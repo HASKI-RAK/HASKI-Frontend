@@ -21,40 +21,32 @@ import {
 import { usePersistedStore, useStore } from '@store'
 
 export type useCreateTopicModalProps = {
-  setCreateTopicIsSending?: React.Dispatch<React.SetStateAction<boolean>>
-  setSelectedTopics?: React.Dispatch<React.SetStateAction<RemoteTopics[]>>
-  setSelectedLearningElements: React.Dispatch<React.SetStateAction<{ [p: number]: RemoteLearningElement[] }>>
+  setCreateTopicIsSending?: Dispatch<SetStateAction<boolean>>
+  setSelectedTopics?: Dispatch<SetStateAction<RemoteTopics[]>>
+  setSelectedLearningElements: Dispatch<SetStateAction<{ [p: number]: RemoteLearningElement[] }>>
   selectedLearningElementSolution: { [topicId: number]: RemoteLearningElementWithSolution[] }
-  setSelectedLearningElementSolution: React.Dispatch<
-    React.SetStateAction<{ [topicId: number]: RemoteLearningElementWithSolution[] }>
+  setSelectedLearningElementSolution: Dispatch<
+    SetStateAction<{ [topicId: number]: RemoteLearningElementWithSolution[] }>
   >
   selectedSolutions: { [topicId: number]: Solution[] }
-  setSelectedSolutions: React.Dispatch<React.SetStateAction<{ [topicId: number]: Solution[] }>>
-  setSelectedLearningElementsClassification: React.Dispatch<
-    React.SetStateAction<{ [p: number]: RemoteLearningElementWithClassification[] }>
+  setSelectedSolutions: Dispatch<SetStateAction<{ [topicId: number]: Solution[] }>>
+  setSelectedLearningElementsClassification: Dispatch<
+    SetStateAction<{ [p: number]: RemoteLearningElementWithClassification[] }>
   >
   setSelectedAlgorithms?: Dispatch<SetStateAction<{ [p: number]: CreateAlgorithmTableNameProps }>>
   setSuccessfullyCreatedTopicsCount?: Dispatch<SetStateAction<number>>
 }
 
 export const useCreateTopicModal = ({
-  setCreateTopicIsSending = () => {
-    return false
-  },
-  setSelectedTopics = () => {
-    return []
-  },
+  setCreateTopicIsSending,
+  setSelectedTopics,
   setSelectedLearningElements,
   setSelectedLearningElementsClassification,
   selectedLearningElementSolution,
   setSelectedLearningElementSolution,
   setSelectedSolutions,
-  setSelectedAlgorithms = () => {
-    return {}
-  },
-  setSuccessfullyCreatedTopicsCount = () => {
-    return 0
-  }
+  setSelectedAlgorithms,
+  setSuccessfullyCreatedTopicsCount
 }: useCreateTopicModalProps) => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
@@ -273,7 +265,7 @@ export const useCreateTopicModal = ({
                     autoHideDuration: 5000
                   })
                   log.info(t('appGlobal.dataSendSuccessful'))
-                  setSuccessfullyCreatedTopicsCount((prevCount) => prevCount + 1)
+                  setSuccessfullyCreatedTopicsCount?.((prevCount) => prevCount + 1)
                 })
               })
               .catch((error) => {
@@ -311,7 +303,7 @@ export const useCreateTopicModal = ({
         })
         .catch((error) => {
           handleError(t, addSnackbar, 'error.postTopic', error, 5000)
-          setCreateTopicIsSending(false)
+          setCreateTopicIsSending?.(false)
         })
     },
     [
@@ -329,7 +321,7 @@ export const useCreateTopicModal = ({
   const handleTopicChange = useCallback(
     (topics: RemoteTopics[]) => {
       const sortedTopics = topics.slice().sort((a, b) => a.topic_lms_id - b.topic_lms_id)
-      setSelectedTopics(sortedTopics)
+      setSelectedTopics?.(sortedTopics)
 
       const topicIds = sortedTopics.map((topic) => topic.topic_lms_id)
       setSelectedLearningElements((elements) =>
@@ -338,7 +330,7 @@ export const useCreateTopicModal = ({
       setSelectedLearningElementsClassification((classifications) =>
         Object.fromEntries(Object.entries(classifications).filter(([key]) => topicIds.includes(Number(key))))
       )
-      setSelectedAlgorithms((algorithms) =>
+      setSelectedAlgorithms?.((algorithms) =>
         Object.fromEntries(Object.entries(algorithms).filter(([key]) => topicIds.includes(Number(key))))
       )
       setSelectedSolutions((solutions) =>
@@ -376,7 +368,7 @@ export const useCreateTopicModal = ({
 
   const handleAlgorithmChange = useCallback(
     (algorithms: { [key: number]: CreateAlgorithmTableNameProps }) => {
-      setSelectedAlgorithms(algorithms)
+      setSelectedAlgorithms?.(algorithms)
     },
     [setSelectedAlgorithms]
   )
