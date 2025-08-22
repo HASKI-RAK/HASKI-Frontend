@@ -195,7 +195,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             minZoom: 0.75,
             nodes: [{ id: initialNodes[0]?.id }]
           }}>
-          <ResponsiveMiniMap />
+          <ResponsiveMiniMap style={{ position: 'absolute', right: '5%' }} />
           <Background gap={16} />
           <Panel position="top-right">
             <LabeledSwitch
@@ -210,7 +210,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               <CreateLearningElement />
             </Panel>
           )}
-          <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
+          <Controls showInteractive={false} position="bottom-right" style={{ marginTop: 25 }} />
         </ReactFlow>
         <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
       </Grid>

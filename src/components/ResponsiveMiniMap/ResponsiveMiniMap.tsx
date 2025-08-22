@@ -1,6 +1,13 @@
-import { memo, useCallback, useEffect, useState } from 'react'
+import {  CSSProperties, memo, useCallback, useEffect, useState } from 'react'
 import { MiniMap } from 'reactflow'
 import { useTheme } from '@common/hooks'
+
+/**
+ * ResponsiveMiniMap component props.
+ */
+export interface ResponsiveMiniMapProps {
+  style?: CSSProperties
+}
 
 /**
  * ResponsiveMiniMap component.
@@ -11,7 +18,7 @@ import { useTheme } from '@common/hooks'
  *
  * @category Components
  */
-const ResponsiveMiniMap = () => {
+const ResponsiveMiniMap = ({ style }: ResponsiveMiniMapProps) => {
   const theme = useTheme()
 
   // Calculates the scaling and translation of the MiniMap according to the window size using a tanh function.
@@ -23,8 +30,8 @@ const ResponsiveMiniMap = () => {
     const scaling = scaleOffset + scaleRange * Math.tanh(window.innerWidth / theme.breakpoints.values.xl - scaleOffset)
     const translation =
       -translationRange * Math.tanh(window.innerWidth / theme.breakpoints.values.xl - translationOffset)
-    return { transform: `scale(${scaling}) translate(${translation}rem, ${translation}rem)` }
-  }, [])
+    return { transform: `scale(${scaling}) translate(${translation}rem, ${translation}rem)`, ...style }
+  }, [style])
 
   const [miniMapSize, setMiniMapSize] = useState(getMapTransform())
 
