@@ -15,7 +15,6 @@ describe('DefaultGroup tests', () => {
     name: 'testNode',
     activityType: 'testType',
     classification: 'GROUP',
-    isRecommended: true,
     handleSetUrl: jest.fn(),
     handleSetTitle: jest.fn(),
     handleOpen: jest.fn(),

@@ -187,7 +187,6 @@ describe('Topic Page', () => {
           id: 1,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 1,
           learning_element: {
             id: 1,
@@ -212,7 +211,6 @@ describe('Topic Page', () => {
           id: 2,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 2,
           learning_element: {
             id: 2,
@@ -267,7 +265,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             isDisabled: false,
@@ -299,7 +296,6 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isDisabled: false,
-            isRecommended: true,
             lmsId: 2,
             learningElementId: 2,
             name: '',
@@ -356,7 +352,6 @@ describe('Topic Page', () => {
           id: 1,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 1,
           learning_element: {
             id: 1,
@@ -381,7 +376,6 @@ describe('Topic Page', () => {
           id: 2,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 2,
           learning_element: {
             id: 1,
@@ -406,7 +400,6 @@ describe('Topic Page', () => {
           id: 3,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 3,
           learning_element: {
             id: 1,
@@ -431,7 +424,6 @@ describe('Topic Page', () => {
           id: 4,
           learning_element_id: 3,
           learning_path_id: 1,
-          recommended: true,
           position: 4,
           learning_element: {
             id: 1,
@@ -484,7 +476,6 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             handleSetLmsId: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -513,7 +504,6 @@ describe('Topic Page', () => {
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -546,7 +536,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             isDisabled: false,
@@ -574,7 +563,6 @@ describe('Topic Page', () => {
             classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
-            isRecommended: true,
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
@@ -655,7 +643,6 @@ describe('Topic Page', () => {
           id: 1,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 1,
           learning_element: {
             id: 1,
@@ -680,7 +667,6 @@ describe('Topic Page', () => {
           id: 2,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 2,
           learning_element: {
             id: 1,
@@ -705,7 +691,6 @@ describe('Topic Page', () => {
           id: 3,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 3,
           learning_element: {
             id: 1,
@@ -730,7 +715,6 @@ describe('Topic Page', () => {
           id: 4,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 4,
           learning_element: {
             id: 1,
@@ -755,7 +739,6 @@ describe('Topic Page', () => {
           id: 5,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 5,
           learning_element: {
             id: 1,
@@ -780,7 +763,6 @@ describe('Topic Page', () => {
           id: 6,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 6,
           learning_element: {
             id: 1,
@@ -805,7 +787,6 @@ describe('Topic Page', () => {
           id: 7,
           learning_element_id: 3,
           learning_path_id: 1,
-          recommended: true,
           position: 7,
           learning_element: {
             id: 1,
@@ -857,7 +838,6 @@ describe('Topic Page', () => {
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -889,7 +869,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -920,7 +899,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -951,7 +929,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -982,7 +959,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -1013,7 +989,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             isDisabled: false,
             learningElementId: 1,
@@ -1044,7 +1019,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -1170,7 +1144,6 @@ describe('Topic Page', () => {
           id: 1,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 1,
           learning_element: {
             id: 1,
@@ -1195,7 +1168,6 @@ describe('Topic Page', () => {
           id: 2,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 2,
           learning_element: {
             id: 1,
@@ -1220,7 +1192,6 @@ describe('Topic Page', () => {
           id: 3,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 3,
           learning_element: {
             id: 1,
@@ -1245,7 +1216,6 @@ describe('Topic Page', () => {
           id: 4,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 4,
           learning_element: {
             id: 1,
@@ -1270,7 +1240,6 @@ describe('Topic Page', () => {
           id: 5,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 5,
           learning_element: {
             id: 1,
@@ -1295,7 +1264,6 @@ describe('Topic Page', () => {
           id: 6,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 6,
           learning_element: {
             id: 1,
@@ -1320,7 +1288,6 @@ describe('Topic Page', () => {
           id: 7,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 7,
           learning_element: {
             id: 1,
@@ -1345,7 +1312,6 @@ describe('Topic Page', () => {
           id: 8,
           learning_element_id: 3,
           learning_path_id: 1,
-          recommended: true,
           position: 8,
           learning_element: {
             id: 1,
@@ -1398,7 +1364,6 @@ describe('Topic Page', () => {
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
             name: '',
@@ -1430,7 +1395,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -1479,7 +1443,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -1510,7 +1473,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -1541,7 +1503,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -1572,7 +1533,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -1603,7 +1563,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -1636,7 +1595,6 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isDone: false,
             isDisabled: false,
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: ''
@@ -1695,7 +1653,6 @@ describe('Topic Page', () => {
           id: 1,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 1,
           learning_element: {
             id: 1,
@@ -1720,7 +1677,6 @@ describe('Topic Page', () => {
           id: 2,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 2,
           learning_element: {
             id: 1,
@@ -1745,7 +1701,6 @@ describe('Topic Page', () => {
           id: 3,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 3,
           learning_element: {
             id: 1,
@@ -1770,7 +1725,6 @@ describe('Topic Page', () => {
           id: 4,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 4,
           learning_element: {
             id: 1,
@@ -1795,7 +1749,6 @@ describe('Topic Page', () => {
           id: 5,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 5,
           learning_element: {
             id: 1,
@@ -1820,7 +1773,6 @@ describe('Topic Page', () => {
           id: 6,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 6,
           learning_element: {
             id: 1,
@@ -1845,7 +1797,6 @@ describe('Topic Page', () => {
           id: 7,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 7,
           learning_element: {
             id: 1,
@@ -1870,7 +1821,6 @@ describe('Topic Page', () => {
           id: 8,
           learning_element_id: 3,
           learning_path_id: 1,
-          recommended: true,
           position: 8,
           learning_element: {
             id: 1,
@@ -1923,7 +1873,6 @@ describe('Topic Page', () => {
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
             name: '',
@@ -1955,7 +1904,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -2004,7 +1952,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -2035,7 +1982,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -2066,7 +2012,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -2097,7 +2042,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -2128,7 +2072,6 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
@@ -2161,7 +2104,6 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isDone: false,
             isDisabled: false,
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: ''
@@ -2260,7 +2202,6 @@ describe('Topic Page', () => {
             id: 1,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: true,
             position: 1,
             learning_element: {
               id: 1,
@@ -2285,7 +2226,6 @@ describe('Topic Page', () => {
             id: 2,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: true,
             position: 2,
             learning_element: {
               id: 1,
@@ -2310,7 +2250,6 @@ describe('Topic Page', () => {
             id: 3,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: true,
             position: 3,
             learning_element: {
               id: 1,
@@ -2335,7 +2274,6 @@ describe('Topic Page', () => {
             id: 4,
             learning_element_id: 2,
             learning_path_id: 1,
-            recommended: true,
             position: 4,
             learning_element: {
               id: 1,
@@ -2360,7 +2298,6 @@ describe('Topic Page', () => {
             id: 5,
             learning_element_id: 2,
             learning_path_id: 1,
-            recommended: true,
             position: 5,
             learning_element: {
               id: 1,
@@ -2385,7 +2322,6 @@ describe('Topic Page', () => {
             id: 6,
             learning_element_id: 2,
             learning_path_id: 1,
-            recommended: true,
             position: 6,
             learning_element: {
               id: 1,
@@ -2410,7 +2346,6 @@ describe('Topic Page', () => {
             id: 7,
             learning_element_id: 2,
             learning_path_id: 1,
-            recommended: true,
             position: 7,
             learning_element: {
               id: 1,
@@ -2435,7 +2370,6 @@ describe('Topic Page', () => {
             id: 8,
             learning_element_id: 3,
             learning_path_id: 1,
-            recommended: true,
             position: 8,
             learning_element: {
               id: 1,

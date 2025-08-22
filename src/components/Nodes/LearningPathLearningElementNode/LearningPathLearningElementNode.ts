@@ -3,7 +3,6 @@
  * @prop name - The name of the learning element.
  * @prop activityType - The activity type of the learning element.
  * @prop classification - The classification of the learning element.
- * @prop isRecommended - Whether the learning element is recommended or not.
  * @prop handleSetUrl - The function that sets the url of the learning element.
  * @prop handleSetTitle - The function that sets the title of the learning element.
  * @prop handleSetLmsId - The function that sets the lms id of the learning element.
@@ -26,7 +25,6 @@ export type LearningPathLearningElementNode = {
   name: string
   activityType: string
   classification: string
-  isRecommended: boolean
   handleSetUrl: (url: string) => void
   handleSetTitle: (title: string) => void
   handleSetLmsId: (lmsId: number) => void

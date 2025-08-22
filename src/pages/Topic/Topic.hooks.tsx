@@ -129,7 +129,6 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     (
       learningElement: LearningElement,
       disabledClassification: boolean,
-      recommended: boolean,
       learningPathStatus: LearningPathElementStatus[],
       id: string,
       position: { x: number; y: number }
@@ -149,7 +148,6 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         name: learningElement.name,
         activityType: learningElement.activity_type,
         classification: learningElement.classification,
-        isRecommended: recommended,
         handleSetUrl: setUrl,
         handleSetTitle: setTitle,
         handleSetLmsId: setLmsId,
@@ -186,7 +184,6 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         return getLearningElementNode(
           node.learning_element,
           disabledClassifications.includes(node.learning_element.classification), //returns if the classification is disabled
-          node.recommended,
           learningPathStatus,
           node.position.toString() + '-' + node.learning_element.lms_id,
           {
@@ -238,7 +235,6 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         return getLearningElementNode(
           learningElements[0].learning_element,
           disabledClassifications.includes(learningElements[0].learning_element.classification),
-          learningElements[0].recommended,
           learningPathStatus,
           learningElements[0].position.toString(),
           {
