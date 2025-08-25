@@ -171,17 +171,14 @@ export const useCreateTopicModal = ({
                 solution.learningElementLmsId,
                 solution.solutionLmsId,
                 solution.solutionLmsType ?? 'resource'
-              ).catch((error) => {
-                addSnackbar({
-                  message: t('error.postLearningElementSolution') + ' ' + solution.learningElementLmsId,
-                  severity: 'error',
-                  autoHideDuration: 5000
-                })
-                log.error(t('error.postLearningElementSolution') + ' ' + error + ' ' + solution.learningElementLmsId)
-                throw error
-              })
+              )
             )
           ).then(() => void 0)
+        })
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.postLearningElementSolution', error, 5000)
+          //throw error to skip the next then block
+          throw error
         })
         .then(() => {
           clearLearningPathElement()
