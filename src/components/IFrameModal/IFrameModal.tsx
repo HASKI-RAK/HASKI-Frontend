@@ -6,7 +6,7 @@ import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
 import { User } from '@core'
 import { postCalculateRating, SnackbarContext } from '@services'
-import { usePersistedStore } from '@store'
+import { usePersistedStore, useStore } from '@store'
 
 const style_box = {
   position: 'absolute',
@@ -45,6 +45,7 @@ type IFrameModalProps = {
  * @category Components
  */
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
+  const clearLearningElementRecommendationCache = useStore((state) => state.clearLearningElementRecommendationCache)
   const getUser = usePersistedStore((state) => state.getUser)
   const { courseId, topicId } = useParams()
   const { t } = useTranslation()
@@ -55,7 +56,9 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
   const handleClose = () => {
     getUser()
       .then((user: User) => {
-        postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId).catch((error) => {
+        postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId).then(() => {
+          clearLearningElementRecommendationCache()
+        }).catch((error) => {
           addSnackbar({
             message: t('error.postCalculateRating'),
             severity: 'error',
