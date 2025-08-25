@@ -407,6 +407,85 @@ describe('useCreateTopicModal', () => {
     expect(logSpy).toHaveBeenCalled()
   })
 
+  it('should add snackbar on error in handleCreate, when postLearningElement fails', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1', topicId: '3' })
+    mockServices.postLearningElement.mockRejectedValueOnce(() => {
+      new Error('postLearningElement error')
+    })
+
+    const addSnackbarMock = jest.fn()
+
+    const my_context = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+
+    // Provide SnackbarContext
+    const wrapper = ({ children }: any) => (
+      <SnackbarContext.Provider value={my_context}>{children}</SnackbarContext.Provider>
+    )
+
+    const selectedLearningElementsClassification = {
+      3: [
+        {
+          lms_id: 201,
+          classification: 'EK',
+          lms_learning_element_name: 'Element 3',
+          lms_activity_type: 'Activity',
+          disabled: false
+        }
+      ]
+    }
+
+    const mockSetCreateTopicIsSending = jest.fn()
+    const { result } = renderHook(
+      () =>
+        useCreateTopicModal({
+          setCreateTopicIsSending: mockSetCreateTopicIsSending,
+          setSuccessfullyCreatedTopicsCount: jest.fn(),
+          setSelectedTopics: jest.fn(),
+          setSelectedLearningElements: jest.fn(),
+          setSelectedLearningElementsClassification: jest.fn(),
+          setSelectedLearningElementSolution: jest.fn(),
+          setSelectedAlgorithms: jest.fn(),
+          selectedLearningElementSolution: {},
+          selectedSolutions: {},
+          setSelectedSolutions: jest.fn()
+        }),
+      { wrapper }
+    )
+
+    await act(async () => {
+      await result.current.handleCreate('Topic A', 1, selectedLearningElementsClassification, 'ALG', '1')
+    })
+
+    expect(addSnackbarMock).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        message: 'error.postLearningElement Element 3',
+        severity: 'error',
+        autoHideDuration: 5000
+      })
+    )
+
+    expect(addSnackbarMock).toHaveBeenNthCalledWith(
+      2,
+      expect.objectContaining({
+        message: 'error.postCalculateLearningPathForAllStudents',
+        severity: 'error',
+        autoHideDuration: 5000
+      })
+    )
+  })
+
   it('handleCreateLearningElementsInExistingTopic — solution creation error triggers snackbar and logs', async () => {
     mockServices.fetchUser.mockResolvedValue({
       name: 'U',
@@ -712,32 +791,5 @@ describe('useCreateTopicModal', () => {
     })
 
     expect(mockSetSending).toHaveBeenCalledWith(false)
-  })
-
-  it('should add snackbar on error in handleCreate', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1', topicId: '2' })
-
-    const mockSetCreateTopicIsSending = jest.fn()
-    const { result } = renderHook(() =>
-      useCreateTopicModal({
-        setCreateTopicIsSending: mockSetCreateTopicIsSending,
-        setSuccessfullyCreatedTopicsCount: jest.fn(),
-        setSelectedTopics: jest.fn(),
-        setSelectedLearningElements: jest.fn(),
-        setSelectedLearningElementsClassification: jest.fn(),
-        setSelectedLearningElementSolution: jest.fn(),
-        setSelectedAlgorithms: jest.fn(),
-        selectedLearningElementSolution: {},
-        selectedSolutions: {},
-        setSelectedSolutions: jest.fn()
-      })
-    )
-    mockServices.fetchUser.mockImplementationOnce(() => {
-      throw new Error('Error')
-    })
-
-    await act(async () => {
-      await result.current.handleCreate('Topic 1', 1, {}, 'algo1', '1')
-    })
   })
 })
