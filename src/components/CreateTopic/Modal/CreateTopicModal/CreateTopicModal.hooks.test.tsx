@@ -749,7 +749,7 @@ describe('useCreateTopicModal', () => {
 
     await waitFor(() => {
       expect(mockServices.postTopic).toHaveBeenCalled()
-      expect(mockServices.postLearningElement).toHaveBeenCalledTimes(2)
+      expect(mockServices.postLearningElement).toHaveBeenCalledTimes(0)
       expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
       expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(2)
 
