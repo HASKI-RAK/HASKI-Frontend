@@ -6,6 +6,7 @@ import { RemoteTopics } from '@core'
 import { useCreateTopicModal } from './CreateTopicModal.hooks'
 import { SnackbarContext } from '@services'
 import log from 'loglevel'
+import { waitFor } from '@testing-library/react'
 
 const mockLearningElement = {
   lms_id: 101,
@@ -449,15 +450,6 @@ describe('useCreateTopicModal', () => {
           lms_activity_type: 'Activity',
           disabled: true
         }
-      ],
-      2: [
-        {
-          lms_id: 201,
-          classification: 'EK',
-          lms_learning_element_name: 'Element 5',
-          lms_activity_type: 'Activity',
-          disabled: false
-        }
       ]
     }
 
@@ -678,6 +670,15 @@ describe('useCreateTopicModal', () => {
           classification: 'Y',
           disabled: false
         }
+      ],
+      2: [
+        {
+          lms_id: 201,
+          classification: 'EK',
+          lms_learning_element_name: 'Element 5',
+          lms_activity_type: 'Activity',
+          disabled: false
+        }
       ]
     }
 
@@ -685,13 +686,15 @@ describe('useCreateTopicModal', () => {
       await result.current.handleCreate('Topic A', 123, classification as any, 'ALG', 'COURSE')
     })
 
-    expect(mockServices.postTopic).toHaveBeenCalled()
-    expect(mockServices.postLearningElement).toHaveBeenCalledTimes(2)
-    expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
-    expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(2)
+    await waitFor(() => {
+      expect(mockServices.postTopic).toHaveBeenCalled()
+      expect(mockServices.postLearningElement).toHaveBeenCalledTimes(2)
+      expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
+      expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(2)
 
-    // counter incremented on success path
-    expect(mockSetCount).toHaveBeenCalled()
+      // counter incremented on success path
+      expect(mockSetCount).toHaveBeenCalled()
+    })
   })
 
   it('should call setSelectedTopics and filter elements correctly in handleTopicChange', () => {
