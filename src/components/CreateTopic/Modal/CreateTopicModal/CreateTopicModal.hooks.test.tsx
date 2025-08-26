@@ -344,7 +344,7 @@ describe('useCreateTopicModal', () => {
     const selectedLearningElementSolution = {
       [topicLmsId]: [
         // one with default type fallback (covers `?? 'resource'`)
-        { learningElementLmsId: 10, solutionLmsId: 20, solutionLmsType: undefined, learningElementName: 'solution-1' },
+        { learningElementLmsId: 10, solutionLmsId: 20, learningElementName: 'solution-1' },
         // one that will fail
         { learningElementLmsId: 11, solutionLmsId: 21, solutionLmsType: 'h5p', learningElementName: 'solution-2' }
       ]
@@ -384,7 +384,7 @@ describe('useCreateTopicModal', () => {
     })
 
     // Assert: two calls, one failed
-    expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(1)
+    expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(2)
     // Snackbar shown for failing solution (contains id)
     expect(addSnackbarMock).toHaveBeenNthCalledWith(
       1,
@@ -411,6 +411,101 @@ describe('useCreateTopicModal', () => {
     jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1', topicId: '3' })
     mockServices.postLearningElement.mockRejectedValueOnce(() => {
       new Error('postLearningElement error')
+    })
+
+    const addSnackbarMock = jest.fn()
+
+    const my_context = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+
+    // Provide SnackbarContext
+    const wrapper = ({ children }: any) => (
+      <SnackbarContext.Provider value={my_context}>{children}</SnackbarContext.Provider>
+    )
+
+    const selectedLearningElementsClassification = {
+      3: [
+        {
+          lms_id: 201,
+          classification: 'EK',
+          lms_learning_element_name: 'Element 3',
+          lms_activity_type: 'Activity',
+          disabled: false
+        },
+        {
+          lms_id: 301,
+          classification: 'EK',
+          lms_learning_element_name: 'Element 4',
+          lms_activity_type: 'Activity',
+          disabled: true
+        }
+      ],
+      2: [
+        {
+          lms_id: 201,
+          classification: 'EK',
+          lms_learning_element_name: 'Element 5',
+          lms_activity_type: 'Activity',
+          disabled: false
+        }
+      ]
+    }
+
+    const mockSetCreateTopicIsSending = jest.fn()
+    const { result } = renderHook(
+      () =>
+        useCreateTopicModal({
+          setCreateTopicIsSending: mockSetCreateTopicIsSending,
+          setSuccessfullyCreatedTopicsCount: jest.fn(),
+          setSelectedTopics: jest.fn(),
+          setSelectedLearningElements: jest.fn(),
+          setSelectedLearningElementsClassification: jest.fn(),
+          setSelectedLearningElementSolution: jest.fn(),
+          setSelectedAlgorithms: jest.fn(),
+          selectedLearningElementSolution: {},
+          selectedSolutions: {},
+          setSelectedSolutions: jest.fn()
+        }),
+      { wrapper }
+    )
+
+    await act(async () => {
+      await result.current.handleCreate('Topic A', 1, selectedLearningElementsClassification, 'ALG', '1')
+    })
+
+    expect(addSnackbarMock).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        message: 'error.postLearningElement Element 3',
+        severity: 'error',
+        autoHideDuration: 5000
+      })
+    )
+
+    expect(addSnackbarMock).toHaveBeenNthCalledWith(
+      2,
+      expect.objectContaining({
+        message: 'error.postTopic',
+        severity: 'error',
+        autoHideDuration: 5000
+      })
+    )
+  })
+
+  it('should add snackbar on error in handleCreate, when postCalculateLearningPathForAllStudents fails', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1', topicId: '3' })
+    mockServices.postCalculateLearningPathForAllStudents.mockRejectedValueOnce(() => {
+      new Error('postCalculateLearningPathForAllStudents error')
     })
 
     const addSnackbarMock = jest.fn()
@@ -470,15 +565,6 @@ describe('useCreateTopicModal', () => {
     expect(addSnackbarMock).toHaveBeenNthCalledWith(
       1,
       expect.objectContaining({
-        message: 'error.postLearningElement Element 3',
-        severity: 'error',
-        autoHideDuration: 5000
-      })
-    )
-
-    expect(addSnackbarMock).toHaveBeenNthCalledWith(
-      2,
-      expect.objectContaining({
         message: 'error.postCalculateLearningPathForAllStudents',
         severity: 'error',
         autoHideDuration: 5000
@@ -537,7 +623,7 @@ describe('useCreateTopicModal', () => {
       )
     })
 
-    expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(1)
+    expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(2)
   })
 
   it('handleCreate happy path creates topic, LEs, algorithms (+continues on algo error), adds students, calculates, creates solutions, increments counter', async () => {
@@ -602,7 +688,7 @@ describe('useCreateTopicModal', () => {
     expect(mockServices.postTopic).toHaveBeenCalled()
     expect(mockServices.postLearningElement).toHaveBeenCalledTimes(2)
     expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
-    expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(1)
+    expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(2)
 
     // counter incremented on success path
     expect(mockSetCount).toHaveBeenCalled()

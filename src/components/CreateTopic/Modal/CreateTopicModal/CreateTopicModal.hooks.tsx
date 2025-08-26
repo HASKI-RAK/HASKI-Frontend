@@ -120,6 +120,7 @@ export const useCreateTopicModal = ({
     })
     return postLearningElementSolution({ learningElementLmsId, outputJson })
   }
+
   const handleCreateLearningElementsInExistingTopic = useCallback(
     async (
       topicLmsId: number,
@@ -127,7 +128,7 @@ export const useCreateTopicModal = ({
       topicId?: string,
       courseId?: string
     ): Promise<void> => {
-      if (!topicId || !courseId) return Promise.resolve()
+      if (!topicId || !courseId) return
 
       return getUser()
         .then((user) => {
@@ -156,11 +157,13 @@ export const useCreateTopicModal = ({
             parseInt(topicId)
           )
         })
-        .then(() => {
+        .then(async () => {
           // Create solutions for learning elements
-          const elementsWithSolution = Object.values(selectedLearningElementSolution[topicLmsId] || [])
+          const elementsWithSolution: RemoteLearningElementWithSolution[] = Object.values(
+            selectedLearningElementSolution[topicLmsId] || []
+          )
             .flat()
-            .filter((element) => element.solutionLmsId && element.solutionLmsId > 0 && element.solutionLmsType)
+            .filter((element) => element.solutionLmsId && element.solutionLmsId > 0)
           if (elementsWithSolution.length === 0) {
             return Promise.resolve()
           }
@@ -173,7 +176,7 @@ export const useCreateTopicModal = ({
                 solution.solutionLmsType ?? 'resource'
               )
             )
-          ).then(() => void 0)
+          )
         })
         .catch((error) => {
           handleError(t, addSnackbar, 'error.postLearningElementSolution', error, 5000)
@@ -197,108 +200,97 @@ export const useCreateTopicModal = ({
   )
 
   const handleCreate = useCallback(
-    (
+    async (
       topicName: string,
       lmsCourseId: number,
       selectedLearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] },
       algorithmShortName: string,
       courseId?: string
     ): Promise<void> => {
-      if (!courseId) return Promise.resolve()
-      return getUser()
-        .then((user) => {
-          return handleCreateTopics(topicName, lmsCourseId, courseId, user).then((topic) => {
-            const topicLmsId = topic.lms_id
-            const topicId = topic.id
-            // Filter out disabled learning elements, that are used as solutions
-            const filteredLearningElements = selectedLearningElementsClassification[topicLmsId].filter(
-              (element) => !element.disabled
-            )
+      if (!courseId) return
 
-            // Create learning elements
-            return Promise.all(
-              filteredLearningElements.map((element) =>
-                handleCreateLearningElements(
-                  element.lms_learning_element_name,
-                  element.lms_activity_type,
-                  element.classification,
-                  element.lms_id,
-                  topic.id,
-                  user
-                ).catch((error) => {
-                  addSnackbar({
-                    message: t('error.postLearningElement') + ' ' + element.lms_learning_element_name,
-                    severity: 'error',
-                    autoHideDuration: 5000
-                  })
-                  log.error(t('error.postLearningElement') + '' + error + '' + element.lms_learning_element_name)
-                  throw error
+      await getUser()
+        .then((user) => handleCreateTopics(topicName, lmsCourseId, courseId, user).then((topic) => ({ user, topic })))
+        .then(async ({ user, topic }) => {
+          const topicLmsId = topic.lms_id
+          const topicId = topic.id
+
+          const filtered = (selectedLearningElementsClassification[topicLmsId] ?? []).filter((e) => !e.disabled)
+
+          await Promise.all(
+            filtered.map((el) =>
+              handleCreateLearningElements(
+                el.lms_learning_element_name,
+                el.lms_activity_type,
+                el.classification,
+                el.lms_id,
+                topicId,
+                user
+              ).catch((error) => {
+                addSnackbar({
+                  message: t('error.postLearningElement') + ' ' + el.lms_learning_element_name,
+                  severity: 'error',
+                  autoHideDuration: 5000
                 })
+                log.error(t('error.postLearningElement') + '' + error + '' + el.lms_learning_element_name)
+                throw error
+              })
+            )
+          )
+          return { user, topicId, topicLmsId }
+        })
+        .then(({ user, topicId, topicLmsId }) =>
+          handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topicId, algorithmShortName)
+            .then(() => handleAddAllStudentsToTopics(courseId))
+            .catch((error) => {
+              // swallow algo/add-students errors (like before)
+              handleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error, 5000)
+            })
+            .then(() => ({ user, topicId, topicLmsId }))
+        )
+        .then(({ user, topicId, topicLmsId }) =>
+          handleCalculateLearningPaths(user.settings.user_id, user.role, user.university, courseId, topicId)
+            .then(() => {
+              addSnackbar({
+                message: t('appGlobal.dataSendSuccessful'),
+                severity: 'success',
+                autoHideDuration: 5000
+              })
+              log.info(t('appGlobal.dataSendSuccessful'))
+              setSuccessfullyCreatedTopicsCount?.((prev) => prev + 1)
+            })
+            .catch((error) => {
+              // swallow calculate errors (like before)
+              handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
+            })
+            .then(() => ({ topicLmsId }))
+        )
+        .then(({ topicLmsId }) => {
+          const elementsWithSolution = Object.values(selectedLearningElementSolution[topicLmsId] || [])
+            .flat()
+            .filter((e) => e.solutionLmsId && e.solutionLmsId > 0)
+
+          if (elementsWithSolution.length === 0) return
+
+          return Promise.all(
+            elementsWithSolution.map((s) =>
+              handleCreateSolutions(s.learningElementLmsId, s.solutionLmsId, s.solutionLmsType ?? 'resource').catch(
+                (error) => {
+                  // per-solution error is handled, chain continues
+                  handleError(
+                    t,
+                    addSnackbar,
+                    'error.postLearningElementSolution',
+                    error + ' Learning Element Lms_Id = ' + s.learningElementLmsId,
+                    5000
+                  )
+                }
               )
             )
-              .then(() => {
-                // Create algorithms and add students to topics
-                return handleCreateAlgorithms(user.settings.user_id, user.lms_user_id, topic.id, algorithmShortName)
-                  .then(() => {
-                    return handleAddAllStudentsToTopics(courseId)
-                  })
-                  .catch((error) => {
-                    handleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error, 5000)
-                  })
-                  .then(() => ({ topicId, user }))
-              })
-              .then(({ topicId, user }) => {
-                // Calculate learning paths
-                return handleCalculateLearningPaths(
-                  user.settings.user_id,
-                  user.role,
-                  user.university,
-                  courseId,
-                  topicId
-                ).then(() => {
-                  addSnackbar({
-                    message: t('appGlobal.dataSendSuccessful'),
-                    severity: 'success',
-                    autoHideDuration: 5000
-                  })
-                  log.info(t('appGlobal.dataSendSuccessful'))
-                  setSuccessfullyCreatedTopicsCount?.((prevCount) => prevCount + 1)
-                })
-              })
-              .catch((error) => {
-                handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
-              })
-              .then(() => {
-                //Create solutions for learning elements
-                const elementsWithSolution = Object.values(selectedLearningElementSolution[topicLmsId] || [])
-                  .flat()
-                  .filter((element) => element.solutionLmsId && element.solutionLmsId > 0 && element.solutionLmsType)
-
-                if (elementsWithSolution.length === 0) {
-                  return Promise.resolve()
-                }
-
-                return Promise.all(
-                  elementsWithSolution.map((solution) =>
-                    handleCreateSolutions(
-                      solution.learningElementLmsId,
-                      solution.solutionLmsId,
-                      solution.solutionLmsType ?? 'resource'
-                    ).catch((error) => {
-                      handleError(
-                        t,
-                        addSnackbar,
-                        'error.postLearningElementSolution',
-                        error + ' Learning Element Lms_Id = ' + solution.learningElementLmsId,
-                        5000
-                      )
-                    })
-                  )
-                ).then(() => void 0)
-              })
-          })
+          )
         })
         .catch((error) => {
+          // outer failure (getUser/postTopic/LE creation rethrow)
           handleError(t, addSnackbar, 'error.postTopic', error, 5000)
           setCreateTopicIsSending?.(false)
         })
@@ -308,10 +300,14 @@ export const useCreateTopicModal = ({
       handleCreateTopics,
       handleCreateLearningElements,
       handleCreateAlgorithms,
+      handleAddAllStudentsToTopics,
       handleCalculateLearningPaths,
+      handleCreateSolutions,
+      selectedLearningElementSolution,
+      setSuccessfullyCreatedTopicsCount,
+      setCreateTopicIsSending,
       addSnackbar,
-      t,
-      setCreateTopicIsSending
+      t
     ]
   )
 
