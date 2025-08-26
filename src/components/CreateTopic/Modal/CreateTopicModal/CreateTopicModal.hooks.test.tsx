@@ -670,13 +670,74 @@ describe('useCreateTopicModal', () => {
           classification: 'Y',
           disabled: false
         }
-      ],
+      ]
+    }
+
+    await act(async () => {
+      await result.current.handleCreate('Topic A', 123, classification as any, 'ALG', 'COURSE')
+    })
+
+    await waitFor(() => {
+      expect(mockServices.postTopic).toHaveBeenCalled()
+      expect(mockServices.postLearningElement).toHaveBeenCalledTimes(2)
+      expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
+      expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(2)
+
+      // counter incremented on success path
+      expect(mockSetCount).toHaveBeenCalled()
+    })
+  })
+
+  it('handleCreate empty path does not create anything', async () => {
+    mockServices.fetchUser.mockResolvedValue({
+      name: 'U',
+      university: 'Uni',
+      role: 'teacher',
+      lms_user_id: 11,
+      settings: { user_id: 99 }
+    })
+
+    mockServices.postTopic.mockResolvedValue({ id: 777, lms_id: 222 })
+    mockServices.postLearningElement.mockResolvedValue({})
+    mockServices.postLearningPathAlgorithm.mockRejectedValueOnce(new Error('algo failed')) // cover catch branch
+    mockServices.postAddAllStudentsToTopics.mockResolvedValue({})
+    mockServices.postCalculateLearningPathForAllStudents.mockResolvedValue({})
+    mockServices.postLearningElementSolution
+      .mockResolvedValueOnce({}) // first ok
+      .mockRejectedValueOnce(new Error('sol failed')) // second triggers handleError
+
+    const mockSetCount = jest.fn()
+    const { result } = renderHook(() =>
+      useCreateTopicModal({
+        setSelectedLearningElements: jest.fn(),
+        setSelectedLearningElementsClassification: jest.fn(),
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn(),
+        selectedSolutions: {},
+        selectedLearningElementSolution: {
+          222: [
+            { learningElementLmsId: 10, solutionLmsId: 20, solutionLmsType: undefined } as any, // default to 'resource'
+            { learningElementLmsId: 11, solutionLmsId: 21, solutionLmsType: 'h5p' } as any
+          ]
+        },
+        setSuccessfullyCreatedTopicsCount: mockSetCount
+      })
+    )
+
+    const classification = {
       2: [
         {
-          lms_id: 201,
-          classification: 'EK',
-          lms_learning_element_name: 'Element 5',
-          lms_activity_type: 'Activity',
+          lms_id: 10,
+          lms_learning_element_name: 'LE-A',
+          lms_activity_type: 'video',
+          classification: 'X',
+          disabled: false
+        },
+        {
+          lms_id: 11,
+          lms_learning_element_name: 'LE-B',
+          lms_activity_type: 'quiz',
+          classification: 'Y',
           disabled: false
         }
       ]
