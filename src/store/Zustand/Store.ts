@@ -5,6 +5,7 @@ import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import { CoursesSlice, createCoursesSlice } from '../Slices/CoursesSlice'
 import { createDefaultLearningPathSlice, DefaultLearningPathSlice } from '../Slices/DefaultLearningPathSlice'
+import { createFavoriteElementSlice, FavoriteElementSlice } from '../Slices/FavoriteElementSlice'
 import LearningElementSolutionSlice, {
   createLearningElementSolutionSlice
 } from '../Slices/LearningElementSolutionSlice'
@@ -37,7 +38,11 @@ export type StoreState = LearningPathElementSlice &
   LearningElementSolutionSlice &
   TeacherLpLeAlgorithmSlice &
   StudentLpLeAlgorithmSlice
-export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & DefaultLearningPathSlice
+export type PersistedStoreState = UserSlice &
+  AuthSlice &
+  LearningPathElementStatusSlice &
+  DefaultLearningPathSlice &
+  FavoriteElementSlice
 export type SessionStoreState = NewsSlice
 
 export const resetters: (() => void)[] = []
@@ -62,7 +67,8 @@ export const usePersistedStore = create<PersistedStoreState>()(
         ...createUserSlice(...a),
         ...createLearningPathElementStatusSlice(...a),
         ...createAuthSlice(...a),
-        ...createDefaultLearningPathSlice(...a)
+        ...createDefaultLearningPathSlice(...a),
+        ...createFavoriteElementSlice(...a)
       }),
       {
         name: 'persisted_storage',
@@ -71,6 +77,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
           _user: state._user,
           _learningPathElementStatus: state._learningPathElementStatus,
           _defaultLearningPath: state._defaultLearningPath,
+          _favorite: state._favorite,
           expire: state.expire
         }),
         onRehydrateStorage: () => {

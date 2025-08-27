@@ -24,6 +24,7 @@
 import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
 import Course, { CourseResponse } from './Course/Course'
 import DefaultLearningPath from './DefaultLearningPath/DefaultLearningPath'
+import FavoriteElement from './FavoriteElement/FavoriteElement'
 import LearningElement from './LearningElement/LearningElement'
 import LearningElementSolution from './LearningElement/LearningElementSolution'
 import LearningPathLearningElementAlgorithm, {
@@ -54,6 +55,7 @@ export type {
   Course,
   CourseResponse,
   DefaultLearningPath,
+  FavoriteElement,
   ILS,
   LearningElement,
   LearningElementSolution,
@@ -80,6 +82,7 @@ export type {
 }
 export type { CourseReturn } from './Course/Course'
 export type { DefaultLearningPathResponse } from './DefaultLearningPath/DefaultLearningPath'
+export type { FavoriteElementReturn } from './FavoriteElement/FavoriteElement'
 export type { LearningElementSolutionReturn } from './LearningElement/LearningElementSolution'
 export type { LearningPathLearningElementAlgorithmReturn } from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
 export type { StudentLpLeAlgorithmReturn } from './LearningPathAlgorithm/StudentLpLeAlgorithm'
