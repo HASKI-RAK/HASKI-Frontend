@@ -52,8 +52,7 @@ const CreateLearningElementModal = ({
   //Hooks
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
-  const { courseId } = useParams()
-  const { topicId } = useParams()
+  const { courseId, topicId } = useParams<{ courseId: string; topicId: string }>()
   const [remoteTopic, setRemoteTopic] = useState<RemoteTopics[]>([])
   const [selectAllLearningElementsChecked, setSelectAllLearningElementsChecked] = useState(false)
   const {
