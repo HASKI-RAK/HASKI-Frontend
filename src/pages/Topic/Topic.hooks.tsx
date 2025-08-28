@@ -1,10 +1,11 @@
-import { useCallback, useContext, useMemo, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Edge, Node } from 'reactflow'
 import { useTheme } from '@common/hooks'
 import { getGroupLabels, LearningPathLearningElementNode } from '@components'
 import { LearningElement, LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
 import { RoleContext } from '@services'
+import { useRecommendation } from './Recommendation.hooks'
 
 /**
  * @prop defaultUrl - The default url of a node
@@ -80,6 +81,13 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const nodeOffsetX = 50
   const groupHeight = 200
 
+  // Hooks
+  const { recommendedLearningElement } = useRecommendation()
+
+  useEffect(() => {
+    console.log(recommendedLearningElement)
+  }, [recommendedLearningElement])
+
   // Logic
   const handleOpen = useCallback(() => {
     setIsOpen(true)
@@ -142,6 +150,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         width: 500
       }
 
+      console.log('why ' + (learningElement.lms_id == recommendedLearningElement?.lms_id))
+
       const nodeData: LearningPathLearningElementNode = {
         learningElementId: learningElement.id,
         lmsId: learningElement.lms_id,
@@ -154,7 +164,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         handleOpen: handleOpen,
         handleClose: handleClose,
         isDone: learningPathStatus?.find((item) => item.cmid === learningElement.lms_id)?.state === 1,
-        isDisabled: disabledClassification
+        isDisabled: disabledClassification,
+        isRecommended: learningElement.lms_id == recommendedLearningElement?.lms_id
       }
 
       return {
@@ -168,7 +179,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         style: learningElementNodeStyle
       }
     },
-    [theme, handleOpen, handleClose, setUrl, setTitle, setLmsId]
+    [theme, handleOpen, handleClose, setUrl, setTitle, setLmsId, recommendedLearningElement]
   )
 
   // Creates aligned nodes of the passed LearningPathLearningElement array.

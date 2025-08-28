@@ -56,16 +56,18 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
   const handleClose = () => {
     getUser()
       .then((user: User) => {
-        postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId).then(() => {
-          clearLearningElementRecommendationCache()
-        }).catch((error) => {
-          addSnackbar({
-            message: t('error.postCalculateRating'),
-            severity: 'error',
-            autoHideDuration: 3000
+        postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId)
+          .then(() => {
+            clearLearningElementRecommendationCache(courseId, topicId)
           })
-          log.error(t('error.postCalculateRating') + ' ' + error)
-        })
+          .catch((error) => {
+            addSnackbar({
+              message: t('error.postCalculateRating'),
+              severity: 'error',
+              autoHideDuration: 3000
+            })
+            log.error(t('error.postCalculateRating') + ' ' + error)
+          })
       })
       .catch((error) => {
         addSnackbar({

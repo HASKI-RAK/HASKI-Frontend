@@ -85,7 +85,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           learningPathElementData,
           learningPathElementStatusData,
           disabledClassificationsList,
-          isGrouped
+          isGrouped // TODO: learningPathRecommendation hier oder direkt in den useTopic(...) Hook integrieren
         )
         setInitialNodes(nodes)
         setInitialEdges(edges)

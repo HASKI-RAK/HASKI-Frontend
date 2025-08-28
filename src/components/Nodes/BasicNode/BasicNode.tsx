@@ -1,10 +1,10 @@
 import { memo, MouseEvent, ReactElement, ReactNode, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { Box, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
+import { Box, Collapse, Grid, IconButton, NodeWrapper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
-import { CheckBox, DeleteForever, Feedback, Warning } from '@common/icons'
-import { DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from '@components'
+import { CheckBox, DeleteForever, Warning } from '@common/icons'
+import { BorderedPaper, DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from '@components'
 import { deleteLearningElement, RoleContext, SnackbarContext } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
@@ -35,23 +35,27 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
 
   const onMouseEnter = () => {
+    // TODO useCallback
     setIsHovered(true)
   }
   const onMouseLeave = () => {
+    // TODO useCallback
     setIsHovered(false)
   }
 
   // Handle node click but ignore clicks that originated from the delete icon.
   const handleNodeClick = (event: MouseEvent) => {
-    if ((event.target as HTMLElement).closest('.learning-element-delete-icon')) {
-      return // Skip the iframe action if it came from the delete button.
-    }
+    // TODO useCallback
+    // Skip the iframe action if it came from the delete button.
+    if ((event.target as HTMLElement).closest('.learning-element-delete-icon')) return
+
     props.data.handleOpen()
     props.data.handleSetUrl(getConfig().MOODLE + `/mod/${props.data.activityType}/view.php?id=${props.data.lmsId}`)
     props.data.handleSetLmsId(props.data.lmsId)
   }
 
   const handleOpenDeleteLearningElementModal = () => {
+    // TODO useCallback
     setdeleteLearningElementModalOpen(true)
     setLearningElementName(props.data.name)
     setLearningElementId(props.data.learningElementId)
@@ -60,6 +64,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   }
 
   const handleAcceptDeleteLearningElementModal = (learningElementId: number, lmsLearningElementId: number) => {
+    // Todo useCallback
     deleteLearningElement(learningElementId, lmsLearningElementId).then(() => {
       addSnackbar({
         message: t('components.BasicNode.deleteLearningElementSuccessful'),
@@ -73,6 +78,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   }
 
   const renderNodeStatus = () => {
+    // Todo useCallback
     return props.data.isDisabled ? (
       <Tooltip title="Classification is not set in the Default Learning Path">
         <Box
@@ -171,16 +177,9 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
         )}
       </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
-      <Paper
-        sx={{
-          width: '65px',
-          height: '65px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
+      <BorderedPaper color={theme.palette.success.main} isAnimated={props.data.isRecommended}>
         {icon}
-      </Paper>
+      </BorderedPaper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {props.data.name}
       </Typography>
