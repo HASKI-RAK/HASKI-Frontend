@@ -8,6 +8,7 @@ import { ReactFlowProvider } from 'reactflow'
 import { RemoteLearningElement } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import CreateLearningElementModal from './CreateLearningElementModal'
+import { useState } from 'react'
 
 jest.useFakeTimers()
 
@@ -341,7 +342,7 @@ describe('CreateLearningElementModal Component', () => {
       ]
     }
 
-    const { getByText } = render(
+    const { getByText, findByText } = render(
       <ReactFlowProvider>
         <MemoryRouter initialEntries={['/course/2/topic/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -367,16 +368,15 @@ describe('CreateLearningElementModal Component', () => {
       </ReactFlowProvider>
     )
 
-    await waitFor(() => {
-      fireEvent.click(getByText('appGlobal.next'))
-      expect(handleSetActiveStep).toHaveBeenCalled()
-    })
+    await findByText('Element 3')
+
+    fireEvent.click(getByText('appGlobal.next'))
+
+    expect(handleSetActiveStep).toHaveBeenCalled()
   })
 
   test('creates LearningElement in existing topic with solution', async () => {
     jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
-
-    const handleSetActiveStep = jest.fn()
 
     const selectedLearningElements: { [key: number]: RemoteLearningElement[] } = {
       3: [
@@ -413,26 +413,34 @@ describe('CreateLearningElementModal Component', () => {
 
     const mockHandleCloseCreateTopicModal = jest.fn()
 
+    const Wrapper = () => {
+      const [activeStep, setActiveStep] = useState(2)
+
+      return (
+        <CreateLearningElementModal
+          openCreateTopicModal={true}
+          currentTopicLmsId={3}
+          handleCloseCreateTopicModal={mockHandleCloseCreateTopicModal}
+          selectedLearningElements={selectedLearningElements}
+          setSelectedLearningElements={jest.fn()}
+          selectedLearningElementsClassification={selectedLearningElementsClassification}
+          setSelectedLearningElementsClassification={jest.fn()}
+          selectedLearningElementSolution={selectedLearningElementSolution}
+          selectedSolutions={selectedSolutions}
+          setSelectedSolutions={jest.fn()}
+          setSelectedLearningElementSolution={jest.fn()}
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
+        />
+      )
+    }
+
     const { getByText } = render(
       <ReactFlowProvider>
         <MemoryRouter initialEntries={['/course/2/topic/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <SnackbarContext.Provider value={mockAddSnackbar}>
-              <CreateLearningElementModal
-                openCreateTopicModal={true}
-                currentTopicLmsId={3}
-                handleCloseCreateTopicModal={mockHandleCloseCreateTopicModal}
-                selectedLearningElements={selectedLearningElements}
-                setSelectedLearningElements={jest.fn()}
-                selectedLearningElementsClassification={selectedLearningElementsClassification}
-                setSelectedLearningElementsClassification={jest.fn()}
-                selectedLearningElementSolution={selectedLearningElementSolution}
-                selectedSolutions={selectedSolutions}
-                setSelectedSolutions={jest.fn()}
-                setSelectedLearningElementSolution={jest.fn()}
-                activeStep={2}
-                setActiveStep={handleSetActiveStep}
-              />
+              <Wrapper />
             </SnackbarContext.Provider>
           </AuthContext.Provider>
         </MemoryRouter>
@@ -441,7 +449,10 @@ describe('CreateLearningElementModal Component', () => {
 
     await waitFor(() => {
       fireEvent.click(getByText('appGlobal.back'))
-      expect(handleSetActiveStep).toHaveBeenCalled()
+    })
+
+    await waitFor(() => {
+      fireEvent.click(getByText('appGlobal.next'))
     })
 
     await waitFor(() => {
