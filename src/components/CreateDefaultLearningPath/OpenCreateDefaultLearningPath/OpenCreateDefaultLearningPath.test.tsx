@@ -69,6 +69,21 @@ describe('OpenCreateDefaultLearningPath component', () => {
     })
   })
 
+  it('does not render the DefaultLearningPathModal when no cookie exists but fetchDefaultLearningPath returns a valid array', async () => {
+    // Simulate that no cookie exists.
+    ;(useCookies as jest.Mock).mockReturnValueOnce([{}, setCookieMock])
+
+    render(
+      <DummyProvider>
+        <OpenCreateDefaultLearningPath usePrivacyModal={() => fakePrivacyModalHookReturn} />
+      </DummyProvider>
+    )
+
+    await waitFor(() => {
+      expect(screen.queryByTestId('close-default-learning-path-modal-button')).not.toBeInTheDocument()
+    })
+  })
+
   it('does render the DefaultLearningPathModal and closes it', async () => {
     ;(useCookies as jest.Mock).mockReturnValueOnce([{ default_learningpath_sent_token: false }, setCookieMock])
 
