@@ -21,7 +21,7 @@ export const postFavorite = async (
   return fetchData<Response>(
     getConfig().BACKEND + `/lms/student/${student_id}/learningElement/${learning_element_id}`,
     {
-      method: 'POST',
+      method: 'PUT',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'

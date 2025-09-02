@@ -1,1 +1,2 @@
-export * from './postFavorite'
+export {postFavorite} from './postFavorite'
+export {fetchFavorite} from './fetchFavorite'

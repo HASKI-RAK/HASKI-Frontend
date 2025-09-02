@@ -4,16 +4,15 @@ import { fetchFavorite } from '@services'
 import { PersistedStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
-//Should return the courseIds of the Elements that are favorited by the user
+//Should return the learningElementids of the Elements that are favorited by the user
 type FavoriteElementCache = {
-  value?: number[]
-  promise?: Promise<number[]>
+  value?: FavoriteElement
+  promise?: Promise<FavoriteElement>
 }
 
 export type FavoriteElementSlice = {
   _favorite: Record<string, FavoriteElementCache>
   getFavoriteElement: FavoriteElementReturn
-  setFavoriteElement: (courseId?: string, studentId?: number, learningElementId?: number) => void
 }
 
 export const createFavoriteElementSlice: StateCreator<PersistedStoreState, [], [], FavoriteElementSlice> = (
@@ -39,7 +38,7 @@ export const createFavoriteElementSlice: StateCreator<PersistedStoreState, [], [
       }
 
       // Otherwise, initiate a new fetch and cache its promise.
-      const fetchPromise = fetchFavorite(studentId).then((favorite: FavoriteElement[]) => {
+      const fetchPromise = fetchFavorite(studentId).then((favorite: FavoriteElement) => {
         set({
           _favorite: {
             ...get()._favorite,
@@ -58,10 +57,6 @@ export const createFavoriteElementSlice: StateCreator<PersistedStoreState, [], [
       })
 
       return fetchPromise
-    },
-    setFavoriteElement: async (...arg) => {
-      const [courseId, studentId, learningElementId] = arg
-      const key = `${studentId}-${learningElementId}`
     }
   }
 }
