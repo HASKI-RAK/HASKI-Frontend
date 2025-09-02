@@ -1332,6 +1332,7 @@
   "components.TopicCard.deleteTopicSuccessful": "Der Themenbereich wurde erfolgreich gelöscht",
   "components.TopicCard.ga": "Genetischer Algorithmus",
   "components.TopicCard.graf": "Graf Algorithmus",
+  "components.AddSolutionModal.selectSolutions": "Lösung auswählen",
   "components.TopicCard.learningPath": "Lernpfad",
   "components.TopicCard.nestor": "Nestor Algorithmus",
   "components.TopicCard.tyche": "Tyche Algorithmus",

@@ -140,7 +140,7 @@ const AddSolution = () => {
         open={addSolutionModalOpen}
         activeStep={activeStep}
         setActiveStep={setActiveStep}
-        onClose={handleClose}
+        handleCloseAddSolutionModal={handleClose}
         currentTopic={currentTopic}
         selectedLearningElements={selectedLearningElements}
         selectedSolutions={selectedSolutions}

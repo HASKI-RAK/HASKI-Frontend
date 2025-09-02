@@ -1,6 +1,5 @@
 import { Dispatch, memo, SetStateAction, useCallback, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
 import { Box, Fab, Grid, Modal, Paper, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
 import { handleError, RemoteLearningElementWithClassification } from '@components'
@@ -22,7 +21,7 @@ type AddSolutionModalProps = {
   learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }
   setSelectedLearningElements: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>>
   setLearningElementsWithSolutions: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithSolution[] }>>
-  onClose: () => void
+  handleCloseAddSolutionModal: () => void
 }
 
 const AddSolutionModal = ({
@@ -35,13 +34,18 @@ const AddSolutionModal = ({
   learningElementsWithSolutions,
   setSelectedLearningElements,
   setLearningElementsWithSolutions,
-  onClose
+  handleCloseAddSolutionModal
 }: AddSolutionModalProps) => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
   const setLearningElementSolution = useStore((state) => state.setLearningElementSolution)
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const AddSolutionModalSteps = [
+    t('components.CreateLearningElementTable.selectLearningElements'),
+    t('components.AddSolutionModal.selectSolutions')
+  ]
 
   const handleSend = useCallback(() => {
     if (!currentTopic) {
@@ -71,7 +75,7 @@ const AddSolutionModal = ({
         })
         .finally(() => {
           setIsLoading(false)
-          onClose()
+          handleCloseAddSolutionModal()
         })
     })
   }, [setIsLoading, currentTopic, learningElementsWithSolutions, addSnackbar, t])
@@ -84,24 +88,25 @@ const AddSolutionModal = ({
         (solution) => solution.learningElementLmsId === element.lms_id && solution.solutionLmsType
       )
     )
-  }, [currentTopic, selectedLearningElements, learningElementsWithSolutions, t, addSnackbar])
+  }, [currentTopic, selectedLearningElements, learningElementsWithSolutions])
 
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={handleCloseAddSolutionModal}>
       <Box sx={{ padding: '2rem', width: '80%', margin: 'auto', marginTop: '5rem' }}>
         <Paper elevation={3} sx={{ padding: '2rem', position: 'relative' }}>
           <Fab
-            id="close-modal-button"
+            id="add-solution-modal-close-button"
+            data-testid="add-solution-modal-close-button"
             color="primary"
             size="small"
-            onClick={onClose}
+            onClick={handleCloseAddSolutionModal}
             sx={{ position: 'absolute', top: '1rem', right: '1rem' }}>
             <Close />
           </Fab>
           <Grid container direction="column" spacing={3}>
             <Grid item>
               <Stepper activeStep={activeStep} alternativeLabel>
-                {['Select Learning Elements', 'Select Solutions'].map((label) => (
+                {AddSolutionModalSteps.map((label) => (
                   <Step key={label}>
                     <StepButton onClick={() => setActiveStep(activeStep)}>{label}</StepButton>
                   </Step>

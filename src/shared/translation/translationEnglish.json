@@ -184,6 +184,7 @@
   "components.CreateLearningElementSolutionTable.setLearningElementSolution": "Set learning element solution",
   "components.CreateLearningElementTable.selectAllToggle": "Select all",
   "components.CreateLearningElementTable.selectLearningElements": "Select learning elements",
+  "components.AddSolutionModal.selectSolutions": "Select solutions",
   "components.CreateTopicModal.createTopics": "Create Topics",
   "components.DeleteEntityModal.confirmLabel": "and all its content will be permanently deleted from the HASKI system (content in Moodle remains unaffected).",
   "components.DeleteEntityModal.description": "This action will permanently remove all data and associated content from the HASKI system. This action cannot be undone. Content in Moodle remains unaffected.",
