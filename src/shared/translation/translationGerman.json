@@ -33,6 +33,7 @@
   "components.AddSolution.solutionAdded": "Lösung zugewiesen",
   "components.AddSolutionModal.missingSolutionData": "Es fehlen Lösungsdaten",
   "components.AddSolutionModal.noTopic": "Topic ID konnte nicht gefunden werden",
+  "components.AddSolutionModal.selectSolutions": "Lösung auswählen",
   "components.AddSolutionModal.successful": "Die Lösung wurde erfolgreich zugewiesen",
   "components.AlgorithmSettingsModal.algorithms": [
     {
@@ -177,11 +178,12 @@
       "key": "RQ"
     }
   ],
-  "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Klassifikation der Lernelemente festlegen",
   "components.CreateLearningElementClassificationTable.IsSolution": "Ist Lösung",
+  "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Klassifikation der Lernelemente festlegen",
   "components.CreateLearningElementModal.createLearningElements": "Lernelemente erstellen",
   "components.CreateLearningElementSolutionTable.noSolution": "Zusatzlösung zuweisen",
   "components.CreateLearningElementSolutionTable.setLearningElementSolution": "Lernelementen Lösungen zuweisen",
+  "components.CreateLearningElementTable.noLearningElements": "Es sind keine Lernelemente zum Erstellen verfügbar",
   "components.CreateLearningElementTable.selectAllToggle": "Alle auswählen",
   "components.CreateLearningElementTable.selectLearningElements": "Lernelemente auswählen",
   "components.CreateTopicModal.createTopics": "Themenbereiche erstellen",
@@ -1332,7 +1334,6 @@
   "components.TopicCard.deleteTopicSuccessful": "Der Themenbereich wurde erfolgreich gelöscht",
   "components.TopicCard.ga": "Genetischer Algorithmus",
   "components.TopicCard.graf": "Graf Algorithmus",
-  "components.AddSolutionModal.selectSolutions": "Lösung auswählen",
   "components.TopicCard.learningPath": "Lernpfad",
   "components.TopicCard.nestor": "Nestor Algorithmus",
   "components.TopicCard.tyche": "Tyche Algorithmus",
@@ -1342,8 +1343,8 @@
   "error.fetchILS": "Beim Abrufen der ILS-Fragebogendaten ist ein Fehler aufgetreten.",
   "error.fetchLearningElementRatings": "Beim Abrufen der Daten von Learning Element Ratings trat ein Fehler auf.",
   "error.fetchLearningPathElement": "Beim Abrufen der LearningPathElement-Daten ist ein Fehler aufgetreten.",
-  "error.fetchLearningPathElementStatus": "Beim Abrufen der LearningPathElementStatus-Daten ist ein Fehler aufgetreten.",
   "error.fetchLearningPathElementSolution": "Beim Abrufen der LearningPathElementSolution-Daten ist ein Fehler aufgetreten.",
+  "error.fetchLearningPathElementStatus": "Beim Abrufen der LearningPathElementStatus-Daten ist ein Fehler aufgetreten.",
   "error.fetchLearningPathTopic": "Beim Abrufen der LearningPathTopic-Daten ist ein Fehler aufgetreten.",
   "error.fetchListK": "Beim Abrufen der ListK-Fragebogendaten ist ein Fehler aufgetreten.",
   "error.fetchRedirectMoodleLogin": "Beim Abrufen der Moodle-Login-URL ist ein Fehler aufgetreten.",
@@ -1367,9 +1368,9 @@
   "error.postDefaultLearningPath": "Beim Senden des Standard-Lernpfades ist ein Fehler aufgetreten.",
   "error.postILS": "Beim Senden der ILS-Fragebogendaten ist ein Fehler aufgetreten.",
   "error.postLearningElement": "Beim Senden der LearningElement-Daten ist ein Fehler aufgetreten.",
+  "error.postLearningElementSolution": "Beim Senden der Lern Element Lösungen ist ein Fehler aufgetreten.",
   "error.postLearningPathAlgorithm": "Beim Senden der LearningPathAlgorithm-Daten ist ein Fehler aufgetreten.",
   "error.postListK": "Beim Senden der ListK-Fragebogendaten ist ein Fehler aufgetreten.",
-  "error.postLearningElementSolution": "Beim Senden der Lern Element Lösungen ist ein Fehler aufgetreten.",
   "error.postLogin": "Beim Einloggen ist ein Fehler aufgetreten.",
   "error.postStudentLpLeAlg": "Beim Setzen des neuen Algorithmus für den Nutzer ist ein Fehler aufgetreten.",
   "error.postTeacherLpLeAlg": "Beim Setzen des neu empfohlenen Algorithmus für das Topic ist ein Fehler aufgetreten.",
@@ -1400,7 +1401,6 @@
   "pages.8": "8",
   "pages.9": "9",
   "pages.aboutus": "Über uns",
-  "components.CreateLearningElementTable.noLearningElements": "Es sind keine Lernelemente zum Erstellen verfügbar",
   "pages.aboutus.interdisciplinaryBody": [
     {
       "header": "Lernelemente",

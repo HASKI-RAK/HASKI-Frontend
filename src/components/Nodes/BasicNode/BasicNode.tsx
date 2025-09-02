@@ -5,7 +5,7 @@ import { Box, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typograph
 import { useTheme } from '@common/hooks'
 import { CheckBox, DeleteForever, Task, Warning } from '@common/icons'
 import { DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from '@components'
-import { deleteLearningElement, RoleContext, SnackbarContext, deleteLearningElementSolution } from '@services'
+import { deleteLearningElement, deleteLearningElementSolution, RoleContext, SnackbarContext } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
 
