@@ -13,6 +13,7 @@ type FavoriteElementCache = {
 export type FavoriteElementSlice = {
   _favorite: Record<string, FavoriteElementCache>
   getFavoriteElement: FavoriteElementReturn
+  setFavoriteElement: (studentId?: number, learningElementId?: number) => void
 }
 
 export const createFavoriteElementSlice: StateCreator<PersistedStoreState, [], [], FavoriteElementSlice> = (
@@ -57,6 +58,19 @@ export const createFavoriteElementSlice: StateCreator<PersistedStoreState, [], [
       })
 
       return fetchPromise
+    },
+    setFavoriteElement: async (...arg) => {
+      const [studentId, learningElementId] = arg
+      const key = `${studentId}-${learningElementId}`
+      const cached = get()._favorite[key]?.value
+
+      set((state) => ({
+        _favorite: {
+          ...state._favorite,
+          [key]: { value: cached }
+        }
+      }))
+      return { cached }
     }
   }
 }

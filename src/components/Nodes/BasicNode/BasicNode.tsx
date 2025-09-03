@@ -39,6 +39,31 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const clearLearningPathElement = useStore((state) => state.clearLearningPathElementCache)
   const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
   const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
+  const getFavoriteElement = usePersistedStore((state) => state.getFavoriteElement)
+  const setFavoriteElement = usePersistedStore((state) => state.setFavoriteElement) //commented out until feature is implemented
+
+  // Fetch favorite status - commented out until feature is implemented
+  useEffect(() => {
+    getUser()
+      .then((user) => {
+        getFavoriteElement(user.id).then((favorite) => {
+          if (favorite.learning_element_id.length > 0) {
+            setIsFavorite(true)
+          } else {
+            setIsFavorite(false)
+          }
+        })
+      })
+      .catch(() => {
+        addSnackbar({
+          message: t('components.BasicNode.favoriteError'),
+          severity: 'error',
+          autoHideDuration: 3000
+        })
+      })
+  }, [getUser, getFavoriteElement, props.data.learningElementId, addSnackbar, t])
+
+  // Handlers for hovering the node
 
   const onMouseEnter = () => {
     setIsHovered(true)
@@ -85,6 +110,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
     getUser()
       .then((user) => {
         postFavorite(!isFavorite, user.id, props.data.learningElementId)
+        setFavoriteElement(user.id, props.data.learningElementId)
       })
       .catch(() => {
         addSnackbar({
