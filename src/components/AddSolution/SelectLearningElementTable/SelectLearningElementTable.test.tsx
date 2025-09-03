@@ -174,8 +174,54 @@ describe('SelectLearningElementTable', () => {
     await waitFor(() => {
       // Select, unselect and select the first checkbox to test functionality
       fireEvent.click(checkboxes[0])
+    })
+    await waitFor(() => {
       fireEvent.click(checkboxes[0])
+    })
+    await waitFor(() => {
       fireEvent.click(checkboxes[0])
+    })
+  })
+
+  it('removes learning element from selection when checkbox is unchecked', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+
+    const topicId = topicMockWithWrongSolution.lms_id
+
+    const selectedBefore = {
+      [topicId]: [
+        {
+          lms_id: 2,
+          lms_learning_element_name: 'test',
+          lms_activity_type: 'test',
+          classification: ''
+        }
+      ]
+    }
+
+    render(
+      <SnackbarContext.Provider value={mockAddSnackbar}>
+        <MemoryRouter>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <SelectLearningElementTable
+              currentTopic={topicMockWithWrongSolution}
+              selectedLearningElements={selectedBefore}
+              setSelectedLearningElements={setSelectedLearningElements}
+            />
+          </RoleContext.Provider>
+        </MemoryRouter>
+      </SnackbarContext.Provider>
+    )
+
+    const checkboxes = await screen.findAllByRole('checkbox')
+
+    // First click: uncheck the already-selected element
+    fireEvent.click(checkboxes[0])
+
+    await waitFor(() => {
+      expect(setSelectedLearningElements).toHaveBeenCalledWith({
+        [topicId]: []
+      })
     })
   })
 
