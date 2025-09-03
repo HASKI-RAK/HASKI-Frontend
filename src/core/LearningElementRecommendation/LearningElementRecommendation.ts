@@ -6,8 +6,8 @@ type LearningElementRecommendationResponse = LearningElementRecommendation
 
 type LearningElementRecommendationReturn = (
   userId: number,
-  courseId: number,
-  topicId: number
+  courseId: string,
+  topicId: string
 ) => Promise<LearningElementRecommendationResponse>
 
 export default LearningElementRecommendation

@@ -1,11 +1,11 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useCallback, useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Edge, Node } from 'reactflow'
 import { useTheme } from '@common/hooks'
 import { getGroupLabels, LearningPathLearningElementNode } from '@components'
 import { LearningElement, LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
 import { RoleContext } from '@services'
-import { useRecommendation } from './Recommendation.hooks'
+import { useLearningElementRecommendation } from './Recommendation.hooks'
 
 /**
  * @prop defaultUrl - The default url of a node
@@ -77,16 +77,12 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const theme = useTheme()
   const { t } = useTranslation()
 
+  // Hook
+  const { recommendedLearningElement } = useLearningElementRecommendation()
+
   // Global variables
   const nodeOffsetX = 50
   const groupHeight = 200
-
-  // Hooks
-  const { recommendedLearningElement } = useRecommendation()
-
-  useEffect(() => {
-    console.log(recommendedLearningElement)
-  }, [recommendedLearningElement])
 
   // Logic
   const handleOpen = useCallback(() => {
@@ -149,9 +145,6 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         cursor: 'pointer',
         width: 500
       }
-
-      console.log('why ' + (learningElement.lms_id == recommendedLearningElement?.lms_id))
-
       const nodeData: LearningPathLearningElementNode = {
         learningElementId: learningElement.id,
         lmsId: learningElement.lms_id,

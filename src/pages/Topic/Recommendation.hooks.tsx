@@ -1,72 +1,61 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { LearningElement, LearningElementRecommendation, LearningPathElementStatus } from '@core'
-import { AuthContext } from '@services'
+import { handleError } from '@components'
+import { LearningElement } from '@core'
 import { usePersistedStore, useStore } from '@store'
 
-// todo
-export const useRecommendation = () => {
-  const { isAuth } = useContext(AuthContext)
-  //! rerendered noch nicht, wenn ein modal geschlossen wird.
+// todo docs
+export type LearningElementRecommendationHookReturn = {
+  recommendedLearningElement?: LearningElement
+}
 
+// todo docs
+export const useLearningElementRecommendation = (): LearningElementRecommendationHookReturn => {
+  // Params
   const { courseId, topicId } = useParams()
+
+  // Store
   const getUser = usePersistedStore((state) => state.getUser)
-  const getLearningElementRecommendation = useStore((state) => state.getLearningElementRecommendation)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
+  const getLearningElementRecommendation = useStore((state) => state.getLearningElementRecommendation)
+  const learningElementRecommendation = useStore((state) => state._learningElementRecommendation)
 
-  // TODO: State for list of recommendations
-  const [recommendedLearningElement, setRecommendedLearningElement] = useState<LearningElement | null>(null)
-
-  // TODO: Check if first item is already done
-  // TODO: IF yes move to second item and repeat
-  // TODO: First undone item will be returned?
+  // State
+  const [recommendedLearningElement, setRecommendedLearningElement] = useState<LearningElement | undefined>()
 
   useEffect(() => {
-    isAuth &&
-      topicId &&
+    topicId &&
       courseId &&
-      getUser() //? This much security needed? -> getUser doesnt return anything if not authenticated
+      getUser()
         .then((user) => {
           getLearningPathElementStatus(courseId, user.lms_user_id).then((learningPathElementStatus) => {
-            // Handle successful status retrieval
-            console.log(learningPathElementStatus)
-            getLearningElementRecommendation(user.id, parseInt(courseId), parseInt(topicId)).then(
-              (learningElementRecommendation) => {
-                // Handle successful recommendation retrieval
-                console.log(learningElementRecommendation)
-                learningElementRecommendation.find((recommendation) => {
-                  const condition =
-                    learningPathElementStatus.find((item) => item.cmid === recommendation.lms_id)?.state === 0
-                  console.log(condition)
-                  if (condition) {
-                    // Found an undone recommendation
-                    console.log('Found recommendation: ', recommendation)
-                    setRecommendedLearningElement(recommendation)
-                  }
-                })
-              }
-            )
+            getLearningElementRecommendation(user.id, courseId, topicId).then((learningElementRecommendation) => {
+              learningElementRecommendation.find((recommendation) => {
+                if (learningPathElementStatus.find((item) => item.cmid === recommendation.lms_id)?.state === 0) {
+                  setRecommendedLearningElement(recommendation)
+                }
+              })
+            })
           })
         })
         .catch(() => {
-          // Handle error
+          // todo error handling -> import function
+          // handleError({}, () => void, '', '', 3000)
         })
   }, [
-    getLearningPathElementStatus,
-    courseId,
-    getLearningElementRecommendation,
     topicId,
-    setRecommendedLearningElement,
+    courseId,
     getUser,
-    isAuth
+    getLearningPathElementStatus,
+    getLearningElementRecommendation,
+    setRecommendedLearningElement,
+    learningElementRecommendation
   ])
 
-  return {
-    recommendedLearningElement
-  }
+  return useMemo(
+    () => ({
+      recommendedLearningElement
+    }),
+    [recommendedLearningElement]
+  )
 }
-
-// TODO: Should return the currently recommended learning element
-
-// Soll es jedes Mal blinken, wenn der Lernpfad neuangezeigt wird? Vielleicht
-// Soll es jedes Mal blinken, wenn ein neues Element empfohlen wird? Ja!

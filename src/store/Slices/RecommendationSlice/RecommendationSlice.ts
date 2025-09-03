@@ -4,12 +4,14 @@ import { fetchLearningElementRecommendation } from '@services'
 import { StoreState } from '@store'
 import { resetters } from '../../Zustand/Store'
 
+// todo doc
 export type LearningElementRecommendationSlice = {
   _learningElementRecommendation: Record<string, LearningElementRecommendation>
   clearLearningElementRecommendationCache: (courseId?: string, topicId?: string) => void
   getLearningElementRecommendation: LearningElementRecommendationReturn
 }
 
+// todo docs
 export const createLearningElementRecommendationSlice: StateCreator<
   StoreState,
   [],
@@ -27,11 +29,11 @@ export const createLearningElementRecommendationSlice: StateCreator<
         }
       })
     },
-    getLearningElementRecommendation: async (userId: number, courseId: number, topicId: number) => {
+    getLearningElementRecommendation: async (userId: number, courseId: string, topicId: string) => {
       const key = `${courseId}-${topicId}`
       const cached = get()._learningElementRecommendation[key]
 
-      if (!cached) {
+      if (!cached || cached.length === 0) {
         const learningElementRecommendation = await fetchLearningElementRecommendation(userId, courseId, topicId)
         set({
           _learningElementRecommendation: {
