@@ -1,9 +1,9 @@
-import { Dispatch, memo, ReactNode, SetStateAction, useContext, useEffect, useState } from 'react'
+import { ChangeEvent, Dispatch, memo, ReactNode, SetStateAction, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { Box, Checkbox, FormControl, FormControlLabel, Grid, Paper, Typography } from '@common/components'
+import { Box, Checkbox, FormControlLabel, Grid, Paper, Typography } from '@common/components'
 import { handleError } from '@components'
-import { LearningElement, LearningElementSolution, RemoteLearningElement, RemoteTopics, Topic } from '@core'
+import { LearningElementSolution, LearningPathLearningElement, Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { RemoteLearningElementWithClassification } from '../../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
@@ -34,8 +34,6 @@ const SelectLearningElementTable = ({
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
 
-  const [existingSolutions, setExistingSolutions] = useState<LearningElementSolution[]>([])
-
   const handleCheckboxChange = (learningElement: RemoteLearningElementWithClassification, checked: boolean) => {
     const updatedLearningElements = {
       [currentTopic.lms_id]: checked
@@ -54,7 +52,7 @@ const SelectLearningElementTable = ({
         .then(async (learningPathElement) => {
           // Build the list of learning elements
           const learningElements: RemoteLearningElementWithClassification[] = learningPathElement.path.map(
-            (element: any) => ({
+            (element: LearningPathLearningElement): RemoteLearningElementWithClassification => ({
               lms_id: element.learning_element.lms_id,
               lms_learning_element_name: element.learning_element.name,
               classification: '',
@@ -79,7 +77,7 @@ const SelectLearningElementTable = ({
 
           setLearningElements(filteredLearningElements)
         })
-        .catch((error: any) => {
+        .catch((error) => {
           handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 5000)
         })
     })
@@ -128,7 +126,7 @@ const SelectLearningElementTable = ({
                       checked={selectedLearningElements[currentTopic.lms_id]?.some(
                         (el) => el.lms_id === element.lms_id
                       )}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      onChange={(event: ChangeEvent<HTMLInputElement>) =>
                         handleCheckboxChange(element, event.target.checked)
                       }
                     />
