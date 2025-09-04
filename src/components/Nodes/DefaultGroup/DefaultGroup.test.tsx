@@ -21,7 +21,8 @@ describe('DefaultGroup tests', () => {
     handleClose: jest.fn(),
     handleSetLmsId: jest.fn(),
     isDone: false,
-    isDisabled: false
+    isDisabled: false,
+    isRecommended: false
   }
 
   const mockNode: Node = {

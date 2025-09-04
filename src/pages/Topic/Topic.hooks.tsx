@@ -5,7 +5,7 @@ import { useTheme } from '@common/hooks'
 import { getGroupLabels, LearningPathLearningElementNode } from '@components'
 import { LearningElement, LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
 import { RoleContext } from '@services'
-import { useLearningElementRecommendation } from './Recommendation.hooks'
+import { useLearningElementRecommendation } from './LearningElementRecommendation.hooks'
 
 /**
  * @prop defaultUrl - The default url of a node

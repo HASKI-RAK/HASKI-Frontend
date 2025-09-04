@@ -177,8 +177,11 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
         )}
       </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
-      <BorderedPaper color={theme.palette.success.main} isAnimated={props.data.isRecommended}>
-        {icon}
+      <BorderedPaper
+        color={theme.palette.success.main}
+        isAnimated={props.data.isRecommended}
+        tooltip={'This is the recommended next learning element for you!'}>
+        {icon /*//todo translation for tooltip */}
       </BorderedPaper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {props.data.name}

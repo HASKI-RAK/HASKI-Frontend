@@ -8,6 +8,8 @@ import { usePersistedStore, useStore } from '@store'
 export type LearningElementRecommendationHookReturn = {
   recommendedLearningElement?: LearningElement
 }
+// todo muss noch getestet werden
+
 
 // todo docs
 export const useLearningElementRecommendation = (): LearningElementRecommendationHookReturn => {
@@ -18,7 +20,7 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
   const getLearningElementRecommendation = useStore((state) => state.getLearningElementRecommendation)
-  const learningElementRecommendation = useStore((state) => state._learningElementRecommendation)
+  const learningElementRecommendation = useStore((state) => state._learningElementRecommendationCache)
 
   // State
   const [recommendedLearningElement, setRecommendedLearningElement] = useState<LearningElement | undefined>()
@@ -28,15 +30,25 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
       courseId &&
       getUser()
         .then((user) => {
-          getLearningPathElementStatus(courseId, user.lms_user_id).then((learningPathElementStatus) => {
-            getLearningElementRecommendation(user.id, courseId, topicId).then((learningElementRecommendation) => {
-              learningElementRecommendation.find((recommendation) => {
-                if (learningPathElementStatus.find((item) => item.cmid === recommendation.lms_id)?.state === 0) {
-                  setRecommendedLearningElement(recommendation)
-                }
-              })
+          getLearningPathElementStatus(courseId, user.lms_user_id)
+            .then((learningPathElementStatus) => {
+              getLearningElementRecommendation(user.id, courseId, topicId)
+                .then((learningElementRecommendation) => {
+                  learningElementRecommendation.find((recommendation) => {
+                    if (learningPathElementStatus.find((item) => item.cmid === recommendation.lms_id)?.state === 0) {
+                      setRecommendedLearningElement(recommendation)
+                    }
+                  })
+                })
+                .catch(() => {
+                  // todo error handling -> import function
+                  // handleError({}, () => void, '', '', 3000)
+                })
             })
-          })
+            .catch(() => {
+              // todo error handling -> import function
+              // handleError({}, () => void, '', '', 3000)
+            })
         })
         .catch(() => {
           // todo error handling -> import function

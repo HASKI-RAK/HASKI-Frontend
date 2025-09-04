@@ -23,7 +23,8 @@ describe('ExampleNode tests', () => {
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
       isDone: false,
-      isDisabled: false
+      isDisabled: false,
+      isRecommended: false
     }
 
     const mockNode: Node = {
@@ -64,7 +65,8 @@ describe('ExampleNode tests', () => {
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
       isDone: true,
-      isDisabled: true
+      isDisabled: true,
+      isRecommended: false
     }
 
     const mockNode: Node = {

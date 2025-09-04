@@ -1,6 +1,7 @@
 import log from 'loglevel'
 import create from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
+import { createLearningElementRecommendationSlice, LearningElementRecommendationSlice } from '../Slices'
 import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import { CoursesSlice, createCoursesSlice } from '../Slices/CoursesSlice'
@@ -15,10 +16,6 @@ import {
 } from '../Slices/LearningPathElementStatusSlice'
 import { createLearningPathTopicSlice, LearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
 import { createNewsSlice, NewsSlice } from '../Slices/NewsSlice'
-import {
-  createLearningElementRecommendationSlice,
-  LearningElementRecommendationSlice
-} from '../Slices/RecommendationSlice/RecommendationSlice'
 import { createRemoteTopicsSlice, RemoteTopicsSlice } from '../Slices/RemoteTopicsSlice'
 import { createStudentLpLeAlgorithmSlice, StudentLpLeAlgorithmSlice } from '../Slices/StudentLpLeAlgSlice'
 import { createTeacherLpLeAlgorithmSlice, TeacherLpLeAlgorithmSlice } from '../Slices/TeacherLpLeAlgorithmSlice'

@@ -29,7 +29,8 @@ describe('BasicNode tests', () => {
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
       isDone: isDone,
-      isDisabled: isDisabled
+      isDisabled: isDisabled,
+      isRecommended: false
     }
 
     return {

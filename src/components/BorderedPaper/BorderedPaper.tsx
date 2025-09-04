@@ -1,16 +1,17 @@
 import { memo, ReactNode } from 'react'
-import { keyframes } from '@mui/system' // TODO -> Common
 import { Paper, Tooltip, Typography } from '@common/components'
+import { keyframes } from '@common/theme'
 
 // todo document
 type BorderedPaperProps = {
-  children: ReactNode
-  color: string
-  isAnimated: boolean
+  children?: ReactNode
+  color?: string
+  isAnimated?: boolean
+  tooltip?: string
 }
 
 // TODO DOCUMENT
-const BorderedPaper = ({ children, color = 'transparent', isAnimated = false }: BorderedPaperProps) => {
+const BorderedPaper = ({ children, color = 'transparent', isAnimated = false, tooltip }: BorderedPaperProps) => {
   // TODO: DOCUMENT
   const animation =
     keyframes`
@@ -26,15 +27,7 @@ const BorderedPaper = ({ children, color = 'transparent', isAnimated = false }: 
 
   return (
     // Typography in tooltip
-    <Tooltip
-      arrow
-      title={
-        isAnimated ? (
-          <Typography variant="body2">{'This is the recommended next learning element for you!'}</Typography>
-        ) : (
-          ''
-        )
-      }>
+    <Tooltip arrow title={isAnimated ? <Typography variant="body2">{tooltip}</Typography> : ''}>
       <Paper
         sx={{
           alignItems: 'center',

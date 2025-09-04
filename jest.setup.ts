@@ -689,6 +689,46 @@ const mockDataServices: MockDataServices = {
       }
     ])
   ),
+  fetchLearningElementRecommendation: jest.fn(() =>
+    Promise.resolve([
+      {
+        id: 1,
+        lms_id: 1,
+        activity_type: 'test',
+        classification: 'KÜ',
+        name: 'test',
+        university: 'test',
+        created_at: 'test',
+        created_by: 'test',
+        last_updated: 'test',
+        student_learning_element: {
+          id: 1,
+          student_id: 1,
+          learning_element_id: 1,
+          done: false,
+          done_at: 'test'
+        }
+      },
+      {
+        id: 2,
+        lms_id: 2,
+        activity_type: 'test',
+        classification: 'ÜB',
+        name: 'test',
+        university: 'test',
+        created_at: 'test',
+        created_by: 'test',
+        last_updated: 'test',
+        student_learning_element: {
+          id: 2,
+          student_id: 1,
+          learning_element_id: 2,
+          done: false,
+          done_at: 'test'
+        }
+      }
+    ])
+  ),
   postCalculateRating: jest.fn(() =>
     Promise.resolve({
       student_rating: {},
