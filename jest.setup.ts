@@ -559,6 +559,154 @@ const mockDataServices: MockDataServices = {
       url: 'https://fakedomain.com:5000/userId/topicId/teacherAlgorithm'
     })
   ),
+  fetchStudentRatings: jest.fn(() =>
+    Promise.resolve([
+      {
+        student_id: 1,
+        topic_id: 1,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        student_id: 1,
+        topic_id: 1,
+        rating_value: 1200,
+        rating_deviation: 120,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        student_id: 2,
+        topic_id: 2,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        student_id: 3,
+        topic_id: 2,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        student_id: 1,
+        topic_id: 99,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      }
+    ])
+  ),
+  fetchStudentRatingsOnTopic: jest.fn((topic_id: number) =>
+    Promise.resolve([
+      {
+        student_id: 1,
+        topic_id: topic_id,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        student_id: 1,
+        topic_id: topic_id,
+        rating_value: 1200,
+        rating_deviation: 120,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        student_id: 2,
+        topic_id: topic_id,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        student_id: 3,
+        topic_id: topic_id,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      }
+    ])
+  ),
+  fetchLearningElementRatings: jest.fn(() =>
+    Promise.resolve([
+      {
+        learning_element_id: 1,
+        topic_id: 1,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        learning_element_id: 1,
+        topic_id: 1,
+        rating_value: 1200,
+        rating_deviation: 120,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        learning_element_id: 2,
+        topic_id: 2,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        learning_element_id: 3,
+        topic_id: 2,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        learning_element_id: 4,
+        topic_id: 99,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      }
+    ])
+  ),
+  fetchLearningElementRatingsOnTopic: jest.fn((topic_id: number) =>
+    Promise.resolve([
+      {
+        learning_element_id: 1,
+        topic_id: topic_id,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        learning_element_id: 1,
+        topic_id: topic_id,
+        rating_value: 1200,
+        rating_deviation: 120,
+        timestamp: new Date('2023-01-02')
+      },
+      {
+        learning_element_id: 2,
+        topic_id: topic_id,
+        rating_value: 1000,
+        rating_deviation: 100,
+        timestamp: new Date('2023-01-01')
+      },
+      {
+        learning_element_id: 3,
+        topic_id: topic_id,
+        rating_value: 800,
+        rating_deviation: 80,
+        timestamp: new Date('2023-01-02')
+      }
+    ])
+  ),
+  postCalculateRating: jest.fn(() =>
+    Promise.resolve({
+      student_rating: {},
+      learning_element_rating: {}
+    })
+  ),
   fetchNews: jest.fn(() =>
     Promise.resolve({
       news: [
