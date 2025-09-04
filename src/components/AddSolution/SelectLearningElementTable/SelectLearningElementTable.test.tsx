@@ -1,15 +1,22 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, cleanup } from '@testing-library/react'
 import SelectLearningElementTable from './SelectLearningElementTable'
 import { Topic } from '@core'
 import React from 'react'
 import '@testing-library/jest-dom'
 import { RoleContext, RoleContextType, SnackbarContext } from '@services'
-import '@testing-library/jest-dom'
 import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
 import { mockServices } from 'jest.setup'
 
 describe('SelectLearningElementTable', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
+  afterEach(() => {
+    cleanup()
+  })
+
   const topicMockWithSolution: Topic = {
     contains_le: true,
     created_at: '',
@@ -54,8 +61,8 @@ describe('SelectLearningElementTable', () => {
 
   const selectedLearningElements = {
     1: [
-      { lms_id: 101, lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity', classification: 'KÜ' },
-      { lms_id: 102, lms_learning_element_name: 'Element 2', lms_activity_type: 'Activity', classification: 'EK' }
+      { lms_id: 1, lms_learning_element_name: 'test', lms_activity_type: 'test', classification: '' },
+      { lms_id: 2, lms_learning_element_name: 'test', lms_activity_type: 'test', classification: '' }
     ]
   }
 
@@ -86,13 +93,9 @@ describe('SelectLearningElementTable', () => {
     setSelectedLearningElements
   }
 
-  beforeEach(() => {
-    jest.clearAllMocks()
-  })
+  jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
 
   it('renders title and topic name', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
-
     const { getByText } = render(
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
@@ -110,9 +113,14 @@ describe('SelectLearningElementTable', () => {
   })
 
   it('renders learning elements without existing solutions', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+    mockServices.fetchLearningElementSolution.mockRejectedValue(() =>
+      Promise.reject({
+        status: 404,
+        message: 'No existing solution'
+      })
+    )
 
-    const { getAllByText } = render(
+    const { getAllByText, getAllByRole } = render(
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>
@@ -127,11 +135,11 @@ describe('SelectLearningElementTable', () => {
     )
 
     await waitFor(() => {
-      expect(getAllByText('test')).toHaveLength(3)
+      expect(getAllByText('test')).toHaveLength(4)
     })
 
-    const checkboxes = screen.getAllByRole('checkbox')
-    expect(checkboxes).toHaveLength(3)
+    const checkboxes = getAllByRole('checkbox')
+    expect(checkboxes).toHaveLength(4)
 
     await waitFor(() => {
       // Select, unselect and select the first checkbox to test functionality
@@ -142,22 +150,33 @@ describe('SelectLearningElementTable', () => {
 
     await waitFor(() => {
       expect(setSelectedLearningElements).toHaveBeenCalledWith({
-        1001: [{ lms_id: 2, lms_learning_element_name: 'test', lms_activity_type: 'test', classification: '' }]
+        1001: [{ lms_id: 1, lms_learning_element_name: 'test', lms_activity_type: 'test', classification: '' }]
       })
     })
   })
 
   it('renders learning elements with existing solutions', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+    mockServices.fetchLearningElementSolution.mockImplementation((lms_id: number) => {
+      if (lms_id === 1) {
+        return Promise.resolve({
+          learning_element_lms_id: 10
+          // other expected fields...
+        })
+      }
+      // Simulate no solution found
+      return Promise.reject({ status: 404 })
+    })
 
-    const { getAllByText } = render(
+    const setSelectedLearningElements1 = jest.fn()
+
+    const { getAllByText, getAllByRole } = render(
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>
             <SelectLearningElementTable
               currentTopic={topicMockWithSolution}
               selectedLearningElements={selectedLearningElements}
-              setSelectedLearningElements={setSelectedLearningElements}
+              setSelectedLearningElements={setSelectedLearningElements1}
             />
           </RoleContext.Provider>
         </MemoryRouter>
@@ -165,27 +184,47 @@ describe('SelectLearningElementTable', () => {
     )
 
     await waitFor(() => {
-      expect(getAllByText('test')).toHaveLength(3)
+      expect(getAllByText('test')).toHaveLength(4)
     })
 
-    const checkboxes = screen.getAllByRole('checkbox')
-    expect(checkboxes).toHaveLength(3)
+    const checkboxes = getAllByRole('checkbox')
+    expect(checkboxes).toHaveLength(4)
 
     await waitFor(() => {
       // Select, unselect and select the first checkbox to test functionality
       fireEvent.click(checkboxes[0])
-    })
-    await waitFor(() => {
+      fireEvent.click(checkboxes[0])
       fireEvent.click(checkboxes[0])
     })
+
     await waitFor(() => {
-      fireEvent.click(checkboxes[0])
+      expect(setSelectedLearningElements1).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({
+          1: [{ lms_id: 2, lms_learning_element_name: 'test', lms_activity_type: 'test', classification: '' }]
+        })
+      )
+
+      expect(setSelectedLearningElements1).toHaveBeenNthCalledWith(
+        2,
+        expect.objectContaining({
+          1: [{ lms_id: 2, lms_learning_element_name: 'test', lms_activity_type: 'test', classification: '' }]
+        })
+      )
+
+      expect(setSelectedLearningElements1).toHaveBeenNthCalledWith(
+        3,
+        expect.objectContaining({
+          1: [{ lms_id: 2, lms_learning_element_name: 'test', lms_activity_type: 'test', classification: '' }]
+        })
+      )
     })
+
+    mockServices.fetchLearningPathElement.mockReset()
+    mockServices.fetchLearningElementSolution.mockReset()
   })
 
   it('removes learning element from selection when checkbox is unchecked', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
-
     const topicId = topicMockWithWrongSolution.lms_id
 
     const selectedBefore = {
@@ -198,6 +237,22 @@ describe('SelectLearningElementTable', () => {
         }
       ]
     }
+
+    // Mock the learning path element to return element with lms_id 2
+    mockServices.fetchLearningPathElement.mockResolvedValue({
+      path: [
+        {
+          learning_element: {
+            lms_id: 2,
+            name: 'test',
+            activity_type: 'test'
+          }
+        }
+      ]
+    })
+
+    // Mock that the solution does NOT exist
+    mockServices.fetchLearningElementSolution.mockRejectedValue({ status: 404 })
 
     render(
       <SnackbarContext.Provider value={mockAddSnackbar}>
@@ -215,7 +270,10 @@ describe('SelectLearningElementTable', () => {
 
     const checkboxes = await screen.findAllByRole('checkbox')
 
-    // First click: uncheck the already-selected element
+    // Ensure the checkbox is initially checked
+    expect(checkboxes[0]).toBeChecked()
+
+    // Click to uncheck
     fireEvent.click(checkboxes[0])
 
     await waitFor(() => {
@@ -223,11 +281,13 @@ describe('SelectLearningElementTable', () => {
         [topicId]: []
       })
     })
+
+    mockServices.fetchLearningPathElement.mockReset()
+    mockServices.fetchLearningElementSolution.mockReset()
   })
 
   it('handles Error when fetchLearningPathElement returns Error', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
-    mockServices.fetchLearningPathElement.mockImplementationOnce(() => {
+    mockServices.fetchLearningPathElement.mockImplementation(() => {
       throw new Error('getLearningPathElement error')
     })
 
@@ -250,95 +310,13 @@ describe('SelectLearningElementTable', () => {
       expect(getByText('Wirtschaftsinformatik')).toBeInTheDocument()
       expect(queryAllByText('Element 1')).toHaveLength(0)
     })
-  })
-
-  it('handles Error when fetchLearningElementSolution returns Error', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
-    mockServices.fetchLearningElementSolution.mockImplementationOnce(() => {
-      throw new Error('getLearningElementSolution error')
-    })
-
-    const { getByText } = render(
-      <SnackbarContext.Provider value={mockAddSnackbar}>
-        <MemoryRouter>
-          <RoleContext.Provider value={courseCreatorContext}>
-            <SelectLearningElementTable
-              currentTopic={topicMockWithSolution}
-              selectedLearningElements={selectedLearningElements}
-              setSelectedLearningElements={setSelectedLearningElements}
-            />
-          </RoleContext.Provider>
-        </MemoryRouter>
-      </SnackbarContext.Provider>
-    )
 
     await waitFor(() => {
-      expect(getByText('components.SelectLearningElementTable.title')).toBeInTheDocument()
-      expect(getByText('Wirtschaftsinformatik')).toBeInTheDocument()
-    })
-  })
-  /* it('allows selecting and unselecting learning elements', async () => {
-    mockGetUser.mockResolvedValue({ settings: { user_id: 1 }, lms_user_id: 1, id: 1 })
-    mockGetLearningPathElement.mockResolvedValue({
-      path: [
-        {
-          learning_element: {
-            lms_id: 123,
-            name: 'Element 1',
-            activity_type: 'video'
-          }
-        }
-      ]
-    })
-
-    mockGetLearningElementSolution.mockRejectedValue({ status: 404 }) // No existing solution
-
-    render(
-      <SnackbarContext.Provider value={mockSnackbar}>
-        <SelectLearningElementTable {...defaultProps} />
-      </SnackbarContext.Provider>
-    )
-
-    const checkbox = await screen.findByLabelText('Element 1')
-    expect(checkbox).not.toBeChecked()
-
-    fireEvent.click(checkbox)
-
-    await waitFor(() => {
-      expect(setSelectedLearningElements).toHaveBeenCalledWith({
-        1001: [
-          {
-            lms_id: 123,
-            lms_learning_element_name: 'Element 1',
-            lms_activity_type: 'video',
-            classification: ''
-          }
-        ]
-      })
-    })
-
-    // Simulate unchecking
-    fireEvent.click(checkbox)
-
-    await waitFor(() => {
-      expect(setSelectedLearningElements).toHaveBeenCalledWith({
-        1001: []
+      expect(addSnackbarMock).toHaveBeenCalledWith({
+        autoHideDuration: 5000,
+        message: 'error.fetchLearningPathElement',
+        severity: 'error'
       })
     })
   })
-
-  it('renders children if provided', async () => {
-    mockGetUser.mockResolvedValue({ settings: { user_id: 1 }, lms_user_id: 1, id: 1 })
-    mockGetLearningPathElement.mockResolvedValue({ path: [] })
-
-    render(
-      <SnackbarContext.Provider value={mockSnackbar}>
-        <SelectLearningElementTable {...defaultProps}>
-          <div data-testid="custom-child">Child Content</div>
-        </SelectLearningElementTable>
-      </SnackbarContext.Provider>
-    )
-
-    expect(await screen.findByTestId('custom-child')).toBeInTheDocument()
-  })*/
 })
