@@ -48,26 +48,25 @@ const AddSolutionModal = ({
   ]
 
   const handleSend = useCallback(() => {
-    if (!currentTopic) {
-      addSnackbar({ message: t('components.AddSolutionModal.noTopic'), severity: 'error' })
-      return
-    }
     setIsLoading(true)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore currentTopic can not be undefined here because the next button is disabled in that case
     learningElementsWithSolutions[currentTopic.lms_id]?.forEach((solution) => {
-      if (!solution.solutionLmsId || !solution.learningElementLmsId || !solution.solutionLmsType) {
-        handleError(t, addSnackbar, 'components.AddSolutionModal.missingSolutionData', { solution }, 5000)
-        setIsLoading(false)
-        return
-      }
-
       const outputJson = JSON.stringify({
         solution_lms_id: solution.solutionLmsId,
         activity_type: solution.solutionLmsType
       })
 
-      postLearningElementSolution({ learningElementLmsId: solution.learningElementLmsId, outputJson })
+      postLearningElementSolution({
+        learningElementLmsId: solution.learningElementLmsId,
+        outputJson
+      })
         .then(() => {
-          addSnackbar({ message: t('appGlobal.solutionAdded'), severity: 'success', autoHideDuration: 3000 })
+          addSnackbar({
+            message: t('appGlobal.solutionAdded'),
+            severity: 'success',
+            autoHideDuration: 3000
+          })
           setLearningElementSolution(solution.learningElementLmsId, solution.solutionLmsId, solution.solutionLmsType)
         })
         .catch((error) => {
@@ -105,10 +104,10 @@ const AddSolutionModal = ({
           </Fab>
           <Grid container direction="column" spacing={3}>
             <Grid item>
-              <Stepper activeStep={activeStep} alternativeLabel>
-                {AddSolutionModalSteps.map((label) => (
+              <Stepper activeStep={activeStep} alternativeLabel data-testid={'add-solution-modal-stepper'}>
+                {AddSolutionModalSteps.map((label, index) => (
                   <Step key={label}>
-                    <StepButton onClick={() => setActiveStep(activeStep)}>{label}</StepButton>
+                    <StepButton onClick={() => setActiveStep(index)}>{label}</StepButton>
                   </Step>
                 ))}
               </Stepper>

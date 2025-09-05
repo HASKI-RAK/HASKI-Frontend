@@ -5,6 +5,14 @@ import { RoleContext, RoleContextType, SnackbarContext } from '@services'
 import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
 import { Topic } from '@core'
+import * as router from 'react-router'
+import { mockServices } from 'jest.setup'
+
+// Mock react-router params
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn()
+}))
 
 describe('AddSolutionModal', () => {
   const setActiveStep = jest.fn()
@@ -94,7 +102,7 @@ describe('AddSolutionModal', () => {
     expect(handleCloseAddSolutionModal).toHaveBeenCalled()
   })
 
-  it('navigates to solution step and back', async () => {
+  it('navigates to solution step', async () => {
     renderModal()
     const nextButton = screen.getByRole('button', { name: 'appGlobal.next' })
     fireEvent.click(nextButton)
@@ -102,6 +110,82 @@ describe('AddSolutionModal', () => {
     await waitFor(() => {
       expect(setActiveStep).toHaveBeenCalledWith(1)
     })
+  })
+
+  it('navigates with stepper buttons', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+
+    const { getAllByTestId, getByRole, getByText } = render(
+      <SnackbarContext.Provider value={mockAddSnackbar}>
+        <MemoryRouter>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <AddSolutionModal
+              open={true}
+              activeStep={1}
+              setActiveStep={setActiveStep}
+              currentTopic={{
+                contains_le: true,
+                created_at: 'string',
+                created_by: 'string',
+                id: 2,
+                is_topic: true,
+                last_updated: 'string',
+                lms_id: 2,
+                name: 'Wirtschaftsinformatik',
+                parent_id: 1,
+                university: 'HS-Kempten',
+                student_topic: {
+                  done: true,
+                  done_at: 'string',
+                  id: 1,
+                  student_id: 1,
+                  topic_id: 1,
+                  visits: ['string']
+                }
+              }}
+              selectedLearningElements={{
+                2: [
+                  {
+                    lms_id: 11,
+                    lms_learning_element_name: 'Test Element',
+                    lms_activity_type: 'video',
+                    classification: 'EK'
+                  }
+                ]
+              }}
+              selectedSolutions={{
+                2: [{ solutionLmsId: 1, solutionLmsName: 'Solution 1', solutionLmsType: 'h5p' }]
+              }}
+              learningElementsWithSolutions={{
+                2: [
+                  {
+                    learningElementLmsId: 11,
+                    solutionLmsId: 1,
+                    solutionLmsType: 'h5p',
+                    learningElementName: 'Test Element'
+                  }
+                ]
+              }}
+              setSelectedLearningElements={setSelectedLearningElements}
+              setLearningElementsWithSolutions={setLearningElementsWithSolutions}
+              handleCloseAddSolutionModal={handleCloseAddSolutionModal}
+            />
+          </RoleContext.Provider>
+        </MemoryRouter>
+      </SnackbarContext.Provider>
+    )
+
+    expect(getByText('Wirtschaftsinformatik')).toBeInTheDocument()
+
+    await waitFor(() => {
+      const buttons = screen.getAllByRole('button', { name: /selectLearningElements|selectSolutions/i })
+      fireEvent.click(buttons[0]) // Click first step
+
+      fireEvent.click(getByRole('button', { name: 'appGlobal.back' })) // Click back button
+    })
+
+    expect(setActiveStep).toHaveBeenCalledWith(0)
+    expect(setActiveStep).toHaveBeenCalledTimes(2)
   })
 
   it('disables next button if no matching solution exists', () => {
@@ -119,7 +203,89 @@ describe('AddSolutionModal', () => {
   })
 
   it('calls postLearningElementSolution on handleSend', async () => {
-    const { postLearningElementSolution } = require('@services')
+    const { postLearningElementSolution } = mockServices
+
+    render(
+      <SnackbarContext.Provider value={mockAddSnackbar}>
+        <MemoryRouter>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <AddSolutionModal
+              open={true}
+              activeStep={1}
+              setActiveStep={setActiveStep}
+              currentTopic={{
+                contains_le: true,
+                created_at: 'string',
+                created_by: 'string',
+                id: 2,
+                is_topic: true,
+                last_updated: 'string',
+                lms_id: 2,
+                name: 'Wirtschaftsinformatik',
+                parent_id: 1,
+                university: 'HS-Kempten',
+                student_topic: {
+                  done: true,
+                  done_at: 'string',
+                  id: 1,
+                  student_id: 1,
+                  topic_id: 1,
+                  visits: ['string']
+                }
+              }}
+              selectedLearningElements={{
+                2: [
+                  {
+                    lms_id: 11,
+                    lms_learning_element_name: 'Test Element',
+                    lms_activity_type: 'video',
+                    classification: 'EK'
+                  }
+                ]
+              }}
+              selectedSolutions={{
+                2: [
+                  {
+                    solutionLmsId: 1,
+                    solutionLmsName: 'Solution 1',
+                    solutionLmsType: 'h5p'
+                  }
+                ]
+              }}
+              learningElementsWithSolutions={{
+                2: [
+                  {
+                    learningElementLmsId: 11,
+                    solutionLmsId: 1,
+                    solutionLmsType: 'h5p',
+                    learningElementName: 'Test Element'
+                  }
+                ]
+              }}
+              setSelectedLearningElements={setSelectedLearningElements}
+              setLearningElementsWithSolutions={setLearningElementsWithSolutions}
+              handleCloseAddSolutionModal={handleCloseAddSolutionModal}
+            />
+          </RoleContext.Provider>
+        </MemoryRouter>
+      </SnackbarContext.Provider>
+    )
+
+    const sendButton = screen.getByRole('button', { name: 'appGlobal.next' })
+    fireEvent.click(sendButton)
+
+    await waitFor(() => {
+      expect(postLearningElementSolution).toHaveBeenCalledWith({
+        learningElementLmsId: 11,
+        outputJson: JSON.stringify({ solution_lms_id: 1, activity_type: 'h5p' })
+      })
+    })
+  })
+
+  it('catches Error on handleSend', async () => {
+    mockServices.postLearningElementSolution.mockRejectedValueOnce(() => {
+      throw new Error('postLearningElementSolution error')
+    })
 
     render(
       <SnackbarContext.Provider value={mockAddSnackbar}>
@@ -168,13 +334,13 @@ describe('AddSolutionModal', () => {
       </SnackbarContext.Provider>
     )
 
-    const sendButton = screen.getByRole('button', { name: 'appGlobal.next' })
-    fireEvent.click(sendButton)
-
     await waitFor(() => {
-      expect(postLearningElementSolution).toHaveBeenCalledWith({
-        learningElementLmsId: 11,
-        outputJson: JSON.stringify({ solution_lms_id: 1, activity_type: 'h5p' })
+      const sendButton = screen.getByRole('button', { name: 'appGlobal.next' })
+      fireEvent.click(sendButton)
+      expect(addSnackbarMock).toHaveBeenCalledWith({
+        message: 'error.addSolution',
+        severity: 'error',
+        autoHideDuration: 5000
       })
     })
   })
