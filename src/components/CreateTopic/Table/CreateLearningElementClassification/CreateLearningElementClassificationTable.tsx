@@ -1,5 +1,6 @@
 import { memo, ReactNode, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { TableBody, tableCellClasses } from '@mui/material'
 import {
   Box,
   Checkbox,
@@ -11,21 +12,29 @@ import {
   Paper,
   Select,
   SelectChangeEvent,
+  Table,
+  TableCell,
+  TableHead,
+  TableRow,
   Typography
 } from '@common/components'
 import { SkeletonList } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
+import { Solution } from '../../Modal/CreateTopicModal/CreateTopicModal'
 import { useCreateLearningElementClassificationTable } from './CreateLearningElementClassificationTable.hooks'
 
 export type LearningElementWithClassification = RemoteLearningElement & {
   classification: string
+  disabled?: boolean
 }
 
 export type CreateLearningElementClassificationTableProps = {
   selectedTopics: RemoteTopics[]
   selectedLearningElements: { [key: number]: RemoteLearningElement[] }
   LearningElementsClassification: { [key: number]: LearningElementWithClassification[] }
+  selectedSolutions: { [key: number]: Solution[] }
   onLearningElementChange: (selectedLearningElements: { [key: number]: LearningElementWithClassification[] }) => void
+  onSolutionChange: (selectedSolutions: { [key: number]: Solution[] }) => void
   children?: ReactNode
 }
 
@@ -38,14 +47,18 @@ const CreateLearningElementClassificationTable = ({
   selectedTopics,
   selectedLearningElements,
   LearningElementsClassification,
+  selectedSolutions,
   onLearningElementChange,
+  onSolutionChange,
   children
 }: CreateLearningElementClassificationTableProps) => {
   //Hooks
   const { t } = useTranslation()
-  const { handleClassificationChange } = useCreateLearningElementClassificationTable({
+  const { handleClassificationChange, handleSolutionchange } = useCreateLearningElementClassificationTable({
     LearningElementsClassification,
-    onLearningElementChange
+    selectedSolutions,
+    onLearningElementChange,
+    onSolutionChange
   })
 
   //Constants
@@ -54,6 +67,20 @@ const CreateLearningElementClassificationTable = ({
       returnObjects: true
     })
   }, [t])
+
+  //function to check if more than than half of elements would be selected as solution if another was selected
+  const canNotSelectSolution = (topicId: number) => {
+    const nextLength = selectedSolutions[topicId].length + 1
+    const halfOfLearningElements = LearningElementsClassification[topicId].length / 2
+    return nextLength > halfOfLearningElements
+  }
+
+  //function to check if solution is checked
+  const isSolution = useCallback(
+    (topicId: number, elementLmsId: number) =>
+      selectedSolutions[topicId].some((solution) => solution.solutionLmsId === elementLmsId),
+    [selectedSolutions]
+  )
 
   useEffect(() => {
     const updatedClassifications = Object.keys(selectedLearningElements).reduce((accumulator, topicId) => {
@@ -122,33 +149,71 @@ const CreateLearningElementClassificationTable = ({
                 </Typography>
               </Grid>
             </Box>
-            {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => {
-              return (
-                <Grid container alignItems="center" spacing={2} key={element.lms_id}>
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={<Checkbox checked={true} disabled={true} />}
-                      label={<Typography>{element.lms_learning_element_name}</Typography>}
-                    />
-                  </Grid>
-                  <Grid item container xs={6} justifyContent="flex-end">
-                    <FormControl sx={{ m: 1, width: '21rem' }} size="small">
-                      <InputLabel>{t('appGlobal.classification')}</InputLabel>
-                      <Select
-                        value={element.classification}
-                        onChange={handleSelectChange(lmsTopic, element)}
-                        label={t('appGlobal.classification')}>
-                        {learningElementClassifications.map((classification) => (
-                          <MenuItem key={classification.key} value={classification.key}>
-                            {classification.name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </Grid>
-                </Grid>
-              )
-            })}
+            <Table
+              sx={{
+                [`& .${tableCellClasses.root}`]: {
+                  borderBottom: 'none'
+                },
+                [`& .${tableCellClasses.body}`]: {
+                  margin: '0rem'
+                }
+              }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ textAlign: 'center' }}>{t('appGlobal.learningElement')}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>{t('appGlobal.classification')}</TableCell>
+                  <TableCell sx={{ textAlign: 'center' }}>
+                    {t('components.CreateLearningElementClassificationTable.IsSolution')}
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {LearningElementsClassification[lmsTopic.topic_lms_id]?.map((element) => (
+                  <TableRow key={element.lms_id}>
+                    <TableCell sx={{ padding: '0rem' }}>
+                      <FormControlLabel
+                        control={<Checkbox checked={true} disabled={true} />}
+                        label={<Typography>{element.lms_learning_element_name}</Typography>}
+                      />
+                    </TableCell>
+                    <TableCell sx={{ textAlign: 'center', padding: '0rem' }}>
+                      <FormControl sx={{ m: 1, width: '21rem' }} size="small">
+                        <InputLabel>{t('appGlobal.classification')}</InputLabel>
+                        <Select
+                          value={element.classification}
+                          onChange={handleSelectChange(lmsTopic, element)}
+                          label={t('appGlobal.classification')}
+                          disabled={element.disabled}>
+                          {learningElementClassifications.map((classification) => (
+                            <MenuItem key={classification.key} value={classification.key}>
+                              {classification.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </TableCell>
+                    <TableCell sx={{ textAlign: 'center', padding: '0rem' }}>
+                      <Checkbox
+                        checked={isSolution(lmsTopic.topic_lms_id, element.lms_id)}
+                        disabled={
+                          canNotSelectSolution(lmsTopic.topic_lms_id) &&
+                          !isSolution(lmsTopic.topic_lms_id, element.lms_id)
+                        }
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          handleSolutionchange(
+                            lmsTopic.topic_lms_id,
+                            element.lms_id,
+                            element.lms_learning_element_name,
+                            event.target.checked,
+                            element.lms_activity_type
+                          )
+                        }
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </Paper>
         </Grid>
       ))}
@@ -157,4 +222,6 @@ const CreateLearningElementClassificationTable = ({
   )
 }
 
+// eslint-disable-next-line immutable/no-mutation
+CreateLearningElementClassificationTable.displayName = 'CreateLearningElementClassificationTable'
 export default memo(CreateLearningElementClassificationTable)

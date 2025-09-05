@@ -3,10 +3,13 @@ import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
 import { CreateLearningElementTable } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
+import { Solution } from '../CreateTopicModal/CreateTopicModal'
 
 type CreateLearningElementsStepProps = {
   selectedTopics: RemoteTopics[]
   selectedLearningElements: { [key: number]: RemoteLearningElement[] }
+  selectedSolutions: { [key: number]: Solution[] }
+  onSolutionChange: (selectedSolutions: { [key: number]: Solution[] }) => void
   handleLearningElementChange: (selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => void
   selectAllLearningElementsChecked: boolean
   setSelectAllLearningElementsChecked: Dispatch<SetStateAction<boolean>>
@@ -17,6 +20,8 @@ type CreateLearningElementsStepProps = {
 const CreateLearningElementsStep = ({
   selectedTopics,
   selectedLearningElements,
+  selectedSolutions,
+  onSolutionChange,
   handleLearningElementChange,
   selectAllLearningElementsChecked,
   setSelectAllLearningElementsChecked,
@@ -31,6 +36,8 @@ const CreateLearningElementsStep = ({
         selectedTopics={selectedTopics}
         onLearningElementChange={handleLearningElementChange}
         selectedLearningElements={selectedLearningElements}
+        selectedSolutions={selectedSolutions}
+        onSolutionChange={onSolutionChange}
         selectAllLearningElementsChecked={selectAllLearningElementsChecked}
         setSelectAllLearningElementsChecked={setSelectAllLearningElementsChecked}>
         <Box sx={{ padding: '1rem', width: '95%' }}>
