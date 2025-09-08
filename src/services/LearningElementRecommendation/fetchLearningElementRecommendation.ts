@@ -1,4 +1,4 @@
-import { LearningElementRecommendationResponse, LearningElementRecommendationReturn } from '@core'
+import { LearningElementRecommendation, LearningElementRecommendationReturn } from '@core'
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
@@ -24,7 +24,7 @@ export const fetchLearningElementRecommendation: LearningElementRecommendationRe
   courseId: string,
   topicId: string
 ) => {
-  return fetchData<LearningElementRecommendationResponse>(
+  return fetchData<LearningElementRecommendation>(
     getConfig().BACKEND + `/user/${userId}/course/${courseId}/topic/${topicId}/recommendation`,
     {
       method: 'GET',

@@ -61,11 +61,10 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
             .then((learningPathElementStatus) => {
               getLearningElementRecommendation(user.id, courseId, topicId)
                 .then((learningElementRecommendation) => {
-                  learningElementRecommendation.find((recommendation) => {
-                    if (learningPathElementStatus.find((item) => item.cmid === recommendation.lms_id)?.state === 0) {
-                      setRecommendedLearningElement(recommendation)
-                    }
-                  })
+                  const nextLearningElement = learningElementRecommendation.find((recommendation) =>
+                    learningPathElementStatus.some((item) => item.cmid === recommendation.lms_id && item.state === 0)
+                  )
+                  setRecommendedLearningElement(nextLearningElement)
                 })
                 .catch((error) => {
                   handleError(t, addSnackbar, 'error.getLearningElementRecommendation', error, 3000)

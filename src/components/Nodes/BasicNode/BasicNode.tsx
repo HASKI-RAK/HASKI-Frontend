@@ -239,7 +239,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
                 <DeleteForever fontSize={'medium'} />
               </IconButton>
             </Tooltip>
-            {props.children}
+            {props.children}s
           </Grid>
         )}
       </Collapse>
@@ -247,8 +247,8 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       <BorderedPaper
         color={theme.palette.success.main}
         isAnimated={props.data.isRecommended}
-        tooltip={'components.BasicNode.recommendedExercise'}>
-        {icon /*//todo translation for tooltip */}
+        tooltip={t('components.BasicNode.recommendedExercise')}>
+        {icon}
       </BorderedPaper>
       <Typography variant="h6" style={{ marginLeft: '8px' }}>
         {props.data.name}
