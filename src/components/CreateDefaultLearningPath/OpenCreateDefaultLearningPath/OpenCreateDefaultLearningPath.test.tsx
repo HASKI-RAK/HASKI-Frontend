@@ -162,8 +162,11 @@ describe('OpenCreateDefaultLearningPath component', () => {
     })
   })
 
-  it('does render the DefaultLearningPathModal and closes it', async () => {
+  it('does render the DefaultLearningPathModal and closes it with close button', async () => {
+    window.confirm = jest.fn(() => true) // always click 'yes'
     ;(useCookies as jest.Mock).mockReturnValueOnce([{ default_learningpath_sent_token: false }, setCookieMock])
+
+    mockServices.fetchDefaultLearningPath.mockImplementationOnce(jest.fn(() => Promise.resolve([])))
     mockServices.fetchUser = jest.fn().mockImplementation(() =>
       Promise.resolve({
         id: 1,
@@ -181,8 +184,6 @@ describe('OpenCreateDefaultLearningPath component', () => {
       })
     )
 
-    mockServices.fetchDefaultLearningPath.mockImplementationOnce(jest.fn(() => Promise.resolve([])))
-
     const { getByTestId, queryByTestId } = render(
       <DummyProvider>
         <OpenCreateDefaultLearningPath usePrivacyModal={() => fakePrivacyModalHookReturn} />
@@ -190,12 +191,15 @@ describe('OpenCreateDefaultLearningPath component', () => {
     )
 
     await waitFor(() => {
-      expect(getByTestId('close-default-learning-path-modal-button')).toBeInTheDocument()
+      const closeButton = getByTestId('close-default-learning-path-modal-button')
+      expect(closeButton).toBeInTheDocument()
+      fireEvent.click(closeButton)
     })
-    fireEvent.click(getByTestId('close-default-learning-path-modal-button'))
+
     await waitFor(() => {
       expect(queryByTestId('default-learning-path-modal')).not.toBeInTheDocument()
     })
+    window.confirm = jest.fn()
   })
 
   it('does render the DefaultLearningPathModal and closes it with backdropclick', async () => {
@@ -300,6 +304,84 @@ describe('OpenCreateDefaultLearningPath component', () => {
           severity: 'error'
         })
       )
+    })
+  })
+
+  it('does not render the DefaultLearningPathModal with an existing default learning path', async () => {
+    ;(useCookies as jest.Mock).mockReturnValueOnce([{ default_learningpath_sent_token: false }, setCookieMock])
+
+    mockServices.fetchUser.mockImplementation(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'TH-AB'
+      })
+    )
+
+    mockServices.fetchDefaultLearningPath.mockImplementation(() =>
+      Promise.resolve([
+        {
+          classification: 'EK',
+          disabled: false,
+          id: 25,
+          position: 1,
+          university: 'HS-KE'
+        },
+        {
+          classification: 'AN',
+          disabled: false,
+          id: 26,
+          position: 2,
+          university: 'HS-KE'
+        },
+        {
+          classification: 'FO',
+          disabled: false,
+          id: 27,
+          position: 3,
+          university: 'HS-KE'
+        },
+        {
+          classification: 'LZ',
+          disabled: true,
+          id: 28,
+          position: 9000,
+          university: 'HS-KE'
+        },
+        {
+          classification: 'KÜ',
+          disabled: true,
+          id: 29,
+          position: 9001,
+          university: 'HS-KE'
+        },
+        {
+          classification: 'BE',
+          disabled: true,
+          id: 30,
+          position: 9002,
+          university: 'HS-KE'
+        }
+      ])
+    )
+
+    const { queryByTestId } = render(
+      <DummyProvider>
+        <OpenCreateDefaultLearningPath usePrivacyModal={() => fakePrivacyModalHookReturn} />
+      </DummyProvider>
+    )
+
+    await waitFor(() => {
+      expect(queryByTestId('close-default-learning-path-modal-button')).not.toBeInTheDocument()
     })
   })
 })
