@@ -1,8 +1,8 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { handleError } from '@components'
-import { LearningElement } from '@core'
+import { LearningElement, LearningPathElementStatus } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
@@ -49,31 +49,47 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
   // State
   const [recommendedLearningElement, setRecommendedLearningElement] = useState<LearningElement | undefined>()
 
+  /**
+   * Updates the next recommended learning element for a student
+   * based on their current progress in the topic and course.
+   *
+   * @param userId - The ID of the user.
+   * @param courseId - The ID of the course.
+   * @param topicId - The ID of the topic.
+   * @param learningPathElementStatus - The student's current progress on learning elements within the topic and course.
+   */
+  const updateNextLearningElement = useCallback(
+    (userId: number, courseId: string, topicId: string, learningPathElementStatus: LearningPathElementStatus[]) => {
+      getLearningElementRecommendation(userId, courseId, topicId)
+        .then((learningElementRecommendation) => {
+          const nextLearningElement = learningElementRecommendation.find((recommendation) =>
+            learningPathElementStatus.some((item) => item.cmid === recommendation.lms_id && item.state === 0)
+          )
+          setRecommendedLearningElement(nextLearningElement)
+        })
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.getLearningElementRecommendation', error, 3000)
+        })
+    },
+    [getLearningElementRecommendation, setRecommendedLearningElement, handleError, t, addSnackbar]
+  )
+
   useEffect(() => {
     if (!isAuth || !isStudentRole || !topicId || !courseId) return
 
     getUser()
-        .then((user) => {
-          getLearningPathElementStatus(courseId, user.lms_user_id)
-            .then((learningPathElementStatus) => {
-              getLearningElementRecommendation(user.id, courseId, topicId)
-                .then((learningElementRecommendation) => {
-                  const nextLearningElement = learningElementRecommendation.find((recommendation) =>
-                    learningPathElementStatus.some((item) => item.cmid === recommendation.lms_id && item.state === 0)
-                  )
-                  setRecommendedLearningElement(nextLearningElement)
-                })
-                .catch((error) => {
-                  handleError(t, addSnackbar, 'error.getLearningElementRecommendation', error, 3000)
-                })
-            })
-            .catch((error) => {
-              handleError(t, addSnackbar, 'error.getLearningPathElementStatus', error, 3000)
-            })
-        })
-        .catch((error) => {
-          handleError(t, addSnackbar, 'error.getUser', error, 3000)
-        })
+      .then((user) => {
+        getLearningPathElementStatus(courseId, user.lms_user_id)
+          .then((learningPathElementStatus) => {
+            updateNextLearningElement(user.id, courseId, topicId, learningPathElementStatus)
+          })
+          .catch((error) => {
+            handleError(t, addSnackbar, 'error.getLearningPathElementStatus', error, 3000)
+          })
+      })
+      .catch((error) => {
+        handleError(t, addSnackbar, 'error.getUser', error, 3000)
+      })
   }, [
     topicId,
     courseId,
