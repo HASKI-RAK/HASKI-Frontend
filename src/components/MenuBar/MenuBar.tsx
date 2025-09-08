@@ -179,10 +179,6 @@ const MenuBar = () => {
             <StatisticsMenu />
             <FurtherInfoMenu />
           </Box>
-          {/** Level bar */}
-          <Box mt={'1rem'} mr={'32rem'}>
-            <LevelBar/>
-          </Box>
           {/** Search bar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>
           {/** Language menu */}

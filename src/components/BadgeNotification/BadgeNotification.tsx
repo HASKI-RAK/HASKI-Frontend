@@ -1,6 +1,6 @@
-import { Snackbar, Typography } from '@common/components'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {  memo, useEffect, useState, useCallback } from 'react'
+import { Snackbar, Typography } from '@common/components'
 
 export type BadgeNotificationProps = {
   badgeQueue: string[]
@@ -16,8 +16,6 @@ const BadgeNotification = ({ badgeQueue }: BadgeNotificationProps) => {
     setIsVisible(false)
   }, [])
 
-
-
   return (
     <Snackbar
       open={badgeQueue.length > 0 && isVisible}
@@ -28,9 +26,7 @@ const BadgeNotification = ({ badgeQueue }: BadgeNotificationProps) => {
             src={`path/to/your/image/${remainingQueue[0]}.png`}
             alt={t('components.badgeNotification.accessibilityLabel')}
           />
-          <Typography variant="body1">
-            {t(`components.badgeNotification.messages.${remainingQueue[0]}`)}
-          </Typography>
+          <Typography variant="body1">{t(`components.badgeNotification.messages.${remainingQueue[0]}`)}</Typography>
           <Typography variant="body1">
             {`+ ${badgeQueue.length - 1} ` + t('components.badgeNotification.moreUnlocked')}
           </Typography>

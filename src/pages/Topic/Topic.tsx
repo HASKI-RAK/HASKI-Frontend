@@ -5,6 +5,7 @@ import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from
 import { Grid, Skeleton } from '@common/components'
 import {
   CreateLearningElement,
+  GameSidePanel,
   handleError,
   IFrameModal,
   LabeledSwitch,
@@ -213,6 +214,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           <Controls showInteractive={false} position="bottom-right" style={{ marginTop: 25 }} />
         </ReactFlow>
         <IFrameModal url={url} title={title} isOpen={isOpen} onClose={getHandleClose} key={url} />
+        <GameSidePanel></GameSidePanel>
       </Grid>
     </Grid>
   ) : (

@@ -20,30 +20,31 @@ const LevelBar = () => {
   }, [experiencePoints])
 
   return (
-    <Grid container direction="column" justifyContent={'center'}>
-      <Grid container alignItems="center" direction="row" justifyContent={'center'}>
-        <LinearProgress
-          variant="determinate"
-          value={60}
-          sx={{
-            height: '0.8rem',
-            borderRadius: 5,
-            width: '25rem',
-            border: '0.2rem solid black',
-            backgroundColor: 'white',
-            '& .MuiLinearProgress-bar': {
-              backgroundColor: 'black'
-            },
-            marginRight: '1rem'
-          }}
-        />
-        <Typography variant="body1" color="text.secondary" fontWeight={'fontWeightBold'}>
+    <Grid container direction="column" justifyContent={'center'} sx={{ position: 'relative' }}>
+      <Grid item xs={12} justifyContent={'center'} sx={{ margin: 'auto' }}>
+        <Typography variant="body1" color="text.secondary" fontWeight={'fontWeightBold'} justifyContent={'center'}>
           {'LVL ' + currentLevel}
         </Typography>
       </Grid>
-      <Typography variant="body2" color="text.secondary" sx={{ marginLeft: '17rem' }}>
-        {'290/500'}
-      </Typography>
+      <LinearProgress
+        variant="determinate"
+        value={60}
+        sx={{
+          height: '0.5rem',
+          borderRadius: 5,
+          width: '100%',
+          border: '0.2rem solid black',
+          backgroundColor: 'white',
+          '& .MuiLinearProgress-bar': {
+            backgroundColor: 'black'
+          }
+        }}
+      />
+      <Grid item justifyContent={'center'} sx={{ mt: '0.5rem', margin: 'auto' }}>
+        <Typography variant="body2" color="text.secondary" sx={{}}>
+          {'290/500'}
+        </Typography>
+      </Grid>
     </Grid>
   )
 }

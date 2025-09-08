@@ -1,6 +1,6 @@
-import { useState, useEffect, memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Grid, Paper, Button, Modal, Typography } from '@common/components'
+import { Button, Grid, Modal, Paper, Typography } from '@common/components'
 
 type GameFeedbackBoxProps = {
   open: boolean

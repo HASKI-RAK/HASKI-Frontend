@@ -1,5 +1,6 @@
 export { default as AlgorithmSettingsModal } from './AlgorithmSettingsModal/AlgorithmSettingsModal'
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
+export { default as ChallengeTracker } from './ChallengeTracker/ChallengeTracker'
 export { default as CollapsibleList } from './CollapsibleList/CollapsibleList/CollapsibleList'
 export {
   default as CollapsibleListEntry,
@@ -41,6 +42,7 @@ export { default as DeleteEntityModal } from './DeleteEntityModal/DeleteEntityMo
 export { default as Filter } from './Filter/Filter'
 export { default as Footer } from './Footer/Footer'
 export { default as Fraction } from './Fraction/Fraction'
+export { default as GameSidePanel } from './GameSidePanel/GameSidePanel'
 export * from './GlobalNav'
 export { default as GlossaryEntry, type GlossaryEntryProps } from './Glossary/GlossaryEntry/GlossaryEntry'
 export { default as GlossaryIndex } from './Glossary/GlossaryIndex/GlossaryIndex'
@@ -49,6 +51,7 @@ export { default as IFrameModal } from './IFrameModal/IFrameModal'
 export { default as ImageCollection } from './ImageCollection/ImageCollection'
 export { default as LabeledSwitch } from './LabeledSwitch/LabeledSwitch'
 export { default as LanguageMenu } from './LanguageMenu/LanguageMenu'
+export { default as Leaderboard } from './Leaderboard/Leaderboard'
 export { default as LevelBar } from './LevelBar/LevelBar'
 export { default as LocalNavBar } from './LocalNav/LocalNavBar/LocalNavBar'
 export { default as LocalNavItem } from './LocalNav/LocalNavItem/LocalNavItem'

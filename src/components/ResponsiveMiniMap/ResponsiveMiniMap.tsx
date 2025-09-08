@@ -1,4 +1,4 @@
-import {  CSSProperties, memo, useCallback, useEffect, useState } from 'react'
+import { CSSProperties, memo, useCallback, useEffect, useState } from 'react'
 import { MiniMap } from 'reactflow'
 import { useTheme } from '@common/hooks'
 
