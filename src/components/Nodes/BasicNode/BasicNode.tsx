@@ -107,9 +107,11 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   }, [
     setDeleteLearningElementModalOpen,
     setLearningElementName,
-    props.data,
+    props.data.name,
     setLearningElementId,
+    props.data.learningElementId,
     setLmsLearningElementId,
+    props.data.lmsId,
     setIsHovered
   ])
 
@@ -239,7 +241,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
                 <DeleteForever fontSize={'medium'} />
               </IconButton>
             </Tooltip>
-            {props.children}s
+            {props.children}
           </Grid>
         )}
       </Collapse>

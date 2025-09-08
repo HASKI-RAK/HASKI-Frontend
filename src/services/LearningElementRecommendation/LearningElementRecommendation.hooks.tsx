@@ -50,12 +50,9 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
   const [recommendedLearningElement, setRecommendedLearningElement] = useState<LearningElement | undefined>()
 
   useEffect(() => {
-    if (!isAuth) return
+    if (!isAuth || !isStudentRole || !topicId || !courseId) return
 
-    isStudentRole &&
-      topicId &&
-      courseId &&
-      getUser()
+    getUser()
         .then((user) => {
           getLearningPathElementStatus(courseId, user.lms_user_id)
             .then((learningPathElementStatus) => {
