@@ -54,29 +54,31 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
   const { addSnackbar } = useContext(SnackbarContext)
 
   const handleClose = () => {
-    getUser()
-      .then((user: User) => {
-        postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId)
-          .then(() => {
-            clearLearningElementRecommendationCache(courseId, topicId)
-          })
-          .catch((error) => {
-            addSnackbar({
-              message: t('error.postCalculateRating'),
-              severity: 'error',
-              autoHideDuration: 3000
+    courseId &&
+      topicId &&
+      getUser()
+        .then((user: User) => {
+          postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId)
+            .then(() => {
+              clearLearningElementRecommendationCache(courseId, topicId)
             })
-            log.error(t('error.postCalculateRating') + ' ' + error)
-          })
-      })
-      .catch((error) => {
-        addSnackbar({
-          message: t('error.getUser'),
-          severity: 'error',
-          autoHideDuration: 3000
+            .catch((error) => {
+              addSnackbar({
+                message: t('error.postCalculateRating'),
+                severity: 'error',
+                autoHideDuration: 3000
+              })
+              log.error(t('error.postCalculateRating') + ' ' + error)
+            })
         })
-        log.error(t('error.getUser') + ' ' + error)
-      })
+        .catch((error) => {
+          addSnackbar({
+            message: t('error.getUser'),
+            severity: 'error',
+            autoHideDuration: 3000
+          })
+          log.error(t('error.getUser') + ' ' + error)
+        })
 
     props.onClose()
   }

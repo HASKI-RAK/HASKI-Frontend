@@ -4,14 +4,39 @@ import { fetchLearningElementRecommendation } from '@services'
 import { StoreState } from '@store'
 import { resetters } from '../../Zustand/Store'
 
-// todo doc
+/**
+ * Type for the {@link LearningElementRecommendationSlice} slice of the store.
+ */
 export type LearningElementRecommendationSlice = {
+  /**
+   * The cache for current learning element recommendations.
+   */
   _learningElementRecommendationCache: Record<string, LearningElementRecommendation>
-  clearLearningElementRecommendationCache: (courseId?: string, topicId?: string) => void // todo maybe not optional
+  /**
+   * Clears the learning element recommendation cache for a course and topic.
+   */
+  clearLearningElementRecommendationCache: (courseId: string, topicId: string) => void
+  /**
+   * Retrieves the learning element recommendations for a user, course, and topic from the cache or backend.
+   */
   getLearningElementRecommendation: LearningElementRecommendationReturn
 }
 
-// todo docs
+/**
+ * Creates a slice of the store to manage learning element recommendations.
+ *
+ * This slice includes a cache for current learning element recommendations, a method to partially clear the cache,
+ * and a method to retrieve learning element recommendations.
+ *
+ * @category Store
+ *
+ * @example
+ * ```ts
+ * export const useStore = create<StoreState>()((...a) => ({
+ *  ...createLearningElementRecommendationSlice(...a)
+ * }))
+ * ```
+ */
 export const createLearningElementRecommendationSlice: StateCreator<
   StoreState,
   [],
@@ -21,7 +46,7 @@ export const createLearningElementRecommendationSlice: StateCreator<
   resetters.push(() => set({ _learningElementRecommendationCache: {} }))
   return {
     _learningElementRecommendationCache: {},
-    clearLearningElementRecommendationCache: (courseId?: string, topicId?: string) => {
+    clearLearningElementRecommendationCache: (courseId: string, topicId: string) => {
       set({
         _learningElementRecommendationCache: {
           ...get()._learningElementRecommendationCache,

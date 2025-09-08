@@ -9,7 +9,11 @@ describe('BorderedPaper', () => {
   })
 
   it('renders correctly with props', async () => {
-    const { getByText } = render(<BorderedPaper color='black' isAnimated={true} tooltip='tooltip'>{'children'}</BorderedPaper>)
+    const { getByText } = render(
+      <BorderedPaper color="black" isAnimated={true} tooltip="tooltip">
+        {'children'}
+      </BorderedPaper>
+    )
     expect(getByText('children')).toBeInTheDocument()
 
     fireEvent.mouseOver(getByText('children'))

@@ -2,17 +2,32 @@ import { memo, ReactNode } from 'react'
 import { Paper, Tooltip, Typography } from '@common/components'
 import { keyframes } from '@common/theme'
 
-// todo document
+/**
+ * Props for the {@link BorderedPaper} component.
+ */
 type BorderedPaperProps = {
+  /**
+   * The children of the component.
+   */
   children?: ReactNode
+  /**
+   * The color of the component's border.
+   */
   color?: string
+  /**
+   * Whether the component's border is animated or not.
+   */
   isAnimated?: boolean
+  /**
+   * The tooltip text displayed while hovering over the component.
+   */
   tooltip?: string
 }
 
-// TODO DOCUMENT
 const BorderedPaper = ({ children, color = 'transparent', isAnimated = false, tooltip }: BorderedPaperProps) => {
-  // TODO: DOCUMENT
+  /**
+   * The animation for the border.
+   */
   const animation =
     keyframes`
       0% {
@@ -26,7 +41,6 @@ const BorderedPaper = ({ children, color = 'transparent', isAnimated = false, to
       }` + ` 1s ease-in-out 3`
 
   return (
-    // Typography in tooltip
     <Tooltip arrow title={isAnimated ? <Typography variant="body2">{tooltip}</Typography> : ''}>
       <Paper
         sx={{
@@ -44,4 +58,19 @@ const BorderedPaper = ({ children, color = 'transparent', isAnimated = false, to
   )
 }
 
+/**
+ * Paper component for displaying a paper with colored border.
+ *
+ * Renders a paper with colored border, optionally with animation and tooltip on hover.
+ *
+ * @param props - See {@link BorderedPaperProps}.
+ * @returns A paper with colored and optionally animated border.
+ *
+ * @example
+ * ```tsx
+ * <BorderedPaper color="blue" isAnimated={true} tooltip="tooltip">
+ *  {children}
+ * </BorderedPaper>
+ * ```
+ */
 export default memo(BorderedPaper)

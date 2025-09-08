@@ -4,8 +4,7 @@ import { Edge, Node } from 'reactflow'
 import { useTheme } from '@common/hooks'
 import { getGroupLabels, LearningPathLearningElementNode } from '@components'
 import { LearningElement, LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
-import { RoleContext } from '@services'
-import { useLearningElementRecommendation } from './LearningElementRecommendation.hooks'
+import { RoleContext, useLearningElementRecommendation } from '@services'
 
 /**
  * @prop defaultUrl - The default url of a node

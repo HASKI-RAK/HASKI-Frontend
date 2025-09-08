@@ -108,22 +108,21 @@ describe('Topic Page', () => {
   test('getUser failed', async () => {
     mockServices.fetchUser.mockImplementationOnce(() => Promise.reject(new Error('fetchUser failed')))
     const useTopicMock = jest.fn(() => ({
-        url: 'url',
-        title: 'title',
-        lmsId: 1,
-        isOpen: false,
-        handleClose: jest.fn(),
-        handleOpen: jest.fn(),
-        mapNodes: jest.fn()
+      url: 'url',
+      title: 'title',
+      lmsId: 1,
+      isOpen: false,
+      handleClose: jest.fn(),
+      handleOpen: jest.fn(),
+      mapNodes: jest.fn()
     }))
-
 
     act(() => {
       render(
         <ReactFlowProvider>
           <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
             <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-              <Topic useTopic={useTopicMock}/>
+              <Topic useTopic={useTopicMock} />
             </AuthContext.Provider>
           </MemoryRouter>
         </ReactFlowProvider>

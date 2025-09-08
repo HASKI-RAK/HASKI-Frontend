@@ -1,20 +1,44 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { handleError } from '@components'
 import { LearningElement } from '@core'
+import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
-// todo docs
+/**
+ * Return type for the {@link useLearningElementRecommendation} hook.
+ */
 export type LearningElementRecommendationHookReturn = {
+  /**
+   * The currently recommended learning element for a student in a topic and course.
+   */
   recommendedLearningElement?: LearningElement
 }
-// todo muss noch getestet werden
 
-
-// todo docs
+/**
+ * Hook for retrieving and processing the recommended learning element for a student in a topic and course.
+ *
+ * This hook fetches the recommended learning elements for a student and determines the next undone learning element to be recommended.
+ *
+ * @category Hooks
+ *
+ * @returns See {@link LearningElementRecommendationHookReturn}.
+ *
+ * @example
+ * ```tsx
+ * const { recommendedLearningElement } = useLearningElementRecommendation()
+ * ```
+ */
 export const useLearningElementRecommendation = (): LearningElementRecommendationHookReturn => {
-  // Params
+  // Hooks
   const { courseId, topicId } = useParams()
+  const { t } = useTranslation()
+
+  // Contexts
+  const { isAuth } = useContext(AuthContext)
+  const { isStudentRole } = useContext(RoleContext)
+  const { addSnackbar } = useContext(SnackbarContext)
 
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
@@ -26,7 +50,10 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
   const [recommendedLearningElement, setRecommendedLearningElement] = useState<LearningElement | undefined>()
 
   useEffect(() => {
-    topicId &&
+    if (!isAuth) return
+
+    isStudentRole &&
+      topicId &&
       courseId &&
       getUser()
         .then((user) => {
@@ -40,19 +67,16 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
                     }
                   })
                 })
-                .catch(() => {
-                  // todo error handling -> import function
-                  // handleError({}, () => void, '', '', 3000)
+                .catch((error) => {
+                  handleError(t, addSnackbar, 'error.getLearningElementRecommendation', error, 3000)
                 })
             })
-            .catch(() => {
-              // todo error handling -> import function
-              // handleError({}, () => void, '', '', 3000)
+            .catch((error) => {
+              handleError(t, addSnackbar, 'error.getLearningPathElementStatus', error, 3000)
             })
         })
-        .catch(() => {
-          // todo error handling -> import function
-          // handleError({}, () => void, '', '', 3000)
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.getUser', error, 3000)
         })
   }, [
     topicId,
