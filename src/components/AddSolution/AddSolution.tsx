@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Button, Grid } from '@common/components'
 import {
+  AddSolutionModal,
   handleError,
   RemoteLearningElementWithClassification,
   RemoteLearningElementWithSolution,
@@ -11,7 +12,6 @@ import {
 import { LearningPathElement, RemoteTopics, Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import AddSolutionModal from './AddSolutionModal'
 
 const AddSolution = () => {
   const { t } = useTranslation()

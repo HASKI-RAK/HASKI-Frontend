@@ -7,9 +7,9 @@ import {
   RemoteLearningElementWithSolution,
   Solution
 } from '../CreateTopicModal/CreateTopicModal'
-import CreateLearningelementSolutionStep from './CreateLearningElementSolutionStep'
+import CreateLearningElementSolutionsStep from './CreateLearningElementSolutionStep'
 
-describe('CreateLearningElementSolutionStep', () => {
+describe('CreateLearningElementSolutionsStep', () => {
   const mockOnNext = jest.fn()
   const mockOnBack = jest.fn()
   const onLearningElementSolutionChange = jest.fn()
@@ -62,7 +62,7 @@ describe('CreateLearningElementSolutionStep', () => {
     const mockLearningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] } = {}
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}
@@ -84,7 +84,7 @@ describe('CreateLearningElementSolutionStep', () => {
     const mockLearningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] } = {}
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}
@@ -105,7 +105,7 @@ describe('CreateLearningElementSolutionStep', () => {
     const mockLearningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] } = {}
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}
@@ -126,7 +126,7 @@ describe('CreateLearningElementSolutionStep', () => {
     const mockLearningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] } = {}
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}
@@ -152,7 +152,7 @@ describe('CreateLearningElementSolutionStep', () => {
 
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}
@@ -172,7 +172,7 @@ describe('CreateLearningElementSolutionStep', () => {
     const disabledNext = jest.fn(() => false)
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}
@@ -194,7 +194,7 @@ describe('CreateLearningElementSolutionStep', () => {
     const disabledNext = jest.fn(() => true)
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}
@@ -222,7 +222,7 @@ describe('CreateLearningElementSolutionStep', () => {
 
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}

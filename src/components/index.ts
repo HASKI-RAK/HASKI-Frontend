@@ -1,3 +1,4 @@
+export * from './AddSolution'
 export { default as AddSolution } from './AddSolution/AddSolution'
 export { default as AlgorithmSettingsModal } from './AlgorithmSettingsModal/AlgorithmSettingsModal'
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
@@ -19,6 +20,7 @@ export { default as CreateDefaultLearningPathModal } from './CreateDefaultLearni
 export { default as OpenCreateDefaultLearningPath } from './CreateDefaultLearningPath/OpenCreateDefaultLearningPath/OpenCreateDefaultLearningPath'
 export { default as CreateLearningElement } from './CreateLearningElement/CreateLearningElement'
 export { default as CreateLearningElementModal } from './CreateLearningElement/CreateLearningElementModal'
+export * from './CreateTopic'
 export { default as CreateAlgorithmsStep } from './CreateTopic/Modal/CreateAlgorithmsStep/CreateAlgorithmsStep'
 export { default as CreateLearningElementClassificationsStep } from './CreateTopic/Modal/CreateLearningElementClassificationsStep/CreateLearningElementClassificationsStep'
 export { default as CreateLearningElementsStep } from './CreateTopic/Modal/CreateLearningElementsStep/CreateLearningElementsStep'

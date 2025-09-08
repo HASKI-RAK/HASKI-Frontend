@@ -1,11 +1,10 @@
 import { Dispatch, memo, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
+import { RemoteLearningElementWithClassification, SelectLearningElementTable } from '@components'
 import { Topic } from '@core'
-import { RemoteLearningElementWithClassification } from '../../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
-import SelectLearningElementTable from '../SelectLearningElementTable/SelectLearningElementTable'
 
-interface SelectLearningElementStep {
+type SelectLearningElementStep = {
   selectedTopics: Topic | undefined
   selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }
   setSelectedLearningElements: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>>

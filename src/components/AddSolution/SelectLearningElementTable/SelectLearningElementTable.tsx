@@ -2,11 +2,10 @@ import { ChangeEvent, Dispatch, memo, ReactNode, SetStateAction, useContext, use
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Box, Checkbox, FormControlLabel, Grid, Paper, Typography } from '@common/components'
-import { handleError } from '@components'
+import { handleError, RemoteLearningElementWithClassification } from '@components'
 import { LearningElementSolution, LearningPathLearningElement, Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import { RemoteLearningElementWithClassification } from '../../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 
 type SelectLearningElementTableProps = {
   currentTopic: Topic

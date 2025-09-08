@@ -1,10 +1,8 @@
 import { Dispatch, memo, ReactNode, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Checkbox, FormControlLabel, FormGroup, Grid, Paper, Typography } from '@common/components'
-import { SkeletonList } from '@components'
+import { SkeletonList, Solution, useCreateLearningElementTable } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
-import { Solution } from '../../Modal/CreateTopicModal/CreateTopicModal'
-import { useCreateLearningElementTable } from './CreateLearningElementTable.hooks'
 
 type CreateLearningElementTableProps = {
   selectedTopics: RemoteTopics[]

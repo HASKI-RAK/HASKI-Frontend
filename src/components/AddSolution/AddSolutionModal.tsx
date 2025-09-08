@@ -2,14 +2,17 @@ import { Dispatch, memo, SetStateAction, useCallback, useContext, useState } fro
 import { useTranslation } from 'react-i18next'
 import { Box, Fab, Grid, Modal, Paper, Step, StepButton, Stepper } from '@common/components'
 import { Close } from '@common/icons'
-import { handleError, RemoteLearningElementWithClassification } from '@components'
+import {
+  CreateLearningElementSolutionsStep,
+  handleError,
+  RemoteLearningElementWithClassification,
+  RemoteLearningElementWithSolution,
+  SelectLearningElementStep,
+  Solution
+} from '@components'
 import { Topic } from '@core'
-import { SnackbarContext } from '@services'
-import { postLearningElementSolution } from '@services'
+import { postLearningElementSolution, SnackbarContext } from '@services'
 import { useStore } from '@store'
-import CreateLearningElementSolutionStep from '../CreateTopic/Modal/CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
-import { RemoteLearningElementWithSolution, Solution } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
-import SelectLearningElementStep from './SelectLearningElementStep/SelectLearningElementStep'
 
 type AddSolutionModalProps = {
   open: boolean
@@ -121,7 +124,7 @@ const AddSolutionModal = ({
               />
             )}
             {activeStep === 1 && (
-              <CreateLearningElementSolutionStep
+              <CreateLearningElementSolutionsStep
                 selectedTopics={
                   currentTopic
                     ? [

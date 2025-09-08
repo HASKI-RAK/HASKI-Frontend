@@ -1,6 +1,5 @@
 import { memo, ReactNode, useCallback, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TableBody, tableCellClasses } from '@mui/material'
 import {
   Box,
   Checkbox,
@@ -13,15 +12,15 @@ import {
   Select,
   SelectChangeEvent,
   Table,
+  TableBody,
   TableCell,
+  tableCellClasses,
   TableHead,
   TableRow,
   Typography
 } from '@common/components'
-import { SkeletonList } from '@components'
+import { SkeletonList, Solution, useCreateLearningElementClassificationTable } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
-import { Solution } from '../../Modal/CreateTopicModal/CreateTopicModal'
-import { useCreateLearningElementClassificationTable } from './CreateLearningElementClassificationTable.hooks'
 
 export type LearningElementWithClassification = RemoteLearningElement & {
   classification: string

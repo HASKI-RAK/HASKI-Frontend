@@ -1,9 +1,8 @@
 import { Dispatch, memo, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
-import { CreateLearningElementTable } from '@components'
+import { CreateLearningElementTable, Solution } from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
-import { Solution } from '../CreateTopicModal/CreateTopicModal'
 
 type CreateLearningElementsStepProps = {
   selectedTopics: RemoteTopics[]

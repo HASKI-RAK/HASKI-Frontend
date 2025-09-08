@@ -311,7 +311,7 @@ describe('CreateLearningElementModal Component', () => {
     })
   })
 
-  test('navigates to step 3 (CreateLearningElementSolutionStep) when clicking Next', async () => {
+  test('navigates to step 3 (CreateLearningElementSolutionsStep) when clicking Next', async () => {
     jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     const handleSetActiveStep = jest.fn()

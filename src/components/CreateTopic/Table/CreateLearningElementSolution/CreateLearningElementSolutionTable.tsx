@@ -12,14 +12,14 @@ import {
   SelectChangeEvent,
   Typography
 } from '@common/components'
-import { SkeletonList } from '@components'
-import { RemoteTopics } from '@core'
 import {
   RemoteLearningElementWithClassification,
   RemoteLearningElementWithSolution,
-  Solution
-} from '../../Modal/CreateTopicModal/CreateTopicModal'
-import { useCreateLearningElementSolutionTable } from './CreateLearningElementSolutionTable.hooks'
+  SkeletonList,
+  Solution,
+  useCreateLearningElementSolutionTable
+} from '@components'
+import { RemoteTopics } from '@core'
 
 type CreateLearningElementClassificationTableProps = {
   selectedTopics: RemoteTopics[]
