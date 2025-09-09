@@ -62,9 +62,17 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
     (userId: number, courseId: string, topicId: string, learningPathElementStatus: LearningPathElementStatus[]) => {
       getLearningElementRecommendation(userId, courseId, topicId)
         .then((learningElementRecommendation) => {
+          // Find the IDs of all learning elements that are not completed.
+          const unfinishedLearningElementIds = learningPathElementStatus.reduce<number[]>((learningElementIds, item) => {
+            if (item.state === 0) learningElementIds.push(item.cmid)
+            return learningElementIds
+          }, [])
+
+          // Find the first recommended learning element that is not completed.
           const nextLearningElement = learningElementRecommendation.find((recommendation) =>
-            learningPathElementStatus.some((item) => item.cmid === recommendation.lms_id && item.state === 0)
+            unfinishedLearningElementIds.includes(recommendation.lms_id)
           )
+
           setRecommendedLearningElement(nextLearningElement)
         })
         .catch((error) => {
