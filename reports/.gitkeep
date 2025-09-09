@@ -1,0 +1,1 @@
+# Keeps the reports directory in git so jest --outputFile has a path.
