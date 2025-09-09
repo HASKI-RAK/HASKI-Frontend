@@ -77,7 +77,7 @@ export const usePersistedStore = create<PersistedStoreState>()(
           _user: state._user,
           _learningPathElementStatus: state._learningPathElementStatus,
           _defaultLearningPath: state._defaultLearningPath,
-          _favorite: state._favorite,
+          favorited: state.favorited,
           expire: state.expire
         }),
         onRehydrateStorage: () => {

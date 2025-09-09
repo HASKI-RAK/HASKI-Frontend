@@ -5,72 +5,49 @@ import { PersistedStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
 //Should return the learningElementids of the Elements that are favorited by the user
-type FavoriteElementCache = {
-  value?: FavoriteElement
-  promise?: Promise<FavoriteElement>
-}
 
 export type FavoriteElementSlice = {
-  _favorite: Record<string, FavoriteElementCache>
   getFavoriteElement: FavoriteElementReturn
   setFavoriteElement: (studentId?: number, learningElementId?: number) => void
+  favorited: number[]
 }
 
 export const createFavoriteElementSlice: StateCreator<PersistedStoreState, [], [], FavoriteElementSlice> = (
   set,
   get
 ) => {
-  resetters.push(() => set({ _favorite: {} }))
+  resetters.push(() => set({ favorited: [] }))
   return {
-    _favorite: {},
-    getFavoriteElement: async (...arg) => {
-      const [studentId] = arg
-      const key = `${studentId}`
-
-      const cached = get()._favorite[key]
-
-      if (cached?.value) {
-        return cached.value
+    favorited: [],
+    getFavoriteElement: async (learningElementId?: number) => {
+      if (!learningElementId) {
+        throw new Error('learningElementId is required')
       }
 
-      // If there's an in-flight promise, return it.
-      if (cached?.promise) {
-        return cached.promise
+      const isCached = get().favorited.includes(learningElementId)
+
+      if (isCached) {
+        // Optionally fetch or return dummy value
+        return fetchFavorite(learningElementId) // still fetch fresh if needed
       }
 
-      // Otherwise, initiate a new fetch and cache its promise.
-      const fetchPromise = fetchFavorite(studentId).then((favorite: FavoriteElement) => {
-        set({
-          _favorite: {
-            ...get()._favorite,
-            [key]: { value: favorite }
-          }
-        })
-        return favorite
-      })
+      // Fetch and store
+      const favorite = await fetchFavorite(learningElementId)
 
-      // Cache the in-flight promise.
       set({
-        _favorite: {
-          ...get()._favorite,
-          [key]: { promise: fetchPromise }
-        }
+        favorited: [...get().favorited, learningElementId]
       })
 
-      return fetchPromise
+      return favorite
     },
     setFavoriteElement: async (...arg) => {
-      const [studentId, learningElementId] = arg
-      const key = `${studentId}-${learningElementId}`
-      const cached = get()._favorite[key]?.value
-
-      set((state) => ({
-        _favorite: {
-          ...state._favorite,
-          [key]: { value: cached }
-        }
-      }))
-      return { cached }
+      const [learningElementId] = arg
+      const cached = get().favorited.find((learningElement) => learningElement === learningElementId)
+      if (cached) {
+        set({ favorited: get().favorited.filter((learningElement) => learningElement !== learningElementId) })
+      } else {
+        set({ favorited: [...get().favorited, learningElementId as number] })
+      }
     }
   }
 }
