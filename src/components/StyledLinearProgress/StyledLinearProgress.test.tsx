@@ -43,7 +43,6 @@ describe('StyledLinearProgress-1', () => {
             id: 1,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: false,
             position: 1,
             learning_element: {
               id: 1,
@@ -68,7 +67,6 @@ describe('StyledLinearProgress-1', () => {
             id: 2,
             learning_element_id: 2,
             learning_path_id: 2,
-            recommended: false,
             position: 2,
             learning_element: {
               id: 2,
@@ -93,7 +91,6 @@ describe('StyledLinearProgress-1', () => {
             id: 3,
             learning_element_id: 3,
             learning_path_id: 3,
-            recommended: false,
             position: 3,
             learning_element: {
               id: 3,
@@ -160,7 +157,6 @@ describe('StyledLinearProgress-1', () => {
             id: 1,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: false,
             position: 1,
             learning_element: {
               id: 1,
@@ -185,7 +181,6 @@ describe('StyledLinearProgress-1', () => {
             id: 2,
             learning_element_id: 2,
             learning_path_id: 2,
-            recommended: false,
             position: 2,
             learning_element: {
               id: 2,
@@ -238,7 +233,6 @@ describe('StyledLinearProgress-1', () => {
             id: 1,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: false,
             position: 1,
             learning_element: {
               id: 1,
@@ -263,7 +257,6 @@ describe('StyledLinearProgress-1', () => {
             id: 2,
             learning_element_id: 2,
             learning_path_id: 2,
-            recommended: false,
             position: 2,
             learning_element: {
               id: 2,
@@ -332,7 +325,6 @@ describe('StyledLinearProgress-1', () => {
             id: 1,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: false,
             position: 1,
             learning_element: {
               id: 1,
@@ -357,7 +349,6 @@ describe('StyledLinearProgress-1', () => {
             id: 2,
             learning_element_id: 2,
             learning_path_id: 2,
-            recommended: false,
             position: 2,
             learning_element: {
               id: 2,
@@ -430,7 +421,6 @@ describe('Course3', () => {
             id: 1,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: false,
             position: 1,
             learning_element: {
               id: 1,
@@ -455,7 +445,6 @@ describe('Course3', () => {
             id: 2,
             learning_element_id: 2,
             learning_path_id: 2,
-            recommended: false,
             position: 2,
             learning_element: {
               id: 2,

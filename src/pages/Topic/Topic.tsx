@@ -148,7 +148,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           padding: 5,
           minZoom: 0.75,
           duration: 100,
-          nodes: [{ id: initialNodes[0].id }]
+          nodes: [{ id: initialNodes[0]?.id }]
         })
         setHasCentered(true)
       }, 100)

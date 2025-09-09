@@ -7,31 +7,6 @@ import { AuthContext, fetchStudentRatings, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
 
 /**
- * # useStudentRatingDashboard hook
- *
- * Fetches the student ratings and calculates the data for student rating dashboard.
- *
- * @returns StudentRatingDashboardHookReturn
- *
- * @remarks
- * This hook is used in the StudentRatingDashboard component as default.
- *
- * @example
- * ```tsx
- * const {@
- *  ratingValue,
- * ratingDeviation,
- * maxRatingDeviation,
- * ratingValueTrend,
- * ratingDeviationTrend,
- * spiderGraphData,
- * histogramData
- * lineGraphData,
- * isLoading,
- * } = useStudentRatingDashboard()
- * ```
- */
-/**
  * Custom hook to retrieve and process student rating data for the rating dashboard.
  *
  * This hook fetches the rating of a student and calculates the data for the visualizations on the rating dashboard.

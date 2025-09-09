@@ -17,14 +17,14 @@ describe('SelfAssessmentNode tests', () => {
       name: 'testNode',
       activityType: 'testType',
       classification: 'SE',
-      isRecommended: true,
       handleSetUrl: jest.fn(),
       handleSetTitle: jest.fn(),
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
       isDone: false,
-      isDisabled: false
+      isDisabled: false,
+      isRecommended: false
     }
 
     const mockNode: Node = {
@@ -59,14 +59,14 @@ describe('SelfAssessmentNode tests', () => {
       name: 'testNode',
       activityType: 'testType',
       classification: 'SE',
-      isRecommended: true,
       handleSetUrl: jest.fn(),
       handleSetTitle: jest.fn(),
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
       isDone: true,
-      isDisabled: true
+      isDisabled: true,
+      isRecommended: false
     }
 
     const mockNode: Node = {

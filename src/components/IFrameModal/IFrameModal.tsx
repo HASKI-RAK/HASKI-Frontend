@@ -6,7 +6,7 @@ import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
 import { User } from '@core'
 import { postCalculateRating, SnackbarContext } from '@services'
-import { usePersistedStore } from '@store'
+import { usePersistedStore, useStore } from '@store'
 
 const style_box = {
   position: 'absolute',
@@ -45,6 +45,7 @@ type IFrameModalProps = {
  * @category Components
  */
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
+  const clearLearningElementRecommendationCache = useStore((state) => state.clearLearningElementRecommendationCache)
   const getUser = usePersistedStore((state) => state.getUser)
   const { courseId, topicId } = useParams()
   const { t } = useTranslation()
@@ -53,31 +54,37 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
   const { addSnackbar } = useContext(SnackbarContext)
 
   const handleClose = () => {
-    getUser()
-      .then((user: User) => {
-        postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId).catch((error) => {
+    courseId &&
+      topicId &&
+      getUser()
+        .then((user: User) => {
+          postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId)
+            .then(() => {
+              clearLearningElementRecommendationCache(courseId, topicId)
+            })
+            .catch((error) => {
+              addSnackbar({
+                message: t('error.postCalculateRating'),
+                severity: 'error',
+                autoHideDuration: 3000
+              })
+              log.error(t('error.postCalculateRating') + ' ' + error)
+            })
+        })
+        .catch((error) => {
           addSnackbar({
-            message: t('error.postCalculateRating'),
+            message: t('error.getUser'),
             severity: 'error',
             autoHideDuration: 3000
           })
-          log.error(t('error.postCalculateRating') + ' ' + error)
+          log.error(t('error.getUser') + ' ' + error)
         })
-      })
-      .catch((error) => {
-        addSnackbar({
-          message: t('error.getUser'),
-          severity: 'error',
-          autoHideDuration: 3000
-        })
-        log.error(t('error.getUser') + ' ' + error)
-      })
 
     props.onClose()
   }
 
   return (
-    <Modal id="iframe-modal" open={props.isOpen} onClose={props.onClose} data-testid={'IFrameModal'}>
+    <Modal id="iframe-modal" open={props.isOpen} onClose={handleClose} data-testid={'IFrameModal'}>
       <Box sx={style_box}>
         <Fab
           id="iframe-modal-close-button"

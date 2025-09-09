@@ -74,6 +74,7 @@ export type {
 }
 export type { CourseReturn } from './Course/Course'
 export type { DefaultLearningPathResponse } from './DefaultLearningPath/DefaultLearningPath'
+export * from './LearningElementRecommendation'
 export type { LearningPathLearningElementAlgorithmReturn } from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
 export type { StudentLpLeAlgorithmReturn } from './LearningPathAlgorithm/StudentLpLeAlgorithm'
 export type { TeacherLpLeAlgorithmReturn } from './LearningPathAlgorithm/TeacherLpLeAlgorithm'

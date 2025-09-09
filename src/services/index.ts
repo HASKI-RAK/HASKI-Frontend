@@ -18,6 +18,7 @@ export * from './debounce'
 export { fetchDefaultLearningPath, fetchDisabledClassifications, postDefaultLearningPath } from './DefaultLearningPath'
 export { postLearningElement } from './LearningElement'
 export { deleteLearningElement } from './LearningElement'
+export * from './LearningElementRecommendation'
 export {
   fetchLearningPathElement,
   fetchLearningPathElementSpecificStatus,
