@@ -80,17 +80,20 @@ const GameSidePanel = ({ children }: GameSidePanelProps) => {
   const collapsedSidePanel = (
     <Paper
       elevation={2}
-      sx={{ right: 0, top: '10rem', width: '18rem', height: '3rem', position: 'absolute', mr: '1rem' }}>
-      <Grid
-        container
-        justifyContent={'center'}
-        alignItems={'center'}
-        sx={{ height: '100%', position: 'relative' }}
-        direction={'row'}>
-        <LevelBar></LevelBar>
-        <IconButton onClick={() => setExpanded(true)} sx={{ position: 'absolute', right: 0, top: 0 }}>
-          <KeyboardArrowLeft />
-        </IconButton>
+      sx={{
+        right: 0,
+        top: '10rem',
+        width: '2.5rem',
+        height: '2.5rem',
+        position: 'absolute',
+        mr: '1rem'
+      }}>
+      <Grid item direction="column" sx={{ mt: '0.5rem', ml: '1rem', mr: '1rem' }}>
+        <Grid container justifyContent={'right'} sx={{ mb: '1rem' }}>
+          <IconButton onClick={() => setExpanded(true)} sx={{ position: 'absolute', right: 0, top: 0 }}>
+            <Close />
+          </IconButton>
+        </Grid>
       </Grid>
     </Paper>
   )
