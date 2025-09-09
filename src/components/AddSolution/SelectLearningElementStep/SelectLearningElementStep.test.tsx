@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import SelectLearningElementStep from './SelectLearningElementStepProps'
+import SelectLearningElementStep from './SelectLearningElementStep'
 import { Topic } from '@core'
 import React from 'react'
 import '@testing-library/jest-dom'
