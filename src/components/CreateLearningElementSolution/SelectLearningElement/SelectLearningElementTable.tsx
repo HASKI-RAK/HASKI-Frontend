@@ -33,6 +33,7 @@ const SelectLearningElementTable = ({
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
 
+  // Handles checkbox state changes for learning elements.
   const handleCheckboxChange = (learningElement: RemoteLearningElementWithClassification, checked: boolean) => {
     const updatedLearningElements = {
       [currentTopic.lms_id]: checked
@@ -42,7 +43,7 @@ const SelectLearningElementTable = ({
     setSelectedLearningElements(updatedLearningElements)
   }
 
-  // Get Learning Elements in Topic that do not have solutions
+  // Loads learning elements for the current topic and filters out ones that already have a solution.
   useEffect(() => {
     if (!courseId || !topicId) return
 
@@ -59,7 +60,7 @@ const SelectLearningElementTable = ({
             })
           )
 
-          // Fetch all solutions in parallel
+          // Check which learning elements already have a solution
           const solutions: (LearningElementSolution | null)[] = await Promise.all(
             learningElements.map(
               (el) => getLearningElementSolution(el.lms_id).catch(() => null) // In case of 404 or error
@@ -96,9 +97,7 @@ const SelectLearningElementTable = ({
     <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
       <Grid item container justifyContent="center">
         <Typography variant="h6" sx={{ mt: '1rem' }}>
-          {
-            t('components.SelectLearningElementTable.title') // add translation key here
-          }
+          {t('components.SelectLearningElementTable.title')}
         </Typography>
       </Grid>
       <Grid
@@ -128,6 +127,7 @@ const SelectLearningElementTable = ({
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
                         handleCheckboxChange(element, event.target.checked)
                       }
+                      id={`select-learning-element-table-checkbox-${element.lms_learning_element_name}`}
                     />
                   }
                   label={element.lms_learning_element_name}

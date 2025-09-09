@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react'
-import AddSolution from './AddSolution'
+import CreateLearningElementSolution from './CreateLearningElementSolution'
 import { MemoryRouter, useParams } from 'react-router-dom'
 import { RoleContext, RoleContextType, SnackbarContext } from '@services'
 import * as router from 'react-router'
@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn()
 }))
 
-describe('<AddSolution />', () => {
+describe('CreateLearningElementSolution', () => {
   const addSnackbarMock = jest.fn()
   const mockAddSnackbar = {
     snackbarsErrorWarning: [],
@@ -52,17 +52,17 @@ describe('<AddSolution />', () => {
   )
 
   it('renders the button', () => {
-    const { getByText } = render(<AddSolution />, { wrapper: Wrapper })
+    const { getByText } = render(<CreateLearningElementSolution />, { wrapper: Wrapper })
 
-    const button = getByText('components.AddSolution.addSolution')
+    const button = getByText('components.CreateLearningElementSolution.addSolution')
     expect(button).toBeInTheDocument()
   })
 
   it('tries to open the modal when button is clicked, without topicId', async () => {
     jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1' })
-    const { getByText } = render(<AddSolution />, { wrapper: Wrapper })
+    const { getByText } = render(<CreateLearningElementSolution />, { wrapper: Wrapper })
 
-    const button = getByText('components.AddSolution.addSolution')
+    const button = getByText('components.CreateLearningElementSolution.addSolution')
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -72,9 +72,9 @@ describe('<AddSolution />', () => {
 
   it('tries to open the modal when button is clicked, without courseId', async () => {
     jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '2' })
-    const { getByText } = render(<AddSolution />, { wrapper: Wrapper })
+    const { getByText } = render(<CreateLearningElementSolution />, { wrapper: Wrapper })
 
-    const button = getByText('components.AddSolution.addSolution')
+    const button = getByText('components.CreateLearningElementSolution.addSolution')
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -83,9 +83,9 @@ describe('<AddSolution />', () => {
   })
 
   it('opens the modal when button is clicked', async () => {
-    const { getByText } = render(<AddSolution />, { wrapper: Wrapper })
+    const { getByText } = render(<CreateLearningElementSolution />, { wrapper: Wrapper })
 
-    const button = getByText('components.AddSolution.addSolution')
+    const button = getByText('components.CreateLearningElementSolution.addSolution')
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -143,9 +143,9 @@ describe('<AddSolution />', () => {
       })
     )
 
-    const { getByText, getByTestId, queryByTestId } = render(<AddSolution />, { wrapper: Wrapper })
+    const { getByText, getByTestId, queryByTestId } = render(<CreateLearningElementSolution />, { wrapper: Wrapper })
 
-    const button = getByText('components.AddSolution.addSolution')
+    const button = getByText('components.CreateLearningElementSolution.addSolution')
     fireEvent.click(button)
 
     await waitFor(() => {
@@ -169,7 +169,7 @@ describe('<AddSolution />', () => {
       throw new Error('fetchLearningPathElement error')
     })
 
-    render(<AddSolution />, { wrapper: Wrapper })
+    render(<CreateLearningElementSolution />, { wrapper: Wrapper })
 
     await waitFor(() => {
       expect(addSnackbarMock).toHaveBeenCalledWith({
@@ -187,7 +187,7 @@ describe('<AddSolution />', () => {
       throw new Error('fetchRemoteTopics error')
     })
 
-    render(<AddSolution />, { wrapper: Wrapper })
+    render(<CreateLearningElementSolution />, { wrapper: Wrapper })
 
     await waitFor(() => {
       expect(addSnackbarMock).toHaveBeenNthCalledWith(
@@ -216,7 +216,7 @@ describe('<AddSolution />', () => {
       throw new Error('fetchLearningPathTopic error')
     })
 
-    render(<AddSolution />, { wrapper: Wrapper })
+    render(<CreateLearningElementSolution />, { wrapper: Wrapper })
 
     await waitFor(() => {
       expect(addSnackbarMock).toHaveBeenCalledWith({
@@ -233,7 +233,7 @@ describe('<AddSolution />', () => {
       throw new Error('fetchUser error')
     })
 
-    render(<AddSolution />, { wrapper: Wrapper })
+    render(<CreateLearningElementSolution />, { wrapper: Wrapper })
 
     await waitFor(() => {
       expect(addSnackbarMock).toHaveBeenCalledWith({

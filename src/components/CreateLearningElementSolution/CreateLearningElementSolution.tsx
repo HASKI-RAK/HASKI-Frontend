@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Button, Grid } from '@common/components'
 import {
-  AddSolutionModal,
+  CreateLearningElementSolutionModal,
   handleError,
   RemoteLearningElementWithClassification,
   RemoteLearningElementWithSolution,
@@ -13,12 +13,11 @@ import { LearningPathElement, RemoteTopics, Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
-const AddSolution = () => {
+const CreateLearningElementSolution = () => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
 
   const [addSolutionModalOpen, setAddSolutionModalOpen] = useState(false)
-
   const [activeStep, setActiveStep] = useState<number>(0)
 
   const { courseId } = useParams()
@@ -41,6 +40,7 @@ const AddSolution = () => {
     setAddSolutionModalOpen(true)
   }, [setAddSolutionModalOpen])
 
+  //empty all states on close
   const handleClose = useCallback(() => {
     setAddSolutionModalOpen(false)
     setActiveStep(0)
@@ -49,7 +49,7 @@ const AddSolution = () => {
     setLearningElementsWithSolutions({})
   }, [setAddSolutionModalOpen])
 
-  // Fetch Topic like in CreateLearningElement
+  //fetch Topic like in CreateLearningElement
   useEffect(() => {
     if (!courseId || !topicId) return
     getUser()
@@ -81,6 +81,7 @@ const AddSolution = () => {
           })
           .catch((error) => {
             handleError(t, addSnackbar, 'error.fetchRemoteTopics', error, 3000)
+            // Throw error to stop the chain
             throw error
           })
       )
@@ -97,7 +98,7 @@ const AddSolution = () => {
               (learningElement) => !existingLearningElementIds.includes(learningElement.lms_id)
             )
 
-            // convert filtered learning elements to solutions
+            // filtered learning elements are possible solutions for the current topic
             const solutions: Solution[] =
               filteredLearningElements?.map(
                 (learningElement) =>
@@ -129,14 +130,14 @@ const AddSolution = () => {
   return (
     <Grid>
       <Button
-        id="create-learning-element-button"
+        id="add-solution-button"
         variant="contained"
         color="primary"
         sx={{ alignSelf: 'end', marginTop: '0.6rem', minWidth: '14rem' }}
         onClick={handleOpen}>
-        {t('components.AddSolution.addSolution')}
+        {t('components.CreateLearningElementSolution.addSolution')}
       </Button>
-      <AddSolutionModal
+      <CreateLearningElementSolutionModal
         open={addSolutionModalOpen}
         activeStep={activeStep}
         setActiveStep={setActiveStep}
@@ -152,4 +153,4 @@ const AddSolution = () => {
   )
 }
 
-export default memo(AddSolution)
+export default memo(CreateLearningElementSolution)

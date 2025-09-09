@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import React from 'react'
-import AddSolutionModal from './AddSolutionModal'
+import AddSolutionModal from './CreateLearningElementSolutionModal'
 import { RoleContext, RoleContextType, SnackbarContext } from '@services'
 import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
@@ -115,7 +115,7 @@ describe('AddSolutionModal', () => {
   it('navigates with stepper buttons', async () => {
     jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
 
-    const { getAllByTestId, getByRole, getByText } = render(
+    const { getByRole, getByText } = render(
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>

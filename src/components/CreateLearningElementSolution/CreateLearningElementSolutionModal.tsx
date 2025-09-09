@@ -14,7 +14,7 @@ import { Topic } from '@core'
 import { postLearningElementSolution, SnackbarContext } from '@services'
 import { useStore } from '@store'
 
-type AddSolutionModalProps = {
+type CreateLearningElementSolutionModalProps = {
   open: boolean
   activeStep: number
   setActiveStep: Dispatch<SetStateAction<number>>
@@ -27,7 +27,7 @@ type AddSolutionModalProps = {
   handleCloseAddSolutionModal: () => void
 }
 
-const AddSolutionModal = ({
+const CreateLearningElementSolutionModal = ({
   open,
   activeStep,
   setActiveStep,
@@ -38,7 +38,7 @@ const AddSolutionModal = ({
   setSelectedLearningElements,
   setLearningElementsWithSolutions,
   handleCloseAddSolutionModal
-}: AddSolutionModalProps) => {
+}: CreateLearningElementSolutionModalProps) => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
   const setLearningElementSolution = useStore((state) => state.setLearningElementSolution)
@@ -47,7 +47,7 @@ const AddSolutionModal = ({
 
   const AddSolutionModalSteps = [
     t('components.CreateLearningElementTable.selectLearningElements'),
-    t('components.AddSolutionModal.selectSolutions')
+    t('components.CreateLearningElementSolutionModal.selectSolutions')
   ]
 
   const handleSend = useCallback(() => {
@@ -66,14 +66,14 @@ const AddSolutionModal = ({
       })
         .then(() => {
           addSnackbar({
-            message: t('appGlobal.solutionAdded'),
+            message: t('components.CreateLearningElementSolutionModal.solutionAdded'),
             severity: 'success',
             autoHideDuration: 3000
           })
           setLearningElementSolution(solution.learningElementLmsId, solution.solutionLmsId, solution.solutionLmsType)
         })
         .catch((error) => {
-          handleError(t, addSnackbar, 'error.addSolution', error, 5000)
+          handleError(t, addSnackbar, 'error.postLearningElementSolution', error, 5000)
         })
         .finally(() => {
           setIsLoading(false)
@@ -82,7 +82,7 @@ const AddSolutionModal = ({
     })
   }, [setIsLoading, currentTopic, learningElementsWithSolutions, addSnackbar, t])
 
-  // Disable the send/ next button when not all selected learning elements have a solution
+  // Disable the send/next button when not all selected learning elements have a solution
   const disableSend = useCallback(() => {
     if (!currentTopic) return true
     return !selectedLearningElements[currentTopic.lms_id]?.every((element) =>
@@ -154,4 +154,4 @@ const AddSolutionModal = ({
   )
 }
 
-export default memo(AddSolutionModal)
+export default memo(CreateLearningElementSolutionModal)

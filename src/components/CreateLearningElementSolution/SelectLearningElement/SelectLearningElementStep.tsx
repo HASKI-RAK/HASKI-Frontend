@@ -36,6 +36,7 @@ const SelectLearningElementStep = ({
         <Box sx={{ padding: '1rem', width: '95%' }}>
           <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
             <Button
+              id="select-learning-element-step-next-button"
               variant="contained"
               color="primary"
               disabled={

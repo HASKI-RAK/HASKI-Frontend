@@ -29,12 +29,6 @@
   "appGlobal.table": "Table",
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
-  "components.AddSolution.addSolution": "Assign Solution",
-  "components.AddSolution.solutionAdded": "Solution assigned",
-  "components.AddSolutionModal.missingSolutionData": "Solution data is missing",
-  "components.AddSolutionModal.noTopic": "Topic ID could not be found",
-  "components.AddSolutionModal.selectSolutions": "Select solutions",
-  "components.AddSolutionModal.successful": "The solution was assigned successfully",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Fixed Order",
@@ -181,6 +175,9 @@
   "components.CreateLearningElementClassificationTable.IsSolution": "Is Solution",
   "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Set learning element classification",
   "components.CreateLearningElementModal.createLearningElements": "Create Learning Elements",
+  "components.CreateLearningElementSolution.addSolution": "Assign Solution",
+  "components.CreateLearningElementSolutionModal.selectSolutions": "Select solutions",
+  "components.CreateLearningElementSolutionModal.solutionAdded": "Learning Element Solution assigned successfully",
   "components.CreateLearningElementSolutionTable.noSolution": "Assign solution",
   "components.CreateLearningElementSolutionTable.setLearningElementSolution": "Set learning element solution",
   "components.CreateLearningElementTable.noLearningElements": "There are no learning elements available to create",
