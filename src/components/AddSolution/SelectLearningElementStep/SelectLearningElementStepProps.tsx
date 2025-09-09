@@ -1,11 +1,11 @@
 import { Dispatch, memo, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Button, Grid } from '@common/components'
+import { Box, Button, Grid, Typography } from '@common/components'
 import { RemoteLearningElementWithClassification, SelectLearningElementTable } from '@components'
 import { Topic } from '@core'
 
-type SelectLearningElementStep = {
-  selectedTopics: Topic | undefined
+type SelectLearningElementStepProps = {
+  selectedTopics?: Topic
   selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }
   setSelectedLearningElements: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>>
   onNext: () => void
@@ -16,13 +16,15 @@ const SelectLearningElementStep = ({
   selectedLearningElements,
   setSelectedLearningElements,
   onNext
-}: SelectLearningElementStep) => {
+}: SelectLearningElementStepProps) => {
   const { t } = useTranslation()
 
   return !selectedTopics ? (
     <Grid container item>
       <Box sx={{ padding: '1rem', width: '95%' }}>
-        <p>{t('components.SelectLearningElementStep.noTopicSelected')}</p>
+        <Typography variant="body1" align={'center'}>
+          {t('components.SelectLearningElementStep.noTopicSelected')}
+        </Typography>
       </Box>
     </Grid>
   ) : (

@@ -1,17 +1,10 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import SelectLearningElementStep from './SelectLearningElementStep'
+import SelectLearningElementStep from './SelectLearningElementStepProps'
 import { Topic } from '@core'
 import React from 'react'
 import '@testing-library/jest-dom'
 import { RoleContext, RoleContextType, SnackbarContext } from '@services'
 import { MemoryRouter } from 'react-router-dom'
-
-// Mock translation hook
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key: string) => key
-  })
-}))
 
 describe('SelectLearningElementStep', () => {
   const mockSetSelectedLearningElements = jest.fn()
