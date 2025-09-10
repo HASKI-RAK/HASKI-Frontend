@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand'
-import { FavoriteElement, FavoriteElementReturn } from '@core'
+import { FavoriteElementReturn } from '@core'
 import { fetchFavorite } from '@services'
 import { PersistedStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
@@ -19,23 +19,23 @@ export const createFavoriteElementSlice: StateCreator<PersistedStoreState, [], [
   resetters.push(() => set({ favorited: [] }))
   return {
     favorited: [],
-    getFavoriteElement: async (learningElementId?: number) => {
-      if (!learningElementId) {
+    hasLoadedFavorites: false,
+    getFavoriteElement: async (studentId: number) => {
+      if (!studentId) {
         throw new Error('learningElementId is required')
       }
 
-      const isCached = get().favorited.includes(learningElementId)
+      const isCached = get().favorited.includes(studentId)
 
       if (isCached) {
-        // Optionally fetch or return dummy value
-        return fetchFavorite(learningElementId) // still fetch fresh if needed
+        return fetchFavorite(studentId)
       }
 
       // Fetch and store
-      const favorite = await fetchFavorite(learningElementId)
+      const favorite = await fetchFavorite(studentId)
 
       set({
-        favorited: [...get().favorited, learningElementId]
+        favorited: [...get().favorited, studentId]
       })
 
       return favorite

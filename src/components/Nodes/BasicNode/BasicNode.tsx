@@ -32,7 +32,6 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const [learningElementId, setLearningElementId] = useState<number>(0)
   const [lmsLearningElementId, setLmsLearningElementId] = useState<number>(0)
   const [isHovered, setIsHovered] = useState(false)
-  const [isFavorite, setIsFavorite] = useState(false) //commented out until feature is implemented
   const [solutionLmsId, setSolutionLmsId] = useState<number>(-1)
   const [solutionActivityType, setSolutionActivityType] = useState<string>('resource')
 
@@ -40,10 +39,12 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
   const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
   const getFavoriteElement = usePersistedStore((state) => state.getFavoriteElement)
-  const setFavoriteElement = usePersistedStore((state) => state.setFavoriteElement) //commented out until feature is implemented
+  const setFavoriteElement = usePersistedStore((state) => state.setFavoriteElement)
+  const favorited = usePersistedStore((state) => state.favorited)
+  const isFavorite = favorited.includes(props.data.learningElementId)
 
   // Fetch favorite status - commented out until feature is implemented
-  useEffect(() => {
+  /*useEffect(() => {
     getUser()
       .then((user) => {
         getFavoriteElement(user.id).then((favorite) => {
@@ -61,7 +62,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           autoHideDuration: 3000
         })
       })
-  }, [getUser, getFavoriteElement, props.data.learningElementId, addSnackbar, t])
+  }, [getUser, getFavoriteElement, props.data.learningElementId, addSnackbar, t])*/
 
   // Handlers for hovering the node
 
@@ -110,7 +111,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
     getUser()
       .then((user) => {
         postFavorite(!isFavorite, user.id, props.data.learningElementId)
-        setFavoriteElement(user.id, props.data.learningElementId)
+        setFavoriteElement(props.data.learningElementId)
       })
       .catch(() => {
         addSnackbar({
@@ -119,7 +120,6 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           autoHideDuration: 3000
         })
       })
-    setIsFavorite(!isFavorite)
     event.stopPropagation()
   }
 
