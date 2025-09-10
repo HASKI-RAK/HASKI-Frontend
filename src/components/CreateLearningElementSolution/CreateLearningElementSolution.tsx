@@ -17,7 +17,7 @@ const CreateLearningElementSolution = () => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
 
-  const [addSolutionModalOpen, setAddSolutionModalOpen] = useState(false)
+  const [addSolutionModalOpen, setCreateLearningElementSolutionModalOpen] = useState(false)
   const [activeStep, setActiveStep] = useState<number>(0)
 
   const { courseId } = useParams()
@@ -37,17 +37,17 @@ const CreateLearningElementSolution = () => {
   }>({})
 
   const handleOpen = useCallback(() => {
-    setAddSolutionModalOpen(true)
-  }, [setAddSolutionModalOpen])
+    setCreateLearningElementSolutionModalOpen(true)
+  }, [setCreateLearningElementSolutionModalOpen])
 
   //empty all states on close
   const handleClose = useCallback(() => {
-    setAddSolutionModalOpen(false)
+    setCreateLearningElementSolutionModalOpen(false)
     setActiveStep(0)
     setSelectedLearningElements({})
     setSelectedSolutions({})
     setLearningElementsWithSolutions({})
-  }, [setAddSolutionModalOpen])
+  }, [setCreateLearningElementSolutionModalOpen])
 
   //fetch Topic like in CreateLearningElement
   useEffect(() => {
@@ -141,7 +141,7 @@ const CreateLearningElementSolution = () => {
         open={addSolutionModalOpen}
         activeStep={activeStep}
         setActiveStep={setActiveStep}
-        handleCloseAddSolutionModal={handleClose}
+        handleCloseCreateLearningElementSolutionModal={handleClose}
         currentTopic={currentTopic}
         selectedLearningElements={selectedLearningElements}
         selectedSolutions={selectedSolutions}

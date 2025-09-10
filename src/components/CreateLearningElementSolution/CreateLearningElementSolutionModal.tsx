@@ -24,7 +24,7 @@ type CreateLearningElementSolutionModalProps = {
   learningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] }
   setSelectedLearningElements: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>>
   setLearningElementsWithSolutions: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithSolution[] }>>
-  handleCloseAddSolutionModal: () => void
+  handleCloseCreateLearningElementSolutionModal: () => void
 }
 
 const CreateLearningElementSolutionModal = ({
@@ -37,7 +37,7 @@ const CreateLearningElementSolutionModal = ({
   learningElementsWithSolutions,
   setSelectedLearningElements,
   setLearningElementsWithSolutions,
-  handleCloseAddSolutionModal
+  handleCloseCreateLearningElementSolutionModal
 }: CreateLearningElementSolutionModalProps) => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
@@ -77,7 +77,7 @@ const CreateLearningElementSolutionModal = ({
         })
         .finally(() => {
           setIsLoading(false)
-          handleCloseAddSolutionModal()
+          handleCloseCreateLearningElementSolutionModal()
         })
     })
   }, [setIsLoading, currentTopic, learningElementsWithSolutions, addSnackbar, t])
@@ -93,7 +93,7 @@ const CreateLearningElementSolutionModal = ({
   }, [currentTopic, selectedLearningElements, learningElementsWithSolutions])
 
   return (
-    <Modal open={open} onClose={handleCloseAddSolutionModal}>
+    <Modal open={open} onClose={handleCloseCreateLearningElementSolutionModal}>
       <Box sx={{ padding: '2rem', width: '80%', margin: 'auto', marginTop: '5rem' }}>
         <Paper elevation={3} sx={{ padding: '2rem', position: 'relative' }}>
           <Fab
@@ -101,7 +101,7 @@ const CreateLearningElementSolutionModal = ({
             data-testid="add-solution-modal-close-button"
             color="primary"
             size="small"
-            onClick={handleCloseAddSolutionModal}
+            onClick={handleCloseCreateLearningElementSolutionModal}
             sx={{ position: 'absolute', top: '1rem', right: '1rem' }}>
             <Close />
           </Fab>

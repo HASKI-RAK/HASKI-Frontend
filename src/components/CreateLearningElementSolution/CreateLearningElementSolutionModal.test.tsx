@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import React from 'react'
-import AddSolutionModal from './CreateLearningElementSolutionModal'
+import { CreateLearningElementSolutionModal } from '@components'
 import { RoleContext, RoleContextType, SnackbarContext } from '@services'
 import { MemoryRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
@@ -14,11 +14,11 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn()
 }))
 
-describe('AddSolutionModal', () => {
+describe('CreateLearningElementSolutionModal', () => {
   const setActiveStep = jest.fn()
   const setSelectedLearningElements = jest.fn()
   const setLearningElementsWithSolutions = jest.fn()
-  const handleCloseAddSolutionModal = jest.fn()
+  const handleCloseCreateLearningElementSolutionModal = jest.fn()
 
   const addSnackbarMock = jest.fn()
   const mockAddSnackbar = {
@@ -71,7 +71,7 @@ describe('AddSolutionModal', () => {
     },
     setSelectedLearningElements,
     setLearningElementsWithSolutions,
-    handleCloseAddSolutionModal
+    handleCloseCreateLearningElementSolutionModal
   }
 
   const courseCreatorContext = {
@@ -84,7 +84,7 @@ describe('AddSolutionModal', () => {
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>
-            <AddSolutionModal {...baseProps} {...props} />
+            <CreateLearningElementSolutionModal {...baseProps} {...props} />
           </RoleContext.Provider>
         </MemoryRouter>
       </SnackbarContext.Provider>
@@ -99,7 +99,7 @@ describe('AddSolutionModal', () => {
   it('closes modal when close button clicked', () => {
     renderModal()
     fireEvent.click(screen.getByTestId('add-solution-modal-close-button'))
-    expect(handleCloseAddSolutionModal).toHaveBeenCalled()
+    expect(handleCloseCreateLearningElementSolutionModal).toHaveBeenCalled()
   })
 
   it('navigates to solution step', async () => {
@@ -119,7 +119,7 @@ describe('AddSolutionModal', () => {
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>
-            <AddSolutionModal
+            <CreateLearningElementSolutionModal
               open={true}
               activeStep={1}
               setActiveStep={setActiveStep}
@@ -168,7 +168,7 @@ describe('AddSolutionModal', () => {
               }}
               setSelectedLearningElements={setSelectedLearningElements}
               setLearningElementsWithSolutions={setLearningElementsWithSolutions}
-              handleCloseAddSolutionModal={handleCloseAddSolutionModal}
+              handleCloseCreateLearningElementSolutionModal={handleCloseCreateLearningElementSolutionModal}
             />
           </RoleContext.Provider>
         </MemoryRouter>
@@ -209,7 +209,7 @@ describe('AddSolutionModal', () => {
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>
-            <AddSolutionModal
+            <CreateLearningElementSolutionModal
               open={true}
               activeStep={1}
               setActiveStep={setActiveStep}
@@ -264,7 +264,7 @@ describe('AddSolutionModal', () => {
               }}
               setSelectedLearningElements={setSelectedLearningElements}
               setLearningElementsWithSolutions={setLearningElementsWithSolutions}
-              handleCloseAddSolutionModal={handleCloseAddSolutionModal}
+              handleCloseCreateLearningElementSolutionModal={handleCloseCreateLearningElementSolutionModal}
             />
           </RoleContext.Provider>
         </MemoryRouter>
@@ -283,7 +283,8 @@ describe('AddSolutionModal', () => {
   })
 
   it('catches Error on handleSend', async () => {
-    mockServices.postLearningElementSolution.mockRejectedValueOnce(() => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '1' })
+    mockServices.postLearningElementSolution.mockRejectedValue(() => {
       throw new Error('postLearningElementSolution error')
     })
 
@@ -291,13 +292,32 @@ describe('AddSolutionModal', () => {
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>
-            <AddSolutionModal
+            <CreateLearningElementSolutionModal
               open={true}
               activeStep={1}
               setActiveStep={setActiveStep}
-              currentTopic={topicMock}
+              currentTopic={{
+                contains_le: true,
+                created_at: 'string',
+                created_by: 'string',
+                id: 2,
+                is_topic: true,
+                last_updated: 'string',
+                lms_id: 2,
+                name: 'Wirtschaftsinformatik',
+                parent_id: 1,
+                university: 'HS-Kempten',
+                student_topic: {
+                  done: true,
+                  done_at: 'string',
+                  id: 1,
+                  student_id: 1,
+                  topic_id: 1,
+                  visits: ['string']
+                }
+              }}
               selectedLearningElements={{
-                1: [
+                2: [
                   {
                     lms_id: 11,
                     lms_learning_element_name: 'Test Element',
@@ -307,7 +327,7 @@ describe('AddSolutionModal', () => {
                 ]
               }}
               selectedSolutions={{
-                1: [
+                2: [
                   {
                     solutionLmsId: 1,
                     solutionLmsName: 'Solution 1',
@@ -316,7 +336,7 @@ describe('AddSolutionModal', () => {
                 ]
               }}
               learningElementsWithSolutions={{
-                1: [
+                2: [
                   {
                     learningElementLmsId: 11,
                     solutionLmsId: 1,
@@ -327,18 +347,19 @@ describe('AddSolutionModal', () => {
               }}
               setSelectedLearningElements={setSelectedLearningElements}
               setLearningElementsWithSolutions={setLearningElementsWithSolutions}
-              handleCloseAddSolutionModal={handleCloseAddSolutionModal}
+              handleCloseCreateLearningElementSolutionModal={handleCloseCreateLearningElementSolutionModal}
             />
           </RoleContext.Provider>
         </MemoryRouter>
       </SnackbarContext.Provider>
     )
 
+    const sendButton = screen.getByRole('button', { name: 'appGlobal.next' })
+    fireEvent.click(sendButton)
+
     await waitFor(() => {
-      const sendButton = screen.getByRole('button', { name: 'appGlobal.next' })
-      fireEvent.click(sendButton)
       expect(addSnackbarMock).toHaveBeenCalledWith({
-        message: 'error.addSolution',
+        message: 'error.postLearningElementSolution',
         severity: 'error',
         autoHideDuration: 5000
       })

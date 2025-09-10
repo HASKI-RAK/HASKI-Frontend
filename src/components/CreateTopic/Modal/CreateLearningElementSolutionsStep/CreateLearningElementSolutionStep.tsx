@@ -9,7 +9,7 @@ import {
 } from '@components'
 import { RemoteTopics } from '@core'
 
-interface CreateLearningElementSolutionsStepProps {
+type CreateLearningElementSolutionsStepProps = {
   selectedTopics: RemoteTopics[]
   LearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
   selectedSolutions: { [key: number]: Solution[] }
