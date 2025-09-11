@@ -19,11 +19,13 @@ const SelectLearningElementStep = ({
 }: SelectLearningElementStepProps) => {
   const { t } = useTranslation()
 
-  return !selectedTopics ? (
+  return !selectedTopics || !selectedLearningElements[selectedTopics.lms_id] ? (
     <Grid container item>
       <Box sx={{ padding: '1rem', width: '95%' }}>
         <Typography variant="body1" align={'center'}>
-          {t('components.SelectLearningElementStep.noTopicSelected')}
+          {!selectedTopics
+            ? t('components.SelectLearningElementStep.noTopicSelected')
+            : t('components.SelectLearningElementStep.noLearningElements')}
         </Typography>
       </Box>
     </Grid>

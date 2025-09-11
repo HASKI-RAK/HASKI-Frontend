@@ -17,6 +17,7 @@
   "appGlobal.learningElement": "Lernelement",
   "appGlobal.learningElements": "Lernelemente",
   "appGlobal.lineGraph": "Liniendiagramm",
+  "components.SelectLearningElementStep.noLearningElements": "Keine Elemente zur Auswahl: Der Pfad ist leer oder alle Elemente haben bereits eine Lösung",
   "appGlobal.loading": "Lade...",
   "appGlobal.next": "Weiter",
   "appGlobal.oClock": "Uhr",
