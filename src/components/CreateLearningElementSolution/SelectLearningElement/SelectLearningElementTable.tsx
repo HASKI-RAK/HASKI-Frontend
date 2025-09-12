@@ -93,7 +93,15 @@ const SelectLearningElementTable = ({
     setLearningElements
   ])
 
-  return (
+  return learningElements.length === 0 ? (
+    <Grid container item>
+      <Box sx={{ padding: '1rem', width: '95%' }}>
+        <Typography variant="body1" align={'center'}>
+          {t('components.SelectLearningElementTable.noLearningElements')}
+        </Typography>
+      </Box>
+    </Grid>
+  ) : (
     <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
       <Grid item container justifyContent="center">
         <Typography variant="h6" sx={{ mt: '1rem' }}>

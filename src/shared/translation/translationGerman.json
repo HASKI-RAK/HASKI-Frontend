@@ -16,6 +16,7 @@
   "appGlobal.imageSources": "Bildquellen:",
   "appGlobal.learningElement": "Lernelement",
   "appGlobal.learningElements": "Lernelemente",
+  "components.SelectLearningElementTable.noLearningElements": "Keine Elemente zur Auswahl: Der Pfad ist leer oder alle Elemente haben bereits eine Lösung",
   "appGlobal.lineGraph": "Liniendiagramm",
   "appGlobal.loading": "Lade...",
   "appGlobal.next": "Weiter",

@@ -287,11 +287,12 @@ describe('SelectLearningElementTable', () => {
   })
 
   it('handles Error when fetchLearningPathElement returns Error', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
     mockServices.fetchLearningPathElement.mockImplementation(() => {
       throw new Error('getLearningPathElement error')
     })
 
-    const { getByText, queryAllByText } = render(
+    const { getByText } = render(
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
           <RoleContext.Provider value={courseCreatorContext}>
@@ -306,9 +307,7 @@ describe('SelectLearningElementTable', () => {
     )
 
     await waitFor(() => {
-      expect(getByText('components.SelectLearningElementTable.title')).toBeInTheDocument()
-      expect(getByText('Wirtschaftsinformatik')).toBeInTheDocument()
-      expect(queryAllByText('Element 1')).toHaveLength(0)
+      expect(getByText('components.SelectLearningElementTable.noLearningElements')).toBeInTheDocument()
     })
 
     await waitFor(() => {

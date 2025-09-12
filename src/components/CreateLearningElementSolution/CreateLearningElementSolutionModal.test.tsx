@@ -103,9 +103,13 @@ describe('CreateLearningElementSolutionModal', () => {
   })
 
   it('navigates to solution step', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
     renderModal()
-    const nextButton = screen.getByRole('button', { name: 'appGlobal.next' })
-    fireEvent.click(nextButton)
+
+    await waitFor(() => {
+      const nextButton = screen.getByRole('button', { name: 'appGlobal.next' })
+      fireEvent.click(nextButton)
+    })
 
     await waitFor(() => {
       expect(setActiveStep).toHaveBeenCalledWith(1)
@@ -188,7 +192,7 @@ describe('CreateLearningElementSolutionModal', () => {
     expect(setActiveStep).toHaveBeenCalledTimes(2)
   })
 
-  it('disables next button if no matching solution exists', () => {
+  it('disables next button if no matching solution exists', async () => {
     const props = {
       selectedLearningElements: {
         101: [{ lms_id: 99, lms_learning_element_name: 'Unmatched', lms_activity_type: 'video', classification: 'EK' }]
@@ -198,8 +202,11 @@ describe('CreateLearningElementSolutionModal', () => {
       }
     }
     renderModal(props)
-    const nextButton = screen.getByRole('button', { name: 'appGlobal.next' })
-    expect(nextButton).toBeDisabled()
+
+    await waitFor(() => {
+      const nextButton = screen.getByRole('button', { name: 'appGlobal.next' })
+      expect(nextButton).toBeDisabled()
+    })
   })
 
   it('calls postLearningElementSolution on handleSend', async () => {
