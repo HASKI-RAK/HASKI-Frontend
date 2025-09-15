@@ -1,4 +1,4 @@
-import { createTheme, green, grey, red, yellow, pink } from '@common/theme'
+import { createTheme, green, grey, pink, red, yellow } from '@common/theme'
 import { defaultBehavior } from './CommonThemeSettings'
 
 const defaultColors = {

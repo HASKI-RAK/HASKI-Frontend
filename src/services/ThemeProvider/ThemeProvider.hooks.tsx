@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Theme } from '@common/theme'
 import log from 'loglevel'
+import { Theme } from '@common/theme'
 import { AltTheme, DarkTheme, HaskiTheme } from '@common/utils'
 import { postUserSettings, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'

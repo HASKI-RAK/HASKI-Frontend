@@ -1,21 +1,21 @@
+import { memo } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Box,
-  Grid,
-  Typography,
-  Card,
   Button,
+  Card,
   CardContent,
+  Grid,
   IconButton,
   Menu,
   MenuItem,
-  Tooltip
+  Tooltip,
+  Typography
 } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
+import { MoreVert, Polyline } from '@common/icons'
 import { SkeletonList, StyledLinearProgress } from '@components'
 import { Topic } from '@core'
-import { useTranslation } from 'react-i18next'
-import { Polyline, MoreVert } from '@common/icons'
-import { memo } from 'react'
 
 const exampleTopics: Topic[] = [
   {

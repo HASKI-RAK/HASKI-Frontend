@@ -91,7 +91,7 @@ const DeleteEntityModal = memo(
     return (
       <Modal
         open={openDeleteEntityModal}
-        onClose={() => setDeleteEntityModalOpen(false)}
+        onClose={useCallback(() => setDeleteEntityModalOpen(false), [setDeleteEntityModalOpen])}
         className="learning-element-delete-icon"
         data-testid="delete-entity-modal">
         <Box sx={styleBox}>
@@ -144,7 +144,7 @@ const DeleteEntityModal = memo(
               <Grid item>
                 <Button
                   id={`delete-entity-modal-${entityType}-cancel-button`}
-                  onClick={() => setDeleteEntityModalOpen(false)}
+                  onClick={useCallback(() => setDeleteEntityModalOpen(false), [setDeleteEntityModalOpen])}
                   variant="outlined"
                   className="learning-element-delete-icon">
                   {t('appGlobal.cancel')}
@@ -153,7 +153,10 @@ const DeleteEntityModal = memo(
               <Grid item>
                 <Button
                   id={`delete-entity-modal-${entityType}-delete-button`}
-                  onClick={() => onDeleteConfirm(entityId, entityLmsId)}
+                  onClick={useCallback(
+                    () => onDeleteConfirm(entityId, entityLmsId),
+                    [onDeleteConfirm, entityId, entityLmsId]
+                  )}
                   className="learning-element-delete-icon"
                   variant="contained"
                   color="error"

@@ -27,6 +27,7 @@ import {
   PlaylistAddCheckCircleOutlined,
   Polyline
 } from '@common/icons'
+import { Theme } from '@common/theme'
 import {
   CourseMenu,
   CreateDefaultLearningPathModal,
@@ -39,7 +40,6 @@ import {
   ThemeModal
 } from '@components'
 import { AuthContext, RoleContext } from '@services'
-import { Theme } from '@common/theme'
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -211,7 +211,7 @@ const MenuBar = () => {
             </Tooltip>
             <ThemeModal
               open={modalOpenTheme}
-              handleClose={() => handleCloseThemeModal()}
+              handleClose={handleCloseThemeModal}
               selectedTheme={selectedTheme}
               setSelectedTheme={setSelectedTheme}
             />

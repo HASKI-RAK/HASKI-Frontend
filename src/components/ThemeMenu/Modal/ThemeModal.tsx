@@ -1,4 +1,4 @@
-import { ChangeEvent, memo, useCallback, useEffect, useState } from 'react'
+import { ChangeEvent, memo, useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Divider,
@@ -22,7 +22,7 @@ import { useThemeProvider } from '@services'
 
 type ThemeModalProps = {
   open?: boolean
-  handleClose: (event: object, reason: string) => void
+  handleClose: () => void
   selectedTheme: Theme
   setSelectedTheme: (theme: Theme) => void
 }
@@ -49,15 +49,11 @@ const ThemeModal = ({ open = false, handleClose, selectedTheme, setSelectedTheme
     AltTheme
   }
 
-  useEffect(() => {
-    if (open) setSelectedTheme(activeTheme)
-  }, [open, activeTheme, setSelectedTheme])
-
-  const handleThemeModalRadioButtonChange: (themeKey: string) => void = useCallback(
+  const handleThemeModalRadioButtonChange = useCallback(
     (themeKey: Theme['name']) => {
       setSelectedTheme(themeMap[themeKey])
     },
-    [setSelectedTheme]
+    [setSelectedTheme, themeMap]
   )
 
   // example pages that are displayed in the modal
@@ -104,7 +100,7 @@ const ThemeModal = ({ open = false, handleClose, selectedTheme, setSelectedTheme
               left: '93.5%'
             }}
             data-testid={'ThemeModal-Close-Button'}
-            onClick={useCallback(() => handleClose({} as object, 'backdropClick'), [handleClose])}>
+            onClick={handleClose}>
             <Close />
           </Fab>
         </Grid>
@@ -220,7 +216,7 @@ const ThemeModal = ({ open = false, handleClose, selectedTheme, setSelectedTheme
             data-testid={'ThemeModal-Accept-Button'}
             onClick={useCallback(() => {
               updateTheme(selectedTheme)
-              handleClose({} as object, 'backdropClick')
+              handleClose()
             }, [updateTheme, selectedTheme, handleClose])}
             disabled={activeTheme === selectedTheme}>
             <Check />

@@ -186,7 +186,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     <Grid container height={'100%'}>
       <Grid item xs={12}>
         <ReactFlow
-          id="real-flow"
+          id="react-flow"
           proOptions={{ hideAttribution: true }}
           nodes={initialNodes}
           edges={initialEdges}

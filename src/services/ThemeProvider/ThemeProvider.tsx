@@ -3,12 +3,12 @@ import { ThemeProvider as DefaultThemeProvider } from '@common/theme'
 import { ThemeContext, ThemeContextType } from '@services'
 import { useThemeProvider as _useThemeProvider } from './ThemeProvider.hooks'
 
-type ThemeProviderComponentProps = {
+type ThemeProviderProps = {
   children: ReactNode
   useThemeProvider?: () => ThemeContextType
 }
 
-export const ThemeProvider = ({ children, useThemeProvider = _useThemeProvider }: ThemeProviderComponentProps) => {
+export const ThemeProvider = ({ children, useThemeProvider = _useThemeProvider }: ThemeProviderProps) => {
   const { theme } = useThemeProvider()
 
   return (

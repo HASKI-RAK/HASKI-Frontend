@@ -209,6 +209,7 @@
   "components.LearningElementRatingInfo.ratingTitle": "Rating",
   "components.LearningElementRatingInfo.spiderGraphText": "Das Netzdiagramm oben rechts zeigt das durchschnittliche Rating aller Lernelemente pro Thema und ermöglicht so einen Vergleich der Schwierigkeit von verschiedenen Bereichen.",
   "components.LearningElementRatingInfo.spiderGraphTitle": "Netzdiagramm",
+  "components.LinearProgressWithLabel.learningProgress": "Lernfortschritt",
   "components.ListKQuestions": [
     [
       {
@@ -640,6 +641,7 @@
   "components.Menubar.questionnaireILS": "ILS Fragebogen",
   "components.Menubar.questionnaireILSShortened": "ILS Fragebogen verkürzt",
   "components.Menubar.questionnaireListK": "List-K Fragebogen",
+  "components.MenuBar.themeModal": "Theme ändern",
   "components.NodeTypes.ab": "Anwendungsbeispiele",
   "components.NodeTypes.an": "Animationen",
   "components.NodeTypes.be": "Beispiele",
@@ -779,7 +781,6 @@
   "components.ResultDescriptionListK.time below3-Description": "Im Hinblick auf Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es würde sich wahrscheinlich positiv auswirken, wenn Sie versuchen, sich klare Lernzeiträume zu schaffen, um Ihr Lernen effektiver zu gestalten.",
   "components.ResultDescriptionListK.time below3-Title": "Zeit hat einen Wert unter 3",
   "components.StatisticsMenu.title": "Statistiken",
-  "components.LinearProgressWithLabel.learningProgress": "Lernfortschritt",
   "components.StudentRatingDashboard.empty": "Diese Seite füllt sich mit Informationen über Ihr Rating, sobald Sie mit der Bearbeitung von Übungen beginnen.",
   "components.StudentRatingDashboard.histogramTitle": "Die Rating-Verteilung aller Studierenden",
   "components.StudentRatingDashboard.histogramUserInfo": "Ihr Rating",
@@ -1316,7 +1317,6 @@
   "components.TableRemoteTopics.noAdditionalTopics": "Keine zusätzlichen Themenbereiche gefunden",
   "components.TableRemoteTopics.title": "Verfügbare Themenbereiche",
   "components.ThemeModal.altTheme": "Alternativ",
-  "components.MenuBar.themeModal": "Theme ändern",
   "components.ThemeModal.darkTheme": "Dunkel",
   "components.ThemeModal.radioHeader": "Verfügbare Themes",
   "components.ThemeModal.standardTheme": "Standard",

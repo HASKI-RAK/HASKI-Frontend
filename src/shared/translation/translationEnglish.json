@@ -209,6 +209,7 @@
   "components.LearningElementRatingInfo.ratingTitle": "Rating",
   "components.LearningElementRatingInfo.spiderGraphText": "The spider graph at the top right shows the average rating of all learning elements per topic and thus enables a comparison of the difficulty of different areas.",
   "components.LearningElementRatingInfo.spiderGraphTitle": "Spider graph",
+  "components.LinearProgressWithLabel.learningProgress": "Learning Progress",
   "components.ListKQuestions": [
     [
       {
@@ -640,6 +641,7 @@
   "components.Menubar.questionnaireILS": "ILS-Questionnaire",
   "components.Menubar.questionnaireILSShortened": "ILS-Questionnaire shortened",
   "components.Menubar.questionnaireListK": "List-K-Questionnaire",
+  "components.MenuBar.themeModal": "Change theme",
   "components.NodeTypes.ab": "Application examples",
   "components.NodeTypes.an": "Animations",
   "components.NodeTypes.be": "Examples",
@@ -779,7 +781,6 @@
   "components.ResultDescriptionListK.time below3-Description": "In terms of internal resource management strategies, it is clear to see that you are currently not taking enough time for your learning. It would probably have a positive effect if you tried to create clear learning periods for yourself in order to make your learning more effective.",
   "components.ResultDescriptionListK.time below3-Title": "Time has a value below 3",
   "components.StatisticsMenu.title": "Statistics",
-  "components.LinearProgressWithLabel.learningProgress": "Learning Progress",
   "components.StudentRatingDashboard.empty": "This page fills with information about your rating as soon as you begin to work on exercises.",
   "components.StudentRatingDashboard.histogramTitle": "The rating distribution of all students",
   "components.StudentRatingDashboard.histogramUserInfo": "Your rating",
@@ -1316,7 +1317,6 @@
   "components.TableRemoteTopics.noAdditionalTopics": "No additional Topics found",
   "components.TableRemoteTopics.title": "Available topics",
   "components.ThemeModal.altTheme": "Alternative",
-  "components.MenuBar.themeModal": "Change theme",
   "components.ThemeModal.darkTheme": "Dark",
   "components.ThemeModal.radioHeader": "Available themes",
   "components.ThemeModal.standardTheme": "Standard",
