@@ -151,13 +151,14 @@ const MenuBar = () => {
     setAnchorElUser(null)
   }, [setAnchorElUser])
 
+  const navigate = useNavigate()
+
   const handleUserLogout = useCallback(() => {
     handleCloseUserMenu()
     logout()
     navigate('/login')
-  }, [])
+  }, [logout, navigate, handleCloseUserMenu])
 
-  const navigate = useNavigate()
   return (
     <AppBar position="static">
       <Toolbar disableGutters>
