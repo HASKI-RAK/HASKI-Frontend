@@ -68,81 +68,94 @@ const MenuBar = () => {
   const [successSendListK, setSuccessSendListK] = useState(false)
   const [selectedTheme, setSelectedTheme] = useState<Theme>(activeTheme)
 
-  const handleOpenThemeModal = () => {
+  const handleOpenThemeModal = useCallback(() => {
     setSelectedTheme(activeTheme)
     setModalOpenTheme(true)
     setAnchorElUser(null)
-  }
+  }, [activeTheme, setSelectedTheme, setModalOpenTheme, setAnchorElUser])
 
-  const handleCloseThemeModal = () => {
+  const handleCloseThemeModal = useCallback(() => {
     setModalOpenTheme(false)
-  }
+  }, [setModalOpenTheme])
 
-  const handleOpenILSShortModal = () => {
+  const handleOpenILSShortModal = useCallback(() => {
     setModalOpenILSShort(true)
     setAnchorElUser(null)
-  }
+  }, [setModalOpenILSShort, setAnchorElUser])
 
-  const handleCloseILSShortModal = (_: object, reason: string) => {
-    if (!successSendILSShort) {
-      if (reason == 'backdropClick')
-        if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSShort(false)
-    } else {
-      window.location.reload()
-      setModalOpenILSShort(false)
-    }
-  }
+  const handleCloseILSShortModal = useCallback(
+    (_: object, reason: string) => {
+      if (!successSendILSShort) {
+        if (reason == 'backdropClick')
+          if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSShort(false)
+      } else {
+        window.location.reload()
+        setModalOpenILSShort(false)
+      }
+    },
+    [successSendILSShort, setModalOpenILSShort]
+  )
 
-  const handleOpenILSLongModal = () => {
+  const handleOpenILSLongModal = useCallback(() => {
     setModalOpenILSLong(true)
     setAnchorElUser(null)
-  }
+  }, [setModalOpenILSLong, setAnchorElUser])
 
-  const handleCloseILSLongModal = (_: object, reason: string) => {
-    if (!successSendILSLong) {
-      if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSLong(false)
-    } else {
-      window.location.reload()
-      setModalOpenILSLong(false)
-    }
-  }
+  const handleCloseILSLongModal = useCallback(
+    (_: object, reason: string) => {
+      if (!successSendILSLong) {
+        if (reason == 'backdropClick')
+          if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSLong(false)
+      } else {
+        window.location.reload()
+        setModalOpenILSLong(false)
+      }
+    },
+    [successSendILSLong, setModalOpenILSLong]
+  )
 
-  const handleOpenListKModal = () => {
+  const handleOpenListKModal = useCallback(() => {
     setModalOpenListK(true)
     setAnchorElUser(null)
-  }
+  }, [setModalOpenListK, setAnchorElUser])
 
-  const handleOpenDefaultLearningPath = () => {
+  const handleOpenDefaultLearningPath = useCallback(() => {
     setModalOpenDefaultLearningPath(true)
     setAnchorElUser(null)
-  }
+  }, [setModalOpenDefaultLearningPath, setAnchorElUser])
 
-  const handleCloseListKModal = (_: object, reason: string) => {
-    if (!successSendListK) {
-      if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenListK(false)
-    } else {
-      window.location.reload()
-      setModalOpenListK(false)
-    }
-  }
+  const handleCloseListKModal = useCallback(
+    (_: object, reason: string) => {
+      if (!successSendListK) {
+        if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenListK(false)
+      } else {
+        window.location.reload()
+        setModalOpenListK(false)
+      }
+    },
+    [successSendListK, setModalOpenListK]
+  )
 
-  const handleCloseDefaultLearningPath = () => {
+  const handleCloseDefaultLearningPath = useCallback(() => {
     setModalOpenDefaultLearningPath(false)
-  }
+  }, [setModalOpenDefaultLearningPath])
 
-  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget)
-  }
+  const handleOpenUserMenu = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      setAnchorElUser(event.currentTarget)
+    },
+    [setAnchorElUser]
+  )
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = useCallback(() => {
     setAnchorElUser(null)
-  }
+  }, [setAnchorElUser])
 
-  const handleUserLogout = () => {
+  const handleUserLogout = useCallback(() => {
     handleCloseUserMenu()
     logout()
     navigate('/login')
-  }
+  }, [])
 
   const navigate = useNavigate()
   return (
