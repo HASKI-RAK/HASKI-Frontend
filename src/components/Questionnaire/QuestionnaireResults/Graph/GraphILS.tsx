@@ -38,6 +38,54 @@ const GraphILS = ({ data }: GraphILSProps) => {
   const theme = useTheme()
   const graphILSdata = useData(data)
 
+  const barTheme =
+    // You can pass this object to the `theme` property
+    {
+      axis: {
+        domain: {
+          line: {
+            stroke: theme.palette.secondary.dark,
+            strokeWidth: 1
+          }
+        },
+        legend: {
+          text: {
+            fontSize: 12,
+            fill: theme.palette.text.primary,
+            outlineWidth: 0,
+            outlineColor: 'transparent'
+          }
+        },
+        ticks: {
+          text: {
+            fontSize: 11,
+            fill: theme.palette.text.primary,
+            outlineWidth: 0,
+            outlineColor: 'transparent'
+          }
+        }
+      },
+      grid: {
+        line: {
+          stroke: theme.palette.secondary.dark,
+          strokeWidth: 1
+        }
+      },
+      tooltip: {
+        wrapper: {},
+        container: {
+          background: theme.palette.background.default,
+          color: theme.palette.text.primary,
+          fontSize: 15
+        },
+        basic: {},
+        chip: {},
+        table: {},
+        tableCell: {},
+        tableCellValue: {}
+      }
+    }
+
   return (
     <Bar
       width={750}
@@ -104,6 +152,7 @@ const GraphILS = ({ data }: GraphILSProps) => {
         from: 'color',
         modifiers: [['darker', 2]]
       }}
+      theme={barTheme}
       labelSkipWidth={12}
       labelSkipHeight={12}
       labelTextColor={theme.palette.common.white}

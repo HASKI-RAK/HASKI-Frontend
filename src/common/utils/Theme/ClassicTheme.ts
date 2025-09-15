@@ -1,6 +1,7 @@
 import { createTheme } from '@common/theme'
+import { defaultBehavior } from './CommonThemeSettings'
 
-// Module needs to be declared once in react
+// Module needs to be declared once in react, so that other component can use the new Breakpoints
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
     xxl: true // adds the `xxl` breakpoint
@@ -8,22 +9,12 @@ declare module '@mui/material/styles' {
   }
 }
 
-export const defaultBehavior = {
-  boxShadowSize: {
-    default: '0 2px 0 ',
-    large: '0 0.5rem 0 ',
-    hidden: '0 0 0 0 '
-  },
-  border: {
-    default: '2px solid '
-  }
-}
-
 export const defaultFonts = {
   defaultFamily: 'din-round,sans-serif',
   default: '700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) din-round,sans-serif'
 }
-export const defaultColors = {
+
+const defaultColors = {
   primary: {
     900: '#45A2EF', // haski blue
     800: '#1277ca' // haski dark blue
@@ -34,10 +25,12 @@ export const defaultColors = {
   },
   lightgrey: 'lightgrey',
   white: 'white',
-  black: 'black'
+  black: 'black',
+  boxcolor: 'white'
 }
 
-export const Theme = createTheme({
+export const ClassicTheme = createTheme({
+  name: 'ClassicTheme',
   palette: {
     primary: {
       main: defaultColors.primary[900],
@@ -63,9 +56,7 @@ export const Theme = createTheme({
     }
   },
   components: {
-    // Name of the component
     MuiPaper: {
-      // Name of the rule
       styleOverrides: {
         root: {
           backgroundColor: 'white',
@@ -78,9 +69,7 @@ export const Theme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
-        // Name of the slot
         root: {
-          // Some CSS
           color: defaultColors.lightgrey,
           font: '700 var(--web-ui_button-font-size,15px)/var(--web-ui_button-line-height,1.2) ' + defaultFonts.default,
           background: 'none',
@@ -93,7 +82,6 @@ export const Theme = createTheme({
           top: '-2px',
           padding: '0.5rem 1.2rem 0.5rem 1.2rem',
           transition: 'filter 0.1s ease',
-          //padding: 'var(--web-ui_button-padding,0 16px)',
           '&:hover': {
             filter: 'var(--web-ui_button-filter-hover,brightness(1.1))',
             backgroundColor: 'inherit'
@@ -138,69 +126,3 @@ export const Theme = createTheme({
     }
   }
 })
-
-export const node_style = {
-  display: 'flex',
-  flexDirection: 'column',
-  height: '100 %',
-  borderWidth: '2px',
-  borderStyle: 'solid',
-  borderImage: 'initial',
-  borderColor: 'black',
-  borderRadius: '8px',
-  overflow: 'hidden',
-  boxShadow: 'rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px'
-}
-
-export const footer_style = {
-  backgroundColor: '#FFCA3A',
-  color: 'black',
-  fontWeight: '400',
-  textTransform: 'uppercase',
-  fontFamily: 'monospace',
-  fontSize: '10px',
-  paddingInlineStart: '0.5rem',
-  paddingInlineEnd: '0.5rem',
-  paddingTop: '0.2rem',
-  paddingBottom: '0.2rem',
-  borderTopWidth: '2px',
-  borderTopStyle: 'solid',
-  borderColor: 'black',
-  flex: '1 1 0%'
-}
-export const header_style = {
-  backgroundColor: '#FFCA3A',
-  color: 'black',
-  fontWeight: '400',
-  textTransform: 'uppercase',
-  fontFamily: 'monospace',
-  fontSize: '10px',
-  paddingInlineStart: '0.5rem',
-  paddingInlineEnd: '0.5rem',
-  paddingTop: '0.2rem',
-  paddingBottom: '0.2rem',
-  borderBottomWidth: '2px',
-  borderBottomStyle: 'solid',
-  borderColor: 'black',
-  flex: '1 1 0%'
-}
-
-export const middle_style = {
-  backgroundColor: '#FFCA3A',
-  margin: '0rem',
-  paddingTop: '0.1rem',
-  paddingBottom: '0.1rem'
-}
-
-export const bottom_text = {
-  paddingTop: '0.2rem',
-  paddingBottom: '0.2rem',
-  paddingLeft: '0.2rem'
-}
-export const bottom_text_right = {
-  position: 'absolute',
-  paddingTop: '0.2rem',
-  paddingBottom: '0.2rem',
-  paddingLeft: '0.2rem',
-  right: '0.5rem'
-}

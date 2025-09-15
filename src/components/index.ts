@@ -84,6 +84,7 @@ export { StyledLinearProgress } from './StyledLinearProgress/StyledLinearProgres
 export { default as TextCardLeft } from './TextCard/TextCardLeft/TextCardLeft'
 export { default as TextCardRight } from './TextCard/TextCardRight/TextCardRight'
 export { default as TextStepper } from './TextStepper/TextStepper'
+export { default as ThemeModal } from './ThemeMenu/Modal/ThemeModal'
 export { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
 export { default as TopicCard } from './TopicCard/TopicCard'
 export { default as Typewriter } from './Typewriter/Typewriter'

@@ -209,6 +209,7 @@
   "components.LearningElementRatingInfo.ratingTitle": "Rating",
   "components.LearningElementRatingInfo.spiderGraphText": "The spider graph at the top right shows the average rating of all learning elements per topic and thus enables a comparison of the difficulty of different areas.",
   "components.LearningElementRatingInfo.spiderGraphTitle": "Spider graph",
+  "components.LinearProgressWithLabel.learningProgress": "Learning Progress",
   "components.ListKQuestions": [
     [
       {
@@ -640,6 +641,7 @@
   "components.Menubar.questionnaireILS": "ILS-Questionnaire",
   "components.Menubar.questionnaireILSShortened": "ILS-Questionnaire shortened",
   "components.Menubar.questionnaireListK": "List-K-Questionnaire",
+  "components.MenuBar.themeModal": "Change theme",
   "components.NodeTypes.ab": "Application examples",
   "components.NodeTypes.an": "Animations",
   "components.NodeTypes.be": "Examples",
@@ -1314,6 +1316,10 @@
   "components.TableListKQuestions.introduction": "Following this you will be asked questions about what learning strategies you use. You will find a list of different learning activities. Please indicate how frequently each activity occurs for you. You can rate your answers from very rarely (1) to very often (5). The questions presented are based on the LIST-K (Klingsieck, 2019), which is a shortened version of the LIST (Wild & Schiefele, 1994).",
   "components.TableRemoteTopics.noAdditionalTopics": "No additional Topics found",
   "components.TableRemoteTopics.title": "Available topics",
+  "components.ThemeModal.altTheme": "Alternative",
+  "components.ThemeModal.darkTheme": "Dark",
+  "components.ThemeModal.radioHeader": "Available themes",
+  "components.ThemeModal.standardTheme": "Standard",
   "components.TopicCard.aco": "Ant Colony Optimization",
   "components.TopicCard.default": "Fixed Order",
   "components.TopicCard.deleteTooltip": "Delete Topic with all of its Content",

@@ -71,7 +71,7 @@ const SnackbarMessage = (props: SnackbarMessageProps) => {
         <SnackbarTransition severity={props.severity} in={openTransition}>
           {props.severity && (
             <Alert onClick={handleClose} onClose={handleClose} severity={props.severity}>
-              <Typography>{t(props.severity) + ': ' + props.message}</Typography>
+              <Typography color={'textSecondary'}>{t(props.severity) + ': ' + props.message}</Typography>
             </Alert>
           )}
         </SnackbarTransition>

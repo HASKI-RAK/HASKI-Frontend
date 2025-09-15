@@ -32,8 +32,18 @@ const CreateCourseDetailsTable = ({
           <TextField
             label={t('components.CreateCourseDetailsTable.courseName')}
             id="create-course-modal-details-course-name"
+            color="primary"
             defaultValue={remoteCourse?.fullname}
-            sx={{ width: '100%', mt: '1rem' }}
+            sx={{
+              width: '100%',
+              mt: '1rem',
+              '& .MuiInputLabel-root': {
+                color: (theme) => theme.palette.text.primary
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: (theme) => theme.palette.text.primary
+              }
+            }}
             required
           />
         </Grid>
@@ -42,7 +52,15 @@ const CreateCourseDetailsTable = ({
             label={t('components.CreateCourseDetailsTable.startDate')}
             value={datePickerValue}
             onChange={(newValue) => setDatePickerValue(newValue || dayjs())}
-            sx={{ width: '100%' }}
+            sx={{
+              width: '100%',
+              '& .MuiInputLabel-root': {
+                color: (theme) => theme.palette.text.primary
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: (theme) => theme.palette.text.primary
+              }
+            }}
             format="DD/MM/YYYY HH:mm"
             ampm={false}
             viewRenderers={{

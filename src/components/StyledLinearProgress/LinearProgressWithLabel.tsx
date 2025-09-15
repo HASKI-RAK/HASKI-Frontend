@@ -65,7 +65,7 @@ const LinearProgressWithLabel = (props: LinearProgressWithLabelProps) => {
     <div>
       <Tooltip title={'Completed learning elements'}>
         <Typography sx={{ ml: props.textposition, mr: '0.5rem' }} variant="body1" color="textPrimary">
-          {t('components.StyledLinearProgress.linearProgressWithLabel.learningProgress') + ': ' + props.text}
+          {t('components.LinearProgressWithLabel.learningProgress') + ': ' + props.text}
         </Typography>
       </Tooltip>
       <LinearProgress

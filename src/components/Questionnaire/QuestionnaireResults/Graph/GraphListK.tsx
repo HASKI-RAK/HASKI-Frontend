@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Network } from '@common/components'
+import { useTheme } from '@common/hooks'
 import { ListK } from '@core'
 
 // Center the Score beneath the Subscale name. That is done with Whitespaces before the score.
@@ -290,6 +291,7 @@ type GraphListKProps = {
 
 const GraphListK = ({ data }: GraphListKProps) => {
   const { t } = useTranslation()
+  const theme = useTheme()
 
   const graphListKData = useData(data)
 
@@ -298,8 +300,42 @@ const GraphListK = ({ data }: GraphListKProps) => {
   const metacognitiveStrategies = t('components.TableListK.metacognitiveStrategies')
   const extResMngtStrategies = t('components.TableListK.externalResourceManagementStrategies')
 
+  const networkTheme =
+    // You can pass this object to the `theme` property
+    {
+      annotations: {
+        text: {
+          fontSize: 14,
+          fill: theme.palette.text.primary,
+          outlineWidth: 0
+        },
+        link: {
+          stroke: theme.palette.text.primary,
+          strokeWidth: 1.5,
+          outlineWidth: 0
+        },
+        outline: {
+          stroke: theme.palette.text.secondary
+        }
+      },
+      tooltip: {
+        wrapper: {},
+        container: {
+          background: theme.palette.background.default,
+          color: theme.palette.text.primary,
+          fontSize: 18
+        },
+        basic: {},
+        chip: {},
+        table: {},
+        tableCell: {},
+        tableCellValue: {}
+      }
+    }
+
   return (
     <Network
+      theme={networkTheme}
       height={500}
       width={650}
       data={graphListKData}
@@ -312,14 +348,14 @@ const GraphListK = ({ data }: GraphListKProps) => {
       nodeBorderWidth={1.3}
       nodeBorderColor={(node) => {
         if (node.data.score >= 3) {
-          return 'black'
+          return theme.palette.text.primary
         } else {
-          return '#9c3641'
+          return theme.palette.error.main
         }
       }}
-      linkColor={{ from: 'source.color', modifiers: [] }}
+      linkColor={theme.palette.text.secondary}
       linkThickness={(n: { target: { data: { height: number } } }) => 2 + 2 * n.target.data.height}
-      linkBlendMode="multiply"
+      linkBlendMode="normal"
       motionConfig="wobbly"
       animate={true}
       annotations={[
@@ -369,7 +405,7 @@ const GraphListK = ({ data }: GraphListKProps) => {
             id: intResMngtStrategies
           },
           note: intResMngtStrategies,
-          noteWidth: 250,
+          noteWidth: 300,
           noteX: 50,
           noteY: 35,
           offset: 13,
@@ -423,7 +459,7 @@ const GraphListK = ({ data }: GraphListKProps) => {
             id: extResMngtStrategies
           },
           note: extResMngtStrategies,
-          noteWidth: 250,
+          noteWidth: 300,
           noteX: 10,
           noteY: 90,
           offset: 13,

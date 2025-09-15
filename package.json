@@ -48,7 +48,7 @@
     "react-rating-charts": "1.4.3",
     "react-router-dom": "^6.4.2",
     "react-xapi-wrapper": "1.0.0",
-    "reactflow": "^11.7.0",
+    "reactflow": "^11.11.4",
     "zustand": "^4.1.1"
   },
   "devDependencies": {
