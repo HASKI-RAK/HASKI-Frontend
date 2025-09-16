@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import Router, { MemoryRouter } from 'react-router-dom'
+import { ThemeProvider } from '@services'
 import { MainFrame } from './MainFrame'
 
 const navigate = jest.fn()
@@ -30,9 +31,11 @@ describe('MainFrame', () => {
     jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseOrSomething: '2' })
 
     const result = render(
-      <MemoryRouter>
-        <MainFrame />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <MainFrame />
+        </MemoryRouter>
+      </ThemeProvider>
     )
     expect(result).toBeTruthy()
   })
@@ -41,9 +44,11 @@ describe('MainFrame', () => {
     jest.spyOn(Router, 'useParams').mockReturnValueOnce({ courseId: '2' })
 
     const { container } = render(
-      <MemoryRouter initialEntries={['/course/2']}>
-        <MainFrame />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter initialEntries={['/course/2']}>
+          <MainFrame />
+        </MemoryRouter>
+      </ThemeProvider>
     )
 
     expect(container.textContent).toContain('pages.home/pages.course')

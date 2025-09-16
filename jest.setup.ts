@@ -851,6 +851,14 @@ const mockDataServices: MockDataServices = {
         solution_lms_id: '5'
       }
     ])
+  ),
+  postUserSettings: jest.fn(() =>
+    Promise.resolve({
+      id: 2,
+      pswd: null,
+      theme: 'HaskiTheme',
+      user_id: '2'
+    })
   )
 }
 /**

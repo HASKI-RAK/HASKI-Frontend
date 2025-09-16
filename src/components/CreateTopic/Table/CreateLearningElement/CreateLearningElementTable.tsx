@@ -83,7 +83,7 @@ const CreateLearningElementTable = ({
           <Paper sx={{ padding: '1rem', width: '95%' }}>
             <Box bgcolor={(theme) => theme.palette.info.light} borderRadius={3}>
               <Grid container justifyContent="center" alignItems="center">
-                <Typography variant="h6" gutterBottom>
+                <Typography variant="h6" gutterBottom sx={{ color: (theme) => theme.palette.secondary.contrastText }}>
                   {lmsTopic.topic_lms_name}
                 </Typography>
               </Grid>

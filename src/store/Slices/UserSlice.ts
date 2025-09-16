@@ -7,6 +7,7 @@ import { resetters } from '../Zustand/Store'
 export type UserSlice = {
   _user: User | undefined
   getUser: (user?: User) => Promise<User>
+  updateUserTheme: (theme: string) => Promise<void>
 }
 
 export const createUserSlice: StateCreator<PersistedStoreState, [], [], UserSlice> = (set, get) => {
@@ -26,6 +27,22 @@ export const createUserSlice: StateCreator<PersistedStoreState, [], [], UserSlic
         set({ _user: user })
         return user
       } else return cached
+    },
+
+    updateUserTheme: async (theme: string) => {
+      const user = get()._user
+
+      if (user) {
+        set({
+          _user: {
+            ...user,
+            settings: {
+              ...user.settings,
+              theme
+            }
+          }
+        })
+      }
     }
   }
 }

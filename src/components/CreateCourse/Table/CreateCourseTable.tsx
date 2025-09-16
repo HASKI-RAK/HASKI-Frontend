@@ -104,7 +104,8 @@ const CreateCourseTable = ({ onCourseSelect, selectedCourse }: CreateCourseTable
             sx={{
               '& .MuiToggleButtonGroup-grouped:not(:first-of-type)': {
                 borderColor: (theme) => theme.palette.common.black
-              }
+              },
+              backgroundColor: (theme) => theme.palette.background.paper
             }}>
             {availableCourses.length === 0 ? (
               <ToggleButton
@@ -112,7 +113,12 @@ const CreateCourseTable = ({ onCourseSelect, selectedCourse }: CreateCourseTable
                 value={t('components.CreateCourseTable.noCoursesFound')}
                 aria-label={t('components.CreateCourseTable.noCoursesFound')}
                 key={t('components.CreateCourseTable.noCoursesFound')}
-                sx={{ minWidth: '30rem', mb: 1, borderColor: (theme) => theme.palette.common.black }}>
+                sx={{
+                  minWidth: '30rem',
+                  mb: 1,
+                  backgroundColor: (theme) => theme.palette.common.white,
+                  borderColor: (theme) => theme.palette.common.black
+                }}>
                 <Grid item container direction="column" justifyContent="center" alignItems="center">
                   <Typography variant={'subtitle1'} sx={{ color: (theme) => theme.palette.common.black }}>
                     {t('components.CreateCourseTable.noCoursesFound')}
@@ -126,7 +132,19 @@ const CreateCourseTable = ({ onCourseSelect, selectedCourse }: CreateCourseTable
                   value={{ name: LmsCourse.fullname, id: LmsCourse.id }}
                   aria-label={LmsCourse.fullname}
                   key={LmsCourse.id}
-                  sx={{ minWidth: '30rem', mb: 1, borderColor: (theme) => theme.palette.common.black }}>
+                  sx={{
+                    minWidth: '30rem',
+                    mb: 1,
+                    backgroundColor: (theme) =>
+                      selectedCourse?.id === LmsCourse.id ? theme.palette.secondary.light : theme.palette.common.white,
+                    borderColor: (theme) => theme.palette.common.black,
+                    '&.Mui-selected': {
+                      backgroundColor: (theme) => theme.palette.secondary.light,
+                      '&:hover': {
+                        backgroundColor: (theme) => theme.palette.secondary.light
+                      }
+                    }
+                  }}>
                   <Grid item container direction="column" justifyContent="center" alignItems="center">
                     <Typography variant={'subtitle1'} sx={{ color: (theme) => theme.palette.common.black }}>
                       {LmsCourse.fullname}
@@ -146,6 +164,7 @@ const CreateCourseTable = ({ onCourseSelect, selectedCourse }: CreateCourseTable
             value={selectedCourse?.fullname}
             onChange={handleSelectedCourseChange}
             sx={{
+              backgroundColor: (theme) => theme.palette.background.paper,
               '& .MuiToggleButtonGroup-grouped:not(:first-of-type)': {
                 //is the exact same color as disabled togglebutton
                 borderColor: '#e0e0e0'
@@ -159,7 +178,8 @@ const CreateCourseTable = ({ onCourseSelect, selectedCourse }: CreateCourseTable
                 disabled={true}
                 sx={{
                   minWidth: '30rem',
-                  mb: 1
+                  mb: 1,
+                  backgroundColor: (theme) => theme.palette.common.white
                 }}>
                 <Grid item container direction="column" justifyContent="center" alignItems="center">
                   <Typography variant={'subtitle1'} sx={{ color: (theme) => theme.palette.common.black }}>

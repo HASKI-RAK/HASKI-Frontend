@@ -108,7 +108,7 @@ const CreateAlgorithmTable = ({
                           sx={{
                             m: '1rem',
                             wordBreak: 'break-word',
-                            color: 'black'
+                            color: (theme) => theme.palette.secondary.contrastText
                           }}>
                           {value.topicName}
                         </InputLabel>

@@ -33,7 +33,7 @@ const QuestionnaireQuestionsModal = ({ open = false, handleClose, children }: Qu
           style={{
             position: 'absolute',
             top: '1%',
-            left: '95.5%'
+            left: '93.5%'
           }}>
           <Close />
         </Fab>
