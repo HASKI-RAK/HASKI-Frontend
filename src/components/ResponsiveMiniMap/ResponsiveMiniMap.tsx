@@ -30,8 +30,12 @@ const ResponsiveMiniMap = ({ style }: ResponsiveMiniMapProps) => {
     const scaling = scaleOffset + scaleRange * Math.tanh(window.innerWidth / theme.breakpoints.values.xl - scaleOffset)
     const translation =
       -translationRange * Math.tanh(window.innerWidth / theme.breakpoints.values.xl - translationOffset)
-    return { transform: `scale(${scaling}) translate(${translation}rem, ${translation}rem)`, ...style }
-  }, [style])
+    return {
+      transform: `scale(${scaling}) translate(${translation}rem, ${translation}rem)`,
+      overflow: 'hidden',
+      boxSizing: 'border-box'
+    }
+  }, [])
 
   const [miniMapSize, setMiniMapSize] = useState(getMapTransform())
 
@@ -48,9 +52,16 @@ const ResponsiveMiniMap = ({ style }: ResponsiveMiniMapProps) => {
 
   return (
     <MiniMap
-      style={miniMapSize}
+      style={{
+        ...miniMapSize,
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        boxSizing: 'border-box' // Include borders in width and height
+      }}
       nodeBorderRadius={2}
       nodeColor={theme.palette.primary.light}
+      maskColor={theme.palette.secondary.dark}
       maskStrokeColor="black"
       maskStrokeWidth={2}
       nodeStrokeColor={theme.palette.primary.main}

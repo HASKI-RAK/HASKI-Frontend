@@ -11,8 +11,6 @@ describe('LinearProgressWithLabel', () => {
       />
     )
 
-    expect(container.textContent).toBe(
-      'components.StyledLinearProgress.linearProgressWithLabel.learningProgress: this is a test'
-    )
+    expect(container.textContent).toBe('components.LinearProgressWithLabel.learningProgress: this is a test')
   })
 })

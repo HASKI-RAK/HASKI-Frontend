@@ -40,7 +40,11 @@ const Footer = () => {
         <Container maxWidth="lg">
           <Grid container direction="column" alignItems="center">
             <Grid item xs={12}>
-              <Typography color="black" variant="h5">
+              <Typography
+                sx={(theme) => ({
+                  color: theme.palette.text.primary
+                })}
+                variant="h5">
                 {t('components.Footer.project') + ' HASKI ' + new Date().getFullYear()}
               </Typography>
             </Grid>
@@ -54,14 +58,14 @@ const Footer = () => {
                         marginX="0.2em"
                         component="button"
                         variant="subtitle1"
-                        color={'textSecondary'}
+                        color={'textPrimary'}
                         href={component.link}
                         underline="hover"
                         onClick={() => navigate(component.link)}>
                         {component.name}
                       </Link>
                       {footerComponents.indexOf(component) !== footerComponents.length - 1 && (
-                        <Typography marginX="0.2em" color="textSecondary" variant="subtitle1">
+                        <Typography marginX="0.2em" color="textPrimary" variant="subtitle1">
                           {' '}
                           |{' '}
                         </Typography>

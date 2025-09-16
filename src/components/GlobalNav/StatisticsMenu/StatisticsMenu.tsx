@@ -26,6 +26,12 @@ const StatisticsMenu = () => {
       url: '/learnercharacteristics',
       isDisabled: false,
       availableAt: new Date()
+    },
+    {
+      name: t('pages.rating'),
+      url: '/rating',
+      isDisabled: false,
+      availableAt: new Date()
     }
   ]
 

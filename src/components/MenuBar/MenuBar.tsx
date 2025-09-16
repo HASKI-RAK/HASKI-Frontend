@@ -1,4 +1,4 @@
-import { MouseEvent, useContext, useState } from 'react'
+import { MouseEvent, useCallback, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -15,8 +15,10 @@ import {
   Tooltip,
   Typography
 } from '@common/components'
+import { useTheme } from '@common/hooks'
 import {
   AssignmentOutlined,
+  Brush,
   Help,
   LibraryBooksOutlined,
   Login,
@@ -25,6 +27,7 @@ import {
   PlaylistAddCheckCircleOutlined,
   Polyline
 } from '@common/icons'
+import { Theme } from '@common/theme'
 import {
   CourseMenu,
   CreateDefaultLearningPathModal,
@@ -34,7 +37,8 @@ import {
   QuestionnaireQuestionsModal,
   StatisticsMenu,
   TableILSQuestions,
-  TableListKQuestions
+  TableListKQuestions,
+  ThemeModal
 } from '@components'
 import { AuthContext, RoleContext } from '@services'
 
@@ -53,6 +57,8 @@ const MenuBar = () => {
   const { t } = useTranslation()
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
   const { isAuth, logout } = useContext(AuthContext)
+  const activeTheme = useTheme()
+  const [modalOpenTheme, setModalOpenTheme] = useState(false)
   const { isCourseCreatorRole } = useContext(RoleContext)
   const { isStudentRole } = useContext(RoleContext)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
@@ -62,74 +68,99 @@ const MenuBar = () => {
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [successSendILSShort, setSuccessSendILSShort] = useState(false)
   const [successSendListK, setSuccessSendListK] = useState(false)
+  const [selectedTheme, setSelectedTheme] = useState<Theme>(activeTheme)
 
-  const handleOpenILSShortModal = () => {
+  const handleOpenThemeModal = useCallback(() => {
+    setSelectedTheme(activeTheme)
+    setModalOpenTheme(true)
+    setAnchorElUser(null)
+  }, [activeTheme, setSelectedTheme, setModalOpenTheme, setAnchorElUser])
+
+  const handleCloseThemeModal = useCallback(() => {
+    setModalOpenTheme(false)
+  }, [setModalOpenTheme])
+
+  const handleOpenILSShortModal = useCallback(() => {
     setModalOpenILSShort(true)
     setAnchorElUser(null)
-  }
+  }, [setModalOpenILSShort, setAnchorElUser])
 
-  const handleCloseILSShortModal = (event: object, reason: string) => {
-    if (!successSendILSShort) {
-      if (reason == 'backdropClick')
-        if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSShort(false)
-    } else {
-      window.location.reload()
-      setModalOpenILSShort(false)
-    }
-  }
+  const handleCloseILSShortModal = useCallback(
+    (_: object, reason: string) => {
+      if (!successSendILSShort) {
+        if (reason == 'backdropClick')
+          if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSShort(false)
+      } else {
+        window.location.reload()
+        setModalOpenILSShort(false)
+      }
+    },
+    [successSendILSShort, setModalOpenILSShort]
+  )
 
-  const handleOpenILSLongModal = () => {
+  const handleOpenILSLongModal = useCallback(() => {
     setModalOpenILSLong(true)
     setAnchorElUser(null)
-  }
+  }, [setModalOpenILSLong, setAnchorElUser])
 
-  const handleCloseILSLongModal = (event: object, reason: string) => {
-    if (!successSendILSLong) {
-      if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSLong(false)
-    } else {
-      window.location.reload()
-      setModalOpenILSLong(false)
-    }
-  }
+  const handleCloseILSLongModal = useCallback(
+    (_: object, reason: string) => {
+      if (!successSendILSLong) {
+        if (reason == 'backdropClick')
+          if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSLong(false)
+      } else {
+        window.location.reload()
+        setModalOpenILSLong(false)
+      }
+    },
+    [successSendILSLong, setModalOpenILSLong]
+  )
 
-  const handleOpenListKModal = () => {
+  const handleOpenListKModal = useCallback(() => {
     setModalOpenListK(true)
     setAnchorElUser(null)
-  }
+  }, [setModalOpenListK, setAnchorElUser])
 
-  const handleOpenDefaultLearningPath = () => {
+  const handleOpenDefaultLearningPath = useCallback(() => {
     setModalOpenDefaultLearningPath(true)
     setAnchorElUser(null)
-  }
+  }, [setModalOpenDefaultLearningPath, setAnchorElUser])
 
-  const handleCloseListKModal = (_: object, reason: string) => {
-    if (!successSendListK) {
-      if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenListK(false)
-    } else {
-      window.location.reload()
-      setModalOpenListK(false)
-    }
-  }
+  const handleCloseListKModal = useCallback(
+    (_: object, reason: string) => {
+      if (!successSendListK) {
+        if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenListK(false)
+      } else {
+        window.location.reload()
+        setModalOpenListK(false)
+      }
+    },
+    [successSendListK, setModalOpenListK]
+  )
 
-  const handleCloseDefaultLearningPath = () => {
+  const handleCloseDefaultLearningPath = useCallback(() => {
     setModalOpenDefaultLearningPath(false)
-  }
+  }, [setModalOpenDefaultLearningPath])
 
-  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget)
-  }
+  const handleOpenUserMenu = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      setAnchorElUser(event.currentTarget)
+    },
+    [setAnchorElUser]
+  )
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = useCallback(() => {
     setAnchorElUser(null)
-  }
+  }, [setAnchorElUser])
 
-  const handleUserLogout = () => {
+  const navigate = useNavigate()
+
+  const handleUserLogout = useCallback(() => {
     handleCloseUserMenu()
     logout()
     navigate('/login')
-  }
+  }, [logout, navigate, handleCloseUserMenu])
 
-  const navigate = useNavigate()
   return (
     <AppBar position="static">
       <Toolbar disableGutters>
@@ -163,15 +194,15 @@ const MenuBar = () => {
               variant="h6"
               noWrap
               component="a"
-              sx={{
+              sx={(theme) => ({
                 mr: 2,
                 ml: 2,
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
-                color: 'inherit',
+                color: theme.palette.secondary.contrastText,
                 textDecoration: 'none'
-              }}
+              })}
               onClick={() => navigate('/')}>
               HASKI
             </TextWrapper>
@@ -186,26 +217,25 @@ const MenuBar = () => {
             <LanguageMenu />
           </Box>
           {/** Theme button */}
-          {/**
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={'Change your theme'}>
+            <Tooltip title={<Typography variant={'body2'}>{t('components.MenuBar.themeModal')}</Typography>}>
               <IconButton
-                id="global-settings-icon-button"
-                onClick={() => {
-                  addSnackbar({
-                    message: t('components.MenubBar.GlobalSettings.Error'),
-                    severity: 'warning',
-                    autoHideDuration: 5000
-                  })
-                }}>
-                <Contrast />
+                id="theme-icon-button"
+                onClick={useCallback(() => handleOpenThemeModal(), [handleOpenThemeModal])}>
+                <Brush data-testid="BrushIcon" />
               </IconButton>
             </Tooltip>
+            <ThemeModal
+              open={modalOpenTheme}
+              handleClose={handleCloseThemeModal}
+              selectedTheme={selectedTheme}
+              setSelectedTheme={setSelectedTheme}
+            />
           </Box>
-           */}
+
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('appGlobal.help')}>
+            <Tooltip title={<Typography variant={'body2'}>{t('appGlobal.help')}</Typography>}>
               <IconButton
                 id="manual-icon-button"
                 onClick={() => {
@@ -215,7 +245,7 @@ const MenuBar = () => {
               </IconButton>
             </Tooltip>
           </Box>
-          {/** 
+          {/**
           { Settings button }
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openGlobalSettings')}>
@@ -235,7 +265,7 @@ const MenuBar = () => {
 */}
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('tooltip.openSettings')}>
+            <Tooltip title={<Typography variant={'body2'}>{t('tooltip.openSettings')}</Typography>}>
               <IconButton id="account-icon-button" onClick={handleOpenUserMenu} data-testid="useravatar">
                 <Avatar alt="Remy Sharp">
                   <Person />

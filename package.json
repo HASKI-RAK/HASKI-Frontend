@@ -16,7 +16,8 @@
     "lint": "node src/shared/auto-order-json-translations.js && eslint ./src/** --ext .ts,.tsx --fix && prettier --loglevel silent --write \"**/*.{ts,tsx,js,css,html,json}\" && npx unimported",
     "pull": "git pull && del node_modules && yarn install",
     "test": "jest",
-    "wiki": "yarn run typedoc --out pages&&npx serve pages"
+    "wiki": "yarn run typedoc --out pages&&npx serve pages",
+    "test:report": "jest --testLocationInResults --json --outputFile=reports/jest-results.json"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -44,9 +45,10 @@
     "react-dom": "^18.2.0",
     "react-flow-renderer": "^10.3.17",
     "react-i18next": "^12.1.1",
+    "react-rating-charts": "1.4.3",
     "react-router-dom": "^6.4.2",
     "react-xapi-wrapper": "1.0.0",
-    "reactflow": "^11.7.0",
+    "reactflow": "^11.11.4",
     "zustand": "^4.1.1"
   },
   "devDependencies": {
