@@ -5,7 +5,7 @@
  * @interface
  * @category Core
  */
-type FavoriteElementReturn = (studentId?: number) => Promise<FavoriteElement>
+type FavoriteElementReturn = (studentId?: number) => Promise<FavoriteElement[]>
 
 /**
  * @prop cmid - The id of the learning element (equals learning_element_id)
@@ -13,9 +13,7 @@ type FavoriteElementReturn = (studentId?: number) => Promise<FavoriteElement>
  * @interface
  * @category Core
  */
-type FavoriteElement = {
-  learning_element_id: number[]
-}
+type FavoriteElement = number
 
 export default FavoriteElement
 export type { FavoriteElementReturn }

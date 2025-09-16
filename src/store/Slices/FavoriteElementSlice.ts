@@ -8,37 +8,34 @@ import { resetters } from '../Zustand/Store'
 
 export type FavoriteElementSlice = {
   getFavoriteElement: FavoriteElementReturn
-  setFavoriteElement: (studentId?: number, learningElementId?: number) => void
+  setFavoriteElement: (learningElementId?: number) => void
   favorited: number[]
+  hasLoadedFavorites: boolean
 }
 
 export const createFavoriteElementSlice: StateCreator<PersistedStoreState, [], [], FavoriteElementSlice> = (
   set,
   get
 ) => {
-  resetters.push(() => set({ favorited: [] }))
+  resetters.push(() => set({ favorited: [], hasLoadedFavorites: false }))
   return {
     favorited: [],
     hasLoadedFavorites: false,
-    getFavoriteElement: async (studentId: number) => {
-      if (!studentId) {
-        throw new Error('learningElementId is required')
-      }
-
-      const isCached = get().favorited.includes(studentId)
-
-      if (isCached) {
-        return fetchFavorite(studentId)
+    getFavoriteElement: async (...arg) => {
+      const [studentId] = arg
+      const hasLoadedFavorites = get().hasLoadedFavorites
+      if (hasLoadedFavorites) {
+        return get().favorited
       }
 
       // Fetch and store
       const favorite = await fetchFavorite(studentId)
 
       set({
-        favorited: [...get().favorited, studentId]
+        favorited: [favorite].flat(),
+        hasLoadedFavorites: true
       })
-
-      return favorite
+      return get().favorited
     },
     setFavoriteElement: async (...arg) => {
       const [learningElementId] = arg
