@@ -29,9 +29,6 @@ const GameSidePanel = ({ children }: GameSidePanelProps) => {
 
   const SecondPage = (
     <>
-      <Typography variant="h6" sx={{ mt: '0.5rem', mb: '0.5rem' }}>
-        Leaderboards
-      </Typography>
       <Leaderboard></Leaderboard>
       <Grid sx={{ mt: '0.5rem', mb: '9.5rem' }}></Grid>
     </>
@@ -43,7 +40,7 @@ const GameSidePanel = ({ children }: GameSidePanelProps) => {
       sx={{
         right: 0,
         top: '10rem',
-        width: '18rem',
+        width: '25rem',
         height: { xxl: '18.5rem', xl: '18rem', lg: '15rem', md: '15rem' },
         position: 'absolute',
         mr: '1rem'

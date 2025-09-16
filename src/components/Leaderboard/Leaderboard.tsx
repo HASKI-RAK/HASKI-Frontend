@@ -1,5 +1,6 @@
 import { memo, useEffect, useState } from 'react'
-import { Grid,
+import { Button,
+  Grid,
   Table,
   TableBody, TableCell,
   TableHead,
@@ -10,21 +11,8 @@ import { Grid,
 const Leaderboard = () => {
   return (
     <Grid container direction={'column'}>
-      <Typography variant="h6">Global</Typography>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Rank</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Score</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {/* Map through your data and create TableRow for each item */}
-        </TableBody>
-      </Table>
-      <Typography variant="h6">Topic</Typography>
-      <Table>
+      <Typography variant="h6">Topic Leaderboard</Typography>
+      <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>User</TableCell>
@@ -33,14 +21,27 @@ const Leaderboard = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
+          <TableRow sx={{ height: '0.5rem' }}>
             <TableCell>1</TableCell>
-            <TableCell>John Doe</TableCell>
-            <TableCell>1500</TableCell>
+            <TableCell>10</TableCell>
+            <TableCell>{'1:30'}</TableCell>
+          </TableRow>
+          <TableRow sx={{ height: '0.5rem' }}>
+            <TableCell>2</TableCell>
+            <TableCell>8</TableCell>
+            <TableCell>{'2:00'}</TableCell>
+          </TableRow>
+          <TableRow sx={{ height: '0.5rem' }}>
+            <TableCell>3</TableCell>
+            <TableCell>7</TableCell>
+            <TableCell>{'1:00'}</TableCell>
           </TableRow>
           {/* Map through your data and create TableRow for each item */}
         </TableBody>
       </Table>
+      <Button variant="text" size="small" sx={{ mt: '0.5rem' }}>
+        More Leaderboards
+      </Button>
     </Grid>
   )
 }
