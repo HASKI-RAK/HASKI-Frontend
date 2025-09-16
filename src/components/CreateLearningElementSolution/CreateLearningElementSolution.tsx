@@ -17,7 +17,7 @@ const CreateLearningElementSolution = () => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
 
-  const [addSolutionModalOpen, setCreateLearningElementSolutionModalOpen] = useState(false)
+  const [createLearningElementSolutionModalOpen, setCreateLearningElementSolutionModalOpen] = useState(false)
   const [activeStep, setActiveStep] = useState<number>(0)
 
   const { courseId } = useParams()
@@ -65,7 +65,7 @@ const CreateLearningElementSolution = () => {
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
       })
-  }, [topicId, getUser, addSolutionModalOpen, getLearningPathTopic, courseId, t, addSnackbar])
+  }, [topicId, getUser, createLearningElementSolutionModalOpen, getLearningPathTopic, courseId, t, addSnackbar])
 
   // fetch remote learning elements to use as solutions
   // filter out the learning elements that are already in the learning path
@@ -119,7 +119,7 @@ const CreateLearningElementSolution = () => {
   }, [
     activeStep,
     setActiveStep,
-    addSolutionModalOpen,
+    createLearningElementSolutionModalOpen,
     topicId,
     currentTopic,
     courseId,
@@ -138,7 +138,7 @@ const CreateLearningElementSolution = () => {
         {t('components.CreateLearningElementSolution.addSolution')}
       </Button>
       <CreateLearningElementSolutionModal
-        open={addSolutionModalOpen}
+        open={createLearningElementSolutionModalOpen}
         activeStep={activeStep}
         setActiveStep={setActiveStep}
         handleCloseCreateLearningElementSolutionModal={handleClose}
