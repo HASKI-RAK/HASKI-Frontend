@@ -1,11 +1,11 @@
-import { memo, MouseEvent, ReactElement, ReactNode, useContext, useState } from 'react'
+import { memo, MouseEvent, ReactElement, ReactNode, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { Box, Checkbox, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
-import { DeleteForever, Warning } from '@common/icons'
+import { DeleteForever, Task, Warning } from '@common/icons'
 import { DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from '@components'
-import { deleteLearningElement, RoleContext, SnackbarContext } from '@services'
+import { deleteLearningElement, deleteLearningElementSolution, RoleContext, SnackbarContext } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
 
@@ -25,14 +25,18 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const { addSnackbar } = useContext(SnackbarContext)
   const { isCourseCreatorRole, isStudentRole } = useContext(RoleContext)
 
-  const [deleteLearningElementModalOpen, setdeleteLearningElementModalOpen] = useState(false)
+  const [deleteLearningElementModalOpen, setDeleteLearningElementModalOpen] = useState(false)
   const [learningElementName, setLearningElementName] = useState<string>('')
   const [learningElementId, setLearningElementId] = useState<number>(0)
   const [lmsLearningElementId, setLmsLearningElementId] = useState<number>(0)
   const [isHovered, setIsHovered] = useState(false)
+  //const [isFavorite, setIsFavorite] = useState(false) commented out until feature is implemented
+  const [solutionLmsId, setSolutionLmsId] = useState<number>(-1)
+  const [solutionActivityType, setSolutionActivityType] = useState<string>('resource')
 
   const clearLearningPathElement = useStore((state) => state.clearLearningPathElementCache)
   const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
+  const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
 
   const onMouseEnter = () => {
     setIsHovered(true)
@@ -52,7 +56,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   }
 
   const handleOpenDeleteLearningElementModal = () => {
-    setdeleteLearningElementModalOpen(true)
+    setDeleteLearningElementModalOpen(true)
     setLearningElementName(props.data.name)
     setLearningElementId(props.data.learningElementId)
     setLmsLearningElementId(props.data.lmsId)
@@ -60,17 +64,40 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   }
 
   const handleAcceptDeleteLearningElementModal = (learningElementId: number, lmsLearningElementId: number) => {
-    deleteLearningElement(learningElementId, lmsLearningElementId).then(() => {
-      addSnackbar({
-        message: t('components.BasicNode.deleteLearningElementSuccessful'),
-        severity: 'success',
-        autoHideDuration: 5000
+    deleteLearningElementSolution(learningElementId).then(() => {
+      deleteLearningElement(learningElementId, lmsLearningElementId).then(() => {
+        addSnackbar({
+          message: t('components.BasicNode.deleteLearningElementSuccessful'),
+          severity: 'success',
+          autoHideDuration: 5000
+        })
+        setDeleteLearningElementModalOpen(false)
       })
-      setdeleteLearningElementModalOpen(false)
     })
     clearLearningPathElement()
     clearLearningPathElementStatusCache()
   }
+
+  /* placeholder for future favorite feature
+  const addToFavorites = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    setIsFavorite(!isFavorite)
+    event.stopPropagation()
+  }
+  */
+
+  const handleShowSolution = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    props.data.handleOpen()
+    props.data.handleSetUrl(getConfig().MOODLE + `/mod/${solutionActivityType}/view.php?id=${solutionLmsId}`)
+    props.data.handleSetLmsId(solutionLmsId)
+    event.stopPropagation()
+  }
+
+  useEffect(() => {
+    getLearningElementSolution(props.data.lmsId).then((solution) => {
+      setSolutionLmsId(solution.solution_lms_id)
+      setSolutionActivityType(solution.activity_type)
+    })
+  }, [getLearningElementSolution, setSolutionLmsId, setSolutionActivityType, id, props])
 
   const renderNodeStatus = () => {
     return props.data.isDisabled ? (
@@ -157,13 +184,46 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}>
       <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '200ms' }}>
-        {isCourseCreatorRole && (
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="center"
-            sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
+        <Grid
+          container
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="center"
+          sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
+          {/* commented out until feature is implemented
+            <IconButton
+            onClick={addToFavorites}
+            data-testid={'favoriteButton'}
+            sx={{
+              marginLeft: '1rem',
+              color: theme.palette.secondary.contrastText,
+              backgroundColor: theme.palette.primary.main,
+              border: '1px solid grey'
+            }}>
+            {isFavorite ? <FavoriteIcon titleAccess="isFavorite" /> : <FavoriteBorderIcon titleAccess="notFavorite" />}
+          </IconButton>
+          */}
+          {solutionLmsId > 1 && (
+            <Tooltip title={t('components.BasicNode.solutionTooltip')}>
+              <IconButton
+                onClick={handleShowSolution}
+                data-testid={'showSolutionButton'}
+                sx={{
+                  backgroundColor: theme.palette.success.main,
+                  marginLeft: '0.5rem',
+                  color: 'white',
+                  border: '1px solid grey',
+                  '&:hover': {
+                    backgroundColor: theme.palette.success.light
+                  },
+                  zIndex: 10
+                }}>
+                <Task />
+              </IconButton>
+            </Tooltip>
+          )}
+          {props.children}
+          {isCourseCreatorRole && (
             <Tooltip arrow title={t('components.BasicNode.deleteTooltip')} placement="top">
               <IconButton
                 data-testid={'delete-learning-element-button'}
@@ -182,9 +242,8 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
                 <DeleteForever fontSize={'medium'} />
               </IconButton>
             </Tooltip>
-            {props.children}
-          </Grid>
-        )}
+          )}
+        </Grid>
       </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <Paper
@@ -204,7 +263,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       {renderNodeStatus()}
       <DeleteEntityModal
         openDeleteEntityModal={deleteLearningElementModalOpen}
-        setDeleteEntityModalOpen={setdeleteLearningElementModalOpen}
+        setDeleteEntityModalOpen={setDeleteLearningElementModalOpen}
         entityName={learningElementName}
         entityId={learningElementId}
         entityLmsId={lmsLearningElementId}
