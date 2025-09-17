@@ -25,7 +25,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const { addSnackbar } = useContext(SnackbarContext)
   const { isCourseCreatorRole, isStudentRole } = useContext(RoleContext)
 
-  const [deleteLearningElementModalOpen, setdeleteLearningElementModalOpen] = useState(false)
+  const [deleteLearningElementModalOpen, setDeleteLearningElementModalOpen] = useState(false)
   const [learningElementName, setLearningElementName] = useState<string>('')
   const [learningElementId, setLearningElementId] = useState<number>(0)
   const [lmsLearningElementId, setLmsLearningElementId] = useState<number>(0)
@@ -56,7 +56,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   }
 
   const handleOpenDeleteLearningElementModal = () => {
-    setdeleteLearningElementModalOpen(true)
+    setDeleteLearningElementModalOpen(true)
     setLearningElementName(props.data.name)
     setLearningElementId(props.data.learningElementId)
     setLmsLearningElementId(props.data.lmsId)
@@ -71,7 +71,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           severity: 'success',
           autoHideDuration: 5000
         })
-        setdeleteLearningElementModalOpen(false)
+        setDeleteLearningElementModalOpen(false)
       })
     })
     clearLearningPathElement()
@@ -263,7 +263,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       {renderNodeStatus()}
       <DeleteEntityModal
         openDeleteEntityModal={deleteLearningElementModalOpen}
-        setDeleteEntityModalOpen={setdeleteLearningElementModalOpen}
+        setDeleteEntityModalOpen={setDeleteLearningElementModalOpen}
         entityName={learningElementName}
         entityId={learningElementId}
         entityLmsId={lmsLearningElementId}
