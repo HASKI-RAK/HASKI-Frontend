@@ -1,4 +1,4 @@
-import { memo, useContext } from 'react'
+import { memo, useCallback, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import log from 'loglevel'
@@ -53,7 +53,7 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
   // Context.
   const { addSnackbar } = useContext(SnackbarContext)
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     courseId &&
       topicId &&
       getUser()
@@ -81,7 +81,17 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
         })
 
     props.onClose()
-  }
+  }, [
+    courseId,
+    topicId,
+    getUser,
+    postCalculateRating,
+    clearLearningElementRecommendationCache,
+    props.learningElementId,
+    addSnackbar,
+    t,
+    props.onClose
+  ])
 
   return (
     <Modal id="iframe-modal" open={props.isOpen} onClose={handleClose} data-testid={'IFrameModal'}>

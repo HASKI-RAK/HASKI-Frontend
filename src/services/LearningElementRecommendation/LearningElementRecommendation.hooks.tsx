@@ -44,7 +44,7 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningPathElementStatus = usePersistedStore((state) => state.getLearningPathElementStatus)
   const getLearningElementRecommendation = useStore((state) => state.getLearningElementRecommendation)
-  const learningElementRecommendation = useStore((state) => state._learningElementRecommendationCache)
+  const learningElementRecommendationCache = useStore((state) => state._learningElementRecommendationCache)
 
   // State
   const [recommendedLearningElement, setRecommendedLearningElement] = useState<LearningElement | undefined>()
@@ -63,10 +63,13 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
       getLearningElementRecommendation(userId, courseId, topicId)
         .then((learningElementRecommendation) => {
           // Find the IDs of all learning elements that are not completed.
-          const unfinishedLearningElementIds = learningPathElementStatus.reduce<number[]>((learningElementIds, item) => {
-            if (item.state === 0) learningElementIds.push(item.cmid)
-            return learningElementIds
-          }, [])
+          const unfinishedLearningElementIds = learningPathElementStatus.reduce<number[]>(
+            (learningElementIds, item) => {
+              if (item.state === 0) learningElementIds.push(item.cmid)
+              return learningElementIds
+            },
+            []
+          )
 
           // Find the first recommended learning element that is not completed.
           const nextLearningElement = learningElementRecommendation.find((recommendation) =>
@@ -89,7 +92,7 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
       .then((user) => {
         getLearningPathElementStatus(courseId, user.lms_user_id)
           .then((learningPathElementStatus) => {
-            updateNextLearningElement(user.id, courseId, topicId, learningPathElementStatus)
+            updateNextLearningElement(user.settings.id, courseId, topicId, learningPathElementStatus)
           })
           .catch((error) => {
             handleError(t, addSnackbar, 'error.getLearningPathElementStatus', error, 3000)
@@ -105,7 +108,7 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
     getLearningPathElementStatus,
     getLearningElementRecommendation,
     setRecommendedLearningElement,
-    learningElementRecommendation
+    learningElementRecommendationCache
   ])
 
   return useMemo(
