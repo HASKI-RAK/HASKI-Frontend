@@ -485,12 +485,12 @@ describe('Course3', () => {
   it('renders StyledLinearProgress with 33% progress', () => {
     const { getAllByTestId } = render(<StyledLinearProgress learningElementProgressTopics={[1, 3]} />)
     const styledLinearProgress = getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent
-    expect(styledLinearProgress).toBe('components.StyledLinearProgress.linearProgressWithLabel.learningProgress: 1/3')
+    expect(styledLinearProgress).toBe('components.LinearProgressWithLabel.learningProgress: 1/3')
   })
 
   it('renders StyledLinearProgress with no progress', () => {
     const { getAllByTestId } = render(<StyledLinearProgress learningElementProgressTopics={[0, 3]} />)
     const styledLinearProgress = getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent
-    expect(styledLinearProgress).toBe('components.StyledLinearProgress.linearProgressWithLabel.learningProgress: 0/3')
+    expect(styledLinearProgress).toBe('components.LinearProgressWithLabel.learningProgress: 0/3')
   })
 })
