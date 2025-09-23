@@ -125,7 +125,7 @@ describe('StyledLinearProgress-1', () => {
 
     waitFor(() => {
       expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe(
-        'components.StyledLinearProgress.linearProgressWithLabel.learningProgress: 1/3'
+        'components.LinearProgressWithLabel.learningProgress: 1/3'
       )
     })
   })
@@ -292,7 +292,7 @@ describe('StyledLinearProgress-1', () => {
 
       waitFor(() => {
         expect(getAllByTestId('Course-Card-Topic-Progress')[1].parentNode?.textContent).toBe(
-          'components.StyledLinearProgress.linearProgressWithLabel.learningProgress: error..'
+          'components.LinearProgressWithLabel.learningProgress: error..'
         )
       })
     })
@@ -477,7 +477,7 @@ describe('Course3', () => {
 
     waitFor(() => {
       expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe(
-        'components.StyledLinearProgress.linearProgressWithLabel.learningProgress: 0/2'
+        'components.LinearProgressWithLabel.learningProgress: 0/2'
       )
     })
   })

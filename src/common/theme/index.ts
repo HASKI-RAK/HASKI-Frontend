@@ -1,6 +1,7 @@
 export { green } from '../theme/DefaultGreen/DefaultGreen'
 export { grey } from '../theme/DefaultGrey/DefaultGrey'
 export { keyframes } from '../theme/DefaultKeyframes/DefaultKeyframes'
+export { pink } from '../theme/DefaultPink/DefaultPink'
 export { red } from '../theme/DefaultRed/DefaultRed'
 export { styled } from '../theme/DefaultStyled/DefaultStyled'
 export type { Theme } from '../theme/DefaultTheme/DefaultTheme'
