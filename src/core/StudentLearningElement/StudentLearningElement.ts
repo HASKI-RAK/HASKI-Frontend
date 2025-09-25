@@ -2,8 +2,7 @@ type StudentLearningElement = {
   id: number
   student_id: number
   learning_element_id: number
-  done: boolean
-  done_at: string
+  is_favorite: boolean
 }
 
 export default StudentLearningElement

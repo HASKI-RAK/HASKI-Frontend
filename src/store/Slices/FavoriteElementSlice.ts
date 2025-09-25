@@ -8,42 +8,34 @@ import { resetters } from '../Zustand/Store'
 
 export type FavoriteElementSlice = {
   getFavoriteElement: FavoriteElementReturn
-  setFavoriteElement: (learningElementId?: number) => void
-  favorited: number[]
-  hasLoadedFavorites: boolean
+  setFavoriteElement: (learningElementId: number) => void
+  favorited?: number[]
 }
 
 export const createFavoriteElementSlice: StateCreator<PersistedStoreState, [], [], FavoriteElementSlice> = (
   set,
   get
 ) => {
-  resetters.push(() => set({ favorited: [], hasLoadedFavorites: false }))
+  resetters.push(() => set({ favorited: undefined }))
   return {
-    favorited: [],
-    hasLoadedFavorites: false,
-    getFavoriteElement: async (...arg) => {
-      const [studentId] = arg
-      const hasLoadedFavorites = get().hasLoadedFavorites
-      if (hasLoadedFavorites) {
-        return get().favorited
+    favorited: undefined,
+    getFavoriteElement: async (studentId: number) => {
+      if (!get().favorited) {
+        // Fetch and store
+        const favorite = await fetchFavorite(studentId)
+        set({
+          favorited: [favorite].flat()
+        })
       }
 
-      // Fetch and store
-      const favorite = await fetchFavorite(studentId)
-
-      set({
-        favorited: [favorite].flat(),
-        hasLoadedFavorites: true
-      })
       return get().favorited
     },
-    setFavoriteElement: async (...arg) => {
-      const [learningElementId] = arg
-      const cached = get().favorited.find((learningElement) => learningElement === learningElementId)
+    setFavoriteElement: async (learningElementId: number) => {
+      const cached = get().favorited?.find((learningElement) => learningElement === learningElementId)
       if (cached) {
-        set({ favorited: get().favorited.filter((learningElement) => learningElement !== learningElementId) })
+        set({ favorited: get().favorited?.filter((learningElement) => learningElement !== learningElementId) })
       } else {
-        set({ favorited: [...get().favorited, learningElementId as number] })
+        set({ favorited: [...(get().favorited || []), learningElementId as number] })
       }
     }
   }

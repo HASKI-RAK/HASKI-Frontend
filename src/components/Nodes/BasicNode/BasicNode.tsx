@@ -41,19 +41,16 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const getFavoriteElement = usePersistedStore((state) => state.getFavoriteElement)
   const setFavoriteElement = usePersistedStore((state) => state.setFavoriteElement)
   const favorited = usePersistedStore((state) => state.favorited)
-  const isFavorite = favorited.includes(props.data.learningElementId)
+  const isFavorite = favorited?.includes(props.data.learningElementId)
 
   // Fetch favorite status - commented out until feature is implemented
-  /*useEffect(() => {
+  useEffect(() => {
     getUser()
       .then((user) => {
         getFavoriteElement(user.id).then((favorite) => {
-          if (favorite.learning_element_id.length > 0) {
-            setIsFavorite(true)
-          } else {
-            setIsFavorite(false)
-          }
-        })
+          for (const learningElementId of favorite || []) {
+            setFavoriteElement(learningElementId)
+        }  })
       })
       .catch(() => {
         addSnackbar({
@@ -62,7 +59,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           autoHideDuration: 3000
         })
       })
-  }, [getUser, getFavoriteElement, props.data.learningElementId, addSnackbar, t])*/
+  }, [getUser, getFavoriteElement, props.data.learningElementId, addSnackbar, t])
 
   // Handlers for hovering the node
 

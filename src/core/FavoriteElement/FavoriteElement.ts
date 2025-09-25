@@ -1,11 +1,4 @@
-/**
- * @prop courseId - The id of the course
- * @prop studentId - The id of the student
- * @prop learningElementId - The id of the learning element
- * @interface
- * @category Core
- */
-type FavoriteElementReturn = (studentId?: number) => Promise<FavoriteElement[]>
+type FavoriteElementReturn = (studentId: number) => Promise<FavoriteElement[] | undefined>
 
 /**
  * @prop cmid - The id of the learning element (equals learning_element_id)
