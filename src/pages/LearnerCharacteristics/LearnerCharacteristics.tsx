@@ -172,7 +172,6 @@ const LearnerCharacteristics = memo(({ activeStepForTesting = 0 }: LearnerCharac
         {steps.map((label, index) => (
           <Step key={label} data-testid={'StepperButton'}>
             <StepButton
-              color="inherit"
               onClick={() => {
                 setActiveStep(index)
               }}>

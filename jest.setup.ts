@@ -823,34 +823,13 @@ const mockDataServices: MockDataServices = {
       message: 'Deletion successful!'
     })
   ),
-  deleteLearningElementSolution: jest.fn(() =>
+  postUserSettings: jest.fn(() =>
     Promise.resolve({
-      message: 'Deletion successful!'
+      id: 2,
+      pswd: null,
+      theme: 'HaskiTheme',
+      user_id: '2'
     })
-  ),
-  fetchLearningElementSolution: jest.fn(() =>
-    Promise.resolve({
-      id: 1,
-      learning_element_lms_id: 1,
-      solution_lms_id: 4,
-      activity_type: 'activity'
-    })
-  ),
-  fetchLearningPathElementSolution: jest.fn(() =>
-    Promise.resolve([
-      {
-        id: 1,
-        learning_element_lms_id: 123,
-        activity_type: 'Quiz',
-        solution_lms_id: '4'
-      },
-      {
-        id: 2,
-        learning_element_lms_id: 124,
-        activity_type: 'Video',
-        solution_lms_id: '5'
-      }
-    ])
   )
 }
 /**
