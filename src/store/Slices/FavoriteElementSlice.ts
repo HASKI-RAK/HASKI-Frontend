@@ -20,12 +20,20 @@ export const createFavoriteElementSlice: StateCreator<PersistedStoreState, [], [
   return {
     favorited: undefined,
     getFavoriteElement: async (studentId: number) => {
-      if (!get().favorited) {
-        // Fetch and store
-        const favorite = await fetchFavorite(studentId)
-        set({
-          favorited: [favorite].flat()
-        })
+      const current = get().favorited
+
+      if (!current) {
+        try {
+          const fetchedFavorites = await fetchFavorite(studentId)
+
+          // Ensure it's an array and store it
+          set({
+            favorited: Array.isArray(fetchedFavorites) ? fetchedFavorites : []
+          })
+        } catch (error) {
+          console.error('Failed to fetch favorites:', error)
+          set({ favorited: [] }) // fallback to empty
+        }
       }
 
       return get().favorited

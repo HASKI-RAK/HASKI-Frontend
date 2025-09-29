@@ -47,10 +47,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   useEffect(() => {
     getUser()
       .then((user) => {
-        getFavoriteElement(user.id).then((favorite) => {
-          for (const learningElementId of favorite || []) {
-            setFavoriteElement(learningElementId)
-        }  })
+        getFavoriteElement(user.id)
       })
       .catch(() => {
         addSnackbar({
