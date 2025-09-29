@@ -45,12 +45,12 @@ describe('fetchLearningPathElementStatus has expected behaviour', () => {
   })
 
   it('should throw an error when courseId or studentId are missing', async () => {
-    const studentId = 1
-    const courseId = undefined // Set to null to simulate a missing value
-    const learningElementId = 3
+    const lmsUserId = 1
+    const courseId = '2'
+    const learningElementId = undefined
 
-    await expect(fetchLearningPathElementSpecificStatus(courseId, studentId, learningElementId)).rejects.toThrow(
-      'courseId, studentId and learningElementId are required'
+    await expect(fetchLearningPathElementSpecificStatus(courseId, lmsUserId, learningElementId)).rejects.toThrow(
+      'learningElementId is required'
     )
   })
 
@@ -67,11 +67,11 @@ describe('fetchLearningPathElementStatus has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const studentId = 1
+    const lmsUserId = 1
     const courseId = '2'
     const learningElementId = 3
 
-    await expect(fetchLearningPathElementSpecificStatus(courseId, studentId, learningElementId)).rejects.toThrow(
+    await expect(fetchLearningPathElementSpecificStatus(courseId, lmsUserId, learningElementId)).rejects.toThrow(
       `${expectedMessage}`
     )
   })
@@ -86,10 +86,10 @@ describe('fetchLearningPathElementStatus has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const studentId = 1
+    const lmsUserId = 1
     const courseId = '2'
     const learningElementId = 3
 
-    await expect(fetchLearningPathElementSpecificStatus(courseId, studentId, learningElementId)).rejects.toThrow('')
+    await expect(fetchLearningPathElementSpecificStatus(courseId, lmsUserId, learningElementId)).rejects.toThrow('')
   })
 })
