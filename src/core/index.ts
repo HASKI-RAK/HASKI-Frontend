@@ -24,6 +24,7 @@
 import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
 import Course, { CourseResponse } from './Course/Course'
 import DefaultLearningPath from './DefaultLearningPath/DefaultLearningPath'
+import { ExperiencePoints } from './ExperiencePoints/ExperiencePoints'
 import LearningElement from './LearningElement/LearningElement'
 import LearningPathLearningElementAlgorithm, {
   LearningPathLearningElementAlgorithmResponse
@@ -51,6 +52,7 @@ export type {
   Course,
   CourseResponse,
   DefaultLearningPath,
+  ExperiencePoints,
   ILS,
   LearningElement,
   LearningPathBasedOn,
@@ -74,6 +76,7 @@ export type {
 }
 export type { CourseReturn } from './Course/Course'
 export type { DefaultLearningPathResponse } from './DefaultLearningPath/DefaultLearningPath'
+export type { ExperiencePointsReturn } from './ExperiencePoints/ExperiencePoints'
 export type { LearningPathLearningElementAlgorithmReturn } from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
 export type { StudentLpLeAlgorithmReturn } from './LearningPathAlgorithm/StudentLpLeAlgorithm'
 export type { TeacherLpLeAlgorithmReturn } from './LearningPathAlgorithm/TeacherLpLeAlgorithm'

@@ -1,12 +1,5 @@
 import { memo, useEffect, useState } from 'react'
-import { Button,
-  Grid,
-  Table,
-  TableBody, TableCell,
-  TableHead,
-  TableRow,
-   Typography
-    } from '@common/components'
+import { Button, Grid, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@common/components'
 
 const Leaderboard = () => {
   return (
