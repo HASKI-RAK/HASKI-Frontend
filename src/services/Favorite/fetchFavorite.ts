@@ -1,6 +1,6 @@
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
-import { FavoriteElement } from '@core'
+import { FavoriteElement, FavoriteResponse } from '@core'
 
 /*
  * fetchFavorite
@@ -15,11 +15,13 @@ import { FavoriteElement } from '@core'
  */
 
 export const fetchFavorite = async (student_id?: number): Promise<FavoriteElement> => {
-  return fetchData<FavoriteElement>(getConfig().BACKEND + `/lms/student/${student_id}/favorites`, {
+  const response = await fetchData<FavoriteResponse>(getConfig().BACKEND + `/lms/student/${student_id}/favorites`, {
     method: 'GET',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     }
   })
+
+  return response.favorites
 }

@@ -30,8 +30,7 @@ export const createFavoriteElementSlice: StateCreator<PersistedStoreState, [], [
           set({
             favorited: Array.isArray(fetchedFavorites) ? fetchedFavorites : []
           })
-        } catch (error) {
-          console.error('Failed to fetch favorites:', error)
+        } catch (_) {
           set({ favorited: [] }) // fallback to empty
         }
       }

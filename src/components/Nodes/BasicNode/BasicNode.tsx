@@ -8,7 +8,7 @@ import { DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from 
 import { deleteLearningElement, RoleContext, SnackbarContext, deleteLearningElementSolution, postFavorite } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
-import { FavoriteBorder as FavoriteBorderIcon, Favorite as FavoriteIcon } from '@mui/icons-material'
+import { FavoriteBorder as FavoriteBorderIcon, Favorite as FavoriteIcon, Task } from '@mui/icons-material'
 
 /**
  * @prop children - The icon of the node.
