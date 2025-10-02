@@ -5,6 +5,7 @@ import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import { CoursesSlice, createCoursesSlice } from '../Slices/CoursesSlice'
 import { createDefaultLearningPathSlice, DefaultLearningPathSlice } from '../Slices/DefaultLearningPathSlice'
+import { createExperiencePointsSlice, ExperiencePointsSlice } from '../Slices/ExperiencePointsSlice'
 import { createLearningPathElementSlice, LearningPathElementSlice } from '../Slices/LearningPathElementSlice'
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
@@ -23,6 +24,7 @@ import { createUserSlice, UserSlice } from '../Slices/UserSlice'
 export type StoreState = LearningPathElementSlice &
   CourseSlice &
   CoursesSlice &
+  ExperiencePointsSlice &
   LearningPathTopicSlice &
   LearningPathElementSpecificStatusSlice &
   RemoteTopicsSlice &
@@ -34,6 +36,7 @@ export type SessionStoreState = NewsSlice
 export const resetters: (() => void)[] = []
 
 export const useStore = create<StoreState>()((...a) => ({
+  ...createExperiencePointsSlice(...a),
   ...createLearningPathElementSlice(...a),
   ...createLearningPathTopicSlice(...a),
   ...createCourseSlice(...a),
