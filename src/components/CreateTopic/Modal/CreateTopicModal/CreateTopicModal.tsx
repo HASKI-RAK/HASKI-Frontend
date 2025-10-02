@@ -7,15 +7,15 @@ import {
   CreateAlgorithmsStep,
   CreateAlgorithmTableNameProps,
   CreateLearningElementClassificationsStep,
+  CreateLearningElementSolutionsStep,
   CreateLearningElementsStep,
   CreateRemoteTopicsStep,
-  handleError
+  handleError,
+  useCreateTopicModal
 } from '@components'
 import { LearningPathTopic, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import CreateLearningelementSolutionsStep from '../CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
-import { useCreateTopicModal } from './CreateTopicModal.hooks'
 
 export type CreateTopicModalProps = {
   openCreateTopicModal?: boolean
@@ -241,7 +241,7 @@ const CreateTopicModal = ({ openCreateTopicModal = false, handleCloseCreateTopic
             />
           )}
           {activeStep === 3 && (
-            <CreateLearningelementSolutionsStep
+            <CreateLearningElementSolutionsStep
               selectedTopics={selectedTopics}
               LearningElementsClassification={selectedLearningElementsClassification}
               selectedSolutions={selectedSolutions}

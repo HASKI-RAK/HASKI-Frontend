@@ -1,9 +1,12 @@
 import { memo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Button, Grid } from '@common/components'
-import { CreateLearningElementClassificationTable, RemoteLearningElementWithClassification } from '@components'
+import {
+  CreateLearningElementClassificationTable,
+  RemoteLearningElementWithClassification,
+  Solution
+} from '@components'
 import { RemoteLearningElement, RemoteTopics } from '@core'
-import { Solution } from '../CreateTopicModal/CreateTopicModal'
 
 type CreateLearningElementClassificationsStepProps = {
   selectedTopics: RemoteTopics[]

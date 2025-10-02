@@ -5,16 +5,17 @@ import { Box, Fab, Grid, Modal, Step, StepButton, Stepper } from '@common/compon
 import { Close } from '@common/icons'
 import {
   CreateLearningElementClassificationsStep,
+  CreateLearningElementSolutionsStep,
   CreateLearningElementsStep,
   handleError,
-  RemoteLearningElementWithClassification
+  RemoteLearningElementWithClassification,
+  RemoteLearningElementWithSolution,
+  Solution,
+  useCreateTopicModal
 } from '@components'
 import { LearningPathElement, LearningPathElementSolution, RemoteLearningElement, RemoteTopics } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import CreateLearningElementSolutionStep from '../CreateTopic/Modal/CreateLearningElementSolutionsStep/CreateLearningElementSolutionStep'
-import { RemoteLearningElementWithSolution, Solution } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
-import { useCreateTopicModal } from '../CreateTopic/Modal/CreateTopicModal/CreateTopicModal.hooks'
 
 export type CreateTopicModalProps = {
   openCreateTopicModal?: boolean
@@ -52,8 +53,7 @@ const CreateLearningElementModal = ({
   //Hooks
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
-  const { courseId } = useParams()
-  const { topicId } = useParams()
+  const { courseId, topicId } = useParams<{ courseId: string; topicId: string }>()
   const [remoteTopic, setRemoteTopic] = useState<RemoteTopics[]>([])
   const [selectAllLearningElementsChecked, setSelectAllLearningElementsChecked] = useState(false)
   const {
@@ -243,7 +243,7 @@ const CreateLearningElementModal = ({
             />
           )}
           {activeStep === 2 && (
-            <CreateLearningElementSolutionStep
+            <CreateLearningElementSolutionsStep
               selectedTopics={remoteTopic}
               LearningElementsClassification={selectedLearningElementsClassification}
               selectedSolutions={selectedSolutions}

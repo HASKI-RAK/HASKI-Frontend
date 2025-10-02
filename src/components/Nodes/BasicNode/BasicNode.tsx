@@ -5,7 +5,7 @@ import { Box, Checkbox, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip,
 import { useTheme } from '@common/hooks'
 import { DeleteForever, Warning } from '@common/icons'
 import { DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from '@components'
-import { deleteLearningElement, RoleContext, SnackbarContext, deleteLearningElementSolution, postFavorite } from '@services'
+import { deleteLearningElement, deleteLearningElementSolution, RoleContext, SnackbarContext, postFavorite } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
 import { FavoriteBorder as FavoriteBorderIcon, Favorite as FavoriteIcon, Task } from '@mui/icons-material'

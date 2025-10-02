@@ -1,15 +1,15 @@
 import { memo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Backdrop, Box, Button, CircularProgress, Grid } from '@common/components'
-import { CreateLearningElementSolutionTable } from '@components'
-import { RemoteTopics } from '@core'
 import {
+  CreateLearningElementSolutionTable,
   RemoteLearningElementWithClassification,
   RemoteLearningElementWithSolution,
   Solution
-} from '../CreateTopicModal/CreateTopicModal'
+} from '@components'
+import { RemoteTopics } from '@core'
 
-interface CreateLearningElementSolutionStepProps {
+type CreateLearningElementSolutionsStepProps = {
   selectedTopics: RemoteTopics[]
   LearningElementsClassification: { [key: number]: RemoteLearningElementWithClassification[] }
   selectedSolutions: { [key: number]: Solution[] }
@@ -22,7 +22,7 @@ interface CreateLearningElementSolutionStepProps {
   isLoading?: boolean
 }
 
-const CreateLearningElementSolutionStep = ({
+const CreateLearningElementSolutionsStep = ({
   selectedTopics,
   LearningElementsClassification,
   selectedSolutions,
@@ -33,7 +33,7 @@ const CreateLearningElementSolutionStep = ({
   disableNext,
   nextButtonText,
   isLoading
-}: CreateLearningElementSolutionStepProps) => {
+}: CreateLearningElementSolutionsStepProps) => {
   const { t } = useTranslation()
 
   // Every Solution has to be used
@@ -84,4 +84,4 @@ const CreateLearningElementSolutionStep = ({
   )
 }
 
-export default memo(CreateLearningElementSolutionStep)
+export default memo(CreateLearningElementSolutionsStep)

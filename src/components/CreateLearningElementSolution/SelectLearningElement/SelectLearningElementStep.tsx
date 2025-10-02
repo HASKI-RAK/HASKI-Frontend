@@ -1,12 +1,11 @@
 import { Dispatch, memo, SetStateAction } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Button, Grid } from '@common/components'
+import { Box, Button, Grid, Typography } from '@common/components'
+import { RemoteLearningElementWithClassification, SelectLearningElementTable } from '@components'
 import { Topic } from '@core'
-import { RemoteLearningElementWithClassification } from '../../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
-import SelectLearningElementTable from '../SelectLearningElementTable/SelectLearningElementTable'
 
-interface SelectLearningElementStep {
-  selectedTopics: Topic | undefined
+type SelectLearningElementStepProps = {
+  selectedTopics?: Topic
   selectedLearningElements: { [key: number]: RemoteLearningElementWithClassification[] }
   setSelectedLearningElements: Dispatch<SetStateAction<{ [key: number]: RemoteLearningElementWithClassification[] }>>
   onNext: () => void
@@ -17,13 +16,17 @@ const SelectLearningElementStep = ({
   selectedLearningElements,
   setSelectedLearningElements,
   onNext
-}: SelectLearningElementStep) => {
+}: SelectLearningElementStepProps) => {
   const { t } = useTranslation()
 
-  return !selectedTopics ? (
+  return !selectedTopics || !selectedLearningElements[selectedTopics.lms_id] ? (
     <Grid container item>
       <Box sx={{ padding: '1rem', width: '95%' }}>
-        <p>{t('components.SelectLearningElementStep.noTopicSelected')}</p>
+        <Typography variant="body1" align={'center'}>
+          {!selectedTopics
+            ? t('components.SelectLearningElementStep.noTopicSelected')
+            : t('components.SelectLearningElementStep.noLearningElements')}
+        </Typography>
       </Box>
     </Grid>
   ) : (
@@ -35,6 +38,7 @@ const SelectLearningElementStep = ({
         <Box sx={{ padding: '1rem', width: '95%' }}>
           <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 2 }}>
             <Button
+              id="select-learning-element-step-next-button"
               variant="contained"
               color="primary"
               disabled={

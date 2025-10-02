@@ -6,10 +6,10 @@ import {
   RemoteLearningElementWithClassification,
   RemoteLearningElementWithSolution,
   Solution
-} from '../../Modal/CreateTopicModal/CreateTopicModal'
-import CreateLearningelementSolutionStep from './CreateLearningElementSolutionStep'
+} from '../CreateTopicModal/CreateTopicModal'
+import CreateLearningElementSolutionsStep from './CreateLearningElementSolutionStep'
 
-describe('CreateLearningElementSolutionStep', () => {
+describe('CreateLearningElementSolutionsStep', () => {
   const mockOnNext = jest.fn()
   const mockOnBack = jest.fn()
   const onLearningElementSolutionChange = jest.fn()
@@ -62,7 +62,7 @@ describe('CreateLearningElementSolutionStep', () => {
     const mockLearningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] } = {}
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}
@@ -70,6 +70,7 @@ describe('CreateLearningElementSolutionStep', () => {
           onLearningElementSolutionChange={onLearningElementSolutionChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          isLoading={false}
           nextButtonText={'appGlobal.next'}
         />
       </MemoryRouter>
@@ -79,11 +80,53 @@ describe('CreateLearningElementSolutionStep', () => {
     expect(screen.getByText('appGlobal.next')).toBeInTheDocument()
   })
 
+  it('does not render next button when loading', () => {
+    const mockLearningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] } = {}
+    render(
+      <MemoryRouter>
+        <CreateLearningElementSolutionsStep
+          selectedTopics={mockSelectedTopics}
+          LearningElementsClassification={mockLearningElementsClassification}
+          selectedSolutions={mockSelectedSolutions}
+          learningElementsWithSolutions={mockLearningElementsWithSolutions}
+          onLearningElementSolutionChange={onLearningElementSolutionChange}
+          onNext={mockOnNext}
+          onBack={mockOnBack}
+          isLoading={true}
+          nextButtonText={'appGlobal.next'}
+        />
+      </MemoryRouter>
+    )
+
+    expect(screen.queryByText('appGlobal.next')).not.toBeInTheDocument()
+  })
+
+  it('does render next button when not loading', () => {
+    const mockLearningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] } = {}
+    render(
+      <MemoryRouter>
+        <CreateLearningElementSolutionsStep
+          selectedTopics={mockSelectedTopics}
+          LearningElementsClassification={mockLearningElementsClassification}
+          selectedSolutions={mockSelectedSolutions}
+          learningElementsWithSolutions={mockLearningElementsWithSolutions}
+          onLearningElementSolutionChange={onLearningElementSolutionChange}
+          onNext={mockOnNext}
+          onBack={mockOnBack}
+          isLoading={false}
+          nextButtonText={'appGlobal.next'}
+        />
+      </MemoryRouter>
+    )
+
+    expect(screen.getByText('appGlobal.next')).toBeInTheDocument()
+  })
+
   it('disables the next button when not all solutions are used', () => {
     const mockLearningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] } = {}
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}
@@ -109,7 +152,7 @@ describe('CreateLearningElementSolutionStep', () => {
 
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}
@@ -125,11 +168,33 @@ describe('CreateLearningElementSolutionStep', () => {
     expect(screen.getByText('appGlobal.next')).not.toBeDisabled()
   })
 
-  it('calls onBack when back button is clicked', () => {
-    const mockLearningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] } = {}
+  it('enables next button when disableNext returns false', () => {
+    const disabledNext = jest.fn(() => false)
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
+          selectedTopics={mockSelectedTopics}
+          LearningElementsClassification={mockLearningElementsClassification}
+          selectedSolutions={mockSelectedSolutions}
+          learningElementsWithSolutions={{}}
+          onLearningElementSolutionChange={onLearningElementSolutionChange}
+          onNext={mockOnNext}
+          onBack={mockOnBack}
+          disableNext={disabledNext}
+          nextButtonText={'appGlobal.next'}
+        />
+      </MemoryRouter>
+    )
+
+    expect(screen.getByText('appGlobal.next')).not.toBeDisabled()
+  })
+
+  it('calls onBack when back button is clicked', () => {
+    const mockLearningElementsWithSolutions: { [key: number]: RemoteLearningElementWithSolution[] } = {}
+    const disabledNext = jest.fn(() => true)
+    render(
+      <MemoryRouter>
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}
@@ -137,6 +202,7 @@ describe('CreateLearningElementSolutionStep', () => {
           onLearningElementSolutionChange={onLearningElementSolutionChange}
           onNext={mockOnNext}
           onBack={mockOnBack}
+          disableNext={disabledNext}
           nextButtonText={'appGlobal.next'}
         />
       </MemoryRouter>
@@ -156,7 +222,7 @@ describe('CreateLearningElementSolutionStep', () => {
 
     render(
       <MemoryRouter>
-        <CreateLearningelementSolutionStep
+        <CreateLearningElementSolutionsStep
           selectedTopics={mockSelectedTopics}
           LearningElementsClassification={mockLearningElementsClassification}
           selectedSolutions={mockSelectedSolutions}

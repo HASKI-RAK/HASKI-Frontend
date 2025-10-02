@@ -22,6 +22,7 @@ export { postLearningElement } from './LearningElement'
 export { deleteLearningElement } from './LearningElement'
 export { fetchLearningElementSolution } from './LearningElementSolution'
 export { postLearningElementSolution } from './LearningElementSolution'
+export { deleteLearningElementSolution } from './LearningElementSolution'
 export {
   fetchLearningPathElement,
   fetchLearningPathElementSolution,
@@ -54,6 +55,5 @@ export { ThemeProvider } from './ThemeProvider/ThemeProvider'
 export { useThemeProvider } from './ThemeProvider/ThemeProvider.hooks'
 export { fetchLearningPathTopic, postAddAllStudentsToTopics, postTopic } from './Topic'
 export { deleteTopic } from './Topic'
-export { deleteLearningElementSolution } from './LearningElementSolution'
 export * from './Viewport'
 export * from './xAPI'

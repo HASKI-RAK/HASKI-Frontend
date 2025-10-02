@@ -8,6 +8,7 @@ import { ReactFlowProvider } from 'reactflow'
 import { RemoteLearningElement } from '@core'
 import { AuthContext, SnackbarContext } from '@services'
 import CreateLearningElementModal from './CreateLearningElementModal'
+import { useState } from 'react'
 
 jest.useFakeTimers()
 
@@ -89,8 +90,7 @@ describe('CreateLearningElementModal Component', () => {
   })
 
   test('renders the modal when closed', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1' })
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     const { queryByTestId } = render(
       <ReactFlowProvider>
@@ -121,8 +121,7 @@ describe('CreateLearningElementModal Component', () => {
   })
 
   test('renders the modal when open', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1' })
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     const { getByTestId } = render(
       <ReactFlowProvider>
@@ -155,8 +154,7 @@ describe('CreateLearningElementModal Component', () => {
   })
 
   test('closes the modal when close button is clicked', () => {
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1' })
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     const { getByTestId } = render(
       <ReactFlowProvider>
@@ -191,8 +189,7 @@ describe('CreateLearningElementModal Component', () => {
   })
 
   test('displays step 1 (CreateLearningElementsStep) initially', () => {
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1' })
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     const { getByText } = render(
       <ReactFlowProvider>
@@ -224,8 +221,7 @@ describe('CreateLearningElementModal Component', () => {
   })
 
   test('displays step 1 (CreateLearningElementsStep) initially, with 0 Learning elements', () => {
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1' })
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     mockServices.fetchRemoteTopics.mockImplementationOnce(() =>
       Promise.resolve({
@@ -266,8 +262,7 @@ describe('CreateLearningElementModal Component', () => {
   })
 
   test('navigates to step 2 (CreateLearningElementClassificationsStep) when clicking Next', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     const handleSetActiveStep = jest.fn()
 
@@ -316,27 +311,52 @@ describe('CreateLearningElementModal Component', () => {
     })
   })
 
-  /*test('calls handleCreateLearningElementsInExistingTopic and closes modal on final step', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+  test('navigates to step 3 (CreateLearningElementSolutionsStep) when clicking Next', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     const handleSetActiveStep = jest.fn()
 
-    const { getByText } = render(
+    const selectedLearningElements: { [key: number]: RemoteLearningElement[] } = {
+      3: [
+        // ✅ Object with numeric keys
+        { lms_id: 38, lms_learning_element_name: 'superKnowledge.pdf', lms_activity_type: 'resource' },
+        { lms_id: 39, lms_learning_element_name: 'Strategie Übung - Leicht', lms_activity_type: 'h5pactivity' }
+      ]
+    }
+
+    const selectedLearningElementsClassification = {
+      1: [
+        { lms_id: 101, classification: 'KÜ', lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity' },
+        { lms_id: 102, classification: '', lms_learning_element_name: 'Element 2', lms_activity_type: 'Activity' }
+      ],
+      3: [{ lms_id: 201, classification: 'EK', lms_learning_element_name: 'Element 3', lms_activity_type: 'Activity' }]
+    }
+
+    const selectedSolutions = {
+      3: [
+        {
+          solutionLmsId: 1,
+          solutionLmsName: 'Solution 1',
+          solutionLmsType: 'h5p'
+        }
+      ]
+    }
+
+    const { getByText, findByText } = render(
       <ReactFlowProvider>
-        <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+        <MemoryRouter initialEntries={['/course/2/topic/1']}>
           <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
             <SnackbarContext.Provider value={mockAddSnackbar}>
               <CreateLearningElementModal
                 openCreateTopicModal={true}
                 currentTopicLmsId={3}
-                handleCloseCreateTopicModal={mockHandleCloseCreateTopicModal}
-                selectedLearningElements={{}}
+                handleCloseCreateTopicModal={jest.fn()}
+                selectedLearningElements={selectedLearningElements}
                 setSelectedLearningElements={jest.fn()}
-                selectedLearningElementsClassification={{}}
+                selectedLearningElementsClassification={selectedLearningElementsClassification}
                 setSelectedLearningElementsClassification={jest.fn()}
                 selectedLearningElementSolution={{}}
-                selectedSolutions={{}}
+                selectedSolutions={selectedSolutions}
                 setSelectedSolutions={jest.fn()}
                 setSelectedLearningElementSolution={jest.fn()}
                 activeStep={1}
@@ -348,22 +368,101 @@ describe('CreateLearningElementModal Component', () => {
       </ReactFlowProvider>
     )
 
-    const nextButton = getByText(/createLearningElements/i)
-    fireEvent.click(nextButton)
+    await findByText('Element 3')
 
-    act(() => {
-      // Replace runAllTimers with a more controlled approach
-      jest.advanceTimersByTime(5000) // Adjust timing as needed
+    fireEvent.click(getByText('appGlobal.next'))
+
+    expect(handleSetActiveStep).toHaveBeenCalled()
+  })
+
+  test('creates LearningElement in existing topic with solution', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
+
+    const selectedLearningElements: { [key: number]: RemoteLearningElement[] } = {
+      3: [
+        // ✅ Object with numeric keys
+        { lms_id: 38, lms_learning_element_name: 'superKnowledge.pdf', lms_activity_type: 'resource' },
+        { lms_id: 39, lms_learning_element_name: 'Strategie Übung - Leicht', lms_activity_type: 'h5pactivity' }
+      ]
+    }
+
+    const selectedLearningElementsClassification = {
+      3: [{ lms_id: 201, classification: 'EK', lms_learning_element_name: 'Element 3', lms_activity_type: 'Activity' }]
+    }
+
+    const selectedSolutions = {
+      3: [
+        {
+          solutionLmsId: 1,
+          solutionLmsName: 'Solution 1',
+          solutionLmsType: 'h5p'
+        }
+      ]
+    }
+
+    const selectedLearningElementSolution = {
+      3: [
+        {
+          learningElementLmsId: 38,
+          learningElementName: 'what',
+          solutionLmsId: 1,
+          solutionLmsType: 'h5p'
+        }
+      ]
+    }
+
+    const mockHandleCloseCreateTopicModal = jest.fn()
+
+    const Wrapper = () => {
+      const [activeStep, setActiveStep] = useState(2)
+
+      return (
+        <CreateLearningElementModal
+          openCreateTopicModal={true}
+          currentTopicLmsId={3}
+          handleCloseCreateTopicModal={mockHandleCloseCreateTopicModal}
+          selectedLearningElements={selectedLearningElements}
+          setSelectedLearningElements={jest.fn()}
+          selectedLearningElementsClassification={selectedLearningElementsClassification}
+          setSelectedLearningElementsClassification={jest.fn()}
+          selectedLearningElementSolution={selectedLearningElementSolution}
+          selectedSolutions={selectedSolutions}
+          setSelectedSolutions={jest.fn()}
+          setSelectedLearningElementSolution={jest.fn()}
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
+        />
+      )
+    }
+
+    const { getByText } = render(
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course/2/topic/1']}>
+          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <Wrapper />
+            </SnackbarContext.Provider>
+          </AuthContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
+    )
+
+    await waitFor(() => {
+      fireEvent.click(getByText('appGlobal.back'))
     })
 
     await waitFor(() => {
+      fireEvent.click(getByText('appGlobal.next'))
+    })
+
+    await waitFor(() => {
+      fireEvent.click(getByText('components.CreateLearningElementModal.createLearningElements'))
       expect(mockHandleCloseCreateTopicModal).toHaveBeenCalled()
     })
-  })*/
+  })
 
   test('calls handleCreateLearningElementsInExistingTopic and closes modal on final step', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     const handleSetActiveStep = jest.fn()
 
@@ -407,8 +506,7 @@ describe('CreateLearningElementModal Component', () => {
   })
 
   test('clicking directly on stepperbutton', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     const handleSetActiveStep = jest.fn()
 
@@ -446,9 +544,44 @@ describe('CreateLearningElementModal Component', () => {
     })
   })
 
+  test('handles errors when fetching LearningPathElementSolution topics', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
+
+    mockServices.fetchLearningPathElementSolution.mockImplementationOnce(() => {
+      throw new Error('fetchLearningPathElementSolution error')
+    })
+
+    await act(async () => {
+      render(
+        <ReactFlowProvider>
+          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/2']}>
+            <SnackbarContext.Provider value={mockAddSnackbar}>
+              <CreateLearningElementModal
+                openCreateTopicModal={true}
+                currentTopicLmsId={3}
+                handleCloseCreateTopicModal={jest.fn()}
+                selectedLearningElements={{}}
+                setSelectedLearningElements={jest.fn()}
+                selectedLearningElementsClassification={{}}
+                setSelectedLearningElementsClassification={jest.fn()}
+                selectedLearningElementSolution={{}}
+                selectedSolutions={{ 3: [] }}
+                setSelectedSolutions={jest.fn()}
+                setSelectedLearningElementSolution={jest.fn()}
+                activeStep={1}
+                setActiveStep={mockSetActiveStep}
+              />
+            </SnackbarContext.Provider>
+          </MemoryRouter>
+        </ReactFlowProvider>
+      )
+    })
+
+    expect(addSnackbarMock).toHaveBeenCalled()
+  })
+
   test('handles errors when fetching remote topics', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     mockServices.fetchRemoteTopics.mockImplementationOnce(() => {
       throw new Error('fetchRemoteTopics error')
@@ -484,8 +617,7 @@ describe('CreateLearningElementModal Component', () => {
   })
 
   test('handles errors when fetching learning path elements', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     mockServices.fetchLearningPathElement.mockImplementationOnce(() => {
       throw new Error('fetchLearningPathElement error')
@@ -522,8 +654,7 @@ describe('CreateLearningElementModal Component', () => {
 
   test('handles errors when fetching user', async () => {
     //mockServices fetch user throw error
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '2' })
-    jest.spyOn(router, 'useParams').mockReturnValueOnce({ topicId: '1' })
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
     mockServices.fetchUser.mockImplementationOnce(() => {
       throw new Error('fetchUser error')

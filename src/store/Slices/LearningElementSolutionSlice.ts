@@ -33,7 +33,7 @@ export const createLearningElementSolutionSlice: StateCreator<StoreState, [], []
         return learningElementSolution
       } else return cached
     },
-    setLearningElementSolution: async (learningElementLmsId, solutionLmsId, activity_type) => {
+    setLearningElementSolution: (learningElementLmsId, solutionLmsId, activity_type) => {
       const learningElementSolution = {
         learning_element_lms_id: learningElementLmsId,
         solution_lms_id: solutionLmsId,

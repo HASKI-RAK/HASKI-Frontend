@@ -1,12 +1,11 @@
-import { Dispatch, memo, ReactNode, SetStateAction, useContext, useEffect, useState } from 'react'
+import { ChangeEvent, Dispatch, memo, ReactNode, SetStateAction, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { Box, Checkbox, FormControl, FormControlLabel, Grid, Paper, Typography } from '@common/components'
-import { handleError } from '@components'
-import { LearningElement, LearningElementSolution, RemoteLearningElement, RemoteTopics, Topic } from '@core'
+import { Box, Checkbox, FormControlLabel, Grid, Paper, Typography } from '@common/components'
+import { handleError, RemoteLearningElementWithClassification } from '@components'
+import { LearningElementSolution, LearningPathLearningElement, Topic } from '@core'
 import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
-import { RemoteLearningElementWithClassification } from '../../CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 
 type SelectLearningElementTableProps = {
   currentTopic: Topic
@@ -34,8 +33,7 @@ const SelectLearningElementTable = ({
   const getUser = usePersistedStore((state) => state.getUser)
   const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
 
-  const [existingSolutions, setExistingSolutions] = useState<LearningElementSolution[]>([])
-
+  // Handles checkbox state changes for learning elements.
   const handleCheckboxChange = (learningElement: RemoteLearningElementWithClassification, checked: boolean) => {
     const updatedLearningElements = {
       [currentTopic.lms_id]: checked
@@ -45,7 +43,7 @@ const SelectLearningElementTable = ({
     setSelectedLearningElements(updatedLearningElements)
   }
 
-  // Get Learning Elements in Topic that do not have solutions
+  // Loads learning elements for the current topic and filters out ones that already have a solution.
   useEffect(() => {
     if (!courseId || !topicId) return
 
@@ -54,7 +52,7 @@ const SelectLearningElementTable = ({
         .then(async (learningPathElement) => {
           // Build the list of learning elements
           const learningElements: RemoteLearningElementWithClassification[] = learningPathElement.path.map(
-            (element: any) => ({
+            (element: LearningPathLearningElement): RemoteLearningElementWithClassification => ({
               lms_id: element.learning_element.lms_id,
               lms_learning_element_name: element.learning_element.name,
               classification: '',
@@ -62,7 +60,7 @@ const SelectLearningElementTable = ({
             })
           )
 
-          // Fetch all solutions in parallel
+          // Check which learning elements already have a solution
           const solutions: (LearningElementSolution | null)[] = await Promise.all(
             learningElements.map(
               (el) => getLearningElementSolution(el.lms_id).catch(() => null) // In case of 404 or error
@@ -79,7 +77,7 @@ const SelectLearningElementTable = ({
 
           setLearningElements(filteredLearningElements)
         })
-        .catch((error: any) => {
+        .catch((error) => {
           handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 5000)
         })
     })
@@ -99,9 +97,7 @@ const SelectLearningElementTable = ({
     <Grid container direction="column" justifyContent="center" alignItems="center" spacing={3}>
       <Grid item container justifyContent="center">
         <Typography variant="h6" sx={{ mt: '1rem' }}>
-          {
-            t('components.SelectLearningElementTable.title') // add translation key here
-          }
+          {t('components.SelectLearningElementTable.title')}
         </Typography>
       </Grid>
       <Grid
@@ -128,9 +124,10 @@ const SelectLearningElementTable = ({
                       checked={selectedLearningElements[currentTopic.lms_id]?.some(
                         (el) => el.lms_id === element.lms_id
                       )}
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      onChange={(event: ChangeEvent<HTMLInputElement>) =>
                         handleCheckboxChange(element, event.target.checked)
                       }
+                      id={`select-learning-element-table-checkbox-${element.lms_learning_element_name}`}
                     />
                   }
                   label={element.lms_learning_element_name}
