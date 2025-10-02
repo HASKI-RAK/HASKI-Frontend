@@ -1,4 +1,4 @@
-import { memo, useCallback, useContext } from 'react'
+import { memo, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import log from 'loglevel'
@@ -6,7 +6,7 @@ import { Box, Fab, Modal } from '@common/components'
 import { Close } from '@common/icons'
 import { User } from '@core'
 import { postCalculateRating, SnackbarContext } from '@services'
-import { usePersistedStore, useStore } from '@store'
+import { usePersistedStore } from '@store'
 
 const style_box = {
   position: 'absolute',
@@ -45,7 +45,6 @@ type IFrameModalProps = {
  * @category Components
  */
 const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
-  const clearLearningElementRecommendationCache = useStore((state) => state.clearLearningElementRecommendationCache)
   const getUser = usePersistedStore((state) => state.getUser)
   const { courseId, topicId } = useParams()
   const { t } = useTranslation()
@@ -53,48 +52,32 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
   // Context.
   const { addSnackbar } = useContext(SnackbarContext)
 
-  const handleClose = useCallback(() => {
-    courseId &&
-      topicId &&
-      getUser()
-        .then((user: User) => {
-          postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId)
-            .then(() => {
-              clearLearningElementRecommendationCache(courseId, topicId)
-            })
-            .catch((error) => {
-              addSnackbar({
-                message: t('error.postCalculateRating'),
-                severity: 'error',
-                autoHideDuration: 3000
-              })
-              log.error(t('error.postCalculateRating') + ' ' + error)
-            })
-        })
-        .catch((error) => {
+  const handleClose = () => {
+    getUser()
+      .then((user: User) => {
+        postCalculateRating(user.settings.user_id, courseId, topicId, props.learningElementId).catch((error) => {
           addSnackbar({
-            message: t('error.getUser'),
+            message: t('error.postCalculateRating'),
             severity: 'error',
             autoHideDuration: 3000
           })
-          log.error(t('error.getUser') + ' ' + error)
+          log.error(t('error.postCalculateRating') + ' ' + error)
         })
+      })
+      .catch((error) => {
+        addSnackbar({
+          message: t('error.getUser'),
+          severity: 'error',
+          autoHideDuration: 3000
+        })
+        log.error(t('error.getUser') + ' ' + error)
+      })
 
     props.onClose()
-  }, [
-    courseId,
-    topicId,
-    getUser,
-    postCalculateRating,
-    clearLearningElementRecommendationCache,
-    props.learningElementId,
-    addSnackbar,
-    t,
-    props.onClose
-  ])
+  }
 
   return (
-    <Modal id="iframe-modal" open={props.isOpen} onClose={handleClose} data-testid={'IFrameModal'}>
+    <Modal id="iframe-modal" open={props.isOpen} onClose={props.onClose} data-testid={'IFrameModal'}>
       <Box sx={style_box}>
         <Fab
           id="iframe-modal-close-button"

@@ -28,8 +28,8 @@ export type LearningPathElementStatusSlice = {
   clearLearningPathElementStatusCache: () => void
   getLearningPathElementStatus: LearningPathElementStatusReturn
   setLearningPathElementStatus: (
-    courseId: string,
-    lmsUserId: number,
+    courseId?: string,
+    studentId?: number,
     newData?: LearningPathElementStatus
   ) => Promise<LearningPathElementStatus[]>
 }
@@ -53,8 +53,9 @@ export const createLearningPathElementStatusSlice: StateCreator<
     clearLearningPathElementStatusCache: () => {
       set({ _learningPathElementStatus: {} })
     },
-    getLearningPathElementStatus: async (courseId: string, lmsUserId: number) => {
-      const key = `${courseId}-${lmsUserId}`
+    getLearningPathElementStatus: async (...arg) => {
+      const [courseId, studentId] = arg
+      const key = `${courseId}-${studentId}`
 
       const cached = get()._learningPathElementStatus[key]
 
@@ -67,7 +68,7 @@ export const createLearningPathElementStatusSlice: StateCreator<
         return cached.promise
       }
 
-      const fetchPromise = fetchLearningPathElementStatus(courseId, lmsUserId).then(
+      const fetchPromise = fetchLearningPathElementStatus(courseId, studentId).then(
         (response: LearningPathElementStatus[]) => {
           // Once resolved, cache the value and remove the in-flight promise.
           set({
@@ -89,12 +90,13 @@ export const createLearningPathElementStatusSlice: StateCreator<
       })
       return fetchPromise
     },
-    setLearningPathElementStatus: async (courseId: string, lmsUserId: number, newData?: LearningPathElementStatus) => {
-      const key = `${courseId}-${lmsUserId}`
+    setLearningPathElementStatus: async (...arg) => {
+      const [courseId, studentId, newData] = arg
+      const key = `${courseId}-${studentId}`
 
       // If the data is not cached, fetch it from the backend
       if (!get()._learningPathElementStatus[key]?.value) {
-        const learningPathElementStatusResponse = await fetchLearningPathElementStatus(courseId, lmsUserId)
+        const learningPathElementStatusResponse = await fetchLearningPathElementStatus(courseId, studentId)
         set({
           _learningPathElementStatus: {
             ...get()._learningPathElementStatus,

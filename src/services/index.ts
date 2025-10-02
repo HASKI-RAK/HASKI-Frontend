@@ -20,7 +20,8 @@ export { postFavorite } from './Favorite/postFavorite'
 export { fetchFavorite } from './Favorite/fetchFavorite'
 export { postLearningElement } from './LearningElement'
 export { deleteLearningElement } from './LearningElement'
-export * from './LearningElementRecommendation'
+export { fetchLearningElementSolution } from './LearningElementSolution'
+export { postLearningElementSolution } from './LearningElementSolution'
 export {
   fetchLearningPathElement,
   fetchLearningPathElementSolution,

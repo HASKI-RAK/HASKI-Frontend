@@ -1,6 +1,5 @@
 export { default as AddSolution } from './AddSolution/AddSolution'
 export { default as AlgorithmSettingsModal } from './AlgorithmSettingsModal/AlgorithmSettingsModal'
-export { default as BorderedPaper } from './BorderedPaper/BorderedPaper'
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
 export { default as CollapsibleList } from './CollapsibleList/CollapsibleList/CollapsibleList'
 export {

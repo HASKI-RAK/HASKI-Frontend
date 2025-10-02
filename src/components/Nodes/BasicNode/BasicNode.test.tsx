@@ -18,14 +18,14 @@ describe('BasicNode tests', () => {
       name: 'basicNode',
       activityType: 'testType',
       classification: 'DEFAULT',
+      isRecommended: true,
       handleSetUrl: jest.fn(),
       handleSetTitle: jest.fn(),
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
       isDone: isDone,
-      isDisabled: isDisabled,
-      isRecommended: false
+      isDisabled: isDisabled
     }
 
     return {

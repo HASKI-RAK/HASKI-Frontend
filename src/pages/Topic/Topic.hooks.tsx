@@ -4,7 +4,7 @@ import { Edge, Node } from 'reactflow'
 import { useTheme } from '@common/hooks'
 import { getGroupLabels, LearningPathLearningElementNode } from '@components'
 import { LearningElement, LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
-import { RoleContext, useLearningElementRecommendation } from '@services'
+import { RoleContext } from '@services'
 
 /**
  * @prop defaultUrl - The default url of a node
@@ -76,9 +76,6 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const theme = useTheme()
   const { t } = useTranslation()
 
-  // Hook
-  const { recommendedLearningElement } = useLearningElementRecommendation()
-
   // Global variables
   const nodeOffsetX = 50
   const groupHeight = 200
@@ -132,6 +129,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     (
       learningElement: LearningElement,
       disabledClassification: boolean,
+      recommended: boolean,
       learningPathStatus: LearningPathElementStatus[],
       id: string,
       position: { x: number; y: number }
@@ -144,20 +142,21 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         cursor: 'pointer',
         width: 500
       }
+
       const nodeData: LearningPathLearningElementNode = {
         learningElementId: learningElement.id,
         lmsId: learningElement.lms_id,
         name: learningElement.name,
         activityType: learningElement.activity_type,
         classification: learningElement.classification,
+        isRecommended: recommended,
         handleSetUrl: setUrl,
         handleSetTitle: setTitle,
         handleSetLmsId: setLmsId,
         handleOpen: handleOpen,
         handleClose: handleClose,
         isDone: learningPathStatus?.find((item) => item.cmid === learningElement.lms_id)?.state === 1,
-        isDisabled: disabledClassification,
-        isRecommended: learningElement.lms_id == recommendedLearningElement?.lms_id
+        isDisabled: disabledClassification
       }
 
       return {
@@ -171,7 +170,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         style: learningElementNodeStyle
       }
     },
-    [theme, handleOpen, handleClose, setUrl, setTitle, setLmsId, recommendedLearningElement]
+    [theme, handleOpen, handleClose, setUrl, setTitle, setLmsId]
   )
 
   // Creates aligned nodes of the passed LearningPathLearningElement array.
@@ -187,6 +186,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         return getLearningElementNode(
           node.learning_element,
           disabledClassifications.includes(node.learning_element.classification), //returns if the classification is disabled
+          node.recommended,
           learningPathStatus,
           node.position.toString() + '-' + node.learning_element.lms_id,
           {
@@ -238,6 +238,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         return getLearningElementNode(
           learningElements[0].learning_element,
           disabledClassifications.includes(learningElements[0].learning_element.classification),
+          learningElements[0].recommended,
           learningPathStatus,
           learningElements[0].position.toString(),
           {

@@ -23,13 +23,13 @@ describe('fetchLearningPathElementStatus has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const lmsUserId = 1
+    const studentId = 1
     const courseId = '2'
 
-    const result = await fetchLearningPathElementStatus(courseId, lmsUserId)
+    const result = await fetchLearningPathElementStatus(courseId, studentId)
 
     expect(fetch).toHaveBeenCalledWith(
-      `${getConfig().BACKEND}/lms/course/${courseId}/student/${lmsUserId}/activitystatus`,
+      `${getConfig().BACKEND}/lms/course/${courseId}/student/${studentId}/activitystatus`,
       {
         method: 'GET',
         credentials: 'include',
@@ -39,6 +39,15 @@ describe('fetchLearningPathElementStatus has expected behaviour', () => {
       }
     )
     expect(result).toEqual(expectedData)
+  })
+
+  it('should throw an error when courseId or studentId are missing', async () => {
+    const studentId = 1
+    const courseId = undefined // Set to null to simulate a missing value
+
+    await expect(fetchLearningPathElementStatus(courseId, studentId)).rejects.toThrow(
+      'courseId and student_id are required'
+    )
   })
 
   it('should throw a specific error when the response has an error variable', async () => {
@@ -54,10 +63,10 @@ describe('fetchLearningPathElementStatus has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const lmsUserId = 1
+    const studentId = 1
     const courseId = '2'
 
-    await expect(fetchLearningPathElementStatus(courseId, lmsUserId)).rejects.toThrow(`${expectedMessage}`)
+    await expect(fetchLearningPathElementStatus(courseId, studentId)).rejects.toThrow(`${expectedMessage}`)
   })
 
   it('should throw an unknown error when the response does not have an error variable', async () => {
@@ -70,9 +79,9 @@ describe('fetchLearningPathElementStatus has expected behaviour', () => {
     // @ts-ignore
     fetch.mockResolvedValue(mockResponse)
 
-    const lmsUserId = 1
+    const studentId = 1
     const courseId = '2'
 
-    await expect(fetchLearningPathElementStatus(courseId, lmsUserId)).rejects.toThrow('')
+    await expect(fetchLearningPathElementStatus(courseId, studentId)).rejects.toThrow('')
   })
 })
