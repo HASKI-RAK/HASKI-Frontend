@@ -1,16 +1,23 @@
-import { useEffect, useState } from 'react'
-import { memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Grid, LinearProgress, LinearProgressProps, Tooltip, Typography } from '@common/components'
+import { Grid, LinearProgress, Tooltip, Typography } from '@common/components'
+import { useStore} from '@store'
 
-const LevelBar = () => {
-  const { t } = useTranslation()
 
-  const [experiencePoints, setExperiencePoints] = useState(3000)
+const LevelBar = (studentId : number) => {
+  const [experiencePoints, setExperiencePoints] = useState(0)
   const [currentLevel, setCurrentLevel] = useState(0)
   const [levelPercentage, setLevelPercentage] = useState(0)
+  const { getExperiencePoints } = useStore(() => ({ getExperiencePoints: useStore.getState().getExperiencePoints }))
 
-  const xpToNextLevel = 500
+  const xpToNextLevel = 1000
+
+  useEffect(() => {
+    // fetch experience points
+    getExperiencePoints(studentId).then((xpRecord) => {
+      setExperiencePoints(xpRecord.experience_points)
+    })
+  }, [studentId])
 
   useEffect(() => {
     const level = Math.floor(experiencePoints / xpToNextLevel)
@@ -28,7 +35,7 @@ const LevelBar = () => {
       </Grid>
       <LinearProgress
         variant="determinate"
-        value={60}
+        value={levelPercentage}
         sx={{
           height: '0.5rem',
           borderRadius: 5,
@@ -42,7 +49,7 @@ const LevelBar = () => {
       />
       <Grid item justifyContent={'center'} sx={{ mt: '0.5rem', margin: 'auto' }}>
         <Typography variant="body2" color="text.secondary" sx={{}}>
-          {'290/500'}
+          {`${experiencePoints % xpToNextLevel} / ${xpToNextLevel}`}
         </Typography>
       </Grid>
     </Grid>

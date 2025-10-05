@@ -13,6 +13,7 @@ export type ExperiencePointsSlice = {
     _cache_experiencePoints_record: Record<string, ExperiencePointsCache>
     clearExperiencePointsCache: () => void
     getExperiencePoints: ExperiencePointsReturn
+    setExperiencePoints: (studentId: number, experiencePoints: ExperiencePoints) => void
 }
 
 export const createExperiencePointsSlice: StateCreator<StoreState, [], [], ExperiencePointsSlice> = (
@@ -27,7 +28,7 @@ export const createExperiencePointsSlice: StateCreator<StoreState, [], [], Exper
             set({ _cache_experiencePoints_record: {} })
         },
         getExperiencePoints: async (studentId) => {
-            const key = `${studentId}`
+            const key = String(studentId)
 
             // Check if we have the experience points cached
             const cached = get()._cache_experiencePoints_record[key]
@@ -64,6 +65,15 @@ export const createExperiencePointsSlice: StateCreator<StoreState, [], [], Exper
             })
 
             return fetchPromise
+        },
+        setExperiencePoints: (studentId, experiencePoints) => {
+            const key = String(studentId)
+            set({
+                _cache_experiencePoints_record: {
+                    ...get()._cache_experiencePoints_record,
+                    [key]: { value: experiencePoints }
+                }
+            })
         }
     }
 }
