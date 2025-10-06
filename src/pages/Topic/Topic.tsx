@@ -13,7 +13,7 @@ import {
   ResponsiveMiniMap
 } from '@components'
 import { LearningPathElementStatus, User } from '@core'
-import { AuthContext, RoleContext, SnackbarContext } from '@services'
+import { AuthContext, postExperiencePoints, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
 
@@ -64,6 +64,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
   const [isGrouped, setIsGrouped] = useState(true)
+  const [learningElementStartTime, setLearningElementStartTime] = useState<number>(Date.now())
+  const [learningElementId, setLearningElementId] = useState<number>(0)
+  const [learningElementClassification, setLearningElementClassification] = useState<string>('')
 
   const getLearningElementsWithStatus = (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
     setLearningPathElementStatus(learningPathElementStatusData)
@@ -158,7 +161,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)
-   * @param user
+   * @param user - current user for which the status should be updated
    */
   const updateLearningPathElementStatus = (user: User) => {
     getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
@@ -177,6 +180,14 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // Catch for getUser is handled in the useEffect
   const getHandleClose = () => {
     getUser().then((user) => {
+      // user.id used as studentId should maybe be replaced in the future
+      postExperiencePoints(user.id, {
+        course_id: courseId ? parseInt(courseId) : 0,
+        learning_element_id: lmsId,
+        user_lms_id: user.lms_user_id.toString(),
+        classification: 'close',
+        start_time: Date.now()
+      })
       return updateLearningPathElementStatus(user)
     })
     return handleClose()

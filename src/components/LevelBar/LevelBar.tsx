@@ -3,8 +3,11 @@ import { useTranslation } from 'react-i18next'
 import { Grid, LinearProgress, Tooltip, Typography } from '@common/components'
 import { useStore} from '@store'
 
+type LevelBarProps = {
+  studentId: number
+}
 
-const LevelBar = (studentId : number) => {
+const LevelBar = ({ studentId }: LevelBarProps) => {
   const [experiencePoints, setExperiencePoints] = useState(0)
   const [currentLevel, setCurrentLevel] = useState(0)
   const [levelPercentage, setLevelPercentage] = useState(0)
