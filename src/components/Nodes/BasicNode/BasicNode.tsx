@@ -9,7 +9,7 @@ import { DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from 
 import {
   deleteLearningElement,
   deleteLearningElementSolution,
-  postFavorite,
+  putFavorite,
   RoleContext,
   SnackbarContext
 } from '@services'
@@ -49,7 +49,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const favorited = usePersistedStore((state) => state.favorited)
   const isFavorite = favorited?.includes(props.data.learningElementId)
 
-  // Fetch favorite status - commented out until feature is implemented
+  // Fetch favorite status
   useEffect(() => {
     getUser()
       .then((user) => {
@@ -57,7 +57,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       })
       .catch(() => {
         addSnackbar({
-          message: t('components.BasicNode.favoriteError'),
+          message: t('error.fetchUser'),
           severity: 'error',
           autoHideDuration: 3000
         })
@@ -110,7 +110,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const addToFavorites = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     getUser()
       .then((user) => {
-        postFavorite(!isFavorite, user.id, props.data.learningElementId)
+        putFavorite(!isFavorite, user.id, props.data.learningElementId)
         setFavoriteElement(props.data.learningElementId)
       })
       .catch(() => {

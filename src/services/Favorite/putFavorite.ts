@@ -2,18 +2,18 @@ import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
 
 /*
- * postFavorite
+ * putFavorite
  *
  * @remarks
- * Posts a learningElement with the favorite status
+ * Puts the is_favorite status of a learningElement for a user.
  *
- * @param favorite - The favorite status to set
- * @param userId - The user's ID
- * @param learningElementId - The learning element's ID
+ * @param is_favorite - The favorite status to set
+ * @param student_id - The user's ID
+ * @param learning_element_id - The learning element's ID
  * @returns A Promise resolving to the fetch Response
  */
 
-export const postFavorite = async (
+export const putFavorite = async (
   is_favorite?: boolean,
   student_id?: number,
   learning_element_id?: number

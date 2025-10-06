@@ -1,2 +1,2 @@
 export { fetchFavorite } from './fetchFavorite'
-export { postFavorite } from './postFavorite'
+export { putFavorite } from './putFavorite'

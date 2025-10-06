@@ -4,13 +4,29 @@ import { fetchFavorite } from '@services'
 import { PersistedStoreState } from '@store'
 import { resetters } from '../Zustand/Store'
 
-//Should return the learningElementids of the Elements that are favorited by the user
+/*
+ * getFavoriteElement
+ * @param studentId The student id
+ * @returns An array of learning element ids
+ *
+ * setFavoriteElement
+ * @param learningElementId The learning element id
+ * @returns Nothing but the void
+ *
+ * @interface
+ */
 
 export type FavoriteElementSlice = {
   getFavoriteElement: FavoriteElementReturn
   setFavoriteElement: (learningElementId: number) => void
   favorited?: number[]
 }
+
+/*
+ * getFavoriteElement - Fetch by the user favorited learning elements
+ *
+ * setFavoriteElement - Set the currently favorited learning elements
+ */
 
 export const createFavoriteElementSlice: StateCreator<PersistedStoreState, [], [], FavoriteElementSlice> = (
   set,

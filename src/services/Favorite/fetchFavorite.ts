@@ -6,12 +6,11 @@ import { fetchData } from '../RequestResponse'
  * fetchFavorite
  *
  * @remarks
- * Posts a learningElement with the favorite status
+ * Gets the learningElements for a user
+ * that have an is_favorite = true status.
  *
- * @param favorite - The favorite status to set
- * @param userId - The user's ID
- * @param learningElementId - The learning element's ID
- * @returns A Promise resolving to the fetch Response
+ * @param student_id - The user's ID for which is being fetched
+ * @returns a Promise resolving to an array of learningElement IDs
  */
 
 export const fetchFavorite = async (student_id?: number): Promise<FavoriteElement> => {
