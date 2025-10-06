@@ -1,6 +1,6 @@
+import { FavoriteElement, FavoriteResponse } from '@core'
 import { getConfig } from '@shared'
 import { fetchData } from '../RequestResponse'
-import { FavoriteElement, FavoriteResponse } from '@core'
 
 /*
  * fetchFavorite

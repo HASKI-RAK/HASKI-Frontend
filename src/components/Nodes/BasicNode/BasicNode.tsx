@@ -1,14 +1,20 @@
 import { memo, MouseEvent, ReactElement, ReactNode, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
+import { Favorite as FavoriteIcon, FavoriteBorder as FavoriteBorderIcon, Task } from '@mui/icons-material'
 import { Box, Checkbox, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
 import { DeleteForever, Warning } from '@common/icons'
 import { DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from '@components'
-import { deleteLearningElement, deleteLearningElementSolution, RoleContext, SnackbarContext, postFavorite } from '@services'
+import {
+  deleteLearningElement,
+  deleteLearningElementSolution,
+  postFavorite,
+  RoleContext,
+  SnackbarContext
+} from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
-import { FavoriteBorder as FavoriteBorderIcon, Favorite as FavoriteIcon, Task } from '@mui/icons-material'
 
 /**
  * @prop children - The icon of the node.
@@ -222,18 +228,23 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           justifyContent="flex-end"
           alignItems="center"
           sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
-          {// commented out until feature is implemented
+          {
+            // commented out until feature is implemented
             <IconButton
-            onClick={addToFavorites}
-            data-testid={'favoriteButton'}
-            sx={{
-              marginLeft: '1rem',
-              color: theme.palette.secondary.contrastText,
-              backgroundColor: theme.palette.primary.main,
-              border: '1px solid grey'
-            }}>
-            {isFavorite ? <FavoriteIcon titleAccess="isFavorite" /> : <FavoriteBorderIcon titleAccess="notFavorite" />}
-          </IconButton>
+              onClick={addToFavorites}
+              data-testid={'favoriteButton'}
+              sx={{
+                marginLeft: '1rem',
+                color: theme.palette.secondary.contrastText,
+                backgroundColor: theme.palette.primary.main,
+                border: '1px solid grey'
+              }}>
+              {isFavorite ? (
+                <FavoriteIcon titleAccess="isFavorite" />
+              ) : (
+                <FavoriteBorderIcon titleAccess="notFavorite" />
+              )}
+            </IconButton>
           }
           {solutionLmsId > 1 && (
             <Tooltip title={t('components.BasicNode.solutionTooltip')}>
