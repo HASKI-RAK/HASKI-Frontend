@@ -33,8 +33,7 @@ const exampleLearningPathElement: LearningPathElement = {
       },
       learning_element_id: 8,
       learning_path_id: 13,
-      position: 1,
-      recommended: true
+      position: 1
     },
     {
       id: 24,
@@ -58,8 +57,7 @@ const exampleLearningPathElement: LearningPathElement = {
       },
       learning_element_id: 9,
       learning_path_id: 13,
-      position: 2,
-      recommended: false
+      position: 2
     },
     {
       id: 25,
@@ -83,8 +81,7 @@ const exampleLearningPathElement: LearningPathElement = {
       },
       learning_element_id: 10,
       learning_path_id: 13,
-      position: 2,
-      recommended: false
+      position: 2
     },
     {
       id: 26,
@@ -108,8 +105,7 @@ const exampleLearningPathElement: LearningPathElement = {
       },
       learning_element_id: 11,
       learning_path_id: 13,
-      position: 2,
-      recommended: false
+      position: 2
     },
     {
       id: 28,
@@ -133,8 +129,7 @@ const exampleLearningPathElement: LearningPathElement = {
       },
       learning_element_id: 13,
       learning_path_id: 13,
-      position: 3,
-      recommended: false
+      position: 3
     }
   ]
 }
