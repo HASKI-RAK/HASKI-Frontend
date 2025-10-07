@@ -56,7 +56,7 @@ const CreateLearningElementSolution = () => {
       .then((user) => {
         getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
           .then((learningPathTopic) => {
-            setCurrentTopic(learningPathTopic.topics.filter((topic) => topic.id === parseInt(topicId))[0])
+            setCurrentTopic(learningPathTopic.topics.find((topic) => topic.id === parseInt(topicId)))
           })
           .catch((error) => {
             handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 5000)
