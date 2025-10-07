@@ -1,4 +1,4 @@
-import { memo, MouseEvent, ReactElement, ReactNode, useEffect, useCallback, useContext, useState } from 'react'
+import { memo, MouseEvent, ReactElement, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { Box, Checkbox, Collapse, Grid, IconButton, NodeWrapper, Tooltip, Typography } from '@common/components'
@@ -35,6 +35,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   // Store
   const clearLearningPathElement = useStore((state) => state.clearLearningPathElementCache)
   const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
+  const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
 
   // States
   /**
@@ -60,10 +61,6 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   //const [isFavorite, setIsFavorite] = useState(false) commented out until feature is implemented
   const [solutionLmsId, setSolutionLmsId] = useState<number>(-1)
   const [solutionActivityType, setSolutionActivityType] = useState<string>('resource')
-
-  const clearLearningPathElement = useStore((state) => state.clearLearningPathElementCache)
-  const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
-  const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
 
   /**
    * Sets the hover state to true.
