@@ -385,4 +385,60 @@ describe('CreateLearningElementSolutionModal', () => {
       })
     })*/
   })
+
+  it('does not call postLearningElementSolution when solutions are empty', async () => {
+    const { postLearningElementSolution } = mockServices
+    postLearningElementSolution.mockClear()
+
+    render(
+      <SnackbarContext.Provider value={mockAddSnackbar}>
+        <MemoryRouter>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <CreateLearningElementSolutionModal
+              open={true}
+              activeStep={1}
+              setActiveStep={setActiveStep}
+              currentTopic={{
+                contains_le: true,
+                created_at: 'string',
+                created_by: 'string',
+                id: 3,
+                is_topic: true,
+                last_updated: 'string',
+                lms_id: 3,
+                name: 'Test Topic',
+                parent_id: 1,
+                university: 'HS-Kempten',
+                student_topic: {
+                  done: true,
+                  done_at: 'string',
+                  id: 1,
+                  student_id: 1,
+                  topic_id: 1,
+                  visits: ['string']
+                }
+              }}
+              selectedLearningElements={{
+                3: []
+              }}
+              selectedSolutions={{
+                3: []
+              }}
+              learningElementsWithSolutions={{}}
+              setSelectedLearningElements={setSelectedLearningElements}
+              setLearningElementsWithSolutions={setLearningElementsWithSolutions}
+              handleCloseCreateLearningElementSolutionModal={handleCloseCreateLearningElementSolutionModal}
+            />
+          </RoleContext.Provider>
+        </MemoryRouter>
+      </SnackbarContext.Provider>
+    )
+
+    const sendButton = screen.getByRole('button', { name: 'appGlobal.next' })
+    fireEvent.click(sendButton)
+
+    await waitFor(() => {
+      expect(postLearningElementSolution).not.toHaveBeenCalled()
+    })
+  })
 })
