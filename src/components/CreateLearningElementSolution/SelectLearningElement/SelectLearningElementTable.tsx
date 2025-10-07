@@ -62,18 +62,16 @@ const SelectLearningElementTable = ({
 
           // Check which learning elements already have a solution
           const solutions: (LearningElementSolution | null)[] = await Promise.all(
-            learningElements.map(
-              (el) => getLearningElementSolution(el.lms_id).catch(() => null) // In case of 404 or error
-            )
+            learningElements.map((el) => getLearningElementSolution(el.lms_id).catch(() => null))
           )
 
-          // Extract IDs for elements that have a solution
-          const solutionIds = solutions
-            .filter((sol): sol is LearningElementSolution => !!sol)
-            .map((sol) => sol.learning_element_lms_id)
+          // Extract IDs for elements that have a solution and store in a Set for efficient lookup
+          const solutionIds = new Set(
+            solutions.filter((sol): sol is LearningElementSolution => !!sol).map((sol) => sol.learning_element_lms_id)
+          )
 
           // Filter out learning elements that already have solutions
-          const filteredLearningElements = learningElements.filter((el) => !solutionIds.includes(el.lms_id))
+          const filteredLearningElements = learningElements.filter((el) => !solutionIds.has(el.lms_id))
 
           setLearningElements(filteredLearningElements)
         })

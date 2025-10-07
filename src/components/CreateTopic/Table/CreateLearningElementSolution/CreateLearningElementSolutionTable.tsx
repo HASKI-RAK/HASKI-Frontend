@@ -60,7 +60,7 @@ const CreateLearningElementClassificationTable = memo(
     useEffect(() => {
       // Create Solutions from LearningElementsClassification
       const updatedSolutions = Object.keys(selectedLearningElementsClassification).reduce((accumulator, topicId) => {
-        const topicIdInt = parseInt(topicId)
+        const topicIdInt = Number.parseInt(topicId)
         const existingLeElSolutions = learningElementsWithSolutions[topicIdInt] || []
 
         const newSolutions = selectedLearningElementsClassification[topicIdInt].reduce<
@@ -92,7 +92,7 @@ const CreateLearningElementClassificationTable = memo(
 
     useEffect(() => {
       const updatedDisplayedSolutions = Object.keys(selectedSolutions).reduce((accumulator, topicId) => {
-        const topicIdInt = parseInt(topicId)
+        const topicIdInt = Number.parseInt(topicId)
         const newDisplayedSolutions = [
           { solutionLmsId: 0, solutionLmsName: t('components.CreateLearningElementSolutionTable.noSolution') },
           ...selectedSolutions[topicIdInt]

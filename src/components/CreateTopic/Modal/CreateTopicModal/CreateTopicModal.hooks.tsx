@@ -154,7 +154,7 @@ export const useCreateTopicModal = ({
             user.role,
             user.university,
             courseId,
-            parseInt(topicId)
+            Number.parseInt(topicId)
           )
         })
         .then(async () => {
@@ -165,7 +165,7 @@ export const useCreateTopicModal = ({
             .flat()
             .filter((element) => element.solutionLmsId && element.solutionLmsId > 0)
           if (elementsWithSolution.length === 0) {
-            return Promise.resolve()
+            return
           }
 
           return Promise.all(

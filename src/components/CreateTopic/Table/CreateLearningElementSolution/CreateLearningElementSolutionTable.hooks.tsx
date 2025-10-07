@@ -34,7 +34,7 @@ export const useCreateLearningElementSolutionTable = ({
     (elementsWithSolutions: RemoteLearningElementWithSolution[], topicId: number) => {
       const topicSolutions = selectedSolutions[topicId]
       return elementsWithSolutions.map((element) =>
-        topicSolutions.find((solution) => solution.solutionLmsId === element.solutionLmsId)
+        topicSolutions.some((solution) => solution.solutionLmsId === element.solutionLmsId)
           ? element
           : { ...element, solutionLmsId: 0 }
       )
