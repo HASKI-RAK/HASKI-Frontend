@@ -1,13 +1,15 @@
 import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Grid, LinearProgress, Tooltip, Typography } from '@common/components'
+import { ExperiencePointsPostResponse } from '@core'
 import { useStore} from '@store'
 
 type LevelBarProps = {
+  experiencePointDetails?: ExperiencePointsPostResponse
   studentId: number
 }
 
-const LevelBar = ({ studentId }: LevelBarProps) => {
+const LevelBar = ({ studentId, experiencePointDetails: experiencePointsResult }: LevelBarProps) => {
   const [experiencePoints, setExperiencePoints] = useState(0)
   const [currentLevel, setCurrentLevel] = useState(0)
   const [levelPercentage, setLevelPercentage] = useState(0)
@@ -20,7 +22,7 @@ const LevelBar = ({ studentId }: LevelBarProps) => {
     getExperiencePoints(studentId).then((xpRecord) => {
       setExperiencePoints(xpRecord.experience_points)
     })
-  }, [studentId])
+  }, [studentId, getExperiencePoints, experiencePointsResult])
 
   useEffect(() => {
     const level = Math.floor(experiencePoints / xpToNextLevel)

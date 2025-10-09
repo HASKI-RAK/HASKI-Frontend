@@ -13,6 +13,7 @@ type ExperiencePointsPostResponse = {
 type ExperiencePointsPostData = {
   course_id: number
   learning_element_id: number
+  topic_id: number
   user_lms_id: string
   classification: string
   start_time: number

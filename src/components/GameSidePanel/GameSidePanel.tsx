@@ -1,14 +1,16 @@
-import { memo, useCallback, useContext, useEffect, useState } from 'react'
-import { Button, Divider, Grid, IconButton, MobileStepper, Paper, Typography } from '@common/components'
+import { memo, useCallback, useEffect, useState } from 'react'
+import { Button, Divider, Grid, IconButton, MobileStepper, Paper } from '@common/components'
 import { Close, KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
 import { ChallengeTracker, Leaderboard, LevelBar } from '@components'
+import { ExperiencePointsPostResponse } from '@core'
 import { usePersistedStore } from '@store'
 
 type GameSidePanelProps = {
+  experiencePointDetails: ExperiencePointsPostResponse
   children?: React.ReactNode
 }
 
-const GameSidePanel = ({ children }: GameSidePanelProps) => {
+const GameSidePanel = ({ experiencePointDetails, children }: GameSidePanelProps) => {
   const getUser = usePersistedStore((state) => state.getUser)
 
   const [activeStep, setActiveStep] = useState<number>(0)
@@ -33,7 +35,7 @@ const GameSidePanel = ({ children }: GameSidePanelProps) => {
 
   const FirstPage = (
     <>
-      <LevelBar studentId={studentId}></LevelBar>
+      <LevelBar studentId={studentId} experiencePointDetails={experiencePointDetails}></LevelBar>
       <Divider sx={{ marginTop: '0.5rem', mB: '0.5rem' }} />
       <ChallengeTracker objective="0/2 schwere Übungen abgeschlossen"></ChallengeTracker>
     </>

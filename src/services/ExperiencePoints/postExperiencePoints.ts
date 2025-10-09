@@ -6,8 +6,12 @@ export const postExperiencePoints: ExperiencePointsPostReturn = async (
   studentId: number,
   data: ExperiencePointsPostData
 ) => {
-  return await fetchData(`${getConfig().BACKEND}/student/${studentId}/xp`, {
+  return await fetchData(`${getConfig().BACKEND}/student/${studentId}/calculate_xp`, {
     method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify(data)
   })
 }
