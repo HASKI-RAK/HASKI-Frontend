@@ -106,7 +106,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
     clearLearningPathElementStatusCache()
   }
 
-  // placeholder for future favorite feature
+  // upon click save the favorite status in the backend and update the persted store
   const addToFavorites = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     getUser()
       .then((user) => {
@@ -115,7 +115,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       })
       .catch(() => {
         addSnackbar({
-          message: t('components.BasicNode.favoriteError'),
+          message: t('error.fetchUser'),
           severity: 'error',
           autoHideDuration: 3000
         })
@@ -229,7 +229,6 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           alignItems="center"
           sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
           {
-            // commented out until feature is implemented
             <IconButton
               onClick={addToFavorites}
               data-testid={'favoriteButton'}

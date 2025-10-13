@@ -23,8 +23,7 @@ const exampleLearningPathElement: LearningPathElement = {
         lms_id: 5,
         name: 'Kurzübersicht',
         student_learning_element: {
-          done: false,
-          done_at: 'null',
+          is_favorite: true,
           id: 25,
           learning_element_id: 8,
           student_id: 2
@@ -48,8 +47,7 @@ const exampleLearningPathElement: LearningPathElement = {
         lms_id: 6,
         name: 'Übung 1 - Leicht',
         student_learning_element: {
-          done: false,
-          done_at: 'null',
+          is_favorite: false,
           id: 26,
           learning_element_id: 9,
           student_id: 2
@@ -73,8 +71,7 @@ const exampleLearningPathElement: LearningPathElement = {
         lms_id: 27,
         name: 'Übung 2 - Leicht',
         student_learning_element: {
-          done: false,
-          done_at: 'null',
+          is_favorite: true,
           id: 27,
           learning_element_id: 10,
           student_id: 2
@@ -98,8 +95,7 @@ const exampleLearningPathElement: LearningPathElement = {
         lms_id: 40,
         name: 'Übung 1 - Mittel',
         student_learning_element: {
-          done: false,
-          done_at: 'null',
+          is_favorite: false,
           id: 28,
           learning_element_id: 11,
           student_id: 2
@@ -123,8 +119,7 @@ const exampleLearningPathElement: LearningPathElement = {
         lms_id: 87,
         name: 'Zusammenfassung',
         student_learning_element: {
-          done: false,
-          done_at: 'null',
+          is_favorite: true,
           id: 29,
           learning_element_id: 13,
           student_id: 2
