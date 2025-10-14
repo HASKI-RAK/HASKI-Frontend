@@ -787,6 +787,7 @@ const mockDataServices: MockDataServices = {
       }
     ])
   ),
+  fetchFavorite: jest.fn(() => Promise.resolve([1, 2, 3])),
   postBufferContent: jest.fn(() =>
     Promise.resolve({
       ok: true,
