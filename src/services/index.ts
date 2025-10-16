@@ -19,8 +19,12 @@ export { fetchDefaultLearningPath, fetchDisabledClassifications, postDefaultLear
 export { postLearningElement } from './LearningElement'
 export { deleteLearningElement } from './LearningElement'
 export * from './LearningElementRecommendation'
+export { fetchLearningElementSolution } from './LearningElementSolution'
+export { postLearningElementSolution } from './LearningElementSolution'
+export { deleteLearningElementSolution } from './LearningElementSolution'
 export {
   fetchLearningPathElement,
+  fetchLearningPathElementSolution,
   fetchLearningPathElementSpecificStatus,
   fetchLearningPathElementStatus,
   postCalculateLearningPathForAllStudents

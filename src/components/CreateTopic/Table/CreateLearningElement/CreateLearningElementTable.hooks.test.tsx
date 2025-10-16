@@ -31,7 +31,9 @@ describe('CreateLearningElementTable.hooks', () => {
         selectedLearningElements: mockSelectedLearningElements,
         onLearningElementChange: mockOnLearningElementChange,
         selectedTopics: mockSelectedTopics,
-        setSelectAllLearningElementsChecked: mockSetSelectedAllLearningElementsChecked
+        setSelectAllLearningElementsChecked: mockSetSelectedAllLearningElementsChecked,
+        selectedSolutions: {},
+        onSolutionChange: jest.fn
       })
     )
 
@@ -51,13 +53,20 @@ describe('CreateLearningElementTable.hooks', () => {
     })
   })
 
-  it('removes a learning element when checkbox is unchecked', () => {
+  it('removes a learning element when checkbox is unchecked and removes it from selected Solutions', () => {
+    const mockSelectedSolutions = {
+      1: [{ solutionLmsId: 101, solutionLmsName: 'Solution 1' }]
+    }
+    const mockOnSolutionChange = jest.fn()
+
     const { result } = renderHook(() =>
       useCreateLearningElementTable({
         selectedLearningElements: mockSelectedLearningElements,
         onLearningElementChange: mockOnLearningElementChange,
         selectedTopics: mockSelectedTopics,
-        setSelectAllLearningElementsChecked: mockSetSelectedAllLearningElementsChecked
+        setSelectAllLearningElementsChecked: mockSetSelectedAllLearningElementsChecked,
+        selectedSolutions: mockSelectedSolutions,
+        onSolutionChange: mockOnSolutionChange
       })
     )
 
@@ -75,6 +84,10 @@ describe('CreateLearningElementTable.hooks', () => {
       ...mockSelectedLearningElements,
       1: [] // Element 1 removed
     })
+
+    expect(mockOnSolutionChange).toHaveBeenCalledWith({
+      1: []
+    })
   })
 
   it('selects all learning elements when handleSelectAllLearningElements is called', () => {
@@ -83,7 +96,9 @@ describe('CreateLearningElementTable.hooks', () => {
         selectedLearningElements: mockSelectedLearningElements,
         onLearningElementChange: mockOnLearningElementChange,
         selectedTopics: mockSelectedTopics,
-        setSelectAllLearningElementsChecked: mockSetSelectedAllLearningElementsChecked
+        setSelectAllLearningElementsChecked: mockSetSelectedAllLearningElementsChecked,
+        selectedSolutions: {},
+        onSolutionChange: jest.fn
       })
     )
 
@@ -103,7 +118,9 @@ describe('CreateLearningElementTable.hooks', () => {
         selectedLearningElements: mockSelectedLearningElements,
         onLearningElementChange: mockOnLearningElementChange,
         selectedTopics: mockSelectedTopics,
-        setSelectAllLearningElementsChecked: mockSetSelectedAllLearningElementsChecked
+        setSelectAllLearningElementsChecked: mockSetSelectedAllLearningElementsChecked,
+        selectedSolutions: {},
+        onSolutionChange: jest.fn
       })
     )
 

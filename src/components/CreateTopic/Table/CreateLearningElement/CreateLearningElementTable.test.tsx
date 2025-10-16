@@ -36,11 +36,40 @@ describe('CreateLearningElementTable', () => {
           selectedLearningElements={{}}
           selectAllLearningElementsChecked={false}
           setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
 
     expect(getByTestId('SkeletonList Element-1')).toBeInTheDocument()
+  })
+
+  it('renders topic with no learning elements in it', () => {
+    const mockSelectedTopicEmpty: RemoteTopics[] = [
+      {
+        topic_lms_id: 1,
+        topic_lms_name: 'Topic 1 - Empty',
+        lms_learning_elements: []
+      }
+    ]
+
+    const { getByText } = render(
+      <MemoryRouter>
+        <CreateLearningElementTable
+          selectedTopics={mockSelectedTopicEmpty}
+          onLearningElementChange={jest.fn()}
+          selectedLearningElements={mockSelectedLearningElements}
+          selectAllLearningElementsChecked={false}
+          setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
+        />
+      </MemoryRouter>
+    )
+
+    expect(getByText('Topic 1 - Empty')).toBeInTheDocument()
+    expect(getByText('components.CreateLearningElementTable.noLearningElements')).toBeInTheDocument()
   })
 
   it('renders topics with learning elements checkboxes', () => {
@@ -52,6 +81,8 @@ describe('CreateLearningElementTable', () => {
           selectedLearningElements={mockSelectedLearningElements}
           selectAllLearningElementsChecked={false}
           setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -72,6 +103,8 @@ describe('CreateLearningElementTable', () => {
           selectedLearningElements={mockSelectedLearningElements}
           selectAllLearningElementsChecked={false}
           setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -91,6 +124,8 @@ describe('CreateLearningElementTable', () => {
           selectedLearningElements={mockSelectedLearningElements}
           selectAllLearningElementsChecked={false}
           setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -110,6 +145,8 @@ describe('CreateLearningElementTable', () => {
           selectedLearningElements={mockSelectedLearningElements}
           selectAllLearningElementsChecked={true}
           setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -128,7 +165,9 @@ describe('CreateLearningElementTable', () => {
           onLearningElementChange={jest.fn()}
           selectedLearningElements={mockSelectedLearningElements}
           selectAllLearningElementsChecked={false}
-          setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}>
+          setSelectAllLearningElementsChecked={mockSetSelectedAllLearningElementsChecked}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}>
           <div data-testid="child">Child Content</div>
         </CreateLearningElementTable>
       </MemoryRouter>

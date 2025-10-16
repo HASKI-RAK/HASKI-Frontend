@@ -4,6 +4,9 @@ import * as router from 'react-router'
 import { RemoteLearningElementWithClassification } from '@components'
 import { RemoteTopics } from '@core'
 import { useCreateTopicModal } from './CreateTopicModal.hooks'
+import { SnackbarContext } from '@services'
+import log from 'loglevel'
+import { waitFor } from '@testing-library/react'
 
 const mockLearningElement = {
   lms_id: 101,
@@ -80,7 +83,11 @@ describe('useCreateTopicModal', () => {
     const { result } = renderHook(() =>
       useCreateTopicModal({
         setSelectedLearningElements: jest.fn(),
-        setSelectedLearningElementsClassification: jest.fn()
+        setSelectedLearningElementsClassification: jest.fn(),
+        selectedSolutions: {},
+        selectedLearningElementSolution: {},
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn()
       })
     )
 
@@ -110,7 +117,11 @@ describe('useCreateTopicModal', () => {
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
-        setSelectedAlgorithms: jest.fn()
+        setSelectedLearningElementSolution: jest.fn(),
+        setSelectedAlgorithms: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn()
       })
     )
     expect(result.current).toHaveProperty('handleCreate')
@@ -118,6 +129,633 @@ describe('useCreateTopicModal', () => {
     expect(result.current).toHaveProperty('handleLearningElementChange')
     expect(result.current).toHaveProperty('handleLearningElementClassification')
     expect(result.current).toHaveProperty('handleAlgorithmChange')
+  })
+
+  it('handleCreate returns early when courseId is missing (no service calls)', async () => {
+    const { result } = renderHook(() =>
+      useCreateTopicModal({
+        setSelectedLearningElements: jest.fn(),
+        setSelectedLearningElementsClassification: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn()
+      })
+    )
+
+    await act(async () => {
+      await result.current.handleCreate('Topic X', 1, {}, 'algoX', undefined)
+    })
+
+    expect(mockServices.postTopic).not.toHaveBeenCalled()
+    expect(mockServices.postLearningElement).not.toHaveBeenCalled()
+    expect(mockServices.postLearningPathAlgorithm).not.toHaveBeenCalled()
+    expect(mockServices.postAddAllStudentsToTopics).not.toHaveBeenCalled()
+    expect(mockServices.postCalculateLearningPathForAllStudents).not.toHaveBeenCalled()
+  })
+
+  it('handleTopicChange filters solutions and learningElementSolution maps', () => {
+    const mockSetSelectedTopics = jest.fn()
+    const mockSetSelectedLEs = jest.fn()
+    const mockSetClassifications = jest.fn()
+    const mockSetSolutions = jest.fn()
+    const mockSetLEWithSolution = jest.fn()
+    const mockSetAlgorithms = jest.fn()
+
+    const { result } = renderHook(() =>
+      useCreateTopicModal({
+        setSelectedTopics: mockSetSelectedTopics,
+        setSelectedLearningElements: mockSetSelectedLEs,
+        setSelectedLearningElementsClassification: mockSetClassifications,
+        setSelectedSolutions: mockSetSolutions,
+        setSelectedLearningElementSolution: mockSetLEWithSolution,
+        setSelectedAlgorithms: mockSetAlgorithms,
+        selectedLearningElementSolution: {},
+        selectedSolutions: {}
+      })
+    )
+
+    const topics = [
+      { topic_lms_id: 2, topic_lms_name: 'T2', lms_learning_elements: [] },
+      { topic_lms_id: 1, topic_lms_name: 'T1', lms_learning_elements: [] }
+    ]
+
+    // Provide state-like objects containing extra keys we expect to be pruned
+    const initialLEs = { 1: [], 2: [], 999: [] }
+    const initialClass = { 1: [], 2: [], 999: [] }
+    const initialAlgos = { 1: { a: 1 }, 999: { a: 2 } } as any
+    const initialSolutions = { 1: [], 2: [], 999: [] }
+    const initialLeSolutions = { 1: [], 2: [], 999: [] }
+
+    ;(mockSetSelectedLEs as jest.Mock).mockImplementation((fn) => fn(initialLEs))
+    ;(mockSetClassifications as jest.Mock).mockImplementation((fn) => fn(initialClass))
+    ;(mockSetAlgorithms as jest.Mock).mockImplementation((fn) => fn(initialAlgos))
+    ;(mockSetSolutions as jest.Mock).mockImplementation((fn) => fn(initialSolutions))
+    ;(mockSetLEWithSolution as jest.Mock).mockImplementation((fn) => fn(initialLeSolutions))
+
+    act(() => {
+      result.current.handleTopicChange(topics as any)
+    })
+
+    // Sorted call (by topic_lms_id)
+    expect(mockSetSelectedTopics).toHaveBeenCalledWith([
+      { topic_lms_id: 1, topic_lms_name: 'T1', lms_learning_elements: [] },
+      { topic_lms_id: 2, topic_lms_name: 'T2', lms_learning_elements: [] }
+    ])
+
+    // All four maps pruned to keys [1,2]
+    expect(mockSetSelectedLEs).toHaveBeenCalled()
+    expect(mockSetClassifications).toHaveBeenCalled()
+    expect(mockSetAlgorithms).toHaveBeenCalled()
+    expect(mockSetSolutions).toHaveBeenCalled()
+    expect(mockSetLEWithSolution).toHaveBeenCalled()
+
+    const prunedLEs = (mockSetSelectedLEs as jest.Mock).mock.results[0].value
+    expect(Object.keys(prunedLEs).map(Number).sort()).toEqual([1, 2])
+  })
+
+  it('handleSolutionsChange and handleLearningElementSolutionChange call setters', () => {
+    const mockSetSolutions = jest.fn()
+    const mockSetLEWithSolution = jest.fn()
+
+    const { result } = renderHook(() =>
+      useCreateTopicModal({
+        setSelectedLearningElements: jest.fn(),
+        setSelectedLearningElementsClassification: jest.fn(),
+        setSelectedSolutions: mockSetSolutions,
+        setSelectedLearningElementSolution: mockSetLEWithSolution,
+        selectedSolutions: {},
+        selectedLearningElementSolution: {}
+      })
+    )
+
+    const solutions = { 1: [{ id: 1 } as any] }
+    const leSolutions = { 2: [{ learningElementLmsId: 10, solutionLmsId: 20 } as any] }
+
+    act(() => result.current.handleSolutionsChange(solutions))
+    act(() => result.current.handleLearningElementSolutionChange(leSolutions))
+
+    expect(mockSetSolutions).toHaveBeenCalledWith(solutions)
+    expect(mockSetLEWithSolution).toHaveBeenCalledWith(leSolutions)
+  })
+
+  it('handleCreateLearningElementsInExistingTopic success with no solutions clears caches & shows success', async () => {
+    mockServices.fetchUser.mockImplementation(() =>
+      Promise.resolve({
+        id: 1,
+        lms_user_id: 1,
+        name: 'Thaddäus Tentakel',
+        role: 'Tester',
+        role_id: 1,
+        settings: {
+          id: 1,
+          user_id: 1,
+          pswd: '1234',
+          theme: 'test'
+        },
+        university: 'TH-AB'
+      })
+    )
+
+    // LE creation & calc path
+    mockServices.postLearningElement.mockResolvedValue({})
+    mockServices.postCalculateLearningPathForAllStudents.mockResolvedValue({})
+
+    const { result } = renderHook(() =>
+      useCreateTopicModal({
+        setSelectedLearningElements: jest.fn(),
+        setSelectedLearningElementsClassification: jest.fn(),
+        selectedLearningElementSolution: { 1: [] }, // no solutions
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn()
+      })
+    )
+
+    await act(async () => {
+      await result.current.handleCreateLearningElementsInExistingTopic(
+        1,
+        {
+          1: [
+            {
+              lms_id: 10,
+              lms_learning_element_name: 'A',
+              lms_activity_type: 'video',
+              classification: 'X',
+              disabled: false
+            },
+            {
+              lms_id: 11,
+              lms_learning_element_name: 'B',
+              lms_activity_type: 'video',
+              classification: 'Y',
+              disabled: true
+            } // filtered out
+          ] as any
+        },
+        '123',
+        'COURSE'
+      )
+    })
+
+    // created only one LE (disabled filtered)
+    expect(mockServices.postLearningElement).toHaveBeenCalledTimes(1)
+    expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalledTimes(1)
+  })
+
+  it('covers catch in solutions Promise.all (existing topic): shows snackbar and logs error', async () => {
+    // Arrange: user + previous API steps succeed
+    mockServices.fetchUser.mockResolvedValue({
+      name: 'U',
+      university: 'Uni',
+      role: 'course creator',
+      lms_user_id: 11,
+      settings: { user_id: 99 }
+    })
+    mockServices.postLearningElement.mockResolvedValue({})
+    mockServices.postCalculateLearningPathForAllStudents.mockResolvedValue({})
+
+    // 2 solution calls: first ok, second rejects → hit the `.catch(...)` inside the map
+    mockServices.postLearningElementSolution.mockRejectedValueOnce(() => {
+      new Error('postLearningElementSolution error')
+    })
+
+    const addSnackbarMock = jest.fn()
+
+    const my_context = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+    const logSpy = jest.spyOn(log, 'error').mockImplementation(() => {})
+
+    // Provide SnackbarContext
+    const wrapper = ({ children }: any) => (
+      <SnackbarContext.Provider value={my_context}>{children}</SnackbarContext.Provider>
+    )
+
+    const topicLmsId = 42
+    const selectedLearningElementSolution = {
+      [topicLmsId]: [
+        // one with default type fallback (covers `?? 'resource'`)
+        { learningElementLmsId: 10, solutionLmsId: 20, learningElementName: 'solution-1' },
+        // one that will fail
+        { learningElementLmsId: 11, solutionLmsId: 21, solutionLmsType: 'h5p', learningElementName: 'solution-2' }
+      ]
+    }
+
+    const { result } = renderHook(
+      () =>
+        useCreateTopicModal({
+          setSelectedLearningElements: jest.fn(),
+          setSelectedLearningElementsClassification: jest.fn(),
+          setSelectedLearningElementSolution: jest.fn(),
+          setSelectedSolutions: jest.fn(),
+          selectedSolutions: {},
+          selectedLearningElementSolution
+        }),
+      { wrapper }
+    )
+
+    // Act: call with matching topicId+courseId so we go into the solutions branch
+    await act(async () => {
+      await result.current.handleCreateLearningElementsInExistingTopic(
+        topicLmsId,
+        {
+          [topicLmsId]: [
+            {
+              lms_id: 1001,
+              lms_learning_element_name: 'LE',
+              lms_activity_type: 'video',
+              classification: 'X',
+              disabled: false
+            }
+          ] as any
+        },
+        '777', // topicId
+        'COURSE' // courseId
+      )
+    })
+
+    // Assert: two calls, one failed
+    expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(2)
+    // Snackbar shown for failing solution (contains id)
+    expect(addSnackbarMock).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        message: 'error.postLearningElementSolution',
+        severity: 'error',
+        autoHideDuration: 5000
+      })
+    )
+
+    expect(addSnackbarMock).toHaveBeenNthCalledWith(
+      2,
+      expect.objectContaining({
+        message: 'error.postCalculateLearningPathForAllStudents',
+        severity: 'error',
+        autoHideDuration: 5000
+      })
+    )
+    // log.error called with the same error path
+    expect(logSpy).toHaveBeenCalled()
+  })
+
+  it('should add snackbar on error in handleCreate, when postLearningElement fails', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1', topicId: '3' })
+    mockServices.postLearningElement.mockRejectedValueOnce(() => {
+      new Error('postLearningElement error')
+    })
+
+    const addSnackbarMock = jest.fn()
+
+    const my_context = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+
+    // Provide SnackbarContext
+    const wrapper = ({ children }: any) => (
+      <SnackbarContext.Provider value={my_context}>{children}</SnackbarContext.Provider>
+    )
+
+    const selectedLearningElementsClassification = {
+      3: [
+        {
+          lms_id: 201,
+          classification: 'EK',
+          lms_learning_element_name: 'Element 3',
+          lms_activity_type: 'Activity',
+          disabled: false
+        },
+        {
+          lms_id: 301,
+          classification: 'EK',
+          lms_learning_element_name: 'Element 4',
+          lms_activity_type: 'Activity',
+          disabled: true
+        }
+      ]
+    }
+
+    const mockSetCreateTopicIsSending = jest.fn()
+    const { result } = renderHook(
+      () =>
+        useCreateTopicModal({
+          setCreateTopicIsSending: mockSetCreateTopicIsSending,
+          setSuccessfullyCreatedTopicsCount: jest.fn(),
+          setSelectedTopics: jest.fn(),
+          setSelectedLearningElements: jest.fn(),
+          setSelectedLearningElementsClassification: jest.fn(),
+          setSelectedLearningElementSolution: jest.fn(),
+          setSelectedAlgorithms: jest.fn(),
+          selectedLearningElementSolution: {},
+          selectedSolutions: {},
+          setSelectedSolutions: jest.fn()
+        }),
+      { wrapper }
+    )
+
+    await act(async () => {
+      await result.current.handleCreate('Topic A', 1, selectedLearningElementsClassification, 'ALG', '1')
+    })
+
+    expect(addSnackbarMock).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        message: 'error.postLearningElement Element 3',
+        severity: 'error',
+        autoHideDuration: 5000
+      })
+    )
+
+    expect(addSnackbarMock).toHaveBeenNthCalledWith(
+      2,
+      expect.objectContaining({
+        message: 'error.postTopic',
+        severity: 'error',
+        autoHideDuration: 5000
+      })
+    )
+  })
+
+  it('should add snackbar on error in handleCreate, when postCalculateLearningPathForAllStudents fails', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValueOnce({ courseId: '1', topicId: '3' })
+    mockServices.postCalculateLearningPathForAllStudents.mockRejectedValueOnce(() => {
+      new Error('postCalculateLearningPathForAllStudents error')
+    })
+
+    const addSnackbarMock = jest.fn()
+
+    const my_context = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+
+    // Provide SnackbarContext
+    const wrapper = ({ children }: any) => (
+      <SnackbarContext.Provider value={my_context}>{children}</SnackbarContext.Provider>
+    )
+
+    const selectedLearningElementsClassification = {
+      3: [
+        {
+          lms_id: 201,
+          classification: 'EK',
+          lms_learning_element_name: 'Element 3',
+          lms_activity_type: 'Activity',
+          disabled: false
+        }
+      ]
+    }
+
+    const mockSetCreateTopicIsSending = jest.fn()
+    const { result } = renderHook(
+      () =>
+        useCreateTopicModal({
+          setCreateTopicIsSending: mockSetCreateTopicIsSending,
+          setSuccessfullyCreatedTopicsCount: jest.fn(),
+          setSelectedTopics: jest.fn(),
+          setSelectedLearningElements: jest.fn(),
+          setSelectedLearningElementsClassification: jest.fn(),
+          setSelectedLearningElementSolution: jest.fn(),
+          setSelectedAlgorithms: jest.fn(),
+          selectedLearningElementSolution: {},
+          selectedSolutions: {},
+          setSelectedSolutions: jest.fn()
+        }),
+      { wrapper }
+    )
+
+    await act(async () => {
+      await result.current.handleCreate('Topic A', 1, selectedLearningElementsClassification, 'ALG', '1')
+    })
+
+    expect(addSnackbarMock).toHaveBeenNthCalledWith(
+      1,
+      expect.objectContaining({
+        message: 'error.postCalculateLearningPathForAllStudents',
+        severity: 'error',
+        autoHideDuration: 5000
+      })
+    )
+  })
+
+  it('handleCreateLearningElementsInExistingTopic — solution creation error triggers snackbar and logs', async () => {
+    mockServices.fetchUser.mockResolvedValue({
+      name: 'U',
+      university: 'Uni',
+      role: 'teacher',
+      lms_user_id: 11,
+      settings: { user_id: 99 }
+    })
+
+    mockServices.postLearningElement.mockResolvedValue({})
+    mockServices.postCalculateLearningPathForAllStudents.mockResolvedValue({})
+    mockServices.postLearningElementSolution
+      .mockResolvedValueOnce({}) // first solution ok
+      .mockRejectedValueOnce(new Error('boom')) // second fails
+
+    const { result } = renderHook(() =>
+      useCreateTopicModal({
+        setSelectedLearningElements: jest.fn(),
+        setSelectedLearningElementsClassification: jest.fn(),
+        selectedLearningElementSolution: {
+          1: [
+            // two solutions, second will fail; also test defaulting to 'resource'
+            { learningElementLmsId: 10, solutionLmsId: 20, solutionLmsType: undefined } as any,
+            { learningElementLmsId: 11, solutionLmsId: 21, solutionLmsType: 'h5p' } as any
+          ]
+        },
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn()
+      })
+    )
+
+    await act(async () => {
+      await result.current.handleCreateLearningElementsInExistingTopic(
+        1,
+        {
+          1: [
+            {
+              lms_id: 10,
+              lms_learning_element_name: 'A',
+              lms_activity_type: 'video',
+              classification: 'X',
+              disabled: false
+            }
+          ] as any
+        },
+        '123',
+        'COURSE'
+      )
+    })
+
+    expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(2)
+  })
+
+  it('handleCreate happy path creates topic, LEs, algorithms (+continues on algo error), adds students, calculates, creates solutions, increments counter', async () => {
+    mockServices.fetchUser.mockResolvedValue({
+      name: 'U',
+      university: 'Uni',
+      role: 'teacher',
+      lms_user_id: 11,
+      settings: { user_id: 99 }
+    })
+
+    mockServices.postTopic.mockResolvedValue({ id: 777, lms_id: 222 })
+    mockServices.postLearningElement.mockResolvedValue({})
+    mockServices.postLearningPathAlgorithm.mockRejectedValueOnce(new Error('algo failed')) // cover catch branch
+    mockServices.postAddAllStudentsToTopics.mockResolvedValue({})
+    mockServices.postCalculateLearningPathForAllStudents.mockResolvedValue({})
+    mockServices.postLearningElementSolution
+      .mockResolvedValueOnce({}) // first ok
+      .mockRejectedValueOnce(new Error('sol failed')) // second triggers handleError
+
+    const mockSetCount = jest.fn()
+    const { result } = renderHook(() =>
+      useCreateTopicModal({
+        setSelectedLearningElements: jest.fn(),
+        setSelectedLearningElementsClassification: jest.fn(),
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn(),
+        selectedSolutions: {},
+        selectedLearningElementSolution: {
+          222: [
+            { learningElementLmsId: 10, solutionLmsId: 20, solutionLmsType: undefined } as any, // default to 'resource'
+            { learningElementLmsId: 11, solutionLmsId: 21, solutionLmsType: 'h5p' } as any
+          ]
+        },
+        setSuccessfullyCreatedTopicsCount: mockSetCount
+      })
+    )
+
+    const classification = {
+      222: [
+        {
+          lms_id: 10,
+          lms_learning_element_name: 'LE-A',
+          lms_activity_type: 'video',
+          classification: 'X',
+          disabled: false
+        },
+        {
+          lms_id: 11,
+          lms_learning_element_name: 'LE-B',
+          lms_activity_type: 'quiz',
+          classification: 'Y',
+          disabled: false
+        }
+      ]
+    }
+
+    await act(async () => {
+      await result.current.handleCreate('Topic A', 123, classification as any, 'ALG', 'COURSE')
+    })
+
+    await waitFor(() => {
+      expect(mockServices.postTopic).toHaveBeenCalled()
+      expect(mockServices.postLearningElement).toHaveBeenCalledTimes(2)
+      expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
+      expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(2)
+
+      // counter incremented on success path
+      expect(mockSetCount).toHaveBeenCalled()
+    })
+  })
+
+  it('handleCreate empty path does not create anything', async () => {
+    mockServices.fetchUser.mockResolvedValue({
+      name: 'U',
+      university: 'Uni',
+      role: 'teacher',
+      lms_user_id: 11,
+      settings: { user_id: 99 }
+    })
+
+    mockServices.postTopic.mockResolvedValue({ id: 777, lms_id: 222 })
+    mockServices.postLearningElement.mockResolvedValue({})
+    mockServices.postLearningPathAlgorithm.mockRejectedValueOnce(new Error('algo failed')) // cover catch branch
+    mockServices.postAddAllStudentsToTopics.mockResolvedValue({})
+    mockServices.postCalculateLearningPathForAllStudents.mockResolvedValue({})
+    mockServices.postLearningElementSolution
+      .mockResolvedValueOnce({}) // first ok
+      .mockRejectedValueOnce(new Error('sol failed')) // second triggers handleError
+
+    const mockSetCount = jest.fn()
+    const { result } = renderHook(() =>
+      useCreateTopicModal({
+        setSelectedLearningElements: jest.fn(),
+        setSelectedLearningElementsClassification: jest.fn(),
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn(),
+        selectedSolutions: {},
+        selectedLearningElementSolution: {
+          222: [
+            { learningElementLmsId: 10, solutionLmsId: 20, solutionLmsType: undefined } as any, // default to 'resource'
+            { learningElementLmsId: 11, solutionLmsId: 21, solutionLmsType: 'h5p' } as any
+          ]
+        },
+        setSuccessfullyCreatedTopicsCount: mockSetCount
+      })
+    )
+
+    const classification = {
+      2: [
+        {
+          lms_id: 10,
+          lms_learning_element_name: 'LE-A',
+          lms_activity_type: 'video',
+          classification: 'X',
+          disabled: false
+        },
+        {
+          lms_id: 11,
+          lms_learning_element_name: 'LE-B',
+          lms_activity_type: 'quiz',
+          classification: 'Y',
+          disabled: false
+        }
+      ]
+    }
+
+    await act(async () => {
+      await result.current.handleCreate('Topic A', 123, classification as any, 'ALG', 'COURSE')
+    })
+
+    await waitFor(() => {
+      expect(mockServices.postTopic).toHaveBeenCalled()
+      expect(mockServices.postLearningElement).toHaveBeenCalledTimes(0)
+      expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
+      expect(mockServices.postLearningElementSolution).toHaveBeenCalledTimes(2)
+
+      // counter incremented on success path
+      expect(mockSetCount).toHaveBeenCalled()
+    })
   })
 
   it('should call setSelectedTopics and filter elements correctly in handleTopicChange', () => {
@@ -133,7 +771,11 @@ describe('useCreateTopicModal', () => {
         setSelectedTopics: mockSetSelectedTopics,
         setSelectedLearningElements: mockSetSelectedLearningElements,
         setSelectedLearningElementsClassification: mockSetSelectedLearningElementsClassification,
-        setSelectedAlgorithms: jest.fn()
+        setSelectedLearningElementSolution: jest.fn(),
+        setSelectedAlgorithms: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn()
       })
     )
 
@@ -157,7 +799,11 @@ describe('useCreateTopicModal', () => {
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: mockSetSelectedLearningElements,
         setSelectedLearningElementsClassification: jest.fn(),
-        setSelectedAlgorithms: jest.fn()
+        setSelectedLearningElementSolution: jest.fn(),
+        setSelectedAlgorithms: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn()
       })
     )
     const learningElements = {
@@ -180,7 +826,11 @@ describe('useCreateTopicModal', () => {
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: mockSetSelectedLearningElementsClassification,
-        setSelectedAlgorithms: jest.fn()
+        setSelectedLearningElementSolution: jest.fn(),
+        setSelectedAlgorithms: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn()
       })
     )
     const learningElementClassifications = {
@@ -203,7 +853,11 @@ describe('useCreateTopicModal', () => {
         setSelectedTopics: jest.fn(),
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
-        setSelectedAlgorithms: mockSetSelectedAlgorithms
+        setSelectedLearningElementSolution: jest.fn(),
+        setSelectedAlgorithms: mockSetSelectedAlgorithms,
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn()
       })
     )
     const algorithms = { 1: { topicName: 'Topic 1', algorithmShortName: 'algo1' } }
@@ -224,7 +878,11 @@ describe('useCreateTopicModal', () => {
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
         setSelectedAlgorithms: jest.fn(),
-        setSuccessfullyCreatedTopicsCount: jest.fn()
+        setSuccessfullyCreatedTopicsCount: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn()
       })
     )
 
@@ -244,7 +902,11 @@ describe('useCreateTopicModal', () => {
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
         setSelectedAlgorithms: jest.fn(),
-        setSuccessfullyCreatedTopicsCount: jest.fn()
+        setSuccessfullyCreatedTopicsCount: jest.fn(),
+        selectedLearningElementSolution: {},
+        selectedSolutions: {},
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn()
       })
     )
 
@@ -258,26 +920,26 @@ describe('useCreateTopicModal', () => {
     })
   })
 
-  it('should add snackbar on error in handleCreate', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
+  it('handleCreate outer catch sets sending=false when getUser fails', async () => {
+    mockServices.fetchUser.mockRejectedValueOnce(new Error('nope'))
+    const mockSetSending = jest.fn()
 
-    const mockSetCreateTopicIsSending = jest.fn()
     const { result } = renderHook(() =>
       useCreateTopicModal({
-        setCreateTopicIsSending: mockSetCreateTopicIsSending,
-        setSelectedTopics: jest.fn(),
+        setCreateTopicIsSending: mockSetSending,
         setSelectedLearningElements: jest.fn(),
         setSelectedLearningElementsClassification: jest.fn(),
-        setSelectedAlgorithms: jest.fn(),
-        setSuccessfullyCreatedTopicsCount: jest.fn()
+        setSelectedSolutions: jest.fn(),
+        setSelectedLearningElementSolution: jest.fn(),
+        selectedSolutions: {},
+        selectedLearningElementSolution: {}
       })
     )
-    mockServices.fetchUser.mockImplementationOnce(() => {
-      throw new Error('Error')
-    })
 
     await act(async () => {
-      await result.current.handleCreate('Topic 1', 1, {}, 'algo1', '1')
+      await result.current.handleCreate('Topic A', 1, {}, 'ALG', 'COURSE')
     })
+
+    expect(mockSetSending).toHaveBeenCalledWith(false)
   })
 })
