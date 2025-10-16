@@ -9,8 +9,8 @@ import { fetchData } from '../RequestResponse'
  *
  * @category Services
  */
-export const fetchRemoteCourses = async () => {
-  return fetchData<RemoteCourse[]>(getConfig().BACKEND + `/lms/remote/courses`, {
+export const fetchRemoteCourses = async (userId: number) => {
+  return fetchData<RemoteCourse[]>(getConfig().BACKEND + `/lms/user/${userId}/remote/courses`, {
     method: 'GET',
     credentials: 'include',
     headers: {
