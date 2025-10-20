@@ -3,8 +3,9 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import ReactFlow, { Node } from 'reactflow'
 import { mockReactFlow } from '@mocks'
+import { mockServices } from 'jest.setup'
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
-import { RoleContext, RoleContextType } from '@services'
+import { RoleContext, RoleContextType, SnackbarContext } from '@services'
 
 describe('BasicNode tests', () => {
   beforeEach(() => {
@@ -36,7 +37,7 @@ describe('BasicNode tests', () => {
     }
   }
 
-  test('renders correctly and can be clicked, isDone is false', () => {
+  test('renders correctly and can be clicked, isDone is false', async () => {
     const mockNode = getMockNode(false, false)
 
     render(
@@ -44,13 +45,15 @@ describe('BasicNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
+    await waitFor(() => {
+      const basicNode = screen.getByTestId('basicNode')
 
-    const basicNode = screen.getByTestId('basicNode')
-    expect(basicNode).toBeInTheDocument()
+      expect(basicNode).toBeInTheDocument()
 
-    fireEvent.click(basicNode)
-    expect(mockNode.data.handleOpen).toBeCalled()
-    expect(mockNode.data.handleSetUrl).toBeCalled()
+      fireEvent.click(basicNode)
+      expect(mockNode.data.handleOpen).toBeCalled()
+      expect(mockNode.data.handleSetUrl).toBeCalled()
+    })
   })
 
   test('renders correctly and can be clicked, isDone is true', () => {
@@ -395,5 +398,65 @@ describe('BasicNode tests', () => {
     )
 
     expect(getByTestId('basicNode')).toBeInTheDocument()
+  })
+})
+describe('Favorite reladed tests', () => {
+  beforeEach(() => {
+    mockReactFlow()
+  })
+
+  const getMockNode = (isDone: boolean, isDisabled: boolean): Node => {
+    const mockData: LearningPathLearningElementNode = {
+      learningElementId: 1,
+      lmsId: 1,
+      name: 'basicNode',
+      activityType: 'testType',
+      classification: 'DEFAULT',
+      isRecommended: true,
+      handleSetUrl: jest.fn(),
+      handleSetTitle: jest.fn(),
+      handleOpen: jest.fn(),
+      handleClose: jest.fn(),
+      handleSetLmsId: jest.fn(),
+      isDone: isDone,
+      isDisabled: isDisabled
+    }
+
+    return {
+      id: 'testId',
+      type: mockData.classification,
+      data: mockData,
+      position: { x: 0, y: 0 }
+    }
+  }
+  test('shows error snackbar when getUser fails', async () => {
+    const mockNode = getMockNode(true, false)
+    const mockfetchUser = jest.fn(() => Promise.reject(new Error('fetchLearningPathElement failed')))
+    mockServices.fetchUser.mockImplementationOnce(mockfetchUser)
+    const addSnackbarMock = jest.fn()
+    const snackbarMock = {
+      snackbarsErrorWarning: [],
+      snackbarsSuccessInfo: [],
+      setSnackbarsErrorWarning: (a: any[]) => a,
+      setSnackbarsSuccessInfo: (a: any) => a,
+      addSnackbar: (a: any) => {
+        addSnackbarMock(a)
+        return a
+      },
+      updateSnackbar: (a: any) => a,
+      removeSnackbar: (a: any) => a
+    }
+
+    await act(async () => {
+      render(
+        <SnackbarContext.Provider value={snackbarMock}>
+          <MemoryRouter>
+            <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
+          </MemoryRouter>
+        </SnackbarContext.Provider>
+      )
+    })
+
+    expect(addSnackbarMock.mock.lastCall[0].severity).toEqual('error')
   })
 })
