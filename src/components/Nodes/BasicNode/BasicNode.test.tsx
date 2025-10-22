@@ -54,28 +54,27 @@ describe('BasicNode tests', () => {
       removeSnackbar: (a: any) => a
     }
 
-      const {getByTestId}=render(
-        <SnackbarContext.Provider value={snackbarMock}>
-          <MemoryRouter>
-            <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
-          </MemoryRouter>
-        </SnackbarContext.Provider>
-      )
-    const basicNode = getByTestId('basicNode')
-  fireEvent.mouseEnter(basicNode)
-  
-  mockServices.fetchUser.mockRejectedValueOnce(new Error('fetchUser unsuccessful'))
-  fireEvent.click(getByTestId('favoriteButton'))
-  
-
-  await waitFor(() => {
-    expect(mockServices.fetchUser).toHaveBeenCalledTimes(3)
-    expect(addSnackbarMock).toHaveBeenCalledWith(
-      expect.objectContaining({
-        severity: 'error',
-      })
+    const { getByTestId } = render(
+      <SnackbarContext.Provider value={snackbarMock}>
+        <MemoryRouter>
+          <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
+        </MemoryRouter>
+      </SnackbarContext.Provider>
     )
-  })
+    const basicNode = getByTestId('basicNode')
+    fireEvent.mouseEnter(basicNode)
+
+    mockServices.fetchUser.mockRejectedValueOnce(new Error('fetchUser unsuccessful'))
+    fireEvent.click(getByTestId('favoriteButton'))
+
+    await waitFor(() => {
+      expect(mockServices.fetchUser).toHaveBeenCalledTimes(3)
+      expect(addSnackbarMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          severity: 'error'
+        })
+      )
+    })
   })
 
   it('shows error snackbar when getUser fails upon loading the favorites', async () => {
@@ -106,10 +105,10 @@ describe('BasicNode tests', () => {
     })
 
     expect(addSnackbarMock).toHaveBeenCalledWith(
-  expect.objectContaining({
-    severity: 'error'
-  })
-)
+      expect.objectContaining({
+        severity: 'error'
+      })
+    )
   })
 
   test('renders correctly and can be clicked, isDone is false', async () => {
