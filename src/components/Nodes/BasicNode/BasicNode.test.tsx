@@ -165,7 +165,7 @@ describe('BasicNode tests', () => {
   })
 
   /*
-    ** This test is commented out because functionality is not completly implemented yet.
+    ** This test is commented out because functionality is not completely implemented yet.
   it('shows the filled favorite button when it is clicked', async () => {
     const mockData: LearningPathLearningElementNode = {
       learningElementId: 1,
