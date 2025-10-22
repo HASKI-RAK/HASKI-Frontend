@@ -788,6 +788,13 @@ const mockDataServices: MockDataServices = {
     ])
   ),
   fetchFavorite: jest.fn(() => Promise.resolve([1, 2, 3])),
+  putFavorite: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED'
+    })
+  ),
   postBufferContent: jest.fn(() =>
     Promise.resolve({
       ok: true,
