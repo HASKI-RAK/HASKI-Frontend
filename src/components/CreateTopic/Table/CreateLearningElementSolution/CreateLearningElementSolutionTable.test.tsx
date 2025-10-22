@@ -61,7 +61,7 @@ describe('CreateLearningElementSolutionTable', () => {
     mockLearningElementsWithSolutions = {}
   })
 
-  test('renders skeleton wehn no topics are selected', () => {
+  test('renders skeleton when no topics are selected', () => {
     render(
       <MemoryRouter>
         <CreateLearningElementSolutionTable
