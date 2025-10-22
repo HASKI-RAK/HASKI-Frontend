@@ -1350,7 +1350,7 @@
 	"error.fetchLearningElementRatings": "An error occurred while fetching the learning element ratings data.",
 	"error.fetchLearningElementRecommendation": "An error occurred while fetching the learning element recommendation data.",
 	"error.fetchLearningPathElement": "An error occurred while fetching the LearningPathElement data.",
-	"error.fetchLearningPathElementSolution": "An error occured while fetching the LearningPathElementSolution data.",
+	"error.fetchLearningPathElementSolution": "An error occurred while fetching the LearningPathElementSolution data.",
 	"error.fetchLearningPathElementStatus": "An error occurred while fetching the LearningPathElementStatus data.",
 	"error.fetchLearningPathTopic": "An error occurred while fetching the LearningPathTopic data.",
 	"error.fetchListK": "An error occurred while fetching the ListK questionnaire data.",
