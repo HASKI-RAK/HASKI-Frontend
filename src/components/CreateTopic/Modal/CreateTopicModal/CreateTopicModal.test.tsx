@@ -485,7 +485,7 @@ describe('CreateTopicModal', () => {
       fireEvent.click(getByText('appGlobal.next'))
     })
 
-    // select solution step is skepped when no solutions are present
+    // select solution step is skipped when no solutions are present
     /*    await waitFor(() => {
       const dropdowns = getAllByRole('combobox', { hidden: true })
       expect(dropdowns).toHaveLength(3)
