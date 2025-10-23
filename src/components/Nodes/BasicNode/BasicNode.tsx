@@ -55,13 +55,6 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       .then((user) => {
         getFavoriteElement(user.id)
       })
-      .catch(() => {
-        addSnackbar({
-          message: t('error.fetchUser'),
-          severity: 'error',
-          autoHideDuration: 3000
-        })
-      })
   }, [getUser, getFavoriteElement, props.data.learningElementId, addSnackbar, t])
 
   // Handlers for hovering the node

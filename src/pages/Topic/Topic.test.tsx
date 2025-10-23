@@ -203,8 +203,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite: false
             }
           }
         },
@@ -228,8 +227,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 2,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         }
@@ -372,8 +370,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -397,8 +394,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -422,8 +418,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -447,8 +442,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         }
@@ -671,8 +665,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -696,8 +689,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -721,8 +713,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -746,8 +737,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -771,8 +761,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -796,8 +785,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -821,8 +809,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         }
@@ -1186,8 +1173,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1211,8 +1197,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1236,8 +1221,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1261,8 +1245,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1286,8 +1269,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1311,8 +1293,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1336,8 +1317,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1361,8 +1341,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         }
@@ -1711,8 +1690,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1736,8 +1714,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1761,8 +1738,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1786,8 +1762,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1811,8 +1786,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1836,8 +1810,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1861,8 +1834,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         },
@@ -1886,8 +1858,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              done: false,
-              done_at: ''
+              is_favorite:true
             }
           }
         }
@@ -2276,8 +2247,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                done: false,
-                done_at: ''
+                is_favorite:true
               }
             }
           },
@@ -2301,8 +2271,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                done: false,
-                done_at: ''
+                is_favorite:true
               }
             }
           },
@@ -2326,8 +2295,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                done: false,
-                done_at: ''
+                is_favorite:true
               }
             }
           },
@@ -2351,8 +2319,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                done: false,
-                done_at: ''
+                is_favorite:true
               }
             }
           },
@@ -2376,8 +2343,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                done: false,
-                done_at: ''
+                is_favorite:true
               }
             }
           },
@@ -2401,8 +2367,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                done: false,
-                done_at: ''
+                is_favorite:true
               }
             }
           },
@@ -2426,8 +2391,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                done: false,
-                done_at: ''
+                is_favorite:true
               }
             }
           },
@@ -2451,8 +2415,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                done: false,
-                done_at: ''
+                is_favorite:true
               }
             }
           }
