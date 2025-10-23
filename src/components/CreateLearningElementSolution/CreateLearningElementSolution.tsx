@@ -115,13 +115,11 @@ const CreateLearningElementSolution = () => {
       })
   }, [
     activeStep,
-    setActiveStep,
     createLearningElementSolutionModalOpen,
     topicId,
     currentTopic,
     courseId,
-    selectedLearningElements,
-    setSelectedLearningElements
+    selectedLearningElements
   ])
 
   return (
