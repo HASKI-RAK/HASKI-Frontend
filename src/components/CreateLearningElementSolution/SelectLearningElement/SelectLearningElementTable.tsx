@@ -87,7 +87,6 @@ const SelectLearningElementTable = ({
     getLearningElementSolution,
     t,
     addSnackbar,
-    handleError,
     setLearningElements
   ])
 
