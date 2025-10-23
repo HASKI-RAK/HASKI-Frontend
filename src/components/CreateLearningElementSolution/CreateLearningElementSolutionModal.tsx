@@ -84,7 +84,7 @@ const CreateLearningElementSolutionModal = ({
           handleCloseCreateLearningElementSolutionModal()
         })
     }
-  }, [setIsLoading, currentTopic, learningElementsWithSolutions, addSnackbar, t])
+  }, [setIsLoading, currentTopic, learningElementsWithSolutions, addSnackbar, t, handleCloseCreateLearningElementSolutionModal, setLearningElementSolution])
 
   // Disable the send/next button when not all selected learning elements have a solution
   const disableSend = useCallback(() => {
