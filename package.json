@@ -30,6 +30,7 @@
     "@nivo/bar": "^0.80.0",
     "@nivo/core": "^0.80.0",
     "@nivo/network": "^0.80.0",
+    "@nivo/pie": "^0.80.0",
     "@nivo/tooltip": "^0.80.0",
     "@xapi/xapi": "^3.0.1",
     "dayjs": "^1.11.11",

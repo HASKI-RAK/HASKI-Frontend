@@ -15,7 +15,8 @@ import {
   PrivacyPolicy,
   ProjectDescription,
   Rating,
-  Topic
+  Topic,
+  ExampleGraphs
 } from '@pages'
 import { AuthProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
 import { useApp } from './App.hooks'
@@ -64,6 +65,7 @@ export const App = () => {
                       <Route path="/rating" element={<Rating />} />
                       <Route path="/privacypolicy" element={<PrivacyPolicy />} />
                       <Route path="/🥚" element={<div>Ei</div>} />
+                      <Route path="/examplegraphs" element={<ExampleGraphs />} />
                       <Route path="*" element={<PageNotFound />} />
                     </Route>
                     <Route path="*" element={<PageNotFound />} />
