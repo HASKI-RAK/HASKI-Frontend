@@ -20,6 +20,7 @@ export { fetchExperiencePoints } from './ExperiencePoints'
 export { postExperiencePoints } from './ExperiencePoints'
 export { postLearningElement } from './LearningElement'
 export { deleteLearningElement } from './LearningElement'
+export * from './LearningElementRecommendation'
 export {
   fetchLearningPathElement,
   fetchLearningPathElementSpecificStatus,

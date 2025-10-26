@@ -35,7 +35,7 @@ const CreateCourseTable = ({ onCourseSelect, selectedCourse }: CreateCourseTable
   useEffect(() => {
     getUser()
       .then((user) => {
-        fetchRemoteCourses()
+        fetchRemoteCourses(user.settings.user_id)
           .then((remoteCourses) => {
             setRemoteLmsCourses(remoteCourses)
             getCourses(user.settings.user_id, user.lms_user_id, user.id)
