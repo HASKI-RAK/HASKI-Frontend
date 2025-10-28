@@ -21,19 +21,16 @@
  * ```
  * @module core
  */
+import Badge from './Badge/Badge'
+import StudentBadge from './Badge/StudentBadge'
 import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
 import Course, { CourseResponse } from './Course/Course'
 import DefaultLearningPath from './DefaultLearningPath/DefaultLearningPath'
 import { ExperiencePoints } from './ExperiencePoints/ExperiencePoints'
-import {
-  ExperiencePointsPostData,
-  ExperiencePointsPostResponse,
-  ExperiencePointsPostReturn
-} from './ExperiencePoints/ExperiencePointsPost'
+import { ExperiencePointsPostData } from './ExperiencePoints/ExperiencePointsPost'
+import Leaderboard from './Leaderboard/Leaderboard'
 import LearningElement from './LearningElement/LearningElement'
-import LearningPathLearningElementAlgorithm, {
-  LearningPathLearningElementAlgorithmResponse
-} from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
+import LearningPathLearningElementAlgorithm from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
 import StudentLpLeAlgorithm from './LearningPathAlgorithm/StudentLpLeAlgorithm'
 import TeacherLpLeAlgorithm from './LearningPathAlgorithm/TeacherLpLeAlgorithm'
 import LearningPathElement from './LearningPathElement/LearningPathElement'
@@ -54,21 +51,20 @@ import User from './User/User'
  * Holds all pure business logic. Does not rely on any other components.
  */
 export type {
+  Badge,
   Course,
   CourseResponse,
   DefaultLearningPath,
   ExperiencePoints,
   ExperiencePointsPostData,
-  ExperiencePointsPostResponse,
-  ExperiencePointsPostReturn,
   ILS,
+  Leaderboard,
   LearningElement,
   LearningPathBasedOn,
   LearningPathElement,
   LearningPathElementStatus,
   LearningPathLearningElement,
   LearningPathLearningElementAlgorithm,
-  LearningPathLearningElementAlgorithmResponse,
   LearningPathTopic,
   ListK,
   News,
@@ -76,15 +72,25 @@ export type {
   RemoteCourse,
   RemoteLearningElement,
   RemoteTopics,
+  StudentBadge,
   StudentLearningElement,
   StudentLpLeAlgorithm,
   TeacherLpLeAlgorithm,
   Topic,
   User
 }
+export type { BadgeResponse, BadgeReturn, PostBadgeReturn } from './Badge/Badge'
+export type {
+  StudentBadgePostInput,
+  StudentBadgePostReturn,
+  StudentBadgeResponse,
+  StudentBadgeReturn
+} from './Badge/StudentBadge'
 export type { CourseReturn } from './Course/Course'
 export type { DefaultLearningPathResponse } from './DefaultLearningPath/DefaultLearningPath'
 export type { ExperiencePointsReturn } from './ExperiencePoints/ExperiencePoints'
+export type { ExperiencePointsPostResponse, ExperiencePointsPostReturn } from './ExperiencePoints/ExperiencePointsPost'
+export type { LeaderboardReturn } from './Leaderboard/Leaderboard'
 export * from './LearningElementRecommendation'
 export type { LearningPathLearningElementAlgorithmReturn } from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
 export type { StudentLpLeAlgorithmReturn } from './LearningPathAlgorithm/StudentLpLeAlgorithm'
