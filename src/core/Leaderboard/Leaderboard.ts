@@ -1,10 +1,8 @@
 type Leaderboard = {
-    [key: string]: number
+  [key: string]: number
 }
 
-
-
-type LeaderboardReturn = (course_id: string, topic_id: string) => Promise<Leaderboard>
+type LeaderboardReturn = (course_id: string, student_id: string) => Promise<Leaderboard>
 
 export default Leaderboard
 export type { LeaderboardReturn }

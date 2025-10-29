@@ -79,7 +79,7 @@ export type {
   Topic,
   User
 }
-export type { BadgeResponse, BadgeReturn, PostBadgeReturn } from './Badge/Badge'
+export type { BadgeResponse, BadgeReturn, CourseBadgesReturn, PostBadgeReturn } from './Badge/Badge'
 export type {
   StudentBadgePostInput,
   StudentBadgePostReturn,

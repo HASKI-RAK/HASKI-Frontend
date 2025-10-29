@@ -55,7 +55,8 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const learningPathElementCache = useStore((state) => state._cache_learningPathElement_record)
   const learningPathLearningElementStatusCache = usePersistedStore((state) => state._learningPathElementStatus)
 
-  const { url, title, lmsId, isOpen, learningElementStartTime, currentActivityClassification, handleClose, mapNodes } = useTopic()
+  const { url, title, lmsId, isOpen, learningElementStartTime, currentActivityClassification, handleClose, mapNodes } =
+    useTopic()
 
   // Translation
   const { t } = useTranslation()
@@ -65,7 +66,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
   const [isGrouped, setIsGrouped] = useState(true)
-  const [experiencePointDetails, setExperiencePointDetails] = useState<ExperiencePointsPostResponse>({} as ExperiencePointsPostResponse)
+  const [experiencePointDetails, setExperiencePointDetails] = useState<ExperiencePointsPostResponse>(
+    {} as ExperiencePointsPostResponse
+  )
 
   const getLearningElementsWithStatus = (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
     setLearningPathElementStatus(learningPathElementStatusData)
@@ -189,18 +192,22 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           topic_id: parseInt(topicId),
           classification: currentActivityClassification,
           start_time: learningElementStartTime
-        }).then((experiencePoints) => {
-          setExperiencePoints(user.id, {experience_points: experiencePoints.total_xp, student_id: user.id} as ExperiencePoints)
-          setExperiencePointDetails(experiencePoints)
         })
+          .then((experiencePoints) => {
+            setExperiencePoints(user.id, {
+              experience_points: experiencePoints.total_xp,
+              student_id: user.id
+            } as ExperiencePoints)
+            setExperiencePointDetails(experiencePoints)
+          })
           .catch((error) => {
             // TODO: translation string missing
             handleError(t, addSnackbar, 'error.postExperiencePoints', error, 3000)
           })
-        } else {
-          // TODO: translation string missing
-          handleError(t, addSnackbar, 'error.noCourseOrTopicId', 'No courseId or topicId given', 3000)
-        }
+      } else {
+        // TODO: translation string missing
+        handleError(t, addSnackbar, 'error.noCourseOrTopicId', 'No courseId or topicId given', 3000)
+      }
       return updateLearningPathElementStatus(user)
     })
     return handleClose()

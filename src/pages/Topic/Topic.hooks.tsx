@@ -363,6 +363,16 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         handleOpen,
         mapNodes
       } as const),
-    [url, title, lmsId, isOpen, learningElementStartTime, currentActivityClassification, handleClose, handleOpen, mapNodes]
+    [
+      url,
+      title,
+      lmsId,
+      isOpen,
+      learningElementStartTime,
+      currentActivityClassification,
+      handleClose,
+      handleOpen,
+      mapNodes
+    ]
   )
 }

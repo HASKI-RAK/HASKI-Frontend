@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Grid, LinearProgress, Tooltip, Typography } from '@common/components'
 import { ExperiencePointsPostResponse } from '@core'
-import { useStore} from '@store'
+import { useStore } from '@store'
 
 type LevelBarProps = {
   experiencePointDetails?: ExperiencePointsPostResponse
