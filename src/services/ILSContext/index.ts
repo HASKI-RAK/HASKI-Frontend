@@ -1,4 +1,4 @@
-import ILSContext, { ILSContextType } from './IlsContext'
+import ILSContext, { ILSContextType } from './ILSContext'
 
 export { ILSContext }
 export type { ILSContextType }

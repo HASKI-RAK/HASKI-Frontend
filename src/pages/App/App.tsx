@@ -17,7 +17,7 @@ import {
   Rating,
   Topic
 } from '@pages'
-import { AuthProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
+import { AuthProvider, ILSProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
 import { useApp } from './App.hooks'
 
 /**
@@ -42,33 +42,35 @@ export const App = () => {
           <Router>
             <AuthProvider>
               <RoleProvider>
+                <ILSProvider>
                 <XAPIProvider value={xAPI}>
-                  <UserInteractionTracker
-                    componentFilePath={new URL(import.meta.url).pathname}
-                    componentType="UserInteractionTracker"
-                    pageName="App"
-                  />
-                  <Routes>
-                    <Route element={<MainFrame />}>
-                      <Route index element={<Home />} />
-                      <Route path="/course/:courseId" element={<Course />} />
-                      <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/contact" element={<Contact />} />
-                      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-                      <Route path="/projectdescription" element={<ProjectDescription />} />
-                      <Route path="/glossary" element={<Glossary />} />
-                      <Route path="/aboutus" element={<AboutUs />} />
-                      <Route path="/imprint" element={<Imprint />} />
-                      <Route path="/learnercharacteristics" element={<LearnerCharacteristics />} />
-                      <Route path="/rating" element={<Rating />} />
-                      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-                      <Route path="/🥚" element={<div>Ei</div>} />
+                    <UserInteractionTracker
+                      componentFilePath={new URL(import.meta.url).pathname}
+                      componentType="UserInteractionTracker"
+                      pageName="App"
+                    />
+                    <Routes>
+                      <Route element={<MainFrame />}>
+                        <Route index element={<Home />} />
+                        <Route path="/course/:courseId" element={<Course />} />
+                        <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+                        <Route path="/projectdescription" element={<ProjectDescription />} />
+                        <Route path="/glossary" element={<Glossary />} />
+                        <Route path="/aboutus" element={<AboutUs />} />
+                        <Route path="/imprint" element={<Imprint />} />
+                        <Route path="/learnercharacteristics" element={<LearnerCharacteristics />} />
+                        <Route path="/rating" element={<Rating />} />
+                        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+                        <Route path="/🥚" element={<div>Ei</div>} />
+                        <Route path="*" element={<PageNotFound />} />
+                      </Route>
                       <Route path="*" element={<PageNotFound />} />
-                    </Route>
-                    <Route path="*" element={<PageNotFound />} />
-                  </Routes>
-                </XAPIProvider>
+                    </Routes>
+                  </XAPIProvider>
+                </ILSProvider>
               </RoleProvider>
             </AuthProvider>
           </Router>

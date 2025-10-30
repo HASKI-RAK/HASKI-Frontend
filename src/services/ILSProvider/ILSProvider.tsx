@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import ILSContext, { ILSContextType } from '../ILSContext/IlsContext'
+import { ILSContext, ILSContextType } from '@services'
 import { useILSProvider as _useILSProvider } from './ILSProvider.hooks'
 
 type ILSProviderProps = {
