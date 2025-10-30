@@ -2,17 +2,16 @@ import { StudentBadgePostInput, StudentBadgePostReturn, StudentBadgeResponse } f
 import { getConfig } from '@shared'
 import { fetchData } from '../../RequestResponse'
 
-
 export const postCheckStudentBadge: StudentBadgePostReturn = async (
-    studentId: number,
-    data: StudentBadgePostInput
+  studentId: number,
+  data: StudentBadgePostInput
 ): Promise<StudentBadgeResponse> => {
-    return fetchData<StudentBadgeResponse>(`${getConfig().BACKEND}/student/${studentId}/badgeCheck`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify(data)
-    })
+  return fetchData<StudentBadgeResponse>(`${getConfig().BACKEND}/student/${studentId}/badgeCheck`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
+    body: JSON.stringify(data)
+  })
 }

@@ -13,7 +13,6 @@ type StudentBadgePostInput = {
   topic_id: number
   lms_user_id: string
   timestamp: number
-  active: boolean
   classification: string
 }
 

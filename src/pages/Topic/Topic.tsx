@@ -13,7 +13,7 @@ import {
   ResponsiveMiniMap
 } from '@components'
 import { ExperiencePoints, ExperiencePointsPostResponse, LearningPathElementStatus, User } from '@core'
-import { AuthContext, postExperiencePoints, RoleContext, SnackbarContext } from '@services'
+import { AuthContext, postCheckStudentBadge, postExperiencePoints, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
 
@@ -51,6 +51,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
   const setExperiencePoints = useStore((state) => state.setExperiencePoints)
+  const getTopicBadges = useStore((state) => state.getTopicBadges)
 
   const learningPathElementCache = useStore((state) => state._cache_learningPathElement_record)
   const learningPathLearningElementStatusCache = usePersistedStore((state) => state._learningPathElementStatus)
@@ -69,6 +70,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [experiencePointDetails, setExperiencePointDetails] = useState<ExperiencePointsPostResponse>(
     {} as ExperiencePointsPostResponse
   )
+  const [badgeKeys, setBadgeKeys] = useState<string[]>([])
 
   const getLearningElementsWithStatus = (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
     setLearningPathElementStatus(learningPathElementStatusData)
@@ -203,6 +205,26 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           .catch((error) => {
             // TODO: translation string missing
             handleError(t, addSnackbar, 'error.postExperiencePoints', error, 3000)
+          })
+        postCheckStudentBadge(user.id, {
+          course_id: parseInt(courseId),
+          topic_id: parseInt(topicId),
+          lms_user_id: user.lms_user_id.toString(),
+          timestamp: learningElementStartTime,
+          classification: currentActivityClassification
+        })
+          .then((badges) => {
+            getTopicBadges(parseInt(courseId), false).then((topicBadges) => {
+              const keys = badges.map((earnedBadge) => {
+                const badge = topicBadges.find((topicBadge) => topicBadge.id === earnedBadge.badge_id)
+                return badge ? badge.variant_key : ''
+              })
+              const validKeys = keys.filter((key) => key !== '')
+              setBadgeKeys(validKeys)
+            })
+          })
+          .catch((error) => {
+            handleError(t, addSnackbar, 'error.postCheckStudentBadge', error, 3000)
           })
       } else {
         // TODO: translation string missing

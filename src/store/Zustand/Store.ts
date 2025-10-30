@@ -7,6 +7,7 @@ import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import { CoursesSlice, createCoursesSlice } from '../Slices/CoursesSlice'
 import { createDefaultLearningPathSlice, DefaultLearningPathSlice } from '../Slices/DefaultLearningPathSlice'
 import { createExperiencePointsSlice, ExperiencePointsSlice } from '../Slices/ExperiencePointsSlice'
+import { createILSSlice, ILSSlice } from '../Slices/ILSSlice'
 import { createLearningPathElementSlice, LearningPathElementSlice } from '../Slices/LearningPathElementSlice'
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
@@ -20,6 +21,7 @@ import { createNewsSlice, NewsSlice } from '../Slices/NewsSlice'
 import { createRemoteTopicsSlice, RemoteTopicsSlice } from '../Slices/RemoteTopicsSlice'
 import { createStudentLpLeAlgorithmSlice, StudentLpLeAlgorithmSlice } from '../Slices/StudentLpLeAlgSlice'
 import { createTeacherLpLeAlgorithmSlice, TeacherLpLeAlgorithmSlice } from '../Slices/TeacherLpLeAlgorithmSlice'
+import { createTopicBadgeSlice, TopicBadgeSlice } from '../Slices/TopicBadgeSlice'
 import { createUserSlice, UserSlice } from '../Slices/UserSlice'
 
 export type StoreState = LearningPathElementSlice &
@@ -31,8 +33,13 @@ export type StoreState = LearningPathElementSlice &
   RemoteTopicsSlice &
   TeacherLpLeAlgorithmSlice &
   StudentLpLeAlgorithmSlice &
-  LearningElementRecommendationSlice
-export type PersistedStoreState = UserSlice & AuthSlice & LearningPathElementStatusSlice & DefaultLearningPathSlice
+  LearningElementRecommendationSlice &
+  TopicBadgeSlice
+export type PersistedStoreState = UserSlice &
+  AuthSlice &
+  LearningPathElementStatusSlice &
+  DefaultLearningPathSlice &
+  ILSSlice
 export type SessionStoreState = NewsSlice
 
 export const resetters: (() => void)[] = []
@@ -47,7 +54,8 @@ export const useStore = create<StoreState>()((...a) => ({
   ...createRemoteTopicsSlice(...a),
   ...createTeacherLpLeAlgorithmSlice(...a),
   ...createStudentLpLeAlgorithmSlice(...a),
-  ...createLearningElementRecommendationSlice(...a)
+  ...createLearningElementRecommendationSlice(...a),
+  ...createTopicBadgeSlice(...a)
 }))
 
 export const usePersistedStore = create<PersistedStoreState>()(
@@ -57,12 +65,14 @@ export const usePersistedStore = create<PersistedStoreState>()(
         ...createUserSlice(...a),
         ...createLearningPathElementStatusSlice(...a),
         ...createAuthSlice(...a),
-        ...createDefaultLearningPathSlice(...a)
+        ...createDefaultLearningPathSlice(...a),
+        ...createILSSlice(...a)
       }),
       {
         name: 'persisted_storage',
         // Here we can whitelist the keys we want to persist
         partialize: (state) => ({
+          _ils: state._ils,
           _user: state._user,
           _learningPathElementStatus: state._learningPathElementStatus,
           _defaultLearningPath: state._defaultLearningPath,

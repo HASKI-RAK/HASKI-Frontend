@@ -4,35 +4,68 @@ import { Snackbar, Typography } from '@common/components'
 
 export type BadgeNotificationProps = {
   badgeQueue: string[]
+  topicName?: string
 }
 
-const BadgeNotification = ({ badgeQueue }: BadgeNotificationProps) => {
+const BadgeNotification = ({ badgeQueue, topicName }: BadgeNotificationProps) => {
   const { t } = useTranslation()
 
   const [isVisible, setIsVisible] = useState(false)
-  const [remainingQueue, setRemainingQueue] = useState<string[]>([])
+  const [queuePosition, setQueuePosition] = useState(0)
+
+  useEffect(() => {
+    setQueuePosition(0)
+    if (badgeQueue.length > 0) {
+      setIsVisible(true)
+    }
+  }, [badgeQueue])
+
+  // Show notification after position resets or advances
+  useEffect(() => {
+    if (badgeQueue.length > 0 && queuePosition < badgeQueue.length) {
+      setIsVisible(true)
+    }
+  }, [queuePosition, badgeQueue.length])
 
   const handleClose = useCallback(() => {
     setIsVisible(false)
-  }, [])
+
+    if (queuePosition < badgeQueue.length - 1) {
+      setTimeout(() => {
+        setQueuePosition((prev) => prev + 1)
+      }, 300)
+    }
+  }, [queuePosition, badgeQueue.length])
+
+  // Don't render if no badges or invalid position
+  if (badgeQueue.length === 0 || queuePosition >= badgeQueue.length) {
+    return null
+  }
+
+  const currentBadge = badgeQueue[queuePosition]
+  const remainingBadges = badgeQueue.length - queuePosition - 1
 
   return (
     <Snackbar
-      open={badgeQueue.length > 0 && isVisible}
+      open={isVisible}
       onClose={handleClose}
       message={
         <>
           <img
-            src={`path/to/your/image/${remainingQueue[0]}.png`}
+            src={`path/to/your/image/${currentBadge}.png`}
             alt={t('components.badgeNotification.accessibilityLabel')}
           />
-          <Typography variant="body1">{t(`components.badgeNotification.messages.${remainingQueue[0]}`)}</Typography>
           <Typography variant="body1">
-            {`+ ${badgeQueue.length - 1} ` + t('components.badgeNotification.moreUnlocked')}
+            {(topicName ? topicName : '') + t(`components.badgeNotification.messages.${currentBadge}`)}
           </Typography>
+          {remainingBadges > 0 && (
+            <Typography variant="body1">
+              {`+ ${remainingBadges} ` + t('components.badgeNotification.moreUnlocked')}
+            </Typography>
+          )}
         </>
       }
-      autoHideDuration={3000}
+      autoHideDuration={5000}
     />
   )
 }
