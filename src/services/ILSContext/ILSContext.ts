@@ -1,16 +1,24 @@
 import { createContext } from 'react'
 
 export type ILSContextType = {
-  perceptionDimension: string
-  inputDimension: string
-  processingDimension: string
-  understandingDimension: string
+    sensingPerception: boolean,
+    intuitivePerception: boolean,
+    verbalInput: boolean,
+    visualInput: boolean,
+    activeProcessing: boolean,
+    reflectiveProcessing: boolean,
+    sequentialUnderstanding: boolean,
+    globalUnderstanding: boolean
 }
 
 const ILSContext = createContext<ILSContextType>({
-  perceptionDimension: '',
-  inputDimension: '',
-  processingDimension: '',
-  understandingDimension: ''
+    sensingPerception: false,
+    intuitivePerception: false,
+    verbalInput: false,
+    visualInput: false,
+    activeProcessing: false,
+    reflectiveProcessing: false,
+    sequentialUnderstanding: false,
+    globalUnderstanding: false
 })
 export default ILSContext

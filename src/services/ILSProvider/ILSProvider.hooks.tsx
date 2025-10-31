@@ -6,10 +6,14 @@ const useILSProvider = (): ILSContextType => {
   const getILS = usePersistedStore((state) => state.getILS)
   const getUser = usePersistedStore((state) => state.getUser)
   const [ilsData, setILSData] = useState<ILSContextType>({
-    perceptionDimension: '',
-    inputDimension: '',
-    processingDimension: '',
-    understandingDimension: ''
+    sensingPerception: false,
+    intuitivePerception: false,
+    verbalInput: false,
+    visualInput: false,
+    activeProcessing: false,
+    reflectiveProcessing: false,
+    sequentialUnderstanding: false,
+    globalUnderstanding: false
   })
 
   useEffect(() => {
@@ -17,10 +21,14 @@ const useILSProvider = (): ILSContextType => {
       const ils = getILS(user.settings.user_id, user.lms_user_id, user.id)
       if (ils) {
         setILSData({
-          perceptionDimension: ils.perception_dimension,
-          inputDimension: ils.input_dimension,
-          processingDimension: ils.processing_dimension,
-          understandingDimension: ils.understanding_dimension
+            sensingPerception: ils.perception_dimension === 'sns',
+            intuitivePerception: ils.perception_dimension === 'int',
+            verbalInput: ils.input_dimension === 'vrb',
+            visualInput: ils.input_dimension === 'vis',
+            activeProcessing: ils.processing_dimension === 'act',
+            reflectiveProcessing: ils.processing_dimension === 'ref',
+            sequentialUnderstanding: ils.understanding_dimension === 'seq',
+            globalUnderstanding: ils.understanding_dimension === 'glo'
         })
       }
     })

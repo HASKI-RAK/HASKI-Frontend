@@ -1,6 +1,7 @@
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Snackbar, Typography } from '@common/components'
+import { ILSContext } from '@services'
 
 export type BadgeNotificationProps = {
   badgeQueue: string[]
@@ -10,8 +11,16 @@ export type BadgeNotificationProps = {
 const BadgeNotification = ({ badgeQueue, topicName }: BadgeNotificationProps) => {
   const { t } = useTranslation()
 
+  const {
+    sensingPerception,
+    visualInput,
+    sequentialUnderstanding,
+   } = useContext(ILSContext)
+
   const [isVisible, setIsVisible] = useState(false)
   const [queuePosition, setQueuePosition] = useState(0)
+  
+  const userVisibility = sensingPerception || sequentialUnderstanding || visualInput
 
   useEffect(() => {
     setQueuePosition(0)
@@ -47,7 +56,7 @@ const BadgeNotification = ({ badgeQueue, topicName }: BadgeNotificationProps) =>
 
   return (
     <Snackbar
-      open={isVisible}
+      open={isVisible && userVisibility}
       onClose={handleClose}
       message={
         <>
