@@ -5,21 +5,17 @@ import { ILSContext } from '@services'
 
 export type BadgeNotificationProps = {
   badgeQueue: string[]
-  topicName?: string
+  //topicName?: string
 }
 
-const BadgeNotification = ({ badgeQueue, topicName }: BadgeNotificationProps) => {
+const BadgeNotification = ({ badgeQueue }: BadgeNotificationProps) => {
   const { t } = useTranslation()
 
-  const {
-    sensingPerception,
-    visualInput,
-    sequentialUnderstanding,
-   } = useContext(ILSContext)
+  const { sensingPerception, visualInput, sequentialUnderstanding } = useContext(ILSContext)
 
   const [isVisible, setIsVisible] = useState(false)
   const [queuePosition, setQueuePosition] = useState(0)
-  
+
   const userVisibility = sensingPerception || sequentialUnderstanding || visualInput
 
   useEffect(() => {
@@ -64,9 +60,7 @@ const BadgeNotification = ({ badgeQueue, topicName }: BadgeNotificationProps) =>
             src={`path/to/your/image/${currentBadge}.png`}
             alt={t('components.badgeNotification.accessibilityLabel')}
           />
-          <Typography variant="body1">
-            {(topicName ? topicName : '') + t(`components.badgeNotification.messages.${currentBadge}`)}
-          </Typography>
+          <Typography variant="body1">{t(`components.badgeNotification.messages.${currentBadge}`)}</Typography>
           {remainingBadges > 0 && (
             <Typography variant="body1">
               {`+ ${remainingBadges} ` + t('components.badgeNotification.moreUnlocked')}

@@ -4,13 +4,15 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
 import { Grid, Skeleton } from '@common/components'
 import {
+  BadgeNotification,
   CreateLearningElement,
+  GameFeedback,
   GameSidePanel,
   handleError,
   IFrameModal,
   LabeledSwitch,
   nodeTypes,
-  ResponsiveMiniMap
+  ResponsiveMiniMap,
 } from '@components'
 import { ExperiencePoints, ExperiencePointsPostResponse, LearningPathElementStatus, User } from '@core'
 import { AuthContext, postCheckStudentBadge, postExperiencePoints, RoleContext, SnackbarContext } from '@services'
@@ -71,6 +73,12 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     {} as ExperiencePointsPostResponse
   )
   const [badgeKeys, setBadgeKeys] = useState<string[]>([])
+  const [openFeedbackModal, setOpenFeedbackModal] = useState(false)
+  const [learningElementEndTime, setLearningElementEndTime] = useState<Date | undefined>(undefined)
+
+  const handleCloseFeedbackModal = () => {
+    setOpenFeedbackModal(false)
+  }
 
   const getLearningElementsWithStatus = (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
     setLearningPathElementStatus(learningPathElementStatusData)
@@ -184,14 +192,15 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // the persisted store and return it. Then close the IFrameModal and rerender page.
   // Catch for getUser is handled in the useEffect
   const getHandleClose = () => {
+    setLearningElementEndTime(new Date())
     getUser().then((user) => {
       // user.id used as studentId should maybe be replaced in the future
       if (courseId && topicId) {
         postExperiencePoints(user.id, {
-          course_id: parseInt(courseId),
+          course_id: Number.parseInt(courseId),
           learning_element_id: lmsId,
           user_lms_id: user.lms_user_id.toString(),
-          topic_id: parseInt(topicId),
+          topic_id: Number.parseInt(topicId),
           classification: currentActivityClassification,
           start_time: learningElementStartTime
         })
@@ -201,14 +210,15 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               student_id: user.id
             } as ExperiencePoints)
             setExperiencePointDetails(experiencePoints)
+            setOpenFeedbackModal(true)
           })
           .catch((error) => {
             // TODO: translation string missing
             handleError(t, addSnackbar, 'error.postExperiencePoints', error, 3000)
           })
         postCheckStudentBadge(user.id, {
-          course_id: parseInt(courseId),
-          topic_id: parseInt(topicId),
+          course_id: Number.parseInt(courseId),
+          topic_id: Number.parseInt(topicId),
           lms_user_id: user.lms_user_id.toString(),
           timestamp: learningElementStartTime,
           classification: currentActivityClassification
@@ -277,6 +287,14 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           learningElementId={lmsId}
         />
         <GameSidePanel experiencePointDetails={experiencePointDetails}></GameSidePanel>
+        <BadgeNotification badgeQueue={badgeKeys} />
+        <GameFeedback
+          open={openFeedbackModal}
+          onClose={handleCloseFeedbackModal}
+          experiencePointDetails={experiencePointDetails}
+          startTime={learningElementStartTime}
+          endTime={Number(learningElementEndTime)}
+        />
       </Grid>
     </Grid>
   ) : (

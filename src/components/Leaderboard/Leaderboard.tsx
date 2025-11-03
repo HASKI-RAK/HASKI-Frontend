@@ -1,40 +1,53 @@
 import { memo, useEffect, useState } from 'react'
-import { Button, Grid, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@common/components'
+import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography
+} from '@common/components'
+import { useRatingLeaderboard } from './RatingLeaderboard.hook'
 
-const Leaderboard = () => {
+export type LeaderboardEntry = {
+  studentId: number
+  scoredValue: number
+}
+
+type LeaderboardProps = {
+  currentStudentId: number | null
+  leaderboardContent: LeaderboardEntry[]
+  scoreHeadline: string
+}
+
+const Leaderboard = ({ currentStudentId, leaderboardContent, scoreHeadline }: LeaderboardProps) => {
+  const { t } = useTranslation()
+
   return (
     <Grid container direction={'column'}>
-      <Typography variant="h6">Topic Leaderboard</Typography>
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>User</TableCell>
-            <TableCell>Excercise Attempts</TableCell>
-            <TableCell>Time Spent</TableCell>
+            <TableCell align="center">{t('component.leaderboard.userHeader')}</TableCell>
+            <TableCell align="center">{scoreHeadline}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow sx={{ height: '0.5rem' }}>
-            <TableCell>1</TableCell>
-            <TableCell>10</TableCell>
-            <TableCell>{'1:30'}</TableCell>
-          </TableRow>
-          <TableRow sx={{ height: '0.5rem' }}>
-            <TableCell>2</TableCell>
-            <TableCell>8</TableCell>
-            <TableCell>{'2:00'}</TableCell>
-          </TableRow>
-          <TableRow sx={{ height: '0.5rem' }}>
-            <TableCell>3</TableCell>
-            <TableCell>7</TableCell>
-            <TableCell>{'1:00'}</TableCell>
-          </TableRow>
-          {/* Map through your data and create TableRow for each item */}
+          {leaderboardContent.map((row) => (
+            <TableRow key={row.studentId} sx={{ height: '0.5rem' }}>
+              <TableCell align="center">{`${
+                currentStudentId === row.studentId ? t('component.leaderboard.you') : row.studentId
+              }`}</TableCell>
+              <TableCell align="center">{row.scoredValue}</TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
-      <Button variant="text" size="small" sx={{ mt: '0.5rem' }}>
-        More Leaderboards
-      </Button>
     </Grid>
   )
 }

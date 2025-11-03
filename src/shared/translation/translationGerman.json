@@ -28,6 +28,13 @@
   "appGlobal.table": "Tabelle",
   "appGlobal.topics": "Themenbereiche",
   "appGlobal.universityKempten": "Hochschule Kempten",
+  "component.leaderboard.moreLeaderboards": "Mehr Leaderboards",
+  "component.leaderboard.ratingHeader": "Topic Rating",
+  "component.leaderboard.refresh": "Aktualisieren",
+  "component.leaderboard.title": "Leaderboard",
+  "component.leaderboard.userHeader": "Nutzer",
+  "component.leaderboard.xpHeader": "Erfahrungspunkte verdient",
+  "component.leaderboard.you": "Du",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Feste Reihenfolge",
@@ -183,6 +190,12 @@
   "components.ExistingTopicsTable.title": "Bereits erstellte Themenbereiche",
   "components.Footer.project": "Projekt",
   "components.FurtherInfoMenu.title": "Weitere Informationen",
+  "components.GameFeedbackModal.failureDescription": "Sie könnten sich die anderen Lernelemente ansehen, um Ihr Wissen zu verbessern.",
+  "components.GameFeedbackModal.failureTitle": "Guter Versuch!",
+  "components.GameFeedbackModal.perfectDescription": "Sie haben die Aufgabe perfekt gemeistert. Ausgezeichnete Arbeit!",
+  "components.GameFeedbackModal.perfectTitle": "Großartig!",
+  "components.GameFeedbackModal.successDescription": "Sie haben die Aufgabe erfolgreich abgeschlossen. Machen Sie weiter so!",
+  "components.GameFeedbackModal.successTitle": "Gute Arbeit!",
   "components.LearnerCharacteristics.ilsLongNoData-1": "ILS-Fragebogen",
   "components.LearnerCharacteristics.ilsShortNoData-1": "ILS-Fragebogen (Kurz)",
   "components.LearnerCharacteristics.ilsShortNoData-2": "oder",
@@ -781,6 +794,7 @@
   "components.ResultDescriptionListK.time && literatureResearch below3-Title": "Zeit und Literaturrecherche haben einen Wert unter 3",
   "components.ResultDescriptionListK.time below3-Description": "Im Hinblick auf Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es würde sich wahrscheinlich positiv auswirken, wenn Sie versuchen, sich klare Lernzeiträume zu schaffen, um Ihr Lernen effektiver zu gestalten.",
   "components.ResultDescriptionListK.time below3-Title": "Zeit hat einen Wert unter 3",
+  "components.SimpleFeedbackModal.button": "Weiter",
   "components.StatisticsMenu.title": "Statistiken",
   "components.StudentRatingDashboard.empty": "Diese Seite füllt sich mit Informationen über Ihr Rating, sobald Sie mit der Bearbeitung von Übungen beginnen.",
   "components.StudentRatingDashboard.histogramTitle": "Die Rating-Verteilung aller Studierenden",
@@ -1923,5 +1937,12 @@
   "tooltip.statisticsMenuSelection": "Verschiedene Informationen zu Ihrem Lernfortschritten.",
   "warning": "Warnung",
   "warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
-  "warning.online": "Sie sind wieder online."
+  "warning.online": "Sie sind wieder online.",
+  "components.GameFeedbackModal.attemptDuration": "Dauer der Aufgabe",
+  "components.GameFeedbackModal.baseXp": "Basis-Erfahrungspunkte",
+  "components.GameFeedbackModal.scoreMultiplier": "Punkte-Multiplikator",
+  "components.GameFeedbackModal.attempts": "Bonus für zusätzliche Versuche",
+  "components.GameFeedbackModal.successRepetitionBonus": "Erster erfolgreicher Versuch innerhalb von drei Tagen",
+  "components.GameFeedbackModal.totalGainedXp": "Erfahrungspunkte Gesamt",
+  "components.gamefeedback.finishButton": "Fertig"
 }

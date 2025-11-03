@@ -1,8 +1,9 @@
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { Button, Divider, Grid, IconButton, MobileStepper, Paper } from '@common/components'
 import { Close, KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
-import { ChallengeTracker, Leaderboard, LevelBar } from '@components'
+import { ChallengeTracker, LevelBar, XpLeaderboard } from '@components'
 import { ExperiencePointsPostResponse } from '@core'
+import { ILSContext } from '@services'
 import { usePersistedStore } from '@store'
 
 type GameSidePanelProps = {
@@ -10,12 +11,38 @@ type GameSidePanelProps = {
   children?: React.ReactNode
 }
 
+type gameElementVisibility = {
+  showLevelBar: boolean
+  showChallengeTracker: boolean
+  showLeaderboard: boolean
+  showProgress: boolean
+  showBadges: boolean
+}
+
 const GameSidePanel = ({ experiencePointDetails, children }: GameSidePanelProps) => {
   const getUser = usePersistedStore((state) => state.getUser)
+
+  const {
+    activeProcessing,
+    reflectiveProcessing,
+    sensingPerception,
+    intuitivePerception,
+    sequentialUnderstanding,
+    globalUnderstanding,
+    visualInput,
+    verbalInput
+  } = useContext(ILSContext)
 
   const [activeStep, setActiveStep] = useState<number>(0)
   const [expanded, setExpanded] = useState<boolean>(true)
   const [studentId, setStudentId] = useState<number>(0)
+  const [elementVisibility, setElementVisibility] = useState<gameElementVisibility>({
+    showLevelBar: false,
+    showChallengeTracker: false,
+    showLeaderboard: false,
+    showProgress: false,
+    showBadges: false
+  })
 
   const handleNext = useCallback(() => {
     setActiveStep((prev) => prev + 1)
@@ -31,6 +58,13 @@ const GameSidePanel = ({ experiencePointDetails, children }: GameSidePanelProps)
     getUser().then((user) => {
       setStudentId(user.id)
     })
+    setElementVisibility({
+      showLevelBar: sensingPerception || intuitivePerception || sequentialUnderstanding || visualInput || verbalInput,
+      showChallengeTracker: activeProcessing || sensingPerception || intuitivePerception || verbalInput,
+      showLeaderboard: activeProcessing || intuitivePerception || sequentialUnderstanding,
+      showProgress: reflectiveProcessing || globalUnderstanding || visualInput,
+      showBadges: sensingPerception || sequentialUnderstanding || visualInput
+    })
   }, [])
 
   const FirstPage = (
@@ -43,7 +77,7 @@ const GameSidePanel = ({ experiencePointDetails, children }: GameSidePanelProps)
 
   const SecondPage = (
     <>
-      <Leaderboard></Leaderboard>
+      <XpLeaderboard></XpLeaderboard>
       <Grid sx={{ mt: '0.5rem', mb: '9.5rem' }}></Grid>
     </>
   )
@@ -59,7 +93,19 @@ const GameSidePanel = ({ experiencePointDetails, children }: GameSidePanelProps)
         position: 'absolute',
         mr: '1rem'
       }}>
-      <Grid item direction="column" sx={{ mt: '0.5rem', ml: '1rem', mr: '1rem' }}>
+      <Grid
+        container
+        item
+        direction="column"
+        sx={{
+          mt: '0.5rem',
+          ml: '1rem',
+          mr: '1rem',
+          width: '100%',
+          boxSizing: 'border-box',
+          overflow: 'hidden',
+          maxWidth: '22rem'
+        }}>
         <Grid container justifyContent={'right'} sx={{ mb: '1rem' }}>
           <IconButton onClick={() => setExpanded(false)} sx={{ position: 'absolute', right: 0, top: 0 }}>
             <Close />
@@ -99,7 +145,7 @@ const GameSidePanel = ({ experiencePointDetails, children }: GameSidePanelProps)
         position: 'absolute',
         mr: '1rem'
       }}>
-      <Grid item direction="column" sx={{ mt: '0.5rem', ml: '1rem', mr: '1rem' }}>
+      <Grid container item direction="column" sx={{ mt: '0.5rem', ml: '1rem', mr: '1rem' }}>
         <Grid container justifyContent={'right'} sx={{ mb: '1rem' }}>
           <IconButton onClick={() => setExpanded(true)} sx={{ position: 'absolute', right: 0, top: 0 }}>
             <Close />

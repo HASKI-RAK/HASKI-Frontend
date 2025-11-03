@@ -89,6 +89,7 @@ export type {
 export type { CourseReturn } from './Course/Course'
 export type { DefaultLearningPathResponse } from './DefaultLearningPath/DefaultLearningPath'
 export type { ExperiencePointsReturn } from './ExperiencePoints/ExperiencePoints'
+export type { ExPointLeaderboardResponse, ExPointLeaderboardReturn } from './ExperiencePoints/ExperiencePoints'
 export type { ExperiencePointsPostResponse, ExperiencePointsPostReturn } from './ExperiencePoints/ExperiencePointsPost'
 export type { LeaderboardReturn } from './Leaderboard/Leaderboard'
 export * from './LearningElementRecommendation'

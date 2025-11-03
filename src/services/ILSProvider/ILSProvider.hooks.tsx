@@ -21,14 +21,14 @@ const useILSProvider = (): ILSContextType => {
       const ils = getILS(user.settings.user_id, user.lms_user_id, user.id)
       if (ils) {
         setILSData({
-            sensingPerception: ils.perception_dimension === 'sns',
-            intuitivePerception: ils.perception_dimension === 'int',
-            verbalInput: ils.input_dimension === 'vrb',
-            visualInput: ils.input_dimension === 'vis',
-            activeProcessing: ils.processing_dimension === 'act',
-            reflectiveProcessing: ils.processing_dimension === 'ref',
-            sequentialUnderstanding: ils.understanding_dimension === 'seq',
-            globalUnderstanding: ils.understanding_dimension === 'glo'
+          sensingPerception: ils.perception_dimension === 'sns',
+          intuitivePerception: ils.perception_dimension === 'int',
+          verbalInput: ils.input_dimension === 'vrb',
+          visualInput: ils.input_dimension === 'vis',
+          activeProcessing: ils.processing_dimension === 'act',
+          reflectiveProcessing: ils.processing_dimension === 'ref',
+          sequentialUnderstanding: ils.understanding_dimension === 'seq',
+          globalUnderstanding: ils.understanding_dimension === 'glo'
         })
       }
     })

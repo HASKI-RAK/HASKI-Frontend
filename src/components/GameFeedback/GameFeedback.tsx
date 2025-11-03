@@ -1,18 +1,19 @@
 import { memo, useContext, useEffect, useState } from 'react'
 import { ILSContext } from '@services'
-import GameFeedbackBox from './GameFeebackBox/GameFeedbackBox'
+import GameFeedbackModal from './GameFeedbackModal/GameFeedbackModal'
+import { ExperiencePointsPostResponse } from '@core'
 
 export type GameFeedbackProps = {
-    open: boolean
-    onClose: () => void
+  open: boolean
+  onClose: () => void
+  experiencePointDetails?: ExperiencePointsPostResponse
+  startTime?: number
+  endTime?: number
+
 }
 
-const GameFeedback = ({ open, onClose }: GameFeedbackProps) => {
-  const {
-    reflectiveProcessing,
-    globalUnderstanding,
-    verbalInput
-  } = useContext(ILSContext)
+const GameFeedback = ({ open, onClose, experiencePointDetails, startTime, endTime }: GameFeedbackProps) => {
+        const { reflectiveProcessing, globalUnderstanding, verbalInput } = useContext(ILSContext)
 
   const [isVisible, setIsVisible] = useState(false)
 
@@ -24,11 +25,15 @@ const GameFeedback = ({ open, onClose }: GameFeedbackProps) => {
     }
   }, [reflectiveProcessing, globalUnderstanding, verbalInput])
 
-  return (
-    <>
-      {isVisible && <GameFeedbackBox open={open} onClose={onClose} />}
-    </>
-  )
+  return <>{
+    isVisible && 
+    <GameFeedbackModal
+     open={open}
+     onClose={onClose}
+     experiencePointDetails={experiencePointDetails}
+     startTime={startTime}
+     endTime={endTime} />
+     }</>
 }
 
 export default memo(GameFeedback)

@@ -28,6 +28,13 @@
   "appGlobal.table": "Table",
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
+  "component.leaderboard.moreLeaderboards": "More Leaderboards",
+  "component.leaderboard.ratingHeader": "Topic Rating",
+  "component.leaderboard.refresh": "Refresh Leaderboard",
+  "component.leaderboard.title": "Leaderboard",
+  "component.leaderboard.userHeader": "User",
+  "component.leaderboard.xpHeader": "XP Points earned",
+  "component.leaderboard.you": "You",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Fixed Order",
@@ -183,6 +190,12 @@
   "components.ExistingTopicsTable.title": "Already created topics",
   "components.Footer.project": "Project",
   "components.FurtherInfoMenu.title": "Further information",
+  "components.GameFeedbackModal.failureDescription": "You could take a look at the other learning elements to improve your knowledge.",
+  "components.GameFeedbackModal.failureTitle": "Good try!",
+  "components.GameFeedbackModal.perfectDescription": "You have mastered the task perfectly. Excellent work!",
+  "components.GameFeedbackModal.perfectTitle": "Great job!",
+  "components.GameFeedbackModal.successDescription": "You have successfully completed the task. Keep up the good work!",
+  "components.GameFeedbackModal.successTitle": "Well done!",
   "components.LearnerCharacteristics.ilsLongNoData-1": "ILS-Questionnaire",
   "components.LearnerCharacteristics.ilsShortNoData-1": "ILS-Questionnaire (Shortened)",
   "components.LearnerCharacteristics.ilsShortNoData-2": "or",
@@ -781,6 +794,7 @@
   "components.ResultDescriptionListK.time && literatureResearch below3-Title": "Time and literature research have a value below 3",
   "components.ResultDescriptionListK.time below3-Description": "In terms of internal resource management strategies, it is clear to see that you are currently not taking enough time for your learning. It would probably have a positive effect if you tried to create clear learning periods for yourself in order to make your learning more effective.",
   "components.ResultDescriptionListK.time below3-Title": "Time has a value below 3",
+  "components.SimpleFeedbackModal.button": "Continue",
   "components.StatisticsMenu.title": "Statistics",
   "components.StudentRatingDashboard.empty": "This page fills with information about your rating as soon as you begin to work on exercises.",
   "components.StudentRatingDashboard.histogramTitle": "The rating distribution of all students",
@@ -1923,5 +1937,12 @@
   "tooltip.statisticsMenuSelection": "Open the statistics menu",
   "warning": "Warning",
   "warning.offline": "You are currently offline. Please check your internet connection.",
-  "warning.online": "You are online again."
+  "warning.online": "You are online again.",
+  "components.GameFeedbackModal.attemptDuration": "Duration of the task",
+  "components.GameFeedbackModal.baseXp": "Base Experience Points",
+  "components.GameFeedbackModal.scoreMultiplier": "Score Multiplier",
+  "components.GameFeedbackModal.attempts": "Bonus for additional tries",
+  "components.GameFeedbackModal.successRepetitionBonus": "First successful attempt in three days",
+  "components.GameFeedbackModal.totalGainedXp": "Total Experience Points",
+  "components.gamefeedback.finishButton": "Finish"
 }

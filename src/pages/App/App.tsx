@@ -43,7 +43,7 @@ export const App = () => {
             <AuthProvider>
               <RoleProvider>
                 <ILSProvider>
-                <XAPIProvider value={xAPI}>
+                  <XAPIProvider value={xAPI}>
                     <UserInteractionTracker
                       componentFilePath={new URL(import.meta.url).pathname}
                       componentType="UserInteractionTracker"

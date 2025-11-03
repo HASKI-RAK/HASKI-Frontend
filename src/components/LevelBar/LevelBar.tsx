@@ -1,5 +1,4 @@
 import { memo, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { Grid, LinearProgress, Tooltip, Typography } from '@common/components'
 import { ExperiencePointsPostResponse } from '@core'
 import { useStore } from '@store'
@@ -32,10 +31,10 @@ const LevelBar = ({ studentId, experiencePointDetails: experiencePointsResult }:
   }, [experiencePoints])
 
   return (
-    <Grid container direction="column" justifyContent={'center'} sx={{ position: 'relative' }}>
+    <Grid container direction="column" justifyContent={'center'} alignItems={'center'} sx={{ position: 'relative' }}>
       <Grid item xs={12} justifyContent={'center'} sx={{ margin: 'auto' }}>
         <Typography variant="body1" color="text.secondary" fontWeight={'fontWeightBold'} justifyContent={'center'}>
-          {'LVL ' + currentLevel}
+          {'LVL ' + (currentLevel + 1) /* Levels start at 1 */}
         </Typography>
       </Grid>
       <LinearProgress
@@ -44,7 +43,8 @@ const LevelBar = ({ studentId, experiencePointDetails: experiencePointsResult }:
         sx={{
           height: '0.5rem',
           borderRadius: 5,
-          width: '100%',
+          position: 'relative',
+          width: '95%',
           border: '0.2rem solid black',
           backgroundColor: 'white',
           '& .MuiLinearProgress-bar': {
