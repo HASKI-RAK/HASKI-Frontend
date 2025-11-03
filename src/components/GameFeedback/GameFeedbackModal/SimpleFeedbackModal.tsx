@@ -17,7 +17,9 @@ const SimpleFeedbackModal = ({ open, onClose, experiencePoints }: SimpleFeedback
 
   return (
     <Modal open={open || true}>
-      <Paper elevation={3} sx={{ width: '5rem', height: '5rem', left: '48%', top: '30%', position: 'absolute', padding: '2rem' }}>
+      <Paper
+        elevation={3}
+        sx={{ width: '5rem', height: '5rem', left: '48%', top: '30%', position: 'absolute', padding: '2rem' }}>
         <Typography variant="h6">{`${experiencePoints} XP`}</Typography>
         <Button variant="contained" color="primary" id={'simple-feedback-finish-button'} onClick={handleClose}>
           {t('components.SimpleFeedbackModal.button')}

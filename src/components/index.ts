@@ -95,5 +95,8 @@ export { default as TextCardRight } from './TextCard/TextCardRight/TextCardRight
 export { default as TextStepper } from './TextStepper/TextStepper'
 export { default as ThemeModal } from './ThemeMenu/Modal/ThemeModal'
 export { ToggleButtonList } from './ToggleButtonList/ToggleButtonList'
+export { default as BadgeSymbol } from './TopicBadgeList/BadgeSymbol'
+export { default as TopicBadgeList } from './TopicBadgeList/TopicBadgeList'
 export { default as TopicCard } from './TopicCard/TopicCard'
 export { default as Typewriter } from './Typewriter/Typewriter'
+export { default as VerbalProgress } from './VerbalProgress/VerbalProgress'

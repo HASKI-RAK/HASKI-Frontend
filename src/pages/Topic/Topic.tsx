@@ -12,7 +12,7 @@ import {
   IFrameModal,
   LabeledSwitch,
   nodeTypes,
-  ResponsiveMiniMap,
+  ResponsiveMiniMap
 } from '@components'
 import { ExperiencePoints, ExperiencePointsPostResponse, LearningPathElementStatus, User } from '@core'
 import { AuthContext, postCheckStudentBadge, postExperiencePoints, RoleContext, SnackbarContext } from '@services'
@@ -75,6 +75,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [badgeKeys, setBadgeKeys] = useState<string[]>([])
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false)
   const [learningElementEndTime, setLearningElementEndTime] = useState<Date | undefined>(undefined)
+  const [numberOfLearningPathElements, setNumberOfLearningPathElements] = useState<number>(0)
 
   const handleCloseFeedbackModal = () => {
     setOpenFeedbackModal(false)
@@ -85,6 +86,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
     getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
       .then((learningPathElementData) => {
+        setNumberOfLearningPathElements(learningPathElementData.path.length)
         if (learningPathElementData.based_on === 'default') {
           return getDefaultLearningPath(user.settings.user_id, user.lms_user_id).then((defaultLearningPath) => {
             const disabledClassificationsList = defaultLearningPath
@@ -286,10 +288,15 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           key={url}
           learningElementId={lmsId}
         />
-        <GameSidePanel experiencePointDetails={experiencePointDetails}></GameSidePanel>
+        <GameSidePanel
+          experiencePointDetails={experiencePointDetails}
+          learningPathElementStatus={learningPathElementStatus}
+          topicId={topicId}
+          numberOfLearningPathElements={numberOfLearningPathElements}
+        />
         <BadgeNotification badgeQueue={badgeKeys} />
         <GameFeedback
-          open={openFeedbackModal}
+          open={openFeedbackModal && experiencePointDetails.new_attempt}
           onClose={handleCloseFeedbackModal}
           experiencePointDetails={experiencePointDetails}
           startTime={learningElementStartTime}

@@ -4,6 +4,7 @@ import { usePersistedStore } from '@store'
 
 const useILSProvider = (): ILSContextType => {
   const getILS = usePersistedStore((state) => state.getILS)
+  const ilsCache = usePersistedStore((state) => state._ils)
   const getUser = usePersistedStore((state) => state.getUser)
   const [ilsData, setILSData] = useState<ILSContextType>({
     sensingPerception: false,
@@ -32,7 +33,7 @@ const useILSProvider = (): ILSContextType => {
         })
       }
     })
-  }, [getILS, getUser])
+  }, [getILS, getUser, ilsCache])
 
   return ilsData
 }

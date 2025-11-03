@@ -8,6 +8,7 @@ type ExperiencePointsPostResponse = {
   success_modifier: number
   wait_bonus: number
   successful_attempts: number
+  new_attempt: boolean
 }
 
 type ExperiencePointsPostData = {

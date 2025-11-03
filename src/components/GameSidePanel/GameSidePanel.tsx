@@ -1,14 +1,16 @@
 import { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { Button, Divider, Grid, IconButton, MobileStepper, Paper } from '@common/components'
 import { Close, KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
-import { ChallengeTracker, LevelBar, XpLeaderboard } from '@components'
-import { ExperiencePointsPostResponse } from '@core'
+import { ChallengeTracker, LevelBar, TopicBadgeList, VerbalProgress, XpLeaderboard } from '@components'
+import { ExperiencePointsPostResponse, LearningPathElementStatus } from '@core'
 import { ILSContext } from '@services'
 import { usePersistedStore } from '@store'
 
 type GameSidePanelProps = {
   experiencePointDetails: ExperiencePointsPostResponse
-  children?: React.ReactNode
+  learningPathElementStatus?: LearningPathElementStatus[]
+  numberOfLearningPathElements: number
+  topicId?: string
 }
 
 type gameElementVisibility = {
@@ -19,7 +21,12 @@ type gameElementVisibility = {
   showBadges: boolean
 }
 
-const GameSidePanel = ({ experiencePointDetails, children }: GameSidePanelProps) => {
+const GameSidePanel = ({
+  experiencePointDetails,
+  learningPathElementStatus,
+  numberOfLearningPathElements,
+  topicId
+}: GameSidePanelProps) => {
   const getUser = usePersistedStore((state) => state.getUser)
 
   const {
@@ -65,13 +72,20 @@ const GameSidePanel = ({ experiencePointDetails, children }: GameSidePanelProps)
       showProgress: reflectiveProcessing || globalUnderstanding || visualInput,
       showBadges: sensingPerception || sequentialUnderstanding || visualInput
     })
-  }, [])
+  }, [ILSContext, getUser])
 
   const FirstPage = (
     <>
       <LevelBar studentId={studentId} experiencePointDetails={experiencePointDetails}></LevelBar>
       <Divider sx={{ marginTop: '0.5rem', mB: '0.5rem' }} />
-      <ChallengeTracker objective="0/2 schwere Übungen abgeschlossen"></ChallengeTracker>
+      {studentId && topicId && elementVisibility.showBadges ? (
+        <TopicBadgeList studentId={studentId} topicId={topicId ? Number(topicId) : undefined} />
+      ) : (
+        <VerbalProgress
+          learningPathElementStatus={learningPathElementStatus}
+          numberOfLearningPathElements={numberOfLearningPathElements}
+        />
+      )}
     </>
   )
 
@@ -89,7 +103,7 @@ const GameSidePanel = ({ experiencePointDetails, children }: GameSidePanelProps)
         right: 0,
         top: '10rem',
         width: '25rem',
-        height: { xxl: '18.5rem', xl: '18rem', lg: '15rem', md: '15rem' },
+        height: { xxl: '22.5rem', xl: '19.5rem', lg: '15rem', md: '15rem' },
         position: 'absolute',
         mr: '1rem'
       }}>
@@ -113,23 +127,24 @@ const GameSidePanel = ({ experiencePointDetails, children }: GameSidePanelProps)
         </Grid>
         {activeStep === 0 && FirstPage}
         {activeStep === 1 && SecondPage}
-        <MobileStepper
-          variant="dots"
-          steps={2}
-          activeStep={activeStep}
-          nextButton={
-            <Button onClick={handleNext} disabled={activeStep >= 1}>
-              <KeyboardArrowRight />
-            </Button>
-          }
-          backButton={
-            <Button onClick={handleBack} disabled={activeStep <= 0}>
-              <KeyboardArrowLeft />
-            </Button>
-          }
-          sx={{ position: 'absolute', bottom: '0.5rem', border: 'none' }}
-        />
-        {children}
+        {elementVisibility.showLeaderboard && (
+          <MobileStepper
+            variant="dots"
+            steps={2}
+            activeStep={activeStep}
+            nextButton={
+              <Button onClick={handleNext} disabled={activeStep >= 1}>
+                <KeyboardArrowRight />
+              </Button>
+            }
+            backButton={
+              <Button onClick={handleBack} disabled={activeStep <= 0}>
+                <KeyboardArrowLeft />
+              </Button>
+            }
+            sx={{ position: 'absolute', bottom: '0.5rem', border: 'none' }}
+          />
+        )}
       </Grid>
     </Paper>
   )

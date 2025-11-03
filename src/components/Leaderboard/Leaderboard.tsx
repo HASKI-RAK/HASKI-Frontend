@@ -1,18 +1,6 @@
-import { memo, useEffect, useState } from 'react'
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
-import {
-  Button,
-  CircularProgress,
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography
-} from '@common/components'
-import { useRatingLeaderboard } from './RatingLeaderboard.hook'
+import { Grid, Table, TableBody, TableCell, TableHead, TableRow } from '@common/components'
 
 export type LeaderboardEntry = {
   studentId: number
