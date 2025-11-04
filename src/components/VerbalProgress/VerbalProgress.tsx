@@ -1,14 +1,17 @@
 import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Node } from 'reactflow'
 import { Grid, Typography } from '@common/components'
-import { LearningPathElementStatus } from '@core'
 
 type VerbalProgressProps = {
-  learningPathElementStatus?: LearningPathElementStatus[]
+  learningPathElements?: Node[]
   numberOfLearningPathElements: number
 }
 
-const VerbalProgress = ({ learningPathElementStatus, numberOfLearningPathElements }: VerbalProgressProps) => {
+const VerbalProgress = ({
+  learningPathElements: learningPathElementStatus,
+  numberOfLearningPathElements
+}: VerbalProgressProps) => {
   const [elementsDone, setElementsDone] = useState<number>(0)
   const { t } = useTranslation()
 
@@ -18,7 +21,7 @@ const VerbalProgress = ({ learningPathElementStatus, numberOfLearningPathElement
       return
     }
 
-    const doneCount = learningPathElementStatus.filter((status) => status.state === 1).length
+    const doneCount = learningPathElementStatus.filter((status) => status.data.isDone === true).length
     setElementsDone(doneCount)
   }, [learningPathElementStatus])
 

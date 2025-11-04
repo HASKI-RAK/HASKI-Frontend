@@ -1,4 +1,5 @@
 import { memo, useCallback, useContext, useEffect, useState } from 'react'
+import { Node } from 'reactflow'
 import { Button, Divider, Grid, IconButton, MobileStepper, Paper } from '@common/components'
 import { Close, KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
 import { ChallengeTracker, LevelBar, TopicBadgeList, VerbalProgress, XpLeaderboard } from '@components'
@@ -8,7 +9,7 @@ import { usePersistedStore } from '@store'
 
 type GameSidePanelProps = {
   experiencePointDetails: ExperiencePointsPostResponse
-  learningPathElementStatus?: LearningPathElementStatus[]
+  learningPathElements?: Node[]
   numberOfLearningPathElements: number
   topicId?: string
 }
@@ -23,7 +24,7 @@ type gameElementVisibility = {
 
 const GameSidePanel = ({
   experiencePointDetails,
-  learningPathElementStatus,
+  learningPathElements,
   numberOfLearningPathElements,
   topicId
 }: GameSidePanelProps) => {
@@ -82,7 +83,7 @@ const GameSidePanel = ({
         <TopicBadgeList studentId={studentId} topicId={topicId ? Number(topicId) : undefined} />
       ) : (
         <VerbalProgress
-          learningPathElementStatus={learningPathElementStatus}
+          learningPathElements={learningPathElements}
           numberOfLearningPathElements={numberOfLearningPathElements}
         />
       )}

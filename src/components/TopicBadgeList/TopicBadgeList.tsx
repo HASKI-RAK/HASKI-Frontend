@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Grid, Typography } from '@common/components'
 import { handleError } from '@components'
 import { BadgeResponse, BadgeVariant, StudentBadgeResponse } from '@core'
-import { fetchStudentBadge, SnackbarContext } from '@services'
+import { SnackbarContext } from '@services'
 import { useStore } from '@store'
 import BadgeSymbol from './BadgeSymbol'
 
@@ -14,6 +14,7 @@ type TopicBadgeListProps = {
 
 const TopicBadgeList = ({ studentId, topicId }: TopicBadgeListProps) => {
   const getTopicBadges = useStore((state) => state.getTopicBadges)
+  const getStudentBadge = useStore((state) => state.getStudentBadge)
   const [studentBadges, setStudentBadges] = useState<StudentBadgeResponse>([])
   const [topicBadges, setTopicBadges] = useState<BadgeResponse>([])
   const { t } = useTranslation()
@@ -23,18 +24,20 @@ const TopicBadgeList = ({ studentId, topicId }: TopicBadgeListProps) => {
     if (!topicId || !studentId) {
       return
     }
-    getTopicBadges(topicId, false).then((badges) => {
-      setTopicBadges(badges)
-    })
-    .catch((error) => {
-      handleError(t, addSnackbar, 'error.fetchTopicBadges', error, 5000)
-    })
-    fetchStudentBadge(String(studentId)).then((badges) => {
-      setStudentBadges(badges)
-    })
-    .catch((error) => {
-      handleError(t, addSnackbar, 'error.fetchStudentBadges', error, 5000)
-    })
+    getTopicBadges(topicId, false)
+      .then((badges) => {
+        setTopicBadges(badges)
+      })
+      .catch((error) => {
+        handleError(t, addSnackbar, 'error.fetchTopicBadges', error, 5000)
+      })
+    getStudentBadge(String(studentId))
+      .then((badges) => {
+        setStudentBadges(badges)
+      })
+      .catch((error) => {
+        handleError(t, addSnackbar, 'error.fetchStudentBadges', error, 5000)
+      })
   }, [getTopicBadges, studentId, topicId])
 
   return (
@@ -49,18 +52,17 @@ const TopicBadgeList = ({ studentId, topicId }: TopicBadgeListProps) => {
         {t('components.TopicBadgeList.topicBadges')}
       </Typography>
       <Grid container spacing={'1rem'} justifyContent="center">
-        { (topicBadges && topicBadges.length > 0) ? (
-        topicBadges.map((badge) => (
-          <Grid item key={`${topicId}-${badge.variant_key}`}>
-            <BadgeSymbol
-              variant={badge.variant_key as BadgeVariant}
-              achieved={studentBadges.some((sb) => sb.badge_id === badge.id)}
-            />
-          </Grid>
-        ))) : (
-          <Typography variant="body2">
-            {t('components.TopicBadgeList.noBadgesAvailable')}
-          </Typography>
+        {topicBadges && topicBadges.length > 0 ? (
+          topicBadges.map((badge) => (
+            <Grid item key={`${topicId}-${badge.variant_key}`}>
+              <BadgeSymbol
+                variant={badge.variant_key as BadgeVariant}
+                achieved={studentBadges.some((sb) => sb.badge_id === badge.id)}
+              />
+            </Grid>
+          ))
+        ) : (
+          <Typography variant="body2">{t('components.TopicBadgeList.noBadgesAvailable')}</Typography>
         )}
       </Grid>
     </Grid>

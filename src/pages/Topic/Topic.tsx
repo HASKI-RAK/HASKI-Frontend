@@ -54,6 +54,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
   const setExperiencePoints = useStore((state) => state.setExperiencePoints)
   const getTopicBadges = useStore((state) => state.getTopicBadges)
+  const setStudentBadge = useStore((state) => state.setStudentBadge)
 
   const learningPathElementCache = useStore((state) => state._cache_learningPathElement_record)
   const learningPathLearningElementStatusCache = usePersistedStore((state) => state._learningPathElementStatus)
@@ -234,6 +235,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               const validKeys = keys.filter((key) => key !== '')
               setBadgeKeys(validKeys)
             })
+            setStudentBadge(String(user.id), badges)
           })
           .catch((error) => {
             handleError(t, addSnackbar, 'error.postCheckStudentBadge', error, 3000)
@@ -290,7 +292,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         />
         <GameSidePanel
           experiencePointDetails={experiencePointDetails}
-          learningPathElementStatus={learningPathElementStatus}
+          learningPathElements={initialNodes}
           topicId={topicId}
           numberOfLearningPathElements={numberOfLearningPathElements}
         />

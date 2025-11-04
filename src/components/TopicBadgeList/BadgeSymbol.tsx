@@ -27,12 +27,12 @@ const BadgeSymbol = ({ variant, achieved }: BadgeSymbolProps) => {
         sx={{
           opacity: achieved ? 1 : 0.3,
           borderRadius: '5rem',
-          borderColor: 'darkgrey',
+          borderColor: 'text.primary',
           borderStyle: 'dotted',
           padding: '0.1rem'
         }}>
         <Grid
-          bgcolor={'darkgrey'}
+          bgcolor={'text.primary'}
           sx={{
             borderRadius: '10rem',
             height: '100%',

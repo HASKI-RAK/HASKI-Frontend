@@ -1,6 +1,6 @@
 import { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Snackbar, Typography } from '@common/components'
+import { Grid, Slide, Snackbar, Typography } from '@common/components'
 import { BadgeSymbol } from '@components'
 import { BadgeVariant } from '@core'
 import { ILSContext } from '@services'
@@ -18,7 +18,11 @@ const BadgeNotification = ({ badgeQueue }: BadgeNotificationProps) => {
   const [isVisible, setIsVisible] = useState(false)
   const [queuePosition, setQueuePosition] = useState(0)
 
-  const userVisibility = sensingPerception || sequentialUnderstanding || visualInput
+  const [userVisibility, setUserVisibility] = useState(sensingPerception || sequentialUnderstanding || visualInput)
+
+  useEffect(() => {
+    setUserVisibility(sensingPerception || sequentialUnderstanding || visualInput)
+  }, [sensingPerception, sequentialUnderstanding, visualInput])
 
   useEffect(() => {
     setQueuePosition(0)
@@ -56,16 +60,27 @@ const BadgeNotification = ({ badgeQueue }: BadgeNotificationProps) => {
     <Snackbar
       open={isVisible && userVisibility}
       onClose={handleClose}
+      TransitionComponent={Slide}
+      sx={{ borderRadius: '1rem' }}
       message={
-        <>
-          <BadgeSymbol variant={currentBadge} achieved={true} />
-          <Typography variant="body1">{t(`components.BadgeSymbol.${currentBadge}`)}</Typography>
+        <Grid
+          container
+          direction={'row'}
+          alignItems={'center'}
+          justifyContent={'left'}
+          sx={{ gap: '1rem', borderRadius: '0.5rem', minWidth: '35rem' }}>
+          <Grid sx={{ bgcolor: 'success.main', borderRadius: '0.5rem', p: 1 }}>
+            <BadgeSymbol variant={currentBadge} achieved={true} />
+          </Grid>
+          <Typography variant="body1">{t(`components.BadgeNotification.${currentBadge}`)}</Typography>
+          <Typography variant="body1">{t(`components.BadgeNotification.badge`)}</Typography>
           {remainingBadges > 0 && (
             <Typography variant="body1">
-              {`+ ${remainingBadges} ` + t('components.badgeNotification.moreUnlocked')}
+              {`+ ${remainingBadges} ` + t('components.BadgeNotification.moreUnlocked')}
             </Typography>
           )}
-        </>
+          <Typography variant="body1">{t('components.BadgeNotification.unlocked')}</Typography>
+        </Grid>
       }
       autoHideDuration={5000}
     />

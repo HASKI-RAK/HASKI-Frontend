@@ -19,6 +19,7 @@ import {
 import { createLearningPathTopicSlice, LearningPathTopicSlice } from '../Slices/LearningPathTopicSlice'
 import { createNewsSlice, NewsSlice } from '../Slices/NewsSlice'
 import { createRemoteTopicsSlice, RemoteTopicsSlice } from '../Slices/RemoteTopicsSlice'
+import { createStudentBadgeSlice, StudentBadgeSlice } from '../Slices/StudentBadgeSlice'
 import { createStudentLpLeAlgorithmSlice, StudentLpLeAlgorithmSlice } from '../Slices/StudentLpLeAlgSlice'
 import { createTeacherLpLeAlgorithmSlice, TeacherLpLeAlgorithmSlice } from '../Slices/TeacherLpLeAlgorithmSlice'
 import { createTopicBadgeSlice, TopicBadgeSlice } from '../Slices/TopicBadgeSlice'
@@ -32,6 +33,7 @@ export type StoreState = LearningPathElementSlice &
   LearningPathElementSpecificStatusSlice &
   RemoteTopicsSlice &
   TeacherLpLeAlgorithmSlice &
+  StudentBadgeSlice &
   StudentLpLeAlgorithmSlice &
   LearningElementRecommendationSlice &
   TopicBadgeSlice
@@ -53,6 +55,7 @@ export const useStore = create<StoreState>()((...a) => ({
   ...createLearningPathElementSpecificStatusSlice(...a),
   ...createRemoteTopicsSlice(...a),
   ...createTeacherLpLeAlgorithmSlice(...a),
+  ...createStudentBadgeSlice(...a),
   ...createStudentLpLeAlgorithmSlice(...a),
   ...createLearningElementRecommendationSlice(...a),
   ...createTopicBadgeSlice(...a)
