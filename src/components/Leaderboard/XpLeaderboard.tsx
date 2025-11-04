@@ -19,11 +19,11 @@ const XpLeaderboard = () => {
 
   return (
     <Grid container direction={'column'} sx={{ position: 'relative' }} justifyContent="center" alignItems="center">
-      <Typography variant="h6">{t('component.leaderboard.title')}</Typography>
+      <Typography variant="h6">{t('components.leaderboard.title')}</Typography>
       <Leaderboard
         currentStudentId={currentStudentId}
         leaderboardContent={leaderboardXp}
-        scoreHeadline={t('component.leaderboard.xpHeader')}
+        scoreHeadline={t('components.leaderboard.xpHeader')}
       />
       <Button
         variant="contained"
@@ -32,11 +32,11 @@ const XpLeaderboard = () => {
         sx={{ mt: '1rem', width: '10rem' }}
         onClick={() => loadLeaderboard()}
         disabled={isLoading}>
-        {isLoading ? <CircularProgress size={16} /> : t('component.leaderboard.refresh')}
+        {isLoading ? <CircularProgress size={16} /> : t('components.leaderboard.refresh')}
       </Button>
       {/*
           <Button variant="text" size="small" sx={{ mt: '0.5rem' }}>
-            {t('component.leaderboard.moreLeaderboards')}
+            {t('components.leaderboard.moreLeaderboards')}
           </Button>
           */}
     </Grid>

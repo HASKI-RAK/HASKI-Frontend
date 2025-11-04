@@ -1,8 +1,9 @@
-import { memo, useEffect, useState } from 'react'
+import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Grid, Typography } from '@common/components'
+import { handleError } from '@components'
 import { BadgeResponse, BadgeVariant, StudentBadgeResponse } from '@core'
-import { fetchStudentBadge } from '@services'
+import { fetchStudentBadge, SnackbarContext } from '@services'
 import { useStore } from '@store'
 import BadgeSymbol from './BadgeSymbol'
 
@@ -16,6 +17,7 @@ const TopicBadgeList = ({ studentId, topicId }: TopicBadgeListProps) => {
   const [studentBadges, setStudentBadges] = useState<StudentBadgeResponse>([])
   const [topicBadges, setTopicBadges] = useState<BadgeResponse>([])
   const { t } = useTranslation()
+  const { addSnackbar } = useContext(SnackbarContext)
 
   useEffect(() => {
     if (!topicId || !studentId) {
@@ -24,8 +26,14 @@ const TopicBadgeList = ({ studentId, topicId }: TopicBadgeListProps) => {
     getTopicBadges(topicId, false).then((badges) => {
       setTopicBadges(badges)
     })
+    .catch((error) => {
+      handleError(t, addSnackbar, 'error.fetchTopicBadges', error, 5000)
+    })
     fetchStudentBadge(String(studentId)).then((badges) => {
       setStudentBadges(badges)
+    })
+    .catch((error) => {
+      handleError(t, addSnackbar, 'error.fetchStudentBadges', error, 5000)
     })
   }, [getTopicBadges, studentId, topicId])
 
@@ -41,14 +49,19 @@ const TopicBadgeList = ({ studentId, topicId }: TopicBadgeListProps) => {
         {t('components.TopicBadgeList.topicBadges')}
       </Typography>
       <Grid container spacing={'1rem'} justifyContent="center">
-        {topicBadges.map((badge) => (
-          <Grid item key={badge.variant_key}>
+        { (topicBadges && topicBadges.length > 0) ? (
+        topicBadges.map((badge) => (
+          <Grid item key={`${topicId}-${badge.variant_key}`}>
             <BadgeSymbol
               variant={badge.variant_key as BadgeVariant}
               achieved={studentBadges.some((sb) => sb.badge_id === badge.id)}
             />
           </Grid>
-        ))}
+        ))) : (
+          <Typography variant="body2">
+            {t('components.TopicBadgeList.noBadgesAvailable')}
+          </Typography>
+        )}
       </Grid>
     </Grid>
   )

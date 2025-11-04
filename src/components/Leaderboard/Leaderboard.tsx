@@ -21,7 +21,7 @@ const Leaderboard = ({ currentStudentId, leaderboardContent, scoreHeadline }: Le
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell align="center">{t('component.leaderboard.userHeader')}</TableCell>
+            <TableCell align="center">{t('components.leaderboard.userHeader')}</TableCell>
             <TableCell align="center">{scoreHeadline}</TableCell>
           </TableRow>
         </TableHead>
@@ -29,7 +29,7 @@ const Leaderboard = ({ currentStudentId, leaderboardContent, scoreHeadline }: Le
           {leaderboardContent.map((row) => (
             <TableRow key={row.studentId} sx={{ height: '0.5rem' }}>
               <TableCell align="center">{`${
-                currentStudentId === row.studentId ? t('component.leaderboard.you') : row.studentId
+                currentStudentId === row.studentId ? t('components.leaderboard.you') : row.studentId
               }`}</TableCell>
               <TableCell align="center">{row.scoredValue}</TableCell>
             </TableRow>

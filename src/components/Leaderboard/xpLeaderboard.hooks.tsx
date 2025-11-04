@@ -30,7 +30,7 @@ export const useXpLeaderboard = (setIsLoading: Dispatch<SetStateAction<boolean>>
           setLeaderboardXp(createEntries(leaderboard))
         })
         .catch((error) => {
-          handleError(t, addSnackbar, 'component.leaderboard.xpLoadError', error, 5000)
+          handleError(t, addSnackbar, 'components.leaderboard.xpLoadError', error, 5000)
         })
         .finally(() => {
           setIsLoading(false)

@@ -19,11 +19,11 @@ const RatingLeaderboard = () => {
 
   return (
     <Grid container direction={'column'}>
-      <Typography variant="h6">{t('component.leaderboard.title')}</Typography>
+      <Typography variant="h6">{t('components.leaderboard.title')}</Typography>
       <Leaderboard
         currentStudentId={currentStudentId}
         leaderboardContent={leaderboardRatings}
-        scoreHeadline={t('component.leaderboard.ratingHeader')}
+        scoreHeadline={t('components.leaderboard.ratingHeader')}
       />
       <Button
         variant="text"
@@ -31,11 +31,11 @@ const RatingLeaderboard = () => {
         sx={{ mt: '0.5rem' }}
         onClick={() => loadRatings(Number(topicId))}
         disabled={isLoading}>
-        {isLoading ? <CircularProgress size={16} /> : t('component.leaderboard.refresh')}
+        {isLoading ? <CircularProgress size={16} /> : t('components.leaderboard.refresh')}
       </Button>
       {/*
           <Button variant="text" size="small" sx={{ mt: '0.5rem' }}>
-            {t('component.leaderboard.moreLeaderboards')}
+            {t('components.leaderboard.moreLeaderboards')}
           </Button>
           */}
     </Grid>

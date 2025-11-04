@@ -28,13 +28,13 @@
   "appGlobal.table": "Table",
   "appGlobal.topics": "Topics",
   "appGlobal.universityKempten": "University of Applied Sciences Kempten",
-  "component.leaderboard.moreLeaderboards": "More Leaderboards",
-  "component.leaderboard.ratingHeader": "Topic Rating",
-  "component.leaderboard.refresh": "Refresh Leaderboard",
-  "component.leaderboard.title": "Leaderboard",
-  "component.leaderboard.userHeader": "User",
-  "component.leaderboard.xpHeader": "XP Points earned",
-  "component.leaderboard.you": "You",
+  "components.leaderboard.moreLeaderboards": "More Leaderboards",
+  "components.leaderboard.ratingHeader": "Topic Rating",
+  "components.leaderboard.refresh": "Refresh Leaderboard",
+  "components.leaderboard.title": "Leaderboard",
+  "components.leaderboard.userHeader": "User",
+  "components.leaderboard.xpHeader": "XP Points earned",
+  "components.leaderboard.you": "You",
   "components.AlgorithmSettingsModal.algorithms": [
     {
       "name": "Fixed Order",
@@ -1373,7 +1373,9 @@
   "error.fetchRedirectMoodleLogin": "An error occurred while fetching the Moodle login URL.",
   "error.fetchStudentLpLeAlg": "An error occurred while fetching the algorithm the user has chosen to the topic.",
   "error.fetchStudentRatings": "An error occurred while fetching the student ratings data.",
+  "error.fetchStudentBadges": "An error occurred while fetching user earned badges.",
   "error.fetchTeacherLpLeAlg": "An error occurred while fetching the recommended algorithm for the topic.",
+  "error.fetchTopicBadges": "Unable to fetch topic badges.",
   "error.fetchUser": "An error occurred while fetching the user data.",
   "error.getLearningElementStatus": "An error occurred while fetching the Learning Element Status.",
   "error.getLearningElementsWithStatus": "An error occurred while fetching the Learning Elements with Status.",
@@ -1954,5 +1956,6 @@
   "tooltip.statisticsMenuSelection": "Open the statistics menu",
   "warning": "Warning",
   "warning.offline": "You are currently offline. Please check your internet connection.",
-  "warning.online": "You are online again."
+  "warning.online": "You are online again.",
+  "components.TopicBadgeList.noBadgesAvailable": "No badges available in Topic"
 }
