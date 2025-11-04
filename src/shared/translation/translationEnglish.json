@@ -1384,6 +1384,7 @@
   "error.getTopics": "An error occurred while fetching the LearningPathTopic data.",
   "error.getUser": "An error occurred while fetching the user data.",
   "error.mapNodes": "An error occurred while mapping the learning path nodes.",
+  "error.postBadge": "Failed to create badges for the topic.",
   "error.postCalculateLearningPathForAllStudents": "An error occurred while sending the CalculateLearningPathForAllStudents data",
   "error.postCalculateLearningPathILS": "An error occurred while calculating the learning path based on the ILS questionnaire data.",
   "error.postCalculateRating": "An error occured while calculating the rating.",

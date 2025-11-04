@@ -1385,6 +1385,7 @@
   "error.getTopics": "Beim Abrufen der LearningPathTopic-Daten ist ein Fehler aufgetreten.",
   "error.getUser": "Beim Abrufen der Benutzerdaten ist ein Fehler aufgetreten.",
   "error.mapNodes": "Beim Zuordnen der Lernpfad-Nodes ist ein Fehler aufgetreten.",
+  "error.postBadge": "Das erstellen der Badges für den Themenbereich ist fehlgeschlagen.",
   "error.postCalculateLearningPathForAllStudents": "Beim Senden der CalculateLearningPathForAllStudents-Daten ist ein Fehler aufgetreten.",
   "error.postCalculateLearningPathILS": "Bei der Berechnung des Lernpfades auf Basis der ILS-Fragebogendaten ist ein Fehler aufgetreten.",
   "error.postCalculateRating": "Bei der Berechnung des Ratings ist ein Fehler aufgetreten.",

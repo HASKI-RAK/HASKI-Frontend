@@ -5,6 +5,7 @@ import { CreateAlgorithmTableNameProps, handleError, RemoteLearningElementWithCl
 import { RemoteLearningElement, RemoteTopics, User } from '@core'
 import {
   postAddAllStudentsToTopics,
+  postBadge,
   postCalculateLearningPathForAllStudents,
   postLearningElement,
   postLearningPathAlgorithm,
@@ -184,6 +185,10 @@ export const useCreateTopicModal = ({
                   return handleAddAllStudentsToTopics(courseId)
                 })
                 .then(() => ({ topicId, user }))
+                .catch((error) => {
+                  handleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error, 5000)
+                  throw error
+                })
             })
             .then(({ topicId, user }) => {
               return handleCalculateLearningPaths(
@@ -192,22 +197,40 @@ export const useCreateTopicModal = ({
                 user.university,
                 courseId,
                 topicId
-              ).then(() => {
-                addSnackbar({
-                  message: t('appGlobal.dataSendSuccessful'),
-                  severity: 'success',
-                  autoHideDuration: 5000
-                })
-                log.info(t('appGlobal.dataSendSuccessful'))
-                setSuccessfullyCreatedTopicsCount((prevCount) => prevCount + 1)
+              ).then(() => ({ topicId, user }))
+              .catch((error) => {
+                handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
+                throw error
               })
             })
+            .then(({ topicId }) => {
+              return postBadge(courseId,String(topicId))
+                .then(() => {
+                  addSnackbar({
+                    message: t('appGlobal.dataSendSuccessful'),
+                    severity: 'success',
+                    autoHideDuration: 5000
+                  })
+                  log.info(t('appGlobal.dataSendSuccessful'))
+                  setSuccessfullyCreatedTopicsCount((prevCount) => prevCount + 1)
+                })
+                .catch((error) => {
+                  log.warn(t('error.postBadge'), error)
+                  addSnackbar({
+                    message: t('appGlobal.dataSendSuccessful'),
+                    severity: 'success',
+                    autoHideDuration: 5000
+                  })
+                  log.info(t('appGlobal.dataSendSuccessful'))
+                  setSuccessfullyCreatedTopicsCount((prevCount) => prevCount + 1)
+                })
+            })
             .catch((error) => {
-              handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
+              handleError(t, addSnackbar, 'error.postTopic', error, 5000)
             })
         })
         .catch((error) => {
-          handleError(t, addSnackbar, 'error.postLearningPathAlgorithm', error, 5000)
+          handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
         })
     },
     [
@@ -218,7 +241,8 @@ export const useCreateTopicModal = ({
       handleCalculateLearningPaths,
       addSnackbar,
       t,
-      setCreateTopicIsSending
+      setCreateTopicIsSending,
+      setSuccessfullyCreatedTopicsCount
     ]
   )
 
