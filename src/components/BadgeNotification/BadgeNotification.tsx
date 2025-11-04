@@ -1,6 +1,8 @@
 import { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Snackbar, Typography } from '@common/components'
+import { BadgeSymbol } from '@components'
+import { BadgeVariant } from '@core'
 import { ILSContext } from '@services'
 
 export type BadgeNotificationProps = {
@@ -47,7 +49,7 @@ const BadgeNotification = ({ badgeQueue }: BadgeNotificationProps) => {
     return null
   }
 
-  const currentBadge = badgeQueue[queuePosition]
+  const currentBadge = badgeQueue[queuePosition] as BadgeVariant
   const remainingBadges = badgeQueue.length - queuePosition - 1
 
   return (
@@ -56,11 +58,8 @@ const BadgeNotification = ({ badgeQueue }: BadgeNotificationProps) => {
       onClose={handleClose}
       message={
         <>
-          <img
-            src={`path/to/your/image/${currentBadge}.png`}
-            alt={t('components.badgeNotification.accessibilityLabel')}
-          />
-          <Typography variant="body1">{t(`components.badgeNotification.messages.${currentBadge}`)}</Typography>
+          <BadgeSymbol variant={currentBadge} achieved={true} />
+          <Typography variant="body1">{t(`components.BadgeSymbol.${currentBadge}`)}</Typography>
           {remainingBadges > 0 && (
             <Typography variant="body1">
               {`+ ${remainingBadges} ` + t('components.badgeNotification.moreUnlocked')}

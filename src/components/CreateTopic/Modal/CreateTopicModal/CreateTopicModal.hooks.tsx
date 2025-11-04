@@ -191,20 +191,15 @@ export const useCreateTopicModal = ({
                 })
             })
             .then(({ topicId, user }) => {
-              return handleCalculateLearningPaths(
-                user.settings.user_id,
-                user.role,
-                user.university,
-                courseId,
-                topicId
-              ).then(() => ({ topicId, user }))
-              .catch((error) => {
-                handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
-                throw error
-              })
+              return handleCalculateLearningPaths(user.settings.user_id, user.role, user.university, courseId, topicId)
+                .then(() => ({ topicId, user }))
+                .catch((error) => {
+                  handleError(t, addSnackbar, 'error.postCalculateLearningPathForAllStudents', error, 5000)
+                  throw error
+                })
             })
             .then(({ topicId }) => {
-              return postBadge(courseId,String(topicId))
+              return postBadge(courseId, String(topicId))
                 .then(() => {
                   addSnackbar({
                     message: t('appGlobal.dataSendSuccessful'),

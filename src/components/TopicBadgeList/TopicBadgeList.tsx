@@ -1,10 +1,10 @@
 import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Grid, Typography } from '@common/components'
-import { BadgeResponse, StudentBadgeResponse } from '@core'
+import { BadgeResponse, BadgeVariant, StudentBadgeResponse } from '@core'
 import { fetchStudentBadge } from '@services'
 import { useStore } from '@store'
-import BadgeSymbol, { BadgeVariant } from './BadgeSymbol'
+import BadgeSymbol from './BadgeSymbol'
 
 type TopicBadgeListProps = {
   studentId?: number

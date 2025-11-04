@@ -2,13 +2,7 @@ import { memo, ReactElement } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Grid, Tooltip } from '@common/components'
 import { CalendarMonth, Done, DoneAll, Quiz, StarHalf } from '@common/icons'
-
-export type BadgeVariant =
-  | 'perfect_one_exercise'
-  | 'complete_exercises'
-  | 'perfect_self_evaluation'
-  | 'revisit_topic'
-  | 'half_exercises'
+import { BadgeVariant } from '@core'
 
 type BadgeSymbolProps = {
   variant: BadgeVariant

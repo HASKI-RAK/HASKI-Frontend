@@ -62,6 +62,7 @@
   "components.AlgorithmSettingsModal.success": "Algorithm changed successfully",
   "components.AlgorithmSettingsModal.teacherIconTip": "Recommended by tutor",
   "components.AlgorithmSettingsModal.wrongRole": "You are not authorized to change the algorithm",
+  "components.badgeNotification.moreUnlocked": "More badges unlocked!",
   "components.BadgeSymbol.complete_exercises": "Finish all exercises in the topic with a perfect score",
   "components.BadgeSymbol.half_exercises": "Successfully complete at least half of the exercises",
   "components.BadgeSymbol.perfect_one_exercise": "Finish one exercise in the topic with a perfect score",

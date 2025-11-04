@@ -62,6 +62,7 @@
   "components.AlgorithmSettingsModal.success": "Der Algorithmus wurde erfolgreich geändert",
   "components.AlgorithmSettingsModal.teacherIconTip": "Empfehlung des Kursleiters",
   "components.AlgorithmSettingsModal.wrongRole": "Sie haben nicht die erforderlichen Berechtigungen, um den Algorithmus zu ändern",
+  "components.badgeNotification.moreUnlocked": "Weitere Badges freigeschaltet!",
   "components.BadgeSymbol.complete_exercises": "Schließe alle Übungen im Topic mit maximaler Punktzahl ab",
   "components.BadgeSymbol.half_exercises": "Schließe mindestens die Hälfte der Übungen erfolgreich ab",
   "components.BadgeSymbol.perfect_one_exercise": "Schließe eine Übung mit maximaler Punktzahl ab",
