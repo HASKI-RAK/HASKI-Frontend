@@ -106,7 +106,12 @@ const GameSidePanel = ({
         right: 0,
         top: '10rem',
         width: '25rem',
-        height: { xxl: '22.5rem', xl: '20rem', lg: '15rem', md: '15rem' },
+        height: {
+          xxl: !elementVisibility.showLeaderboard ? '15rem' : '22.5rem',
+          xl: !elementVisibility.showLeaderboard ? '15rem' : '20rem',
+          lg: '15rem',
+          md: '15rem'
+        },
         position: 'absolute',
         mr: '1rem'
       }}>
