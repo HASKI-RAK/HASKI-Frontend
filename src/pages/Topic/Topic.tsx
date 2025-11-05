@@ -144,11 +144,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     getLearningPathElement,
     getUser,
     topicId,
-    mapNodes,
-    navigate,
-    setInitialNodes,
-    setInitialEdges,
-    learningPathElementStatus,
     isGrouped,
     learningPathElementCache,
     learningPathLearningElementStatusCache
