@@ -110,7 +110,7 @@ const GameFeedbackModal = ({ open, onClose, experiencePointDetails, startTime, e
                   {t('components.GameFeedbackModal.scoreMultiplier')}
                 </Typography>
                 <Typography variant="body1" sx={{ textAlign: 'right' }}>
-                  {'\u00D7' + `${experiencePointDetails?.score_modifier}`}
+                  {'\u00D7' + `${Number(experiencePointDetails?.score_modifier).toFixed(2)}`}
                 </Typography>
               </Grid>
               <Grid container direction="row" justifyContent="space-between" sx={{ mb: 1 }}>
