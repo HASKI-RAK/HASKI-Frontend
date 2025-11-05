@@ -9,16 +9,14 @@ import { postCalculateRating, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 const style_box = {
-  position: 'absolute',
-  top: '25%',
-  left: '25%',
-  transform: 'translate(-20%, -25%)',
+  position: 'fixed',
+  top: '7.5%',
+  left: '12.5%',
   width: '75%',
   height: '85%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
   overflow: 'hidden'
 }
 
@@ -103,8 +101,8 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
           onClick={handleClose}
           style={{
             position: 'absolute',
-            top: '2%',
-            left: '94.75%'
+            top: '8px',
+            right: '8px'
           }}>
           <Close />
         </Fab>
@@ -112,7 +110,7 @@ const IFrameModalMemo = (props: IFrameModalProps): JSX.Element => {
           src={props.url + '&haski=true'}
           title={props.title}
           width="100%"
-          height="104%"
+          height="100%"
           style={{
             position: 'relative',
             border: 0

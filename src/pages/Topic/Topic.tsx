@@ -14,7 +14,7 @@ import {
   nodeTypes,
   ResponsiveMiniMap
 } from '@components'
-import { ExperiencePoints, ExperiencePointsPostResponse, LearningPathElementStatus, User } from '@core'
+import { BadgeVariant, ExperiencePoints, ExperiencePointsPostResponse, LearningPathElementStatus, User } from '@core'
 import { AuthContext, postCheckStudentBadge, postExperiencePoints, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
@@ -73,7 +73,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [experiencePointDetails, setExperiencePointDetails] = useState<ExperiencePointsPostResponse>(
     {} as ExperiencePointsPostResponse
   )
-  const [badgeKeys, setBadgeKeys] = useState<string[]>([])
+  const [studentBadgeKeys, setStudentBadgeKeys] = useState<BadgeVariant[]>([])
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false)
   const [learningElementEndTime, setLearningElementEndTime] = useState<Date | undefined>(undefined)
   const [numberOfLearningPathElements, setNumberOfLearningPathElements] = useState<number>(0)
@@ -143,11 +143,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     getLearningPathElement,
     getUser,
     topicId,
-    mapNodes,
-    navigate,
-    setInitialNodes,
-    setInitialEdges,
-    learningPathElementStatus,
     isGrouped,
     learningPathElementCache,
     learningPathLearningElementStatusCache
@@ -227,13 +222,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           classification: currentActivityClassification
         })
           .then((badges) => {
-            getTopicBadges(parseInt(courseId), false).then((topicBadges) => {
+            getTopicBadges(Number.parseInt(topicId), false).then((topicBadges) => {
               const keys = badges.map((earnedBadge) => {
                 const badge = topicBadges.find((topicBadge) => topicBadge.id === earnedBadge.badge_id)
                 return badge ? badge.variant_key : ''
               })
-              const validKeys = keys.filter((key) => key !== '')
-              setBadgeKeys(validKeys)
+              const validKeys = keys.filter((key) => key !== '') as BadgeVariant[]
+              setStudentBadgeKeys(validKeys)
             })
             setStudentBadge(String(user.id), badges)
           })
@@ -295,8 +290,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           learningPathElements={initialNodes}
           topicId={topicId}
           numberOfLearningPathElements={numberOfLearningPathElements}
+          studentBadgeKeys={studentBadgeKeys}
         />
-        <BadgeNotification badgeQueue={badgeKeys} />
+        <BadgeNotification badgeQueue={studentBadgeKeys} />
         <GameFeedback
           open={openFeedbackModal && experiencePointDetails.new_attempt}
           onClose={handleCloseFeedbackModal}

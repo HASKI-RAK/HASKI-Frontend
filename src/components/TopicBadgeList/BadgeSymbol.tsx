@@ -1,7 +1,7 @@
 import { memo, ReactElement } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Grid, Tooltip } from '@common/components'
-import { CalendarMonth, Done, DoneAll, Quiz, StarHalf } from '@common/icons'
+import { CalendarMonth, Done, DoneAll, Hiking, LocalLibrary } from '@common/icons'
 import { BadgeVariant } from '@core'
 
 type BadgeSymbolProps = {
@@ -10,11 +10,11 @@ type BadgeSymbolProps = {
 }
 
 const badgeIcons: Record<BadgeVariant, ReactElement> = {
-  perfect_one_exercise: <Done sx={{ color: 'white' }} />,
-  complete_exercises: <DoneAll sx={{ color: 'white' }} />,
-  perfect_self_evaluation: <Quiz sx={{ color: 'white' }} />,
-  revisit_topic: <CalendarMonth sx={{ color: 'white' }} />,
-  half_exercises: <StarHalf sx={{ color: 'white' }} />
+  perfect_one_exercise: <Done sx={{ color: 'background.default' }} />,
+  complete_exercises: <DoneAll sx={{ color: 'background.default' }} />,
+  perfect_self_evaluation: <LocalLibrary sx={{ color: 'background.default' }} />,
+  revisit_topic: <CalendarMonth sx={{ color: 'background.default' }} />,
+  half_exercises: <Hiking sx={{ color: 'background.default' }} />
 }
 
 const BadgeSymbol = ({ variant, achieved }: BadgeSymbolProps) => {

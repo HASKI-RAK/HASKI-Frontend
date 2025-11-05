@@ -10,9 +10,10 @@ import BadgeSymbol from './BadgeSymbol'
 type TopicBadgeListProps = {
   studentId?: number
   topicId?: number
+  badgesAsKeys?: BadgeVariant[]
 }
 
-const TopicBadgeList = ({ studentId, topicId }: TopicBadgeListProps) => {
+const TopicBadgeList = ({ studentId, topicId, badgesAsKeys: badgeKeys }: TopicBadgeListProps) => {
   const getTopicBadges = useStore((state) => state.getTopicBadges)
   const getStudentBadge = useStore((state) => state.getStudentBadge)
   const [studentBadges, setStudentBadges] = useState<StudentBadgeResponse>([])
@@ -38,7 +39,7 @@ const TopicBadgeList = ({ studentId, topicId }: TopicBadgeListProps) => {
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchStudentBadges', error, 5000)
       })
-  }, [getTopicBadges, studentId, topicId])
+  }, [getTopicBadges, studentId, topicId, badgeKeys])
 
   return (
     <Grid

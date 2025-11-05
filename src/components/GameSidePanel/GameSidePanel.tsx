@@ -1,9 +1,9 @@
 import { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { Node } from 'reactflow'
 import { Button, Divider, Grid, IconButton, MobileStepper, Paper } from '@common/components'
-import { Close, KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
+import { Close, ExpandMore, KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
 import { ChallengeTracker, LevelBar, TopicBadgeList, VerbalProgress, XpLeaderboard } from '@components'
-import { ExperiencePointsPostResponse, LearningPathElementStatus } from '@core'
+import { BadgeVariant, ExperiencePointsPostResponse, LearningPathElementStatus } from '@core'
 import { ILSContext } from '@services'
 import { usePersistedStore } from '@store'
 
@@ -12,6 +12,7 @@ type GameSidePanelProps = {
   learningPathElements?: Node[]
   numberOfLearningPathElements: number
   topicId?: string
+  studentBadgeKeys: BadgeVariant[]
 }
 
 type gameElementVisibility = {
@@ -26,7 +27,8 @@ const GameSidePanel = ({
   experiencePointDetails,
   learningPathElements,
   numberOfLearningPathElements,
-  topicId
+  topicId,
+  studentBadgeKeys
 }: GameSidePanelProps) => {
   const getUser = usePersistedStore((state) => state.getUser)
 
@@ -80,7 +82,7 @@ const GameSidePanel = ({
       <LevelBar studentId={studentId} experiencePointDetails={experiencePointDetails}></LevelBar>
       <Divider sx={{ marginTop: '0.5rem', mB: '0.5rem' }} />
       {studentId && topicId && elementVisibility.showBadges ? (
-        <TopicBadgeList studentId={studentId} topicId={topicId ? Number(topicId) : undefined} />
+        <TopicBadgeList studentId={studentId} topicId={topicId ? Number(topicId) : undefined} badgesAsKeys={studentBadgeKeys} />
       ) : (
         <VerbalProgress
           learningPathElements={learningPathElements}
@@ -104,7 +106,7 @@ const GameSidePanel = ({
         right: 0,
         top: '10rem',
         width: '25rem',
-        height: { xxl: '22.5rem', xl: '19.5rem', lg: '15rem', md: '15rem' },
+        height: { xxl: '22.5rem', xl: '20rem', lg: '15rem', md: '15rem' },
         position: 'absolute',
         mr: '1rem'
       }}>
@@ -143,7 +145,7 @@ const GameSidePanel = ({
                 <KeyboardArrowLeft />
               </Button>
             }
-            sx={{ position: 'absolute', bottom: '0.5rem', border: 'none' }}
+            sx={{ position: 'absolute', bottom: '0.5rem', border: 'none', mr: '1rem', ml: '1rem' }}
           />
         )}
       </Grid>
@@ -164,7 +166,7 @@ const GameSidePanel = ({
       <Grid container item direction="column" sx={{ mt: '0.5rem', ml: '1rem', mr: '1rem' }}>
         <Grid container justifyContent={'right'} sx={{ mb: '1rem' }}>
           <IconButton onClick={() => setExpanded(true)} sx={{ position: 'absolute', right: 0, top: 0 }}>
-            <Close />
+            <ExpandMore />
           </IconButton>
         </Grid>
       </Grid>

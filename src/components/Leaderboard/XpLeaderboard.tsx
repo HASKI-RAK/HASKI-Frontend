@@ -29,7 +29,7 @@ const XpLeaderboard = () => {
         variant="contained"
         color="primary"
         size="small"
-        sx={{ mt: '1rem', width: '10rem' }}
+        sx={{ mt: { xxl: '2rem', xl: '1rem', lg: '1rem', md: '1rem' }, width: '10rem' }}
         onClick={() => loadLeaderboard()}
         disabled={isLoading}>
         {isLoading ? <CircularProgress size={16} /> : t('components.leaderboard.refresh')}
