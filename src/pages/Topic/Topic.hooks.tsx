@@ -37,6 +37,8 @@ export type TopicHookReturn = {
   readonly title: string
   readonly lmsId: number
   readonly isOpen: boolean
+  readonly learningElementStartTime: number
+  readonly currentActivityClassification: string
   readonly handleClose: () => void
   readonly handleOpen: () => void
   readonly mapNodes: (
@@ -73,6 +75,8 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const [title, setTitle] = useState(defaultTitle)
   const [isOpen, setIsOpen] = useState(defaultIsOpen)
   const [lmsId, setLmsId] = useState<number>(defaultLmsId)
+  const [learningElementStartTime, setLearningElementStartTime] = useState<number>(Date.now())
+  const [currentActivityClassification, setCurrentActivityClassification] = useState<string>('other')
   const theme = useTheme()
   const { t } = useTranslation()
 
@@ -86,6 +90,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   // Logic
   const handleOpen = useCallback(() => {
     setIsOpen(true)
+    setLearningElementStartTime(Math.round(Date.now() / 1000))
   }, [setIsOpen])
 
   const handleClose = useCallback(() => {
@@ -153,6 +158,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         handleSetUrl: setUrl,
         handleSetTitle: setTitle,
         handleSetLmsId: setLmsId,
+        handleSetClassification: setCurrentActivityClassification,
         handleOpen: handleOpen,
         handleClose: handleClose,
         isDone: learningPathStatus?.find((item) => item.cmid === learningElement.lms_id)?.state === 1,
@@ -351,10 +357,22 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         title,
         lmsId,
         isOpen,
+        learningElementStartTime,
+        currentActivityClassification,
         handleClose,
         handleOpen,
         mapNodes
       } as const),
-    [url, title, lmsId, isOpen, handleClose, handleOpen, mapNodes]
+    [
+      url,
+      title,
+      lmsId,
+      isOpen,
+      learningElementStartTime,
+      currentActivityClassification,
+      handleClose,
+      handleOpen,
+      mapNodes
+    ]
   )
 }

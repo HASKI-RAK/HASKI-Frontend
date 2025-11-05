@@ -6,7 +6,7 @@ type StudentRating = {
   timestamp: Date
 }
 
-type StudentRatingReturn = (studentId: number, topicId: number) => Promise<StudentRating[]>
+type StudentRatingReturn = (userId: number, studentId: number) => Promise<StudentRating[]>
 
 export default StudentRating
 export type { StudentRatingReturn }

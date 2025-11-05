@@ -33,6 +33,7 @@ import {
   CreateDefaultLearningPathModal,
   FurtherInfoMenu,
   LanguageMenu,
+  LevelBar,
   QuestionnaireQuestionsModal,
   StatisticsMenu,
   TableILSQuestions,
@@ -59,6 +60,7 @@ const MenuBar = () => {
   const activeTheme = useTheme()
   const [modalOpenTheme, setModalOpenTheme] = useState(false)
   const { isCourseCreatorRole } = useContext(RoleContext)
+  const { isStudentRole } = useContext(RoleContext)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
   const [modalOpenListK, setModalOpenListK] = useState(false)

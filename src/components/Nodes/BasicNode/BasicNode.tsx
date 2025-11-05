@@ -89,6 +89,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       props.data.handleOpen()
       props.data.handleSetUrl(getConfig().MOODLE + `/mod/${props.data.activityType}/view.php?id=${props.data.lmsId}`)
       props.data.handleSetLmsId(props.data.lmsId)
+      props.data.handleSetClassification(props.data.classification)
     },
     [
       props.data.handleOpen,

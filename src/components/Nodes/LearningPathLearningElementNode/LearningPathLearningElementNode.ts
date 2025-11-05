@@ -28,6 +28,7 @@ export type LearningPathLearningElementNode = {
   handleSetUrl: (url: string) => void
   handleSetTitle: (title: string) => void
   handleSetLmsId: (lmsId: number) => void
+  handleSetClassification: (classification: string) => void
   handleOpen: () => void
   handleClose: () => void
   isDone: boolean

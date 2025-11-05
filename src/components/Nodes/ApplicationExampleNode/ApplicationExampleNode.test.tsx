@@ -22,6 +22,7 @@ describe('ApplicationExampleNode tests', () => {
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
+      handleSetClassification: jest.fn(),
       isDone: false,
       isDisabled: false,
       isRecommended: false
@@ -64,6 +65,7 @@ describe('ApplicationExampleNode tests', () => {
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
+      handleSetClassification: jest.fn(),
       isDone: true,
       isDisabled: true,
       isRecommended: false

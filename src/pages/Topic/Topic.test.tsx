@@ -112,6 +112,8 @@ describe('Topic Page', () => {
       title: 'title',
       lmsId: 1,
       isOpen: false,
+      learningElementStartTime: 1761858996,
+      currentActivityClassification: 'ÜB',
       handleClose: jest.fn(),
       handleOpen: jest.fn(),
       mapNodes: jest.fn()

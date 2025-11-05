@@ -4,7 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
 import { Grid, Skeleton } from '@common/components'
 import {
+  BadgeNotification,
   CreateLearningElement,
+  GameFeedback,
+  GameSidePanel,
   CreateLearningElementSolution,
   handleError,
   IFrameModal,
@@ -12,8 +15,8 @@ import {
   nodeTypes,
   ResponsiveMiniMap
 } from '@components'
-import { LearningPathElementStatus, User } from '@core'
-import { AuthContext, RoleContext, SnackbarContext } from '@services'
+import { BadgeVariant, ExperiencePoints, ExperiencePointsPostResponse, LearningPathElementStatus, User } from '@core'
+import { AuthContext, postCheckStudentBadge, postExperiencePoints, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 import { TopicHookReturn, useTopic as _useTopic, useTopicHookParams } from './Topic.hooks'
 
@@ -50,11 +53,15 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getDefaultLearningPath = usePersistedStore((state) => state.getDefaultLearningPath)
   const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
+  const setExperiencePoints = useStore((state) => state.setExperiencePoints)
+  const getTopicBadges = useStore((state) => state.getTopicBadges)
+  const setStudentBadge = useStore((state) => state.setStudentBadge)
 
   const learningPathElementCache = useStore((state) => state._cache_learningPathElement_record)
   const learningPathLearningElementStatusCache = usePersistedStore((state) => state._learningPathElementStatus)
 
-  const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
+  const { url, title, lmsId, isOpen, learningElementStartTime, currentActivityClassification, handleClose, mapNodes } =
+    useTopic()
 
   // Translation
   const { t } = useTranslation()
@@ -64,12 +71,24 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
   const [isGrouped, setIsGrouped] = useState(true)
+  const [experiencePointDetails, setExperiencePointDetails] = useState<ExperiencePointsPostResponse>(
+    {} as ExperiencePointsPostResponse
+  )
+  const [studentBadgeKeys, setStudentBadgeKeys] = useState<BadgeVariant[]>([])
+  const [openFeedbackModal, setOpenFeedbackModal] = useState(false)
+  const [learningElementEndTime, setLearningElementEndTime] = useState<Date | undefined>(undefined)
+  const [numberOfLearningPathElements, setNumberOfLearningPathElements] = useState<number>(0)
+
+  const handleCloseFeedbackModal = () => {
+    setOpenFeedbackModal(false)
+  }
 
   const getLearningElementsWithStatus = (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
     setLearningPathElementStatus(learningPathElementStatusData)
 
     getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
       .then((learningPathElementData) => {
+        setNumberOfLearningPathElements(learningPathElementData.path.length)
         if (learningPathElementData.based_on === 'default') {
           return getDefaultLearningPath(user.settings.user_id, user.lms_user_id).then((defaultLearningPath) => {
             const disabledClassificationsList = defaultLearningPath
@@ -158,7 +177,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)
-   * @param user
+   * @param user - current user for which the status should be updated
    */
   const updateLearningPathElementStatus = (user: User) => {
     courseId &&
@@ -177,7 +196,55 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // the persisted store and return it. Then close the IFrameModal and rerender page.
   // Catch for getUser is handled in the useEffect
   const getHandleClose = () => {
+    setLearningElementEndTime(new Date())
     getUser().then((user) => {
+      // user.id used as studentId should maybe be replaced in the future
+      if (courseId && topicId) {
+        postExperiencePoints(user.id, {
+          course_id: Number.parseInt(courseId),
+          learning_element_id: lmsId,
+          user_lms_id: user.lms_user_id.toString(),
+          topic_id: Number.parseInt(topicId),
+          classification: currentActivityClassification,
+          start_time: learningElementStartTime
+        })
+          .then((experiencePoints) => {
+            setExperiencePoints(user.id, {
+              experience_points: experiencePoints.total_xp,
+              student_id: user.id
+            } as ExperiencePoints)
+            setExperiencePointDetails(experiencePoints)
+            setOpenFeedbackModal(true)
+          })
+          .catch((error) => {
+            // TODO: translation string missing
+            handleError(t, addSnackbar, 'error.postExperiencePoints', error, 3000)
+          })
+        postCheckStudentBadge(user.id, {
+          course_id: Number.parseInt(courseId),
+          topic_id: Number.parseInt(topicId),
+          lms_user_id: user.lms_user_id.toString(),
+          timestamp: learningElementStartTime,
+          classification: currentActivityClassification
+        })
+          .then((badges) => {
+            getTopicBadges(Number.parseInt(topicId), false).then((topicBadges) => {
+              const keys = badges.map((earnedBadge) => {
+                const badge = topicBadges.find((topicBadge) => topicBadge.id === earnedBadge.badge_id)
+                return badge ? badge.variant_key : ''
+              })
+              const validKeys = keys.filter((key) => key !== '') as BadgeVariant[]
+              setStudentBadgeKeys(validKeys)
+            })
+            setStudentBadge(String(user.id), badges)
+          })
+          .catch((error) => {
+            handleError(t, addSnackbar, 'error.postCheckStudentBadge', error, 3000)
+          })
+      } else {
+        // TODO: translation string missing
+        handleError(t, addSnackbar, 'error.noCourseOrTopicId', 'No courseId or topicId given', 3000)
+      }
       return updateLearningPathElementStatus(user)
     })
     return handleClose()
@@ -199,7 +266,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             minZoom: 0.75,
             nodes: [{ id: initialNodes[0]?.id }]
           }}>
-          <ResponsiveMiniMap />
+          <ResponsiveMiniMap style={{ position: 'absolute', right: '5%' }} />
           <Background gap={16} />
           <Panel position="top-right">
             <LabeledSwitch
@@ -215,7 +282,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               <CreateLearningElementSolution />
             </Panel>
           )}
-          <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
+          <Controls showInteractive={false} position="bottom-right" style={{ marginTop: 25 }} />
         </ReactFlow>
         <IFrameModal
           url={url}
@@ -224,6 +291,21 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           onClose={getHandleClose}
           key={url}
           learningElementId={lmsId}
+        />
+        <GameSidePanel
+          experiencePointDetails={experiencePointDetails}
+          learningPathElements={initialNodes}
+          topicId={topicId}
+          numberOfLearningPathElements={numberOfLearningPathElements}
+          studentBadgeKeys={studentBadgeKeys}
+        />
+        <BadgeNotification badgeQueue={studentBadgeKeys} />
+        <GameFeedback
+          open={openFeedbackModal && experiencePointDetails.new_attempt}
+          onClose={handleCloseFeedbackModal}
+          experiencePointDetails={experiencePointDetails}
+          startTime={learningElementStartTime}
+          endTime={Number(learningElementEndTime)}
         />
       </Grid>
     </Grid>
