@@ -53,7 +53,6 @@ describe('CreateLearningElementSolutionTable', () => {
   const mockOnLearningElementSolutionChange = jest.fn(
     (selectedSolutions: { [key: number]: RemoteLearningElementWithSolution[] }) => {
       mockLearningElementsWithSolutions = { ...selectedSolutions } // Update the mock state
-      console.log('Updated mockLearningElementsWithSolutions:', mockLearningElementsWithSolutions) // Debugging
     }
   )
 
