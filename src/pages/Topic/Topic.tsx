@@ -5,6 +5,7 @@ import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from
 import { Grid, Skeleton } from '@common/components'
 import {
   CreateLearningElement,
+  CreateLearningElementSolution,
   handleError,
   IFrameModal,
   LabeledSwitch,
@@ -211,6 +212,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           {isCourseCreatorRole && (
             <Panel position={'top-right'} style={{ right: '2rem', top: '2.5rem' }}>
               <CreateLearningElement />
+              <CreateLearningElementSolution />
             </Panel>
           )}
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
