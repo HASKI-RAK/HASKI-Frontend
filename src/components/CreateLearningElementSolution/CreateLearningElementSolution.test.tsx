@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react'
 import CreateLearningElementSolution from './CreateLearningElementSolution'
-import { MemoryRouter, useParams } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import { RoleContext, RoleContextType, SnackbarContext } from '@services'
 import * as router from 'react-router'
 import React from 'react'
