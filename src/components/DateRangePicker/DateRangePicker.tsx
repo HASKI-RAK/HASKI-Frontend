@@ -37,8 +37,8 @@ const DateRangePicker = ({
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Grid container direction="column" wrap="nowrap" sx={{ display: 'inline-flex', gap: 0.25 }}>
         <Grid item>
-          <Grid container wrap="nowrap" alignItems="center" sx={{ gap: 0.25 }}>
-            <Grid item>
+          <Grid container wrap="nowrap" alignItems="center" sx={{ gap: 0.25, mt: 1 }}>
+            <Grid item sx={{ mr: 0.5 }}>
               <DatePicker
                 label={t('Von')}
                 value={startDate}
