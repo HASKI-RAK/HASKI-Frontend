@@ -45,9 +45,9 @@ const DatePickerForChart = ({
         ...position,
         zIndex: 10,
         bgcolor: 'background.paper',
-        borderRadius: 1,
-        boxShadow: 2,
-        p: 1,
+        borderRadius: 2,
+        boxShadow: 3,
+        p: 1.25,
         overflow: 'hidden'
       }}>
       <DateRangePicker

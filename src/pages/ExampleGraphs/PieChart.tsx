@@ -10,17 +10,24 @@ type PieChartRequiredProps = {
 type PieChartProps<T extends PieChartRequiredProps = PieChartRequiredProps> = {
   width: number
   height: number
-  totalHours: number
+  totalHours?: number
   data: T[]
 }
 
 const PieChart = ({ height, width, data }: PieChartProps) => {
   const totalHours = data.reduce((sum, d) => sum + d.value, 0)
+  const enhancedData = data.map((d) => ({
+    ...d,
+    // Append raw value and percentage to legend label
+    label: `${d.label} (${d.value}h)`
+    // If your Pie component expects id instead of label, also add: id: `${d.label} (${d.value})`
+  }))
+
   return (
     <Pie
       height={height}
       width={width}
-      data={data}
+      data={enhancedData}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       innerRadius={0.5}
       padAngle={0.6}
@@ -39,15 +46,10 @@ const PieChart = ({ height, width, data }: PieChartProps) => {
         {
           anchor: 'bottom-right',
           direction: 'column',
-          translateY: 56,
-          itemWidth: 100,
+          translateY: 35,
+          itemWidth: 50,
           itemHeight: 18,
-          symbolShape: 'circle',
-          data: data.map((item) => ({
-            id: item.label,
-            label: `${item.label}: ${item.value}h`,
-            color: item.color
-          }))
+          symbolShape: 'circle'
         }
       ]}
       layers={[
