@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - main
+      - main, haski-requirements-linking-tests
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:

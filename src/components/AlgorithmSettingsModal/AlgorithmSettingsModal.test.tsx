@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { RoleContext, RoleContextType, SnackbarContext } from '@services'
 import AlgorithmSettingsModal from './AlgorithmSettingsModal'
 
-describe('AlgorithmSettingsModal', () => {
+describe('[HASKI-REQ-0008] AlgorithmSettingsModal', () => {
   it('is displayed with all options', async () => {
     const open = true
     const { getByTestId, getByLabelText } = render(
