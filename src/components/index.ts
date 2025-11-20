@@ -1,5 +1,4 @@
 export { default as AlgorithmSettingsModal } from './AlgorithmSettingsModal/AlgorithmSettingsModal'
-export { default as BorderedPaper } from './BorderedPaper/BorderedPaper'
 export { default as BreadcrumbsContainer } from './BreadcrumbsContainer/BreadcrumbsContainer'
 export { default as CollapsibleList } from './CollapsibleList/CollapsibleList/CollapsibleList'
 export {
@@ -19,13 +18,18 @@ export { default as CreateDefaultLearningPathModal } from './CreateDefaultLearni
 export { default as OpenCreateDefaultLearningPath } from './CreateDefaultLearningPath/OpenCreateDefaultLearningPath/OpenCreateDefaultLearningPath'
 export { default as CreateLearningElement } from './CreateLearningElement/CreateLearningElement'
 export { default as CreateLearningElementModal } from './CreateLearningElement/CreateLearningElementModal'
+export * from './CreateLearningElementSolution'
+export { default as CreateLearningElementSolution } from './CreateLearningElementSolution/CreateLearningElementSolution'
+export * from './CreateTopic'
 export { default as CreateAlgorithmsStep } from './CreateTopic/Modal/CreateAlgorithmsStep/CreateAlgorithmsStep'
 export { default as CreateLearningElementClassificationsStep } from './CreateTopic/Modal/CreateLearningElementClassificationsStep/CreateLearningElementClassificationsStep'
 export { default as CreateLearningElementsStep } from './CreateTopic/Modal/CreateLearningElementsStep/CreateLearningElementsStep'
 export { default as CreateRemoteTopicsStep } from './CreateTopic/Modal/CreateRemoteTopicsStep/CreateRemoteTopicsStep'
 export {
   default as CreateTopicModal,
-  type RemoteLearningElementWithClassification
+  type RemoteLearningElementWithClassification,
+  type RemoteLearningElementWithSolution,
+  type Solution
 } from './CreateTopic/Modal/CreateTopicModal/CreateTopicModal'
 export {
   default as CreateAlgorithmTable,
@@ -36,6 +40,7 @@ export {
   default as CreateLearningElementClassificationTable,
   type LearningElementWithClassification
 } from './CreateTopic/Table/CreateLearningElementClassification/CreateLearningElementClassificationTable'
+export { default as CreateLearningElementSolutionTable } from './CreateTopic/Table/CreateLearningElementSolution/CreateLearningElementSolutionTable'
 export { default as CreateRemoteTopicsTable } from './CreateTopic/Table/CreateRemoteTopics/CreateRemoteTopicsTable'
 export { default as ExistingTopicsTable } from './CreateTopic/Table/ExistingTopics/ExistingTopicsTable'
 export * from './Dashboards'

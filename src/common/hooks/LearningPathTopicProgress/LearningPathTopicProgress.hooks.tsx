@@ -72,10 +72,6 @@ export const useLearningPathTopicProgress = (
       //do that for every topic, and lastly return an array with all the arrays for every topic
       //example: [[1,2],[2,2],[0,2]]
       return topics.map((topic) => {
-        if (!courseId) {
-          return Promise.resolve([])
-        }
-
         return getLearningPathElementStatus(courseId, user.lms_user_id)
           .then((learningPathElementStatusData) =>
             getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topic.id.toString())

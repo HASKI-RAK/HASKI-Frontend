@@ -16,11 +16,15 @@ export { fetchCourses } from './Courses'
 export * from './CourseTopics'
 export * from './debounce'
 export { fetchDefaultLearningPath, fetchDisabledClassifications, postDefaultLearningPath } from './DefaultLearningPath'
+export { fetchFavorite, putFavorite } from './Favorite'
 export { postLearningElement } from './LearningElement'
 export { deleteLearningElement } from './LearningElement'
-export * from './LearningElementRecommendation'
+export { fetchLearningElementSolution } from './LearningElementSolution'
+export { postLearningElementSolution } from './LearningElementSolution'
+export { deleteLearningElementSolution } from './LearningElementSolution'
 export {
   fetchLearningPathElement,
+  fetchLearningPathElementSolution,
   fetchLearningPathElementSpecificStatus,
   fetchLearningPathElementStatus,
   postCalculateLearningPathForAllStudents

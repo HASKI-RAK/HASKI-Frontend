@@ -5,6 +5,7 @@ import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from
 import { Grid, Skeleton } from '@common/components'
 import {
   CreateLearningElement,
+  CreateLearningElementSolution,
   handleError,
   IFrameModal,
   LabeledSwitch,
@@ -148,7 +149,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           padding: 5,
           minZoom: 0.75,
           duration: 100,
-          nodes: [{ id: initialNodes[0]?.id }]
+          nodes: [{ id: initialNodes[0].id }]
         })
         setHasCentered(true)
       }, 100)
@@ -160,16 +161,15 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
    * @param user
    */
   const updateLearningPathElementStatus = (user: User) => {
-    courseId &&
-      getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
-        .then((data) => {
-          setLearningPathElementSpecificStatus(courseId.toString(), user.lms_user_id, data[0]).then((data) => {
-            setLearningPathElementStatus(data)
-          })
+    getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
+      .then((data) => {
+        setLearningPathElementSpecificStatus(courseId?.toString(), user.lms_user_id, data[0]).then((data) => {
+          setLearningPathElementStatus(data)
         })
-        .catch((error) => {
-          handleError(t, addSnackbar, 'error.setLearningPathElementSpecificStatus', error, 3000)
-        })
+      })
+      .catch((error) => {
+        handleError(t, addSnackbar, 'error.setLearningPathElementSpecificStatus', error, 3000)
+      })
   }
 
   // On Close of IFrameModal, fetch new LearningPathElementStatus, update it in
@@ -211,6 +211,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           {isCourseCreatorRole && (
             <Panel position={'top-right'} style={{ right: '2rem', top: '2.5rem' }}>
               <CreateLearningElement />
+              <CreateLearningElementSolution />
             </Panel>
           )}
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />

@@ -6,8 +6,8 @@
  * @category Core
  */
 type LearningPathElementStatusReturn = (
-  courseId: string,
-  lmsUserId: number,
+  courseId?: string,
+  studentId?: number,
   learningElementId?: number
 ) => Promise<LearningPathElementStatus[]>
 

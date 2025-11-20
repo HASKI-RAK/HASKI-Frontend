@@ -11,9 +11,8 @@ import {
   SelectChangeEvent,
   Typography
 } from '@common/components'
-import { SkeletonList } from '@components'
+import { SkeletonList, useCreateAlgorithmTable } from '@components'
 import { RemoteTopics } from '@core'
-import { useCreateAlgorithmTable } from './CreateAlgorithmTable.hooks'
 
 export type CreateAlgorithmTableNameProps = {
   topicName: string

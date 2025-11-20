@@ -69,6 +69,7 @@ const mockDataServices: MockDataServices = {
           id: 1,
           learning_element_id: 1,
           learning_path_id: 1,
+          recommended: false,
           position: 1,
           learning_element: {
             id: 1,
@@ -93,6 +94,7 @@ const mockDataServices: MockDataServices = {
           id: 2,
           learning_element_id: 2,
           learning_path_id: 2,
+          recommended: false,
           position: 2,
           learning_element: {
             id: 2,
@@ -117,6 +119,7 @@ const mockDataServices: MockDataServices = {
           id: 3,
           learning_element_id: 3,
           learning_path_id: 3,
+          recommended: false,
           position: 3,
           learning_element: {
             id: 3,
@@ -141,6 +144,7 @@ const mockDataServices: MockDataServices = {
           id: 4,
           learning_element_id: 4,
           learning_path_id: 4,
+          recommended: false,
           position: 4,
           learning_element: {
             id: 4,
@@ -515,6 +519,14 @@ const mockDataServices: MockDataServices = {
       university: 'HS-KE'
     })
   ),
+  postLearningElementSolution: jest.fn(() =>
+    Promise.resolve({
+      id: 1,
+      learning_element_lms_id: 1,
+      solution_lms_id: 4,
+      activity_type: 'activity'
+    })
+  ),
   fetchStudentLpLeAlg: jest.fn(() =>
     Promise.resolve({
       algorithm_id: 1,
@@ -689,46 +701,6 @@ const mockDataServices: MockDataServices = {
       }
     ])
   ),
-  fetchLearningElementRecommendation: jest.fn(() =>
-    Promise.resolve([
-      {
-        id: 1,
-        lms_id: 1,
-        activity_type: 'test',
-        classification: 'KÜ',
-        name: 'test',
-        university: 'test',
-        created_at: 'test',
-        created_by: 'test',
-        last_updated: 'test',
-        student_learning_element: {
-          id: 1,
-          student_id: 1,
-          learning_element_id: 1,
-          done: false,
-          done_at: 'test'
-        }
-      },
-      {
-        id: 2,
-        lms_id: 2,
-        activity_type: 'test',
-        classification: 'ÜB',
-        name: 'test',
-        university: 'test',
-        created_at: 'test',
-        created_by: 'test',
-        last_updated: 'test',
-        student_learning_element: {
-          id: 2,
-          student_id: 1,
-          learning_element_id: 2,
-          done: false,
-          done_at: 'test'
-        }
-      }
-    ])
-  ),
   postCalculateRating: jest.fn(() =>
     Promise.resolve({
       student_rating: {},
@@ -815,6 +787,14 @@ const mockDataServices: MockDataServices = {
       }
     ])
   ),
+  fetchFavorite: jest.fn(() => Promise.resolve([1, 2, 3])),
+  putFavorite: jest.fn(() =>
+    Promise.resolve({
+      ok: true,
+      status: 201,
+      statusText: 'CREATED'
+    })
+  ),
   postBufferContent: jest.fn(() =>
     Promise.resolve({
       ok: true,
@@ -850,6 +830,35 @@ const mockDataServices: MockDataServices = {
     Promise.resolve({
       message: 'Deletion successful!'
     })
+  ),
+  deleteLearningElementSolution: jest.fn(() =>
+    Promise.resolve({
+      message: 'Deletion successful!'
+    })
+  ),
+  fetchLearningElementSolution: jest.fn(() =>
+    Promise.resolve({
+      id: 1,
+      learning_element_lms_id: 1,
+      solution_lms_id: 4,
+      activity_type: 'activity'
+    })
+  ),
+  fetchLearningPathElementSolution: jest.fn(() =>
+    Promise.resolve([
+      {
+        id: 1,
+        learning_element_lms_id: 123,
+        activity_type: 'Quiz',
+        solution_lms_id: '4'
+      },
+      {
+        id: 2,
+        learning_element_lms_id: 124,
+        activity_type: 'Video',
+        solution_lms_id: '5'
+      }
+    ])
   ),
   postUserSettings: jest.fn(() =>
     Promise.resolve({

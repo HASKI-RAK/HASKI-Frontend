@@ -20,15 +20,15 @@ import { fetchData } from '../RequestResponse'
 
 export const fetchLearningPathElementSpecificStatus: LearningPathElementStatusReturn = async (
   courseId,
-  lmsUserId,
+  studentId,
   learningElementId
 ) => {
-  if (!learningElementId) {
-    throw new Error('learningElementId is required')
+  if (!courseId || !studentId || !learningElementId) {
+    throw new Error('courseId, studentId and learningElementId are required')
   }
   return fetchData<LearningPathElementStatus[]>(
     getConfig().BACKEND +
-      `/lms/course/${courseId}/student/${lmsUserId}/learningElementId/${learningElementId}/activitystatus`,
+      `/lms/course/${courseId}/student/${studentId}/learningElementId/${learningElementId}/activitystatus`,
     {
       method: 'GET',
       credentials: 'include',

@@ -55,7 +55,7 @@ const OpenCreateDefaultLearningPath = ({ usePrivacyModal = _usePrivacyModal }: P
           setDefaultLearningPathExists(false)
         })
     }
-  })
+  }, [])
 
   return (
     <>
