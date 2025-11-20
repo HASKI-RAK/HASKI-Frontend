@@ -1,46 +1,37 @@
 import { memo } from 'react'
-import { ResponsiveBar } from '@nivo/bar'
+import { Bar } from '@common/components'
 
-const dataBarChart = [
-  {
-    calendarWeek: '32',
-    Versuche: 141
-  },
-  {
-    calendarWeek: '33',
-    Versuche: 140
-  },
-  {
-    calendarWeek: '34',
-    Versuche: 84
-  },
-  {
-    calendarWeek: '35',
-    Versuche: 109
-  },
-  {
-    calendarWeek: '36',
-    Versuche: 141
-  },
-  {
-    calendarWeek: '37',
-    Versuche: 12
-  },
-  {
-    calendarWeek: '38',
-    Versuche: 24
-  }
-]
+type BarChartProps = {
+  width: number
+  height: number
+  keys: string[]
+  indexBy: string
+  color: string[]
+  axisLeftText: string
+  axisBottomText: string
+  data: Array<Record<string, string | number>>
+}
 
-const AnzahlVersucheBarChart = () => {
+const AnzahlVersucheBarChart = ({
+  width,
+  height,
+  keys,
+  indexBy,
+  color,
+  axisLeftText,
+  axisBottomText,
+  data
+}: BarChartProps) => {
   return (
-    <ResponsiveBar
-      data={dataBarChart}
-      keys={['Versuche']}
-      indexBy="calendarWeek"
+    <Bar
+      width={width}
+      height={height}
+      data={data}
+      keys={keys}
+      indexBy={indexBy}
       labelSkipWidth={12}
       labelSkipHeight={12}
-      colors={['#6EC6FF']}
+      colors={color}
       legends={[
         {
           dataFrom: 'keys',
@@ -52,8 +43,8 @@ const AnzahlVersucheBarChart = () => {
           itemHeight: 16
         }
       ]}
-      axisBottom={{ legend: 'calendarWeek', legendOffset: 40, legendPosition: 'middle' }}
-      axisLeft={{ legend: 'Anzahl Versuche', legendOffset: -40, legendPosition: 'middle' }}
+      axisBottom={{ legend: axisBottomText, legendOffset: 40, legendPosition: 'middle' }}
+      axisLeft={{ legend: axisLeftText, legendOffset: -40, legendPosition: 'middle' }}
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
     />
   )

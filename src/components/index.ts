@@ -48,6 +48,7 @@ export { default as GlossaryEntry, type GlossaryEntryProps } from './Glossary/Gl
 export { default as GlossaryIndex } from './Glossary/GlossaryIndex/GlossaryIndex'
 export { default as GlossaryList } from './Glossary/GlossaryList/GlossaryList'
 export { default as IFrameModal } from './IFrameModal/IFrameModal'
+export { default as DateRangePicker } from './DateRangePicker/DateRangePicker'
 export { default as ImageCollection } from './ImageCollection/ImageCollection'
 export { default as LabeledSwitch } from './LabeledSwitch/LabeledSwitch'
 export { default as LanguageMenu } from './LanguageMenu/LanguageMenu'

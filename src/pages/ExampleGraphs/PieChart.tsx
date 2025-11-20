@@ -1,39 +1,26 @@
 import { memo } from 'react'
-import { ResponsivePie } from '@nivo/pie'
+import { Pie } from '@common/components'
 
-const dataPie: { id: string; label: string; value: number; color: string }[] = [
-  {
-    id: 'Course-1',
-    label: 'Course-1',
-    value: 429,
-    color: 'hsl(49, 70%, 50%)'
-  },
-  {
-    id: 'Course-2',
-    label: 'Course-2',
-    value: 104,
-    color: 'hsl(307, 70%, 50%)'
-  },
-  {
-    id: 'Course-3',
-    label: 'Course-3',
-    value: 364,
-    color: 'hsl(223, 70%, 50%)'
-  },
-  {
-    id: 'Course-4',
-    label: 'Course-4',
-    value: 482,
-    color: 'hsl(9, 70%, 50%)'
-  }
-]
+type PieChartRequiredProps = {
+  label: string
+  value: number
+  color: string
+}
 
-const totalHours = dataPie.reduce((sum, d) => sum + d.value, 0)
+type PieChartProps<T extends PieChartRequiredProps = PieChartRequiredProps> = {
+  width: number
+  height: number
+  totalHours: number
+  data: T[]
+}
 
-const PieChart = () => {
+const PieChart = ({ height, width, data }: PieChartProps) => {
+  const totalHours = data.reduce((sum, d) => sum + d.value, 0)
   return (
-    <ResponsivePie
-      data={dataPie}
+    <Pie
+      height={height}
+      width={width}
+      data={data}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
       innerRadius={0.5}
       padAngle={0.6}
@@ -56,8 +43,8 @@ const PieChart = () => {
           itemWidth: 100,
           itemHeight: 18,
           symbolShape: 'circle',
-          data: dataPie.map((item) => ({
-            id: item.id,
+          data: data.map((item) => ({
+            id: item.label,
             label: `${item.label}: ${item.value}h`,
             color: item.color
           }))

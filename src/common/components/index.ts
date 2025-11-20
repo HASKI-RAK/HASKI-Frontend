@@ -61,6 +61,7 @@ export { Typography } from './DefaultTypography/DefaultTypography'
 export { Zoom } from './DefaultZoom/DefaultZoom'
 export { Bar } from './Graphs/Bar'
 export { Network } from './Graphs/Network'
+export { Pie } from './Graphs/Pie'
 
 /**
  * Reusable types
