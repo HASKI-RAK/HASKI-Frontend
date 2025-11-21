@@ -46,14 +46,7 @@ describe('LocalNavItem tests', () => {
 
     const { getByRole } = render(
       <MemoryRouter>
-        <LocalNavItem
-          topic={topic}
-          courseId="1"
-          isProgressLoading={false}
-          key="key"
-          topicId="1"
-          topicProgress={[1, 2]}
-        />
+        <LocalNavItem topic={topic} courseId="1" isLoading={false} key="key" topicId="1" topicProgress={[1, 2]} />
       </MemoryRouter>
     )
 
