@@ -44,7 +44,7 @@ const mockListK = {
 }
 
 // tests for mui can be found https://github.com/mui/material-ui/blob/master/packages/mui-material/src
-describe('Test TableList-K with all Methods', () => {
+describe('[HASKI-REQ-0007] Test TableList-K with all Methods', () => {
   test('Table Values are correct', () => {
     const { getAllByRole } = render(<TableListK data={mockListK} />)
 

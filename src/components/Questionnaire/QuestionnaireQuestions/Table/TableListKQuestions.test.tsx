@@ -22,7 +22,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('TableListKQuestions', () => {
+describe('[HASKI-REQ-0007] TableListKQuestions', () => {
   const successSend = false
   const setSuccessSend = jest.fn((successSend) => successSend)
 

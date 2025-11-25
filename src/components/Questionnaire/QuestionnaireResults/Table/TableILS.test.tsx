@@ -19,7 +19,7 @@ const mockILS = {
 //we have to mock react-i18next otherwise a warning will appear
 //"You will need pass in an i18next instance by using initReactI18next" => mock is needed.
 
-describe('Test TableILS with all Methods', () => {
+describe('[HASKI-REQ-0007] Test TableILS with all Methods', () => {
   test('Table values are correct', () => {
     const { getAllByRole } = render(<TableILS data={mockILS} />)
 

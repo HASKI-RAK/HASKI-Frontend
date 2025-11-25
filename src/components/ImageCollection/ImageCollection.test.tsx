@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import ImageCollection from './ImageCollection'
 
-describe('ImageCollection tests', () => {
+describe('[HASKI-REQ-0026] ImageCollection tests', () => {
   it('renders without input', () => {
     const imageCollection = render(<ImageCollection />)
     expect(imageCollection).toBeTruthy()
