@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
+import '@testing-library/jest-dom'
 import CreateDefaultLearningPathTable from './CreateDefaultLearningPathTable'
 
 describe('[HASKI-REQ-0026] CreateDefaultLearningPathTable', () => {
