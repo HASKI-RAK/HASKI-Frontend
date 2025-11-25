@@ -7,7 +7,7 @@ import { act } from 'react-test-renderer'
 import { AuthContext, RoleContext, RoleContextType } from '@services'
 import TopicCard from './TopicCard'
 
-describe('TopicCard tests', () => {
+describe('[HASKI-REQ-0026] TopicCard tests', () => {
   const navigate = jest.fn()
 
   beforeEach(() => {

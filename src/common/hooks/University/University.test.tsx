@@ -4,6 +4,7 @@ import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import { useUniversity } from '@common/hooks'
 
+describe('[HASKI-REQ-0034] useUniversity hook', () => {
 test('useUniversity returns valid value', async () => {
   mockServices.fetchUser = jest.fn().mockImplementationOnce(() =>
     Promise.resolve({
@@ -36,4 +37,5 @@ test('useUniversity returns empty string when fetch fails', async () => {
     wrapper: ({ children }) => <MemoryRouter>{children}</MemoryRouter>
   })
   expect(await result.current.university).toBe('')
+})
 })

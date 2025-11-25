@@ -9,7 +9,7 @@ jest.mock('@components', () => ({
   ExistingTopicsTable: jest.fn(() => <div data-testid="existing-topics-table"></div>)
 }))
 
-describe('CreateRemoteTopicsStep', () => {
+describe('[HASKI-REQ-0026] CreateRemoteTopicsStep', () => {
   const mockHandleTopicChange = jest.fn()
   const mockOnNext = jest.fn()
 

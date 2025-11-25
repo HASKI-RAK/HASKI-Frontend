@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import Fraction from './Fraction'
 
-describe('Fraction Component', () => {
+describe('[HASKI-REQ-0025] Fraction Component', () => {
   it('renders correctly', () => {
     const { getByText } = render(<Fraction numerator={3} denominator={4} />)
     const numeratorElement = getByText('3')

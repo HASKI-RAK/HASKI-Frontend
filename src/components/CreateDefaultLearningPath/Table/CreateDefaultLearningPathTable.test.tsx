@@ -1,12 +1,10 @@
-import '@testing-library/jest-dom'
-import '@testing-library/jest-dom'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import CreateDefaultLearningPathTable from './CreateDefaultLearningPathTable'
 
-describe('CreateDefaultLearningPathTable Component', () => {
+describe('[HASKI-REQ-0026] CreateDefaultLearningPathTable', () => {
   const dummyOrderedItems: string[] = []
   const dummyDisabledItems: string[] = []
   const dummySetOrderedItems = jest.fn()

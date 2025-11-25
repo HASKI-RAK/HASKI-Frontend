@@ -7,7 +7,7 @@ import * as router from 'react-router'
 
 jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
-describe('IFrameModal tests', () => {
+describe('[HASKI-REQ-0025] IFrameModal tests', () => {
   it('is displayed', () => {
     const open = true
     const { getByTestId } = render(

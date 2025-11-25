@@ -10,7 +10,7 @@ jest.requireActual('i18next')
 
 const navigate = jest.fn()
 
-describe('MenuBar', () => {
+describe('[HASKI-REQ-0007] MenuBar', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })

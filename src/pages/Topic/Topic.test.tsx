@@ -19,7 +19,7 @@ jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')
 
-describe('Topic Page', () => {
+describe('[HASKI-REQ-0026] Topic Page', () => {
   beforeEach(() => {
     jest.clearAllTimers()
     jest.clearAllMocks()

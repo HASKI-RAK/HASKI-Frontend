@@ -4,7 +4,7 @@ import { ReactFlow } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import ResponsiveMiniMap from './ResponsiveMiniMap'
 
-describe('ResponsiveMiniMap component', () => {
+describe('[HASKI-REQ-0007] ResponsiveMiniMap component', () => {
   beforeEach(() => {
     mockReactFlow()
   })
