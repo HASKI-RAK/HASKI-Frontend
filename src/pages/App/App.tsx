@@ -1,57 +1,81 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { ThemeProvider } from '@common/components'
+import { UserInteractionTracker, XAPIProvider } from 'react-xapi-wrapper'
+import { ReactFlowProvider } from 'reactflow'
 import {
-  MainFrame,
-  Home,
-  ThemePresentation,
-  Login,
-  Dashboard,
+  AboutUs,
   Contact,
-  ProjectDescription,
-  ProjectInformation,
+  Course,
+  Glossary,
+  Home,
   Imprint,
-  Glossary
+  LearnerCharacteristics,
+  Login,
+  MainFrame,
+  PageNotFound,
+  PrivacyPolicy,
+  ProjectDescription,
+  Rating,
+  Topic
 } from '@pages'
-import { AuthProvider, SnackbarProvider } from '@services'
-import { logBuffer } from '@shared'
-import { HaskiTheme } from '@utils'
-
-logBuffer()
+import { AuthProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
+import { useApp } from './App.hooks'
 
 /**
- * App component.
- *
+ * # App
+ * Entry point of the application.
  * @remarks
  * This is the main component of the application and the entry point after the index.tsx.
- * It contains the main frame and the routes to the other pages.
- * The Theme is injected here. Additionally, the AuthProvider is used to provide the authentication context.
+ * It contains the {@link MainFrame} and the routes to the other pages.
+ * The {@link ThemeProvider} provides the custom theme context.
+ * The {@link AuthProvider} is used to provide the authentication context.
+ * The {@link SnackbarProvider} is used to provide the snackbars to all pages.
  *
  * @category Pages
  */
-const App = () => (
-  <ThemeProvider theme={HaskiTheme}>
-    <AuthProvider>
-      <SnackbarProvider>
-        <Router>
-          <Routes>
-            <Route element={<MainFrame />}>
-              <Route index element={<Home />} />
-              <Route path="/theme" element={<ThemePresentation />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/projectinformation" element={<ProjectInformation />} />
-              <Route path="/projectinformation/projectdescription" element={<ProjectDescription />} />
-              <Route path="/projectinformation/glossary" element={<Glossary />} />
-              <Route path="/imprint" element={<Imprint />} />
-              <Route path="/🥚" element={<div>Ei</div>} />
-              <Route path="*" element={<div>404</div>} />
-            </Route>
-            <Route path="*" element={<div>404</div>} />
-          </Routes>
-        </Router>
-      </SnackbarProvider>
-    </AuthProvider>
-  </ThemeProvider>
-)
+export const App = () => {
+  const { xAPI } = useApp()
+
+  return (
+    <ThemeProvider>
+      <ReactFlowProvider>
+        <SnackbarProvider>
+          <Router>
+            <AuthProvider>
+              <RoleProvider>
+                <XAPIProvider value={xAPI}>
+                  <UserInteractionTracker
+                    componentFilePath={new URL(import.meta.url).pathname}
+                    componentType="UserInteractionTracker"
+                    pageName="App"
+                  />
+                  <Routes>
+                    <Route element={<MainFrame />}>
+                      <Route index element={<Home />} />
+                      <Route path="/course/:courseId" element={<Course />} />
+                      <Route path="/course/:courseId/topic/:topicId" element={<Topic />} />
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+                      <Route path="/projectdescription" element={<ProjectDescription />} />
+                      <Route path="/glossary" element={<Glossary />} />
+                      <Route path="/aboutus" element={<AboutUs />} />
+                      <Route path="/imprint" element={<Imprint />} />
+                      <Route path="/learnercharacteristics" element={<LearnerCharacteristics />} />
+                      <Route path="/rating" element={<Rating />} />
+                      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+                      <Route path="/🥚" element={<div>Ei</div>} />
+                      <Route path="*" element={<PageNotFound />} />
+                    </Route>
+                    <Route path="*" element={<PageNotFound />} />
+                  </Routes>
+                </XAPIProvider>
+              </RoleProvider>
+            </AuthProvider>
+          </Router>
+        </SnackbarProvider>
+      </ReactFlowProvider>
+    </ThemeProvider>
+  )
+}
+
 export default App

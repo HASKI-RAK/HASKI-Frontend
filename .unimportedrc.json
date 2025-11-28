@@ -10,6 +10,20 @@
     "**/*.test.{js,jsx,ts,tsx}",
     "**/*.d.ts"
   ],
+  "ignoreUnimported": [
+    "src/common/index.ts",
+    "src/components/Nodes/BasicNode/BasicNode.tsx",
+    "src/index.tsx",
+    "src/services/xAPI/verbs/completed.ts",
+    "src/services/xAPI/verbs/created.ts",
+    "src/services/xAPI/verbs/deleted.ts",
+    "src/services/xAPI/verbs/loggedin.ts",
+    "src/services/xAPI/verbs/loggedout.ts",
+    "src/services/xAPI/verbs/updated.ts",
+    "src/services/xAPI/verbs/uploaded.ts",
+    "src/shared/auto-order-json-translations.js",
+    "src/shared/config.ts"
+  ],
   "ignoreUnresolved": [],
-  "ignoreUnused": ["@nivo/core", "@nivo/tooltip"]
+  "ignoreUnused": ["@nivo/core", "@nivo/tooltip", "i", "react-flow-renderer"]
 }

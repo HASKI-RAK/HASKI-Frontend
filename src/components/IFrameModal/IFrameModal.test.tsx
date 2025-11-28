@@ -1,0 +1,72 @@
+import { fireEvent, render } from '@testing-library/react'
+import { mockServices } from 'jest.setup'
+import { MemoryRouter } from 'react-router-dom'
+import { Box } from '@common/components'
+import { IFrameModal } from '@components'
+import * as router from 'react-router'
+
+jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
+
+describe('[HASKI-REQ-0025] IFrameModal tests', () => {
+  it('is displayed', () => {
+    const open = true
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <Box>
+          <IFrameModal url="fakedomain.com:8080" title="Modal is open" isOpen={open} onClose={jest.fn()} />
+        </Box>
+      </MemoryRouter>
+    )
+
+    expect(getByTestId('IFrameModal')).toBeInTheDocument
+  })
+
+  it('is displayed and can be closed', () => {
+    const open = true
+    const handleClose = jest.fn()
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <Box>
+          <IFrameModal url="fakedomain.com:8080" title="Modal is open" isOpen={open} onClose={handleClose} />
+        </Box>
+      </MemoryRouter>
+    )
+
+    fireEvent.click(getByTestId('IFrameModal-Close-Button'))
+    expect(handleClose).toHaveBeenCalledTimes(1)
+  })
+
+  test('postCalculateRating on close fails', () => {
+    mockServices.postCalculateRating.mockImplementationOnce(() =>
+      Promise.reject(new Error('postCalculateRating error'))
+    )
+
+    const handleClose = jest.fn()
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <Box>
+          <IFrameModal url="fakedomain.com:8080" title="Modal is open" isOpen={true} onClose={handleClose} />
+        </Box>
+      </MemoryRouter>
+    )
+
+    fireEvent.click(getByTestId('IFrameModal-Close-Button'))
+    expect(handleClose).toHaveBeenCalledTimes(1)
+  })
+
+  test('getUser error on close', () => {
+    mockServices.fetchUser.mockImplementationOnce(() => Promise.reject(new Error('fetchUser error')))
+
+    const handleClose = jest.fn()
+    const { getByTestId } = render(
+      <MemoryRouter>
+        <Box>
+          <IFrameModal url="fakedomain.com:8080" title="Modal is open" isOpen={true} onClose={handleClose} />
+        </Box>
+      </MemoryRouter>
+    )
+
+    fireEvent.click(getByTestId('IFrameModal-Close-Button'))
+    expect(handleClose).toHaveBeenCalledTimes(1)
+  })
+})

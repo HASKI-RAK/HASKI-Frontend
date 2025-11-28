@@ -1,51 +1,39 @@
-import { act } from 'react-test-renderer'
 import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import { act } from 'react-test-renderer'
 import ContactForm from './ContactForm'
-
-jest.mock('react-i18next', () => ({
-  useTranslation: () => {
-    return {
-      t: (key: string) => {
-        if (key == 'components.ContactForm.types') {
-          const reportTypes = [
-            { value: '1', label: 'issue' },
-            { value: '2', label: 'Spam' }
-          ]
-          return reportTypes
-        } else if (key == 'components.ContactForm.topics') {
-          return [
-            { value: '1', label: 'Learningelement' },
-            { value: '2', label: 'Sexism' }
-          ]
-        }
-        return key
-      }
-    }
-  }
-}))
 
 describe('Test ContactForm', () => {
   const send = jest.fn()
 
   test('Test default params', () => {
-    const form = render(<ContactForm />)
-    const submitButton = form.getByText('components.ContactForm.submit')
+    const form = render(
+      <MemoryRouter>
+        <ContactForm />
+      </MemoryRouter>
+    )
+    const submitButton = form.getByText('appGlobal.submit')
     const input = form.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'text' } })
-    fireEvent.mouseDown(form.getByRole('button', { name: /Topic/i }))
+    fireEvent.mouseDown(form.getByRole('combobox', { name: /Topic/i }))
     act(() => {
       form.getAllByRole('option')[0].click()
     })
     fireEvent.click(submitButton)
+    expect(form).toBeTruthy()
   })
 
   test('submits form correctly', () => {
-    const form = render(<ContactForm onSubmit={send} />)
-    const submitButton = form.getByText('components.ContactForm.submit')
+    const form = render(
+      <MemoryRouter>
+        <ContactForm onSubmit={send} />
+      </MemoryRouter>
+    )
+    const submitButton = form.getByText('appGlobal.submit')
     const input = form.getByRole('textbox')
     fireEvent.change(input, { target: { value: 'text' } })
-    fireEvent.mouseDown(form.getByRole('button', { name: /Topic/i }))
+    fireEvent.mouseDown(form.getByRole('combobox', { name: /Topic/i }))
     act(() => {
       form.getAllByRole('option')[0].click()
     })
@@ -54,9 +42,13 @@ describe('Test ContactForm', () => {
     expect(send).toBeCalled()
   })
   test('missing description input', () => {
-    const form = render(<ContactForm onSubmit={send} />)
-    const submitButton = form.getByText('components.ContactForm.submit')
-    fireEvent.mouseDown(form.getByRole('button', { name: /Topic/i }))
+    const form = render(
+      <MemoryRouter>
+        <ContactForm onSubmit={send} />
+      </MemoryRouter>
+    )
+    const submitButton = form.getByText('appGlobal.submit')
+    fireEvent.mouseDown(form.getByRole('combobox', { name: /Topic/i }))
     act(() => {
       form.getAllByRole('option')[0].click()
     })
@@ -68,27 +60,39 @@ describe('Test ContactForm', () => {
 
   test('submits form incorrectly', () => {
     const text = '60%'
-    const form = render(<ContactForm onSubmit={send} />)
-    const submitButton = form.getByText('components.ContactForm.submit')
+    const form = render(
+      <MemoryRouter>
+        <ContactForm onSubmit={send} />
+      </MemoryRouter>
+    )
+    const submitButton = form.getByText('appGlobal.submit')
 
     fireEvent.click(submitButton)
     expect(typeof text).toBe('string')
     expect(send).not.toBeCalled()
   })
   test('check InputChange function', () => {
-    const { getAllByRole, getByRole } = render(<ContactForm />)
-    fireEvent.mouseDown(getByRole('button', { name: /Topic/i }))
+    const { getAllByRole, getByRole } = render(
+      <MemoryRouter>
+        <ContactForm />
+      </MemoryRouter>
+    )
+    fireEvent.mouseDown(getByRole('combobox', { name: /Topic/i }))
     act(() => {
       getAllByRole('option')[0].click()
     })
-    expect(getByRole('button', { name: /Topic/i })).toHaveTextContent(/Learningelement/i)
+    expect(getByRole('combobox', { name: /Topic/i })).toHaveTextContent(/Learningelement/i)
   })
 
   test('Contactform form no input', () => {
-    const contactform = render(<ContactForm onSubmit={send} />)
-    const submitButton = contactform.getByText('components.ContactForm.submit')
+    const contactform = render(
+      <MemoryRouter>
+        <ContactForm onSubmit={send} />
+      </MemoryRouter>
+    )
+    const submitButton = contactform.getByText('appGlobal.submit')
     const reporttype = contactform.getByRole('radio', { name: /issue/i })
-    const reporttopic = contactform.getByRole('button', { name: /Topic/i })
+    const reporttopic = contactform.getByRole('combobox', { name: /Topic/i })
 
     // No input yet so no submit
     fireEvent.mouseDown(reporttype)

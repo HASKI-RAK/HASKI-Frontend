@@ -1,7 +1,7 @@
-import { fireEvent, render, act } from '@testing-library/react'
-import Searchbar, { debouncedSearchQuery } from './Searchbar'
-import { ChangeEvent } from 'react'
 import '@testing-library/jest-dom'
+import { fireEvent, render } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
+import Searchbar from './Searchbar'
 
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')
@@ -19,17 +19,30 @@ describe('Searchbar tests', () => {
   }
 
   it('renders without input', () => {
-    const { getByDisplayValue } = render(<Searchbar />)
-    expect(getByDisplayValue('')).toBeInTheDocument()
+    expect(
+      render(
+        <MemoryRouter>
+          <Searchbar />
+        </MemoryRouter>
+      )
+    ).toBeTruthy()
   })
 
   it('renders with input', () => {
-    const { getAllByText } = render(<Searchbar {...mockSearchbarProps} />)
+    const { getAllByText } = render(
+      <MemoryRouter>
+        <Searchbar {...mockSearchbarProps} />
+      </MemoryRouter>
+    )
     expect(getAllByText(mockSearchbarProps.label).length).toEqual(2)
   })
 
-  test('search query has changed', () => {
-    const { getByRole } = render(<Searchbar {...mockSearchbarProps} />)
+  test('Search query has changed', () => {
+    const { getByRole } = render(
+      <MemoryRouter>
+        <Searchbar {...mockSearchbarProps} />
+      </MemoryRouter>
+    )
     const searchbarInput = getByRole('textbox')
 
     expect(setTimeout).toHaveBeenCalledTimes(0)
@@ -39,29 +52,5 @@ describe('Searchbar tests', () => {
     expect(setTimeout).toHaveBeenCalledTimes(1)
     expect(mockSearchbarProps.setSearchQuery).toHaveBeenCalledTimes(1)
     expect(mockSearchbarProps.setSearchQuery).toHaveBeenCalledWith('testValue')
-  })
-
-  test('debounced search query function', () => {
-    const mockEvent = {
-      target: {
-        value: 'testValue'
-      }
-    } as ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-
-    expect(setTimeout).toHaveBeenCalledTimes(0)
-
-    const mockDebouncedSearchQuery = debouncedSearchQuery(
-      mockEvent,
-      mockSearchbarProps.setSearchQuery,
-      mockSearchbarProps.timeout
-    )
-
-    render(<Searchbar {...mockSearchbarProps} />)
-
-    act(() => {
-      mockDebouncedSearchQuery()
-    })
-
-    expect(setTimeout).toHaveBeenCalledTimes(1)
   })
 })

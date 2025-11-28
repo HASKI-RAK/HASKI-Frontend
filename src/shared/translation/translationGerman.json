@@ -1,153 +1,88 @@
 {
-  "Back": "Zurück",
-  "components.QuestionnaireResults.QuestionnaireResultsModal.ButtonText": "Fragebogen Ergebnisse",
-  "components.QuestionnaireResults.ResultDescriptionILS.Active.moderate": "Ihre Informationsverarbeitung erfolgt bevorzugt eher aktiv. Es ist zu empfehlen, dass Sie stets Möglichkeiten für sich schaffen, neue Information im Zuge von praktischen Experimenten und Diskussionen mit Kommiliton*innen zu verarbeiten. So können Sie tendenziell schneller lernen.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Active.strong": "Ihre Informationsverarbeitung erfolgt bevorzugt aktiv. Es ist zu empfehlen, dass Sie stets Möglichkeiten für sich schaffen, neue Information im Zuge von praktischen Experimenten und Diskussionen mit Kommiliton*innen zu verarbeiten. So können Sie tendenziell schneller lernen.",
-  "components.QuestionnaireResults.ResultDescriptionILS.EverythingBalanced": "In keiner der Dimensionen zeigt sich bei Ihnen eine klare Tendenz. Das deutet darauf hin, dass Sie in der Verarbeitung, der Wahrnehmung, der Präsentation und der Organisation von Informationen sich beide Pole der Dimensionen zunutze machen können. Laut dem Ergebnis des ILS haben Sie hier das Skillset sich flexibel anzupassen. Die Empfehlung lautet deshalb, dass weiterhin in dieser Balance gelernt werden sollte.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Global.moderate": "Bezüglich der Informationsorganisation zeigt sich eher eine signifikante Präferenz in Richtung global. Es ergibt sich daraus die Empfehlung bei dem Erlernen von neuen Inhalten sich zuerst einen Überblick über den Kontext und die Gesamtheit des Themas zu verschaffen.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Global.strong": "Bezüglich der Informationsorganisation zeigt sich eine signifikante Präferenz in Richtung global. Es ergibt sich daraus die Empfehlung bei dem Erlernen von neuen Inhalten sich zuerst einen Überblick über den Kontext und die Gesamtheit des Themas zu verschaffen.",
-  "components.QuestionnaireResults.ResultDescriptionILS.ILSResults": "ILS Ergebnis",
-  "components.QuestionnaireResults.ResultDescriptionILS.Intuitive.moderate": "Sie präferieren eher eine intuitive Informationswahrnehmung. Es scheint förderlich, dass Sie neue Informationen zunächst anhand von Prinzipien und Ideen lernen. Die Auseinandersetzung mit zusätzlicher theoretischer Literatur kann Ihr Verständnis verbessern.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Intuitive.strong": "Sie präferieren eine intuitive Informationswahrnehmung. Es scheint förderlich, dass Sie neue Informationen zunächst anhand von Prinzipien und Ideen lernen. Die Auseinandersetzung mit zusätzlicher theoretischer Literatur kann Ihr Verständnis verbessern.",
-  "components.QuestionnaireResults.ResultDescriptionILS.ListKResults": "List-K Ergebnis",
-  "components.QuestionnaireResults.ResultDescriptionILS.Reflective.moderate": "Ihre Informationsverarbeitung erfolgt bevorzugt eher reflektiv. Es ist zu empfehlen, dass Sie stets Möglichkeiten für sich schaffen, über neue Informationen intensiv nachzudenken, bevor Sie diese praktisch umsetzen oder experimentieren. So können Sie tendenziell schneller lernen.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Reflective.strong": "Ihre Informationsverarbeitung erfolgt bevorzugt reflektiv. Es ist zu empfehlen, dass Sie stets Möglichkeiten für sich schaffen, über neue Informationen intensiv nachzudenken, bevor Sie diese praktisch umsetzen oder experimentieren. So können Sie tendenziell schneller lernen.",
-  "components.QuestionnaireResults.ResultDescriptionILS.RemainingDimensions": "Restliche Dimensionen",
-  "components.QuestionnaireResults.ResultDescriptionILS.Sensory.moderate": "Sie präferieren eher eine sensorische Informationswahrnehmung. Es scheint förderlich, dass Sie neue Informationen anhand von Fakten oder Experimenten lernen. Die Auseinandersetzung mit selbst ausgedachten Beispielen kann Ihr Lerntempo erhöhen.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Sensory.strong": "Sie präferieren eine sensorische Informationswahrnehmung. Es scheint förderlich, dass Sie neue Informationen anhand von Fakten oder Experimenten lernen. Die Auseinandersetzung mit selbst ausgedachten Beispielen kann Ihr Lerntempo erhöhen.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Sequential.moderate": "Bezüglich der Informationsorganisation zeigt sich eher eine signifikante Präferenz in Richtung sequentiell. Es ergibt sich daraus die Empfehlung, bei dem Erlernen von neuen Inhalten zuerst eine hierarchische Struktur des Inhalts zu schaffen, um diesen dann schrittweise abzuarbeiten.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Sequential.strong": "Bezüglich der Informationsorganisation zeigt sich eine signifikante Präferenz in Richtung sequentiell. Es ergibt sich daraus die Empfehlung, bei dem Erlernen von neuen Inhalten zuerst eine hierarchische Struktur des Inhalts zu schaffen, um diesen dann schrittweise abzuarbeiten.",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.1": "einer",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.2": "zwei",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.3": "drei",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.organisation": "Organisation",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part1": "In",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part2": "der vier Dimensionen zeigt sich bei Ihnen keine klare Tendenz. Das deutet darauf hin, dass Sie sich bei der",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.Part3": "von Informationen beide Pole der Dimension zunutze machen können. Laut dem Ergebnis des ILS haben Sie hier das Skillset sich flexibel anzupassen.",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.perception": "Wahrnehmung",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.presentation": "Präsentation",
-  "components.QuestionnaireResults.ResultDescriptionILS.SomethingBalanced.processing": "Verarbeitung",
-  "components.QuestionnaireResults.ResultDescriptionILS.Verbal.moderate": "Im Hinblick auf die Präsentation von Informationen ziehen Sie eher einen verbalen Fokus vor. Bei der Auseinandersetzung mit schwierigen und komplexen Inhalten kann es Ihnen helfen, wenn Sie diese mithilfe von eigenen schriftlichen Zusammenfassungen oder Audioaufnahmen verbalisieren, um ihr Lernen zu erleichtern.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Verbal.strong": "Im Hinblick auf die Präsentation von Informationen ziehen Sie einen verbalen Fokus vor. Bei der Auseinandersetzung mit schwierigen und komplexen Inhalten kann es Ihnen helfen, wenn Sie diese mithilfe von eigenen schriftlichen Zusammenfassungen oder Audioaufnahmen verbalisieren, um ihr Lernen zu erleichtern.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Visual.moderate": "Im Hinblick auf die Präsentation von Informationen ziehen Sie eher einen visuellen Fokus vor. Bei der Auseinandersetzung mit schwierigen und komplexen Inhalten kann es Ihnen helfen, wenn Sie diese mithilfe von Grafiken, Diagrammen oder Ähnlichem visualisieren, um ihr Lernen zu erleichtern.",
-  "components.QuestionnaireResults.ResultDescriptionILS.Visual.strong": "Im Hinblick auf die Präsentation von Informationen ziehen Sie einen visuellen Fokus vor. Bei der Auseinandersetzung mit schwierigen und komplexen Inhalten kann es Ihnen helfen, wenn Sie diese mithilfe von Grafiken, Diagrammen oder Ähnlichem visualisieren, um ihr Lernen zu erleichtern.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learningEnvironment Below3.Title": "Aufmerksamkeit und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learningWithClassmates Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learningWithClassmates Below3.Title": "Aufmerksamkeit und Lernen mit Kommiliton*innen haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learnWithClassmates && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learnWithClassmates && learningEnvironment Below3.Title": "Aufmerksamkeit, Lernen mit Kommiliton*innen und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch && learningEnvironment Below3.Title": "Aufmerksamkeit, Lernen mit Kommiliton*innen, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch Below3.Title": "Aufmerksamkeit, Lernen mit Kommiliton*innen und Literaturrecherche haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && literatureResearch && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && literatureResearch && learningEnvironment Below3.Title": "Aufmerksamkeit, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && literatureResearch Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && literatureResearch Below3.Title": "Aufmerksamkeit und Literaturrecherche haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich gut, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung mit möglichst wenig Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learningEnvironment Below3.Title": "Aufmerksamkeit, Zeit und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Das Treffen mit Kommiliton*innen kann hier die Verbindlichkeit unterstützen. Das gibt Ihnen zusätzlich die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates && learningEnvironment Below3.Title": "Aufmerksamkeit, Zeit, Lernen mit Kommiliton*innen und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Das Treffen mit Kommiliton*innen kann hier die Verbindlichkeit unterstützen. Das gibt Ihnen zusätzlich die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch && learningEnvironment Below3.Title": "Aufmerksamkeit, Zeit, Lernen mit Kommiliton*innen, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Das Treffen mit Kommiliton*innen kann hier die Verbindlichkeit unterstützen. Das gibt Ihnen zusätzlich die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch Below3.Title": "Aufmerksamkeit, Zeit, Lernen mit Kommiliton*innen und Literaturrecherche haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Das Treffen mit Kommiliton*innen kann hier die Verbindlichkeit unterstützen. Das gibt Ihnen zusätzlich die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && learnWithClassmates Below3.Title": "Aufmerksamkeit, Zeit und Lernen mit Kommiliton*innen haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && literatureResearch && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && literatureResearch && learningEnvironment Below3.Title": "Aufmerksamkeit, Zeit, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && literatureResearch Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time && literatureResearch Below3.Title": "Aufmerksamkeit, Zeit und Literaturrecherche haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention && time Below3.Title": "Aufmerksamkeit und Zeit haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention Below3.Description": "Bezüglich des Managements interner Ressourcen ist es zu sehen, dass es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich gut, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.attention Below3.Title": "Aufmerksamkeit hat einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part1": "In Bezug auf die kognitiven Strategien wäre ein intensiverer Nutzen förderlich, um die Lerninhalte besser zu verstehen und zu durchdringen. Speziell ein vermehrtes",
-  "components.QuestionnaireResults.ResultDescriptionListK.CognitiveStrategies Below3.Part2": "von Lerninhalten kann für Sie sinnvoll sein.",
-  "components.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Description": "Im Rahmen des LIST-K geht es prinzipiell darum, Ihnen den Blick auf Ihre eigenen Lernstrategien zu erleichtern. Werte von 3 oder höher lassen darauf schließen, dass Sie aus Ihrer Sicht die jeweilige Strategie zumindest manchmal anwenden.",
-  "components.QuestionnaireResults.ResultDescriptionListK.GeneralDescription.Title": "Allgemeine Beschreibung des LIST-K",
-  "components.QuestionnaireResults.ResultDescriptionListK.learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements externer Ressourcen ist es deutlich zu sehen, dass Sie bei der Gestaltung Ihrer Lernumgebung auf deren Eignung achten sollten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.learningEnvironment Below3.Title": "Lernumgebung hat einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates && learningEnvironment Below3.Description": "Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Es ist zusätzlich deutlich zu sehen, dass Sie bei der Gestaltung Ihrer Lernumgebung auf deren Eignung achten sollten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates && learningEnvironment Below3.Title": "Lernen mit Kommiliton*innen und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates && literatureResearch && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements externer Ressourcen ist es deutlich zu sehen, dass Sie bei der Gestaltung Ihrer Lernumgebung auf deren Eignung achten sollten. Es wäre außerdem sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates && literatureResearch && learningEnvironment Below3.Title": "Lernen mit Kommiliton*innen, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates && literatureResearch Below3.Description": "Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates && literatureResearch Below3.Title": "Lernen mit Kommiliton*innen und Literaturrecherche haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates Below3.Description": "Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.learnWithClassmates Below3.Title": "Lernen mit Kommiliton*innen hat einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.literatureResearch && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements externer Ressourcen ist es deutlich zu sehen, dass Sie bei der Gestaltung Ihrer Lernumgebung auf deren Eignung achten sollten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.literatureResearch && learningEnvironment Below3.Title": "Literaturrecherche und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.literatureResearch Below3.Description": "Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.literatureResearch Below3.Title": "Literaturrecherche hat einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Goals & Plans": "Planen",
-  "components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Part1": "Im Hinblick auf metakognitive Strategien ist es zu empfehlen, dass Sie sich des Öfteren die Mühe machen, ihren eigenen Lernprozess zu",
-  "components.QuestionnaireResults.ResultDescriptionListK.MetacognitiveStrategies Below3.Regulate": "Reflektieren",
-  "components.QuestionnaireResults.ResultDescriptionListK.Score": "Wert",
-  "components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3.2": "In Ihrem Fall zeigt sich, dass die Nutzung von Lernstrategien vor allen in zwei Bereichen noch ausbaufähig ist.",
-  "components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3.3": "In Ihrem Fall zeigt sich, dass die Nutzung von Lernstrategien vor allen in drei Bereichen noch ausbaufähig ist.",
-  "components.QuestionnaireResults.ResultDescriptionListK.SubscaleAverage Below3.4": "In Ihrem Fall zeigt sich, dass die Nutzung von Lernstrategien vor allen in allen Bereichen noch ausbaufähig ist.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung schaffen, um Ihr Lernen effektiver zu gestalten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learningEnvironment Below3.Title": "Zeit und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung zu schaffen, um Ihr Lernen effektiver zu gestalten. Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates && learningEnvironment Below3.Title": "Zeit, Lernen mit Kommiliton*innen und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates && literatureResearch && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung zu schaffen, um Ihr Lernen effektiver zu gestalten. Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates && literatureResearch && learningEnvironment Below3.Title": "Zeit, Lernen mit Kommiliton*innen, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates && literatureResearch Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung zu schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates && literatureResearch Below3.Title": "Zeit, Lernen mit Kommiliton*innen und Literaturrecherche haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume schaffen, um Ihr Lernen effektiver zu gestalten. Das Treffen mit Kommiliton*innen kann hier die Verbindlichkeit unterstützen.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && learnWithClassmates Below3.Title": "Zeit und Lernen mit Kommiliton*innen haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && literatureResearch && learningEnvironment Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung zu schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && literatureResearch && learningEnvironment Below3.Title": "Zeit, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && literatureResearch Below3.Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time && literatureResearch Below3.Title": "Zeit und Literaturrecherche haben einen Wert unter 3",
-  "components.QuestionnaireResults.ResultDescriptionListK.time Below3.Description": "Im Hinblick auf Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es würde sich wahrscheinlich positiv auswirken, wenn Sie versuchen, sich klare Lernzeiträume zu schaffen, um Ihr Lernen effektiver zu gestalten.",
-  "components.QuestionnaireResults.ResultDescriptionListK.time Below3.Title": "Zeit hat einen Wert unter 3",
-  "components.QuestionnaireResults.TableILS.Active": "Aktiv",
-  "components.QuestionnaireResults.TableILS.balanced": "balanciert",
-  "components.QuestionnaireResults.TableILS.Dimension": "Dimension",
-  "components.QuestionnaireResults.TableILS.Global": "Global",
-  "components.QuestionnaireResults.TableILS.Interpretation": "Interpretation",
-  "components.QuestionnaireResults.TableILS.Intuitive": "Intuitiv",
-  "components.QuestionnaireResults.TableILS.moderate": "moderat",
-  "components.QuestionnaireResults.TableILS.Reflective": "Reflektiv",
-  "components.QuestionnaireResults.TableILS.Score": "Wert",
-  "components.QuestionnaireResults.TableILS.Sensory": "Sensorisch",
-  "components.QuestionnaireResults.TableILS.Sequential": "Sequentiell",
-  "components.QuestionnaireResults.TableILS.strong": "stark",
-  "components.QuestionnaireResults.TableILS.Verbal": "Verbal",
-  "components.QuestionnaireResults.TableILS.Visual": "Visuel",
-  "components.QuestionnaireResults.TableListK.Attention": "Aufmerksamkeit",
-  "components.QuestionnaireResults.TableListK.Cognitive strategies": "Kognitive Strategien",
-  "components.QuestionnaireResults.TableListK.Control": "Kontrollieren",
-  "components.QuestionnaireResults.TableListK.Critical review": "Kritisches Prüfen",
-  "components.QuestionnaireResults.TableListK.Effort": "Anstrengung",
-  "components.QuestionnaireResults.TableListK.Elaborate": "Elaborieren",
-  "components.QuestionnaireResults.TableListK.External resource management strategies": "Strategien des Managements externer Ressourcen",
-  "components.QuestionnaireResults.TableListK.Factors & subscales": "Faktoren & Subskalen",
-  "components.QuestionnaireResults.TableListK.Goals & plans": "Ziele und Planen",
-  "components.QuestionnaireResults.TableListK.Internal resource management strategies": "Strategien des Managements interner Ressourcen",
-  "components.QuestionnaireResults.TableListK.Learning environment": "Lernumgebung",
-  "components.QuestionnaireResults.TableListK.Learning with classmates": "Lernen mit Studienkollegen",
-  "components.QuestionnaireResults.TableListK.Literature research": "Literaturrecherche",
-  "components.QuestionnaireResults.TableListK.Metacognitive strategies": "Metakognitive Strategien",
-  "components.QuestionnaireResults.TableListK.Organize": "Organisieren",
-  "components.QuestionnaireResults.TableListK.Regulate": "Regulieren",
-  "components.QuestionnaireResults.TableListK.Repeat": "Wiederholen",
-  "components.QuestionnaireResults.TableListK.Score": "Wert",
-  "components.QuestionnaireResults.TableListK.Time": "Zeit",
-  "components.Login.login": "Anmelden",
-  "components.Login.orLoginWithMoodle": "oder mit Moodle anmelden",
-  "components.Login.password": "Passwort",
-  "components.Login.passwordError": "Bitte geben Sie ein gültiges Passwort ein",
-  "components.Login.subtitle": "Bitte geben Sie Ihre Zugangsdaten ein",
-  "components.Login.title": "HASKI Anmeldung",
-  "components.Login.username": "Benutzername",
-  "components.Login.usernameError": "Bitte geben Sie einen gültigen Benutzernamen ein",
-  "components.ContactForm.contactform": "Kontaktformular",
-  "components.ContactForm.reportType": "Reporttyp",
+  "appGlobal.accept": "Akzeptieren",
+  "appGlobal.algorithm": "Algorithmus",
+  "appGlobal.algorithms": "Algorithmen",
+  "appGlobal.aschaffenburgUAS": "TH Aschaffenburg",
+  "appGlobal.back": "Zurück",
+  "appGlobal.cancel": "Abbrechen",
+  "appGlobal.classification": "Klassifikation",
+  "appGlobal.classifications": "Klassifikationen",
+  "appGlobal.courses": "Kurse",
+  "appGlobal.dataSendSuccessful": "Daten wurden erfolgreich gesendet",
+  "appGlobal.dataSendUnsuccessful": "Daten konnten nicht gesendet werden",
+  "appGlobal.decline": "Ablehnen",
+  "appGlobal.delete": "Löschen",
+  "appGlobal.help": "Hilfe",
+  "appGlobal.imageSources": "Bildquellen:",
+  "appGlobal.learningElement": "Lernelement",
+  "appGlobal.learningElements": "Lernelemente",
+  "appGlobal.lineGraph": "Liniendiagramm",
+  "appGlobal.loading": "Lade...",
+  "appGlobal.next": "Weiter",
+  "appGlobal.oClock": "Uhr",
+  "appGlobal.othRegensburg": "OTH Regensburg",
+  "appGlobal.reset": "Zurücksetzen",
+  "appGlobal.send": "Senden",
+  "appGlobal.start": "Start",
+  "appGlobal.submit": "Abschicken",
+  "appGlobal.table": "Tabelle",
+  "appGlobal.topics": "Themenbereiche",
+  "appGlobal.universityKempten": "Hochschule Kempten",
+  "components.AlgorithmSettingsModal.algorithms": [
+    {
+      "name": "Feste Reihenfolge",
+      "description": "Die Lernelemente werden in einer festen Reihenfolge angezeigt. Es wird kein Algorithmus verwendet.",
+      "key": "default"
+    },
+    {
+      "name": "Graf",
+      "description": "Dieser Algorithmus basiert auf dem lernadaptiven Mechanismus von Graf et al. Er berechnet den Lernpfad basierend auf dem Lernstil des Lernenden.",
+      "key": "graf"
+    },
+    {
+      "name": "ACO",
+      "description": "Inspiriert vom Verhalten von Ameisen, berechnet dieser Algorithmus den Lernpfad durch Simulation von Pheromonspuren, um optimale Wege zu finden.",
+      "key": "aco"
+    },
+    {
+      "name": "Genetischer Algorithmus",
+      "description": "Basierend auf natürlicher Selektion, kombiniert dieser Algorithmus Lernwege, um über Generationen den besten Lernpfad zu entwickeln.",
+      "key": "ga"
+    }
+  ],
+  "components.AlgorithmSettingsModal.headerRight": "Beschreibung",
+  "components.AlgorithmSettingsModal.selectAlgorithms": "Algorithmen auswählen",
+  "components.AlgorithmSettingsModal.success": "Der Algorithmus wurde erfolgreich geändert",
+  "components.AlgorithmSettingsModal.teacherIconTip": "Empfehlung des Kursleiters",
+  "components.AlgorithmSettingsModal.wrongRole": "Sie haben nicht die erforderlichen Berechtigungen, um den Algorithmus zu ändern",
+  "components.BasicNode.deleteLearningElementSuccessful": "Das Lernelement wurde erfolgreich gelöscht",
+  "components.BasicNode.deleteTooltip": "Lernelement löschen",
+  "components.BasicNode.recommendedExercise": "Diese Übung wird Ihnen als Nächstes empfohlen.",
   "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
+  "components.ContactForm.contactform": "Kontaktformular",
+  "components.ContactForm.error": "Es fehlt eine Beschreibung.",
+  "components.ContactForm.errorSelect": "Es wurde kein Thema ausgewählt.",
+  "components.ContactForm.reportType": "Reporttyp",
+  "components.ContactForm.submitError": "Die Submit-Funktion wurde aufgerufen, jedoch gab es einen Fehler.",
+  "components.ContactForm.topic": "Themenbereich",
+  "components.ContactForm.topics": [
+    {
+      "value": "le",
+      "label": "Lernelement"
+    },
+    {
+      "value": "ui",
+      "label": "UI"
+    },
+    {
+      "value": "design",
+      "label": "Design"
+    },
+    {
+      "value": "other",
+      "label": "Sonstiges"
+    }
+  ],
   "components.ContactForm.types": [
     {
       "value": "issue",
@@ -170,116 +105,1384 @@
       "label": "Sonstiges"
     }
   ],
-  "components.ContactForm.topics": [
+  "components.CourseCard.deleteCourseSuccessful": "Der Kurs wurde erfolgreich gelöscht",
+  "components.CourseCard.deleteTooltip": "Kurs mit all seinen Inhalten löschen",
+  "components.CreateAlgorithmTable.initialAlgorithmDescription": "Bitte wählen Sie einen Algorithmus für die Berechnung des Lernpfads aus.",
+  "components.CreateCourseDetailsTable.courseName": "Kursname",
+  "components.CreateCourseDetailsTable.startDate": "Startdatum",
+  "components.CreateCourseModal.createCourse": "Kurs erstellen",
+  "components.CreateCourseTable.alreadyCreatedCourses": "Bereits erstellte Kurse",
+  "components.CreateCourseTable.lmsCourses": "Kurse aus dem LMS",
+  "components.CreateCourseTable.noCoursesFound": "Keine Kurse gefunden...",
+  "components.CreateDefaultLearningPathTable.header": "Fester Lernpfad",
+  "components.CreateDefaultLearningPathTable.introduction": "Im Folgenden müssen Sie Ihren eigenen didaktischen Lernpfad durch Ihren Lerninhalt festlegen. Dieser repräsentiert eine unveränderliche Reihenfolge von Lernelementen, die Sie prinzipiell für alle Studierenden vorschlagen würden. Der didaktische Lernpfad dient als generelle Empfehlung für alle Studierenden, deren Datenbasis noch nicht ausreichend groß ist, um die Berechnung eines adaptiven Lernpfades zu gewährleisten. Des Weiteren haben die Studierenden in HASKI immer die Möglichkeit, den von Ihnen entworfenen didaktischem Lernpfad auszuwählen und diesem zu folgen.",
+  "components.CreateDefaultLearningPathTable.leftHeader": "Klassifikations Elemente",
+  "components.CreateDefaultLearningPathTable.rightHeader": "Sortierte Klassifikationen",
+  "components.CreateDefaultLearningPathTable.submitRequirement": "Alle Elemente müssen zugeteilt oder deaktiviert sein",
+  "components.CreateLearningElement.createLearningElement": "Lernelement hinzufügen",
+  "components.CreateLearningElementClassificationTable.classifications": [
     {
-      "value": "le",
-      "label": "Lernelement"
+      "name": "LZ - Lernziel",
+      "key": "LZ"
     },
     {
-      "value": "ui",
-      "label": "UI"
+      "name": "KÜ - Kurzübersicht",
+      "key": "KÜ"
     },
     {
-      "value": "design",
-      "label": "Design"
+      "name": "FO - Forum",
+      "key": "FO"
     },
     {
-      "value": "other",
-      "label": "Sonstiges"
+      "name": "EK - Erklärung",
+      "key": "EK"
+    },
+    {
+      "name": "AN - Animation",
+      "key": "AN"
+    },
+    {
+      "name": "BE - Beispiel",
+      "key": "BE"
+    },
+    {
+      "name": "AB - Anwendungsbeispiel",
+      "key": "AB"
+    },
+    {
+      "name": "ÜB - Übung",
+      "key": "ÜB"
+    },
+    {
+      "name": "SE - Selbsteinschätzungstest",
+      "key": "SE"
+    },
+    {
+      "name": "ZL - Zusatzliteratur",
+      "key": "ZL"
+    },
+    {
+      "name": "ZF - Zusammenfassung",
+      "key": "ZF"
+    },
+    {
+      "name": "RQ - Reflektives Quiz",
+      "key": "RQ"
     }
   ],
-  "components.ContactForm.submit": "Abschicken",
-    "components.ContactForm.learningelement": "Learnelement",
-  "components.ContactForm.ui": "UI",
-  "components.ContactForm.design": "Design",
-  "components.ContactForm.error": "Es fehlt eine Beschreibung.",
-  "components.ContactForm.errorSelect": "Es wurde kein Thema ausgewählt.",
-  "components.ContactForm.submitError": "Die submit funktion wurde aufgerufen, jedoch gab es einen Fehler.",
-  "Dot": ".",
-  "help": "Hilfe",
-  "Next": "Weiter",
-  "contact": "Kontakt",
-  "topic": "Thema",
-  "pages.glossary": "Glossar",
-  "pages.home": "Startseite",
-  "pages.imprint": "Impressum",
-  "pages.login": "Login",
-  "pages.privacypolicy": "Datenschutzerklärung",
-  "pages.projectinformation": "Projektinformation",
-  "pages.projectdescription": "Projektbeschreibung",
-  "pages.Contact.success": "Ihr Feedback wurde erfolgreich versendet.",
-  "pages.Contact.error": "Ihr Feedback konnte nicht versendet werden.",
-  "projectHASKI": "Projekt HASKI",
-  "tooltip.openGlobalSettings": "Globale Einstellungen",
-  "tooltip.openSettings": "Einstellungen",
-  "components.ProjectDescriptionContent.introductionHeader": "Was ist HASKI?",
-  "components.ProjectDescriptionContent.introductionBody": "HASKI steht für „Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt“ und wird gefördert durch das Bundesministerium für Bildung und Forschung mit einer Projektlaufzeit bis Dezember 2025. HASKI ist ein Verbundprojekt von drei bayerischen Hochschulen: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
-  "components.ProjectDescriptionContent.advantagesTeachingHeader": "Vorteile für die Hochschullehre",
-  "components.ProjectDescriptionContent.advantagesTeachingBody": "Das HASKI-System möchte einen wichtigen Beitrag dazu leisten, interaktives, individuelles und selbstgesteuertes Lernen in der Hochschullehre besser zu etablieren. Digitale Medien und Plattformen können weit mehr gewährleisten als die derzeitige Praxis der Hochschullehre, in der auch im Zuge der Pandemie der Frontalunterricht dominiert.",
-  "components.ProjectDescriptionContent.advantagesTeachingHeader2": "Einsatz in der Hochschullehre",
-  "components.ProjectDescriptionContent.advantagesTeachingBody2": "Die Idee von HASKI ist es, das Potenzial von KI in den Veranstaltungen der Hochschule Kempten zu nutzen. Kombiniert werden dazu die Präsenzveranstaltungen, das Learning Management System (z. B. Moodle) und das HASKI-System. Damit bieten wir eine Software-Komponente, die mithilfe von KI-Algorithmen Dich bei dem Erreichen Deiner Lernziele unterstützt.",
-  "components.ProjectDescriptionContent.advantagesLearningHeader": "Vorteile für Dich im Studium",
-  "components.ProjectDescriptionContent.advantagesLearningBody": "Die Unterstützung wird ermöglicht, indem das HASKI-System Deine Daten aus Moodle ausliest und ein KI-Algorithmus auf Basis dieser Daten Dir einen personalisierten Lernpfad durch die Lernmaterialien vorschlägt. Natürlich bleibt die Entscheidung bei Dir, welches Material Du als Nächstes bearbeiten willst. Auch diese Präferenzen merkt sich HASKI und passt zukünftige Vorschläge an die neuen Begebenheiten an.",
-  "components.ProjectDescriptionContent.advantagesLearningHeader2": "Mit welchen Daten arbeitet HASKI?",
-  "components.ProjectDescriptionContent.advantagesLearningBody2": "Die Datenbasis sind Fragebögen, individueller Wissensstand, ausgewertete Aufgaben und Verhaltensdaten aus Moodle. Ein Rückschluss der Lehrenden auf Dich wird durch Anonymisierung der Daten verhindert.",
-  "components.ProjectDescriptionContent.approachesHeader": "Was ist unser Ansatz?",
-  "components.ProjectDescriptionContent.approachesBody": [
-    "Bundesweiter Austausch. Publikation von wissenschaftlichen Beiträgen. Vorträge auf deutschen Konferenzen.",
-    "Applikation von modernster Technologie. Kombination von Learning Analytics und Künstlicher Intelligenz.",
-    "Empirische Untersuchungen. Online-Fragebögen, Evaluationsstudien, Datenanalysen."
+  "components.CreateLearningElementClassificationTable.setLearningElementClassification": "Klassifikation der Lernelemente festlegen",
+  "components.CreateLearningElementModal.createLearningElements": "Lernelemente erstellen",
+  "components.CreateLearningElementTable.selectAllToggle": "Alle auswählen",
+  "components.CreateLearningElementTable.selectLearningElements": "Lernelemente auswählen",
+  "components.CreateTopicModal.createTopics": "Themenbereiche erstellen",
+  "components.DeleteEntityModal.confirmLabel": "samt aller Inhalte unwiderruflich aus dem HASKI-System löschen (Inhalte in Moodle werden nicht verändert).",
+  "components.DeleteEntityModal.description": "Mit dieser Aktion werden alle zugehörigen Daten und Inhalte aus dem HASKI-System unwiderruflich entfernt. Diese Aktion kann nicht rückgängig gemacht werden. Inhalte in Moodle werden nicht verändert.",
+  "components.DeleteEntityModal.header": "endgültig löschen",
+  "components.DeleteEntityModal.title-1": "Sie sind dabei,",
+  "components.DeleteEntityModal.title-2": " zu löschen.",
+  "components.ExistingTopicsTable.title": "Bereits erstellte Themenbereiche",
+  "components.Footer.project": "Projekt",
+  "components.FurtherInfoMenu.title": "Weitere Informationen",
+  "components.LearnerCharacteristics.ilsLongNoData-1": "ILS-Fragebogen",
+  "components.LearnerCharacteristics.ilsShortNoData-1": "ILS-Fragebogen (Kurz)",
+  "components.LearnerCharacteristics.ilsShortNoData-2": "oder",
+  "components.LearnerCharacteristics.listKNoData": "List-K-Fragebogen",
+  "components.LearnerCharacteristics.moreInformation": "Ich möchte mehr zum ILS und ListK erfahren",
+  "components.LearnerCharacteristics.noData-1": "Um Ergebnisse anzuzeigen, müssen Sie zuerst den",
+  "components.LearnerCharacteristics.noData-2": "abschließen.",
+  "components.LearningElementRatingDashboard.empty": "Diese Seite füllt sich mit Informationen über das Rating von Lernelementen, sobald Sie mit der Bearbeitung von Übungen beginnen.",
+  "components.LearningElementRatingDashboard.lineGraphDataTooltip": "Am {{timestamp}} hatte das Rating einen Wert von {{value}} mit einer Abweichung von {{deviation}}.",
+  "components.LearningElementRatingDashboard.lineGraphLowerDeviationTooltip": "Am {{timestamp}} war das minimale Rating {{value}}.",
+  "components.LearningElementRatingDashboard.lineGraphTitle": "Der Verlauf des durchschnittl. Ratings der Lernelemente pro Thema",
+  "components.LearningElementRatingDashboard.lineGraphUpperDeviationTooltip": "Am {{timestamp}} war das maximale Rating {{value}}.",
+  "components.LearningElementRatingDashboard.ratingDeviationTooltip": "Die aktuelle normalisierte durchschnittl. Abweichung ist {{value}}.",
+  "components.LearningElementRatingDashboard.ratingDeviationTrendTooltip": "Der Trend der normalisierten durchschnittl. Abweichung ist {{value}}.",
+  "components.LearningElementRatingDashboard.ratingTitle": "Das aktuelle durchschnittl. Rating aller Lernelemente ",
+  "components.LearningElementRatingDashboard.ratingValueTooltip": "Das aktuelle normalisierte durchschnittl. Rating ist {{value}}.",
+  "components.LearningElementRatingDashboard.ratingValueTrendTooltip": "Der Trend des normalisierten durchschnittl. Ratings ist {{value}}.",
+  "components.LearningElementRatingDashboard.spiderGraphTitle": "Das durchschnittl. Lernelement-Rating pro Thema",
+  "components.LearningElementRatingDashboard.spiderGraphTooltip": "Das Rating für Thema {{concept}} ist {{value}}.",
+  "components.LearningElementRatingInfo.dashboardText": "Dieses Dashboard gibt Auskunft über das aktuelle Rating von Lernelementen und bereitet diese in verschiedenen Formen auf.",
+  "components.LearningElementRatingInfo.dashboardTitle": "Lernelement-Rating",
+  "components.LearningElementRatingInfo.lineGraphText": "Das Liniendiagramm und die Tabelle sind unten abgebildet. Sie zeigen die durchschnittlichen Ratings aller Lernelemente über die Zeit und ermöglichen so einen Überblick über die Entwicklung des Schwierigkeitsgrades. Während das Liniendiagramm eine grafische Aufbereitung darstellt, bietet die Tabelle einen detaillierten Einblick in die bisherigen Ratings.",
+  "components.LearningElementRatingInfo.lineGraphTitle": "Liniendiagramm / Tabelle",
+  "components.LearningElementRatingInfo.ratingText": "Das aktuelle Rating aller Lernelemente wird durch einen Wert und dessen Standardabweichung in der linken oberen Ecke angezeigt. Sie gibt einen Überblick über den aktuellen durchschnittlichen Schwierigkeitsgrad aller Lernelemente in allen Themenbereichen. Die Ausgangswerte für Rating und Standardabweichung liegen bei 1500 bzw. 350. Um das Rating einschätzen zu können, wurde sie mit den aktuellen Maximalwerten normalisiert. Zusätzlich geben Tendenzen Auskunft über die aktuelle Entwicklung.",
+  "components.LearningElementRatingInfo.ratingTitle": "Rating",
+  "components.LearningElementRatingInfo.spiderGraphText": "Das Netzdiagramm oben rechts zeigt das durchschnittliche Rating aller Lernelemente pro Thema und ermöglicht so einen Vergleich der Schwierigkeit von verschiedenen Bereichen.",
+  "components.LearningElementRatingInfo.spiderGraphTitle": "Netzdiagramm",
+  "components.LinearProgressWithLabel.learningProgress": "Lernfortschritt",
+  "components.ListKQuestions": [
+    [
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": "",
+        "answer3": "",
+        "answer4": "",
+        "answer5": ""
+      }
+    ],
+    [
+      {
+        "question": "Ich gehe meine Aufzeichnungen durch und mache mir dazu eine Gliederung mit den wichtigsten Punkten.",
+        "questionLabel": "org1_f1",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich stelle mir aus Mitschrift, Skript oder Literatur kurze Zusammenfassungen mit den Hauptideen zusammen.",
+        "questionLabel": "org2_f2",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich stelle wichtige Fachausdrücke und Definitionen in eigenen Listen zusammen.",
+        "questionLabel": "org3_f3",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich versuche, neue Begriffe oder Theorien auf mir bereits bekannte Begriffe und Theorien zu beziehen.",
+        "questionLabel": "elab1_f4",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich denke mir konkrete Beispiele zu bestimmten Lerninhalten aus.",
+        "questionLabel": "elab2_f5",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      }
+    ],
+    [
+      {
+        "question": "Ich beziehe das, was ich lerne, auf meine eigenen Erfahrungen.",
+        "questionLabel": "elab3_f6",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich frage mich, ob der Text, den ich gerade durcharbeite, wirklich überzeugend ist.",
+        "questionLabel": "crit_rev1_f7",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich gehe an die meisten Texte kritisch heran.",
+        "questionLabel": "crit_rev2_f8",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Das, was ich lerne, prüfe ich auch kritisch.",
+        "questionLabel": "crit_rev3_f9",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich lerne eine selbst erstellte Übersicht mit den wichtigsten Fachtermini auswendig.",
+        "questionLabel": "rep1_f10",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      }
+    ],
+    [
+      {
+        "question": "Ich lerne Regeln, Fachbegriffe oder Formeln auswendig.",
+        "questionLabel": "rep2_f11",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich lerne den Lernstoff anhand von Skripten oder anderen Aufzeichnungen möglichst auswendig.",
+        "questionLabel": "rep3_f12",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich formuliere Lernziele, an denen ich dann mein Lernen ausrichte.",
+        "questionLabel": "goal_plan1_f13",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich mache mir vor dem Lernen Gedanken, wie ich lernen will.",
+        "questionLabel": "goal_plan2_f14",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich plane mein Vorgehen beim Lernen nicht.",
+        "questionLabel": "goal_plan3_f15",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      }
+    ],
+    [
+      {
+        "question": "Um Wissenslücken festzustellen, rekapituliere ich die wichtigsten Inhalte, ohne meine Unterlagen zu Hilfe zu nehmen.",
+        "questionLabel": "con1_f16",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich stelle mir Fragen zum Stoff, um zu überprüfen, ob ich alles verstanden habe.",
+        "questionLabel": "con2_f17",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Falls im Lernstoff Fragen oder Tests enthalten sind, nutze ich diese, um mich selbst zu überprüfen.",
+        "questionLabel": "con3_f18",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich verändere meine Lerntechnik, wenn ich auf Schwierigkeiten stoße.",
+        "questionLabel": "reg1_f19",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich verändere meine Lernpläne, wenn ich merke, dass sie sich nicht umsetzen lassen.",
+        "questionLabel": "reg2_f20",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      }
+    ],
+    [
+      {
+        "question": "Wenn ich merke, dass mein Vorgehen beim Lernen nicht erfolgreich ist, verändere ich es.",
+        "questionLabel": "reg3_f21",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Es fällt mir schwer, bei der Sache zu bleiben.",
+        "questionLabel": "att1_f22",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Beim Lernen bin ich unkonzentriert.",
+        "questionLabel": "att2_f23",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Wenn ich lerne, bin ich leicht abzulenken.",
+        "questionLabel": "att3_f24",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Wenn ich mir ein bestimmtes Pensum zum Lernen vorgenommen habe, bemühe ich mich, es auch zu schaffen.",
+        "questionLabel": "eff1_f25",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      }
+    ],
+    [
+      {
+        "question": "Ich gebe nicht auf, auch wenn der Stoff sehr schwierig oder komplex ist.",
+        "questionLabel": "eff2_f26",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich lerne auch spätabends und am Wochenende, wenn es sein muss.",
+        "questionLabel": "eff3_f27",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Beim Lernen halte ich mich an einen bestimmten Zeitplan.",
+        "questionLabel": "time1_f28",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich lege die Stunden, die ich täglich mit Lernen verbringe, durch einen Zeitplan fest.",
+        "questionLabel": "time2_f29",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich lege vor jeder Lernphase eine bestimmte Zeitdauer fest.",
+        "questionLabel": "time3_f30",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      }
+    ],
+    [
+      {
+        "question": "Ich bearbeite Texte oder Aufgaben zusammen mit meinen Studienkollegen.",
+        "questionLabel": "lrn_w_cls1_f31",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich nehme mir Zeit, um mit Studienkollegen über den Stoff zu diskutieren.",
+        "questionLabel": "lrn_w_cls2_f32",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Wenn mir etwas nicht klar ist, so frage ich einen Studienkollegen um Rat.",
+        "questionLabel": "lrn_w_cls3_f33",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich suche nach weiterführender Literatur, wenn mir bestimmte Inhalte noch nicht ganz klar sind.",
+        "questionLabel": "lit_res1_f34",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Fehlende Informationen suche ich mir aus verschiedenen Quellen zusammen (z. B. Mitschriften, Bücher, Fachzeitschriften).",
+        "questionLabel": "lit_res2_f35",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      }
+    ],
+    [
+      {
+        "question": "Ich ziehe zusätzlich Literatur heran, wenn meine Aufzeichnungen unvollständig sind.",
+        "questionLabel": "lit_res3_f36",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Ich gestalte meine Umgebung so, dass ich möglichst wenig vom Lernen abgelenkt werde.",
+        "questionLabel": "lrn_env1_f37",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Zum Lernen sitze ich immer am selben Platz.",
+        "questionLabel": "lrn_env2_f38",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      },
+      {
+        "question": "Mein Arbeitsplatz ist so gestaltet, dass ich alles schnell finden kann.",
+        "questionLabel": "lrn_env3_f39",
+        "answer1": "sehr selten",
+        "answer2": "selten",
+        "answer3": "manchmal",
+        "answer4": "oft",
+        "answer5": "sehr oft"
+      }
+    ]
   ],
-  "components.ProjectDescriptionContent.goalsHeader": "Ziele des HASKI Projekts",
-  "components.ProjectDescriptionContent.goalsBody": [
-    "Verbesserung und Erweiterung von bisherigen Kursen im Bereich „Software Engineering“, durch Produktion von qualitativ hochwertigen, pädagogisch sinnvollen und abwechslungsreichen Lerninhalten",
-    "Umfassende digitale Repräsentation von einzelnen Studierenden und deren Charakteristiken",
-    "Entwicklung eines adaptiven und KI-basierten Lernsystems zur Generierung von personalisierten Lernpfadempfehlungen",
-    "KI-basierte Auswertung von Aufgaben und hilfreiches Feedback",
-    "Visualisierung und Aufbereitung von Learning Analytics zur Reflektion des Lernverhaltens",
-    "Didaktisch relevante Berichte für Lehrende zur Weiterentwicklung von Kursen"
+  "components.LoginForm.loginButton": "Anmelden",
+  "components.LoginForm.orLoginWithMoodle": "oder mit Moodle anmelden",
+  "components.LoginForm.password": "Passwort",
+  "components.LoginForm.passwordError": "Bitte geben Sie ein gültiges Passwort ein",
+  "components.LoginForm.subtitle": "Klicken Sie den folgenden Button, um zu Ihrem persönlichen Lernbereich zu gelangen.",
+  "components.LoginForm.title": "Willkommen bei HASKI",
+  "components.LoginForm.username": "Benutzername",
+  "components.LoginForm.usernameError": "Bitte geben Sie einen gültigen Benutzernamen ein",
+  "components.Menubar.closeDialog": "Sind Sie sicher, dass Sie den Fragebogen schließen möchten? Nicht abgeschickte Antworten werden nicht gespeichert.",
+  "components.Menubar.defaultLearningPath": "Fester Lernpfad",
+  "components.MenuBar.profileLogin": "Einloggen",
+  "components.MenuBar.profileLogout": "Ausloggen",
+  "components.Menubar.questionnaireILS": "ILS Fragebogen",
+  "components.Menubar.questionnaireILSShortened": "ILS Fragebogen verkürzt",
+  "components.Menubar.questionnaireListK": "List-K Fragebogen",
+  "components.MenuBar.themeModal": "Theme ändern",
+  "components.NodeTypes.ab": "Anwendungsbeispiele",
+  "components.NodeTypes.an": "Animationen",
+  "components.NodeTypes.be": "Beispiele",
+  "components.NodeTypes.ef": "Evaluationsfragebögen",
+  "components.NodeTypes.ek": "Erklärungen",
+  "components.NodeTypes.fo": "Foren",
+  "components.NodeTypes.kü": "Kurzübersichten",
+  "components.NodeTypes.lz": "Lernziele",
+  "components.NodeTypes.rq": "Reflektive Quiz",
+  "components.NodeTypes.se": "Selbsteinschätzungstests",
+  "components.NodeTypes.üb": "Übungen",
+  "components.NodeTypes.zf": "Zusammenfassungen",
+  "components.NodeTypes.zl": "Zusatzliteratur",
+  "components.PrivacyModal.accepted": "Danke für Ihr Vertrauen. Daten werden jetzt gesammelt, um Ihnen eine bessere Lernerfahrung zu bieten.",
+  "components.PrivacyModal.afterReading": "HASKI verwendet essentielle Cookies. Weitere Informationen über die gesammelten Daten und deren Verwendung können in der Datenschutzerklärung nachgelesen werden:",
+  "components.PrivacyModal.declined": "Sie können HASKI nicht verwenden, ohne den essentiellen Cookies zuzustimmen.",
+  "components.PrivacyModal.readPrivacypolicy": "Ich habe die",
+  "components.PrivacyModal.readPrivacyPolicy-2": "gelesen",
+  "components.PrivacyModal.returnToMoodle": "Dies wird Sie zu Moodle weiterleiten",
+  "components.PrivacyModal.termsOfService": "Nutzungsbedingungen und Datenschutzerklärung",
+  "components.RatingDashboard.histogramXAxisTitle": "Rating",
+  "components.RatingDashboard.histogramXAxisTooltip": "Zeigt den Wert des Ratings.",
+  "components.RatingDashboard.histogramYAxisTitle": "Anzahl der Studierenden",
+  "components.RatingDashboard.histogramYAxisTooltip": "Zeigt die Anzahl der Studierenden",
+  "components.RatingDashboard.lineGraphXAxisTitle": "Timestamp",
+  "components.RatingDashboard.lineGraphXAxisTooltip": "Zeigt die Timestamps.",
+  "components.RatingDashboard.lineGraphYAxisTitle": "Rating",
+  "components.RatingDashboard.lineGraphYAxisTooltip": "Zeigt die Werte des Ratings.",
+  "components.RatingDashboard.tableHeaderDeviation": "Abweichung",
+  "components.RatingDashboard.tableHeaderTimestamp": "Timestamp",
+  "components.RatingDashboard.tableHeaderTooltip": "Zeigt Timestamps, Ratings und Abweichungen der Daten.",
+  "components.RatingDashboard.tableHeaderValue": "Rating",
+  "components.RatingInfoDrawerButton.close": "Drawer schließen",
+  "components.RatingInfoDrawerButton.open": "Drawer öffnen für weitere Dashboard-Informationen",
+  "components.ResultDescriptionILS.active-moderate": "Ihre Informationsverarbeitung erfolgt bevorzugt eher aktiv. Es ist zu empfehlen, dass Sie stets Möglichkeiten für sich schaffen, neue Information im Zuge von praktischen Experimenten und Diskussionen mit Kommiliton*innen zu verarbeiten. So können Sie tendenziell schneller lernen.",
+  "components.ResultDescriptionILS.active-strong": "Ihre Informationsverarbeitung erfolgt bevorzugt aktiv. Es ist zu empfehlen, dass Sie stets Möglichkeiten für sich schaffen, neue Information im Zuge von praktischen Experimenten und Diskussionen mit Kommiliton*innen zu verarbeiten. So können Sie tendenziell schneller lernen.",
+  "components.ResultDescriptionILS.allDimensions": "Alle Dimensionen",
+  "components.ResultDescriptionILS.balancedDimensions-1": "In",
+  "components.ResultDescriptionILS.balancedDimensions-2": "der vier Dimensionen zeigt sich bei Ihnen keine klare Tendenz. Das deutet darauf hin, dass Sie sich bei der",
+  "components.ResultDescriptionILS.balancedDimensions-3": "von Informationen beide Pole der Dimension zunutze machen können. Laut dem Ergebnis des ILS haben Sie hier das Skillset sich flexibel anzupassen.",
+  "components.ResultDescriptionILS.balancedEnumeration-1": "einer",
+  "components.ResultDescriptionILS.balancedEnumeration-2": "zwei",
+  "components.ResultDescriptionILS.balancedEnumeration-3": "drei",
+  "components.ResultDescriptionILS.everythingBalanced": "In keiner der Dimensionen zeigt sich bei Ihnen eine klare Tendenz. Das deutet darauf hin, dass Sie in der Verarbeitung, der Wahrnehmung, der Präsentation und der Organisation von Informationen sich beide Pole der Dimensionen zunutze machen können. Laut dem Ergebnis des ILS haben Sie hier das Skillset sich flexibel anzupassen. Die Empfehlung lautet deshalb, dass weiterhin in dieser Balance gelernt werden sollte.",
+  "components.ResultDescriptionILS.global-moderate": "Bezüglich der Informationsorganisation zeigt sich eher eine signifikante Präferenz in Richtung global. Es ergibt sich daraus die Empfehlung bei dem Erlernen von neuen Inhalten sich zuerst einen Überblick über den Kontext und die Gesamtheit des Themas zu verschaffen.",
+  "components.ResultDescriptionILS.global-strong": "Bezüglich der Informationsorganisation zeigt sich eine signifikante Präferenz in Richtung global. Es ergibt sich daraus die Empfehlung bei dem Erlernen von neuen Inhalten sich zuerst einen Überblick über den Kontext und die Gesamtheit des Themas zu verschaffen.",
+  "components.ResultDescriptionILS.ilsResults": "ILS Ergebnis",
+  "components.ResultDescriptionILS.intuitive-moderate": "Sie präferieren eher eine intuitive Informationswahrnehmung. Es scheint förderlich, dass Sie neue Informationen zunächst anhand von Prinzipien und Ideen lernen. Die Auseinandersetzung mit zusätzlicher theoretischer Literatur kann Ihr Verständnis verbessern.",
+  "components.ResultDescriptionILS.intuitive-strong": "Sie präferieren eine intuitive Informationswahrnehmung. Es scheint förderlich, dass Sie neue Informationen zunächst anhand von Prinzipien und Ideen lernen. Die Auseinandersetzung mit zusätzlicher theoretischer Literatur kann Ihr Verständnis verbessern.",
+  "components.ResultDescriptionILS.listKResults": "List-K Ergebnis",
+  "components.ResultDescriptionILS.organisationBalanced": "Organisation",
+  "components.ResultDescriptionILS.perceptionBalanced": "Wahrnehmung",
+  "components.ResultDescriptionILS.presentationBalanced": "Präsentation",
+  "components.ResultDescriptionILS.processingBalanced": "Verarbeitung",
+  "components.ResultDescriptionILS.reflective-moderate": "Ihre Informationsverarbeitung erfolgt bevorzugt eher reflektiv. Es ist zu empfehlen, dass Sie stets Möglichkeiten für sich schaffen, über neue Informationen intensiv nachzudenken, bevor Sie diese praktisch umsetzen oder experimentieren. So können Sie tendenziell schneller lernen.",
+  "components.ResultDescriptionILS.reflective-strong": "Ihre Informationsverarbeitung erfolgt bevorzugt reflektiv. Es ist zu empfehlen, dass Sie stets Möglichkeiten für sich schaffen, über neue Informationen intensiv nachzudenken, bevor Sie diese praktisch umsetzen oder experimentieren. So können Sie tendenziell schneller lernen.",
+  "components.ResultDescriptionILS.remainingDimensions": "Restliche Dimensionen",
+  "components.ResultDescriptionILS.sensory-moderate": "Sie präferieren eher eine sensorische Informationswahrnehmung. Es scheint förderlich, dass Sie neue Informationen anhand von Fakten oder Experimenten lernen. Die Auseinandersetzung mit selbst ausgedachten Beispielen kann Ihr Lerntempo erhöhen.",
+  "components.ResultDescriptionILS.sensory-strong": "Sie präferieren eine sensorische Informationswahrnehmung. Es scheint förderlich, dass Sie neue Informationen anhand von Fakten oder Experimenten lernen. Die Auseinandersetzung mit selbst ausgedachten Beispielen kann Ihr Lerntempo erhöhen.",
+  "components.ResultDescriptionILS.sequential-moderate": "Bezüglich der Informationsorganisation zeigt sich eher eine signifikante Präferenz in Richtung sequentiell. Es ergibt sich daraus die Empfehlung, bei dem Erlernen von neuen Inhalten zuerst eine hierarchische Struktur des Inhalts zu schaffen, um diesen dann schrittweise abzuarbeiten.",
+  "components.ResultDescriptionILS.sequential-strong": "Bezüglich der Informationsorganisation zeigt sich eine signifikante Präferenz in Richtung sequentiell. Es ergibt sich daraus die Empfehlung, bei dem Erlernen von neuen Inhalten zuerst eine hierarchische Struktur des Inhalts zu schaffen, um diesen dann schrittweise abzuarbeiten.",
+  "components.ResultDescriptionILS.verbal-moderate": "Im Hinblick auf die Präsentation von Informationen ziehen Sie eher einen verbalen Fokus vor. Bei der Auseinandersetzung mit schwierigen und komplexen Inhalten kann es Ihnen helfen, wenn Sie diese mithilfe von eigenen schriftlichen Zusammenfassungen oder Audioaufnahmen verbalisieren, um ihr Lernen zu erleichtern.",
+  "components.ResultDescriptionILS.verbal-strong": "Im Hinblick auf die Präsentation von Informationen ziehen Sie einen verbalen Fokus vor. Bei der Auseinandersetzung mit schwierigen und komplexen Inhalten kann es Ihnen helfen, wenn Sie diese mithilfe von eigenen schriftlichen Zusammenfassungen oder Audioaufnahmen verbalisieren, um ihr Lernen zu erleichtern.",
+  "components.ResultDescriptionILS.visual-moderate": "Im Hinblick auf die Präsentation von Informationen ziehen Sie eher einen visuellen Fokus vor. Bei der Auseinandersetzung mit schwierigen und komplexen Inhalten kann es Ihnen helfen, wenn Sie diese mithilfe von Grafiken, Diagrammen oder Ähnlichem visualisieren, um ihr Lernen zu erleichtern.",
+  "components.ResultDescriptionILS.visual-strong": "Im Hinblick auf die Präsentation von Informationen ziehen Sie einen visuellen Fokus vor. Bei der Auseinandersetzung mit schwierigen und komplexen Inhalten kann es Ihnen helfen, wenn Sie diese mithilfe von Grafiken, Diagrammen oder Ähnlichem visualisieren, um ihr Lernen zu erleichtern.",
+  "components.ResultDescriptionListK.attention && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten.",
+  "components.ResultDescriptionListK.attention && learningEnvironment below3-Title": "Aufmerksamkeit und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && learningWithClassmates below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten.",
+  "components.ResultDescriptionListK.attention && learningWithClassmates below3-Title": "Aufmerksamkeit und Lernen mit Kommiliton*innen haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && learnWithClassmates && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten.",
+  "components.ResultDescriptionListK.attention && learnWithClassmates && learningEnvironment below3-Title": "Aufmerksamkeit, Lernen mit Kommiliton*innen und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
+  "components.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch && learningEnvironment below3-Title": "Aufmerksamkeit, Lernen mit Kommiliton*innen, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
+  "components.ResultDescriptionListK.attention && learnWithClassmates && literatureResearch below3-Title": "Aufmerksamkeit, Lernen mit Kommiliton*innen und Literaturrecherche haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && literatureResearch && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
+  "components.ResultDescriptionListK.attention && literatureResearch && learningEnvironment below3-Title": "Aufmerksamkeit, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && literatureResearch below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass es Ihnen derzeit schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
+  "components.ResultDescriptionListK.attention && literatureResearch below3-Title": "Aufmerksamkeit und Literaturrecherche haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && time && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich gut, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung mit möglichst wenig Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten.",
+  "components.ResultDescriptionListK.attention && time && learningEnvironment below3-Title": "Aufmerksamkeit, Zeit und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && time && learnWithClassmates && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Das Treffen mit Kommiliton*innen kann hier die Verbindlichkeit unterstützen. Das gibt Ihnen zusätzlich die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten.",
+  "components.ResultDescriptionListK.attention && time && learnWithClassmates && learningEnvironment below3-Title": "Aufmerksamkeit, Zeit, Lernen mit Kommiliton*innen und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Das Treffen mit Kommiliton*innen kann hier die Verbindlichkeit unterstützen. Das gibt Ihnen zusätzlich die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
+  "components.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch && learningEnvironment below3-Title": "Aufmerksamkeit, Zeit, Lernen mit Kommiliton*innen, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Das Treffen mit Kommiliton*innen kann hier die Verbindlichkeit unterstützen. Das gibt Ihnen zusätzlich die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
+  "components.ResultDescriptionListK.attention && time && learnWithClassmates && literatureResearch below3-Title": "Aufmerksamkeit, Zeit, Lernen mit Kommiliton*innen und Literaturrecherche haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && time && learnWithClassmates below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Das Treffen mit Kommiliton*innen kann hier die Verbindlichkeit unterstützen. Das gibt Ihnen zusätzlich die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten.",
+  "components.ResultDescriptionListK.attention && time && learnWithClassmates below3-Title": "Aufmerksamkeit, Zeit und Lernen mit Kommiliton*innen haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && time && literatureResearch && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
+  "components.ResultDescriptionListK.attention && time && literatureResearch && learningEnvironment below3-Title": "Aufmerksamkeit, Zeit, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && time && literatureResearch below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
+  "components.ResultDescriptionListK.attention && time && literatureResearch below3-Title": "Aufmerksamkeit, Zeit und Literaturrecherche haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention && time below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen und es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten.",
+  "components.ResultDescriptionListK.attention && time below3-Title": "Aufmerksamkeit und Zeit haben einen Wert unter 3",
+  "components.ResultDescriptionListK.attention below3-Description": "Bezüglich des Managements interner Ressourcen ist es zu sehen, dass es Ihnen schwerfällt, sich zu fokussieren. Es wäre wahrscheinlich gut, wenn Sie versuchen, sich eine geeignete Umgebung mit möglichst wenigen Störfaktoren zu schaffen, um Ihr Lernen effektiver zu gestalten.",
+  "components.ResultDescriptionListK.attention below3-Title": "Aufmerksamkeit hat einen Wert unter 3",
+  "components.ResultDescriptionListK.cognitiveStrategies below3-1": "In Bezug auf die kognitiven Strategien wäre ein intensiverer Nutzen förderlich, um die Lerninhalte besser zu verstehen und zu durchdringen. Speziell ein vermehrtes",
+  "components.ResultDescriptionListK.cognitiveStrategies below3-2": "von Lerninhalten kann für Sie sinnvoll sein.",
+  "components.ResultDescriptionListK.generalDescription": "Im Rahmen des LIST-K geht es prinzipiell darum, Ihnen den Blick auf Ihre eigenen Lernstrategien zu erleichtern. Werte von 3 oder höher lassen darauf schließen, dass Sie aus Ihrer Sicht die jeweilige Strategie zumindest manchmal anwenden.",
+  "components.ResultDescriptionListK.generalDescription-Title": "Allgemeine Beschreibung des LIST-K",
+  "components.ResultDescriptionListK.learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements externer Ressourcen ist es deutlich zu sehen, dass Sie bei der Gestaltung Ihrer Lernumgebung auf deren Eignung achten sollten.",
+  "components.ResultDescriptionListK.learningEnvironment below3-Title": "Lernumgebung hat einen Wert unter 3",
+  "components.ResultDescriptionListK.learnWithClassmates && learningEnvironment below3-Description": "Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Es ist zusätzlich deutlich zu sehen, dass Sie bei der Gestaltung Ihrer Lernumgebung auf deren Eignung achten sollten.",
+  "components.ResultDescriptionListK.learnWithClassmates && learningEnvironment below3-Title": "Lernen mit Kommiliton*innen und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.learnWithClassmates && literatureResearch && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements externer Ressourcen ist es deutlich zu sehen, dass Sie bei der Gestaltung Ihrer Lernumgebung auf deren Eignung achten sollten. Es wäre außerdem sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
+  "components.ResultDescriptionListK.learnWithClassmates && literatureResearch && learningEnvironment below3-Title": "Lernen mit Kommiliton*innen, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.learnWithClassmates && literatureResearch below3-Description": "Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
+  "components.ResultDescriptionListK.learnWithClassmates && literatureResearch below3-Title": "Lernen mit Kommiliton*innen und Literaturrecherche haben einen Wert unter 3",
+  "components.ResultDescriptionListK.learnWithClassmates below3-Description": "Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten.",
+  "components.ResultDescriptionListK.learnWithClassmates below3-Title": "Lernen mit Kommiliton*innen hat einen Wert unter 3",
+  "components.ResultDescriptionListK.literatureResearch && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements externer Ressourcen ist es deutlich zu sehen, dass Sie bei der Gestaltung Ihrer Lernumgebung auf deren Eignung achten sollten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
+  "components.ResultDescriptionListK.literatureResearch && learningEnvironment below3-Title": "Literaturrecherche und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.literatureResearch below3-Description": "Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
+  "components.ResultDescriptionListK.literatureResearch below3-Title": "Literaturrecherche hat einen Wert unter 3",
+  "components.ResultDescriptionListK.metacognitiveStrategies below3-1": "Im Hinblick auf metakognitive Strategien ist es zu empfehlen, dass Sie sich des Öfteren die Mühe machen, ihren eigenen Lernprozess zu",
+  "components.ResultDescriptionListK.metacognitiveStrategies below3.GoalsAndPlans": "Planen",
+  "components.ResultDescriptionListK.metacognitiveStrategies below3.regulate": "Reflektieren",
+  "components.ResultDescriptionListK.score": "Wert",
+  "components.ResultDescriptionListK.subscaleAverage below3-2": "In Ihrem Fall zeigt sich, dass die Nutzung von Lernstrategien vor allen in zwei Bereichen noch ausbaufähig ist.",
+  "components.ResultDescriptionListK.subscaleAverage below3-3": "In Ihrem Fall zeigt sich, dass die Nutzung von Lernstrategien vor allen in drei Bereichen noch ausbaufähig ist.",
+  "components.ResultDescriptionListK.subscaleAverage below3-4": "In Ihrem Fall zeigt sich, dass die Nutzung von Lernstrategien vor allen in allen Bereichen noch ausbaufähig ist.",
+  "components.ResultDescriptionListK.time && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung schaffen, um Ihr Lernen effektiver zu gestalten.",
+  "components.ResultDescriptionListK.time && learningEnvironment below3-Title": "Zeit und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.time && learnWithClassmates && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung zu schaffen, um Ihr Lernen effektiver zu gestalten. Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten.",
+  "components.ResultDescriptionListK.time && learnWithClassmates && learningEnvironment below3-Title": "Zeit, Lernen mit Kommiliton*innen und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.time && learnWithClassmates && literatureResearch && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung zu schaffen, um Ihr Lernen effektiver zu gestalten. Es wäre sinnvoll, wenn Sie versuchen, eine Lerngruppe mit befreundeten Kommiliton*innen zu finden. Das gibt es Ihnen die Möglichkeit, Inhalte in der Diskussion zu vertiefen sowie wertvolle andere Perspektiven zu erhalten. Um Letzteres zu gewährleisten, ist die Recherche von passender Literatur ebenfalls höchst relevant.",
+  "components.ResultDescriptionListK.time && learnWithClassmates && literatureResearch && learningEnvironment below3-Title": "Zeit, Lernen mit Kommiliton*innen, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.time && learnWithClassmates && literatureResearch below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung zu schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
+  "components.ResultDescriptionListK.time && learnWithClassmates && literatureResearch below3-Title": "Zeit, Lernen mit Kommiliton*innen und Literaturrecherche haben einen Wert unter 3",
+  "components.ResultDescriptionListK.time && learnWithClassmates below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume schaffen, um Ihr Lernen effektiver zu gestalten. Das Treffen mit Kommiliton*innen kann hier die Verbindlichkeit unterstützen.",
+  "components.ResultDescriptionListK.time && learnWithClassmates below3-Title": "Zeit und Lernen mit Kommiliton*innen haben einen Wert unter 3",
+  "components.ResultDescriptionListK.time && literatureResearch && learningEnvironment below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume in einer geeigneten Umgebung zu schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
+  "components.ResultDescriptionListK.time && literatureResearch && learningEnvironment below3-Title": "Zeit, Literaturrecherche und Lernumgebung haben einen Wert unter 3",
+  "components.ResultDescriptionListK.time && literatureResearch below3-Description": "Im Hinblick auf die Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen. Es wäre wahrscheinlich förderlich, wenn Sie versuchen, sich klare Zeiträume schaffen, um Ihr Lernen effektiver zu gestalten. Um zu gewährleisten, dass Sie die Möglichkeit haben Inhalte zu vertiefen und wertvolle andere Perspektiven zu erhalten, ist die Recherche von passender Literatur höchst relevant.",
+  "components.ResultDescriptionListK.time && literatureResearch below3-Title": "Zeit und Literaturrecherche haben einen Wert unter 3",
+  "components.ResultDescriptionListK.time below3-Description": "Im Hinblick auf Strategien des Managements interner Ressourcen ist es deutlich zu sehen, dass Sie sich derzeit zu wenig Zeit für Ihr Lernen nehmen. Es würde sich wahrscheinlich positiv auswirken, wenn Sie versuchen, sich klare Lernzeiträume zu schaffen, um Ihr Lernen effektiver zu gestalten.",
+  "components.ResultDescriptionListK.time below3-Title": "Zeit hat einen Wert unter 3",
+  "components.StatisticsMenu.title": "Statistiken",
+  "components.StudentRatingDashboard.empty": "Diese Seite füllt sich mit Informationen über Ihr Rating, sobald Sie mit der Bearbeitung von Übungen beginnen.",
+  "components.StudentRatingDashboard.histogramTitle": "Die Rating-Verteilung aller Studierenden",
+  "components.StudentRatingDashboard.histogramUserInfo": "Ihr Rating",
+  "components.StudentRatingDashboard.histogramUserInfoTooltip": "Sie sind besser als {{percentage}}% der Studierenden mit einem Rating von {{value}}.",
+  "components.StudentRatingDashboard.lineGraphDataTooltip": "Am {{timestamp}} hatte Ihr Rating einen Wert von {{value}} mit einer Abweichung von {{deviation}}.",
+  "components.StudentRatingDashboard.lineGraphLowerDeviationTooltip": "Am {{timestamp}} war Ihr minimales Rating {{value}}.",
+  "components.StudentRatingDashboard.lineGraphTitle": "Der Verlauf von Ihrem durchschnittl. Rating",
+  "components.StudentRatingDashboard.lineGraphUpperDeviationTooltip": "Am {{timestamp}} war Ihr maximales Rating {{value}}.",
+  "components.StudentRatingDashboard.ratingDeviationTooltip": "Ihre aktuelle normalisierte durchschnittl. Abweichung ist {{value}}.",
+  "components.StudentRatingDashboard.ratingDeviationTrendTooltip": "Der Trend von Ihrer normalisierten durchschnittl. Abweichung ist {{value}}.",
+  "components.StudentRatingDashboard.ratingTitle": "Ihr aktuelles durchschnittl. Rating",
+  "components.StudentRatingDashboard.ratingValueTooltip": "Ihr aktuelles normalisiertes durchschnittl. Rating ist {{value}}.",
+  "components.StudentRatingDashboard.ratingValueTrendTooltip": "Der Trend von Ihrem normalisierten durchschnittl. Rating ist {{value}}.",
+  "components.StudentRatingDashboard.spiderGraphTitle": "Ihr durchschnittl. Rating pro Thema",
+  "components.StudentRatingDashboard.spiderGraphTooltip": "Ihr Rating für Thema {{concept}} ist {{value}}.",
+  "components.StudentRatingInfo.dashboardText": "Dieses Dashboard gibt Ihnen Auskunft über Ihr aktuelles Rating und stellt diese in verschiedenen Formen dar.",
+  "components.StudentRatingInfo.dashboardTitle": "Studierenden-Rating",
+  "components.StudentRatingInfo.histogramText": "Das Histogramm befindet sich in der Mitte. Es gibt einen Überblick über die Verteilung der durchschnittlichen Ratings aller Studierenden und soll so einen Vergleich mit Ihrem Rating ermöglichen. Ihre Einstufung ist dabei hervorgehoben.",
+  "components.StudentRatingInfo.histogramTitle": "Histogramm",
+  "components.StudentRatingInfo.lineGraphText": "Das Liniendiagramm und die Tabelle sind unten abgebildet. Sie zeigen Ihr durchschnittliches Rating im Verlauf der Zeit und ermöglichen so einen Überblick über die Entwicklung Ihres Wissensstandes. Während das Liniendiagramm eine grafische Aufbereitung darstellt, bietet die Tabelle einen detaillierten Einblick in Ihre bisherigen Ratings.",
+  "components.StudentRatingInfo.lineGraphTitle": "Liniendiagramm / Tabelle",
+  "components.StudentRatingInfo.ratingText": "Ihre aktuelles Rating wird oben links durch einen Wert und dessen Standardabweichung angezeigt. Sie gibt einen Überblick über Ihren aktuellen durchschnittlichen Wissensstand in allen Themenbereichen. Die Ausgangswerte für Rating und Standardabweichung liegen bei 1500 bzw. 350. Um das Rating einschätzen zu können, wurde sie mit den aktuellen Maximalwerten normalisiert. Zusätzlich geben Tendenzen Auskunft über die aktuelle Entwicklung.",
+  "components.StudentRatingInfo.ratingTitle": "Rating",
+  "components.StudentRatingInfo.spiderGraphText": "Das Netzdiagramm oben rechts zeigt Ihr durchschnittliches Rating pro Thema an und ermöglicht so einen Vergleich Ihrer Kenntnisse in den verschiedenen Bereichen.",
+  "components.StudentRatingInfo.spiderGraphTitle": "Netzdiagramm",
+  "components.StyledLinearProgress.linearProgressWithLabel.learningProgress": "Lernfortschritt",
+  "components.TableILS.active": "Aktiv",
+  "components.TableILS.balanced": "balanciert",
+  "components.TableILS.dimension": "Dimension",
+  "components.TableILS.global": "Global",
+  "components.TableILS.interpretation": "Interpretation",
+  "components.TableILS.intuitive": "Intuitiv",
+  "components.TableILS.moderate": "moderat",
+  "components.TableILS.reflective": "Reflektiv",
+  "components.TableILS.score": "Wert",
+  "components.TableILS.sensory": "Sensorisch",
+  "components.TableILS.sequential": "Sequentiell",
+  "components.TableILS.strong": "stark",
+  "components.TableILS.verbal": "Verbal",
+  "components.TableILS.visual": "Visuell",
+  "components.TableILSQuestions.ilsLong": [
+    [
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      }
+    ],
+    [
+      {
+        "question": "Ich verstehe etwas besser nachdem ich",
+        "questionLabel": "AR_1_F1",
+        "answer1": "es ausprobiert habe.",
+        "answer2": "darüber nachgedacht habe."
+      },
+      {
+        "question": "Ich möchte lieber wahrgenommen werden als",
+        "questionLabel": "SI_1_F2",
+        "answer1": "realistisch.",
+        "answer2": "innovativ."
+      },
+      {
+        "question": "Wenn ich daran denke, was ich gestern gemacht habe, fallen mir eher",
+        "questionLabel": "VV_1_F3",
+        "answer1": "Bilder ein.",
+        "answer2": "Wörter ein."
+      },
+      {
+        "question": "Ich neige dazu",
+        "questionLabel": "SG_1_F4",
+        "answer1": "die Details eines Themas zu verstehen, aber die Gesamtstruktur nicht ganz zu erfassen.",
+        "answer2": "die Gesamtstruktur zu verstehen, aber die Details nicht ganz zu erfassen."
+      }
+    ],
+    [
+      {
+        "question": "Wenn ich etwas Neues lerne, hilft es mir",
+        "questionLabel": "AR_2_F5",
+        "answer1": "darüber zu sprechen.",
+        "answer2": "darüber nachzudenken."
+      },
+      {
+        "question": "Wenn ich ein Lehrperson wäre, würde ich lieber einen Kurs unterrichten in dem es um",
+        "questionLabel": "SI_2_F6",
+        "answer1": "Fakten und Situationen aus dem wirklichen Leben geht.",
+        "answer2": "Ideen und Theorien geht."
+      },
+      {
+        "question": "Ich erhalte neue Informationen lieber durch",
+        "questionLabel": "VV_2_F7",
+        "answer1": "Bilder, Diagramme, Schaubilder und Karten.",
+        "answer2": "schriftliche Anweisungen zu mündlichen Informationen."
+      },
+      {
+        "question": "Sobald ich",
+        "questionLabel": "SG_2_F8",
+        "answer1": "alle Bestandteile verstehe, verstehe ich das große Ganze.",
+        "answer2": "das große Ganze verstehe, verstehe ich wie die Bestandteile zusammenpassen."
+      }
+    ],
+    [
+      {
+        "question": "In einer Studiengruppe, die an schwierigem Material arbeitet, ist es wahrscheinlicher, dass ich",
+        "questionLabel": "AR_3_F9",
+        "answer1": "aktiv bin und meine eigenen Ideen einbringe.",
+        "answer2": "mich zurückhalte und zuhöre."
+      },
+      {
+        "question": "Mir fällt es leichter",
+        "questionLabel": "SI_3_F10",
+        "answer1": "Fakten zu lernen.",
+        "answer2": "Konzepte zu lernen."
+      },
+      {
+        "question": "In einem Dokument mit vielen Bildern und Tabellen werde ich wahrscheinlich",
+        "questionLabel": "VV_3_F11",
+        "answer1": "die Bilder und Diagramme sorgfältig betrachten.",
+        "answer2": "mich auf den geschriebenen Text konzentrieren."
+      },
+      {
+        "question": "Wenn ich mathematische Probleme löse",
+        "questionLabel": "SG_3_F12",
+        "answer1": "arbeite ich mich normalerweise Schritt für Schritt an die Lösung heran.",
+        "answer2": "sehe ich oft nur die Lösungen aber tue mir dann schwer die Schritte dorthin zu finden."
+      }
+    ],
+    [
+      {
+        "question": "In den Kursen, die ich bisher besucht habe,",
+        "questionLabel": "AR_4_F13",
+        "answer1": "habe ich für gewöhnlich viele der anderen Studierenden kennengelernt.",
+        "answer2": "habe ich selten viele der anderen Studierenden kennengelernt."
+      },
+      {
+        "question": "Beim Lesen von Sachtexten bevorzuge ich",
+        "questionLabel": "SI_4_F14",
+        "answer1": "etwas, das mir neue Fakten beibringt oder mir zeigt, wie ich etwas tun kann.",
+        "answer2": "etwas, das mir neue Ideen gibt, über die nachdenken kann."
+      },
+      {
+        "question": "Ich mag Lehrende,",
+        "questionLabel": "VV_4_F15",
+        "answer1": "die viele Diagramme zur Inhaltspräsentation nutzen.",
+        "answer2": "die sich viel Zeit für Erklärungen nehmen. "
+      },
+      {
+        "question": "Wenn ich eine Geschichte oder einen Roman analysiere",
+        "questionLabel": "SG_4_F16",
+        "answer1": "denke ich an die Geschehnisse und versuche sie zusammenzufügen um die Themen herauszufinden.",
+        "answer2": "weiß ich, nachdem ich fertig mit dem Lesen bin, was die Themen sind und muss dann zurückgehen um die Geschehnisse zu finden, die diese veranschaulichen."
+      }
+    ],
+    [
+      {
+        "question": "Wenn ich eine Hausaufgabe beginne, ist es wahrscheinlicher, dass ich",
+        "questionLabel": "AR_5_F17",
+        "answer1": "sofort anfange an der Lösung zu arbeiten.",
+        "answer2": "zuerst versuche die Aufgabe vollständig zu verstehen."
+      },
+      {
+        "question": "Ich bevorzuge die Vorstellung von",
+        "questionLabel": "SI_5_F18",
+        "answer1": "Gewissheit.",
+        "answer2": "Theorie."
+      },
+      {
+        "question": "Ich erinnere mich am besten an das, was ich",
+        "questionLabel": "VV_5_F19",
+        "answer1": "sehe.",
+        "answer2": "höre."
+      },
+      {
+        "question": "Für mich ist es wichtiger, dass eine Lehrperson",
+        "questionLabel": "SG_5_F20",
+        "answer1": "den Lernstoff in klaren aufeinander aufbauenden Schritten darlegt.",
+        "answer2": "mir ein Gesamtbild vermittelt und den Lernstoff in Beziehung zu anderen Themen setzt."
+      }
+    ],
+    [
+      {
+        "question": "Ich lerne am liebsten,",
+        "questionLabel": "AR_6_F21",
+        "answer1": "in einer Lerngruppe.",
+        "answer2": "alleine."
+      },
+      {
+        "question": "Ich würde eher damit charakterisiert werden,",
+        "questionLabel": "SI_6_F22",
+        "answer1": "dass ich sorgfältig auf die Details meiner Arbeit achte.",
+        "answer2": "dass ich kreativ bin, wenn es darum geht, wie ich meine Arbeit erledige."
+      },
+      {
+        "question": "Wenn ich die Wegbeschreibung zu einem neuen Ort bekomme, bevorzuge ich",
+        "questionLabel": "VV_6_F23",
+        "answer1": "eine Karte.",
+        "answer2": "schriftliche Anweisungen."
+      },
+      {
+        "question": "Ich lerne",
+        "questionLabel": "SG_6_F24",
+        "answer1": "in einem ziemlich regelmäßigen Tempo. Wenn ich fleißig lerne, dann werde ich es „kapieren“.",
+        "answer2": "in Schüben. Ich bin total verwirrt und dann plötzlich macht es plötzlich „klick“."
+      }
+    ],
+    [
+      {
+        "question": "Ich würde lieber zuerst ",
+        "questionLabel": "AR_7_F25",
+        "answer1": "Dinge ausprobieren.",
+        "answer2": "darüber nachdenken, wie ich etwas mache werde."
+      },
+      {
+        "question": "Wenn ich mich in meiner Freizeit mit Inhalten beschäftige, möchte ich, dass die Produzenten",
+        "questionLabel": "SI_7_F26",
+        "answer1": "deutlich sagen, was sie meinen.",
+        "answer2": "die Dinge auf kreative, interessante Weise vermitteln."
+      },
+      {
+        "question": "Wenn ich in einem Kurs ein Diagramm oder eine Skizze sehe, erinnere ich mich am ehesten",
+        "questionLabel": "VV_7_F27",
+        "answer1": "an das Bild.",
+        "answer2": "an das was die Lehrperson darüber gesagt hat."
+      },
+      {
+        "question": "Wenn ich Informationsmaterial anschaue, neige ich eher dazu",
+        "questionLabel": "SG_7_F28",
+        "answer1": "mich auf die Details zu konzentrieren und das große Ganze zu übersehen.",
+        "answer2": "zu versuchen das große Ganze zu verstehen bevor ich mich mit den Details befasse."
+      }
+    ],
+    [
+      {
+        "question": "Ich kann mich leichter an etwas erinnern,",
+        "questionLabel": "AR_8_F29",
+        "answer1": "das ich getan habe.",
+        "answer2": "über das ich viel nachgedacht habe."
+      },
+      {
+        "question": "Wenn ich eine Aufgabe erfüllen muss, bevorzuge ich es",
+        "questionLabel": "SI_8_F30",
+        "answer1": "einen Weg dafür zu finden und diesen zu perfektionieren.",
+        "answer2": "mir immer neue Wege einfallen zu lassen, um sie zu erledigen."
+      },
+      {
+        "question": "Wenn jemand mir Daten zeigt, bevorzuge ich",
+        "questionLabel": "VV_8_F31",
+        "answer1": "Tabellen und Graphen.",
+        "answer2": "einen Text, der die Ergebnisse zusammenfasst."
+      },
+      {
+        "question": "Wenn ich eine Studienarbeit schreibe, bin ich eher dazu geneigt ",
+        "questionLabel": "SG_8_F32",
+        "answer1": "an der Einleitung des Aufsatzes zu arbeiten (darüber nachzudenken oder zu schreiben) und dann voranzuschreiten.",
+        "answer2": "an verschiedenen Teilen des Aufsatzes zu arbeiten (darüber nachzudenken oder zu schreiben) und sie dann zu ordnen."
+      }
+    ],
+    [
+      {
+        "question": "Wenn ich an einem Gruppenprojekt arbeiten muss, möchte ich zuerst",
+        "questionLabel": "AR_9_F33",
+        "answer1": "ein „Gruppen-Brainstorming“ durchführen, bei dem jeder seine Ideen einbringt.",
+        "answer2": "ein individuelles Brainstorming und dann als Gruppe zusammenkommen, um Ideen zu vergleichen."
+      },
+      {
+        "question": "Ich betrachte es als großes Lob jemanden als",
+        "questionLabel": "SI_9_F34",
+        "answer1": "vernünftig zu bezeichnen.",
+        "answer2": "phantasievoll zu bezeichnen."
+      },
+      {
+        "question": "Wenn ich auf einer Party neue Menschen kennenlerne, erinnere ich mich eher daran",
+        "questionLabel": "VV_9_F35",
+        "answer1": "wie sie aussahen.",
+        "answer2": "was sie über sich selbst gesagt haben."
+      },
+      {
+        "question": "Wenn ich ein neues Thema lerne, ziehe ich es vor",
+        "questionLabel": "SG_9_F36",
+        "answer1": "mich auf dieses Thema zu konzentrieren und so viel wie möglich darüber zu lernen.",
+        "answer2": "zu versuchen Verbindungen zwischen diesem Thema und verwandten Themen herzustellen."
+      }
+    ],
+    [
+      {
+        "question": "Ich gelte eher als",
+        "questionLabel": "AR_10_F37",
+        "answer1": "aufgeschlossen.",
+        "answer2": "zurückhaltend."
+      },
+      {
+        "question": "Ich bevorzuge Kurse, die ihren Fokus auf ",
+        "questionLabel": "SI_10_F38",
+        "answer1": "konkretes Material (Fakten, Daten) legen.",
+        "answer2": "abstraktes Material (Konzepte, Theorien) legen."
+      },
+      {
+        "question": "Zu meiner Unterhaltung würde ich lieber",
+        "questionLabel": "VV_10_F39",
+        "answer1": "einen Film oder eine Serie schauen.",
+        "answer2": "ein Buch lesen oder ein Hörbuch hören."
+      },
+      {
+        "question": "Manche Lehrpersonen beginnen ihre Kurse mit einem Überblick über den Inhalt. Solche Gliederungen sind für mich",
+        "questionLabel": "SG_10_F40",
+        "answer1": "etwas hilfreich.",
+        "answer2": "sehr hilfreich."
+      }
+    ],
+    [
+      {
+        "question": "Die Idee von Gruppenhausaufgaben mit einer gemeinsamen Note für alle Gruppenmitglieder",
+        "questionLabel": "AR_11_F41",
+        "answer1": "klingt für mich gut.",
+        "answer2": "gefällt mir nicht."
+      },
+      {
+        "question": "Wenn ich längere Rechnungen durchführe,",
+        "questionLabel": "SI_11_F42",
+        "answer1": "tendiere ich dazu alle meine Schritte zu wiederholen und meine Arbeit sorgfältig zu überprüfen.",
+        "answer2": "ist es für mich ermüdend meine Arbeit zu überprüfen und ich muss mich zwingen es zu machen."
+      },
+      {
+        "question": "Orte an denen ich bereits war kann ich mir mental",
+        "questionLabel": "VV_11_F43",
+        "answer1": "sehr gut und ziemlich detailreich verbildlichen.",
+        "answer2": "mit Schwierigkeiten verbildlichen und meist mit wenig Details."
+      },
+      {
+        "question": "Wenn ich Probleme in einer Gruppe löse, ist es wahrscheinlicher,",
+        "questionLabel": "SG_11_F44",
+        "answer1": "dass ich an die Schritte des Lösungsprozess denke.",
+        "answer2": "dass ich an die möglichen Konsequenzen oder Anwendungen der Lösung in unterschiedlichen Bereichen denke."
+      }
+    ]
   ],
-  "components.ProjectDescriptionContent.imageSources": "Bildquellen: ",
-  "components.ProjectDescriptionContent.imageSource1": "Bild von katemangostar auf Freepik",
-  "components.ProjectDescriptionContent.imageSource2": "Bild von natanaelginting auf Freepik",
-  "universityKempten": "Hochschule Kempten",
-  "Activities": "Aktivitäten",
-  "and": "und",
-  "components.ImprintContent.AsOf": "Stand",
-  "components.ImprintContent.AuthorisedRepresentative": "Vertretungsberechtigte Person",
-  "components.ImprintContent.AuthorisedRepresentative.Title": "Herr",
-  "components.ImprintContent.Disclaimer": "Haftungsausschluss",
-  "components.ImprintContent.Disclaimer.CopyrightAndTrademarkLaw": "Urheber- und Leistungsschutzrechte",
-  "components.ImprintContent.Disclaimer.CopyrightAndTrademarkLaw.Text": "Die Hochschule Kempten ist bestrebt, in allen Publikationen die Urheberrechte der verwendeten Grafiken, Tondokumente, Videosequenzen und Texte zu beachten, von ihr selbst erstellte Grafiken, Tondokumente, Videosequenzen und Texte zu nutzen oder auf lizenzfreie Grafiken, Tondokumente, Videosequenzen und Texte zurückzugreifen. Alle innerhalb des Internetangebotes genannten und ggf. durch Dritte geschützten Marken- und Warenzeichen unterliegen uneingeschränkt den Bestimmungen des jeweils gültigen Kennzeichenrechts und den Besitzrechten der jeweiligen eingetragenen Eigentümer. Allein aufgrund der bloßen Nennung ist nicht der Schluss zu ziehen, dass Markenzeichen nicht durch Rechte Dritter geschützt sind! Das Copyright für veröffentlichte, von der Hochschule erstellte Objekte bleibt allein bei der HS Kempten. Eine Vervielfältigung oder Verwendung solcher Grafiken, Tondokumente, Videosequenzen und Texte in anderen elektronischen oder gedruckten Publikationen ist ohne ausdrückliche Zustimmung der Fachhochschule nicht gestattet.",
-  "components.ImprintContent.Disclaimer.DataProtection": "Datenschutz",
-  "components.ImprintContent.Disclaimer.DataProtection.Text": "Sofern innerhalb des Internetangebotes die Möglichkeit zur Eingabe persönlicher oder geschäftlicher Daten (Emailadressen, Namen, Anschriften) besteht, so erfolgt die Preisgabe dieser Daten seitens des Nutzers auf ausdrücklich freiwilliger Basis. Die Inanspruchnahme aller angebotenen Dienste ist - soweit technisch möglich und zumutbar - auch ohne Angabe solcher Daten bzw. unter Angabe anonymisierter Daten oder eines Pseudonyms gestattet. Die Nutzung der im Rahmen des Impressums oder vergleichbarer Angaben veröffentlichten Kontaktdaten wie Postanschriften, Telefon- und Faxnummern sowie Emailadressen durch Dritte zur Übersendung von nicht ausdrücklich angeforderten Informationen ist nicht gestattet. Rechtliche Schritte gegen die Versender von sogenannten Spam-Mails bei Verstößen gegen dieses Verbot sind ausdrücklich vorbehalten.",
-  "components.ImprintContent.Disclaimer.LegalValidityOfDisclaimer": "Rechtswirksamkeit dieses Haftungsausschlusses",
-  "components.ImprintContent.Disclaimer.LegalValidityOfDisclaimer.Text": "Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten, von dem aus auf diese Seite verwiesen wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder nicht vollständig entsprechen sollten, bleiben die übrigen Teile des Dokumentes in ihrem Inhalt und ihrer Gültigkeit davon unberührt.",
-  "components.ImprintContent.Disclaimer.OnlineContent": "Inhalt des Onlineangebotes",
-  "components.ImprintContent.Disclaimer.OnlineContent.Text": "Die Hochschule Kempten übernimmt keinerlei Gewähr für die Aktualität, Korrektheit, Vollständigkeit oder Qualität der bereitgestellten Informationen. Haftungsansprüche gegen die Hochschule, welche sich auf Schäden materieller oder ideeller Art beziehen, die durch die Nutzung oder Nichtnutzung der dargebotenen Informationen bzw. durch die Nutzung fehlerhafter und unvollständiger Informationen verursacht wurden, sind grundsätzlich ausgeschlossen, sofern seitens der Hochschule kein nachweislich vorsätzliches oder grob fahrlässiges Verschulden vorliegt. Alle Angebote sind freibleibend und unverbindlich. Die Hochschule Kempten behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen.",
-  "components.ImprintContent.Disclaimer.ReferencesAndLinks": "Verweise und Links",
-  "components.ImprintContent.Disclaimer.ReferencesAndLinks.Text": "Bei direkten oder indirekten Verweisen auf fremde Webseiten (\"Hyperlinks\"), die außerhalb des Verantwortungsbereiches der Hochschule liegen, würde eine Haftungsverpflichtung ausschließlich in dem Fall in Kraft treten, in dem die Hochschule von den Inhalten Kenntnis hat und es ihm technisch möglich und zumutbar wäre, die Nutzung im Falle rechtswidriger Inhalte zu verhindern. Die Hochschule Kempten erklärt hiermit ausdrücklich, dass zum Zeitpunkt der Linksetzung keine illegalen Inhalte auf den zu verlinkenden Seiten erkennbar waren. Auf die aktuelle und zukünftige Gestaltung, die Inhalte oder die Urheberschaft der gelinkten/verknüpften Seiten hat die Hochschule keinerlei Einfluss. Deshalb distanziert sie sich hiermit ausdrücklich von allen Inhalten aller gelinkten /verknüpften Seiten, die nach der Linksetzung verändert wurden. Diese Feststellung gilt für alle innerhalb des eigenen Internetangebotes gesetzten Links und Verweise . Für illegale, fehlerhafte oder unvollständige Inhalte und insbesondere für Schäden, die aus der Nutzung oder Nichtnutzung solcherart dargebotener Informationen entstehen, haftet allein der Anbieter der Seite, auf welche verwiesen wurde, nicht derjenige, der über Links auf die jeweilige Veröffentlichung lediglich verweist.",
-  "components.ImprintContent.Subtitle": "Lehr-/Lernplattform HASKI vom Labor Softwareentwicklung Hochschule Kempten",
-  "components.ImprintContent.Title": "Impressum",
-  "components.LocalNav.Topics": "Thema",
-  "components.LocalNav.Topics.NoLearningElements": "Keine Lernelemente gefunden",
-  "components.login.login": "Anmelden",
-  "components.login.password": "Passwort",
-  "components.login.passwordError": "Bitte geben Sie ein gültiges Passwort ein",
-  "components.login.subtitle": "Bitte geben Sie Ihre Zugangsdaten ein",
-  "components.login.title": "HASKI Anmeldung",
-  "components.login.username": "Benutzername",
-  "components.login.usernameError": "Bitte geben Sie einen gültigen Benutzernamen ein",
-  "components.MenuBar.Profile.Logout": "Ausloggen",
-  "components.MenuBar.TopicButton": "Themen",
-  "delete": "Löschen",
-  "DSGVO": "DSGVO",
+  "components.TableILSQuestions.ilsShort": [
+    [
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      },
+      {
+        "question": "",
+        "questionLabel": "",
+        "answer1": "",
+        "answer2": ""
+      }
+    ],
+    [
+      {
+        "question": "In einer Studiengruppe, die an schwierigem Material arbeitet, ist es wahrscheinlicher, dass ich",
+        "questionLabel": "AR_3_F9",
+        "answer1": "aktiv bin und meine eigenen Ideen einbringe.",
+        "answer2": "mich zurückhalte und zuhöre."
+      },
+      {
+        "question": "Ich möchte lieber wahrgenommen werden als",
+        "questionLabel": "SI_1_F2",
+        "answer1": "realistisch.",
+        "answer2": "innovativ."
+      },
+      {
+        "question": "Ich erhalte neue Informationen lieber durch",
+        "questionLabel": "VV_2_F7",
+        "answer1": "Bilder, Diagramme, Schaubilder und Karten.",
+        "answer2": "schriftliche Anweisungen zu mündlichen Informationen."
+      },
+      {
+        "question": "Ich neige dazu",
+        "questionLabel": "SG_1_F4",
+        "answer1": "die Details eines Themas zu verstehen, aber die Gesamtstruktur nicht ganz zu erfassen.",
+        "answer2": "die Gesamtstruktur zu verstehen, aber die Details nicht ganz zu erfassen."
+      }
+    ],
+    [
+      {
+        "question": "In den Kursen, die ich bisher besucht habe,",
+        "questionLabel": "AR_4_F13",
+        "answer1": "habe ich für gewöhnlich viele der anderen Studierenden kennengelernt.",
+        "answer2": "habe ich selten viele der anderen Studierenden kennengelernt."
+      },
+      {
+        "question": "Beim Lesen von Sachtexten bevorzuge ich",
+        "questionLabel": "SI_4_F14",
+        "answer1": "etwas, das mir neue Fakten beibringt oder mir zeigt, wie ich etwas tun kann.",
+        "answer2": "etwas, das mir neue Ideen gibt, über die nachdenken kann."
+      },
+      {
+        "question": "Ich erinnere mich am besten an das, was ich",
+        "questionLabel": "VV_5_F19",
+        "answer1": "sehe.",
+        "answer2": "höre."
+      },
+      {
+        "question": "Sobald ich",
+        "questionLabel": "SG_2_F8",
+        "answer1": "alle Bestandteile verstehe, verstehe ich das große Ganze.",
+        "answer2": "das große Ganze verstehe, verstehe ich wie die Bestandteile zusammenpassen."
+      }
+    ],
+    [
+      {
+        "question": "Ich lerne am liebsten,",
+        "questionLabel": "AR_6_F21",
+        "answer1": "in einer Lerngruppe.",
+        "answer2": "alleine."
+      },
+      {
+        "question": "Wenn ich mich in meiner Freizeit mit Inhalten beschäftige, möchte ich, dass die Produzenten",
+        "questionLabel": "SI_7_F26",
+        "answer1": "deutlich sagen, was sie meinen.",
+        "answer2": "die Dinge auf kreative, interessante Weise vermitteln."
+      },
+      {
+        "question": "Wenn ich in einem Kurs ein Diagramm oder eine Skizze sehe, erinnere ich mich am ehesten",
+        "questionLabel": "VV_7_F27",
+        "answer1": "an das Bild.",
+        "answer2": "an das was die Lehrperson darüber gesagt hat."
+      },
+      {
+        "question": "Wenn ich eine Geschichte oder einen Roman analysiere",
+        "questionLabel": "SG_4_F16",
+        "answer1": "denke ich an die Geschehnisse und versuche sie zusammenzufügen um die Themen herauszufinden.",
+        "answer2": "weiß ich, nachdem ich fertig mit dem Lesen bin, was die Themen sind und muss dann zurückgehen um die Geschehnisse zu finden, die diese veranschaulichen."
+      }
+    ],
+    [
+      {
+        "question": "Ich würde lieber zuerst ",
+        "questionLabel": "AR_7_F25",
+        "answer1": "Dinge ausprobieren.",
+        "answer2": "darüber nachdenken, wie ich etwas mache werde."
+      },
+      {
+        "question": "Ich bevorzuge Kurse, die ihren Fokus auf ",
+        "questionLabel": "SI_10_F38",
+        "answer1": "konkretes Material (Fakten, Daten) legen.",
+        "answer2": "abstraktes Material (Konzepte, Theorien) legen."
+      },
+      {
+        "question": "Zu meiner Unterhaltung würde ich lieber",
+        "questionLabel": "VV_10_F39",
+        "answer1": "einen Film oder eine Serie schauen.",
+        "answer2": "ein Buch lesen oder ein Hörbuch hören."
+      },
+      {
+        "question": "Manche Lehrpersonen beginnen ihre Kurse mit einem Überblick über den Inhalt. Solche Gliederungen sind für mich",
+        "questionLabel": "SG_10_F40",
+        "answer1": "etwas hilfreich.",
+        "answer2": "sehr hilfreich."
+      }
+    ],
+    [
+      {
+        "question": "Ich kann mich leichter an etwas erinnern,",
+        "questionLabel": "AR_8_F29",
+        "answer1": "das ich getan habe.",
+        "answer2": "über das ich viel nachgedacht habe."
+      },
+      {
+        "question": "Wenn ich längere Rechnungen durchführe,",
+        "questionLabel": "SI_11_F42",
+        "answer1": "tendiere ich dazu alle meine Schritte zu wiederholen und meine Arbeit sorgfältig zu überprüfen.",
+        "answer2": "ist es für mich ermüdend meine Arbeit zu überprüfen und ich muss mich zwingen es zu machen."
+      },
+      {
+        "question": "Orte an denen ich bereits war kann ich mir mental",
+        "questionLabel": "VV_11_F43",
+        "answer1": "sehr gut und ziemlich detailreich verbildlichen.",
+        "answer2": "mit Schwierigkeiten verbildlichen und meist mit wenig Details."
+      },
+      {
+        "question": "Wenn ich Probleme in einer Gruppe löse, ist es wahrscheinlicher,",
+        "questionLabel": "SG_11_F44",
+        "answer1": "dass ich an die Schritte des Lösungsprozess denke.",
+        "answer2": "dass ich an die möglichen Konsequenzen oder Anwendungen der Lösung in unterschiedlichen Bereichen denke."
+      }
+    ]
+  ],
+  "components.TableILSQuestions.introduction": "Im Folgenden werden Ihnen Fragen gestellt, welche sich auf Ihre Art der Informationsverarbeitung und -organisierung, Wahrnehmung und bevorzugte Präsentation beziehen. Geben Sie bitte für jede Frage eine der beiden Antwortmöglichkeiten an. Sollten beide oder auch keine der Antwortmöglichkeiten auf Sie zutreffen, dann wählen Sie die aus, welche tendenziell noch häufiger zutrifft. Die gestellten Fragen basieren auf dem Index of Learning Styles (Felder & Solomon 1991).",
+  "components.TableListK.attention": "Aufmerksamkeit",
+  "components.TableListK.cognitiveStrategies": "Kognitive Strategien",
+  "components.TableListK.control": "Kontrollieren",
+  "components.TableListK.criticalReview": "Kritisches Prüfen",
+  "components.TableListK.effort": "Anstrengung",
+  "components.TableListK.elaborate": "Elaborieren",
+  "components.TableListK.externalResourceManagementStrategies": "Strategien des Managements externer Ressourcen",
+  "components.TableListK.factorsAndSubscales": "Faktoren & Subskalen",
+  "components.TableListK.goalsAndPlans": "Ziele und Planen",
+  "components.TableListK.internalResourceManagementStrategies": "Strategien des Managements interner Ressourcen",
+  "components.TableListK.learningEnvironment": "Lernumgebung",
+  "components.TableListK.learningWithClassmates": "Lernen mit Studienkollegen",
+  "components.TableListK.literatureResearch": "Literaturrecherche",
+  "components.TableListK.metacognitiveStrategies": "Metakognitive Strategien",
+  "components.TableListK.organize": "Organisieren",
+  "components.TableListK.regulate": "Regulieren",
+  "components.TableListK.repeat": "Wiederholen",
+  "components.TableListK.score": "Wert",
+  "components.TableListK.time": "Zeit",
+  "components.TableListKQuestions.introduction": "Im Folgenden werden Ihnen Fragen darüber gestellt welche Lernstrategien Sie anwenden. Sie finden hier eine Liste verschiedener Lerntätigkeiten. Geben Sie bitte für jede Tätigkeit an, wie häufig diese bei Ihnen vorkommt. Sie können Ihre Antworten von sehr selten (1) bis sehr oft (5) abstufen. Die gestellten Fragen basieren auf dem LIST-K (Klingsieck, 2019), welcher eine gekürzte Form des LIST (Wild & Schiefele, 1994) darstellt.",
+  "components.TableRemoteTopics.noAdditionalTopics": "Keine zusätzlichen Themenbereiche gefunden",
+  "components.TableRemoteTopics.title": "Verfügbare Themenbereiche",
+  "components.ThemeModal.altTheme": "Alternativ",
+  "components.ThemeModal.darkTheme": "Dunkel",
+  "components.ThemeModal.radioHeader": "Verfügbare Themes",
+  "components.ThemeModal.standardTheme": "Standard",
+  "components.TopicCard.aco": "Ameisenalgorithmus",
+  "components.TopicCard.default": "Feste Reihenfolge",
+  "components.TopicCard.deleteTooltip": "Themenbereich mit all seinen Inhalten löschen",
+  "components.TopicCard.deleteTopicSuccessful": "Der Themenbereich wurde erfolgreich gelöscht",
+  "components.TopicCard.ga": "Genetischer Algorithmus",
+  "components.TopicCard.graf": "Graf Algorithmus",
+  "components.TopicCard.learningPath": "Lernpfad",
+  "components.TopicCard.nestor": "Nestor Algorithmus",
+  "components.TopicCard.tyche": "Tyche Algorithmus",
   "error": "Fehler",
-  "firstPage": "Erste Seite",
+  "error.fetchCourses": "Beim Abrufen der Kursdaten ist ein Fehler aufgetreten.",
+  "error.fetchDefaultLearningPath": "Beim Abrufen des Standard-Lernpfads ist ein Fehler aufgetreten.",
+  "error.fetchILS": "Beim Abrufen der ILS-Fragebogendaten ist ein Fehler aufgetreten.",
+  "error.fetchLearningElementRatings": "Beim Abrufen der Lernelemente-Ratings ist ein Fehler aufgetreten.",
+  "error.fetchLearningElementRecommendation": "Beim Abrufen der Empfehlung zu Lernelementen ist ein Fehler aufgetreten.",
+  "error.fetchLearningPathElement": "Beim Abrufen der LearningPathElement-Daten ist ein Fehler aufgetreten.",
+  "error.fetchLearningPathElementStatus": "Beim Abrufen der LearningPathElementStatus-Daten ist ein Fehler aufgetreten.",
+  "error.fetchLearningPathTopic": "Beim Abrufen der LearningPathTopic-Daten ist ein Fehler aufgetreten.",
+  "error.fetchListK": "Beim Abrufen der ListK-Fragebogendaten ist ein Fehler aufgetreten.",
+  "error.fetchRedirectMoodleLogin": "Beim Abrufen der Moodle-Login-URL ist ein Fehler aufgetreten.",
+  "error.fetchStudentLpLeAlg": "Beim Abrufen des Algorithmus, den der Nutzer für das Topic gewählt hat, ist ein Fehler aufgetreten.",
+  "error.fetchStudentRatings": "Beim Abrufen der Studierenden-Ratings ist ein Fehler aufgetreten.",
+  "error.fetchTeacherLpLeAlg": "Beim Abrufen des empfohlenen Algorithmus für das Topic ist ein Fehler aufgetreten.",
+  "error.fetchUser": "Beim Abrufen der Nutzerdaten ist ein Fehler aufgetreten.",
+  "error.getLearningElementStatus": "Beim Abrufen des Lernelementstatus ist ein Fehler aufgetreten.",
+  "error.getLearningElementsWithStatus": "Beim Abrufen der Lernelemente mit Status ist ein Fehler aufgetreten.",
+  "error.getLearningPathElement": "Beim Abrufen des neuen Lernpfads ist ein Fehler aufgetreten.",
+  "error.getNews": "Beim Abrufen der Neuigkeiten ist ein Fehler aufgetreten.",
+  "error.getRemoteCourses": "Beim Abrufen der Kursdaten vom LMS ist ein Fehler aufgetreten.",
+  "error.getRemoteTopics": "Beim Abrufen der Themen vom LMS ist ein Fehler aufgetreten.",
+  "error.getSortedLearningPath": "Beim Abrufen und Sortieren der LearningPathLearningElement-Daten ist ein Fehler aufgetreten.",
+  "error.getTopics": "Beim Abrufen der LearningPathTopic-Daten ist ein Fehler aufgetreten.",
+  "error.getUser": "Beim Abrufen der Benutzerdaten ist ein Fehler aufgetreten.",
+  "error.mapNodes": "Beim Zuordnen der Lernpfad-Nodes ist ein Fehler aufgetreten.",
+  "error.postCalculateLearningPathForAllStudents": "Beim Senden der CalculateLearningPathForAllStudents-Daten ist ein Fehler aufgetreten.",
+  "error.postCalculateLearningPathILS": "Bei der Berechnung des Lernpfades auf Basis der ILS-Fragebogendaten ist ein Fehler aufgetreten.",
+  "error.postCalculateRating": "Bei der Berechnung des Ratings ist ein Fehler aufgetreten.",
+  "error.postDefaultLearningPath": "Beim Senden des Standard-Lernpfades ist ein Fehler aufgetreten.",
+  "error.postILS": "Beim Senden der ILS-Fragebogendaten ist ein Fehler aufgetreten.",
+  "error.postLearningElement": "Beim Senden der LearningElement-Daten ist ein Fehler aufgetreten.",
+  "error.postLearningPathAlgorithm": "Beim Senden der LearningPathAlgorithm-Daten ist ein Fehler aufgetreten.",
+  "error.postListK": "Beim Senden der ListK-Fragebogendaten ist ein Fehler aufgetreten.",
+  "error.postLogin": "Beim Einloggen ist ein Fehler aufgetreten.",
+  "error.postStudentLpLeAlg": "Beim Setzen des neuen Algorithmus für den Nutzer ist ein Fehler aufgetreten.",
+  "error.postTeacherLpLeAlg": "Beim Setzen des neu empfohlenen Algorithmus für das Topic ist ein Fehler aufgetreten.",
+  "error.postTopic": "Beim Senden der Themendaten ist ein Fehler aufgetreten.",
+  "error.sendStatement": "Beim Senden eines xAPI-Statements ist ein Fehler aufgetreten.",
+  "error.setLearningPathElementSpecificStatus": "Beim Festlegen des spezifischen Status eines Lernpfadelements ist ein Fehler aufgetreten.",
+  "error.setTopics": "Beim Festlegen der Themen ist ein Fehler aufgetreten.",
+  "error.setTopicsPath": "Beim Festlegen des Themenpfads ist ein Fehler aufgetreten.",
+  "error.useUniversity": "Beim Abrufen der Universität ist ein Fehler aufgetreten.",
   "info": "Info",
-  "lastPage": "Letzte Seite",
-  "nextText": "Nächste",
-  "Notifications": "Benachrichtigungen",
-  "offlineWarning": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
-  "onlineWarning": "Sie sind wieder online.",
+  "info.postCalculateLearningPathILS": "Eine POST-Anfrage wurde erfolgreich gesendet, um den Lernpfad auf der Grundlage der Daten des ILS-Fragebogens zu berechnen.",
+  "log.learningPathTopicProgressTimeout": "Beim Laden des LearningPathTopicProgress-Hook ist ein Timout aufgetreten.",
+  "pages.1": "1",
+  "pages.10": "10",
+  "pages.11": "11",
+  "pages.12": "12",
+  "pages.13": "13",
+  "pages.14": "14",
+  "pages.15": "15",
+  "pages.16": "16",
+  "pages.17": "17",
+  "pages.2": "2",
+  "pages.3": "3",
+  "pages.4": "4",
+  "pages.5": "5",
+  "pages.6": "6",
+  "pages.7": "7",
+  "pages.8": "8",
+  "pages.9": "9",
+  "pages.aboutus": "Über uns",
+  "pages.aboutus.interdisciplinaryBody": [
+    {
+      "header": "Lernelemente",
+      "body": [
+        "Produktion von Lernelementen im Bereich des Software Engineerings mit mehrstufigem Reviewprozess",
+        "Konzeption eines literaturbasierten Kategoriensystems zur Typisierung von Lernelementen"
+      ]
+    },
+    {
+      "header": "Lernanalyse",
+      "body": [
+        "Erhebung und Analyse von Learning Analytics mit Persistierung in einem Learning Record Store (Data Lake)",
+        "Erfassung von studentischem Verhalten auf Moodle und Frontend in Form von Statements entsprechend des xAPI-Standards",
+        "Entwerfen und implementieren von Designs für studentische und tutorielle Dashboards"
+      ]
+    },
+    {
+      "header": "Anbindung zu Moodle",
+      "body": [
+        "Entwicklung von mehreren Moodle-Plugins (xAPI, Moodle Theme und H5P-Report Feature)",
+        "Kommunikation mit Moodle mithilfe der zur Verfügung gestellten REST-API",
+        "LTI-basierte Kommunikation zwischen Frontend und Moodle"
+      ]
+    },
+    {
+      "header": "Frontend und Backend Entwicklung",
+      "body": [
+        "React-Frontend-Entwicklung (modulare Entwicklung durch Components und Pages)",
+        "Jest-Frontend Testing und Pytest-Backend Testing",
+        "Entwicklung einer CI/CD Pipeline für Frontend und Backend in GitHub mithilfe von SonarLint",
+        "Python-Backend-Entwicklung",
+        "Kommunikation von Frontend und Backend mithilfe von API-Endpunkten mit Persistierung in einer Postgres-Datenbank",
+        "Branch-fokussierte Entwicklung mit Reviewprozess auf GitHub",
+        "Codenahe, kommentarbasierte (inline source) Dokumentation im Frontend und Backend"
+      ]
+    },
+    {
+      "header": "Konzeptionierung des Systems",
+      "body": [
+        "Theoretische Vorkonzeptionierung eines adaptiven Lernsystems",
+        "Weiterentwicklung von reliablen, validierten und gekürzten Fragebogenversionen des ILS und des LIST-K mithilfe z.B. Faktorenanalyse, Exhaustive Feature Selection und Bayesschen Netzen",
+        "Modellierung des individuellen Wissensstandes mittels eines Rating Systems",
+        "Modellierung von studentischen Charakteristiken wie Lernstil und Lernstrategie",
+        "Literaturrecherche zu Adaptiven Lernsystemen, Learning Analytics, Knowledge Tracing, Rating Systems, Large Language Models und Natural Language Processing",
+        "Konzeption eines Tools zur Auswertung von Freitext-Aufgaben mithilfe von Large Language Models und Natural Language Processing"
+      ]
+    },
+    {
+      "header": "Lernpfadgenerierung",
+      "body": [
+        "Auswertungsalgorithmen für diverse Fragebögen (Index of Learning Styles - ILS und Lernstrategien im Studium, gekürzt – LIST-K)",
+        "Konzeption, Implementierung und Anwendung von KI-Algorithmen (bspw. Ameisenkolonie-Algorithmus und genetischer Algorithmus) zur Generierung von individualisierten Lernpfaden in einem multidimensionalen Hypercube",
+        "Implementierung und Anwendung von literaturbasierten Algorithmen auf Basis des Lernstils (z.B. nach Graf et al. 2010)",
+        "Zusammenarbeit von Frontend, Backend und Moodle zur automatischen Generierung von studentischen Lernpfaden"
+      ]
+    },
+    {
+      "header": "Auswertung und Austausch",
+      "body": [
+        "Planung und Durchführung von triangulierten (quantitativ und qualitativ) Evaluationen des Frontend und der Lernelemente",
+        "Ausarbeitung der Erkenntnisse in Form von peer-reviewten Beiträgen auf wissenschaftlichen Konferenzen",
+        "Disseminationsarbeit (Design von Flyern, Postern und Roll-Ups)",
+        "Besuch von einschlägigen und fachlich relevanten (internationalen) Konferenzen",
+        "Interner und externer Austausch auf Workshops und Verbundtreffen"
+      ]
+    }
+  ],
+  "pages.aboutus.interdisciplinaryHeader": "Interdisziplinäres Arbeiten – Ein Überblick",
+  "pages.aboutus.introductionBody": "HASKI ist ein Verbundprojekt der drei bayerischen Hochschulen OTH Regensburg, TH Aschaffenburg & HS Kempten und umfasst ein Team von über 20 ProfessorInnen, wissenschaftlichen MitarbeiterInnen, studentischen Hilfskräften und an der Verwaltung beteiligten Personen.",
+  "pages.aboutus.introductionHeader": "Wer ist HASKI?",
+  "pages.aboutus.membersAschaffenburgBody": "Projektleitung:\nProf. Dr.-Ing. Jörg Abke \n\nMitarbeitende:\nProf. Dr. Galia Weidl, Isabell Hock, Yeimy Valencia, Paul Schoppel, Julian Manz \n\nEhemalig:\nDoris Rebitzer, Marc Normann, PhD. Iryna Sapsai, Michael Münch",
+  "pages.aboutus.membersAschaffenburgHeader": "Team TH Aschaffenburg",
+  "pages.aboutus.membersKemptenBody": "Projektleitung:\nProf. Dr. Georg Hagel\n\nMitarbeitende:\nDimitri Bigler, David Fischer, Jim Haug, Kevin Lee, Gesine Wagner\n\nStudentische Hilfskräfte:\nJoel Scherer\n\nEhemalige:\nJonathan Hilscher, Elena Gialamas (studentische Hilfskraft), Maximilian Jatzkowski (studentische Hilfskraft), Cedric Steiert (studentische Hilfskraft), Martyna Dorosewicz (studentische Hilfskraft)",
+  "pages.aboutus.membersKemptenHeader": "Team HS Kempten",
+  "pages.aboutus.membersRegensburgBody": "Projektleitung:\nProf. Dr. Jürgen Mottok \n\nMitarbeitende:\nFlemming Bugert, Timur Ezer, Miriam Flannery, Lisa Grabinger, Florian Hauser, Vamsi Krishna Nadimpalli, Simon Roehrl, Susanne Staufer\n\nEhemalige: Dominik Bittner",
+  "pages.aboutus.membersRegensburgHeader": "Team OTH Regensburg",
+  "pages.aboutus.quotesBody": [
+    {
+      "quote": "„Das Besondere am adaptiven Lernenden-Modell von HASKI ist, dass es sich den Lernenden anpasst und nicht umgekehrt – wie sonst üblich. Damit stellen wir die Lernenden in den Mittelpunkt des Lernprozesses.“",
+      "name": "Prof. Dr. Georg Hagel",
+      "description": "Projektleiter, Hochschule Kempten"
+    }
+  ],
+  "pages.aboutus.quotesHeader": "Motivation",
+  "pages.contact": "Kontakt",
+  "pages.contact.error": "Ihr Feedback konnte nicht versendet werden.",
+  "pages.contact.success": "Ihr Feedback wurde erfolgreich versendet.",
+  "pages.course": "Kurs",
+  "pages.course.topicButton": "Weiter zum Thema",
+  "pages.glossary": "Glossar",
   "pages.glossary.collapseAll": "Alle schließen",
   "pages.glossary.elements": [
     {
@@ -483,6 +1686,13 @@
       "fundamental": false
     },
     {
+      "term": "Lerner-Effizienz",
+      "definition": "Lerneffizienz ist ein Grad der Entwicklung in Bezug auf Gesamtleistungspräzision und Geschwindigkeit pro Studienzeit. https://www.ilearnlot.com/what-is-the-meaning-of-learning-efficiency/66945/",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
       "term": "Lernelement - LE",
       "definition": "Lernelemente (engl. learning element) dienen der Kompetenzentwicklung der Lernenden und werden diesen in Lernräumen zur Verfügung gestellt. Sie treten als verbale Elemente (schriftliche Texte, Hypertexte, gesprochene Sprache) und/oder visuelle Elemente (statische oder bewegte Bilder) in Erscheinung und/oder haben interaktive Darstellungsformen (Simulationen, Spiele, 3D) (vgl. Arnold 2011, S. 138; Bartel, Dörringer & Klopp 2022, S.1). In der Hierarchie des Domänenmodells siedeln sich Lernelemente auf der untersten Stufe an und sind in Lernräumen verortet. Lernelemente können in unterschiedliche Klassifikationsarten differenziert werden.",
       "sources": "Arnold 2011, S. 138; Bartel, Dörringer & Klopp 2022, S.1",
@@ -501,6 +1711,13 @@
         "Adaptivität",
         "Lernanalytiken"
       ],
+      "fundamental": false
+    },
+    {
+      "term": "Lernerleistung",
+      "definition": "https://www.igi-global.com/dictionary/gamified-learning/91338",
+      "sources": "",
+      "tags": [],
       "fundamental": false
     },
     {
@@ -541,6 +1758,20 @@
         "HASKI-Struktur",
         "Erziehungswissenschaften"
       ],
+      "fundamental": false
+    },
+    {
+      "term": "Lernpräferenzen",
+      "definition": "Gemäß dem Oxford English Dictionary wird „Präferenz“ definiert als „eine größere Vorliebe für eine Alternative gegenüber einer anderen oder anderen“. Lernpräferenzen können daher als Vorlieben der Schüler für bestimmte Elemente des Lernens und ausgewählte Interaktionsweisen mit den Elementen des Lernens bezeichnet werden. In der Literatur fallen Studien zu Lernpräferenzen in zwei Kategorien. Eine betrifft die bevorzugten Arten von Umgebungs- oder Unterrichtsformaten der Lernenden, und die andere befasst sich mit den bevorzugten Arten kognitiver Aktivitäten der Lernenden. Studien in letzterer Kategorie erscheinen häufiger unter dem Begriff „Lernstile“. https://link.springer.com/referenceworkentry/10.1007/978-1-4419-1428-6_636",
+      "sources": "",
+      "tags": [],
+      "fundamental": false
+    },
+    {
+      "term": "Lernpfad",
+      "definition": "Ein Lernpfad bezieht sich auf die didaktisch geplante sequenzielle Zusammensetzung von Themen, Lernräumen und/oder Lernelementen. Lernpfade können von Lehrern und vom HASKI-System erstellt werden. Die ursprüngliche Unterteilung oder Strukturierung des Kurses, die von den Lehrern verwendet wird, wird vom HASKI-System als \"Standard\"-Lernpfad betrachtet. Am Ende eines Lernpfads erfolgt eine erfolgreiche Wissensgenerierung und Kompetenzentwicklung in Bezug auf den durchlaufenen Inhalt. Lernende können Lernpfade in ihrem individuellen Tempo durchlaufen (vgl. Pöhler 2018; Hessisches Kultusministerium 2016; Roth 2014). Es gibt zwei Arten von Lernpfaden: lineare, die die Lernelemente, Lernräume und Themen in derselben Reihenfolge für alle Lernenden verbinden, und adaptive, die sich individuell an die Lernenden anpassen. Dieser adaptive Lernpfad kann dann im Hinblick auf die enthaltenen Daten differenziert werden. Im Kontext von HASKI erfolgt die Anpassung durch das Tutorial-Modell auf der Grundlage der im Lernermodell verfügbaren Daten zu den jeweiligen Personen und der Grundstruktur des Domänenmodells (vgl. auch Niegemann & Heidig 2020, S. 362; Goertz 2015; Paramythis & Loidl-Reisinger 2004; Bartel, Dörringer & Klopp 2022, S.1).",
+      "sources": "Bartel, Dörringer & Klopp 2022, S.1; Goertz, 2015; Hessisches Kultusministerium, 2016; Niegemann & Heidig, 2020, S. 362; Paramythis & Loidl-Reisinger, 2004; Pöhler, 2018; Roth, 2014",
+      "tags": [],
       "fundamental": false
     },
     {
@@ -757,16 +1988,103 @@
     "Lernstile",
     "Lernstrategien"
   ],
-  "pages.glossary.title": "Glossar",
-  "post": "Post",
+  "pages.home": "Startseite",
+  "pages.home.courseButton": "Weiter zum Kurs",
+  "pages.home.courseDisabled": "Der Kurs ist Verfügbar ab",
+  "pages.home.noCourses": "Keine Kurse gefunden",
+  "pages.imprint": "Impressum",
+  "pages.imprint.asOf": "Stand",
+  "pages.imprint.authorisedRepresentative": "Vertretungsberechtigte Person",
+  "pages.imprint.authorisedRepresentativeTitle": "Herr",
+  "pages.imprint.copyrightAndTrademarkLaw": "Urheber- und Leistungsschutzrechte",
+  "pages.imprint.copyrightAndTrademarkLawText": "Die Hochschule Kempten ist bestrebt, in allen Publikationen die Urheberrechte der verwendeten Grafiken, Tondokumente, Videosequenzen und Texte zu beachten, von ihr selbst erstellte Grafiken, Tondokumente, Videosequenzen und Texte zu nutzen oder auf lizenzfreie Grafiken, Tondokumente, Videosequenzen und Texte zurückzugreifen. Alle innerhalb des Internetangebotes genannten und ggf. durch Dritte geschützten Marken- und Warenzeichen unterliegen uneingeschränkt den Bestimmungen des jeweils gültigen Kennzeichenrechts und den Besitzrechten der jeweiligen eingetragenen Eigentümer. Allein aufgrund der bloßen Nennung ist nicht der Schluss zu ziehen, dass Markenzeichen nicht durch Rechte Dritter geschützt sind! Das Copyright für veröffentlichte, von der Hochschule erstellte Objekte bleibt allein bei der HS Kempten. Eine Vervielfältigung oder Verwendung solcher Grafiken, Tondokumente, Videosequenzen und Texte in anderen elektronischen oder gedruckten Publikationen ist ohne ausdrückliche Zustimmung der Fachhochschule nicht gestattet.",
+  "pages.imprint.dataProtection": "Datenschutz",
+  "pages.imprint.dataProtectionText": "Sofern innerhalb des Internetangebotes die Möglichkeit zur Eingabe persönlicher oder geschäftlicher Daten (Emailadressen, Namen, Anschriften) besteht, so erfolgt die Preisgabe dieser Daten seitens des Nutzers auf ausdrücklich freiwilliger Basis. Die Inanspruchnahme aller angebotenen Dienste ist - soweit technisch möglich und zumutbar - auch ohne Angabe solcher Daten bzw. unter Angabe anonymisierter Daten oder eines Pseudonyms gestattet. Die Nutzung der im Rahmen des Impressums oder vergleichbarer Angaben veröffentlichten Kontaktdaten wie Postanschriften, Telefon- und Faxnummern sowie Emailadressen durch Dritte zur Übersendung von nicht ausdrücklich angeforderten Informationen ist nicht gestattet. Rechtliche Schritte gegen die Versender von sogenannten Spam-Mails bei Verstößen gegen dieses Verbot sind ausdrücklich vorbehalten.",
+  "pages.imprint.disclaimer": "Haftungsausschluss",
+  "pages.imprint.legalValidity": "Rechtswirksamkeit dieses Haftungsausschlusses",
+  "pages.imprint.legalValidityText": "Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten, von dem aus auf diese Seite verwiesen wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder nicht vollständig entsprechen sollten, bleiben die übrigen Teile des Dokumentes in ihrem Inhalt und ihrer Gültigkeit davon unberührt.",
+  "pages.imprint.onlineContent": "Inhalt des Onlineangebotes",
+  "pages.imprint.onlineContentText": "Die Hochschule Kempten übernimmt keinerlei Gewähr für die Aktualität, Korrektheit, Vollständigkeit oder Qualität der bereitgestellten Informationen. Haftungsansprüche gegen die Hochschule, welche sich auf Schäden materieller oder ideeller Art beziehen, die durch die Nutzung oder Nichtnutzung der dargebotenen Informationen bzw. durch die Nutzung fehlerhafter und unvollständiger Informationen verursacht wurden, sind grundsätzlich ausgeschlossen, sofern seitens der Hochschule kein nachweislich vorsätzliches oder grob fahrlässiges Verschulden vorliegt. Alle Angebote sind freibleibend und unverbindlich. Die Hochschule Kempten behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen.",
+  "pages.imprint.referenceLinks": "Verweise und Links",
+  "pages.imprint.referenceLinksText": "Bei direkten oder indirekten Verweisen auf fremde Webseiten (\"Hyperlinks\"), die außerhalb des Verantwortungsbereiches der Hochschule liegen, würde eine Haftungsverpflichtung ausschließlich in dem Fall in Kraft treten, in dem die Hochschule von den Inhalten Kenntnis hat und es ihm technisch möglich und zumutbar wäre, die Nutzung im Falle rechtswidriger Inhalte zu verhindern. Die Hochschule Kempten erklärt hiermit ausdrücklich, dass zum Zeitpunkt der Linksetzung keine illegalen Inhalte auf den zu verlinkenden Seiten erkennbar waren. Auf die aktuelle und zukünftige Gestaltung, die Inhalte oder die Urheberschaft der gelinkten/verknüpften Seiten hat die Hochschule keinerlei Einfluss. Deshalb distanziert sie sich hiermit ausdrücklich von allen Inhalten aller gelinkten /verknüpften Seiten, die nach der Linksetzung verändert wurden. Diese Feststellung gilt für alle innerhalb des eigenen Internetangebotes gesetzten Links und Verweise . Für illegale, fehlerhafte oder unvollständige Inhalte und insbesondere für Schäden, die aus der Nutzung oder Nichtnutzung solcherart dargebotener Informationen entstehen, haftet allein der Anbieter der Seite, auf welche verwiesen wurde, nicht derjenige, der über Links auf die jeweilige Veröffentlichung lediglich verweist.",
+  "pages.imprint.subtitle": "Lehr-/Lernplattform HASKI vom Labor Softwareentwicklung Hochschule Kempten",
+  "pages.learnercharacteristics": "Lerncharakteristiken",
+  "pages.login": "Login",
   "pages.login.redirect": "Sie werden weitergeleitet",
-  "previousText": "Vorherige",
-  "projecthaski": "Projekt HASKI",
-  "resultPagesText": "Ergebnisseite",
-  "searchButtonText": "Suche",
-  "sort": "Sortiere bei:",
-  "spellcheckText": "Hast du das gesucht?",
+  "pages.privacypolicy": "Datenschutzerklärung",
+  "pages.privacypolicy.dataCollection": "Datenerhebung",
+  "pages.privacypolicy.dataCollectionText": "Die Datenerhebungen werden von entsprechend geschulten MitarbeiterInnen des HASKI-Projekts betreut und online mittels Moodle und dem HASKI-System durchgeführt. Bei Fragen zum jeweiligen Erhebungsverfahren oder bezüglich weiterführender Informationen können Sie sich jederzeit an die nachfolgend genannten Kontaktpersonen wenden. Die erhobenen Daten werden im weiteren Verlauf ausschließlich vertraulich verarbeitet.",
+  "pages.privacypolicy.dataProcessing": "Datenverarbeitung",
+  "pages.privacypolicy.dataProcessingText": "Nach Aufzeichnung werden die Daten durch wissenschaftliche MitarbeiterInnen des HASKI-Projekts ausgewertet. Die für die Datenauswertung verantwortlichen wissenschaftlichen MitarbeiterInnen stehen in keinem Interessenskonflikt mit den teilnehmenden Personen (z.B. Bewertungssituation). Im Rahmen der Auswertungen werden auch Abschriften und/oder Kopien der Daten erstellt. Diese Abschriften und Kopien werden anonymisiert, d. h., es werden sämtliche Namen und sonstigen Hinweise, die Rückschlüsse auf Sie als Person ermöglichen könnten, entfernt.",
+  "pages.privacypolicy.informationStudy": "Informationen zur Studie",
+  "pages.privacypolicy.informationStudyText": "Im Rahmen des HASKI-Projekts beschäftigten sich die OTH Regensburg, HS Kempten und die TH Aschaffenburg damit, wie künstliche Intelligenz zur Unterstützung von Studierenden beim Lernen eingesetzt werden kann. Ziel des Projekts ist es, ein adaptives Learning Management System zu erstellen, welches die Lernenden mit den für sie bestmöglichen Lernmaterialien versorgt. Die erste Version dieses Systems, bezeichnet als HASKI Alpha, soll nun getestet werden im Hinblick auf den Einfluss von lernstilbasierten Lernpfaden auf die Motivation, das Interesse und den Wissensstand der teilnehmenden Studierenden. Der Fokus liegt dabei auf den unterschiedlichen Algorithmen, welche den Lernpfaden zugrunde liegen. Diese Vorgehensweise wird in der Ihnen vorliegenden Studie erstmals eingesetzt und getestet.",
+  "pages.privacypolicy.learningAnalytics": "Learning Analytics",
+  "pages.privacypolicy.nameSurname": "Vor- und Nachname",
+  "pages.privacypolicy.privacyNotice": "Hinweise zum Datenschutz",
+  "pages.privacypolicy.privacyNoticeHandlingPersonalData": "Im Folgenden informieren wir Sie über den datenschutzrechtskonformen Umgang mit Ihren personenbezogenen Daten. Bei Rückfragen oder Verständnisschwierigkeiten wenden Sie sich an den Studienleiter. Wir danken Ihnen für Ihre Mitwirkung und Ihr Vertrauen in unsere Arbeit! Wir arbeiten nach den Vorschriften der Datenschutz-Grundverordnung und allen anderen datenschutzrechtlichen Bestimmungen. Im Rahmen dieser Studie werden folgende Daten erhoben:",
+  "pages.privacypolicy.privacyNoticeIntention": "Diese Daten möchten wir wie im Folgenden dargelegt einsetzen:",
+  "pages.privacypolicy.privacySupport": "Bei Rückfragen bezüglich datenschutzrechtlicher Themen, wenden Sie sich bitte an den Datenschutzbeauftragten. Dieser ist unter den folgenden Kontaktdaten erreichbar:",
+  "pages.privacypolicy.privacySupportName": "Datenschutzbeauftragter der Hochschule Kempten",
+  "pages.privacypolicy.publication": "Veröffentlichung",
+  "pages.privacypolicy.publicationParagraph-1": "Art. 7 Abs. 3 DSGVO - Recht auf Widerruf der Einwilligung: Sie haben das Recht, Ihre Einwilligung jederzeit mit Wirkung für die Zukunft zu widerrufen.",
+  "pages.privacypolicy.publicationParagraph-2": "Art. 15 DSGVO - Auskunftsrecht: Sie haben uns gegenüber das Recht, Auskunft darüber zu erhalten, welche Daten wir zu Ihrer Person verarbeiten.",
+  "pages.privacypolicy.publicationParagraph-3": "Art. 16 DSGVO - Recht auf Berichtigung: Sollten die Sie betreffenden Daten nicht richtig oder unvollständig sein, so können Sie die Berichtigung unrichtiger oder die Vervollständigung unvollständiger Angaben verlangen.",
+  "pages.privacypolicy.publicationParagraph-4": "Art. 17 DSGVO - Recht auf Löschung: Sie können jederzeit die Löschung Ihrer Daten verlangen.",
+  "pages.privacypolicy.publicationParagraph-5": "Art. 18 DSGVO - Recht auf Einschränkung der Verarbeitung: Sie können die Einschränkung der Verarbeitung der Sie betreffenden personenbezogenen Daten verlangen.",
+  "pages.privacypolicy.publicationParagraph-6": "Art. 21 DSGVO - Widerspruchsrecht:  Sie können jederzeit gegen die Verarbeitung der Sie betreffenden Daten Widerspruch einlegen.",
+  "pages.privacypolicy.publicationParagraph-7": "Art. 77 DSGVO - Recht auf Beschwerde bei einer Aufsichtsbehörde: Wenn Sie der Auffassung sind, dass wir bei der Verarbeitung Ihrer Daten datenschutzrechtliche Vorschriften nicht beachtet haben, können Sie sich mit einer Beschwerde an die zuständige Aufsichtsbehörde wenden, die Ihre Beschwerde prüfen wird.",
+  "pages.privacypolicy.publicationText-1": "Die Veröffentlichung von Forschungsergebnissen in Publikationen oder auf Tagungen erfolgt ausschließlich in anonymisierter Form und lässt zu keinem Zeitpunkt Rückschlüsse auf Sie als Person zu. Es erfolgt keine Veröffentlichung von personenbezogenen Daten (z. B. Name, Kontaktdaten).",
+  "pages.privacypolicy.publicationText-2": "Sie haben jederzeit die Möglichkeit folgende Rechte geltend zu machen:",
+  "pages.privacypolicy.publicationText-3": "In jedem Fall gilt: Ihre Teilnahme an den Erhebungen ist freiwillig. Sie haben jederzeit die Möglichkeit zu widerrufen. Durch Verweigerung oder Widerruf entstehen Ihnen keine Nachteile.",
+  "pages.privacypolicy.publicationText-4": "Für die Einhaltung der Datenschutzbestimmungen ist im Falle der vorliegenden Studie die HS Kempten verantwortlich.",
+  "pages.privacypolicy.storageAndAccess": "Aufbewahrung und Zugriff",
+  "pages.privacypolicy.storageAndAccessText": "Die Daten werden in digitaler Form geschützt auf dem Server des HASKI-Projekts aufbewahrt und nur berechtigten MitarbeiterInnen des HASKI-Projekts zugänglich gemacht. Die in dieser Studie erhobenen Daten werden im Sinne guter wissenschaftlicher Praxis in anonymisierter Form in einem vertrauenswürdigen Archiv aufbewahrt und von anderen WissenschaftlerInnen genutzt. Die anonymisierten Daten werden unter kontrollierten Bedingungen auch im Rahmen der Lehre eingesetzt. Seitens des Projekts HASKI werden Ihre Daten für maximal 10 Jahre aufbewahrt und nach Ablauf dieses Zeitraums unwiederbringlich gelöscht.",
+  "pages.privacypolicy.support": "Bei Rückfragen zur Studie, wenden Sie sich bitte an den Versuchsleiter. Im Falle dieser Studie handelt es sich dabei um:",
+  "pages.projectdescription": "Projektbeschreibung",
+  "pages.projectdescription.advantagesLearningBody": "Die Unterstützung wird ermöglicht, indem das HASKI-System Deine Daten aus Moodle ausliest und ein KI-Algorithmus auf Basis dieser Daten Dir einen personalisierten Lernpfad durch die Lernmaterialien vorschlägt. Natürlich bleibt die Entscheidung bei Dir, welches Material Du als Nächstes bearbeiten willst. Auch diese Präferenzen merkt sich HASKI und passt zukünftige Vorschläge an die neuen Begebenheiten an.",
+  "pages.projectdescription.advantagesLearningBody-2": "Die Datenbasis sind Fragebögen, individueller Wissensstand, ausgewertete Aufgaben und Verhaltensdaten aus Moodle. Ein Rückschluss der Lehrenden auf Dich wird durch Anonymisierung der Daten verhindert.",
+  "pages.projectdescription.advantagesLearningHeader": "Vorteile für Dich im Studium",
+  "pages.projectdescription.advantagesLearningHeader-2": "Mit welchen Daten arbeitet HASKI?",
+  "pages.projectdescription.advantagesTeachingBody": "Das HASKI-System möchte einen wichtigen Beitrag dazu leisten, interaktives, individuelles und selbstgesteuertes Lernen in der Hochschullehre besser zu etablieren. Digitale Medien und Plattformen können weit mehr gewährleisten als die derzeitige Praxis der Hochschullehre, in der auch im Zuge der Pandemie der Frontalunterricht dominiert.",
+  "pages.projectdescription.advantagesTeachingBody-2": "Die Idee von HASKI ist es, das Potenzial von KI in den Veranstaltungen der Hochschule Kempten zu nutzen. Kombiniert werden dazu die Präsenzveranstaltungen, das Learning Management System (z. B. Moodle) und das HASKI-System. Damit bieten wir eine Software-Komponente, die mithilfe von KI-Algorithmen Dich bei dem Erreichen Deiner Lernziele unterstützt.",
+  "pages.projectdescription.advantagesTeachingHeader": "Vorteile für die Hochschullehre",
+  "pages.projectdescription.advantagesTeachingHeader-2": "Einsatz in der Hochschullehre",
+  "pages.projectdescription.approachesBody": [
+    "Bundesweiter Austausch. Publikation von wissenschaftlichen Beiträgen. Vorträge auf deutschen Konferenzen.",
+    "Applikation von modernster Technologie. Kombination von Learning Analytics und Künstlicher Intelligenz.",
+    "Empirische Untersuchungen. Online-Fragebögen, Evaluationsstudien, Datenanalysen."
+  ],
+  "pages.projectdescription.approachesHeader": "Was ist unser Ansatz?",
+  "pages.projectdescription.goalsBody": [
+    "Verbesserung und Erweiterung von bisherigen Kursen im Bereich „Software Engineering“, durch Produktion von qualitativ hochwertigen, pädagogisch sinnvollen und abwechslungsreichen Lerninhalten",
+    "Umfassende digitale Repräsentation von einzelnen Studierenden und deren Charakteristiken",
+    "Entwicklung eines adaptiven und KI-basierten Lernsystems zur Generierung von personalisierten Lernpfadempfehlungen",
+    "KI-basierte Auswertung von Aufgaben und hilfreiches Feedback",
+    "Visualisierung und Aufbereitung von Learning Analytics zur Reflektion des Lernverhaltens",
+    "Didaktisch relevante Berichte für Lehrende zur Weiterentwicklung von Kursen"
+  ],
+  "pages.projectdescription.goalsHeader": "Ziele des HASKI Projekts",
+  "pages.projectdescription.imageSource-1": "Bild von katemangostar auf Freepik",
+  "pages.projectdescription.imageSource-2": "Bild von natanaelginting auf Freepik",
+  "pages.projectdescription.introductionBody": "HASKI steht für „Hochschullehre: Adaptiv, selbstgesteuert, KI-gestützt“ und wird gefördert durch das Bundesministerium für Bildung und Forschung mit einer Projektlaufzeit bis Dezember 2025. HASKI ist ein Verbundprojekt von drei bayerischen Hochschulen: OTH Regensburg, TH Aschaffenburg & HS Kempten.",
+  "pages.projectdescription.introductionHeader": "Was ist HASKI?",
+  "pages.rating": "Rating",
+  "pages.rating.learningElementRating": "Lernelement-Rating",
+  "pages.rating.studentRating": "Studierenden-Rating",
+  "pages.topic": "Thema",
+  "pages.topic.grouped": "Gruppiert",
+  "pages.topic.menuItemAlgorithms": "Lernpfadalgorithmus ändern",
+  "pages.topic.single": "Einzeln",
   "success": "Erfolg",
-  "update": "Aktualisieren",
-  "warning": "Warnung"
+  "tooltip.completed": "Erledigt",
+  "tooltip.courseAvailableAt": "Kurs verfügbar ab ",
+  "tooltip.courseSelection": "Wählen Sie einen Kurs",
+  "tooltip.furtherInfoSelection": "Weitere Informationen über das Projekt",
+  "tooltip.languageSettings": "Spracheinstellungen",
+  "tooltip.openGlobalSettings": "Globale Einstellungen",
+  "tooltip.openSettings": "Einstellungen",
+  "tooltip.statisticsMenuSelection": "Verschiedene Informationen zu Ihrem Lernfortschritten.",
+  "warning": "Warnung",
+  "warning.offline": "Sie sind offline. Bitte überprüfen Sie Ihre Internetverbindung.",
+  "warning.online": "Sie sind wieder online."
 }

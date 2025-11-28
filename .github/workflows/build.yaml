@@ -2,7 +2,7 @@ name: Build
 on:
   push:
     branches:
-      - main
+      - main, haski-requirements-linking-tests
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
@@ -10,7 +10,7 @@ jobs:
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Install dependencies
@@ -18,17 +18,23 @@ jobs:
       - name: Test and coverage
         run: yarn jest --coverage
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarqube-scan-action@v4.2.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   code_quality:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install modules
         run: yarn
       - name: Install ESLint
         run: yarn global add eslint-cli
       - name: Run ESLint
         run: eslint ./src --ext .ts,.tsx
+      - name: Cache dependencies
+        uses: actions/cache@v4.2.0  # Updated version
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}

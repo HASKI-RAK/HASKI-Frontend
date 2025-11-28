@@ -1,18 +1,29 @@
-import { GlossaryList, Filter, Searchbar, GlossaryIndex, GlossaryEntryProps } from '@components'
-import { useGlossary as _useGlossary, GlossaryHookReturn } from './Glossary.hooks'
-import { useState, useMemo, Dispatch, SetStateAction } from 'react'
-import { Typography, Box, Grid, Button } from '@common/components'
+import { Dispatch, memo, SetStateAction, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Box, Button, Grid, Typography } from '@common/components'
+import { Filter, GlossaryEntryProps, GlossaryIndex, GlossaryList, Searchbar } from '@components'
+import { GlossaryHookReturn, useGlossary as _useGlossary } from './Glossary.hooks'
 
 /**
- * @interface GlossaryProps
- * @property {function} useGlossary - The hook that is used for the Glossary page logic.
+ * @prop useGlossary - The hook that is used for the Glossary page logic.
+ * @interface
  */
 type GlossaryProps = {
   useGlossary?: () => GlossaryHookReturn
 }
 
-// Returns a function that maps an undefined, string or string array input to a string array and sets it as currently selected tags.
+/**
+ * getSelectedTagsWrapper function.
+ *
+ * @param setSelectedTags - Function to set the currently selected tags.
+ *
+ * @remarks
+ * getSelectedTagsWrapper presents a function that can be used to get a function that sets the currently selected tags.
+ *
+ * @returns - Function thats maps an undefined, string or string array input to a string array and sets it as currently selected tags.
+ *
+ * @category Logic
+ */
 export const getSelectedTagsWrapper = (setSelectedTags: Dispatch<SetStateAction<string[]>>) => {
   const setSelectedTagsWrapper = (input?: string | string[]) => {
     if (input === undefined) {
@@ -28,24 +39,39 @@ export const getSelectedTagsWrapper = (setSelectedTags: Dispatch<SetStateAction<
 }
 
 /**
+ * Glossary page.
+ *
+ * @param props - Props containing the logic to collapse and expand the every glossary entry.
+ *
+ * @remarks
  * Glossary presents a page with a list of important terms of the haski project.
  * It uses the GlossaryList component to present the content and several other components, like a Filter, Searchbar and GlossaryIndex to filter or search for specific entries.
  * It is also possible to collapse and expand individual entries or all at once to gain further information to every term.
- * @param props - Props containing the logic to collapse and expand the every glossary entry.
- * @returns {JSX.Element} - The Glossary page.
+ *
  * @category Pages
  */
 const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
   // Translation
   const { t } = useTranslation()
 
-  const glossaryEntries: GlossaryEntryProps[] = t<string>('pages.glossary.elements', {
-    returnObjects: true
-  }) as GlossaryEntryProps[]
+  // Deconstructing array of glossary entries into array to prevent testing errors.
+  const glossaryEntries: GlossaryEntryProps[] = [
+    ...(t<string>('pages.glossary.elements', {
+      returnObjects: true
+    }) as GlossaryEntryProps[])
+  ]
 
-  const tags = t<string>('pages.glossary.tags', {
-    returnObjects: true
-  }) as string[]
+  // Sorts the glossary entries alphabetically by term.
+  const sortedGlossaryEntries = [...glossaryEntries].sort((a, b) =>
+    (a.term?.toLowerCase() ?? '').localeCompare(b.term?.toLowerCase() ?? '')
+  )
+
+  // Deconstructing array of tags into array to prevent testing errors.
+  const tags = [
+    ...(t<string>('pages.glossary.tags', {
+      returnObjects: true
+    }) as string[])
+  ]
 
   const indexElements = [t('pages.glossary.fundamentals')].concat([
     'A',
@@ -88,10 +114,10 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
   return (
     <Grid container columnSpacing={1} rowSpacing={1}>
       <Grid item xs={12} sm={12} sx={{ mt: '1rem', mb: '1rem' }}>
-        <Typography variant="h3">{t('pages.glossary.title')}</Typography>
+        <Typography variant="h3">{t('pages.glossary')}</Typography>
       </Grid>
       <Grid item xs={8} sm={6}>
-        <Searchbar label={t('pages.glossary.search')} setSearchQuery={setSearchQuery} timeout={100} />
+        <Searchbar label={t('pages.glossary.search')} setSearchQuery={setSearchQuery} timeout={250} />
       </Grid>
       <Grid item xs={4} sm={6}>
         <Filter
@@ -103,32 +129,30 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
       </Grid>
       <Grid item xs={12} sm={12}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-          {useMemo(
-            () => (
-              <GlossaryIndex
-                orientation="horizontal"
-                indexElements={indexElements}
-                selectedIndexElement={selectedIndexElement}
-                setSelectedIndexElement={setSelectedIndexElement}
-              />
-            ),
-            [indexElements, selectedIndexElement, setSelectedIndexElement]
-          )}
+          <GlossaryIndex
+            orientation="horizontal"
+            indexElements={indexElements}
+            selectedIndexElement={selectedIndexElement}
+            setSelectedIndexElement={setSelectedIndexElement}
+          />
         </Box>
       </Grid>
       <Grid item xs={12} sm={12} sx={{ mt: '0.5rem', mb: '0.5rem' }}>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-          <Button variant="outlined" onClick={() => collapseAll(setExpandedList)}>
+          <Button id="collapse-all-button" variant="outlined" onClick={() => collapseAll(setExpandedList)}>
             {t('pages.glossary.collapseAll')}
           </Button>
-          <Button variant="outlined" onClick={() => expandAll(setExpandedList, glossaryEntries)}>
+          <Button
+            id="expand-all-button"
+            variant="outlined"
+            onClick={() => expandAll(setExpandedList, sortedGlossaryEntries)}>
             {t('pages.glossary.expandAll')}
           </Button>
         </Box>
       </Grid>
       <Grid item xs={12} sm={12}>
         <GlossaryList
-          glossaryEntries={glossaryEntries}
+          glossaryEntries={sortedGlossaryEntries}
           expandedList={expandedList}
           setExpandedList={setExpandedList}
           searchQuery={searchQuery}
@@ -140,4 +164,4 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
   )
 }
 
-export default Glossary
+export default memo(Glossary)

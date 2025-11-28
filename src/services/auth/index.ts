@@ -1,0 +1,5 @@
+export { fetchLogout } from './fetchLogout'
+export { fetchRedirectMoodleLogin } from './fetchRedirectMoodleLogin'
+export { fetchUser } from './fetchUser'
+export { postLogin } from './postLogin'
+export { postLoginCredentials } from './postLoginCredentials'

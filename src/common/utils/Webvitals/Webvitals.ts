@@ -1,5 +1,6 @@
 /* istanbul ignore file */
 import { CLSReportCallback } from 'web-vitals'
+import { getConfig } from '@shared'
 
 /**
  * Sends statistics to backend enpoint to track vitals of website like responsiveness
@@ -7,7 +8,7 @@ import { CLSReportCallback } from 'web-vitals'
  */
 export const sendToAnalytics = (metric: object): void => {
   const body = JSON.stringify(metric)
-  const url = process.env.BACKEND + '/logs/frontend'
+  const url = getConfig().BACKEND + '/logs/frontend'
   // Use `navigator.sendBeacon()` if available, falling back to `fetch()`
   const headers = {
     type: 'application/json'

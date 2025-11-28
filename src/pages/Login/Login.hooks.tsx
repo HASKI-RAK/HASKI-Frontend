@@ -1,82 +1,100 @@
-import { AuthContext, postLogin, postLoginCredentials, redirectMoodleLogin } from '@services'
+import { useContext, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useContext, useCallback } from 'react'
+import log from 'loglevel'
+import { AuthContext, fetchRedirectMoodleLogin, postLogin, SnackbarContext } from '@services'
 
 export type LoginHookParams = {
   setIsLoading: (isLoading: boolean) => void
+  /** The nonce is a string that is passed to the login page back from the backend as part of the LTI flow.
+   * It is used to associate the session in a short living authorization flow. */
   nonce?: string
 }
 
 export type LoginHookReturn = {
-  readonly onSubmit: () => void
+  /** Redirects the user to moodle for authorization */
   readonly onMoodleLogin: () => void
 }
 
 /**
  * Hook for the login logic. Handles the login request and redirects to the home page.
- *
+ * @param props - Contain nonce and {@link LoginHookParams.setIsLoading | setIsLoading} function.
  * @remarks
  * If a nonce is passed, the user can be authenticated with the nonce.
  * If no nonce is passed the user is redirected to the login page without a nonce.
  *
- * @param params - Contain nonce and setIsLoading
- * @returns {LoginHookReturn} - The login logic.
  */
-export const useLogin = (params: LoginHookParams): LoginHookReturn => {
-  const authcontext = useContext(AuthContext)
+export const useLogin = (props: LoginHookParams): LoginHookReturn => {
+  const authContext = useContext(AuthContext)
   const navigate = useNavigate()
-
-  const login = useCallback(() => {
-    // supply auth context
-    authcontext.setIsAuth(true)
-    // then redirect to home page
-    navigate('/dashboard', { replace: true })
-  }, [authcontext, navigate])
-
-  // Login with username and password
-  const onSubmitHandler = () => {
-    params.setIsLoading(true)
-    postLoginCredentials()
-      .then((response) => {
-        if (response.status === 200) {
-          login()
-        }
-
-        //TODO catch and🍿 snackbar
-      })
-      .finally(() => {
-        params.setIsLoading(false)
-      })
-  }
+  const { addSnackbar } = useContext(SnackbarContext)
+  const { t } = useTranslation()
+  const popup = useRef<Window | null>(null)
 
   const onMoodleLogin = () => {
-    params.setIsLoading(true)
-    redirectMoodleLogin()
+    const messageHandler = (event: MessageEvent) => {
+      if (event.source === popup.current && event.data === 'login_success') {
+        navigate('/', { replace: true })
+        window.location.reload()
+      }
+    }
+    props.setIsLoading(true)
+    fetchRedirectMoodleLogin()
       .then((response) => {
-        if (response.status === 200) {
-          // 👇️ redirects to Moodle LTI launch acticity
-          window.location.replace(response.message)
+        // 👇️ if possible creates a popup linked to Moodle LTI launch activity, otherwise redirects to it
+        const popupPositionLeft = window.screenLeft + window.outerWidth / 2 - 300
+        const popupPositionTop = window.screenTop + window.outerHeight / 8
+        popup.current = window.open(
+          response.lti_launch_view,
+          'login_window',
+          `popup=true, width=600, height=600, left=${popupPositionLeft}, top=${popupPositionTop}`
+        )
+        if (popup.current) {
+          popup.current.focus()
+          window.addEventListener('message', messageHandler)
+        } else {
+          window.location.replace(response.lti_launch_view)
         }
-
-        //TODO catch and🍿 snackbar
+      })
+      .catch((error) => {
+        addSnackbar({
+          message: t('error.fetchRedirectMoodleLogin'),
+          severity: 'error',
+          autoHideDuration: 5000
+        })
+        log.error(t('error.fetchRedirectMoodleLogin') + 'Error: ' + error)
       })
       .finally(() => {
-        params.setIsLoading(false)
+        props.setIsLoading(false)
       })
   }
 
-  // on mount, read search param 'nounce' and set it to state
+  // on mount, read search param 'nonce' and set it to state
   useEffect(() => {
-    postLogin({ nonce: params.nonce }).then((response) => {
-      if (response.status === 200) login()
-      else navigate('/login', { replace: true })
+    if (!props.nonce) return
 
-      //TODO 🍿 snackbar
-    })
-  }, [login, navigate, params.nonce])
+    postLogin({ nonce: props.nonce })
+      .then((response) => {
+        // supply auth context
+        authContext.setExpire(response.expiration)
+        // then redirect to home page through message event
+        if (window.opener !== null) {
+          window.opener.postMessage('login_success', window.location.origin)
+          window.close()
+        }
+      })
+      .catch((error: string) => {
+        addSnackbar({
+          message: t('error.postLogin'),
+          severity: 'error',
+          autoHideDuration: 5000
+        })
+        log.error(t('error.postLogin') + ' ' + error)
+        navigate('/login', { replace: true })
+      })
+  }, [])
 
   return {
-    onSubmit: onSubmitHandler,
     onMoodleLogin
   } as const
 }

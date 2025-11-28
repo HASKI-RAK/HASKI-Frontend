@@ -1,215 +1,329 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render } from '@testing-library/react'
-import MenuBar, { MenuBarProps } from './MenuBar'
-import { createMemoryHistory } from 'history'
-import { Router } from 'react-router-dom'
-import { Topic, LearningElement, LearningPath } from '@services'
+import { fireEvent, render, waitFor } from '@testing-library/react'
+import * as router from 'react-router'
+import { act } from 'react-dom/test-utils'
+import { MemoryRouter } from 'react-router-dom'
+import { AuthContext, ThemeProvider, RoleContext, RoleContextType } from '@services'
+import MenuBar from './MenuBar'
 
-const topics: Topic[] = []
-const learningElementPath: LearningPath[] = []
+jest.requireActual('i18next')
 
-describe('MenuBar', () => {
-  it('should return to home when clicked on logo or text', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
+const navigate = jest.fn()
 
-    const result = render(
-      <Router location={history.location} navigator={history}>
-        <MenuBar />
-      </Router>
-    )
-    // click on img:
-    fireEvent.click(result.getAllByRole('img')[0])
-    expect(history.location.pathname).toEqual('/')
-
-    history.push('/home')
-
-    // click on component a with text HASKI:
-    fireEvent.click(result.getAllByText('HASKI')[0])
-    expect(history.location.pathname).toEqual('/')
+describe('[HASKI-REQ-0007] MenuBar', () => {
+  beforeEach(() => {
+    jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
-  test('popover is rendered when Topics button is clicked', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
-    const exampleLearningElement: LearningElement = {
-      activity_type: 'Quiz',
-      classification: 'Formative',
-      created_at: '2023-04-19T10:30:00.000Z',
-      created_by: 'John Doe',
-      id: 123,
-      last_updated: '2023-04-20T15:45:00.000Z',
-      lms_id: 456,
-      name: 'Quiz on Chapter 3',
-      student_learning_element: null,
-      university: 'ABC University'
-    }
-
-    const topics: Topic[] = [
-      {
-        contains_le: true,
-        created_at: '2021-09-01T12:00:00.000Z',
-        created_by: 'dimitri',
-        id: 1,
-        is_topic: true,
-        last_updated: '2021-09-01T12:00:00.000Z',
-        lms_id: 1,
-        name: 'Allgemeine Informatik',
-        parent_id: 1,
-        student_topic: {
-          done: false,
-          done_at: null,
-          id: 1,
-          student_id: 1,
-          topic_id: 1,
-          visits: []
-        },
-        university: 'HS-KE'
-      },
-      {
-        contains_le: true,
-        created_at: '2021-09-01T12:00:00.000Z',
-        created_by: 'dimitri',
-        id: 2,
-        is_topic: true,
-        last_updated: '2021-09-01T12:00:00.000Z',
-        lms_id: 1,
-        name: 'Zustand',
-        parent_id: 1,
-        student_topic: {
-          done: false,
-          done_at: null,
-          id: 1,
-          student_id: 1,
-          topic_id: 1,
-          visits: []
-        },
-        university: 'HS-KE'
-      }
-    ]
-
-    const learningElementPath: LearningPath[] = [
-      {
-        based_on: 'some-Algorithm',
-        calculated_on: 'today',
-        course_id: 1,
-        id: 1,
-        path: [
-          {
-            id: 1,
-            learning_element: exampleLearningElement,
-            learning_element_id: 1,
-            learning_path_id: 1,
-            position: 1,
-            recommended: true
-          }
-        ]
-      },
-      {
-        based_on: 'some-Algorithm',
-        calculated_on: 'today',
-        course_id: 1,
-        id: 2,
-        path: [
-          {
-            id: 2,
-            learning_element: exampleLearningElement,
-            learning_element_id: 1,
-            learning_path_id: 1,
-            position: 1,
-            recommended: true
-          }
-        ]
-      }
-    ]
-
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
-    })
-
-    const props: MenuBarProps = {
-      useLearningPath: mockUseLearningPath
-    }
-
-    const result = render(
-      <Router location={history.location} navigator={history}>
-        <MenuBar {...props} />
-      </Router>
+  test('ils-short can be closed after sending answers', async () => {
+    const { getByTestId, getByText } = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
     )
-    // click on Topics button:
-    fireEvent.click(result.getAllByText('components.MenuBar.TopicButton')[0])
-    expect(result.getByText('Allgemeine Informatik')).toBeInTheDocument()
 
-    // click on subtopic:
-    fireEvent.click(result.getAllByText('Quiz on Chapter 3')[0])
-    // render is different from browser url. in browser url is /topics/Design%20patterns/Adapter
-    expect(history.location.pathname).toEqual('/topics/Allgemeine Informatik/Quiz on Chapter 3')
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireILSshort'))
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.TableILSQuestions.introduction'))
+    fireEvent.click(startButton)
+
+    const nextButton = getByTestId('nextButtonILSQuestionnaire')
+    const backButton = getByTestId('backButtonILSQuestionnaire')
+    expect(nextButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
+    expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
+
+    for (let i = 0; i < 6; i++) {
+      const RadioButton1 = getByTestId('ilsShortQuestionnaireILSButtonGroup1').querySelectorAll(
+        'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton1)
+
+      const RadioButton2 = getByTestId('ilsShortQuestionnaireILSButtonGroup2').querySelectorAll(
+        'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton2)
+
+      const RadioButton3 = getByTestId('ilsShortQuestionnaireILSButtonGroup3').querySelectorAll(
+        'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton3)
+
+      const RadioButton4 = getByTestId('ilsShortQuestionnaireILSButtonGroup4').querySelectorAll(
+        'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton4)
+
+      expect(RadioButton1.checked).toBe(true)
+      expect(RadioButton2.checked).toBe(true)
+      expect(RadioButton3.checked).toBe(true)
+      expect(RadioButton4.checked).toBe(true)
+
+      if (i < 5) {
+        fireEvent.click(nextButton)
+      } else {
+        const sendButton = getByTestId('sendButtonILSQuestionnaire')
+        expect(sendButton).toBeEnabled()
+        await act(async () => {
+          fireEvent.click(sendButton)
+        })
+        expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
+        expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
+        fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
+      }
+    }
+  }, 20000)
+
+  // If only the describe runs, the test passes without problems. Running all tests in jest, this test times out.
+  // Adding a bigger timeout solved the problem
+  test('ils-long can be closed after sending answers', async () => {
+    const { getByTestId, getByText } = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireILS'))
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.TableILSQuestions.introduction'))
+    fireEvent.click(startButton)
+
+    const nextButton = getByTestId('nextButtonILSQuestionnaire')
+    const backButton = getByTestId('backButtonILSQuestionnaire')
+    expect(nextButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
+
+    for (let i = 0; i < 11; i++) {
+      const RadioButton1 = getByTestId('ilsLongQuestionnaireILSButtonGroup1').querySelectorAll(
+        'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton1)
+
+      const RadioButton2 = getByTestId('ilsLongQuestionnaireILSButtonGroup2').querySelectorAll(
+        'input[type="radio"]'
+      )[1] as HTMLInputElement
+      fireEvent.click(RadioButton2)
+
+      const RadioButton3 = getByTestId('ilsLongQuestionnaireILSButtonGroup3').querySelectorAll(
+        'input[type="radio"]'
+      )[0] as HTMLInputElement
+      fireEvent.click(RadioButton3)
+
+      const RadioButton4 = getByTestId('ilsLongQuestionnaireILSButtonGroup4').querySelectorAll(
+        'input[type="radio"]'
+      )[1] as HTMLInputElement
+      fireEvent.click(RadioButton4)
+
+      expect(RadioButton1.checked).toBe(true)
+      expect(RadioButton2.checked).toBe(true)
+      expect(RadioButton3.checked).toBe(true)
+      expect(RadioButton4.checked).toBe(true)
+
+      if (i < 10) {
+        fireEvent.click(nextButton)
+      } else {
+        const sendButton = getByTestId('sendButtonILSQuestionnaire')
+        expect(sendButton).toBeEnabled()
+        await act(async () => {
+          fireEvent.click(sendButton)
+        })
+        expect(getByTestId('sendButtonILSQuestionnaire')).toBeDisabled()
+        expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
+        fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
+      }
+    }
+  }, 20000)
+
+  test('listk can be closed after sending answers', async () => {
+    const { getByTestId, getByText } = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireListk'))
+
+    const startButton = getByTestId('StartButtonQuestionnaire')
+
+    expect(startButton).toBeEnabled()
+    expect(getByText('components.TableListKQuestions.introduction'))
+    fireEvent.click(startButton)
+
+    const nextButton = getByTestId('nextButtonListKQuestionnaire')
+    const backButton = getByTestId('backButtonListKQuestionnaire')
+    expect(nextButton).toBeDisabled()
+    expect(backButton).toBeEnabled()
+
+    for (let i = 0; i < 8; i++) {
+      if (i < 7) {
+        const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
+          'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton1)
+
+        const RadioButton2 = getByTestId('ListKQuestionnaireButtonGroup2').querySelectorAll(
+          'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton2)
+
+        const RadioButton3 = getByTestId('ListKQuestionnaireButtonGroup3').querySelectorAll(
+          'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton3)
+
+        const RadioButton4 = getByTestId('ListKQuestionnaireButtonGroup4').querySelectorAll(
+          'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton4)
+
+        const RadioButton5 = getByTestId('ListKQuestionnaireButtonGroup5').querySelectorAll(
+          'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton5)
+
+        expect(RadioButton1.checked).toBe(true)
+        expect(RadioButton2.checked).toBe(true)
+        expect(RadioButton3.checked).toBe(true)
+        expect(RadioButton4.checked).toBe(true)
+        expect(RadioButton5.checked).toBe(true)
+        fireEvent.click(nextButton)
+      }
+      //Last step only has 4 radio buttongroups
+      else {
+        const RadioButton1 = getByTestId('ListKQuestionnaireButtonGroup1').querySelectorAll(
+          'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton1)
+
+        const RadioButton2 = getByTestId('ListKQuestionnaireButtonGroup2').querySelectorAll(
+          'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton2)
+
+        const RadioButton3 = getByTestId('ListKQuestionnaireButtonGroup3').querySelectorAll(
+          'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton3)
+
+        const RadioButton4 = getByTestId('ListKQuestionnaireButtonGroup4').querySelectorAll(
+          'input[type="radio"]'
+        )[0] as HTMLInputElement
+        fireEvent.click(RadioButton4)
+
+        expect(RadioButton1.checked).toBe(true)
+        expect(RadioButton2.checked).toBe(true)
+        expect(RadioButton3.checked).toBe(true)
+        expect(RadioButton4.checked).toBe(true)
+
+        const sendButton = getByTestId('sendButtonListKQuestionnaire')
+        expect(sendButton).toBeEnabled()
+        await act(async () => {
+          fireEvent.click(sendButton)
+        })
+        expect(getByTestId('sendButtonListKQuestionnaire')).toBeDisabled()
+        expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
+        fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
+      }
+    }
+  }, 30000)
+
+  it('should return to home when clicked on logo or text', () => {
+    const { getAllByRole, getAllByText } = render(
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
+    )
+
+    // Click on the logo:
+    fireEvent.click(getAllByRole('img')[0])
+    expect(navigate).toHaveBeenCalledTimes(1)
+    expect(navigate).toHaveBeenCalledWith('/')
+
+    // Click on the component with text 'HASKI':
+    fireEvent.click(getAllByText('HASKI')[0])
+
+    // Assert that useNavigate was called again
+    expect(navigate).toHaveBeenCalledTimes(2)
+    expect(navigate).toHaveBeenCalledWith('/')
   })
 
   test('click on HelpIcon should open popover', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
-    })
-
-    const props: MenuBarProps = {
-      useLearningPath: mockUseLearningPath
-    }
-
     const result = render(
-      <Router location={history.location} navigator={history}>
-        <MenuBar {...props} />
-      </Router>
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
     )
     // click on HelpIcon:
     fireEvent.click(result.getByTestId('HelpIcon'))
     expect(result.getByTestId('HelpIcon')).toBeInTheDocument()
   })
 
-  test('click on SettingsIcon should open popover', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
-    })
-
-    const props: MenuBarProps = {
-      useLearningPath: mockUseLearningPath
-    }
-
+  test('click on ThemeIcon should open ThemeModal', async () => {
     const result = render(
-      <Router location={history.location} navigator={history}>
-        <MenuBar {...props} />
-      </Router>
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
     )
-    // click on HelpIcon:
-    fireEvent.click(result.getByTestId('SettingsIcon'))
-    expect(result.getByTestId('SettingsIcon')).toBeInTheDocument()
+
+    fireEvent.click(result.getByTestId('BrushIcon'))
+    await waitFor(() => {
+      expect(result.getByTestId('ThemeModal')).toBeInTheDocument()
+    })
+  })
+
+  test('click on ThemeIcon should open ThemeModal, then close it', async () => {
+    const result = render(
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(result.getByTestId('BrushIcon'))
+    await waitFor(() => {
+      expect(result.getByTestId('ThemeModal')).toBeInTheDocument()
+      fireEvent.click(result.getByTestId('ThemeModal-Close-Button'))
+    })
+    await waitFor(() => {
+      expect(result.queryByTestId('ThemeModal')).toBeNull()
+    })
   })
 
   test('click on UserIcon should open popover', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
-    })
-
-    const props: MenuBarProps = {
-      useLearningPath: mockUseLearningPath
-    }
-
     const result = render(
-      <Router location={history.location} navigator={history}>
-        <MenuBar {...props} />
-      </Router>
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
     )
 
     // click on UserIcon:
@@ -222,23 +336,31 @@ describe('MenuBar', () => {
     // TODO 📑: will be implemented in the future. Current menu is mock.
   })
 
-  test('clicking logout should close popover', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
+  test('click on static dropdown and select learner characteristic', () => {
+    const result = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    )
 
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
+    fireEvent.click(result.getByText('components.StatisticsMenu.title'))
+    act(() => {
+      fireEvent.click(result.getByText('pages.learnercharacteristics'))
+      expect(navigate).toHaveBeenCalledWith('/learnercharacteristics')
     })
+  })
 
-    const props: MenuBarProps = {
-      useLearningPath: mockUseLearningPath
-    }
-
+  test('clicking logout should close popover', () => {
     const { getByTestId, queryByTestId } = render(
-      <Router location={history.location} navigator={history}>
-        <MenuBar {...props} />
-      </Router>
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
     )
 
     const userAvatarButton = getByTestId('useravatar')
@@ -259,22 +381,12 @@ describe('MenuBar', () => {
   })
 
   test('clicking outside of Menu should close popover', () => {
-    const history = createMemoryHistory({ initialEntries: ['/home'] })
-
-    const mockUseLearningPath = jest.fn().mockReturnValue({
-      loading: false,
-      topics: topics,
-      learningPaths: learningElementPath
-    })
-
-    const props: MenuBarProps = {
-      useLearningPath: mockUseLearningPath
-    }
-
     const { getByTestId, queryByTestId } = render(
-      <Router location={history.location} navigator={history}>
-        <MenuBar {...props} />
-      </Router>
+      <ThemeProvider>
+        <MemoryRouter>
+          <MenuBar />
+        </MemoryRouter>
+      </ThemeProvider>
     )
 
     // get the user avatar button
@@ -290,5 +402,169 @@ describe('MenuBar', () => {
     fireEvent.mouseDown(document.body)
     const userMenu = queryByTestId('menu-appbar')
     expect(userMenu).toBeNull()
+  })
+
+  it('opens the ils-short questionnaire', async () => {
+    const { getByTestId, getByText } = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireILSshort'))
+    expect(getByTestId('Questions Modal')).toBeInTheDocument()
+    expect(getByText('components.TableILSQuestions.introduction')).toBeInTheDocument()
+  })
+
+  it('closes the ils-short questionnaire', async () => {
+    window.confirm = jest.fn(() => true) // always click 'yes'
+
+    const { getByTestId, getByText } = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireILSshort'))
+    expect(getByTestId('Questions Modal')).toBeInTheDocument()
+    expect(getByText('components.TableILSQuestions.introduction')).toBeInTheDocument()
+
+    expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
+    fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
+  })
+
+  it('opens the questionnaire ils-long questionnaire', async () => {
+    const { getByTestId, getByText } = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireILS'))
+    expect(getByTestId('Questions Modal')).toBeInTheDocument()
+    expect(getByText('components.TableILSQuestions.introduction')).toBeInTheDocument()
+  })
+
+  it('close the ils-long questionnaire', async () => {
+    window.confirm = jest.fn(() => true) // always click 'yes'
+
+    const { getByTestId, getByText } = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireILS'))
+    expect(getByTestId('Questions Modal')).toBeInTheDocument()
+    expect(getByText('components.TableILSQuestions.introduction')).toBeInTheDocument()
+
+    expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
+    fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
+  })
+
+  it('open the listk questionnaire', async () => {
+    const { getByTestId, getByText } = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireListk'))
+    expect(getByTestId('Questions Modal')).toBeInTheDocument()
+    expect(getByText('components.TableListKQuestions.introduction')).toBeInTheDocument()
+  })
+
+  it('close the listk questionnaire', async () => {
+    window.confirm = jest.fn(() => true) // always click 'yes'
+
+    const { getByTestId, getByText } = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getByTestId('questionnaireListk'))
+    expect(getByTestId('Questions Modal')).toBeInTheDocument()
+    expect(getByText('components.TableListKQuestions.introduction')).toBeInTheDocument()
+
+    expect(getByTestId('QuestionnaireQuestionsModal-Close-Button')).toBeInTheDocument()
+    fireEvent.click(getByTestId('QuestionnaireQuestionsModal-Close-Button'))
+  })
+
+  it('navigates to default learning path modal and closes it', async () => {
+    const courseCreatorContext = {
+      isStudentRole: false,
+      isCourseCreatorRole: true
+    } as RoleContextType
+
+    const { getAllByText, getByTestId, getByText, queryByText } = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <RoleContext.Provider value={courseCreatorContext}>
+              <MenuBar />
+            </RoleContext.Provider>
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getAllByText('components.Menubar.defaultLearningPath')[0])
+    await waitFor(() => {
+      expect(getByTestId('close-default-learning-path-modal-button')).toBeInTheDocument()
+      expect(getByText('appGlobal.start')).toBeInTheDocument()
+    })
+    fireEvent.click(getByText('appGlobal.start'))
+    await waitFor(() => {
+      expect(queryByText('appGlobal.start')).not.toBeInTheDocument()
+    })
+    fireEvent.click(getByTestId('close-default-learning-path-modal-button'))
+  })
+
+  it('navigates to logout page', async () => {
+    const { getAllByText, getByTestId } = render(
+      <ThemeProvider>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <MemoryRouter>
+            <MenuBar />
+          </MemoryRouter>
+        </AuthContext.Provider>
+      </ThemeProvider>
+    )
+
+    fireEvent.click(getByTestId('useravatar'))
+    fireEvent.click(getAllByText('components.MenuBar.profileLogout')[0])
+    expect(navigate).toHaveBeenCalledWith('/login')
   })
 })

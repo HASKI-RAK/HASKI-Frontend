@@ -1,7 +1,14 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prefer-arrow-functions", "react-hooks"],
+  "plugins": [
+    "@typescript-eslint",
+    "prefer-arrow-functions",
+    "react-hooks",
+    "immutable",
+    "tsdoc",
+    "simple-import-sort"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -10,8 +17,8 @@
     "prettier"
   ],
   "rules": {
-    "no-console": 1, // Warn on console log
-    "prefer-arrow-callback": 1, // Warn on function() { ... }
+    "no-console": 1,
+    "prefer-arrow-callback": 1,
     "prefer-arrow-functions/prefer-arrow-functions": [
       "warn",
       {
@@ -21,11 +28,29 @@
         "singleReturnOnly": false
       }
     ],
-    "react-hooks/rules-of-hooks": "warn", // Checks rules of Hooks
-    // suppress errors for missing 'import React' in files
+    "react-hooks/rules-of-hooks": "warn",
     "react/react-in-jsx-scope": "off",
-    // allow jsx syntax in js files (for next.js project)
-    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }] //should add ".ts" if typescript project
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".ts", ".tsx"] }
+    ],
+    "react-hooks/exhaustive-deps": 0,
+    "immutable/no-let": 1,
+    "immutable/no-this": 1,
+    "immutable/no-mutation": 1,
+    "tsdoc/syntax": "warn",
+
+    // simple-import-sort handles grouping & alphabetizing
+    "simple-import-sort/imports": [
+      "warn",
+      {
+        "groups": [
+          // external + your aliases all in one + relative imports
+          ["^react","^@?\\w","^@mocks$","^@common/.*$","^@components$","^@core$","^@pages$","^@services$","^@shared$","^@store$", "^[./]"]
+        ]
+      }
+    ],
+    "simple-import-sort/exports": "warn"
   },
   "settings": {
     "react": {

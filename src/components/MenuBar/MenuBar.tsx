@@ -1,41 +1,45 @@
-import React, { useContext, useState } from 'react'
+import { MouseEvent, useCallback, useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import {
   AppBar,
-  Toolbar,
-  Typography,
+  Avatar,
   Box,
   IconButton,
+  ImageWrapper,
+  ListItemIcon,
   Menu,
-  Tooltip,
-  Avatar,
   MenuItem,
-  Grid,
-  Button,
-  Popover,
-  Link,
-  Divider,
-  Skeleton,
-  ListItemIcon
+  TextWrapper,
+  Toolbar,
+  Tooltip,
+  Typography
 } from '@common/components'
-import SettingsIcon from '@mui/icons-material/Settings'
-import HelpIcon from '@mui/icons-material/Help'
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
-import { useTranslation } from 'react-i18next'
-import { Logout } from '@mui/icons-material'
-import { AuthContext, Topic, LearningPath } from '@services'
-import { useLearningPath as _useLearningPath } from '../LocalNav/LocalNav.hooks'
-// TODO: Move it into @common/hooks since it is reused in LocalNav
-
-/**
- *  Local navigation component props.
- *  The "loading" property is a boolean value that indicates whether the data is still being loaded.
- *  The "topics" property is an array of objects that represent the topics related to the current page.
- *  The "learningPaths" property is an array of objects that represent the available learning paths related to the current page.
- */
-export type MenuBarProps = {
-  useLearningPath?: () => { loading: boolean; topics: Topic[]; learningPaths: LearningPath[] }
-}
+import { useTheme } from '@common/hooks'
+import {
+  AssignmentOutlined,
+  Brush,
+  Help,
+  LibraryBooksOutlined,
+  Login,
+  Logout,
+  Person,
+  PlaylistAddCheckCircleOutlined,
+  Polyline
+} from '@common/icons'
+import { Theme } from '@common/theme'
+import {
+  CourseMenu,
+  CreateDefaultLearningPathModal,
+  FurtherInfoMenu,
+  LanguageMenu,
+  QuestionnaireQuestionsModal,
+  StatisticsMenu,
+  TableILSQuestions,
+  TableListKQuestions,
+  ThemeModal
+} from '@components'
+import { AuthContext, RoleContext } from '@services'
 
 /**
  * The MenuBar component is the top bar of the application.
@@ -47,52 +51,118 @@ export type MenuBarProps = {
  *
  * @category Components
  */
-const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
-  const [anchorElTopics, setAnchorElTopics] = useState<null | HTMLElement>(null)
-  const authcontext = useContext(AuthContext)
+
+const MenuBar = () => {
   const { t } = useTranslation()
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
+  const { isAuth, logout } = useContext(AuthContext)
+  const activeTheme = useTheme()
+  const [modalOpenTheme, setModalOpenTheme] = useState(false)
+  const { isCourseCreatorRole } = useContext(RoleContext)
+  const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
+  const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
+  const [modalOpenListK, setModalOpenListK] = useState(false)
+  const [modalOpenDefaultLearningPath, setModalOpenDefaultLearningPath] = useState(false)
+  const [successSendILSLong, setSuccessSendILSLong] = useState(false)
+  const [successSendILSShort, setSuccessSendILSShort] = useState(false)
+  const [successSendListK, setSuccessSendListK] = useState(false)
+  const [selectedTheme, setSelectedTheme] = useState<Theme>(activeTheme)
 
-  //Application logic hooks
-  const { loading, topics, learningPaths } = useLearningPath()
-
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget)
-  }
-
-  const handleCloseUserMenu = () => {
+  const handleOpenThemeModal = useCallback(() => {
+    setSelectedTheme(activeTheme)
+    setModalOpenTheme(true)
     setAnchorElUser(null)
-  }
+  }, [activeTheme, setSelectedTheme, setModalOpenTheme, setAnchorElUser])
 
-  const handleOpenTopicsMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElTopics(event.currentTarget)
-  }
+  const handleCloseThemeModal = useCallback(() => {
+    setModalOpenTheme(false)
+  }, [setModalOpenTheme])
 
-  const handleCloseTopicsMenu = () => {
-    setAnchorElTopics(null)
-  }
+  const handleOpenILSShortModal = useCallback(() => {
+    setModalOpenILSShort(true)
+    setAnchorElUser(null)
+  }, [setModalOpenILSShort, setAnchorElUser])
 
-  const handleUserLogout = () => {
-    handleCloseUserMenu()
-    authcontext.logout()
-    navigate('/login', { replace: true })
-  }
+  const handleCloseILSShortModal = useCallback(
+    (_: object, reason: string) => {
+      if (!successSendILSShort) {
+        if (reason == 'backdropClick')
+          if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSShort(false)
+      } else {
+        window.location.reload()
+        setModalOpenILSShort(false)
+      }
+    },
+    [successSendILSShort, setModalOpenILSShort]
+  )
 
-  const skeletonItems = []
-  for (let i = 0; i < 3; i++) {
-    skeletonItems.push(
-      <React.Fragment key={`MenuBar-Topic-Skeleton-${i}`}>
-        <Skeleton variant="text" width={'500'} height={55} />
-        <Skeleton variant="text" width={'70%'} height={20} />
-      </React.Fragment>
-    )
-  }
+  const handleOpenILSLongModal = useCallback(() => {
+    setModalOpenILSLong(true)
+    setAnchorElUser(null)
+  }, [setModalOpenILSLong, setAnchorElUser])
+
+  const handleCloseILSLongModal = useCallback(
+    (_: object, reason: string) => {
+      if (!successSendILSLong) {
+        if (reason == 'backdropClick')
+          if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenILSLong(false)
+      } else {
+        window.location.reload()
+        setModalOpenILSLong(false)
+      }
+    },
+    [successSendILSLong, setModalOpenILSLong]
+  )
+
+  const handleOpenListKModal = useCallback(() => {
+    setModalOpenListK(true)
+    setAnchorElUser(null)
+  }, [setModalOpenListK, setAnchorElUser])
+
+  const handleOpenDefaultLearningPath = useCallback(() => {
+    setModalOpenDefaultLearningPath(true)
+    setAnchorElUser(null)
+  }, [setModalOpenDefaultLearningPath, setAnchorElUser])
+
+  const handleCloseListKModal = useCallback(
+    (_: object, reason: string) => {
+      if (!successSendListK) {
+        if (reason == 'backdropClick') if (window.confirm(t('components.Menubar.closeDialog'))) setModalOpenListK(false)
+      } else {
+        window.location.reload()
+        setModalOpenListK(false)
+      }
+    },
+    [successSendListK, setModalOpenListK]
+  )
+
+  const handleCloseDefaultLearningPath = useCallback(() => {
+    setModalOpenDefaultLearningPath(false)
+  }, [setModalOpenDefaultLearningPath])
+
+  const handleOpenUserMenu = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      setAnchorElUser(event.currentTarget)
+    },
+    [setAnchorElUser]
+  )
+
+  const handleCloseUserMenu = useCallback(() => {
+    setAnchorElUser(null)
+  }, [setAnchorElUser])
 
   const navigate = useNavigate()
+
+  const handleUserLogout = useCallback(() => {
+    handleCloseUserMenu()
+    logout()
+    navigate('/login')
+  }, [logout, navigate, handleCloseUserMenu])
+
   return (
     <AppBar position="static">
       <Toolbar disableGutters>
-        <Box
+        <ImageWrapper
           component="img"
           sx={{
             mt: 2,
@@ -102,11 +172,11 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
             maxHeight: { xs: 20, md: 50 },
             maxWidth: { xs: 20, md: 50 },
             borderRadius: '50%',
-            backgroundColor: (theme) => `${theme.palette.secondary.main}`,
+            backgroundColor: 'white',
             cursor: 'pointer'
           }}
           alt="HASKI Home"
-          src="/LogoPng.png"
+          src="/LogoHaski.png"
           onClick={() => navigate('/')}
         />
         <Box sx={{ flexGrow: 1, textAlign: 'center', display: 'flex' }}>
@@ -117,125 +187,92 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
               textAlign: 'center',
               display: { xs: 'none', md: 'flex' }
             }}>
-            <Typography
+            <TextWrapper
+              id="HASKI-text-menu-bar"
               variant="h6"
               noWrap
               component="a"
-              sx={{
+              sx={(theme) => ({
                 mr: 2,
                 ml: 2,
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
-                color: 'inherit',
+                color: theme.palette.secondary.contrastText,
                 textDecoration: 'none'
-              }}
+              })}
               onClick={() => navigate('/')}>
               HASKI
-            </Typography>
-            <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-              <Tooltip title="Open topics">
-                <Button
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleOpenTopicsMenu}
-                  color="inherit"
-                  endIcon={
-                    anchorElTopics ? <ArrowDropDownIcon sx={{ transform: 'rotate(180deg)' }} /> : <ArrowDropDownIcon />
-                  }>
-                  {t('components.MenuBar.TopicButton')}
-                </Button>
-              </Tooltip>
-              <Popover
-                id="menu-appbar"
-                anchorEl={anchorElTopics}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left'
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left'
-                }}
-                open={Boolean(anchorElTopics)}
-                onClose={handleCloseTopicsMenu}
-                sx={{ minWidth: '500px' }}>
-                <Box sx={{ p: 2 }}>
-                  <Grid container direction="column-reverse" spacing={2}>
-                    {loading ? ( // display Skeleton component while loading
-                      <Box width={400}>{skeletonItems}</Box>
-                    ) : (
-                      //For every Topic the LearningPath is displayed under it.
-                      <>
-                        {topics.map((topic, index) => (
-                          <React.Fragment key={`topic-in-Accordion-${topic.name}-topicID-${topic.id}`}>
-                            <Grid item xs={12} key={t(topic.name)}>
-                              <Typography variant="h6">{t(topic.name)}</Typography>
-                              <Box
-                                sx={{
-                                  display: 'flex',
-                                  flexDirection: 'row',
-                                  flexWrap: 'wrap',
-                                  justifyContent: 'start'
-                                }}>
-                                {learningPaths[index]?.path.map((element) => (
-                                  <Link
-                                    key={element.learning_element.name}
-                                    underline="hover"
-                                    variant="body2"
-                                    component="span"
-                                    color="inherit"
-                                    sx={{ m: 1, cursor: 'pointer' }}
-                                    onClick={() => {
-                                      navigate(`/topics/${topic.name}/${element.learning_element.name}`)
-                                      handleCloseTopicsMenu()
-                                    }}>
-                                    {element.learning_element.name}
-                                  </Link>
-                                ))}
-                              </Box>
-                            </Grid>
-                            {topics.indexOf(topic) !== topics.length - 1 && <Divider flexItem />}
-                          </React.Fragment>
-                        ))}
-                      </>
-                    )}
-                  </Grid>
-                </Box>
-              </Popover>
-            </Box>
+            </TextWrapper>
+            <CourseMenu />
+            <StatisticsMenu />
+            <FurtherInfoMenu />
           </Box>
           {/** Search bar */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>{/* <Searchbar /> */}</Box>
+          {/** Language menu */}
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 }, mt: 1 }}>
+            <LanguageMenu />
+          </Box>
+          {/** Theme button */}
+          <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
+            <Tooltip title={<Typography variant={'body2'}>{t('components.MenuBar.themeModal')}</Typography>}>
+              <IconButton
+                id="theme-icon-button"
+                onClick={useCallback(() => handleOpenThemeModal(), [handleOpenThemeModal])}>
+                <Brush data-testid="BrushIcon" />
+              </IconButton>
+            </Tooltip>
+            <ThemeModal
+              open={modalOpenTheme}
+              handleClose={handleCloseThemeModal}
+              selectedTheme={selectedTheme}
+              setSelectedTheme={setSelectedTheme}
+            />
+          </Box>
 
           {/** Help button */}
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('help')}>
-              <IconButton>
-                <HelpIcon data-testid="HelpIcon" />
+            <Tooltip title={<Typography variant={'body2'}>{t('appGlobal.help')}</Typography>}>
+              <IconButton
+                id="manual-icon-button"
+                onClick={() => {
+                  window.open('/files/Tutorial_zur_Bedienung_von_HASKI_Okt24.pdf', '_blank')
+                }}>
+                <Help data-testid="HelpIcon" />
               </IconButton>
             </Tooltip>
           </Box>
-
-          {/** Settings button */}
+          {/**
+          { Settings button }
           <Box display="flex" sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
             <Tooltip title={t('tooltip.openGlobalSettings')}>
-              <IconButton>
-                <SettingsIcon data-testid="SettingsIcon" />
+              <IconButton
+                id="global-settings-icon-button"
+                onClick={() => {
+                  addSnackbar({
+                    message: t('components.MenubBar.GlobalSettings.Error'),
+                    severity: 'warning',
+                    autoHideDuration: 5000
+                  })
+                }}>
+                <Settings data-testid="SettingsIcon" />
               </IconButton>
             </Tooltip>
           </Box>
-
+*/}
           {/** User menu */}
           <Box sx={{ flexGrow: 0, mr: { xs: 0, md: 2 } }}>
-            <Tooltip title={t('tooltip.openSettings')}>
-              <IconButton onClick={handleOpenUserMenu} data-testid="useravatar">
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            <Tooltip title={<Typography variant={'body2'}>{t('tooltip.openSettings')}</Typography>}>
+              <IconButton id="account-icon-button" onClick={handleOpenUserMenu} data-testid="useravatar">
+                <Avatar alt="Remy Sharp">
+                  <Person />
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
-              id="menu-appbar"
+              id="account-menu"
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
@@ -248,14 +285,90 @@ const MenuBar = ({ useLearningPath = _useLearningPath }: MenuBarProps) => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}>
+              {isAuth && (
+                <MenuItem
+                  id="ils-long-menu-item"
+                  data-testid="questionnaireILS"
+                  key="questionnaireILS"
+                  onClick={() => handleOpenILSLongModal()}>
+                  <ListItemIcon>
+                    <LibraryBooksOutlined fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{t('components.Menubar.questionnaireILS')}</Typography>
+                </MenuItem>
+              )}
+              <QuestionnaireQuestionsModal open={modalOpenILSLong} handleClose={handleCloseILSLongModal}>
+                <TableILSQuestions
+                  ilsLong={true}
+                  successSend={successSendILSLong}
+                  setSuccessSend={setSuccessSendILSLong}
+                />
+              </QuestionnaireQuestionsModal>
+
+              {isAuth && (
+                <MenuItem
+                  id="ils-short-menu-item"
+                  disabled={true}
+                  data-testid="questionnaireILSshort"
+                  key="questionnaireILSshort"
+                  onClick={() => {
+                    handleOpenILSShortModal()
+                  }}>
+                  <ListItemIcon>
+                    <AssignmentOutlined fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{t('components.Menubar.questionnaireILSShortened')}</Typography>
+                </MenuItem>
+              )}
+              <QuestionnaireQuestionsModal open={modalOpenILSShort} handleClose={handleCloseILSShortModal}>
+                <TableILSQuestions
+                  ilsLong={false}
+                  successSend={successSendILSShort}
+                  setSuccessSend={setSuccessSendILSShort}
+                />
+              </QuestionnaireQuestionsModal>
+
+              {isAuth && (
+                <MenuItem
+                  id="list-k-menu-item"
+                  data-testid="questionnaireListk"
+                  key="questionnaireListk"
+                  onClick={() => handleOpenListKModal()}>
+                  <ListItemIcon>
+                    <PlaylistAddCheckCircleOutlined fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{t('components.Menubar.questionnaireListK')}</Typography>
+                </MenuItem>
+              )}
+              <QuestionnaireQuestionsModal open={modalOpenListK} handleClose={handleCloseListKModal}>
+                <TableListKQuestions successSend={successSendListK} setSuccessSend={setSuccessSendListK} />
+              </QuestionnaireQuestionsModal>
+
+              {isAuth && isCourseCreatorRole && (
+                <MenuItem id="default-learningpath-menu-item" onClick={() => handleOpenDefaultLearningPath()}>
+                  <ListItemIcon>
+                    <Polyline fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{t('components.Menubar.defaultLearningPath')}</Typography>
+                </MenuItem>
+              )}
+              <CreateDefaultLearningPathModal
+                open={modalOpenDefaultLearningPath}
+                handleClose={handleCloseDefaultLearningPath}
+              />
+
               <MenuItem
+                id="login-logout-menu-item"
                 data-testid="usermenuitem"
-                key={t('components.MenuBar.Profile.Logout')}
-                onClick={handleUserLogout}>
-                <ListItemIcon>
-                  <Logout fontSize="small" />
-                </ListItemIcon>
-                <Typography textAlign="center">{t('components.MenuBar.Profile.Logout')}</Typography>
+                key="usermenuitem"
+                onClick={() => {
+                  isAuth ? handleUserLogout() : navigate('/login')
+                  handleCloseUserMenu()
+                }}>
+                <ListItemIcon>{isAuth ? <Logout fontSize="small" /> : <Login fontSize="small" />}</ListItemIcon>
+                <Typography textAlign="center">
+                  {isAuth ? t('components.MenuBar.profileLogout') : t('components.MenuBar.profileLogin')}
+                </Typography>
               </MenuItem>
             </Menu>
           </Box>

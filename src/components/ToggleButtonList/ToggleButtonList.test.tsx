@@ -1,6 +1,6 @@
-import { ToggleButtonList } from './ToggleButtonList'
-import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
+import { ToggleButtonList } from '@components'
 
 describe('ToggleButtonList tests', () => {
   const mockToggleButtonListProps = {
