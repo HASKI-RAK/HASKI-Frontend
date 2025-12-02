@@ -1485,421 +1485,412 @@
   "pages.glossary": "Glossary",
   "pages.glossary.collapseAll": "Collapse All",
   "pages.glossary.elements": [
-  {
-    "term": "Adaptability",
-    "definition": "Adaptability describes a system’s ability to be changed through external actions that modify its settings. In HASKI, both teachers and learners can adapt the system. For example, teachers can intervene in suggested learning paths, while learners can adjust basic settings such as colors or configure their own sequence of learning elements.",
-    "sources": "Bartel, Dörringer & Klopp, 2022a; Petko & Reusser, 2005, p. 188; Zens, 2005",
-    "tags": ["Adaptivity", "System Architecture"],
-    "fundamental": false
-  },
-  {
-    "term": "Adaptivity",
-    "definition": "Adaptivity is present when a system autonomously adjusts to input (e.g., test results, processing speed, or learning paths). In this context, adaptive learning refers to adapting learning offerings to individual differences so that all learners can be supported appropriately.",
-    "sources": "Bartel, Dörringer & Klopp, 2022a; Petko & Reusser, 2005, p. 188; Stangl, 2022, p. 1",
-    "tags": ["Adaptivity", "Learning Analytics"],
-    "fundamental": false
-  },
-  {
-    "term": "Adaptive content presentation",
-    "definition": "Adaptive content presentation refers to adapting the content or presentation of a page based on an individual learner’s characteristics. For example, learners with higher prior knowledge may receive more detailed information, while learners with lower prior knowledge receive additional explanations. Presentation can also be adapted to preferences such as favoring graphics over text.",
-    "sources": "Brusilovsky, 1996; Kersebaum, 2016, p. 98",
-    "tags": ["Adaptivity", "System Architecture"],
-    "fundamental": false
-  },
-  {
-    "term": "Adaptive navigation support",
-    "definition": "Adaptive navigation support helps learners find their way through a system. It includes various adaptation techniques; in HASKI, this is implemented through adaptive link annotation, where the next recommended action is highlighted.",
-    "sources": "Brusilovsky, 1996; Kersebaum, 2016, p. 98",
-    "tags": ["Adaptivity", "System Architecture"],
-    "fundamental": false
-  },
-  {
-    "term": "Adaptive learning system",
-    "definition": "An adaptive learning system (also referred to as an Intelligent Tutoring System, Adaptive Educational System, or Personalized Learning Environment) aims to adapt to the needs and learning goals of individual learners. In HASKI, this is based on three models: the learner model, the tutorial model, and the domain model.",
-    "sources": "",
-    "tags": ["Adaptivity", "System Architecture"],
-    "fundamental": false
-  },
-  {
-    "term": "Animation (AN)",
-    "definition": "Animations present learning content in an animated multimedia format. In HASKI, they are classified as a type of learning element.",
-    "sources": "Graf, Kinshuk & Ives, 2010",
-    "tags": ["LE Classification"],
-    "fundamental": false
-  },
-  {
-    "term": "Real-Life Application (AB)",
-    "definition": "Real-life applications show how learned material can be applied in real-world situations. In HASKI, they are classified as a type of learning element.",
-    "sources": "Graf, Kinshuk & Ives, 2010",
-    "tags": ["LE Classification"],
-    "fundamental": false
-  },
-  {
-    "term": "Examples (BE)",
-    "definition": "Examples provide concrete illustrations of theoretical concepts. In HASKI, they are classified as a type of learning element.",
-    "sources": "Graf, Kinshuk & Ives, 2010",
-    "tags": ["LE Classification"],
-    "fundamental": false
-  },
-  {
-    "term": "Educational setting",
-    "definition": "An educational setting is any environment in which learning and educational activities take place. Learners may engage in lectures, discussions, group work, or independent study to acquire knowledge, skills, and competencies. Educational settings vary in size, structure, and focus depending on educational level, subject area, and target audience.",
-    "sources": "",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Domain model",
-    "definition": "The domain model contains metadata for all topics, digital learning spaces, and learning elements within the learning environment, including the domain’s basic structure. It also captures concepts, content, learning objects (e.g., examples, graphics, or exercises), and their relationships or dependencies.",
-    "sources": "Meier, 2019, p. 4",
-    "tags": ["System Architecture"],
-    "fundamental": true
-  },
-  {
-    "term": "Element progress",
-    "definition": "Element progress represents the history of visited learning elements and indicates which learning elements have already been visited.",
-    "sources": "",
-    "tags": ["Learning Analytics"],
-    "fundamental": false
-  },
-  {
-    "term": "Content Object (EK)",
-    "definition": "Content objects present the core learning material of a course. In HASKI, they are classified as a type of learning element.",
-    "sources": "Graf, Kinshuk & Ives, 2010",
-    "tags": ["LE Classification"],
-    "fundamental": false
-  },
-  {
-    "term": "Forum (FO)",
-    "definition": "Forum activities enable learners to ask questions and discuss topics with peers and instructors. While a course often has one forum, it can include multiple forum activities that encourage participation. In HASKI, forum activities are classified as a type of learning element.",
-    "sources": "Graf, Kinshuk & Ives, 2010",
-    "tags": ["LE Classification"],
-    "fundamental": false
-  },
-  {
-    "term": "Feedback (educational context)",
-    "definition": "In an educational context, feedback is information provided to learners about their progress, performance, and achievements. It can take the form of verbal comments, written comments, grades, or scores. Effective feedback is timely, specific, and constructive, focusing on the task or behavior and offering clear suggestions for improvement. Feedback may come from teachers, peers, or self-assessment and supports monitoring progress, sustaining motivation, and developing competencies.",
-    "sources": "",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Felder & Silverman Learning Style Model (FSLSM)",
-    "definition": "The FSLSM distinguishes eight learning styles across four dimensions: processing (active vs. reflective), perception (sensory vs. intuitive), input modality (visual vs. verbal), and understanding (sequential vs. global). If there is no noticeable preference on a dimension, it is described as balanced (BAL).",
-    "sources": "Felder & Silverman, 1988",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Externally controlled learning",
-    "definition": "Externally controlled learning refers to learning processes guided by external influences. These may include other people (e.g., teacher instructions), instructional media (e.g., computer programs), or the design of the learning environment.",
-    "sources": "HRM Akademie Deutschland, n.d.",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Basic structure (of the domain model or the learning world)",
-    "definition": "The basic structure of the learning world comprises all relationships and dependencies among topics, digital learning spaces, and learning elements from the teacher’s perspective.",
-    "sources": "",
-    "tags": ["System Architecture"],
-    "fundamental": false
-  },
-  {
-    "term": "Index of Learning Styles (ILS)",
-    "definition": "The ILS questionnaire is used to determine an individual’s learning style. In its original English version, it contains 44 dichotomous questions, with 11 questions per dimension. Preferences are expressed on a scale from +11 to −11 per dimension: selecting option (a) increases the score by +1, while selecting option (b) decreases it by −1.",
-    "sources": "Graf, Viola, Leo & Kinshuk, 2007, p. 82",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Competence",
-    "definition": "Competence refers to the cognitive abilities and skills individuals possess or can acquire to solve specific problems, as well as the associated motivational, volitional, and social dispositions that enable responsible and effective problem-solving in varying situations.",
-    "sources": "Weinert, 2002, pp. 27–28",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Course",
-    "definition": "A course is the highest hierarchical level in the domain model structure. A course can include one or more topics and sub-topics that may be logically connected through learning paths, and within which learning processes take place.",
-    "sources": "Bartel, Dörringer & Klopp, 2022e, p. 1",
-    "tags": ["System Architecture"],
-    "fundamental": true
-  },
-  {
-    "term": "Commentary (KÜ)",
-    "definition": "Commentaries provide learners with a brief overview of a sub-topic. In HASKI, they are classified as a type of learning element.",
-    "sources": "Graf, Kinshuk & Ives, 2010",
-    "tags": ["LE Classification"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning Analytics",
-    "definition": "Learning analytics refers to measuring, collecting, analyzing, and reporting data about learners and their contexts to understand and optimize learning and learning environments. In HASKI, learning analytics includes element progress, learning progress, ratings, time spent (duration and timing), learning sequences and repetitions, performance in test elements, demographic data (e.g., age, gender, semester, program, work experience), and grades.",
-    "sources": "Judel, 2018, p. 7",
-    "tags": ["Learning Analytics"],
-    "fundamental": true
-  },
-  {
-    "term": "Learning Management System (LMS)",
-    "definition": "A learning management system (LMS) is software that supports the administration of learning and training activities. It can register users, track courses, record learner data, and provide reports. LMSs are widely used to create, manage, and deliver course material and can support instructional and pedagogical activities through features such as assessment, personalization, and resource management.",
-    "sources": "Hall, 2001; Kattoua, Al-Lozi & Alrowwad, 2016; Sabharwal et al., 2018; Turnbull, Chugh & Luck, 2019; Turnbull, Chugh & Luck, 2021, p. 164",
-    "tags": ["Didactics", "System Architecture"],
-    "fundamental": false
-  },
-  {
-    "term": "Learner characteristics",
-    "definition": "In HASKI, learner characteristics comprise individual attributes that are relevant for adaptive learning path design and/or shown in student and teacher dashboards. These characteristics are stored in the learner model and may include learning style tendencies, learning strategies, knowledge level, and learning analytics.",
-    "sources": "",
-    "tags": ["Adaptivity", "Learning Analytics"],
-    "fundamental": true
-  },
-  {
-    "term": "Learning element (LE)",
-    "definition": "Learning elements support learners’ competence development and are provided within learning spaces. They may appear as verbal elements (e.g., written text, hypertext, spoken language), visual elements (e.g., static or moving images), and/or interactive formats (e.g., simulations, games, 3D). In the domain model hierarchy, learning elements form the lowest level and can be differentiated by classification types.",
-    "sources": "Arnold, 2011, p. 138; Bartel, Dörringer & Klopp, 2022, p. 1",
-    "tags": ["System Architecture"],
-    "fundamental": true
-  },
-  {
-    "term": "Learning recommendation",
-    "definition": "HASKI can provide learning recommendations based on individual learner data and the structure of the domain model, supporting decisions about what to do next. Recommendations are communicated by visually highlighting suggested learning elements. The tutorial model combines information from the learner model and the domain model to generate individualized learning recommendations.",
-    "sources": "Raj & Renumol, 2022, p. 114",
-    "tags": ["Adaptivity", "System Architecture"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning format",
-    "definition": "A learning format refers to the structure or arrangement in which educational content is presented to learners. It includes how information is organized, delivered, and accessed to facilitate learning. Examples range from lectures and textbooks to online courses and interactive multimedia. The choice of format depends on factors such as learning goals, target audience, and available resources and technology.",
-    "sources": "",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning progress",
-    "definition": "Learning progress indicates which learning elements have been completed and how successful the learner was while working on them.",
-    "sources": "",
-    "tags": ["Learning Analytics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learner model",
-    "definition": "The learner model in HASKI consists of multiple components that interact and influence each other. It is assumed to be dynamic and can change over time through new experiences, interactions, and knowledge acquisition, adapting to current requirements.",
-    "sources": "",
-    "tags": ["Adaptivity", "System Architecture"],
-    "fundamental": true
-  },
-  {
-    "term": "Learner satisfaction",
-    "definition": "Learner satisfaction is the degree of contentment or positive emotional response learners experience regarding their learning experiences. It reflects engagement and motivation and includes aspects such as enjoyment of learning activities, perceived achievement of learning goals, perceived relevance, and satisfaction with the learning environment and support.",
-    "sources": "ChatGPT",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning object",
-    "definition": "In online learning, a learning object is a self-contained unit of digital educational content (e.g., text, images, video, interactive elements) designed to address specific learning objectives and to be reusable across contexts. In HASKI, the term \"learning element\" is used instead of \"learning object\" because \"learning object\" is used inconsistently in broader educational contexts.",
-    "sources": "",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning pathway",
-    "definition": "A learning pathway is a didactically planned, sequential composition of topics, learning spaces, and/or learning elements. Pathways may be created by teachers or by HASKI; the teacher-created structure is treated as the default pathway. Learning pathways can be linear (same order for all learners) or adaptive (adjusted to individual learners). In HASKI, the tutorial model adapts pathways based on data from the learner model and the basic structure of the domain model.",
-    "sources": "Bartel, Dörringer & Klopp, 2022, p. 1; Goertz, 2015; Hessisches Kultusministerium, 2016; Niegemann & Heidig, 2020, p. 362; Paramythis & Loidl-Reisinger, 2004; Pöhler, 2018; Roth, 2014",
-    "tags": ["Adaptivity", "System Architecture"],
-    "fundamental": true
-  },
-  {
-    "term": "Learning space (physical)",
-    "definition": "Physical learning spaces are locations where teachers and learners meet and engage in learning activities; they can be understood as physical containers as well as perceptual, action, and social spaces. In HASKI, face-to-face sessions conducted in combination with the HASKI system (following a blended-learning approach) are referred to as physical learning spaces.",
-    "sources": "Wittwer & Diettrich, 2015, pp. 18–19",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning sequence",
-    "definition": "In HASKI, a learning sequence is a limited sequence of learning elements that a learner visits. Unlike a learning pathway, a learning sequence is not didactically planned. It is also distinct from a learning way, which represents the totality of a learner’s sequences over time.",
-    "sources": "",
-    "tags": ["Learning Analytics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning state",
-    "definition": "The learning state is the individualized part of the learner model. It includes information such as element progress, learning style, learning strategies, knowledge level, and additional learning analytics. It is visible only to the learner, while teachers can access aggregated averages across learners.",
-    "sources": "",
-    "tags": ["Adaptivity", "Learning Analytics"],
-    "fundamental": true
-  },
-  {
-    "term": "Learning style (LS)",
-    "definition": "Learning styles are relatively stable individual indicators reflecting preferences in processing, perceiving, organizing, and presenting information. They are considered situation- and task-independent and describe how learners interact with and respond to their learning environment.",
-    "sources": "",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning style (dynamic)",
-    "definition": "In learning style recognition, \"dynamic\" refers to a system’s ability to adjust to changing learner needs and preferences over time. A dynamic approach continuously monitors and evaluates preferences and updates recommendations accordingly, rather than relying on a single, static assessment.",
-    "sources": "",
-    "tags": ["Adaptivity", "Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning style (static)",
-    "definition": "In learning style recognition, \"static\" refers to the assumption that a learner’s preferred learning style is fixed and does not change over time. This approach treats preferences as stable across contexts, in contrast to dynamic approaches that allow for change depending on time and situation.",
-    "sources": "",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning style recognition",
-    "definition": "Learning style recognition is the process of identifying an individual’s preferred way of learning by assessing tendencies related to approaching tasks, retaining information, and engaging with educational materials. The aim is to enable more personalized learning experiences and improve outcomes and motivation.",
-    "sources": "",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning style theories",
-    "definition": "Learning style theories describe the idea that learners differ in how they prefer to process information and approach learning, and that instruction can be adapted accordingly. Various models classify learners based on dimensions such as sensory modalities, environmental influences, and emotional factors.",
-    "sources": "",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning strategies",
-    "definition": "In HASKI, learning strategies are behaviors learners use deliberately to acquire knowledge. They support obtaining, processing, organizing, and storing information effectively. Learning strategies are an individual characteristic composed of multiple components with varying levels of expression; in HASKI, they are currently assessed using LIST-K.",
-    "sources": "",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning environment",
-    "definition": "A learning environment is the physical, social, and psychological context in which learning takes place. It includes conditions, resources, and interactions, such as classrooms or online platforms, relationships with teachers and peers, tools and technologies, and the cultural and emotional climate that shapes engagement and motivation.",
-    "sources": "",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learner behaviour",
-    "definition": "Learner behaviour refers to observable actions, attitudes, and interactions during learning. It includes how learners engage with tasks and materials, participate in discussions, seek help, manage time, and regulate their learning. Understanding learner behaviour can inform instructional design and tailored support.",
-    "sources": "ChatGPT",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Learning way",
-    "definition": "A learning way is the actual sequence of actions taken by an individual learner. It may differ from the planned learning pathway for a learning space. Observed learning ways can provide insights into learning behaviour, knowledge level, and preferences; differences between planned pathways and actual learning ways of high-performing learners may also indicate pathway quality and fit.",
-    "sources": "",
-    "tags": ["Learning Analytics"],
-    "fundamental": false
-  },
-  {
-    "term": "Assignments (LZ)",
-    "definition": "Assignments describe requirements learners must meet for course assessment. In HASKI, they are classified as a type of learning element.",
-    "sources": "Graf, Kinshuk & Ives, 2010",
-    "tags": ["LE Classification"],
-    "fundamental": false
-  },
-  {
-    "term": "LIST-K questionnaire",
-    "definition": "The LIST-K questionnaire is a shortened version of the original \"Learning Strategies in Studies\" (LIST). It reduces the number of items to improve test economy while maintaining reliability. LIST-K distinguishes cognitive strategies, metacognitive strategies, management of internal resources, and management of external resources, each with multiple subscales.",
-    "sources": "Klingsieck, 2018; Wild & Schiefele, 1994",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Metadata",
-    "definition": "Metadata describe topics, digital learning spaces, and learning elements in more detail. Categories include identifiers, authorship, dates, course assignment, target group, semester, short descriptions, difficulty level, learning analytics metrics, positioning in the learning world, and relations within the basic structure. For learning elements, additional fields include classification type, file type, supporting or hindering FSLSM dimensions, and influencing learning strategies.",
-    "sources": "Bartel, Beslmeisl, Figas & Gold-Veerkamp, 2015",
-    "tags": ["System Architecture"],
-    "fundamental": false
-  },
-  {
-    "term": "Reflective Quiz (RQ)",
-    "definition": "Reflective quizzes include one or more open-ended questions about a section’s content. They encourage learners to reflect on what they have learned. In HASKI, they are classified as a type of learning element.",
-    "sources": "Graf, Kinshuk & Ives, 2010",
-    "tags": ["LE Classification"],
-    "fundamental": false
-  },
-  {
-    "term": "Self-Assessment Test (SE)",
-    "definition": "Self-assessment tests include multiple closed-ended questions about a section’s content. They allow learners to check their knowledge and receive immediate feedback on their answers. In HASKI, they are classified as a type of learning element.",
-    "sources": "Graf, Kinshuk & Ives, 2010",
-    "tags": ["LE Classification"],
-    "fundamental": false
-  },
-  {
-    "term": "Self-controlled learning",
-    "definition": "Self-controlled learning describes a form of learning in which learners have substantial agency and decide which content, tools, and didactic approaches best meet their needs. Learners take self-regulating measures aligned with given and self-determined goals, depending on motivation and situational requirements, to monitor, regulate, and evaluate their learning process.",
-    "sources": "Goertz, 2014, p. 23; Konrad & Traub, 2010",
-    "tags": ["Didactics"],
-    "fundamental": false
-  },
-  {
-    "term": "Sub-topic",
-    "definition": "A sub-topic contains one or more learning elements that learners can visit and work on. Learning elements can be logically linked via learning pathways. In the domain model hierarchy, sub-topics are positioned one level above learning elements.",
-    "sources": "",
-    "tags": ["System Architecture"],
-    "fundamental": true
-  },
-  {
-    "term": "Topic",
-    "definition": "In HASKI, a topic is a logically connected area within a course that groups related sub-topics. In exceptional cases, a topic may contain only one sub-topic. In the hierarchy, the topic level sits between course and sub-topic.",
-    "sources": "",
-    "tags": ["System Architecture"],
-    "fundamental": true
-  },
-  {
-    "term": "Tutorial model",
-    "definition": "The tutorial model in HASKI is responsible for generating individualized learning pathways and communicating them via learning recommendations. It uses data from the learner model and the basic structure of the domain model to determine what should be recommended to an individual learner. This decision-making may be based on AI models or rule-based methods and includes information about when specific learning content should be recommended.",
-    "sources": "Meier, 2019, p. 4",
-    "tags": ["Adaptivity", "System Architecture"],
-    "fundamental": true
-  },
-  {
-    "term": "Exercise (ÜB)",
-    "definition": "Exercises give learners the opportunity to apply and practice what they have learned. In HASKI, they are classified as a type of learning element.",
-    "sources": "Graf, Kinshuk & Ives, 2010",
-    "tags": ["LE Classification"],
-    "fundamental": false
-  },
-  {
-    "term": "Knowledge level",
-    "definition": "Knowledge level describes how familiar a learner is with central topics or concepts of a knowledge domain. In HASKI, it is part of the learner model and is initially elicited through a prior-knowledge test. It is updated over time as learners successfully complete learning elements, learning spaces, and topics; initially, HASKI models declarative knowledge as verbalizable factual knowledge.",
-    "sources": "Brusilovsky & Millán, 2005; Cranach & Bangerter, 2000, pp. 235–236; Uhing, 2004, p. 102",
-    "tags": ["Adaptivity", "Learning Analytics"],
-    "fundamental": true
-  },
-  {
-    "term": "Conclusion (ZF)",
-    "definition": "Conclusions summarize the learning content presented in the content object. In HASKI, they are classified as a type of learning element.",
-    "sources": "Graf, Kinshuk & Ives, 2010",
-    "tags": ["LE Classification"],
-    "fundamental": false
-  },
-  {
-    "term": "Additional Reading Material (ZL)",
-    "definition": "Additional reading materials provide learners with further sources related to a sub-topic, such as more detailed explanations or alternative perspectives. In HASKI, they are classified as a type of learning element.",
-    "sources": "Graf, Kinshuk & Ives, 2010",
-    "tags": ["LE Classification"],
-    "fundamental": false
-  }
-]
-,
+    {
+      "term": "Adaptability",
+      "definition": "Adaptability describes a system’s ability to be changed through external actions that modify its settings. In HASKI, both teachers and learners can adapt the system. For example, teachers can intervene in suggested learning paths, while learners can adjust basic settings such as colors or configure their own sequence of learning elements.",
+      "sources": "Bartel, Dörringer & Klopp, 2022a; Petko & Reusser, 2005, p. 188; Zens, 2005",
+      "tags": ["Adaptivity", "System Architecture"],
+      "fundamental": false
+    },
+    {
+      "term": "Adaptivity",
+      "definition": "Adaptivity is present when a system autonomously adjusts to input (e.g., test results, processing speed, or learning paths). In this context, adaptive learning refers to adapting learning offerings to individual differences so that all learners can be supported appropriately.",
+      "sources": "Bartel, Dörringer & Klopp, 2022a; Petko & Reusser, 2005, p. 188; Stangl, 2022, p. 1",
+      "tags": ["Adaptivity", "Learning Analytics"],
+      "fundamental": false
+    },
+    {
+      "term": "Adaptive content presentation",
+      "definition": "Adaptive content presentation refers to adapting the content or presentation of a page based on an individual learner’s characteristics. For example, learners with higher prior knowledge may receive more detailed information, while learners with lower prior knowledge receive additional explanations. Presentation can also be adapted to preferences such as favoring graphics over text.",
+      "sources": "Brusilovsky, 1996; Kersebaum, 2016, p. 98",
+      "tags": ["Adaptivity", "System Architecture"],
+      "fundamental": false
+    },
+    {
+      "term": "Adaptive navigation support",
+      "definition": "Adaptive navigation support helps learners find their way through a system. It includes various adaptation techniques; in HASKI, this is implemented through adaptive link annotation, where the next recommended action is highlighted.",
+      "sources": "Brusilovsky, 1996; Kersebaum, 2016, p. 98",
+      "tags": ["Adaptivity", "System Architecture"],
+      "fundamental": false
+    },
+    {
+      "term": "Adaptive learning system",
+      "definition": "An adaptive learning system (also referred to as an Intelligent Tutoring System, Adaptive Educational System, or Personalized Learning Environment) aims to adapt to the needs and learning goals of individual learners. In HASKI, this is based on three models: the learner model, the tutorial model, and the domain model.",
+      "sources": "",
+      "tags": ["Adaptivity", "System Architecture"],
+      "fundamental": false
+    },
+    {
+      "term": "Animation (AN)",
+      "definition": "Animations present learning content in an animated multimedia format. In HASKI, they are classified as a type of learning element.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE Classification"],
+      "fundamental": false
+    },
+    {
+      "term": "Real-Life Application (AB)",
+      "definition": "Real-life applications show how learned material can be applied in real-world situations. In HASKI, they are classified as a type of learning element.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE Classification"],
+      "fundamental": false
+    },
+    {
+      "term": "Examples (BE)",
+      "definition": "Examples provide concrete illustrations of theoretical concepts. In HASKI, they are classified as a type of learning element.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE Classification"],
+      "fundamental": false
+    },
+    {
+      "term": "Educational setting",
+      "definition": "An educational setting is any environment in which learning and educational activities take place. Learners may engage in lectures, discussions, group work, or independent study to acquire knowledge, skills, and competencies. Educational settings vary in size, structure, and focus depending on educational level, subject area, and target audience.",
+      "sources": "",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Domain model",
+      "definition": "The domain model contains metadata for all topics, digital learning spaces, and learning elements within the learning environment, including the domain’s basic structure. It also captures concepts, content, learning objects (e.g., examples, graphics, or exercises), and their relationships or dependencies.",
+      "sources": "Meier, 2019, p. 4",
+      "tags": ["System Architecture"],
+      "fundamental": true
+    },
+    {
+      "term": "Element progress",
+      "definition": "Element progress represents the history of visited learning elements and indicates which learning elements have already been visited.",
+      "sources": "",
+      "tags": ["Learning Analytics"],
+      "fundamental": false
+    },
+    {
+      "term": "Content Object (EK)",
+      "definition": "Content objects present the core learning material of a course. In HASKI, they are classified as a type of learning element.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE Classification"],
+      "fundamental": false
+    },
+    {
+      "term": "Forum (FO)",
+      "definition": "Forum activities enable learners to ask questions and discuss topics with peers and instructors. While a course often has one forum, it can include multiple forum activities that encourage participation. In HASKI, forum activities are classified as a type of learning element.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE Classification"],
+      "fundamental": false
+    },
+    {
+      "term": "Feedback (educational context)",
+      "definition": "In an educational context, feedback is information provided to learners about their progress, performance, and achievements. It can take the form of verbal comments, written comments, grades, or scores. Effective feedback is timely, specific, and constructive, focusing on the task or behavior and offering clear suggestions for improvement. Feedback may come from teachers, peers, or self-assessment and supports monitoring progress, sustaining motivation, and developing competencies.",
+      "sources": "",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Felder & Silverman Learning Style Model (FSLSM)",
+      "definition": "The FSLSM distinguishes eight learning styles across four dimensions: processing (active vs. reflective), perception (sensory vs. intuitive), input modality (visual vs. verbal), and understanding (sequential vs. global). If there is no noticeable preference on a dimension, it is described as balanced (BAL).",
+      "sources": "Felder & Silverman, 1988",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Externally controlled learning",
+      "definition": "Externally controlled learning refers to learning processes guided by external influences. These may include other people (e.g., teacher instructions), instructional media (e.g., computer programs), or the design of the learning environment.",
+      "sources": "HRM Akademie Deutschland, n.d.",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Basic structure (of the domain model or the learning world)",
+      "definition": "The basic structure of the learning world comprises all relationships and dependencies among topics, digital learning spaces, and learning elements from the teacher’s perspective.",
+      "sources": "",
+      "tags": ["System Architecture"],
+      "fundamental": false
+    },
+    {
+      "term": "Index of Learning Styles (ILS)",
+      "definition": "The ILS questionnaire is used to determine an individual’s learning style. In its original English version, it contains 44 dichotomous questions, with 11 questions per dimension. Preferences are expressed on a scale from +11 to −11 per dimension: selecting option (a) increases the score by +1, while selecting option (b) decreases it by −1.",
+      "sources": "Graf, Viola, Leo & Kinshuk, 2007, p. 82",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Competence",
+      "definition": "Competence refers to the cognitive abilities and skills individuals possess or can acquire to solve specific problems, as well as the associated motivational, volitional, and social dispositions that enable responsible and effective problem-solving in varying situations.",
+      "sources": "Weinert, 2002, pp. 27–28",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Course",
+      "definition": "A course is the highest hierarchical level in the domain model structure. A course can include one or more topics and sub-topics that may be logically connected through learning paths, and within which learning processes take place.",
+      "sources": "Bartel, Dörringer & Klopp, 2022e, p. 1",
+      "tags": ["System Architecture"],
+      "fundamental": true
+    },
+    {
+      "term": "Commentary (KÜ)",
+      "definition": "Commentaries provide learners with a brief overview of a sub-topic. In HASKI, they are classified as a type of learning element.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE Classification"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning Analytics",
+      "definition": "Learning analytics refers to measuring, collecting, analyzing, and reporting data about learners and their contexts to understand and optimize learning and learning environments. In HASKI, learning analytics includes element progress, learning progress, ratings, time spent (duration and timing), learning sequences and repetitions, performance in test elements, demographic data (e.g., age, gender, semester, program, work experience), and grades.",
+      "sources": "Judel, 2018, p. 7",
+      "tags": ["Learning Analytics"],
+      "fundamental": true
+    },
+    {
+      "term": "Learning Management System (LMS)",
+      "definition": "A learning management system (LMS) is software that supports the administration of learning and training activities. It can register users, track courses, record learner data, and provide reports. LMSs are widely used to create, manage, and deliver course material and can support instructional and pedagogical activities through features such as assessment, personalization, and resource management.",
+      "sources": "Hall, 2001; Kattoua, Al-Lozi & Alrowwad, 2016; Sabharwal et al., 2018; Turnbull, Chugh & Luck, 2019; Turnbull, Chugh & Luck, 2021, p. 164",
+      "tags": ["Didactics", "System Architecture"],
+      "fundamental": false
+    },
+    {
+      "term": "Learner characteristics",
+      "definition": "In HASKI, learner characteristics comprise individual attributes that are relevant for adaptive learning path design and/or shown in student and teacher dashboards. These characteristics are stored in the learner model and may include learning style tendencies, learning strategies, knowledge level, and learning analytics.",
+      "sources": "",
+      "tags": ["Adaptivity", "Learning Analytics"],
+      "fundamental": true
+    },
+    {
+      "term": "Learning element (LE)",
+      "definition": "Learning elements support learners’ competence development and are provided within learning spaces. They may appear as verbal elements (e.g., written text, hypertext, spoken language), visual elements (e.g., static or moving images), and/or interactive formats (e.g., simulations, games, 3D). In the domain model hierarchy, learning elements form the lowest level and can be differentiated by classification types.",
+      "sources": "Arnold, 2011, p. 138; Bartel, Dörringer & Klopp, 2022, p. 1",
+      "tags": ["System Architecture"],
+      "fundamental": true
+    },
+    {
+      "term": "Learning recommendation",
+      "definition": "HASKI can provide learning recommendations based on individual learner data and the structure of the domain model, supporting decisions about what to do next. Recommendations are communicated by visually highlighting suggested learning elements. The tutorial model combines information from the learner model and the domain model to generate individualized learning recommendations.",
+      "sources": "Raj & Renumol, 2022, p. 114",
+      "tags": ["Adaptivity", "System Architecture"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning format",
+      "definition": "A learning format refers to the structure or arrangement in which educational content is presented to learners. It includes how information is organized, delivered, and accessed to facilitate learning. Examples range from lectures and textbooks to online courses and interactive multimedia. The choice of format depends on factors such as learning goals, target audience, and available resources and technology.",
+      "sources": "",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning progress",
+      "definition": "Learning progress indicates which learning elements have been completed and how successful the learner was while working on them.",
+      "sources": "",
+      "tags": ["Learning Analytics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learner model",
+      "definition": "The learner model in HASKI consists of multiple components that interact and influence each other. It is assumed to be dynamic and can change over time through new experiences, interactions, and knowledge acquisition, adapting to current requirements.",
+      "sources": "",
+      "tags": ["Adaptivity", "System Architecture"],
+      "fundamental": true
+    },
+    {
+      "term": "Learner satisfaction",
+      "definition": "Learner satisfaction is the degree of contentment or positive emotional response learners experience regarding their learning experiences. It reflects engagement and motivation and includes aspects such as enjoyment of learning activities, perceived achievement of learning goals, perceived relevance, and satisfaction with the learning environment and support.",
+      "sources": "ChatGPT",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning object",
+      "definition": "In online learning, a learning object is a self-contained unit of digital educational content (e.g., text, images, video, interactive elements) designed to address specific learning objectives and to be reusable across contexts. In HASKI, the term \"learning element\" is used instead of \"learning object\" because \"learning object\" is used inconsistently in broader educational contexts.",
+      "sources": "",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning pathway",
+      "definition": "A learning pathway is a didactically planned, sequential composition of topics, learning spaces, and/or learning elements. Pathways may be created by teachers or by HASKI; the teacher-created structure is treated as the default pathway. Learning pathways can be linear (same order for all learners) or adaptive (adjusted to individual learners). In HASKI, the tutorial model adapts pathways based on data from the learner model and the basic structure of the domain model.",
+      "sources": "Bartel, Dörringer & Klopp, 2022, p. 1; Goertz, 2015; Hessisches Kultusministerium, 2016; Niegemann & Heidig, 2020, p. 362; Paramythis & Loidl-Reisinger, 2004; Pöhler, 2018; Roth, 2014",
+      "tags": ["Adaptivity", "System Architecture"],
+      "fundamental": true
+    },
+    {
+      "term": "Learning space (physical)",
+      "definition": "Physical learning spaces are locations where teachers and learners meet and engage in learning activities; they can be understood as physical containers as well as perceptual, action, and social spaces. In HASKI, face-to-face sessions conducted in combination with the HASKI system (following a blended-learning approach) are referred to as physical learning spaces.",
+      "sources": "Wittwer & Diettrich, 2015, pp. 18–19",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning sequence",
+      "definition": "In HASKI, a learning sequence is a limited sequence of learning elements that a learner visits. Unlike a learning pathway, a learning sequence is not didactically planned. It is also distinct from a learning way, which represents the totality of a learner’s sequences over time.",
+      "sources": "",
+      "tags": ["Learning Analytics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning state",
+      "definition": "The learning state is the individualized part of the learner model. It includes information such as element progress, learning style, learning strategies, knowledge level, and additional learning analytics. It is visible only to the learner, while teachers can access aggregated averages across learners.",
+      "sources": "",
+      "tags": ["Adaptivity", "Learning Analytics"],
+      "fundamental": true
+    },
+    {
+      "term": "Learning style (LS)",
+      "definition": "Learning styles are relatively stable individual indicators reflecting preferences in processing, perceiving, organizing, and presenting information. They are considered situation- and task-independent and describe how learners interact with and respond to their learning environment.",
+      "sources": "",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning style (dynamic)",
+      "definition": "In learning style recognition, \"dynamic\" refers to a system’s ability to adjust to changing learner needs and preferences over time. A dynamic approach continuously monitors and evaluates preferences and updates recommendations accordingly, rather than relying on a single, static assessment.",
+      "sources": "",
+      "tags": ["Adaptivity", "Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning style (static)",
+      "definition": "In learning style recognition, \"static\" refers to the assumption that a learner’s preferred learning style is fixed and does not change over time. This approach treats preferences as stable across contexts, in contrast to dynamic approaches that allow for change depending on time and situation.",
+      "sources": "",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning style recognition",
+      "definition": "Learning style recognition is the process of identifying an individual’s preferred way of learning by assessing tendencies related to approaching tasks, retaining information, and engaging with educational materials. The aim is to enable more personalized learning experiences and improve outcomes and motivation.",
+      "sources": "",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning style theories",
+      "definition": "Learning style theories describe the idea that learners differ in how they prefer to process information and approach learning, and that instruction can be adapted accordingly. Various models classify learners based on dimensions such as sensory modalities, environmental influences, and emotional factors.",
+      "sources": "",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning strategies",
+      "definition": "In HASKI, learning strategies are behaviors learners use deliberately to acquire knowledge. They support obtaining, processing, organizing, and storing information effectively. Learning strategies are an individual characteristic composed of multiple components with varying levels of expression; in HASKI, they are currently assessed using LIST-K.",
+      "sources": "",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning environment",
+      "definition": "A learning environment is the physical, social, and psychological context in which learning takes place. It includes conditions, resources, and interactions, such as classrooms or online platforms, relationships with teachers and peers, tools and technologies, and the cultural and emotional climate that shapes engagement and motivation.",
+      "sources": "",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learner behaviour",
+      "definition": "Learner behaviour refers to observable actions, attitudes, and interactions during learning. It includes how learners engage with tasks and materials, participate in discussions, seek help, manage time, and regulate their learning. Understanding learner behaviour can inform instructional design and tailored support.",
+      "sources": "ChatGPT",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Learning way",
+      "definition": "A learning way is the actual sequence of actions taken by an individual learner. It may differ from the planned learning pathway for a learning space. Observed learning ways can provide insights into learning behaviour, knowledge level, and preferences; differences between planned pathways and actual learning ways of high-performing learners may also indicate pathway quality and fit.",
+      "sources": "",
+      "tags": ["Learning Analytics"],
+      "fundamental": false
+    },
+    {
+      "term": "Assignments (LZ)",
+      "definition": "Assignments describe requirements learners must meet for course assessment. In HASKI, they are classified as a type of learning element.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE Classification"],
+      "fundamental": false
+    },
+    {
+      "term": "LIST-K questionnaire",
+      "definition": "The LIST-K questionnaire is a shortened version of the original \"Learning Strategies in Studies\" (LIST). It reduces the number of items to improve test economy while maintaining reliability. LIST-K distinguishes cognitive strategies, metacognitive strategies, management of internal resources, and management of external resources, each with multiple subscales.",
+      "sources": "Klingsieck, 2018; Wild & Schiefele, 1994",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Metadata",
+      "definition": "Metadata describe topics, digital learning spaces, and learning elements in more detail. Categories include identifiers, authorship, dates, course assignment, target group, semester, short descriptions, difficulty level, learning analytics metrics, positioning in the learning world, and relations within the basic structure. For learning elements, additional fields include classification type, file type, supporting or hindering FSLSM dimensions, and influencing learning strategies.",
+      "sources": "Bartel, Beslmeisl, Figas & Gold-Veerkamp, 2015",
+      "tags": ["System Architecture"],
+      "fundamental": false
+    },
+    {
+      "term": "Reflective Quiz (RQ)",
+      "definition": "Reflective quizzes include one or more open-ended questions about a section’s content. They encourage learners to reflect on what they have learned. In HASKI, they are classified as a type of learning element.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE Classification"],
+      "fundamental": false
+    },
+    {
+      "term": "Self-Assessment Test (SE)",
+      "definition": "Self-assessment tests include multiple closed-ended questions about a section’s content. They allow learners to check their knowledge and receive immediate feedback on their answers. In HASKI, they are classified as a type of learning element.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE Classification"],
+      "fundamental": false
+    },
+    {
+      "term": "Self-controlled learning",
+      "definition": "Self-controlled learning describes a form of learning in which learners have substantial agency and decide which content, tools, and didactic approaches best meet their needs. Learners take self-regulating measures aligned with given and self-determined goals, depending on motivation and situational requirements, to monitor, regulate, and evaluate their learning process.",
+      "sources": "Goertz, 2014, p. 23; Konrad & Traub, 2010",
+      "tags": ["Didactics"],
+      "fundamental": false
+    },
+    {
+      "term": "Sub-topic",
+      "definition": "A sub-topic contains one or more learning elements that learners can visit and work on. Learning elements can be logically linked via learning pathways. In the domain model hierarchy, sub-topics are positioned one level above learning elements.",
+      "sources": "",
+      "tags": ["System Architecture"],
+      "fundamental": true
+    },
+    {
+      "term": "Topic",
+      "definition": "In HASKI, a topic is a logically connected area within a course that groups related sub-topics. In exceptional cases, a topic may contain only one sub-topic. In the hierarchy, the topic level sits between course and sub-topic.",
+      "sources": "",
+      "tags": ["System Architecture"],
+      "fundamental": true
+    },
+    {
+      "term": "Tutorial model",
+      "definition": "The tutorial model in HASKI is responsible for generating individualized learning pathways and communicating them via learning recommendations. It uses data from the learner model and the basic structure of the domain model to determine what should be recommended to an individual learner. This decision-making may be based on AI models or rule-based methods and includes information about when specific learning content should be recommended.",
+      "sources": "Meier, 2019, p. 4",
+      "tags": ["Adaptivity", "System Architecture"],
+      "fundamental": true
+    },
+    {
+      "term": "Exercise (ÜB)",
+      "definition": "Exercises give learners the opportunity to apply and practice what they have learned. In HASKI, they are classified as a type of learning element.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE Classification"],
+      "fundamental": false
+    },
+    {
+      "term": "Knowledge level",
+      "definition": "Knowledge level describes how familiar a learner is with central topics or concepts of a knowledge domain. In HASKI, it is part of the learner model and is initially elicited through a prior-knowledge test. It is updated over time as learners successfully complete learning elements, learning spaces, and topics; initially, HASKI models declarative knowledge as verbalizable factual knowledge.",
+      "sources": "Brusilovsky & Millán, 2005; Cranach & Bangerter, 2000, pp. 235–236; Uhing, 2004, p. 102",
+      "tags": ["Adaptivity", "Learning Analytics"],
+      "fundamental": true
+    },
+    {
+      "term": "Conclusion (ZF)",
+      "definition": "Conclusions summarize the learning content presented in the content object. In HASKI, they are classified as a type of learning element.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE Classification"],
+      "fundamental": false
+    },
+    {
+      "term": "Additional Reading Material (ZL)",
+      "definition": "Additional reading materials provide learners with further sources related to a sub-topic, such as more detailed explanations or alternative perspectives. In HASKI, they are classified as a type of learning element.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE Classification"],
+      "fundamental": false
+    }
+  ],
   "pages.glossary.expandAll": "Expand All",
   "pages.glossary.filter": "Filter by tags",
   "pages.glossary.fundamentals": "Fundamentals",
   "pages.glossary.search": "Search",
   "pages.glossary.sources": "Sources:",
-  "pages.glossary.tags": [
-    "Learning Elements",
-    "HASKI-Structure",
-    "Adaptivity",
-    "Learning Analytics",
-    "Educational Sciences",
-    "Learning Styles",
-    "Learning Strategies"
-  ],
+  "pages.glossary.tags": ["Adaptivity", "Didactics", "LE Classification", "Learning Analytics", "System Architecture"],
   "pages.home": "Home",
   "pages.home.courseButton": "Continue to course",
   "pages.home.courseDisabled": "The course is available on",
@@ -1988,8 +1979,8 @@
   "pages.topic.menuItemAlgorithms": "Change learning path algorithm",
   "pages.topic.single": "Single",
   "success": "Success",
+  "tooltip.availableAt": " available at ",
   "tooltip.completed": "Completed",
-  "tooltip.courseAvailableAt": "Course available at ",
   "tooltip.courseSelection": "Select a course",
   "tooltip.furtherInfoSelection": "Further information about the project",
   "tooltip.languageSettings": "Language settings",

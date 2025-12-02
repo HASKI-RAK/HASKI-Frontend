@@ -2,7 +2,7 @@ import { ForwardedRef, forwardRef, memo, MouseEvent, useCallback, useState } fro
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, Divider, Menu, MenuItem, Tooltip, Typography } from '@common/components'
-import { ArrowDropDown, Info } from '@common/icons'
+import { ArrowDropDown, Lock } from '@common/icons'
 import { SkeletonList } from '@components'
 
 export type GlobalNavContent = { name: string; url: string; isDisabled: boolean; availableAt: Date }
@@ -79,7 +79,15 @@ const GlobalNavMenu = forwardRef(
                 </Box>
               ) : (
                 [...content].map((element) => (
-                  <Box key={element.name} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Box
+                    key={element.name}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: 1,
+                      pr: 1.5
+                    }}>
                     <MenuItem
                       id={element.name.concat('-link').replaceAll(' ', '-')}
                       key={element.name}
@@ -91,28 +99,39 @@ const GlobalNavMenu = forwardRef(
                       }}>
                       {element.name}
                     </MenuItem>
-                    {element.isDisabled && element.availableAt > new Date() && (
-                      <Tooltip
-                        title={
-                          <Typography variant="body2">
-                            {t('tooltip.courseAvailableAt').concat(
-                              element.availableAt.toLocaleDateString('de-DE', {
-                                year: 'numeric',
-                                month: 'numeric',
-                                day: 'numeric',
-                                hour: 'numeric',
-                                minute: 'numeric'
-                              }),
-                              ' ',
-                              t('appGlobal.oClock')
-                            )}
-                          </Typography>
-                        }
-                        arrow
-                        placement="right">
-                        <Info color="disabled" sx={{ mt: 1, mr: 1, ml: -1, fontSize: 18 }} />
-                      </Tooltip>
-                    )}
+                    <Box
+                      sx={{
+                        width: 32,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}>
+                      {element.isDisabled && element.availableAt > new Date() && (
+                        <Tooltip
+                          title={
+                            <Typography variant="body2">
+                              {element.name +
+                                t('tooltip.availableAt').concat(
+                                  element.availableAt.toLocaleDateString('de-DE', {
+                                    year: 'numeric',
+                                    month: 'numeric',
+                                    day: 'numeric',
+                                    hour: 'numeric',
+                                    minute: 'numeric'
+                                  }),
+                                  ' ',
+                                  t('appGlobal.oClock')
+                                )}
+                            </Typography>
+                          }
+                          arrow
+                          placement="right">
+                          <Box component="span" sx={{ display: 'inline-flex' }}>
+                            <Lock color="disabled" sx={{ fontSize: 22 }} />
+                          </Box>
+                        </Tooltip>
+                      )}
+                    </Box>
                   </Box>
                 ))
               )}

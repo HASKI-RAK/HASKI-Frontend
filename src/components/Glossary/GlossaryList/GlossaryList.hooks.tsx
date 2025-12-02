@@ -35,7 +35,6 @@ export const useGlossaryList = (): GlossaryListHookReturn => {
   const { t } = useTranslation()
 
   const filterByTags = useCallback(
-    //  todo: something is wrong here
     (glossaryEntries: GlossaryEntryProps[], selectedTags?: string[]): GlossaryEntryProps[] => {
       if (selectedTags === undefined || selectedTags.length === 0) {
         return glossaryEntries
