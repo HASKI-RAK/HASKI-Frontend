@@ -17,7 +17,7 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn()
 }))
 
-describe('[HASKI-REQ-0026] CreateLearningElement Component', () => {
+describe('[HASKI-REQ-0037] CreateLearningElement Component', () => {
   const addSnackbarMock = jest.fn()
   const mockAddSnackbar = {
     snackbarsErrorWarning: [],
