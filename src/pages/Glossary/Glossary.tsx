@@ -4,6 +4,10 @@ import { Box, Button, Grid, Typography } from '@common/components'
 import { Filter, GlossaryEntryProps, GlossaryIndex, GlossaryList, Searchbar } from '@components'
 import { GlossaryHookReturn, useGlossary as _useGlossary } from './Glossary.hooks'
 
+// todo: double entries in glossary entries
+// todo: filtering by multiple tags does not work correctly -> only first tag is considered -> should
+// todo. Check the tags on correctness (naming)
+
 /**
  * @prop useGlossary - The hook that is used for the Glossary page logic.
  * @interface
@@ -122,8 +126,8 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
       <Grid item xs={4} sm={6}>
         <Filter
           label={t('pages.glossary.filter')}
-          options={tags}
-          selectedOptions={selectedTags}
+          options={tags.sort()}
+          selectedOptions={selectedTags} // todo: more than one tag bricks the filtering logic
           setSelectedOptions={getSelectedTagsWrapper(setSelectedTags)}
         />
       </Grid>

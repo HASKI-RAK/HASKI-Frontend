@@ -31,7 +31,6 @@
     "@nivo/core": "^0.80.0",
     "@nivo/network": "^0.80.0",
     "@nivo/tooltip": "^0.80.0",
-    "@xapi/xapi": "^3.0.1",
     "dayjs": "^1.11.11",
     "dayjs-timezone-iana-plugin": "^0.1.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
