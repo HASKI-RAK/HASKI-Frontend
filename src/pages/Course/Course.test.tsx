@@ -9,11 +9,12 @@ import Course from './Course'
 const navigate = jest.fn()
 jest.useFakeTimers()
 
-describe('[HASKI-REQ-0026] Course tests', () => {
+describe('[HASKI-REQ-0101] Course tests', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
+  /** [HASKI-REQ-0035] */
   it('renders course page with topics and clicking on first topic navigates to topic/1', async () => {
     const { getAllByTestId } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -29,6 +30,7 @@ describe('[HASKI-REQ-0026] Course tests', () => {
     })
   }, 20000)
 
+  /** [HASKI-REQ-0035] */
   it('renders course page with topics and clicking on second topic navigates to topic/2', async () => {
     const { getAllByTestId } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
@@ -45,6 +47,7 @@ describe('[HASKI-REQ-0026] Course tests', () => {
     expect(navigate).toHaveBeenCalledWith('topic/2')
   }, 20000)
 
+  /** [HASKI-REQ-0036] */
   test('students do not see create topic button', async () => {
     const studentContext = {
       isStudentRole: true,
@@ -68,6 +71,7 @@ describe('[HASKI-REQ-0026] Course tests', () => {
     })
   })
 
+  /** [HASKI-REQ-0036] */
   test('course creator can see create topic button and open create topic modal', async () => {
     const courseCreatorContext = {
       isStudentRole: false,
@@ -94,6 +98,7 @@ describe('[HASKI-REQ-0026] Course tests', () => {
     })
   })
 
+  /** [HASKI-REQ-0036] */
   test('course creator can fill out create topic details and close modal', async () => {
     const courseCreatorContext = {
       isStudentRole: false,

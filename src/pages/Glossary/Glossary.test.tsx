@@ -5,7 +5,7 @@ import { GlossaryEntryProps } from '@components'
 import Glossary, { getSelectedTagsWrapper } from './Glossary'
 import { useGlossary } from './Glossary.hooks'
 
-describe('Glossary page tests', () => {
+describe('[HASKI-REQ-0084] Glossary page tests', () => {
   const mockGlossaryEntryProps: GlossaryEntryProps[] = [
     { term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true },
     { term: 'term2', definition: 'definition2', sources: 'source2', tags: ['tag11', 'tag12'], fundamental: false },

@@ -51,7 +51,7 @@ const mockSnackbarContext: SnackbarContextType = {
  *
  * - the fetch function returns 201, but is Loading is false, so the Snackbar shows an error
  */
-describe('Test Contactpage', () => {
+describe('Test Contactpage [HASKI-REQ-0044]', () => {
   const submit = jest.fn()
   const useContact = jest.fn(() => {
     return { onSubmitHandler: submit }
