@@ -12,7 +12,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('postCalculateRating', () => {
+describe('[HASKI-REQ-0043] postCalculateRating', () => {
   test('Successful POST request', async () => {
     const returnData = {
       student_rating: {},

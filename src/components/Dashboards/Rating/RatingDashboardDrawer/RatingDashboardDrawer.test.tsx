@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import RatingDashboardDrawer from './RatingDashboardDrawer'
 
-describe('RatingDashboardDrawer', () => {
+describe('[HASKI-REQ-0043] RatingDashboardDrawer', () => {
   it('renders when isOpen is true and StudentRating dashboard is selected', () => {
     const ratingDashboardDrawer = render(<RatingDashboardDrawer isOpen={true} selectedDashboard="StudentRating" />)
     expect(ratingDashboardDrawer).toBeTruthy()

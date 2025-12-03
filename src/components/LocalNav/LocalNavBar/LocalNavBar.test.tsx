@@ -14,7 +14,7 @@ window.matchMedia =
     }
   }
 
-describe('LocalNav tests', () => {
+describe('[HASKI-REQ-0089] LocalNavBar tests', () => {
   it('should render LocalNav with isAuth false', async () => {
     await act(async () => {
       const result = render(

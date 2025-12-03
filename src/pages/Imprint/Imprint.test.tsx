@@ -2,7 +2,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { Imprint } from '@pages'
 
-describe('Imprint Component', () => {
+describe('[HASKI-REQ-0005] Imprint Component', () => {
   it('renders the component without errors', () => {
     const { getByText } = render(
       <MemoryRouter>

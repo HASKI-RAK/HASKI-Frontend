@@ -10,7 +10,7 @@ jest.mock('@common/hooks', () => ({
   useMediaQuery: jest.fn().mockReturnValue(true)
 }))
 
-describe('StyledLinearProgress-1', () => {
+describe('[HASKI-REQ-0071] StyledLinearProgress-1', () => {
   it('renders course page with topics, some learning elements are done (33%)', () => {
     mockServices.fetchLearningPathElementStatus.mockImplementation(() =>
       Promise.resolve([
@@ -391,7 +391,7 @@ describe('StyledLinearProgress-1', () => {
     expect(styledLinearProgress).toBeTruthy()
   })
 })
-describe('Course3', () => {
+describe('[HASKI-REQ-0071] StyledLinearProgress-2', () => {
   it('renders course page with topics, none learning elements are done (0%)', () => {
     mockServices.fetchLearningPathElementStatus.mockImplementation(() =>
       Promise.resolve([

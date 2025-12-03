@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 import RatingDashboardDrawerButton from './RatingDashboardDrawerButton'
 
-describe('RatingDashboardDrawerButton', () => {
+describe('[HASKI-REQ-0043] RatingDashboardDrawerButton', () => {
   it('renders RatingDashboardDrawerButton with isOpen set to true and triggers setIsOpen when the button is clicked', () => {
     jest.useFakeTimers()
     const mockSetIsOpen = jest.fn()

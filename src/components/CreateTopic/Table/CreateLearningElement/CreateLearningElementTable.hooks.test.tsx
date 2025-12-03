@@ -4,7 +4,7 @@ import { act } from 'react-test-renderer'
 import { RemoteLearningElement, RemoteTopics } from '@core'
 import { useCreateLearningElementTable } from './CreateLearningElementTable.hooks'
 
-describe('CreateLearningElementTable.hooks', () => {
+describe('[HASKI-REQ-0037] CreateLearningElementTable.hooks', () => {
   const mockOnLearningElementChange = jest.fn()
   const mockSetSelectedAllLearningElementsChecked = jest.fn()
 

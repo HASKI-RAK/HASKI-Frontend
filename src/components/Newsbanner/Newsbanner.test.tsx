@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { useUniversity } from '@common/hooks'
 import Newsbanner from './Newsbanner'
 
-describe('Newsbanner tests', () => {
+describe('[HASKI-REQ-0046] Newsbanner tests', () => {
   beforeEach(() => {
     window.sessionStorage.clear()
   })

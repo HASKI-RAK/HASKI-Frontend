@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Fab from './DefaultFab'
 
-describe('DefaultFab tests', () => {
+describe('[HASKI-REQ-0086] DefaultFab tests', () => {
   test('DefaultFab renders correctly', () => {
     const fab = render(
       <MemoryRouter>

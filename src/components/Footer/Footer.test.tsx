@@ -7,7 +7,7 @@ import Footer from './Footer'
 
 const navigate = jest.fn()
 
-describe('Footer', () => {
+describe('[HASKI-REQ-0089] Footer', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })

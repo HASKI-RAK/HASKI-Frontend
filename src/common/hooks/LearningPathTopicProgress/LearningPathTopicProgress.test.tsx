@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
 import { useLearningPathTopicProgress } from './LearningPathTopicProgress.hooks'
 
-describe('LearningPathTopicProgress tests', () => {
+describe('[HASKI-REQ-0071] LearningPathTopicProgress tests', () => {
   const navigate = jest.fn()
   jest.useFakeTimers()
 

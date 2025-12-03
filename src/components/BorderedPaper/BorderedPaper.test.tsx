@@ -2,7 +2,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react'
 import BorderedPaper from './BorderedPaper'
 import '@testing-library/jest-dom'
 
-describe('BorderedPaper', () => {
+describe('[HASKI-REQ-0085] BorderedPaper', () => {
   it('renders correctly without props', () => {
     const borderedPaper = render(<BorderedPaper />)
     expect(borderedPaper).toBeTruthy()

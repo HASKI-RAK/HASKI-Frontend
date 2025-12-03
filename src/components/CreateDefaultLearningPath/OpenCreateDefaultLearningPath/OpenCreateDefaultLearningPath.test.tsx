@@ -8,6 +8,7 @@ import { ReactFlowProvider } from 'reactflow'
 import OpenCreateDefaultLearningPath from './OpenCreateDefaultLearningPath'
 import { CookiesProvider, useCookies } from 'react-cookie'
 
+describe('[HASKI-REQ-0026] OpenCreateDefaultLearningPath', () => {
 // --- Mocks --- //
 jest.mock('react-cookie', () => ({
   useCookies: jest.fn()

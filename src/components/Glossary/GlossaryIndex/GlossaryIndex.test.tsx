@@ -3,7 +3,7 @@ import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import GlossaryIndex, { GlossaryIndexProps } from './GlossaryIndex'
 
-describe('GlossaryIndex tests', () => {
+describe('[HASKI-REQ-0084] GlossaryIndex tests', () => {
   const mockIndexProps: GlossaryIndexProps = {
     orientation: 'horizontal',
     indexElements: ['test1', 'test2', 'test3'],

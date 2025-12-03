@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
 import LearnerCharacteristics from '../LearnerCharacteristics/LearnerCharacteristics'
 
-describe('LearnerCharacteristics', () => {
+describe('[HASKI-REQ-0087] LearnerCharacteristics', () => {
   it('it renders correctly and buttons can be pressed', () => {
     const { getAllByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
