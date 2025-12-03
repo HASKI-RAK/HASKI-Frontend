@@ -18,7 +18,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('Test AuthProvider', () => {
+describe('Test AuthProvider [HASKI-REQ-0028]', () => {
   it('should include the standard useAuthprovider values', () => {
     const result = render(
       <MemoryRouter>

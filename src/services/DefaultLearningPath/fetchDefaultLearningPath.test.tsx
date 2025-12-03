@@ -11,7 +11,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('fetchDefaultLearningPath has expected behaviour', () => {
+describe('fetchDefaultLearningPath has expected behaviour [HASKI-REQ-0026]', () => {
   it('should return the disabled classifications when the response is successful', async () => {
     const expectedData = [
       { classification: 'KÜ', position: 1, id: 1, disabled: false, university: 'HS-KE' },

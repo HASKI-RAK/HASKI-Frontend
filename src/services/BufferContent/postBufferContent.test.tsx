@@ -11,7 +11,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('postBufferContent has expected behaviour', () => {
+describe('postBufferContent has expected behaviour [HASKI-REQ-0047]', () => {
   type StringTuple = [string, string]
   type StringTupleArray = StringTuple[]
   it('should return inputData if succesfull', async () => {

@@ -11,7 +11,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('fetchCourses has expected behaviour', () => {
+describe('fetchCourses has expected behaviour [HASKI-REQ-0053]', () => {
   /** [HASKI-REQ-0053] */
   it('should return the course when the response is successful', async () => {
     const expectedData = { course: 'dude where is my car' }

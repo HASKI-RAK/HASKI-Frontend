@@ -15,7 +15,7 @@ const output = JSON.stringify({
   algorithm_s_name: 'aco'
 })
 
-describe('postLearningPathAlgorithm has expected behaviour', () => {
+describe('postLearningPathAlgorithm has expected behaviour [HASKI-REQ-0041]', () => {
   it('should return inputData if succesfull', async () => {
     const inputData = ['teacher algorithm set']
 

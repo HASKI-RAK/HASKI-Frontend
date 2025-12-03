@@ -12,7 +12,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('postCalculateLearningPathILS tests', () => {
+describe('postCalculateLearningPathILS tests [HASKI-REQ-0007]', () => {
   it('should return inputData if succesfull', async () => {
     const inputData = ['1', '1']
 

@@ -17,7 +17,7 @@ const someThemeLiteral = {
 // Build a "real" mockTheme
 const someTheme = createTheme(someThemeLiteral as any)
 
-describe('ThemeProvider', () => {
+describe('[HASKI-REQ-0090] ThemeProvider', () => {
   it('should include the standard useThemeProvider values', () => {
     const result = render(
       <MemoryRouter>

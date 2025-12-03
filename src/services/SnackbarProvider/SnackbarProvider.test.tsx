@@ -3,7 +3,7 @@ import { act, render, renderHook } from '@testing-library/react'
 import { SnackbarProvider } from '@services'
 import { useSnackbarProvider } from './SnackbarProvider.hooks'
 
-describe('Test SnackbarProvider', () => {
+describe('[HASKI-REQ-0090] Test SnackbarProvider', () => {
   test('SnackbarProvider renders correctly', () => {
     const { getByText } = render(
       <SnackbarProvider>

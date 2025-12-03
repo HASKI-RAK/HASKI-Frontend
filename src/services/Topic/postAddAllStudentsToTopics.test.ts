@@ -12,6 +12,10 @@ global.fetch = jest.fn(() =>
 ) as jest.Mock
 
 describe('postAddAllStudentsToTopics has expected behaviour', () => {
+  /**
+   * Test postAddAllStudentsToTopics
+   * [HASKI-REQ-0078] Moodle-Einschreibungen bulkweise übernehmen
+   */
   it('should return inputData if succesfull', async () => {
     const inputData = ['course created']
 

@@ -3,6 +3,10 @@ import { renderHook } from '@testing-library/react'
 import { useViewport } from './Viewport.hooks'
 
 describe('Viewport hook tests', () => {
+  /**
+   * Test Viewport hook
+   * [HASKI-REQ-0090] React SPA-Architektur mit Provider-Hierarchie und Routing
+   */
   test('General functionality of useViewport', () => {
     const { result } = renderHook(() => useViewport())
 

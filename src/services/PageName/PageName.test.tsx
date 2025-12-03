@@ -14,7 +14,7 @@ beforeEach(() => {
   }))
 })
 
-describe('Test usePageName', () => {
+describe('Test usePageName [HASKI-REQ-0086]', () => {
   test('Retrieve the page name with empty location', async () => {
     const { result } = renderHook(() => usePageName(), {
       wrapper: ({ children }) => <MemoryRouter initialEntries={['']}>{children}</MemoryRouter>

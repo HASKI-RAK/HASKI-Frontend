@@ -14,8 +14,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('postContactForm', () => {
-  /** [HASKI-REQ-0044] */
+describe('postContactForm [HASKI-REQ-0044]', () => {
   const testData: FormDataType = {
     report_type: '1',
     report_topic: '1',

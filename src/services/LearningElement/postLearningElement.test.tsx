@@ -22,7 +22,7 @@ const output = JSON.stringify({
   university: 'Tech University'
 })
 
-describe('postLearningElement has expected behaviour', () => {
+describe('postLearningElement has expected behaviour [HASKI-REQ-0093]', () => {
   it('should return inputData if succesfull', async () => {
     const inputData = ['learning element created']
 

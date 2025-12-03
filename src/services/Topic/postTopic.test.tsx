@@ -23,6 +23,10 @@ const output = JSON.stringify({
 })
 
 describe('postTopic has expected behaviour', () => {
+  /**
+   * Test postTopic
+   * [HASKI-REQ-0036] Automatische Topic- und Subtopic-Anlage aus Moodle
+   */
   it('should return inputData if succesfull', async () => {
     const inputData = ['topic created']
 

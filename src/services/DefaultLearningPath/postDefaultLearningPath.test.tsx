@@ -18,7 +18,7 @@ const output = JSON.stringify({
   university: 'HS-KE'
 })
 
-describe('postDefaultLearningPath has expected behaviour', () => {
+describe('postDefaultLearningPath has expected behaviour [HASKI-REQ-0026]', () => {
   it('should return inputData if succesfull', async () => {
     const inputData = ['learning element created']
 

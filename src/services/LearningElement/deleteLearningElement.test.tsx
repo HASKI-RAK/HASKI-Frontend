@@ -11,7 +11,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('deleteLearningElement has expected behaviour', () => {
+describe('deleteLearningElement has expected behaviour [HASKI-REQ-0082]', () => {
   it('should return message string if successful', async () => {
     const inputData = ['deletion successful']
 

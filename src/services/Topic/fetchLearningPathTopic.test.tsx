@@ -2,6 +2,18 @@ import { getConfig } from '@shared'
 //Tests fail with shortened Path
 import { fetchLearningPathTopic } from './fetchLearningPathTopic'
 
+describe('fetchLearningPathTopic', () => {
+  /**
+   * Test fetchLearningPathTopic
+   * [HASKI-REQ-0055] Kursinhalte (Topics) pro Studierendenkurs abrufen
+   */
+  it('should fetch learning path topic', async () => {
+    const result = await fetchLearningPathTopic(1, 1, 1, 1)
+
+    expect(result).toBeDefined()
+  })
+})
+
 global.fetch = jest.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve({ status: 200 }),

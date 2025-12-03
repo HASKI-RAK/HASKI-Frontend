@@ -11,7 +11,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('fetchLearningElementRecommendation', () => {
+describe('fetchLearningElementRecommendation [HASKI-REQ-0102]', () => {
   it('fetches learning element recommendation data correctly', async () => {
     // todo maybe rename
     const mockData = [
