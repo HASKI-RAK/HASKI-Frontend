@@ -69,8 +69,7 @@ const GlobalNavMenu = forwardRef(
                 horizontal: 'center'
               }}
               sx={{
-                alignItems: 'center',
-                textAlign: 'center'
+                alignItems: 'center'
               }}
               onClose={handleClose}>
               {isLoading ? (
@@ -78,35 +77,31 @@ const GlobalNavMenu = forwardRef(
                   <SkeletonList />
                 </Box>
               ) : (
-                [...content].map((element) => (
-                  <Box
-                    key={element.name}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: 1,
-                      pr: 1.5
-                    }}>
+                [...content].map((element) => {
+                  const isLocked = element.isDisabled && element.availableAt > new Date()
+                  return (
                     <MenuItem
-                      id={element.name.concat('-link').replaceAll(' ', '-')}
                       key={element.name}
-                      color="inherit"
-                      disabled={element.isDisabled && element.availableAt > new Date()}
+                      id={element.name.concat('-link').replaceAll(' ', '-')}
                       onClick={() => {
+                        if (isLocked) return
                         navigate(element.url)
                         handleClose()
-                      }}>
-                      {element.name}
-                    </MenuItem>
-                    <Box
+                      }}
+                      disabled={isLocked}
                       sx={{
-                        width: 32,
+                        width: '100%',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center'
+                        gap: 0.75,
+                        '&.Mui-disabled:hover': {
+                          backgroundColor: 'transparent'
+                        }
                       }}>
-                      {element.isDisabled && element.availableAt > new Date() && (
+                      <Box component="span" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {element.name}
+                      </Box>
+                      {isLocked && (
                         <Tooltip
                           title={
                             <Typography variant="body2">
@@ -126,14 +121,16 @@ const GlobalNavMenu = forwardRef(
                           }
                           arrow
                           placement="right">
-                          <Box component="span" sx={{ display: 'inline-flex' }}>
+                          <Box
+                            component="span"
+                            sx={{ display: 'inline-flex', alignItems: 'center', pointerEvents: 'auto' }}>
                             <Lock color="disabled" sx={{ fontSize: 22 }} />
                           </Box>
                         </Tooltip>
                       )}
-                    </Box>
-                  </Box>
-                ))
+                    </MenuItem>
+                  )
+                })
               )}
             </Menu>
           </Box>
