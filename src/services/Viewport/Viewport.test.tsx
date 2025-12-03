@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { renderHook } from '@testing-library/react'
 import { useViewport } from './Viewport.hooks'
 
-describe('Viewport hook tests', () => {
+describe('[HASKI-REQ-0090] Viewport hook tests', () => {
   test('General functionality of useViewport', () => {
     const { result } = renderHook(() => useViewport())
 

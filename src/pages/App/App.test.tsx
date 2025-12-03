@@ -5,7 +5,7 @@ import log from 'loglevel'
 import { App } from './App'
 import { useApp } from './App.hooks'
 
-describe('App tests', () => {
+describe('[HASKI-REQ-0090] App tests', () => {
   test('renders correctly', () => {
     const app = render(<App />)
     expect(app).toBeTruthy()

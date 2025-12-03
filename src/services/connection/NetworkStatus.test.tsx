@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { act, fireEvent, renderHook } from '@testing-library/react'
 import { useNetworkStatus } from './NetworkStatus.hooks'
 
-describe('Test useNetworkStatus', () => {
+describe('[HASKI-REQ-0086] Test useNetworkStatus', () => {
   test('loss and retrieval of network status', async () => {
     const removeEventListenerSpy = jest.spyOn(window, 'removeEventListener')
     const { result } = renderHook(() => useNetworkStatus())

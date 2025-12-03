@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import ProjectDescription from './ProjectDescription'
 
-describe('ProjectDescription tests', () => {
+describe('[HASKI-REQ-0083] ProjectDescription tests', () => {
   test('ProjectDescription renders', () => {
     const { getAllByTestId } = render(
       <MemoryRouter>

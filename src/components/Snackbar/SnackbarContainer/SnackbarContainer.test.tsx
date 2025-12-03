@@ -27,7 +27,7 @@ const mockContext = {
 
 const mockUseNetworkStatus = jest.fn().mockReturnValue(true)
 
-describe('Test SnackbarContainer', () => {
+describe('[HASKI-REQ-0086] Test SnackbarContainer', () => {
   test('SnackbarContainer renders on its own', () => {
     const { queryAllByText } = render(<SnackbarContainer />)
     expect(queryAllByText('error: test').length).toEqual(0)

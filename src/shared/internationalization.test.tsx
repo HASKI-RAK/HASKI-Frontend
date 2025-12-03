@@ -7,7 +7,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { MenuItem, Select, SelectChangeEvent } from '@common/components'
 import i18next from './internationalization'
 
-describe('i18n test', () => {
+describe('[HASKI-REQ-0090] i18n test', () => {
   localStorage.setItem('i18nextLng', 'en')
   const ArrangeElement = () => {
     const { i18n } = useTranslation()

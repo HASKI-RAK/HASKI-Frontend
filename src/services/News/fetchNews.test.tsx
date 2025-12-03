@@ -11,7 +11,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('Test the fetchNews functionalities', () => {
+describe('[HASKI-REQ-0046] Test the fetchNews functionalities', () => {
   it('should return the news when the response is successful', async () => {
     const expectedData = { news: 'News in english' }
     const mockResponse = {

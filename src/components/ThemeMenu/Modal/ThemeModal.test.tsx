@@ -12,7 +12,7 @@ jest.mock('react-i18next', () => ({
   })
 }))
 
-describe('ThemeModal tests', () => {
+describe('[HASKI-REQ-0073] ThemeModal tests', () => {
   it('should render ThemeModal component correctly in closed state', () => {
     const themeModal = render(
       <ThemeProvider>

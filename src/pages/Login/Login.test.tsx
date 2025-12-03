@@ -9,7 +9,7 @@ const { AuthContext } = jest.requireActual('@services')
 
 const navigate = jest.fn()
 
-describe('Login Page', () => {
+describe('[HASKI-REQ-0028] Login Page', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })

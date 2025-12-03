@@ -15,7 +15,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('getLoginStatus', () => {
+describe('[HASKI-REQ-0028] getLoginStatus', () => {
   it('should return logout success', async () => {
     fetchLogout().then(() => {
       expect(global.fetch).toHaveBeenCalledTimes(1)

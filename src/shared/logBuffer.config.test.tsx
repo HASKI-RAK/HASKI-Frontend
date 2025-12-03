@@ -2,7 +2,7 @@ import { mockServices } from 'jest.setup'
 import log from 'loglevel'
 import { logBuffer } from './logBuffer.config'
 
-describe('Test the demo component', () => {
+describe('[HASKI-REQ-0090] Test the demo component', () => {
   beforeEach(() => {
     jest.resetModules()
     process.env = {
