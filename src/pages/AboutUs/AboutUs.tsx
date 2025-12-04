@@ -57,10 +57,9 @@ const AboutUs = () => {
             returnObjects: true
           }) as AboutUsQuotesProps[])
         ].map((element) => (
-          <>
+          <Box key={element.quote}>
             <Typography
               align="center"
-              key={element.quote}
               variant="h5"
               sx={{
                 width: { sm: '18.75rem', md: '37.5rem' },
@@ -87,7 +86,7 @@ const AboutUs = () => {
               }}>
               {element.description}
             </Typography>
-          </>
+          </Box>
         ))}
       </TextStepper>
       <TextCardRight header="Team OTH Regensburg" body={t('pages.aboutus.membersRegensburgBody')}>
