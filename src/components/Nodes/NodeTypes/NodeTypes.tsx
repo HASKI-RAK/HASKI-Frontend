@@ -1,6 +1,7 @@
 import { ReactElement } from 'react'
 import { NodeTypes } from 'reactflow'
 import { TFunction } from 'i18next'
+import { Box } from '@common/components'
 import {
   Article,
   Assignment,
@@ -71,6 +72,9 @@ export const getNodeIcon = (key: string, fontSize: number): ReactElement => {
     RQ: <Feedback sx={{ fontSize }} />,
     SE: <AssignmentInd sx={{ fontSize }} />,
     ÜB: <AssignmentLate sx={{ fontSize }} />,
+    ÜBL: <Box component="img" sx={{ maxHeight: fontSize, maxWidth: fontSize }} src="/images/ÜbungLeicht.png" />,
+    ÜBM: <Box component="img" sx={{ maxHeight: fontSize, maxWidth: fontSize }} src="/images/ÜbungLeicht.png" />,
+    ÜBS: <Box component="img" sx={{ maxHeight: fontSize, maxWidth: fontSize }} src="/images/ÜbungLeicht.png" />,
     ZF: <Description sx={{ fontSize }} />,
     ZL: <Article sx={{ fontSize }} />
   }
