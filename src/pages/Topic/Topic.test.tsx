@@ -256,7 +256,25 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
-          id: '1',
+          data: {
+            classification: "",
+            label: undefined,
+          },
+          id: "1",
+          position: {
+            x: -575,
+            y: 0
+          },
+          style: {
+            border: "2px solid #9e9e9e",
+            borderRadius: 8,
+            height: 200,
+            width: 1150
+        },
+        type: "GROUP"
+      },
+        {
+          id: '1-1',
           type: '',
           data: {
             activityType: '',
@@ -274,8 +292,8 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
             isRecommended: false
           },
           position: {
-            x: -250,
-            y: 0
+            x: -525,
+            y: 50
           },
           style: {
             background: '#1976d2',
@@ -287,7 +305,7 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
           }
         },
         {
-          id: '2',
+          id: '2-2',
           type: '',
           data: {
             activityType: '',
@@ -305,8 +323,8 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
             isRecommended: false
           },
           position: {
-            x: -250,
-            y: 250
+            x: 25,
+            y: 50
           },
           style: {
             background: '#1976d2',
@@ -319,8 +337,7 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
         }
       ],
       edges: [
-        { id: 'Edge1', source: '1', target: '2' },
-        { id: 'Edge2', source: '2', target: undefined }
+        { id: 'Edge1', source: '1', target: undefined }
       ]
     })
 
@@ -472,96 +489,21 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
       nodes: [
         {
           data: {
-            activityType: '',
-            classification: '',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
-            lmsId: 1,
-            learningElementId: 1,
-            name: '',
-            isDisabled: false,
-            isDone: false,
-            isRecommended: false
+            classification: "",
+            label: undefined,
           },
-          id: '1',
+          id: "1",
           position: {
-            x: -250,
+            x: -575,
             y: 0
           },
           style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
+            border: "2px solid #9e9e9e",
             borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
+            height: 200,
+            width: 1150
           },
-          type: ''
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            lmsId: 1,
-            learningElementId: 1,
-            name: '',
-            isDone: false,
-            isDisabled: false,
-            handleSetLmsId: expect.any(Function),
-            handleClose: expect.any(Function),
-            isRecommended: false
-          },
-          id: '2',
-          position: {
-            x: -250,
-            y: 250
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            lmsId: 1,
-            learningElementId: 1,
-            isDisabled: false,
-            name: '',
-            isDone: false,
-            isRecommended: false
-          },
-          id: '3',
-          position: {
-            x: -250,
-            y: 500
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
+          type: "GROUP"
         },
         {
           data: {
@@ -569,20 +511,20 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
             classification: '',
             handleClose: expect.any(Function),
             handleOpen: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
             lmsId: 1,
             learningElementId: 1,
-            isDisabled: false,
             name: '',
+            isDisabled: false,
             isDone: false,
             isRecommended: false
           },
-          id: '4',
+          id: '1-1',
           position: {
-            x: -250,
-            y: 750
+            x: -525,
+            y: 50
           },
           style: {
             background: '#1976d2',
@@ -593,6 +535,117 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
             width: 500
           },
           type: ''
+        },
+        {
+          data: {
+            activityType: '',
+            classification: '',
+            handleOpen: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            name: '',
+            isDone: false,
+            isDisabled: false,
+            handleSetLmsId: expect.any(Function),
+            handleClose: expect.any(Function),
+            isRecommended: false
+          },
+          id: '4-1',
+          position: {
+            x: 25,
+            y: 50
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: ''
+        },
+        {
+          data: {
+            classification: "ÜB",
+            label: "components.NodeTypes.üb"
+          },
+          id: "2",
+            position: {
+              x: -575,
+              y: 364.2857142857143
+            },
+            style: {
+              border: '2px solid #9e9e9e',
+              borderRadius: 8,
+              height: 200,
+              width: 1150
+            },
+          type: 'GROUP'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            isDisabled: false,
+            name: '',
+            isDone: false,
+            isRecommended: false
+          },
+          id: '2-1',
+          position: {
+            x: -525,
+            y: 414.2857142857143
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            isDisabled: false,
+            name: '',
+            isDone: false,
+            isRecommended: false
+          },
+          id: '3-1',
+          position: {
+            x: 25,
+            y: 414.2857142857143
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
         }
       ],
       edges: [
@@ -604,16 +657,6 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
         {
           id: 'Edge2',
           source: '2',
-          target: '3'
-        },
-        {
-          id: 'Edge3',
-          source: '3',
-          target: '4'
-        },
-        {
-          id: 'Edge4',
-          source: '4',
           target: undefined
         }
       ]
@@ -839,26 +882,44 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
       nodes: [
         {
           data: {
-            activityType: '',
-            classification: '',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            lmsId: 1,
-            learningElementId: 1,
-            name: '',
-            isDone: false,
-            isDisabled: false,
-            handleSetLmsId: expect.any(Function),
-            isRecommended: false
+            classification: "",
+            label: undefined,
           },
-          id: '1',
+          id: "1",
           position: {
-            x: -250,
+            x: -575,
             y: 0
           },
           style: {
+            border: "2px solid #9e9e9e",
+            borderRadius: 8,
+            height: 200,
+            width: 1150
+          },
+          type: "GROUP"
+        },
+        {
+          data: {
+            activityType: '',
+            classification: '',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            name: '',
+            isDone: false,
+            isDisabled: false,
+            handleSetLmsId: expect.any(Function),
+            isRecommended: false
+          },
+          id: '1-1',
+          position: {
+            x: -525,
+            y: 50
+          },
+          style: {
             background: '#1976d2',
             border: '1px solid #9e9e9e',
             borderRadius: 8,
@@ -867,161 +928,6 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
             width: 500
           },
           type: ''
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            lmsId: 1,
-            learningElementId: 1,
-            name: '',
-            isDone: false,
-            isDisabled: false,
-            isRecommended: false
-          },
-          id: '2',
-          position: {
-            x: -250,
-            y: 250
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            lmsId: 1,
-            learningElementId: 1,
-            name: '',
-            isDisabled: false,
-            isDone: false,
-            isRecommended: false
-          },
-          id: '3',
-          position: {
-            x: -250,
-            y: 500
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            lmsId: 1,
-            learningElementId: 1,
-            name: '',
-            isDisabled: false,
-            isDone: false,
-            isRecommended: false
-          },
-          id: '4',
-          position: {
-            x: -250,
-            y: 750
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            lmsId: 1,
-            learningElementId: 1,
-            name: '',
-            isDisabled: false,
-            isDone: false,
-            isRecommended: false
-          },
-          id: '5',
-          position: {
-            x: -250,
-            y: 1000
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            lmsId: 1,
-            isDisabled: false,
-            learningElementId: 1,
-            name: '',
-            isDone: false,
-            isRecommended: false
-          },
-          id: '6',
-          position: {
-            x: -250,
-            y: 1250
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
         },
         {
           data: {
@@ -1035,14 +941,14 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
             lmsId: 1,
             learningElementId: 1,
             name: '',
-            isDisabled: false,
             isDone: false,
+            isDisabled: false,
             isRecommended: false
           },
-          id: '7',
+          id: '7-1',
           position: {
-            x: -250,
-            y: 1500
+            x: 25,
+            y: 50
           },
           style: {
             background: '#1976d2',
@@ -1053,16 +959,184 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
             width: 500
           },
           type: ''
+        },
+        {
+          data: {
+            classification: "ÜB",
+            label: "components.NodeTypes.üb"
+          },
+          id: "2",
+          position: {
+            x: -1125,
+            y: 364.2857142857143
+        },
+        style: {
+          border: '2px solid #9e9e9e',
+          borderRadius: 8,
+          height: 325,
+          width: 2250
+        },
+        type: 'GROUP',
+      },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            name: '',
+            isDisabled: false,
+            isDone: false,
+            isRecommended: false
+          },
+          id: '2-1',
+          position: {
+            x: -1075,
+            y: 414.2857142857143
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            name: '',
+            isDisabled: false,
+            isDone: false,
+            isRecommended: false
+          },
+          id: '3-1',
+          position: {
+            x: -525,
+            y: 414.2857142857143
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            name: '',
+            isDisabled: false,
+            isDone: false,
+            isRecommended: false
+          },
+          id: '4-1',
+          position: {
+            x: 25,
+            y: 414.2857142857143
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            isDisabled: false,
+            learningElementId: 1,
+            name: '',
+            isDone: false,
+            isRecommended: false
+          },
+          id: '5-1',
+          position: {
+            x: 575,
+            y: 414.2857142857143
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            name: '',
+            isDisabled: false,
+            isDone: false,
+            isRecommended: false
+          },
+          id: '6-1',
+          position: {
+            x: -1075,
+            y: 539.2857142857143
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
         }
       ],
       edges: [
         { id: 'Edge1', source: '1', target: '2' },
-        { id: 'Edge2', source: '2', target: '3' },
-        { id: 'Edge3', source: '3', target: '4' },
-        { id: 'Edge4', source: '4', target: '5' },
-        { id: 'Edge5', source: '5', target: '6' },
-        { id: 'Edge6', source: '6', target: '7' },
-        { id: 'Edge7', source: '7', target: undefined }
+        { id: 'Edge2', source: '2', target: undefined }
       ]
     })
 
@@ -1366,7 +1440,6 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
       mockLearningPath,
       mockLearningElementStatus,
       mocklearningPathDisabledClassifications,
-      true
     )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
@@ -1883,7 +1956,6 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
       mockLearningPath,
       mockLearningElementStatus,
       mocklearningPathDisabledClassifications,
-      true
     )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [

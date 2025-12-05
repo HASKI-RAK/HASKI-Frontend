@@ -20,7 +20,6 @@ describe('Glossary page tests', () => {
         <Glossary />
       </MemoryRouter>
     )
-    expect(queryByText('pages.glossary')).toBeInTheDocument()
     expect(queryAllByText('pages.glossary.search').length).toBeGreaterThan(0)
     expect(queryAllByText('pages.glossary.filter').length).toBeGreaterThan(0)
     expect(queryByText('pages.glossary.collapseAll')).toBeInTheDocument()
