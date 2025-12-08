@@ -66,7 +66,7 @@ export const getNodeIcon = (key: string, fontSize: number): ReactElement => {
     display: 'inline-block',
     verticalAlign: 'middle',
     objectFit: 'contain',
-    transform: 'translateY(-2px) scale(0.84)', //
+    transform: 'translateY(-2px) scale(0.84)',
     transformOrigin: 'center'
   }
 
