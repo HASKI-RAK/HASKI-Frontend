@@ -308,7 +308,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
           {}
         )
       )
-        .flatMap((nodes) => nodes)
+        .flat()
         .map((node) => node.id)
 
       // Creates an array of edges from the array of node ids.
