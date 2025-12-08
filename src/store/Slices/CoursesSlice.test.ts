@@ -7,7 +7,7 @@ describe('CoursesSlice', () => {
     jest.clearAllMocks()
   })
 
-  it('should fetch courses from server and cache them', async () => {
+  it('[HASKI-REQ-0053] should fetch courses from server and cache them', async () => {
     const { getCourses } = useStore.getState()
     const courses = {
       courses: [
@@ -74,7 +74,7 @@ describe('CoursesSlice', () => {
     expect(getCourses).not.toThrow() // counts as function call (getCourses), here it would be Called 2 times instead of 1
   })
 
-  it('should return cached courses if available', async () => {
+  it('[HASKI-REQ-0053] should return cached courses if available', async () => {
     const { getCourses } = useStore.getState()
     const courses = [{ id: 1, name: 'Math', description: 'Learn math' }]
     mockServices.fetchCourses = jest.fn().mockResolvedValueOnce(courses)
@@ -96,7 +96,7 @@ describe('CoursesSlice', () => {
     expect(cached).toEqual(courses)
   })
 
-  it('should trigger a reload even if cache is available', async () => {
+  it('[HASKI-REQ-0053] should trigger a reload even if cache is available', async () => {
     const { getCourses } = useStore.getState()
     const courses = [{ id: 1, name: 'Math', description: 'Learn math' }]
     mockServices.fetchCourses = jest.fn().mockResolvedValue(courses)

@@ -1,7 +1,7 @@
 import { useStore } from '../Zustand/Store'
 
 describe('CourseSlice', () => {
-  it('should set course', () => {
+  it('[HASKI-REQ-0054] should set course', () => {
     const { setCourse } = useStore.getState()
     const courseToSet = {} as typeof course
     setCourse(courseToSet)

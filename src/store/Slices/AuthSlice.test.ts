@@ -1,7 +1,7 @@
 import { usePersistedStore } from '../Zustand/Store'
 
 describe('AuthSlice', () => {
-  it('should set expire timestamp', () => {
+  it('[HASKI-REQ-0028] should set expire timestamp', () => {
     const { setExpire } = usePersistedStore.getState()
     const timestamp = Date.now()
     setExpire(timestamp)

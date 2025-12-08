@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { useStore } from '../Zustand/Store'
 
 describe('TeacherLpLeAlgSlice', () => {
-  test('explicitely setting the algorithm in cache from the frontend', async () => {
+  test('[HASKI-REQ-0041] explicitely setting the algorithm in cache from the frontend', async () => {
     const { setTeacherLpLeAlgorithm } = useStore.getState()
     const { getTeacherLpLeAlgorithm } = useStore.getState()
     const topicId = 1
