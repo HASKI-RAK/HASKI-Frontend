@@ -11,7 +11,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('postTeacherLpLeAlg has expected behaviour', () => {
+describe('[HASKI-REQ-0041] postTeacherLpLeAlg has expected behaviour', () => {
   it('should return inputData if successfull', async () => {
     const inputData = ['testAlgorithm']
 

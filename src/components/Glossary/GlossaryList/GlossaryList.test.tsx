@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import GlossaryList from './GlossaryList'
 import { useGlossaryList } from './GlossaryList.hooks'
 
-describe('GlossaryList tests', () => {
+describe('[HASKI-REQ-0084] GlossaryList tests', () => {
   const mockGlossaryListProps = {
     glossaryEntries: [
       {

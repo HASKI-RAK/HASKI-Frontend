@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react'
 import React from 'react'
 import { Droppable } from './DroppableItem'
 
-describe('Droppable component', () => {
+describe('[HASKI-REQ-0026] Droppable component', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })

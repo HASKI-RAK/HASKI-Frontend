@@ -26,7 +26,7 @@ afterEach(() => {
   jest.clearAllMocks()
 })
 
-describe('TextStepper tests', () => {
+describe('[HASKI-REQ-0083] TextStepper tests', () => {
   it('renders without input', () => {
     const { getByTestId } = render(
       <MemoryRouter>

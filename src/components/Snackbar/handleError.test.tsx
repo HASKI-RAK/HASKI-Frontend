@@ -2,7 +2,7 @@ import log from 'loglevel'
 import { useTranslation } from 'react-i18next'
 import handleError from './handleError'
 
-describe('handleError', () => {
+describe('[HASKI-REQ-0086] handleError', () => {
   const mockLogError = jest.spyOn(log, 'error').mockImplementation(() => {})
   const mockAddSnackbar = jest.fn()
 

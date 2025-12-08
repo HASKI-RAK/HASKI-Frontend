@@ -8,7 +8,7 @@ import LearningElementLearningPath from './LearningElementLearningPath'
 
 jest.useFakeTimers()
 
-describe('LearningElementLearningPath tests', () => {
+describe('[HASKI-REQ-0085] LearningElementLearningPath tests', () => {
   beforeEach(() => {
     mockReactFlow()
     jest.clearAllTimers()

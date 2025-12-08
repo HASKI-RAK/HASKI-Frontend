@@ -6,7 +6,7 @@ import GlobalNavMenu from './GlobalNavMenu'
 
 const navigate = jest.fn()
 
-describe('GlobalNavMenu tests', () => {
+describe('[HASKI-REQ-0089] GlobalNavMenu tests', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })

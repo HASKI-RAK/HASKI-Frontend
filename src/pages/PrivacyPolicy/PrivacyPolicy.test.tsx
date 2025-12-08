@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { PrivacyPolicy } from '@pages'
 
-describe('Test the PrivacyPolicy page', () => {
+describe('[HASKI-REQ-0005] Test the PrivacyPolicy page', () => {
   it('renders PrivacyPolicy', () => {
     const { getByText } = render(
       <MemoryRouter>

@@ -6,7 +6,7 @@ import { usePersistedStore } from '../Zustand/Store'
 const learningElementStatus = { cmid: 1, state: 0, timecompleted: 0 }
 
 describe('LearningPathElementStatusSlice', () => {
-  it('should return set data if setLearningPathElementStatus newData is given', async () => {
+  it('[HASKI-REQ-0071] should return set data if setLearningPathElementStatus newData is given', async () => {
     const { getLearningPathElementStatus, setLearningPathElementStatus } = usePersistedStore.getState()
 
     const courseId = '1'
@@ -30,7 +30,7 @@ describe('LearningPathElementStatusSlice', () => {
     expect(result).toEqual(expectedDataAfterSet)
   })
 
-  it('should return set data if setLearningPathElementStatus newData is given, but can not be found', async () => {
+  it('[HASKI-REQ-0071] should return set data if setLearningPathElementStatus newData is given, but can not be found', async () => {
     const { getLearningPathElementStatus, setLearningPathElementStatus } = usePersistedStore.getState()
 
     const courseId = '1'
@@ -50,7 +50,7 @@ describe('LearningPathElementStatusSlice', () => {
     })
   })
 
-  it('should fetch LearningPathElementStatusSlice from server and cache it', async () => {
+  it('[HASKI-REQ-0071] should fetch LearningPathElementStatusSlice from server and cache it', async () => {
     const { getLearningPathElementStatus } = usePersistedStore.getState()
 
     const courseId = '1'
@@ -91,7 +91,7 @@ describe('LearningPathElementStatusSlice', () => {
     expect(getLearningPathElementStatus).not.toThrow()
   })
 
-  it('should return cached LearningPathElementStatus if available', async () => {
+  it('[HASKI-REQ-0071] should return cached LearningPathElementStatus if available', async () => {
     const { getLearningPathElementStatus } = usePersistedStore.getState()
 
     const courseId = '1'
@@ -152,7 +152,7 @@ describe('LearningPathElementStatusSlice', () => {
     ])
   })
 
-  it('should return cached data if setLearningPathElementStatus newData is empty', async () => {
+  it('[HASKI-REQ-0071] should return cached data if setLearningPathElementStatus newData is empty', async () => {
     mockServices.fetchLearningPathElementStatus = jest
       .fn()
       .mockImplementationOnce(() => Promise.resolve(learningElementStatus))
@@ -167,7 +167,7 @@ describe('LearningPathElementStatusSlice', () => {
     expect(cached).toEqual([])
   })
 
-  it('should return cached array data if setLearningPathElementStatus newData is empty', async () => {
+  it('[HASKI-REQ-0071] should return cached array data if setLearningPathElementStatus newData is empty', async () => {
     mockServices.fetchLearningPathElementStatus = jest
       .fn()
       .mockImplementationOnce(() => Promise.resolve(learningElementStatus))

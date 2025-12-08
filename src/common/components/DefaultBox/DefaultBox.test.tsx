@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import ImageWrapper from './ImageWrapper'
 import NodeWrapper from './NodeWrapper'
 
-describe('DefaultBox tests', () => {
+describe('[HASKI-REQ-0086] DefaultBox tests', () => {
   test('ImageWrapper renders correctly', async () => {
     const box = render(
       <MemoryRouter>

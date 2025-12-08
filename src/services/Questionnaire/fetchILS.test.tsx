@@ -11,7 +11,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('fetchILS has expected behaviour', () => {
+describe('[HASKI-REQ-0087] fetchILS has expected behaviour', () => {
   it('should return negative values when the response is successful (because of dimensions)', async () => {
     const inputData = {
       course: 'dude where is my car',

@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Switch from './DefaultSwitch'
 
-describe('DefaultSwitch tests', () => {
+describe('[HASKI-REQ-0086] DefaultSwitch tests', () => {
   test('DefaultSwitch renders correctly', async () => {
     const textField = render(
       <MemoryRouter>

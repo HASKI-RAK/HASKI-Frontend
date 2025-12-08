@@ -11,7 +11,7 @@ jest.mock('@services', () => ({
   deleteLearningElement: jest.fn().mockResolvedValue(undefined)
 }))
 
-describe('[HASKI-REQ-0026] BasicNode tests', () => {
+describe('[HASKI-REQ-0085] BasicNode tests', () => {
   beforeEach(() => {
     mockReactFlow()
   })

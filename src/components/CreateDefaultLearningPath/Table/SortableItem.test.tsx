@@ -7,7 +7,7 @@ import { SortableItem } from './SortableItem'
 
 const originalModule = jest.requireActual('@dnd-kit/sortable')
 
-describe('SortableItem component', () => {
+describe('[HASKI-REQ-0026] SortableItem component', () => {
   it('renders the position badge, label, icon, and children correctly', () => {
     ;(useSortable as jest.Mock).mockImplementationOnce(() => ({
       ...originalModule

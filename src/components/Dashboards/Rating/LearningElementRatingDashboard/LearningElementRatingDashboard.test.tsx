@@ -3,7 +3,7 @@ import { useLearningElementRatingDashboard } from './LearningElementRatingDashbo
 import { mockServices } from 'jest.setup'
 import { AuthContext } from '@services'
 
-describe('useLearningElementRatingDashboard', () => {
+describe('[HASKI-REQ-0043] useLearningElementRatingDashboard', () => {
   it('correctly fetches and calculates learning element rating dashboard data', async () => {
     const { result } = renderHook(() => useLearningElementRatingDashboard(), {
       wrapper: ({ children }) => (

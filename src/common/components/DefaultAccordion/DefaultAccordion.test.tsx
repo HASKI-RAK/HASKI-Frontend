@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { AccordionSummary } from '@common/components'
 import Accordion from './DefaultAccordion'
 
-describe('DefaultAccordion tests', () => {
+describe('[HASKI-REQ-0086] DefaultAccordion tests', () => {
   test('DefaultAccordion renders correctly', () => {
     const accordion = render(
       <MemoryRouter>

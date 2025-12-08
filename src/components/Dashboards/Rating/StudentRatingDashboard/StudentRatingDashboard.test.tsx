@@ -3,7 +3,7 @@ import { useStudentRatingDashboard } from './StudentRatingDashboard.hooks'
 import { mockServices } from 'jest.setup'
 import { AuthContext } from '@services'
 
-describe('useStudentRatingDashboard', () => {
+describe('[HASKI-REQ-0043] useStudentRatingDashboard', () => {
   it('correctly fetches and calculates student rating dashboard data', async () => {
     const { result } = renderHook(() => useStudentRatingDashboard(), {
       wrapper: ({ children }) => (

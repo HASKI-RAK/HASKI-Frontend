@@ -13,7 +13,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('Test Authcontext', () => {
+describe('[HASKI-REQ-0028] Test Authcontext', () => {
   // render custom component
   const TestComponent = () => {
     const context = useContext(AuthContext)

@@ -27,30 +27,28 @@ const fakePrivacyModalHookReturn = {
   privacyPolicyCookie: new FakeCookiesProvider() as unknown as CookiesProvider,
   handleAccept: jest.fn()
 }
+const setCookieMock = jest.fn()
 
-describe('OpenCreateDefaultLearningPath component', () => {
-  const setCookieMock = jest.fn()
+afterEach(() => {
+  jest.resetAllMocks()
+})
 
-  afterEach(() => {
-    jest.resetAllMocks()
-  })
+// Create a dummy provider for AuthContext and RoleContext.
+const courseCreatorContext = {
+  isStudentRole: false,
+  isCourseCreatorRole: true
+} as RoleContextType
 
-  // Create a dummy provider for AuthContext and RoleContext.
-  const courseCreatorContext = {
-    isStudentRole: false,
-    isCourseCreatorRole: true
-  } as RoleContextType
-
-  const DummyProvider: FC<{ children: ReactNode }> = ({ children }) => (
-    <ReactFlowProvider>
-      <MemoryRouter>
-        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-          <RoleContext.Provider value={courseCreatorContext}>{children}</RoleContext.Provider>
-        </AuthContext.Provider>
-      </MemoryRouter>
-    </ReactFlowProvider>
-  )
-
+const DummyProvider: FC<{ children: ReactNode }> = ({ children }) => (
+  <ReactFlowProvider>
+    <MemoryRouter>
+      <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+        <RoleContext.Provider value={courseCreatorContext}>{children}</RoleContext.Provider>
+      </AuthContext.Provider>
+    </MemoryRouter>
+  </ReactFlowProvider>
+)
+describe('[HASKI-REQ-0026] OpenCreateDefaultLearningPath', () => {
   it('renders the DefaultLearningPathModal when no cookie exists and fetchDefaultLearningPath returns an empty array', async () => {
     // Simulate that no cookie exists.
     ;(useCookies as jest.Mock).mockReturnValueOnce([{}, setCookieMock])

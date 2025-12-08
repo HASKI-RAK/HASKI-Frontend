@@ -6,7 +6,7 @@ import { AuthContext, RoleContext } from '@services'
 
 jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 
-describe('LearningElementRecommendation', () => {
+describe('[HASKI-REQ-0072] LearningElementRecommendation', () => {
   it('returns recommendedLearningElement when isAuth is true', async () => {
     const { result } = renderHook(() => useLearningElementRecommendation(), {
       wrapper: ({ children }) => (

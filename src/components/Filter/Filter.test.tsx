@@ -10,7 +10,7 @@ const mockFilterProps = {
   setSelectedOptions: jest.fn()
 }
 
-describe('[HASKI-REQ-0026] Filter tests', () => {
+describe('[HASKI-REQ-0084] Filter tests', () => {
   it('renders without input', () => {
     const filter = render(<Filter />)
     expect(filter).toBeTruthy()

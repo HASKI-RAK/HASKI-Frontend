@@ -13,7 +13,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('postLogin', () => {
+describe('[HASKI-REQ-0028] postLogin', () => {
   it('should return login success with default params', async () => {
     const loginStatus = await postLogin()
     expect(loginStatus).toEqual({ expiration: 0 })

@@ -20,7 +20,7 @@ const output = JSON.stringify({
   created_at: '2024-09-10T09:30:31Z'
 })
 
-describe('postCourse has expected behaviour', () => {
+describe('[HASKI-REQ-0035] postCourse has expected behaviour', () => {
   it('should return inputData if succesfull', async () => {
     const inputData = ['course created']
 

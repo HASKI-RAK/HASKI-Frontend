@@ -1,6 +1,6 @@
 import { getConfig, setConfig } from './config'
 
-describe('[HASKI-REQ-0000] setConfig', () => {
+describe('[HASKI-REQ-0090] setConfig', () => {
   it('should use appConfig correctly', () => {
     const mockConfig = { BACKEND: 'backendurl' } // replace this with your actual Config structure
     setConfig(mockConfig)

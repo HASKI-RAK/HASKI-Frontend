@@ -11,7 +11,7 @@ const mockProps = {
   setIsGrouped: jest.fn()
 }
 
-describe('[HASKI-REQ-0026] LabeledSwitch tests', () => {
+describe('[HASKI-REQ-0085] LabeledSwitch tests', () => {
   it('renders correctly without input', () => {
     const labeledSwitch = render(
       <MemoryRouter>

@@ -21,7 +21,7 @@ jest.mock('common/hooks', () => ({
   useMediaQuery: jest.fn().mockReturnValue(true) // Simulate the useMediaQuery hook returning true
 }))
 
-describe('MainFrame', () => {
+describe('[HASKI-REQ-0089] MainFrame', () => {
   beforeEach(() => {
     jest.spyOn(Router, 'useNavigate').mockImplementation(() => navigate)
   })

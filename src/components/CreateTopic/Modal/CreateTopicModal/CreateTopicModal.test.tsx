@@ -10,7 +10,7 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom')
 }))
 
-describe('[HASKI-REQ-0026] CreateTopicModal', () => {
+describe('[HASKI-REQ-0036] CreateTopicModal', () => {
   const courseCreatorContext = {
     isStudentRole: false,
     isCourseCreatorRole: true

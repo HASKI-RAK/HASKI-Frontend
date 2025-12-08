@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react-hooks'
 import { LearningElementWithClassification } from '@components'
 import { useCreateLearningElementClassificationTable } from './CreateLearningElementClassificationTable.hooks'
 
-describe('useCreateLearningElementClassificationTable', () => {
+describe('[HASKI-REQ-0037] useCreateLearningElementClassificationTable', () => {
   const initialLearningElementsClassification: { [key: number]: LearningElementWithClassification[] } = {
     1: [
       { lms_id: 101, lms_learning_element_name: 'Element 1', lms_activity_type: 'Activity', classification: '' },
