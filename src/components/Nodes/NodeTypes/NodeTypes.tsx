@@ -72,9 +72,20 @@ export const getNodeIcon = (key: string, fontSize: number): ReactElement => {
     RQ: <Feedback sx={{ fontSize }} />,
     SE: <AssignmentInd sx={{ fontSize }} />,
     ÜB: <AssignmentLate sx={{ fontSize }} />,
-    ÜBL: <Box component="img" sx={{ maxHeight: fontSize, maxWidth: fontSize }} src="/images/ÜbungLeicht.png" />,
-    ÜBM: <Box component="img" sx={{ maxHeight: fontSize, maxWidth: fontSize }} src="/images/ÜbungLeicht.png" />,
-    ÜBS: <Box component="img" sx={{ maxHeight: fontSize, maxWidth: fontSize }} src="/images/ÜbungLeicht.png" />,
+ÜBL: (
+  <Box
+    component="img"
+    src="/images/ÜbungLeicht.svg"
+    sx={{
+      width: fontSize * 0.9,   // tweak 0.85–0.95 until it matches MUI
+      height: fontSize * 0.9,
+      display: 'block',
+      objectFit: 'contain',
+    }}
+  />
+),
+    ÜBM: <Box component="img" sx={{ fontSize: fontSize * 0.5 }} src="/images/ÜbungMittel.svg" />,
+    ÜBS: <Box component="img" sx={{ maxHeight: fontSize, maxWidth: fontSize }} src="/images/ÜbungSchwer.svg" />,
     ZF: <Description sx={{ fontSize }} />,
     ZL: <Article sx={{ fontSize }} />
   }
