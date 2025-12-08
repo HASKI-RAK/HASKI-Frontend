@@ -257,22 +257,22 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
       nodes: [
         {
           data: {
-            classification: "",
-            label: undefined,
+            classification: '',
+            label: undefined
           },
-          id: "1",
+          id: '1',
           position: {
             x: -575,
             y: 0
           },
           style: {
-            border: "2px solid #9e9e9e",
+            border: '2px solid #9e9e9e',
             borderRadius: 8,
             height: 200,
             width: 1150
+          },
+          type: 'GROUP'
         },
-        type: "GROUP"
-      },
         {
           id: '1-1',
           type: '',
@@ -336,9 +336,7 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
           }
         }
       ],
-      edges: [
-        { id: 'Edge1', source: '1', target: undefined }
-      ]
+      edges: [{ id: 'Edge1', source: '1', target: undefined }]
     })
 
     act(() => {
@@ -489,21 +487,21 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
       nodes: [
         {
           data: {
-            classification: "",
-            label: undefined,
+            classification: '',
+            label: undefined
           },
-          id: "1",
+          id: '1',
           position: {
             x: -575,
             y: 0
           },
           style: {
-            border: "2px solid #9e9e9e",
+            border: '2px solid #9e9e9e',
             borderRadius: 8,
             height: 200,
             width: 1150
           },
-          type: "GROUP"
+          type: 'GROUP'
         },
         {
           data: {
@@ -569,20 +567,20 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
         },
         {
           data: {
-            classification: "ÜB",
-            label: "components.NodeTypes.üb"
+            classification: 'ÜB',
+            label: 'components.NodeTypes.üb'
           },
-          id: "2",
-            position: {
-              x: -575,
-              y: 364.2857142857143
-            },
-            style: {
-              border: '2px solid #9e9e9e',
-              borderRadius: 8,
-              height: 200,
-              width: 1150
-            },
+          id: '2',
+          position: {
+            x: -575,
+            y: 364.2857142857143
+          },
+          style: {
+            border: '2px solid #9e9e9e',
+            borderRadius: 8,
+            height: 200,
+            width: 1150
+          },
           type: 'GROUP'
         },
         {
@@ -882,21 +880,21 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
       nodes: [
         {
           data: {
-            classification: "",
-            label: undefined,
+            classification: '',
+            label: undefined
           },
-          id: "1",
+          id: '1',
           position: {
             x: -575,
             y: 0
           },
           style: {
-            border: "2px solid #9e9e9e",
+            border: '2px solid #9e9e9e',
             borderRadius: 8,
             height: 200,
             width: 1150
           },
-          type: "GROUP"
+          type: 'GROUP'
         },
         {
           data: {
@@ -962,22 +960,22 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
         },
         {
           data: {
-            classification: "ÜB",
-            label: "components.NodeTypes.üb"
+            classification: 'ÜB',
+            label: 'components.NodeTypes.üb'
           },
-          id: "2",
+          id: '2',
           position: {
             x: -1125,
             y: 364.2857142857143
+          },
+          style: {
+            border: '2px solid #9e9e9e',
+            borderRadius: 8,
+            height: 325,
+            width: 2250
+          },
+          type: 'GROUP'
         },
-        style: {
-          border: '2px solid #9e9e9e',
-          borderRadius: 8,
-          height: 325,
-          width: 2250
-        },
-        type: 'GROUP',
-      },
         {
           data: {
             activityType: '',
@@ -1439,7 +1437,7 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
     const nodesAndEdges = result.current.mapNodes(
       mockLearningPath,
       mockLearningElementStatus,
-      mocklearningPathDisabledClassifications,
+      mocklearningPathDisabledClassifications
     )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
@@ -1955,7 +1953,7 @@ describe('[HASKI-REQ-0026] Topic Page', () => {
     const nodesAndEdges = result.current.mapNodes(
       mockLearningPath,
       mockLearningElementStatus,
-      mocklearningPathDisabledClassifications,
+      mocklearningPathDisabledClassifications
     )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [

@@ -16,7 +16,7 @@ import BasicNode from '../BasicNode/BasicNode'
  * @category Components
  */
 const ExerciseNode = (data: NodeProps<LearningPathLearningElementNode>) => {
-  return <BasicNode {...data} id="exercise-node" icon={getNodeIcon('ÜBL', 50)} />
+  return <BasicNode {...data} id="exercise-node" icon={getNodeIcon('ÜB', 50)} />
 }
 
 export default memo(ExerciseNode)

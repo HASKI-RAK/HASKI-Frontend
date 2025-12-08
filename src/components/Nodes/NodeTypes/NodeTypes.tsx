@@ -60,6 +60,16 @@ export const nodeTypes: NodeTypes = {
 }
 
 export const getNodeIcon = (key: string, fontSize: number): ReactElement => {
+  const customSvgSx = {
+    width: fontSize,
+    height: fontSize,
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    objectFit: 'contain',
+    transform: 'translateY(-2px) scale(0.84)', //
+    transformOrigin: 'center'
+  }
+
   const mapping: Record<string, ReactElement> = {
     AB: <SettingsApplications sx={{ fontSize }} />,
     AN: <Videocam sx={{ fontSize }} />,
@@ -72,20 +82,9 @@ export const getNodeIcon = (key: string, fontSize: number): ReactElement => {
     RQ: <Feedback sx={{ fontSize }} />,
     SE: <AssignmentInd sx={{ fontSize }} />,
     ÜB: <AssignmentLate sx={{ fontSize }} />,
-ÜBL: (
-  <Box
-    component="img"
-    src="/images/ÜbungLeicht.svg"
-    sx={{
-      width: fontSize * 0.9,   // tweak 0.85–0.95 until it matches MUI
-      height: fontSize * 0.9,
-      display: 'block',
-      objectFit: 'contain',
-    }}
-  />
-),
-    ÜBM: <Box component="img" sx={{ fontSize: fontSize * 0.5 }} src="/images/ÜbungMittel.svg" />,
-    ÜBS: <Box component="img" sx={{ maxHeight: fontSize, maxWidth: fontSize }} src="/images/ÜbungSchwer.svg" />,
+    ÜBL: <Box component="img" src="/images/ÜbungLeicht.svg" sx={customSvgSx} />,
+    ÜBM: <Box component="img" src="/images/ÜbungMittel.svg" sx={customSvgSx} />,
+    ÜBS: <Box component="img" src="/images/ÜbungSchwer.svg" sx={customSvgSx} />,
     ZF: <Description sx={{ fontSize }} />,
     ZL: <Article sx={{ fontSize }} />
   }
