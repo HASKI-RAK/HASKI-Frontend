@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { getConfig } from '@shared'
 import { RequestResponse, fetchData } from './RequestResponse'
 
-describe('RequestResponse', () => {
+describe('[HASKI-REQ-0090] RequestResponse', () => {
   const response = {
     text: () => Promise.reject(new Error('error')),
     json: () => Promise.reject(new Error('error')),
