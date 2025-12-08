@@ -271,7 +271,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       })
 
       // Dissovles the array of arrays into a single array.
-      return nodes.flatMap((nodes) => nodes)
+      return nodes.flat()
     },
     [groupLearningElementsByClassification, groupNodes, groupHeight]
   )

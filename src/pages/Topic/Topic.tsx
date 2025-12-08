@@ -1,13 +1,12 @@
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
+import ReactFlow, { Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
 import { Grid, Skeleton } from '@common/components'
 import {
   CreateLearningElement,
   handleError,
   IFrameModal,
-  LabeledSwitch,
   nodeTypes,
   ResponsiveMiniMap
 } from '@components'

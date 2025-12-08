@@ -124,7 +124,7 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
       <Grid item xs={4} sm={6}>
         <Filter
           label={t('pages.glossary.filter')}
-          options={tags.sort()}
+          options={[...tags].sort((a, b) => a.localeCompare(b))}
           selectedOptions={selectedTags}
           setSelectedOptions={getSelectedTagsWrapper(setSelectedTags)}
         />
