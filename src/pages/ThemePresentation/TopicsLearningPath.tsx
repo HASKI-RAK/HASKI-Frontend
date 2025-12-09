@@ -178,7 +178,10 @@ const TopicsLearningPath = () => {
               transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               data-testid="TopicSettingsMenu">
               <MenuItem id="algorithm-settings-menu-algorithm-item" data-testid="AlgorithmSettingsItem">
-                <Tooltip arrow title="Change Learning Path" placement="left">
+                <Tooltip
+                  arrow
+                  title={<Typography variant="body2">{'Change Learning Path'}</Typography>}
+                  placement="left">
                   <Grid container direction={'row'}>
                     <Polyline fontSize="small" />
                     <Typography sx={{ ml: 1 }}>{t('pages.topic.menuItemAlgorithms')}</Typography>
@@ -202,3 +205,4 @@ const TopicsLearningPath = () => {
 }
 
 export default memo(TopicsLearningPath)
+// TOdo: Translation to files
