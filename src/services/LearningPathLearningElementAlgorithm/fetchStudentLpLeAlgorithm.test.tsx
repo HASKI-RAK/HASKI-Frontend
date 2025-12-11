@@ -11,7 +11,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('[HASKI-REQ-0041] fetchStudentLpLeAlg has expected behaviour', () => {
+describe('[HASKI-REQ-0040] fetchStudentLpLeAlg has expected behaviour', () => {
   it('should return the student learning path algorithm when the response is successful', async () => {
     const expectedData = { short_name: 'test' }
     const mockResponse = {
