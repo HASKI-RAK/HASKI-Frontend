@@ -7,11 +7,11 @@ global.fetch = jest.fn(() =>
     ok: true,
     headers: {
       get: () => 'application/json'
-    }
+    })
   })
 ) as jest.Mock
 
-describe('[HASKI-REQ-0067] fetchRemoteCourses has expected behaviour', () => {
+describe('[HASKI-REQ-0035] fetchRemoteCourses has expected behaviour', () => {
   const userId = 1
   it('should return the remote course when the response is successful', async () => {
     const expectedData = [
