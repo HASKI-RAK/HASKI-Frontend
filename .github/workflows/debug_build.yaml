@@ -2,7 +2,7 @@ name: frontend
 on:
   push:
     branches:
-      - main, haski-requirements-linking-tests
+      - main
 jobs:
   publish_frontend:
     runs-on: ubuntu-latest
