@@ -15,7 +15,6 @@ type CourseCardProps = {
 }
 
 export const courseCardStyle = {
-  mb: '1rem',
   width: {
     xs: '20rem',
     sm: '20rem',
@@ -24,7 +23,8 @@ export const courseCardStyle = {
     xl: '40rem',
     xxl: '45rem',
     xxxl: '50rem'
-  }
+  },
+  mt: '1rem'
 }
 
 export const courseCardButtonStyle = {

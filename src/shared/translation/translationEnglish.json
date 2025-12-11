@@ -57,7 +57,7 @@
   "components.AlgorithmSettingsModal.wrongRole": "You are not authorized to change the algorithm",
   "components.BasicNode.deleteLearningElementSuccessful": "Learning Element deleted successfully",
   "components.BasicNode.deleteTooltip": "Delete Learning Element",
-  "components.BasicNode.recommendedExercise": "This exercise is recommended next for you.",
+  "components.BasicNode.recommendedExercise": "This exercise is recommended for you.",
   "components.ContactForm.briefDescription": "Give a brief description of your request",
   "components.ContactForm.contactform": "Contactform",
   "components.ContactForm.error": "Missing description. Please write something.",

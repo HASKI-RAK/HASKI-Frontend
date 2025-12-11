@@ -3,43 +3,79 @@ import { useTranslation } from 'react-i18next'
 import { NavigateFunction, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Box, Breadcrumbs, Link } from '@common/components'
 import { Course, Topic } from '@core'
-import { useStore } from '@store'
+import { usePersistedStore, useStore } from '@store'
 
-// Regex to check if a string contains numbers
-const onlyNumbersRegex = /\d/
+// Regex to check if a string contains only numbers
+const onlyNumbersRegex = /^\d+$/
 
-// Check if current index is number, if yes return the previous name
-const showCurrentBreadcrump = (
+// Check if current index is numbern, if yes return name of course/topic
+const showCurrentBreadcrumb = (
   path: string,
   index: number,
   array: string[],
   navigate: NavigateFunction,
   t: (key: string) => string,
-  isLast: boolean
+  isLast: boolean,
+  course: Course | null,
+  topic: Topic | null,
+  locationPathname: string
 ) => {
-  const label = onlyNumbersRegex.test(array[index])
-    ? t(`pages.${array[index - 1].replace(onlyNumbersRegex, '').replaceAll('/', '')}`)
-    : t(`pages.${path}`)
+  const segment = array[index]
+  const prev = array[index - 1]
+  const isNumeric = onlyNumbersRegex.test(segment)
+
+  const isCourseId =
+    isNumeric &&
+    !!course &&
+    String(course.id) === segment &&
+    (prev === 'courses' || prev === 'course')
+
+  const isTopicId =
+    isNumeric &&
+    !!topic &&
+    String(topic.id) === segment &&
+    (prev === 'topics' || prev === 'topic')
+
+  const baseKey = (value: string) =>
+    value
+      .replace(onlyNumbersRegex, '')
+      .replaceAll('/', '')
+
+  const label = isCourseId
+    ? course?.name
+    : isTopicId
+    ? topic?.name
+    : isNumeric
+    ? t(`pages.${baseKey(prev ?? '')}`)
+    : t(`pages.${baseKey(path)}`)
+
+  const id = path.concat('-link').replaceAll(' ', '-')
 
   return isLast ? (
-    <Link id={path.concat('-link').replaceAll(' ', '-')} component={'span'} underline="always" color={'textPrimary'}>
+    <Link
+      id={id}
+      component={'span'}
+      underline="always"
+      color={'textPrimary'}
+    >
       {label}
     </Link>
   ) : (
     <Link
-      id={path.concat('-link').replaceAll(' ', '-')}
-      key={path}
+      id={id}
+      key={path + index}
       underline="hover"
       component={'button'}
       color={'textPrimary'}
       onClick={() => {
         navigate(
-          location.pathname
+          locationPathname
             .split('/')
             .slice(0, index + 1)
             .join('/')
         )
-      }}>
+      }}
+    >
       {label}
     </Link>
   )
@@ -57,70 +93,81 @@ const showCurrentBreadcrump = (
  *
  * @category Components
  */
-
 const BreadcrumbsContainer = () => {
-  // UX Logic
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
 
-  /**
-   * 
-  // todo
-  const { topicId, courseId } = useParams()
+  const { courseId, topicId } = useParams()
+  const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
-  const [course, setCourse] = useState<Course | null>(null)
   const getTopics = useStore((state) => state.getLearningPathTopic)
+
+  const [course, setCourse] = useState<Course | null>(null)
   const [topic, setTopic] = useState<Topic | null>(null)
 
-  // get user
-  //  get courses
-  //  ----------
-  //  get learning path topics
   useEffect(() => {
     if (courseId) {
-      getCourses().then((courses) => {
-        courses.courses.forEach((c) => {
-          if (c.id === Number(courseId)) {
-            setCourse(c)
-            if (topicId) {
-              c.topics.forEach((t) => {
-                if (t.id === Number(topicId)) {
-                  setTopic(t)
-                }
-              })
+      getUser().then((user) => {
+        getCourses(user.settings.user_id, user.lms_user_id, user.id).then((courses) => {
+          courses.courses.forEach((c) => {
+            if (c.id === Number(courseId)) {
+              setCourse(c)
             }
-          }
+          })
         })
+        if (topicId) {
+          getTopics(user.settings.user_id, user.lms_user_id, user.id, courseId).then((topics) => {
+            topics.topics.forEach((t) => {
+              if (t.id === Number(topicId)) {
+                setTopic(t)
+              }
+            })
+          })
+        } else {
+          setTopic(null)
+        }
       })
+    } else {
+      setCourse(null)
+      setTopic(null)
     }
-  }, [courseId])
-  */
+  }, [courseId, topicId, getUser, getCourses, getTopics])
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      {/** Center */}
       <Breadcrumbs aria-label="breadcrumb">
         {location.pathname !== '/' ? (
           location.pathname.split('/').map((path, index, array) => {
-            if (path === '')
+            if (path === '') {
               return (
                 <Link
                   id="home-link"
-                  key={path}
+                  key={`home-${index}`}
                   underline="hover"
                   color="textPrimary"
                   onClick={() => {
                     navigate('/')
-                  }}>
+                  }}
+                >
                   {t('pages.home')}
                 </Link>
               )
+            }
 
-            //Do not display current path if the next is a number for example course/3
-            //In this example course will be ignored, 3 will be changed to match the previous name (course)
-            if (onlyNumbersRegex.test(array[index + 1])) return
-            else return showCurrentBreadcrump(path, index, array, navigate, t, index === array.length - 1)
+            if (onlyNumbersRegex.test(array[index + 1] ?? '')) return null
+
+            return showCurrentBreadcrumb(
+              path,
+              index,
+              array,
+              navigate,
+              t,
+              index === array.length - 1,
+              course,
+              topic,
+              location.pathname
+            )
           })
         ) : (
           <Box display="flex">
@@ -129,7 +176,8 @@ const BreadcrumbsContainer = () => {
               onClick={() => {
                 navigate('/')
               }}
-              color="textPrimary">
+              color="textPrimary"
+            >
               {t('pages.home')}
             </Link>
           </Box>
