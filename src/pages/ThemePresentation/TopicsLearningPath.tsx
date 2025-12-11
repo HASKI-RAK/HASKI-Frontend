@@ -180,7 +180,9 @@ const TopicsLearningPath = () => {
               <MenuItem id="algorithm-settings-menu-algorithm-item" data-testid="AlgorithmSettingsItem">
                 <Tooltip
                   arrow
-                  title={<Typography variant="body2">{'Change Learning Path'}</Typography>}
+                  title={
+                    <Typography variant="body2">{t('components.TopicCard.changeLearningPathAlgorithm')}</Typography>
+                  }
                   placement="left">
                   <Grid container direction={'row'}>
                     <Polyline fontSize="small" />
@@ -205,4 +207,3 @@ const TopicsLearningPath = () => {
 }
 
 export default memo(TopicsLearningPath)
-// TOdo: Translation to files

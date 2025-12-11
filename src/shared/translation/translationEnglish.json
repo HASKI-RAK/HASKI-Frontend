@@ -210,6 +210,7 @@
   "components.LearningElementRatingInfo.ratingTitle": "Rating",
   "components.LearningElementRatingInfo.spiderGraphText": "The spider graph at the top right shows the average rating of all learning elements per topic and thus enables a comparison of the difficulty of different areas.",
   "components.LearningElementRatingInfo.spiderGraphTitle": "Spider graph",
+  "components.LinearProgressWithLabel.completedLearningElements": "Completed learning elements",
   "components.LinearProgressWithLabel.learningProgress": "Learning Progress",
   "components.ListKQuestions": [
     [
@@ -1322,6 +1323,7 @@
   "components.ThemeModal.radioHeader": "Available themes",
   "components.ThemeModal.standardTheme": "Standard",
   "components.TopicCard.aco": "Ant Colony Optimization",
+  "components.TopicCard.changeLearningPathAlgorithm": "Change the learning path algorithm",
   "components.TopicCard.default": "Fixed Order",
   "components.TopicCard.deleteTooltip": "Delete Topic with all of its Content",
   "components.TopicCard.deleteTopicSuccessful": "Topic deleted successfully",

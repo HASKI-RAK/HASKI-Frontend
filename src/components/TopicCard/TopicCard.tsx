@@ -159,7 +159,10 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           onClick={handleAlgorithmMenuOpen}
           id="algorithm-settings-menu-algorithm-item"
           data-testid="AlgorithmSettingsItem">
-          <Tooltip arrow title={<Typography variant="body2">{'Change Learning Path'}</Typography>} placement="left">
+          <Tooltip
+            arrow
+            title={<Typography variant="body2">{t('components.TopicCard.changeLearningPathAlgorithm')}</Typography>}
+            placement="left">
             <Grid container direction={'row'}>
               <Polyline fontSize="small" />
               <Typography sx={{ ml: 1 }}>{t('pages.topic.menuItemAlgorithms')}</Typography>
@@ -194,4 +197,3 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
 }
 
 export default memo(TopicCard)
-// todo: Translation to files

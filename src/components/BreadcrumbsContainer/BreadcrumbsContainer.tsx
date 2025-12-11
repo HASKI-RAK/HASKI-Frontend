@@ -1,7 +1,9 @@
-import { memo } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom'
+import { NavigateFunction, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Box, Breadcrumbs, Link } from '@common/components'
+import { Course, Topic } from '@core'
+import { useStore } from '@store'
 
 // Regex to check if a string contains numbers
 const onlyNumbersRegex = /\d/
@@ -61,6 +63,39 @@ const BreadcrumbsContainer = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
+
+  /**
+   * 
+  // todo
+  const { topicId, courseId } = useParams()
+  const getCourses = useStore((state) => state.getCourses)
+  const [course, setCourse] = useState<Course | null>(null)
+  const getTopics = useStore((state) => state.getLearningPathTopic)
+  const [topic, setTopic] = useState<Topic | null>(null)
+
+  // get user
+  //  get courses
+  //  ----------
+  //  get learning path topics
+  useEffect(() => {
+    if (courseId) {
+      getCourses().then((courses) => {
+        courses.courses.forEach((c) => {
+          if (c.id === Number(courseId)) {
+            setCourse(c)
+            if (topicId) {
+              c.topics.forEach((t) => {
+                if (t.id === Number(topicId)) {
+                  setTopic(t)
+                }
+              })
+            }
+          }
+        })
+      })
+    }
+  }, [courseId])
+  */
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>

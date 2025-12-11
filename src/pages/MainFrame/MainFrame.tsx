@@ -29,9 +29,9 @@ import {
  */
 
 export const MainFrame = () => {
-  const { courseId } = useParams()
+  const { topicId } = useParams()
   const theme = useTheme()
-  const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && !!courseId
+  const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && !!topicId
 
   return (
     <>
