@@ -7,7 +7,7 @@ global.fetch = jest.fn(() =>
     ok: true,
     headers: {
       get: () => 'application/json'
-    })
+    }
   })
 ) as jest.Mock
 
