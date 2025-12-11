@@ -89,6 +89,7 @@ describe('[HASKI-REQ-0035] Course tests', () => {
         expect(getByTestId('create-topic-button')).toBeInTheDocument()
         fireEvent.click(getByTestId('create-topic-button'))
         expect(getByTestId('create-topic-modal-close-button')).toBeInTheDocument()
+        //expect(getAllByTestId('settings-menu')[0]).toBeInTheDocument()
       })
     })
   })
