@@ -220,7 +220,13 @@ const CreateDefaultLearningPathTable = ({
             <Tooltip
               arrow
               title={
-                !isSubmitActive || isSending ? t('components.CreateDefaultLearningPathTable.submitRequirement') : ''
+                !isSubmitActive || isSending ? (
+                  <Typography variant="body2">
+                    {t('components.CreateDefaultLearningPathTable.submitRequirement')}
+                  </Typography>
+                ) : (
+                  ''
+                )
               }>
               <span>
                 <Button

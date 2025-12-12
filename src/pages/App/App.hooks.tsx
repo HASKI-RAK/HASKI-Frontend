@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { setupXAPI, XAPI } from 'react-xapi-wrapper'
 import log from 'loglevel'
+import { AuthContext } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore } from '@store'
 
@@ -30,49 +31,60 @@ export const useApp = (): AppHookReturn => {
   const [lmsUserID, setLmsUserID] = useState<string | undefined>(undefined)
   const [xAPI, setXAPI] = useState<XAPI | null>(null)
 
-  // Current browser language.
-  const currentLanguage = localStorage.getItem('i18nextLng') ?? ''
-
   // Get the user from the store.
   const getUser = usePersistedStore((state) => state.getUser)
 
   // Translate.
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+
+  // Current language.
+  const currentLanguage = i18n.language ?? ''
+
+  // Get the authentication context.
+  const { isAuth } = useContext(AuthContext)
+
+  // Get the configuration.
+  const config = useMemo(() => getConfig(), [])
 
   useEffect(() => {
-    // Set the current user.
-    getUser()
-      .then((user) => {
-        setLmsUserID(user.lms_user_id.toString())
-      })
-      .catch((error) => {
-        log.error(t('error.getUser') + ' ' + error)
-      })
+    if (!isAuth) {
+      setLmsUserID(undefined)
+      setXAPI(null)
+      return
+    }
+
+    if (!lmsUserID) {
+      // Set the current user.
+      getUser()
+        .then((user) => setLmsUserID(String(user.lms_user_id)))
+        .catch((error) => log.error(t('error.getUser') + ' ' + error))
+      return
+    }
 
     // Setup the xAPI object.
     setXAPI(
       setupXAPI({
         currentLanguage: currentLanguage,
         onError: (error: string) => log.error(t('error.sendStatement') + ' ' + error),
-        projectURL: getConfig().FRONTEND_GITHUB ?? '',
-        projectVersion: getConfig().FRONTEND_VERSION ?? '',
+        projectURL: config.FRONTEND_GITHUB ?? '',
+        projectVersion: config.FRONTEND_VERSION ?? '',
         repositories: {
-          component: `${getConfig().WIKI ?? ''}/functions/common.`,
-          page: `${getConfig().WIKI ?? ''}/functions/pages.`,
-          verb: `${getConfig().WIKI ?? ''}/variables/services.`
+          component: `${config.WIKI ?? ''}/functions/common.`,
+          page: `${config.WIKI ?? ''}/functions/pages.`,
+          verb: `${config.WIKI ?? ''}/variables/services.`
         },
         userID: lmsUserID,
         xAPI: {
           auth: {
-            username: getConfig().LRS_AUTH_USERNAME ?? '',
-            password: getConfig().LRS_AUTH_PASSWORD ?? ''
+            username: config.LRS_AUTH_USERNAME ?? '',
+            password: config.LRS_AUTH_PASSWORD ?? ''
           },
-          endpoint: getConfig().LRS ?? '',
+          endpoint: config.LRS ?? '',
           version: '1.0.3'
         }
       })
     )
-  }, [getUser, lmsUserID, setLmsUserID, currentLanguage, getConfig, setXAPI])
+  }, [isAuth, getUser, lmsUserID, currentLanguage, config])
 
   return useMemo(() => ({ xAPI }), [xAPI])
 }

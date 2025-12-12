@@ -15,7 +15,6 @@ type CourseCardProps = {
 }
 
 export const courseCardStyle = {
-  mb: '1rem',
   width: {
     xs: '20rem',
     sm: '20rem',
@@ -24,7 +23,8 @@ export const courseCardStyle = {
     xl: '40rem',
     xxl: '45rem',
     xxxl: '50rem'
-  }
+  },
+  mt: '1rem'
 }
 
 export const courseCardButtonStyle = {
@@ -126,7 +126,10 @@ const CourseCard = ({ course, isCourseCreatorRole }: CourseCardProps) => {
         <MenuItem
           onClick={() => handleOpenDeleteCourseModal(course.name, course.id, course.lms_id)}
           id="delete-course-settings-menu-item">
-          <Tooltip arrow title={t('components.CourseCard.deleteTooltip')} placement="left">
+          <Tooltip
+            arrow
+            title={<Typography variant="body2">{t('components.CourseCard.deleteTooltip')}</Typography>}
+            placement="left">
             <Grid container direction="row">
               <DeleteForever fontSize="small" />
               <Typography sx={{ ml: 1 }}>{t('appGlobal.delete')}</Typography>

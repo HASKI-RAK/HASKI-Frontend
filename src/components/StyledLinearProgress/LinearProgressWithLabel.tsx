@@ -63,7 +63,10 @@ const LinearProgressWithLabel = (props: LinearProgressWithLabelProps) => {
   const { t } = useTranslation()
   return (
     <div>
-      <Tooltip title={'Completed learning elements'}>
+      <Tooltip
+        title={
+          <Typography variant="body2">{t('components.LinearProgressWithLabel.completedLearningElements')}</Typography>
+        }>
         <Typography sx={{ ml: props.textposition, mr: '0.5rem' }} variant="body1" color="textPrimary">
           {t('components.LinearProgressWithLabel.learningProgress') + ': ' + props.text}
         </Typography>

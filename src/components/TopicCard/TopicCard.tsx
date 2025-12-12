@@ -159,7 +159,10 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
           onClick={handleAlgorithmMenuOpen}
           id="algorithm-settings-menu-algorithm-item"
           data-testid="AlgorithmSettingsItem">
-          <Tooltip arrow title="Change Learning Path" placement="left">
+          <Tooltip
+            arrow
+            title={<Typography variant="body2">{t('components.TopicCard.changeLearningPathAlgorithm')}</Typography>}
+            placement="left">
             <Grid container direction={'row'}>
               <Polyline fontSize="small" />
               <Typography sx={{ ml: 1 }}>{t('pages.topic.menuItemAlgorithms')}</Typography>
@@ -168,7 +171,10 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         </MenuItem>
         {isCourseCreatorRole && (
           <MenuItem onClick={handleDeleteClick} id="algorithm-settings-menu-delete-item" data-testid="DeleteTopicItem">
-            <Tooltip arrow title={t('components.TopicCard.deleteTooltip')} placement="left">
+            <Tooltip
+              arrow
+              title={<Typography variant="body2">{t('components.TopicCard.deleteTooltip')}</Typography>}
+              placement="left">
               <Grid container direction={'row'}>
                 <DeleteForever fontSize="small" />
                 <Typography sx={{ ml: 1 }}>{t('appGlobal.delete')}</Typography>
