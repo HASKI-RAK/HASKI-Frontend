@@ -32,6 +32,7 @@
     "@nivo/network": "^0.80.0",
     "@nivo/tooltip": "^0.80.0",
     "dayjs": "^1.11.11",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "i": "^0.3.7",
     "i18next": "^22.1.2",
     "loglevel": "^1.8.1",
