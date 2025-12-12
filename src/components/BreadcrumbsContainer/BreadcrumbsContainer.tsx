@@ -24,40 +24,24 @@ const showCurrentBreadcrumb = (
   const prev = array[index - 1]
   const isNumeric = onlyNumbersRegex.test(segment)
 
-  const isCourseId =
-    isNumeric &&
-    !!course &&
-    String(course.id) === segment &&
-    (prev === 'courses' || prev === 'course')
+  const isCourseId = isNumeric && !!course && String(course.id) === segment && prev === 'course'
 
-  const isTopicId =
-    isNumeric &&
-    !!topic &&
-    String(topic.id) === segment &&
-    (prev === 'topics' || prev === 'topic')
+  const isTopicId = isNumeric && !!topic && String(topic.id) === segment && prev === 'topic'
 
-  const baseKey = (value: string) =>
-    value
-      .replace(onlyNumbersRegex, '')
-      .replaceAll('/', '')
+  const baseKey = (value: string) => value.replace(onlyNumbersRegex, '').replaceAll('/', '')
 
   const label = isCourseId
-    ? course?.name
+    ? course.name
     : isTopicId
-    ? topic?.name
+    ? topic.name
     : isNumeric
-    ? t(`pages.${baseKey(prev ?? '')}`)
+    ? t(`pages.${baseKey(prev)}`)
     : t(`pages.${baseKey(path)}`)
 
   const id = path.concat('-link').replaceAll(' ', '-')
 
   return isLast ? (
-    <Link
-      id={id}
-      component={'span'}
-      underline="always"
-      color={'textPrimary'}
-    >
+    <Link id={id} component={'span'} underline="always" color={'textPrimary'}>
       {label}
     </Link>
   ) : (
@@ -74,8 +58,7 @@ const showCurrentBreadcrumb = (
             .slice(0, index + 1)
             .join('/')
         )
-      }}
-    >
+      }}>
       {label}
     </Link>
   )
@@ -110,6 +93,7 @@ const BreadcrumbsContainer = () => {
     if (courseId) {
       getUser().then((user) => {
         getCourses(user.settings.user_id, user.lms_user_id, user.id).then((courses) => {
+          // todo catch error
           courses.courses.forEach((c) => {
             if (c.id === Number(courseId)) {
               setCourse(c)
@@ -148,8 +132,7 @@ const BreadcrumbsContainer = () => {
                   color="textPrimary"
                   onClick={() => {
                     navigate('/')
-                  }}
-                >
+                  }}>
                   {t('pages.home')}
                 </Link>
               )
@@ -176,8 +159,7 @@ const BreadcrumbsContainer = () => {
               onClick={() => {
                 navigate('/')
               }}
-              color="textPrimary"
-            >
+              color="textPrimary">
               {t('pages.home')}
             </Link>
           </Box>

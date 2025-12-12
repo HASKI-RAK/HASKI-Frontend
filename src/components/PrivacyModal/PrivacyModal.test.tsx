@@ -65,7 +65,7 @@ describe('[HASKI-REQ-0001] Test PrivacyModal', () => {
       </MemoryRouter>
     )
     act(() => {
-      const declineButton = form.getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+      const declineButton = form.getByRole('button', { name: /appGlobal.decline/i })
       fireEvent.click(declineButton)
     })
   })
@@ -109,7 +109,7 @@ describe('[HASKI-REQ-0001] Test PrivacyModal', () => {
       </MemoryRouter>
     )
     act(() => {
-      const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+      const declineButton = getByRole('button', { name: /appGlobal.decline/i })
       expect(declineButton).toBeInTheDocument()
       fireEvent.click(declineButton)
     })
@@ -148,7 +148,7 @@ describe('[HASKI-REQ-0001] Test PrivacyModal', () => {
     )
 
     act(() => {
-      const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+      const declineButton = getByRole('button', { name: /appGlobal.decline/i })
       fireEvent.click(declineButton)
     })
     expect(window.location.assign).toHaveBeenCalled()
@@ -178,7 +178,7 @@ describe('[HASKI-REQ-0001] Test PrivacyModal', () => {
       </MemoryRouter>
     )
     act(() => {
-      const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+      const declineButton = getByRole('button', { name: /appGlobal.decline/i })
       fireEvent.click(declineButton)
     })
   })

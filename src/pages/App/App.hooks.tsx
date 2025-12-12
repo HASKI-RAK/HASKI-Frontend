@@ -38,7 +38,7 @@ export const useApp = (): AppHookReturn => {
   const { t, i18n } = useTranslation()
 
   // Current language.
-  const currentLanguage = i18n.language
+  const currentLanguage = i18n.language ?? ''
 
   // Get the authentication context.
   const { isAuth } = useContext(AuthContext)
