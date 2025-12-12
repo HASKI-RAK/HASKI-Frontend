@@ -41,7 +41,9 @@ describe('[HASKI-REQ-0001] Test PrivacyModal', () => {
     fireEvent.click(link)
     expect(navigate).toHaveBeenCalledWith('/privacypolicy')
   })
+})
 
+describe('[HASKI-REQ-0004] Test PrivacyModal-2', () => {
   test('accept the PrivacyPolicy', () => {
     const new_form = render(
       <MemoryRouter>

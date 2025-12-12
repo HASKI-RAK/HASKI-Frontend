@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils'
 import { MemoryRouter } from 'react-router-dom'
 import CreateAlgorithmTable, { CreateAlgorithmTableProps } from './CreateAlgorithmTable'
 
-describe('[HASKI-REQ-0041] CreateAlgorithmTable', () => {
+describe('[HASKI-REQ-0040] CreateAlgorithmTable', () => {
   const mockHandleAlgorithmChange = jest.fn()
 
   const mockAlgorithmOptions = [

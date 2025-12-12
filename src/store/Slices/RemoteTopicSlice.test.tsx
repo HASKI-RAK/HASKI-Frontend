@@ -47,11 +47,11 @@ const remoteTopic = [
   }
 ]
 
-describe('[HASKI-REQ-0068] RemoteTopicSlice ', () => {
+describe('[HASKI-REQ-0035] RemoteTopicSlice ', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
-  it('[HASKI-REQ-0068] should fetch remote topics from lms', async () => {
+  it('should fetch remote topics from lms', async () => {
     const { getRemoteTopics } = useStore.getState()
     const courseId = '2'
 
@@ -99,7 +99,7 @@ describe('[HASKI-REQ-0068] RemoteTopicSlice ', () => {
     })
   })
 
-  it('[HASKI-REQ-0068] should return cached remote topics if available', async () => {
+  it('should return cached remote topics if available', async () => {
     const { getRemoteTopics } = useStore.getState()
     const courseId = '1'
 
@@ -148,7 +148,7 @@ describe('[HASKI-REQ-0068] RemoteTopicSlice ', () => {
     expect(cached).toEqual(remoteTopic)
   })
 
-  it('[HASKI-REQ-0068] should return the cached promise if a fetch is already pending', async () => {
+  it('should return the cached promise if a fetch is already pending', async () => {
     const deferred = createDeferred<RemoteTopics[]>()
 
     mockServices.fetchRemoteTopics = jest.fn(() => deferred.promise)
