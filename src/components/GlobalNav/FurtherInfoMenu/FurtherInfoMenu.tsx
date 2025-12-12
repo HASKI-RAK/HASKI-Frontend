@@ -5,7 +5,12 @@ import GlobalNavMenu from '../GlobalNavMenu/GlobalNavMenu'
 const FurtherInfoMenu = () => {
   const { t } = useTranslation()
   const furtherInfoComponents = [
-    { name: t('pages.projectdescription'), url: '/projectdescription', isDisabled: false, availableAt: new Date() },
+    {
+      name: t('pages.projectdescription'),
+      url: '/projectdescription',
+      isDisabled: false,
+      availableAt: new Date()
+    },
     { name: t('pages.glossary'), url: '/glossary', isDisabled: false, availableAt: new Date() },
     { name: t('pages.aboutus'), url: '/aboutus', isDisabled: false, availableAt: new Date() }
   ].sort((a, b) => a.name.localeCompare(b.name))

@@ -77,6 +77,8 @@ describe('[HASKI-REQ-0089] GlobalNavMenu tests', () => {
 
     fireEvent.click(getByRole('button'))
     fireEvent.click(getAllByRole('menuitem')[0])
+    fireEvent.click(getByRole('button'))
+    fireEvent.click(getAllByRole('menuitem')[1])
 
     expect(navigate).toHaveBeenCalledTimes(1)
   })

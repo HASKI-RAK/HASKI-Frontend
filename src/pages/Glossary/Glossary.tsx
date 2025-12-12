@@ -1,6 +1,6 @@
-import { Dispatch, memo, SetStateAction, useState } from 'react'
+import { Dispatch, memo, SetStateAction, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Box, Button, Grid, Typography } from '@common/components'
+import { Box, Button, Grid } from '@common/components'
 import { Filter, GlossaryEntryProps, GlossaryIndex, GlossaryList, Searchbar } from '@components'
 import { GlossaryHookReturn, useGlossary as _useGlossary } from './Glossary.hooks'
 
@@ -52,7 +52,7 @@ export const getSelectedTagsWrapper = (setSelectedTags: Dispatch<SetStateAction<
  */
 const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
   // Translation
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   // Deconstructing array of glossary entries into array to prevent testing errors.
   const glossaryEntries: GlossaryEntryProps[] = [
@@ -111,18 +111,20 @@ const Glossary = ({ useGlossary = _useGlossary }: GlossaryProps) => {
   const [selectedIndexElement, setSelectedIndexElement] = useState<string>('')
   const [expandedList, setExpandedList] = useState<string[]>([])
 
+  // Reset selected tags on language change.
+  useEffect(() => {
+    setSelectedTags([])
+  }, [i18n.language])
+
   return (
-    <Grid container columnSpacing={1} rowSpacing={1}>
-      <Grid item xs={12} sm={12} sx={{ mt: '1rem', mb: '1rem' }}>
-        <Typography variant="h3">{t('pages.glossary')}</Typography>
-      </Grid>
+    <Grid container columnSpacing={1} rowSpacing={1} sx={{ mt: 1 }}>
       <Grid item xs={8} sm={6}>
         <Searchbar label={t('pages.glossary.search')} setSearchQuery={setSearchQuery} timeout={250} />
       </Grid>
       <Grid item xs={4} sm={6}>
         <Filter
           label={t('pages.glossary.filter')}
-          options={tags}
+          options={[...tags].sort((a, b) => a.localeCompare(b))}
           selectedOptions={selectedTags}
           setSelectedOptions={getSelectedTagsWrapper(setSelectedTags)}
         />

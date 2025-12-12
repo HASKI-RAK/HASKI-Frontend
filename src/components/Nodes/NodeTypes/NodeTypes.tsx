@@ -1,6 +1,7 @@
 import { ReactElement } from 'react'
 import { NodeTypes } from 'reactflow'
 import { TFunction } from 'i18next'
+import { Box } from '@common/components'
 import {
   Article,
   Assignment,
@@ -59,6 +60,16 @@ export const nodeTypes: NodeTypes = {
 }
 
 export const getNodeIcon = (key: string, fontSize: number): ReactElement => {
+  const customSvgSx = {
+    width: fontSize,
+    height: fontSize,
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    objectFit: 'contain',
+    transform: 'translateY(-2px) scale(0.84)',
+    transformOrigin: 'center'
+  }
+
   const mapping: Record<string, ReactElement> = {
     AB: <SettingsApplications sx={{ fontSize }} />,
     AN: <Videocam sx={{ fontSize }} />,
@@ -71,6 +82,9 @@ export const getNodeIcon = (key: string, fontSize: number): ReactElement => {
     RQ: <Feedback sx={{ fontSize }} />,
     SE: <AssignmentInd sx={{ fontSize }} />,
     ÜB: <AssignmentLate sx={{ fontSize }} />,
+    ÜBL: <Box component="img" src="/images/ÜbungLeicht.svg" sx={customSvgSx} />,
+    ÜBM: <Box component="img" src="/images/ÜbungMittel.svg" sx={customSvgSx} />,
+    ÜBS: <Box component="img" src="/images/ÜbungSchwer.svg" sx={customSvgSx} />,
     ZF: <Description sx={{ fontSize }} />,
     ZL: <Article sx={{ fontSize }} />
   }

@@ -185,7 +185,7 @@ const exampleLearningPathStatuses: LearningPathElementStatus[] = [
 const LearningElementLearningPath = () => {
   const { mapNodes } = useTopic()
   const { fitView } = useReactFlow()
-  const { nodes, edges } = mapNodes(exampleLearningPathElement, exampleLearningPathStatuses, [], true)
+  const { nodes, edges } = mapNodes(exampleLearningPathElement, exampleLearningPathStatuses, [])
 
   useEffect(() => {
     if (nodes) {

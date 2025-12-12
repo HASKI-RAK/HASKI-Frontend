@@ -1,3 +1,4 @@
+export { alpha } from '../theme/DefaultAlpha/DefaultAlpha'
 export { green } from '../theme/DefaultGreen/DefaultGreen'
 export { grey } from '../theme/DefaultGrey/DefaultGrey'
 export { keyframes } from '../theme/DefaultKeyframes/DefaultKeyframes'

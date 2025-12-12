@@ -1,6 +1,7 @@
 import { memo, useCallback, useEffect, useState } from 'react'
 import { MiniMap } from 'reactflow'
 import { useTheme } from '@common/hooks'
+import { alpha } from '@common/theme'
 
 /**
  * ResponsiveMiniMap component.
@@ -50,11 +51,11 @@ const ResponsiveMiniMap = () => {
         position: 'absolute',
         bottom: 0,
         right: 0,
-        boxSizing: 'border-box' // Include borders in width and height
+        boxSizing: 'border-box'
       }}
       nodeBorderRadius={2}
       nodeColor={theme.palette.primary.light}
-      maskColor={theme.palette.secondary.dark}
+      maskColor={alpha(theme.palette.secondary.dark, 0.5)}
       maskStrokeColor="black"
       maskStrokeWidth={2}
       nodeStrokeColor={theme.palette.primary.main}
