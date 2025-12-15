@@ -1,11 +1,16 @@
-import { memo, useContext, useEffect, useState } from 'react'
+import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Box, Breadcrumbs, Link } from '@common/components'
-import { handleError } from '@components'
 import { Course, Topic } from '@core'
-import { SnackbarContext } from '@services'
-import { usePersistedStore, useStore } from '@store'
+import {
+  BreadcrumbsContainerHookReturn,
+  useBreadcrumbsContainer as _useBreadcrumbsContainer
+} from './BreadcrumbsContainer.hooks'
+
+type BreadcrumbsContainerProps = {
+  useBreadcrumbsContainer?: () => BreadcrumbsContainerHookReturn
+}
 
 // Regex to check if a string contains only numbers
 const onlyNumbersRegex = /^\d+$/
@@ -22,19 +27,11 @@ const onlyNumbersRegex = /^\d+$/
  *
  * @category Components
  */
-const BreadcrumbsContainer = () => {
+const BreadcrumbsContainer = ({ useBreadcrumbsContainer = _useBreadcrumbsContainer }: BreadcrumbsContainerProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
-  const { addSnackbar } = useContext(SnackbarContext)
-
-  const { courseId, topicId } = useParams()
-  const getUser = usePersistedStore((state) => state.getUser)
-  const getCourses = useStore((state) => state.getCourses)
-  const getTopics = useStore((state) => state.getLearningPathTopic)
-
-  const [course, setCourse] = useState<Course | null>(null)
-  const [topic, setTopic] = useState<Topic | null>(null)
+  const { course, topic } = useBreadcrumbsContainer()
 
   // Check if current index is numbern, if yes return name of course/topic
   const showCurrentBreadcrumb = (
@@ -86,45 +83,6 @@ const BreadcrumbsContainer = () => {
       </Link>
     )
   }
-
-  useEffect(() => {
-    if (!courseId) {
-      setCourse(null)
-      setTopic(null)
-      return
-    }
-
-    const cid = Number(courseId)
-    const tid = topicId ? Number(topicId) : null
-
-    getUser()
-      .then((user) =>
-        Promise.all([
-          getCourses(user.settings.user_id, user.lms_user_id, user.id)
-            .then((courses) => courses.courses.find((c) => c.id === cid))
-            .catch((error: string) => {
-              handleError(t, addSnackbar, 'error.fetchCourses', error, 3000)
-              return null
-            }),
-
-          tid
-            ? getTopics(user.settings.user_id, user.lms_user_id, user.id, courseId)
-                .then((topics) => topics.topics.find((tp) => tp.id === tid))
-                .catch((error: string) => {
-                  handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 3000)
-                  return null
-                })
-            : Promise.resolve(null)
-        ])
-      )
-      .then(([course, topic]) => {
-        setCourse(course ?? null)
-        setTopic(topic ?? null)
-      })
-      .catch((error: string) => {
-        handleError(t, addSnackbar, 'error.fetchUser', error, 3000)
-      })
-  }, [courseId, topicId, getUser, getCourses, getTopics])
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
