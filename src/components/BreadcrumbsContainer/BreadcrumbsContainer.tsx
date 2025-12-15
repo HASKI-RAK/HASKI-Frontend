@@ -34,14 +34,7 @@ const BreadcrumbsContainer = ({ useBreadcrumbsContainer = _useBreadcrumbsContain
   const { course, topic } = useBreadcrumbsContainer()
 
   // Check if current index is numbern, if yes return name of course/topic
-  const showCurrentBreadcrumb = (
-    path: string,
-    index: number,
-    array: string[],
-    course: Course | null, // todo maybe remove
-    topic: Topic | null, // todo maybe remove
-    locationPathname: string
-  ) => {
+  const showCurrentBreadcrumb = (path: string, index: number, array: string[], locationPathname: string) => {
     const segment = array[index]
     const prev = array[index - 1]
     const isNumeric = onlyNumbersRegex.test(segment)
@@ -106,7 +99,7 @@ const BreadcrumbsContainer = ({ useBreadcrumbsContainer = _useBreadcrumbsContain
 
             if (onlyNumbersRegex.test(array[index + 1] ?? '')) return null
 
-            return showCurrentBreadcrumb(path, index, array, course, topic, location.pathname)
+            return showCurrentBreadcrumb(path, index, array, location.pathname)
           })
         ) : (
           <Box display="flex">
