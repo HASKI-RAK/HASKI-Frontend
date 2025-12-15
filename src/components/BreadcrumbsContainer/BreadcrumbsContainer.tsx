@@ -41,8 +41,8 @@ const BreadcrumbsContainer = () => {
     path: string,
     index: number,
     array: string[],
-    course: Course | null, // maybe remove
-    topic: Topic | null, // maybe remove
+    course: Course | null, // todo maybe remove
+    topic: Topic | null, // todo maybe remove
     locationPathname: string
   ) => {
     const segment = array[index]
@@ -94,34 +94,32 @@ const BreadcrumbsContainer = () => {
       return
     }
 
+    const cid = Number(courseId)
+    const tid = topicId ? Number(topicId) : null
+
     getUser()
-      .then((user) => {
-        getCourses(user.settings.user_id, user.lms_user_id, user.id)
-          .then((courses) => {
-            courses.courses.forEach((c) => {
-              if (c.id === Number(courseId)) {
-                setCourse(c)
-              }
-            })
-          })
-          .catch((error: string) => {
-            handleError(t, addSnackbar, 'error.fetchCourses', error, 3000)
-          })
-        if (topicId) {
-          getTopics(user.settings.user_id, user.lms_user_id, user.id, courseId)
-            .then((topics) => {
-              topics.topics.forEach((t) => {
-                if (t.id === Number(topicId)) {
-                  setTopic(t)
-                }
-              })
-            })
+      .then((user) =>
+        Promise.all([
+          getCourses(user.settings.user_id, user.lms_user_id, user.id)
+            .then((courses) => courses.courses.find((c) => c.id === cid))
             .catch((error: string) => {
-              handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 3000)
-            })
-        } else {
-          setTopic(null)
-        }
+              handleError(t, addSnackbar, 'error.fetchCourses', error, 3000)
+              return null
+            }),
+
+          tid
+            ? getTopics(user.settings.user_id, user.lms_user_id, user.id, courseId)
+                .then((topics) => topics.topics.find((tp) => tp.id === tid))
+                .catch((error: string) => {
+                  handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 3000)
+                  return null
+                })
+            : Promise.resolve(null)
+        ])
+      )
+      .then(([course, topic]) => {
+        setCourse(course ?? null)
+        setTopic(topic ?? null)
       })
       .catch((error: string) => {
         handleError(t, addSnackbar, 'error.fetchUser', error, 3000)
