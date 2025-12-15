@@ -9,14 +9,13 @@ import { AuthContext, RoleContext, RoleContextType, ThemeProvider } from '@servi
 
 const navigate = jest.fn()
 
-describe('[HASKI-REQ-0053] Test the Home page-1', () => {
+describe('[HASKI-REQ-0035] Test the Home page-1', () => {
   jest.useFakeTimers()
   jest.mock('@common/hooks', () => ({
     ...jest.requireActual('@common/hooks'),
     useMediaQuery: jest.fn().mockReturnValue(true)
   }))
 
-  /** [HASKI-REQ-0053] */
   test('fetching Course returns no courses', async () => {
     mockServices.fetchCourses.mockResolvedValueOnce({ courses: [] })
 
@@ -36,13 +35,12 @@ describe('[HASKI-REQ-0053] Test the Home page-1', () => {
   })
 })
 
-describe('[HASKI-REQ-0053] Test the Home page-2', () => {
+describe('[HASKI-REQ-0035] Test the Home page-2', () => {
   jest.useFakeTimers()
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
-  /** [HASKI-REQ-0053] */
   test('fetching Course throws error', async () => {
     mockServices.fetchCourses.mockRejectedValueOnce(new Error('Error'))
 
@@ -65,7 +63,7 @@ describe('[HASKI-REQ-0053] Test the Home page-2', () => {
     })
   })
 
-  /** [HASKI-REQ-0053] */
+
   test('render page', () => {
     const result = render(
       <ThemeProvider>
@@ -80,7 +78,6 @@ describe('[HASKI-REQ-0053] Test the Home page-2', () => {
     expect(result).toBeTruthy()
   })
 
-  /** [HASKI-REQ-0053] */
   test('click on course navigates to course page', async () => {
     const { getAllByText } = render(
       <ThemeProvider>
@@ -100,7 +97,6 @@ describe('[HASKI-REQ-0053] Test the Home page-2', () => {
     })
   })
 
-  /** [HASKI-REQ-0035] */
   test('students do not see create course button', async () => {
     const studentContext = {
       isStudentRole: true,
@@ -126,7 +122,6 @@ describe('[HASKI-REQ-0053] Test the Home page-2', () => {
     })
   })
 
-  /** [HASKI-REQ-0035] */
   test('course creator can see create course button and open create course modal', async () => {
     const courseCreatorContext = {
       isStudentRole: false,
@@ -154,7 +149,6 @@ describe('[HASKI-REQ-0053] Test the Home page-2', () => {
     })
   })
 
-  /** [HASKI-REQ-0035] */
   test('course creator can fill out create course details and close modal', async () => {
     const courseCreatorContext = {
       isStudentRole: false,
