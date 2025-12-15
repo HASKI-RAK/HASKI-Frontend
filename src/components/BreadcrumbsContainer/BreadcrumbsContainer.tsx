@@ -17,7 +17,6 @@ const showCurrentBreadcrumb = (
   array: string[],
   navigate: NavigateFunction,
   t: (key: string) => string,
-  isLast: boolean,
   course: Course | null,
   topic: Topic | null,
   locationPathname: string
@@ -32,17 +31,15 @@ const showCurrentBreadcrumb = (
 
   const baseKey = (value: string) => value.replace(onlyNumbersRegex, '').replaceAll('/', '')
 
-  const label = isCourseId
-    ? course.name
-    : isTopicId
+const label = isCourseId
+  ? course.name
+  : isTopicId
     ? topic.name
-    : isNumeric
-    ? t(`pages.${baseKey(prev)}`)
-    : t(`pages.${baseKey(path)}`)
+    : t(`pages.${baseKey(isNumeric ? prev : path)}`);
 
   const id = path.concat('-link').replaceAll(' ', '-')
 
-  return isLast ? (
+  return (index === array.length - 1) ? (
     <Link id={id} component={'span'} underline="always" color={'textPrimary'}>
       {label}
     </Link>
@@ -142,7 +139,7 @@ const BreadcrumbsContainer = () => {
               return (
                 <Link
                   id="home-link"
-                  key={`home-${index}`}
+                  key={'home-' + index}
                   underline="hover"
                   color="textPrimary"
                   onClick={() => {
@@ -161,7 +158,6 @@ const BreadcrumbsContainer = () => {
               array,
               navigate,
               t,
-              index === array.length - 1,
               course,
               topic,
               location.pathname
