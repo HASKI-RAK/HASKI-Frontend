@@ -8,7 +8,7 @@ const learningPathElement = { id: 1, name: 'Math', description: 'Learn math' }
 describe('LearningPathElementSlice', () => {
   mockServices.fetchLearningPathElement.mockImplementation(() => Promise.resolve(learningPathElement))
 
-  it('[HASKI-REQ-0058] should fetch learning path from server and cache it', async () => {
+  it('[HASKI-REQ-0007] should fetch learning path from server and cache it', async () => {
     const { getLearningPathElement } = useStore.getState()
     const courseId = '1'
     const topicId = '2'
@@ -28,7 +28,7 @@ describe('LearningPathElementSlice', () => {
     })
   })
 
-  it('[HASKI-REQ-0058] should return cached learning path if available', async () => {
+  it('[HASKI-REQ-0007] should return cached learning path if available', async () => {
     const { getLearningPathElement } = useStore.getState()
     const learningPath = { id: 1, name: 'Math', description: 'Learn math' }
     const courseId = '1'
@@ -47,7 +47,7 @@ describe('LearningPathElementSlice', () => {
     expect(cached).toEqual(learningPath)
   })
 
-  it('[HASKI-REQ-0058] should return cached learning path if available, clearLearningPathElementCache clears cached value', async () => {
+  it('[HASKI-REQ-0007] should return cached learning path if available, clearLearningPathElementCache clears cached value', async () => {
     const { getLearningPathElement } = useStore.getState()
     const learningPath = { id: 1, name: 'Math', description: 'Learn math' }
     const courseId = '1'
