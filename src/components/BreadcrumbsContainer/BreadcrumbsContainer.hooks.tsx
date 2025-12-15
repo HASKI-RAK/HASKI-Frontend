@@ -30,12 +30,14 @@ export const useBreadcrumbsContainer = (): BreadcrumbsContainerHookReturn => {
 
     const cid = Number(courseId)
     const tid = topicId ? Number(topicId) : null
+    const findCourseById = (courses: Course[]): Course | undefined => courses.find((c) => c.id === cid)
+    const findTopicById = (topics: Topic[]): Topic | undefined => topics.find((tp) => tp.id === tid)
 
     getUser()
       .then((user) =>
         Promise.all([
           getCourses(user.settings.user_id, user.lms_user_id, user.id)
-            .then((courses) => courses.courses.find((c) => c.id === cid))
+            .then((courses) => findCourseById(courses.courses))
             .catch((error: string) => {
               handleError(t, addSnackbar, 'error.fetchCourses', error, 3000)
               return null
@@ -43,7 +45,7 @@ export const useBreadcrumbsContainer = (): BreadcrumbsContainerHookReturn => {
 
           tid
             ? getTopics(user.settings.user_id, user.lms_user_id, user.id, courseId)
-                .then((topics) => topics.topics.find((tp) => tp.id === tid))
+                .then((topics) => findTopicById(topics.topics))
                 .catch((error: string) => {
                   handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 3000)
                   return null
