@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react-hooks'
 import { CreateAlgorithmTableNameProps } from '@components'
 import { useCreateAlgorithmTable } from './CreateAlgorithmTable.hooks'
 
-describe('[HASKI-REQ-0041] useCreateAlgorithmTable', () => {
+describe('[HASKI-REQ-0040] useCreateAlgorithmTable', () => {
   const mockOnAlgorithmChange = jest.fn()
 
   const initialAlgorithms: { [key: number]: CreateAlgorithmTableNameProps } = {

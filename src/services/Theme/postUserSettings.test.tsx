@@ -15,7 +15,7 @@ const output = JSON.stringify({
   theme: 'DarkTheme'
 })
 
-describe('[HASKI-REQ-0070] postUserSettings has expected behaviour', () => {
+describe('[HASKI-REQ-0073] postUserSettings has expected behaviour', () => {
   it('should send data without password and return inputData on success', async () => {
     const inputData = ['user updated']
 
