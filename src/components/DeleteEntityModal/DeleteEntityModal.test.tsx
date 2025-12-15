@@ -10,7 +10,7 @@ jest.mock('react-i18next', () => ({
   })
 }))
 
-describe('[HASKI-REQ-0035] DeleteEntityModal Component', () => {
+describe('[HASKI-REQ-0082] DeleteEntityModal Component', () => {
   const mockSetDeleteEntityModalOpen = jest.fn()
   const mockOnDeleteConfirm = jest.fn()
 
