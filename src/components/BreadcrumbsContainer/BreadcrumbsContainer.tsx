@@ -1,8 +1,10 @@
-import { memo, useEffect, useState } from 'react'
+import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavigateFunction, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Box, Breadcrumbs, Link } from '@common/components'
+import { handleError } from '@components'
 import { Course, Topic } from '@core'
+import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 // Regex to check if a string contains only numbers
@@ -80,6 +82,7 @@ const BreadcrumbsContainer = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
+  const { addSnackbar } = useContext(SnackbarContext)
 
   const { courseId, topicId } = useParams()
   const getUser = usePersistedStore((state) => state.getUser)
@@ -90,32 +93,44 @@ const BreadcrumbsContainer = () => {
   const [topic, setTopic] = useState<Topic | null>(null)
 
   useEffect(() => {
-    if (courseId) {
-      getUser().then((user) => {
-        getCourses(user.settings.user_id, user.lms_user_id, user.id).then((courses) => {
-          // todo catch error
-          courses.courses.forEach((c) => {
-            if (c.id === Number(courseId)) {
-              setCourse(c)
-            }
-          })
-        })
-        if (topicId) {
-          getTopics(user.settings.user_id, user.lms_user_id, user.id, courseId).then((topics) => {
-            topics.topics.forEach((t) => {
-              if (t.id === Number(topicId)) {
-                setTopic(t)
+    if (!courseId) {
+      setCourse(null)
+      setTopic(null)
+      return
+    }
+
+    getUser()
+      .then((user) => {
+        getCourses(user.settings.user_id, user.lms_user_id, user.id)
+          .then((courses) => {
+            courses.courses.forEach((c) => {
+              if (c.id === Number(courseId)) {
+                setCourse(c)
               }
             })
           })
+          .catch((error: string) => {
+            handleError(t, addSnackbar, 'error.fetchCourses', error, 3000)
+          })
+        if (topicId) {
+          getTopics(user.settings.user_id, user.lms_user_id, user.id, courseId)
+            .then((topics) => {
+              topics.topics.forEach((t) => {
+                if (t.id === Number(topicId)) {
+                  setTopic(t)
+                }
+              })
+            })
+            .catch((error: string) => {
+              handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 3000)
+            })
         } else {
           setTopic(null)
         }
       })
-    } else {
-      setCourse(null)
-      setTopic(null)
-    }
+      .catch((error: string) => {
+        handleError(t, addSnackbar, 'error.fetchUser', error, 3000)
+      })
   }, [courseId, topicId, getUser, getCourses, getTopics])
 
   return (

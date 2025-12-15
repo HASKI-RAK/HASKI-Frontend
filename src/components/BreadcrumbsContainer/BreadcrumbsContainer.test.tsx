@@ -3,6 +3,7 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import * as router from 'react-router'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import BreadcrumbsContainer from './BreadcrumbsContainer'
+import { mockServices } from 'jest.setup'
 
 describe('[HASKI-REQ-0089] BreadcrumbsContainer', () => {
   const navigate = jest.fn()
@@ -130,6 +131,82 @@ describe('[HASKI-REQ-0089] BreadcrumbsContainer', () => {
     await waitFor(() => {
       expect(screen.getByText('pages.home')).toBeInTheDocument()
       expect(screen.getByText('test')).toBeInTheDocument()
+    })
+  })
+
+  it('handles errors when fetching the courses', async () => {
+    mockServices.fetchCourses.mockImplementationOnce(() => {
+      throw new Error('getCourses error')
+    })
+
+    const { getAllByText } = render(
+      <MemoryRouter initialEntries={['/course/1']}>
+        <Routes>
+          <Route path="/course/:courseId" element={<BreadcrumbsContainer />} />
+        </Routes>
+      </MemoryRouter>
+    )
+
+    await waitFor(async () =>
+      act(async () => {
+        fireEvent.click(getAllByText('pages.home')[0])
+      })
+    )
+
+    await waitFor(() => {
+      expect(screen.getByText('pages.home')).toBeInTheDocument()
+      expect(screen.getByText('pages.course')).toBeInTheDocument()
+    })
+  })
+
+  it('handles errors when fetching the topics', async () => {
+    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => {
+      throw new Error('getLearningPathTopic error')
+    })
+
+    const { getAllByText } = render(
+      <MemoryRouter initialEntries={['/course/1/topic/1']}>
+        <Routes>
+          <Route path="/course/:courseId/topic/:topicId" element={<BreadcrumbsContainer />} />
+        </Routes>
+      </MemoryRouter>
+    )
+
+    await waitFor(async () =>
+      act(async () => {
+        fireEvent.click(getAllByText('pages.home')[0])
+      })
+    )
+
+    await waitFor(() => {
+      expect(screen.getByText('pages.home')).toBeInTheDocument()
+      expect(screen.getByText('test')).toBeInTheDocument()
+      expect(screen.getByText('pages.topic')).toBeInTheDocument()
+    })
+  })
+
+  it('handles errors when fetching the user', async () => {
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('getUser error')
+    })
+
+    const { getAllByText } = render(
+      <MemoryRouter initialEntries={['/course/1']}>
+        <Routes>
+          <Route path="/course/:courseId" element={<BreadcrumbsContainer />} />
+        </Routes>
+      </MemoryRouter>
+    )
+
+    await waitFor(async () =>
+      act(async () => {
+        fireEvent.click(getAllByText('pages.home')[0])
+      })
+    )
+
+    await waitFor(() => {
+      expect(screen.getByText('pages.home')).toBeInTheDocument()
+      expect(screen.getByText('pages.course')).toBeInTheDocument()
     })
   })
 })

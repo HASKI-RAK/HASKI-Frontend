@@ -32,8 +32,6 @@ export const MainFrame = () => {
   const { topicId } = useParams()
   const theme = useTheme()
   const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && !!topicId
-  const test = useMediaQuery(theme.breakpoints.up('lg'))
-  console.log(useMediaQuery(theme.breakpoints.up('lg')))
 
   return (
     <>
