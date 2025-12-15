@@ -1,6 +1,6 @@
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { NavigateFunction, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { Box, Breadcrumbs, Link } from '@common/components'
 import { handleError } from '@components'
 import { Course, Topic } from '@core'
@@ -9,59 +9,6 @@ import { usePersistedStore, useStore } from '@store'
 
 // Regex to check if a string contains only numbers
 const onlyNumbersRegex = /^\d+$/
-
-// Check if current index is numbern, if yes return name of course/topic
-const showCurrentBreadcrumb = (
-  path: string,
-  index: number,
-  array: string[],
-  navigate: NavigateFunction,
-  t: (key: string) => string,
-  course: Course | null,
-  topic: Topic | null,
-  locationPathname: string
-) => {
-  const segment = array[index]
-  const prev = array[index - 1]
-  const isNumeric = onlyNumbersRegex.test(segment)
-
-  const isCourseId = isNumeric && !!course && String(course.id) === segment && prev === 'course'
-
-  const isTopicId = isNumeric && !!topic && String(topic.id) === segment && prev === 'topic'
-
-  const baseKey = (value: string) => value.replace(onlyNumbersRegex, '').replaceAll('/', '')
-
-const label = isCourseId
-  ? course.name
-  : isTopicId
-    ? topic.name
-    : t(`pages.${baseKey(isNumeric ? prev : path)}`);
-
-  const id = path.concat('-link').replaceAll(' ', '-')
-
-  return (index === array.length - 1) ? (
-    <Link id={id} component={'span'} underline="always" color={'textPrimary'}>
-      {label}
-    </Link>
-  ) : (
-    <Link
-      id={id}
-      key={path + index}
-      underline="hover"
-      component={'button'}
-      color={'textPrimary'}
-      onClick={() => {
-        navigate(
-          locationPathname
-            .split('/')
-            .slice(0, index + 1)
-            .join('/')
-        )
-      }}>
-      {label}
-    </Link>
-  )
-}
 
 /**
  * BreadcrumbsContainer component.
@@ -88,6 +35,57 @@ const BreadcrumbsContainer = () => {
 
   const [course, setCourse] = useState<Course | null>(null)
   const [topic, setTopic] = useState<Topic | null>(null)
+
+  // Check if current index is numbern, if yes return name of course/topic
+  const showCurrentBreadcrumb = (
+    path: string,
+    index: number,
+    array: string[],
+    course: Course | null, // maybe remove
+    topic: Topic | null, // maybe remove
+    locationPathname: string
+  ) => {
+    const segment = array[index]
+    const prev = array[index - 1]
+    const isNumeric = onlyNumbersRegex.test(segment)
+
+    const isCourseId = isNumeric && !!course && String(course.id) === segment && prev === 'course'
+
+    const isTopicId = isNumeric && !!topic && String(topic.id) === segment && prev === 'topic'
+
+    const baseKey = (value: string) => value.replace(onlyNumbersRegex, '').replaceAll('/', '')
+
+    const getLabel = () => {
+      if (isCourseId) return course.name
+      if (isTopicId) return topic.name
+      return t(`pages.${baseKey(isNumeric ? prev : path)}`)
+    }
+
+    const id = path.concat('-link').replaceAll(' ', '-')
+
+    return index === array.length - 1 ? (
+      <Link id={id} component={'span'} underline="always" color={'textPrimary'}>
+        {getLabel()}
+      </Link>
+    ) : (
+      <Link
+        id={id}
+        key={path + index}
+        underline="hover"
+        component={'button'}
+        color={'textPrimary'}
+        onClick={() => {
+          navigate(
+            locationPathname
+              .split('/')
+              .slice(0, index + 1)
+              .join('/')
+          )
+        }}>
+        {getLabel()}
+      </Link>
+    )
+  }
 
   useEffect(() => {
     if (!courseId) {
@@ -152,16 +150,7 @@ const BreadcrumbsContainer = () => {
 
             if (onlyNumbersRegex.test(array[index + 1] ?? '')) return null
 
-            return showCurrentBreadcrumb(
-              path,
-              index,
-              array,
-              navigate,
-              t,
-              course,
-              topic,
-              location.pathname
-            )
+            return showCurrentBreadcrumb(path, index, array, course, topic, location.pathname)
           })
         ) : (
           <Box display="flex">
