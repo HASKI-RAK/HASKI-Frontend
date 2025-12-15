@@ -2,7 +2,6 @@ import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Box, Breadcrumbs, Link } from '@common/components'
-import { Course, Topic } from '@core'
 import {
   BreadcrumbsContainerHookReturn,
   useBreadcrumbsContainer as _useBreadcrumbsContainer
