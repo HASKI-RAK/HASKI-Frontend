@@ -1487,324 +1487,401 @@
   "pages.glossary.elements": [
     {
       "term": "Adaptierbarkeit",
-      "definition": "Die Adaptierbarkeit eines Systems bedeutet, dass dieses durch externe Aktionen hinsichtlich seiner Programmeinstellungen verändert werden kann. Das HASKI-System ist für Lehrpersonen und für die Lernenden adaptierbar. Während Lehrpersonen z.B. in die vorgeschlagenen Lernpfade eingreifen können, können die Lernenden selbstständig bestimmte Grundeinstellungen modifizieren. Letzteres kann z.B. das Verändern von Farben oder die Konfigurierung einer eigenen Sequenz von Lernelementen sein (vgl. Zens 2005; Petko & Reusser 2005, S.188; Bartel, Dörringer & Klopp 2022a).",
-      "sources": "Bartel, Dörringer & Klopp, 2022a; Petko & Reusser, 2005, S.188; Zens, 2005",
-      "tags": [],
+      "definition": "Die Adaptierbarkeit eines Systems bedeutet, dass dieses durch externe Aktionen hinsichtlich seiner Programmeinstellungen verändert werden kann. Das HASKI-System ist für Lehrpersonen und für die Lernenden adaptierbar. Während Lehrpersonen z. B. in die vorgeschlagenen Lernpfade eingreifen können, können die Lernenden selbstständig bestimmte Grundeinstellungen modifizieren. Letzteres kann z. B. das Verändern von Farben oder die Konfiguration einer eigenen Sequenz von Lernelementen sein (vgl. Zens, 2005; Petko & Reusser, 2005, S. 188; Bartel, Dörringer & Klopp, 2022a).",
+      "sources": "Bartel, Dörringer & Klopp, 2022a; Petko & Reusser, 2005, S. 188; Zens, 2005",
+      "tags": ["Adaptivität", "Systemarchitektur"],
       "fundamental": false
     },
     {
       "term": "Adaptivität",
-      "definition": "Adaptivität ist in einem System vorhanden, wenn es sich selbstständig an den Input (z.B. Testergebnisse, Bearbeitungsgeschwindigkeit, Lernwege usw.) anpasst. „Adaptivität ermöglicht in kurzen Abständen eine kontinuierliche Anpassung des Systems“ (Petko & Reusser 2005, S.188). In diesem Kontext meint adaptives Lernen „Anpassung des Lernangebots an die individuellen Unterschiede der Lernenden, damit alle gleichermaßen gefördert werden können“ (Stangl 2022, S.1) (vgl. Bartel, Dörringer & Klopp 2022a).",
-      "sources": "Bartel, Dörringer & Klopp 2022a; Petko & Reusser 2005, S.188; Stangl 2022, S.1",
-      "tags": [],
+      "definition": "Adaptivität ist in einem System vorhanden, wenn es sich selbstständig an den Input (z. B. Testergebnisse, Bearbeitungsgeschwindigkeit, Lernwege usw.) anpasst. „Adaptivität ermöglicht in kurzen Abständen eine kontinuierliche Anpassung des Systems“ (Petko & Reusser, 2005, S. 188). In diesem Kontext meint adaptives Lernen „Anpassung des Lernangebots an die individuellen Unterschiede der Lernenden, damit alle gleichermaßen gefördert werden können“ (Stangl, 2022, S. 1) (vgl. Bartel, Dörringer & Klopp, 2022a).",
+      "sources": "Bartel, Dörringer & Klopp, 2022a; Petko & Reusser, 2005, S. 188; Stangl, 2022, S. 1",
+      "tags": ["Adaptivität", "Learning Analytics"],
       "fundamental": false
     },
     {
       "term": "Adaptive Inhaltspräsentation",
-      "definition": "Die Anpassung des Inhalts oder der Darstellung einer Seite auf Basis der Charakteristiken einer einzelnen lernenden Person wird als adaptive Inhaltspräsentation bezeichnet (Brusilovsky, 1996). In Bezug auf Inhalt können Lernende mit hohem Wissensstand mehr Detailinformationen erhalten, während die Seite für Lernende mit niedrigerem Wissensstand mehr Erklärungen inkludiert (Kersebaum 2016, S.98). Im Hinblick auf die Darstellung können Lernende beispielsweise Grafiken oder Textelemente präferieren und so die Gestaltung der Seite beeinflussen.",
-      "sources": "Brusilovsky, 1996; Kersebaum 2016, S.98",
-      "tags": [],
+      "definition": "Die Anpassung des Inhalts oder der Darstellung einer Seite auf Basis der Charakteristiken einer einzelnen lernenden Person wird als adaptive Inhaltspräsentation bezeichnet (Brusilovsky, 1996). In Bezug auf Inhalt können Lernende mit hohem Wissensstand mehr Detailinformationen erhalten, während die Seite für Lernende mit niedrigerem Wissensstand mehr Erklärungen inkludiert (Kersebaum, 2016, S. 98). Im Hinblick auf die Darstellung können Lernende beispielsweise Grafiken oder Textelemente präferieren und so die Gestaltung der Seite beeinflussen.",
+      "sources": "Brusilovsky, 1996; Kersebaum, 2016, S. 98",
+      "tags": ["Adaptivität", "Systemarchitektur"],
       "fundamental": false
     },
     {
       "term": "Adaptive Navigationsunterstützung",
-      "definition": "Die adaptive Navigationsunterstützung hat zum Ziel den Lernenden bei der Wegfindung durch das System Hilfestellung zu geben. Es existieren mehrere Adaptionstechniken, die unter diesen Oberbegriff fallen (Brusilovsky, 1996; Kersebaum 2016, S.98) Von diesen nutzt das HASKI-System die adaptive Annotation von Links. Die vom HASKI-System als nächstes empfohlene Aktion wird farblich hervorgehoben.",
-      "sources": "Brusilovsky, 1996; Kersebaum 2016, S.98",
-      "tags": [],
+      "definition": "Die adaptive Navigationsunterstützung hat zum Ziel, den Lernenden bei der Wegfindung durch das System Hilfestellung zu geben. Es existieren mehrere Adaptionstechniken, die unter diesen Oberbegriff fallen (Brusilovsky, 1996; Kersebaum, 2016, S. 98). Von diesen nutzt das HASKI-System die adaptive Annotation von Links. Die vom HASKI-System als nächstes empfohlene Aktion wird farblich hervorgehoben.",
+      "sources": "Brusilovsky, 1996; Kersebaum, 2016, S. 98",
+      "tags": ["Adaptivität", "Systemarchitektur"],
       "fundamental": false
     },
     {
       "term": "Adaptives Lernsystem",
-      "definition": "Ein adaptives Lernsystem, im Englischen auch als Intelligent Tutoring System (ITS), Adaptive Educational System (AES) oder Personalized Learning Environment (PLE) bezeichnet, versucht sich an die Bedürfnisse und Lernziele der einzelnen Lernenden anzupassen. Dies geschieht auf Basis der drei Modelle aus denen sich das HASKI-System zusammensetzt: dem Lernenden-Modell, dem Tutoriellen Modell und dem Domänen-Modell.",
+      "definition": "Ein adaptives Lernsystem, im Englischen auch als Intelligent Tutoring System (ITS), Adaptive Educational System (AES) oder Personalized Learning Environment (PLE) bezeichnet, versucht, sich an die Bedürfnisse und Lernziele der einzelnen Lernenden anzupassen. Dies geschieht auf Basis der drei Modelle, aus denen sich das HASKI-System zusammensetzt: dem Lernenden-Modell, dem Tutoriellen Modell und dem Domänen-Modell.",
       "sources": "",
-      "tags": [],
+      "tags": ["Adaptivität", "Systemarchitektur"],
       "fundamental": false
     },
     {
       "term": "Animationen (AN)",
       "definition": "Animationen sind multimediale Präsentationen, die die Lerninhalte in animierter Form veranschaulichen. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
-      "sources": "Graf, Kinshuk & Ives 2010",
-      "tags": [],
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE-Klassifikation"],
       "fundamental": false
     },
     {
       "term": "Anwendungsbeispiel (AB)",
       "definition": "Anwendungsbeispiele zeigen, wie das gelernte Material in realen Situationen umgesetzt werden kann. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
-      "sources": "Graf, Kinshuk & Ives 2010",
-      "tags": [],
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE-Klassifikation"],
       "fundamental": false
     },
     {
-      "term": "(zusätzliches) Beispiel (BE)",
+      "term": "Beispiel (BE)",
       "definition": "Beispiele geben konkrete Veranschaulichungen theoretischer Konzepte. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
-      "sources": "Graf, Kinshuk & Ives 2010",
-      "tags": [],
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE-Klassifikation"],
+      "fundamental": false
+    },
+    {
+      "term": "Bildungssetting",
+      "definition": "Ein Bildungssetting bezieht sich auf jede Umgebung, in der Lern- und Bildungsaktivitäten stattfinden. In einem Bildungssetting engagieren sich Schüler und Lernende in verschiedenen Formen des Lernens, einschließlich Vorlesungen, Diskussionen, Gruppenarbeiten und unabhängigem Studium, mit dem Ziel, Wissen, Fähigkeiten und Kompetenzen zu erwerben, die ihnen helfen, ihre persönlichen und beruflichen Ziele zu erreichen. Bildungssettings können in Größe, Struktur und Schwerpunkt variieren, abhängig vom Bildungsniveau, dem Fachgebiet und dem beabsichtigten Publikum.",
+      "sources": "",
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
       "term": "Domänen-Modell",
-      "definition": "Das Domänenmodell beinhaltet die Metadaten zu allen Themenbereichen, digitalen Lernräumen und Lernelementen der Lernwelt. Dazu gehört die Grundstruktur der Domäne. „Das Domänen-Modell beinhaltet Informationen zu Konzepten und Inhalten, zu Lernobjekten, wie etwa Beispielen, Grafiken oder Übungsaufgaben, und zu deren Beziehungen untereinander bzw. Abhängigkeiten voneinander“ (Meier 2019, S.4)",
-      "sources": "Meier, 2019, S.4",
-      "tags": [],
-      "fundamental": false
+      "definition": "Das Domänenmodell beinhaltet die Metadaten zu allen Themenbereichen, digitalen Lernräumen und Lernelementen der Lernwelt. Dazu gehört die Grundstruktur der Domäne.\n\nDas Domänen-Modell beinhaltet Informationen zu Konzepten und Inhalten, zu Lernobjekten, wie etwa Beispielen, Grafiken oder Übungsaufgaben, und zu deren Beziehungen untereinander bzw. Abhängigkeiten voneinander“ (Meier, 2019, S. 4).",
+      "sources": "Meier, 2019, S. 4",
+      "tags": ["Systemarchitektur"],
+      "fundamental": true
     },
     {
       "term": "Elementfortschritt",
-      "definition": "Der Elementfortschritt stellt die Historie der besuchten Lernelemente dar und zeigt an welche Lernelemente bereits besucht wurden.",
+      "definition": "Der Elementfortschritt stellt die Historie der besuchten Lernelemente dar und zeigt an, welche Lernelemente bereits besucht wurden.",
       "sources": "",
-      "tags": [],
+      "tags": ["Learning Analytics"],
       "fundamental": false
     },
     {
       "term": "Erklärung (EK)",
       "definition": "Erklärungen präsentieren das eigentliche fundamentale Lernmaterial. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
-      "sources": "Graf, Kinshuk & Ives 2010",
-      "tags": [],
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE-Klassifikation"],
       "fundamental": false
     },
     {
       "term": "Forum (FO)",
-      "definition": "Forumaktivitäten bieten den Lernenden die Möglichkeit Fragen zu stellen und Themen mit anderen Lernenden oder den Lehrenden zu diskutieren. Ein Kurs hat zwar meistens nur ein Forum aber in diesem Forum kann es mehrere Aktivitäten geben. Das Diskussionsthema wird vom Lehrenden angeleitet. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
-      "sources": "Graf, Kinshuk & Ives 2010",
-      "tags": [],
+      "definition": "Forumaktivitäten bieten den Lernenden die Möglichkeit, Fragen zu stellen und Themen mit anderen Lernenden oder den Lehrenden zu diskutieren. Ein Kurs hat zwar meistens nur ein Forum, aber in diesem Forum kann es mehrere Aktivitäten geben. Das Diskussionsthema wird vom Lehrenden angeleitet. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE-Klassifikation"],
+      "fundamental": false
+    },
+    {
+      "term": "Feedback (pädagogischer Kontext)",
+      "definition": "Im pädagogischen Kontext bezieht sich Feedback auf Informationen, die den Studierenden über ihren Lernfortschritt, ihre Leistung und ihre Erfolge gegeben werden. Feedback kann in verschiedenen Formen gegeben werden, wie z. B. mündliche Kommentare, schriftliche Kommentare, Noten oder Bewertungen. Sein Zweck besteht darin, den Studierenden zu helfen, ihre Stärken und Schwächen zu verstehen, Bereiche zur Verbesserung zu identifizieren und ihre Lernstrategien und Verhaltensweisen anzupassen. Effektives Feedback ist zeitnah, spezifisch und konstruktiv. Es sollte mit der Absicht gegeben werden, den Studierenden zu helfen, sich zu verbessern, anstatt einfach ihre Arbeit zu bewerten. Gutes Feedback konzentriert sich auch auf die Aufgabe oder das Verhalten, anstatt auf die Person, und gibt klare Vorschläge, wie man sich verbessern kann. Feedback kann von Dozierenden, Peers oder auch per Selbstbewertung gegeben werden. Es ist ein wesentlicher Bestandteil des Lernprozesses, da es den Studierenden hilft, ihren Fortschritt zu überwachen, motiviert zu bleiben und die Fähigkeiten und Kenntnisse zu entwickeln, die für das Erreichen ihrer Bildungsziele erforderlich sind.",
+      "sources": "",
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
       "term": "Felder & Silverman Learning Style Model (FSLSM)",
-      "definition": "Im FSLSM wird zwischen 8 Lernstilen unterschieden, die auf 4 Dimensionen basieren: wie Lernende es vorziehen, Informationen zu verarbeiten - aktiv (AKT) oder reflektierend (REF), wie Lernende Informationen wahrnehmen oder aufnehmen – sensorisch (SNS) oder intuitive (INT),  wie Informationen für Lernende bevorzugt präsentiert werden – visuell (VIS) oder verbal (VRB), wie es dem Lernenden gelingt, Informationen zu organisieren und zu verstehen – sequentiell (SEQ) oder global (GLO). Besteht in einer Dimension keine merkliche Ausprägung nennt sich dies „balanciert“ (BAL).",
-      "sources": "Felder & Silverman 1988",
-      "tags": [],
+      "definition": "Im FSLSM wird zwischen 8 Lernstilen unterschieden, die auf 4 Dimensionen basieren:\n- wie Lernende es vorziehen, Informationen zu verarbeiten – aktiv (AKT) oder reflektierend (REF),\n- wie Lernende Informationen wahrnehmen oder aufnehmen – sensorisch (SNS) oder intuitiv (INT),\n- wie Informationen für Lernende bevorzugt präsentiert werden – visuell (VIS) oder verbal (VRB),\n- wie es dem Lernenden gelingt, Informationen zu organisieren und zu verstehen – sequentiell (SEQ) oder global (GLO).\n\nBesteht in einer Dimension keine merkliche Ausprägung, nennt sich dies „balanciert“ (BAL).",
+      "sources": "Felder & Silverman, 1988",
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
       "term": "Fremdgesteuertes Lernen",
-      "definition": "Beim fremdgesteuerten Lernen werden die Lernprozesse durch Einflüsse von außen gesteuert. Dies können anderen Personen sein (z.B. die Anweisungen von Lehrern), Instruktionsmedien (Computerprogramme) oder die Gestaltung einer Lehrumgebung.",
-      "sources": "HRM Akademie Deutschland (o.J.)",
-      "tags": [],
+      "definition": "Beim fremdgesteuerten Lernen werden die Lernprozesse durch Einflüsse von außen gesteuert. Dies können andere Personen sein (z. B. die Anweisungen von Lehrern), Instruktionsmedien (Computerprogramme) oder die Gestaltung einer Lehrumgebung.",
+      "sources": "HRM Akademie Deutschland, o.J.",
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
-      "term": "Grundstruktur (des Domänen-Modells bzw. der Lernwelt) ",
-      "definition": "Die Grundstruktur der Lernwelt umfasst alle Beziehungen und Abhängigkeiten von Themenbereichen, digitalen Lernräumen und Lernelementen die aus Sicht der Lehrenden bestehen.",
+      "term": "Grundstruktur (des Domänen-Modells bzw. der Lernwelt)",
+      "definition": "Die Grundstruktur der Lernwelt umfasst alle Beziehungen und Abhängigkeiten von Themenbereichen, digitalen Lernräumen und Lernelementen, die aus Sicht der Lehrenden bestehen.",
       "sources": "",
-      "tags": [],
+      "tags": ["Systemarchitektur"],
       "fundamental": false
     },
     {
-      "term": "Index of Learning Styles",
-      "definition": "Der Lernstil des Individuums wird durch den ILS-Fragebogen ermittelt. Dieser hat in seiner originalen englischen Form 44 dichotome Fragen. Jeweils 11 Fragen beziehen sich dementsprechend auf eine Dimension. Die Präferenzen werden mit Werten zwischen +11 und -11 pro Dimension ausgedrückt. Bei jeder Frage wird bei Antwort a) der Wert in der jeweiligen Dimension um +1 erhöht und bei Antwort b) der Wert um -1 reduziert. Während Antwort a) stets den einen Pol der Dimension repräsentiert, bezieht sich die Antwort b) auf den anderen Pol. (vgl. Graf, Viola, Leo & Kinshuk 2007, S.82)",
-      "sources": "Graf, Viola, Leo & Kinshuk 2007, S.82",
-      "tags": [],
+      "term": "Index of Learning Styles (ILS)",
+      "definition": "Der Lernstil des Individuums wird durch den ILS-Fragebogen ermittelt. Dieser hat in seiner originalen englischen Form 44 dichotome Fragen. Jeweils 11 Fragen beziehen sich dementsprechend auf eine Dimension. Die Präferenzen werden mit Werten zwischen +11 und -11 pro Dimension ausgedrückt. Bei jeder Frage wird bei Antwort a) der Wert in der jeweiligen Dimension um +1 erhöht und bei Antwort b) der Wert um -1 reduziert. Während Antwort a) stets den einen Pol der Dimension repräsentiert, bezieht sich die Antwort b) auf den anderen Pol (vgl. Graf, Viola, Leo & Kinshuk, 2007, S. 82).",
+      "sources": "Graf, Viola, Leo & Kinshuk, 2007, S. 82",
+      "tags": ["Didaktik"],
+      "fundamental": false
+    },
+    {
+      "term": "Kompetenz",
+      "definition": "Kompetenzen sind definiert als „die bei Individuen verfügbaren oder durch sie erlernbaren kognitiven Fähigkeiten und Fertigkeiten, um bestimmte Probleme zu lösen, sowie die damit verbundenen motivationalen, volitionalen und sozialen Bereitschaften und Fähigkeiten, die Problemlösungen in variablen Situationen erfolgreich und verantwortungsvoll nutzen zu können“.",
+      "sources": "Weinert, 2002, S. 27-28",
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
       "term": "Kurs",
-      "definition": "Der Kurs bildet die höchste Hierarchie-Stufe in der Struktur des Domänenmodells. Innerhalb eines Kurses können ein oder mehrere Themen und Sub-Themen enthalten sein, die über Lernpfade logisch miteinander verknüpft sein können und in welchen die eigentlichen Lernprozesse stattfinden (angelehnt an Bartel, Dörringer & Klopp 2022e, S. 1).",
+      "definition": "Der Kurs bildet die höchste Hierarchie-Stufe in der Struktur des Domänenmodells. Innerhalb eines Kurses können ein oder mehrere Themen und Sub-Themen enthalten sein, die über Lernpfade logisch miteinander verknüpft sein können und in welchen die eigentlichen Lernprozesse stattfinden (angelehnt an Bartel, Dörringer & Klopp, 2022e, S. 1).",
       "sources": "Bartel, Dörringer & Klopp, 2022e, S. 1",
-      "tags": [],
-      "fundamental": false
+      "tags": ["Systemarchitektur"],
+      "fundamental": true
     },
     {
       "term": "Kurzübersicht (KÜ)",
       "definition": "Kurzübersichten bieten den Lernenden einen kurzen Überblick über das Sub-Thema. In HASKI sind sie als eine Art von Lernelement kategorisiert.",
-      "sources": "Graf, Kinshuk & Ives 2010",
-      "tags": [],
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE-Klassifikation"],
       "fundamental": false
     },
     {
       "term": "Learning Analytics",
-      "definition": "Im Kontext von HASKI umfasst Learning Analytics folgende Kategorien: Elementfortschritt, Lernfortschritt, Gegebene Ratings, Verbrachte Zeit (wie lange und wann), Lernweg (Wiederholungen, Sequenzen), Leistung in Testelementen, Demografische Daten (Alter, Geschlecht, Fachsemester, Erststudiengang, Berufserfahrung), Noten",
-      "sources": "Judel, 2018, S.7",
-      "tags": [],
+      "definition": "Im Kontext von HASKI umfasst Learning Analytics folgende Kategorien: Elementfortschritt, Lernfortschritt, gegebene Ratings, verbrachte Zeit (wie lange und wann), Lernweg (Wiederholungen, Sequenzen), Leistung in Testelementen, demografische Daten (Alter, Geschlecht, Fachsemester, Erststudiengang, Berufserfahrung), Noten.",
+      "sources": "Judel, 2018, S. 7",
+      "tags": ["Learning Analytics"],
+      "fundamental": true
+    },
+    {
+      "term": "Learning Management System (LMS)",
+      "definition": "Ein Learning Management System ist eine Software, die die Verwaltung von Schulungen automatisch übernimmt. Das LMS registriert Benutzer, verfolgt Kurse in einem Katalog und erfasst Daten von Lernenden; es stellt auch geeignete Berichte an die Führungskräfte bereit. Die Datenbankfähigkeiten des LMS erstrecken sich auf zusätzliche Funktionen wie Unternehmensverwaltung, Online-Bewertung, Personalisierung und andere Ressourcen. Lernmanagement-Systeme (LMS) werden als Online-Lerntechnologien für die Erstellung, Verwaltung und Bereitstellung von Kursmaterial definiert (Sabharwal et al., 2018; Turnbull, Chugh & Luck, 2019). In der heutigen allgegenwärtigen digitalen Umgebung spielen LMSs eine wichtige Rolle bei der Verbesserung und Förderung von Lehre und Lernen. LMSs ermöglichen nicht nur die Bereitstellung von Anweisungen und elektronischen Ressourcen, um das Lernen von Schülern in einem kooperativen Umfeld zu verbessern und zu erweitern, sondern erlauben auch Lehrpersonen, sich auf die Gestaltung sinnvoller pädagogischer Aktivitäten zu konzentrieren (Kattoua, Al-Lozi & Alrowwad, 2016; Turnbull, Chugh & Luck, 2021, S. 164).",
+      "sources": "Hall, 2001; Kattoua, Al-Lozi & Alrowwad, 2016; Sabharwal et al., 2018; Turnbull, Chugh & Luck, 2019; Turnbull, Chugh & Luck, 2021, S. 164",
+      "tags": ["Didaktik", "Systemarchitektur"],
       "fundamental": false
     },
     {
-      "term": "Learning Management System - LMS",
-      "definition": "Ein Learning Management System ist eine Software, die die Verwaltung von Schulungen automatisch übernimmt. Das LMS registriert Benutzer, verfolgt Kurse in einem Katalog und erfasst Daten von Lernenden; es stellt auch geeignete Berichte an die Führungskräfte bereit. Die Datenbankfähigkeiten des LMS erstrecken sich auf zusätzliche Funktionen wie Unternehmensverwaltung, Online-Bewertung, Personalisierung und andere Ressourcen. Lernmanagement-Systeme (LMS) werden als Online-Lerntechnologien für die Erstellung, Verwaltung und Bereitstellung von Kursmaterial definiert (Sabharwal et al. 2018; Turnbull, Chugh, and Luck 2019). In der heutigen allgegenwärtigen digitalen Umgebung spielen LMSs eine wichtige Rolle bei der Verbesserung und Förderung von Lehre und Lernen. LMSs ermöglichen nicht nur die Bereitstellung von Anweisungen und elektronischen Ressourcen, um das Lernen von Schülern in einem kooperativen Umfeld zu verbessern und zu erweitern, sondern erlauben auch Lehrpersonen, sich auf die Gestaltung sinnvoller pädagogischer Aktivitäten zu konzentrieren (Kattoua, Al-Lozi & Alrowwad 2016; Turnbull, Chugh & Luck, 2021, S. 164).",
-      "sources": "Hall, 2001; Kattoua, Al-Lozi, and Alrowwad 2016; Sabharwal et al. 2018; Turnbull, Chugh & Luck 2019; Turnbull, Chugh & Luck, 2021, S. 164",
-      "tags": [],
-      "fundamental": false
-    },
-    {
-      "term": "Lerner-Effizienz",
-      "definition": "Lerneffizienz ist ein Grad der Entwicklung in Bezug auf Gesamtleistungspräzision und Geschwindigkeit pro Studienzeit. https://www.ilearnlot.com/what-is-the-meaning-of-learning-efficiency/66945/",
+      "term": "Lerncharakteristiken",
+      "definition": "Als Lerncharakteristiken werden in HASKI alle Eigenschaften der einzelnen Studierenden zusammengefasst, die für die adaptive Lernpfadgestaltung relevant sind und/oder in den Dashboards der Studierenden und Lehrenden dargestellt werden. Die Lerncharakteristiken sind im Lernendenmodell gespeichert. Dabei kann es sich derzeit um die Lernstiltendenzen, die Lernstrategien, den Wissensstand und um Learning Analytics handeln.",
       "sources": "",
-      "tags": [],
-      "fundamental": false
+      "tags": ["Adaptivität", "Learning Analytics"],
+      "fundamental": true
     },
     {
-      "term": "Lernelement - LE",
-      "definition": "Lernelemente (engl. learning element) dienen der Kompetenzentwicklung der Lernenden und werden diesen in Lernräumen zur Verfügung gestellt. Sie treten als verbale Elemente (schriftliche Texte, Hypertexte, gesprochene Sprache) und/oder visuelle Elemente (statische oder bewegte Bilder) in Erscheinung und/oder haben interaktive Darstellungsformen (Simulationen, Spiele, 3D) (vgl. Arnold 2011, S. 138; Bartel, Dörringer & Klopp 2022, S.1). In der Hierarchie des Domänenmodells siedeln sich Lernelemente auf der untersten Stufe an und sind in Lernräumen verortet. Lernelemente können in unterschiedliche Klassifikationsarten differenziert werden.",
-      "sources": "Arnold 2011, S. 138; Bartel, Dörringer & Klopp 2022, S.1",
-      "tags": [],
-      "fundamental": false
+      "term": "Lernelement (LE)",
+      "definition": "Lernelemente (engl. learning element) dienen der Kompetenzentwicklung der Lernenden und werden diesen in Lernräumen zur Verfügung gestellt. Sie treten als verbale Elemente (schriftliche Texte, Hypertexte, gesprochene Sprache) und/oder visuelle Elemente (statische oder bewegte Bilder) in Erscheinung und/oder haben interaktive Darstellungsformen (Simulationen, Spiele, 3D) (vgl. Arnold, 2011, S. 138; Bartel, Dörringer & Klopp, 2022, S. 1). In der Hierarchie des Domänenmodells siedeln sich Lernelemente auf der untersten Stufe an und sind in Lernräumen verortet. Lernelemente können in unterschiedliche Klassifikationsarten differenziert werden.",
+      "sources": "Arnold, 2011, S. 138; Bartel, Dörringer & Klopp, 2022, S. 1",
+      "tags": ["Systemarchitektur"],
+      "fundamental": true
     },
     {
       "term": "Lernempfehlung",
-      "definition": "Das HASKI-System kann Lernempfehlungen aufgrund von Daten des/der individuellen Lerner*in und der Struktur des Domänenmodells kommunizieren und so bei der Entscheidung im Hinblick auf den weiteren Lernweg unterstützen. Das geschieht durch ein visuelles Hervorheben der empfohlenen Lernelemente (vgl. Raj & Renumol 2022, S.114). Das Tutorielle Modell des HASKI-Systems füllt den Adaptionsmechanismus mit den Daten aus dem Lernenden Modell und dem Domänen-Modell um dann individualisierte Lernempfehlungen zu kommunizieren. ",
-      "sources": "Raj & Renumol 2022, S.114",
-      "tags": [],
+      "definition": "Das HASKI-System kann Lernempfehlungen aufgrund von Daten des/der individuellen Lerner*in und der Struktur des Domänenmodells kommunizieren und so bei der Entscheidung im Hinblick auf den weiteren Lernweg unterstützen. Das geschieht durch ein visuelles Hervorheben der empfohlenen Lernelemente (vgl. Raj & Renumol, 2022, S. 114). Das Tutorielle Modell des HASKI-Systems füllt den Adaptionsmechanismus mit den Daten aus dem Lernenden Modell und dem Domänen-Modell, um dann individualisierte Lernempfehlungen zu kommunizieren.",
+      "sources": "Raj & Renumol, 2022, S. 114",
+      "tags": ["Adaptivität", "Systemarchitektur"],
       "fundamental": false
     },
     {
-      "term": "Lernerleistung",
-      "definition": "https://www.igi-global.com/dictionary/gamified-learning/91338",
+      "term": "Lernformat",
+      "definition": "Der Begriff „Lernformat“ bezieht sich auf die spezifische Struktur oder Anordnung, in der Bildungsinhalte Lernenden präsentiert werden. Es umfasst die Art und Weise, wie Informationen organisiert, vermittelt und zugänglich gemacht werden, um den Lernprozess zu erleichtern. Beispiele sind traditionelle Methoden wie Vorlesungen und Lehrbücher sowie moderne Ansätze wie Online-Kurse und interaktive Multimedia. Die Wahl des Lernformats hängt von verschiedenen Faktoren ab, einschließlich des Themas, der Lernziele, der Zielgruppe und der verfügbaren Ressourcen und Technologien. Das Ziel bei der Auswahl eines Lernformats besteht darin, ein ansprechendes und effektives Lernerlebnis zu schaffen, das das Verständnis, die Behaltensleistung und die Anwendung von Wissen und Fähigkeiten fördert.",
       "sources": "",
-      "tags": [],
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
       "term": "Lernfortschritt",
-      "definition": "Der Lernfortschritt zeigt an welche Lernelemente bereits vollständig bearbeitet wurden. Es wird ebenfalls ausgedrückt, wie erfolgreich die lernende Person in Rahmen der Bearbeitung dieser Lernelemente war.",
+      "definition": "Der Lernfortschritt zeigt an, welche Lernelemente bereits vollständig bearbeitet wurden. Es wird ebenfalls ausgedrückt, wie erfolgreich die lernende Person im Rahmen der Bearbeitung dieser Lernelemente war.",
       "sources": "",
-      "tags": [],
+      "tags": ["Learning Analytics"],
       "fundamental": false
     },
     {
       "term": "Lernenden-Modell",
-      "definition": "Das Lernenden-Modell des HASKI-Projekts setzt sich aus mehreren Komponenten zusammen. Diese Komponenten interagieren untereinander und beeinflussen sich gegenseitig. Es wird davon ausgegangen, dass es sich um ein dynamisches Lernenden-Modell handelt, welches sich durch neue Erfahrungen, Interaktionen und die Aneignung von Wissen in einem bestimmten Bereich verändert und an die jeweiligen Anforderungen anpasst. ",
+      "definition": "Das Lernenden-Modell des HASKI-Projekts setzt sich aus mehreren Komponenten zusammen. Diese Komponenten interagieren untereinander und beeinflussen sich gegenseitig. Es wird davon ausgegangen, dass es sich um ein dynamisches Lernenden-Modell handelt, welches sich durch neue Erfahrungen, Interaktionen und die Aneignung von Wissen in einem bestimmten Bereich verändert und an die jeweiligen Anforderungen anpasst.",
       "sources": "",
-      "tags": [],
+      "tags": ["Adaptivität", "Systemarchitektur"],
+      "fundamental": true
+    },
+    {
+      "term": "Lernzufriedenheit",
+      "definition": "Lernzufriedenheit bezieht sich auf das Maß an Zufriedenheit, Erfüllung oder positiver emotionaler Reaktion, die ein Lernender in Bezug auf seine Lernerfahrungen erlebt. Sie spiegelt das Ausmaß wider, in dem sich ein Lernender engagiert, motiviert und zufrieden mit dem Lernprozess und den Ergebnissen fühlt. Lernzufriedenheit umfasst verschiedene Aspekte wie die Freude an Lernaktivitäten, das Gefühl des Erfolgs beim Erreichen von Lernzielen, die wahrgenommene Relevanz und Anwendbarkeit des erworbenen Wissens oder Könnens sowie die allgemeine Zufriedenheit mit der Lernumgebung und der erhaltenen Unterstützung. Sie wird von Faktoren wie der Qualität des Unterrichts, den Kursmaterialien, der Interaktion zwischen Lehrenden und Lernenden, der Zusammenarbeit mit anderen Lernenden und der persönlichen Motivation beeinflusst. Eine hohe Lernzufriedenheit deutet auf eine positive Lernerfahrung und ein Gefühl der persönlichen Erfüllung und Leistung hin.",
+      "sources": "ChatGPT",
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
-      "term": "(Physischer) Lernraum",
-      "definition": "Physische Lernräume können „zunächst als bloßer physikalischer Behälter betrachtet werden“ (Wittwer & Diettrich 2015, S.18). Sie sind aufgrund der Tatsache, dass sich dort Lehrende und Lernende treffen „zugleich auch Wahrnehmungs- und Handlungsräume“ (ebd., S.18). Außerdem ist ein physischer Lernraum damit „immer auch sozialer Raum“ (ebd., S.18).  Im Rahmen von HASKI werden alle Präsenzveranstaltungen, die von Lehrenden, dem Blended Learning Ansatz folgend, in Kombination mit dem HASKI-System durchgeführt werden, als physische Lernräume bezeichnet.",
-      "sources": "Wittwer & Diettrich, 2015, S.18-19",
-      "tags": [],
-      "fundamental": false
-    },
-    {
-      "term": "Lernpräferenzen",
-      "definition": "Gemäß dem Oxford English Dictionary wird „Präferenz“ definiert als „eine größere Vorliebe für eine Alternative gegenüber einer anderen oder anderen“. Lernpräferenzen können daher als Vorlieben der Schüler für bestimmte Elemente des Lernens und ausgewählte Interaktionsweisen mit den Elementen des Lernens bezeichnet werden. In der Literatur fallen Studien zu Lernpräferenzen in zwei Kategorien. Eine betrifft die bevorzugten Arten von Umgebungs- oder Unterrichtsformaten der Lernenden, und die andere befasst sich mit den bevorzugten Arten kognitiver Aktivitäten der Lernenden. Studien in letzterer Kategorie erscheinen häufiger unter dem Begriff „Lernstile“. https://link.springer.com/referenceworkentry/10.1007/978-1-4419-1428-6_636",
+      "term": "Lernobjekt",
+      "definition": "Im Kontext des Online-Lernens bezieht sich ein Lernobjekt auf eine eigenständige Einheit von Bildungsinhalten, die darauf abzielt, das Lernen zu erleichtern. Es handelt sich um eine digitale Ressource, in der Regel in Form von Multimedia, wie Texten, Bildern, Videos oder interaktiven Elementen, die spezifische Lernmaterialien oder Unterrichtsinhalte an Lernende vermitteln. Ein Lernobjekt ist darauf ausgelegt, bestimmte Lernziele oder -ergebnisse anzusprechen und soll wiederverwendbar und anpassungsfähig für verschiedene Lernkontexte oder Plattformen sein. Lernobjekte im Online-Lernen sind oft modular aufgebaut, um es den Lernenden zu ermöglichen, sie unabhängig oder als Teil eines größeren Lernerlebnisses zu nutzen. Der Einsatz von Lernobjekten im Online-Lernen ermöglicht flexible und personalisierte Lernerfahrungen, da die Lernenden den Inhalt in ihrem eigenen Tempo und entsprechend ihren individuellen Bedürfnissen und Vorlieben nutzen können. Sie bieten einen strukturierten und fokussierten Ansatz zur Bereitstellung spezifischer Lernmaterialien und fördern effektives Lernen und Wissensaufbau in der Online-Lernumgebung. In HASKI wurde der Begriff „Lernobjekt“ durch den Begriff „Lernelement“ ersetzt, da ersterer insbesondere im breiteren Bildungskontext oft keine einheitliche Definition aufweist.",
       "sources": "",
-      "tags": [],
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
       "term": "Lernpfad",
-      "definition": "Ein Lernpfad bezieht sich auf die didaktisch geplante sequenzielle Zusammensetzung von Themen, Lernräumen und/oder Lernelementen. Lernpfade können von Lehrern und vom HASKI-System erstellt werden. Die ursprüngliche Unterteilung oder Strukturierung des Kurses, die von den Lehrern verwendet wird, wird vom HASKI-System als \"Standard\"-Lernpfad betrachtet. Am Ende eines Lernpfads erfolgt eine erfolgreiche Wissensgenerierung und Kompetenzentwicklung in Bezug auf den durchlaufenen Inhalt. Lernende können Lernpfade in ihrem individuellen Tempo durchlaufen (vgl. Pöhler 2018; Hessisches Kultusministerium 2016; Roth 2014). Es gibt zwei Arten von Lernpfaden: lineare, die die Lernelemente, Lernräume und Themen in derselben Reihenfolge für alle Lernenden verbinden, und adaptive, die sich individuell an die Lernenden anpassen. Dieser adaptive Lernpfad kann dann im Hinblick auf die enthaltenen Daten differenziert werden. Im Kontext von HASKI erfolgt die Anpassung durch das Tutorial-Modell auf der Grundlage der im Lernermodell verfügbaren Daten zu den jeweiligen Personen und der Grundstruktur des Domänenmodells (vgl. auch Niegemann & Heidig 2020, S. 362; Goertz 2015; Paramythis & Loidl-Reisinger 2004; Bartel, Dörringer & Klopp 2022, S.1).",
-      "sources": "Bartel, Dörringer & Klopp 2022, S.1; Goertz, 2015; Hessisches Kultusministerium, 2016; Niegemann & Heidig, 2020, S. 362; Paramythis & Loidl-Reisinger, 2004; Pöhler, 2018; Roth, 2014",
-      "tags": [],
+      "definition": "Ein Lernpfad bezeichnet die didaktisch geplante sequentielle Zusammensetzung von Themen, Sub-Themen und/oder Lernelementen. Lernpfade können von Lehrenden und von dem HASKI-System konstruiert werden. Die ursprüngliche von den Lehrenden verwendete Unterteilung bzw. Strukturierung des Kurses wird seitens HASKI als ein „default“ Lernpfad betrachtet. Am Ende eines Lernpfades steht die erfolgreiche Wissensgenerierung und Kompetenzentwicklung in Bezug auf den durchlaufenen Inhalt. Es wird Lernenden ermöglicht, Lernpfade in ihrem individuellen Tempo zu durchlaufen (vgl. Pöhler, 2018; Hessisches Kultusministerium, 2016; Roth, 2014). Es gibt zwei Arten von Lernpfaden: den linearen, der die Lernelemente, Lernräume und Themenbereiche für alle Lernenden in der gleichen Reihenfolge verbindet, und den adaptiven, der sich individuell an die Studierenden anpasst. Dieser adaptive Lernpfad kann dann noch im Hinblick auf die einbezogenen Daten unterschieden werden. Im Kontext von HASKI erfolgt die Anpassung vom Tutoriellen Modell aufgrund der Daten, die im Lernenden-Modell zu den jeweiligen Personen vorhanden sind, und der Grundstruktur des Domänen-Modells (siehe hierzu auch Niegemann & Heidig, 2020, S. 362; Goertz, 2015; Paramythis & Loidl-Reisinger, 2004; Bartel, Dörringer & Klopp, 2022, S. 1).",
+      "sources": "Bartel, Dörringer & Klopp, 2022, S. 1; Goertz, 2015; Hessisches Kultusministerium, 2016; Niegemann & Heidig, 2020, S. 362; Paramythis & Loidl-Reisinger, 2004; Pöhler, 2018; Roth, 2014",
+      "tags": ["Adaptivität", "Systemarchitektur"],
+      "fundamental": true
+    },
+    {
+      "term": "Lernraum (physisch)",
+      "definition": "Physische Lernräume können „zunächst als bloßer physikalischer Behälter betrachtet werden“ (Wittwer & Diettrich, 2015, S. 18). Sie sind aufgrund der Tatsache, dass sich dort Lehrende und Lernende treffen, „zugleich auch Wahrnehmungs- und Handlungsräume“ (ebd., S. 18). Außerdem ist ein physischer Lernraum damit „immer auch sozialer Raum“ (ebd., S. 18). Im Rahmen von HASKI werden alle Präsenzveranstaltungen, die von Lehrenden dem Blended-Learning-Ansatz folgend in Kombination mit dem HASKI-System durchgeführt werden, als physische Lernräume bezeichnet.",
+      "sources": "Wittwer & Diettrich, 2015, S. 18-19",
+      "tags": ["Didaktik"],
+      "fundamental": false
+    },
+    {
+      "term": "Lernsequenz",
+      "definition": "Eine Lernsequenz im Kontext von HASKI ist eine begrenzte Reihenfolge von Lernelementen, welche ein(e) Studierende(r) besucht. Sie wird abgegrenzt vom Begriff des Lernpfades, da eine Lernsequenz nicht didaktisch geplant ist. Ebenfalls muss sie vom Lernweg unterschieden werden, der die Gesamtheit aller Lernsequenzen der Studierenden repräsentiert.",
+      "sources": "",
+      "tags": ["Learning Analytics"],
       "fundamental": false
     },
     {
       "term": "Lernstand (Spielstand)",
       "definition": "Der Lernstand ist der individualisierte Teil des Lernenden-Modells. Er beinhaltet Informationen zum individuellen Elementfortschritt des Lernenden, dessen Lernstil, Lernstrategie und Wissensstand sowie weitere Learning Analytics. Sichtbar ist dieser ausschließlich für die lernende Person selbst. Die Lehrperson kann die Durchschnittswerte aller Lernenden ebenfalls einsehen.",
       "sources": "",
-      "tags": [],
+      "tags": ["Adaptivität", "Learning Analytics"],
+      "fundamental": true
+    },
+    {
+      "term": "Lernstil (LS)",
+      "definition": "Lernstile sind individuelle, relativ stabile Indikatoren, die Präferenzen in der Verarbeitung, Wahrnehmung, Organisation und Präsentation von Informationen zeigen. Sie sind situations- und aufgabenunspezifisch und repräsentieren, wie ein(e) Lernende(r) mit ihrer/seiner Lernumgebung interagiert und darauf reagiert.",
+      "sources": "",
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
-      "term": "Lernstil - LS",
-      "definition": "Lernstile sind individuelle, relativ stabile Indikatoren, die Präferenzen in der Verarbeitung, Wahrnehmung, Organisation und Präsentation von Informationen zeigen. Sie sind situations- und aufgabenunspezifisch und repräsentieren wie ein(e) Lernende(r) mit ihrer/seiner Lernumgebung interagiert und darauf reagiert. ",
+      "term": "Lernstil (dynamisch)",
+      "definition": "Im Zusammenhang mit der Erkennung von Lernstilen bezieht sich der Begriff „dynamisch“ auf die Fähigkeit eines Systems, sich an die sich verändernden Bedürfnisse und Vorlieben eines Lernenden anzupassen. Das bedeutet, dass ein dynamisches Lernstilerkennungssystem in der Lage ist, die Präferenzen des Lernenden kontinuierlich zu überwachen und zu bewerten und seine Empfehlungen entsprechend anzupassen, anstatt sich auf eine statische, einmalige Beurteilung des Lernstils des Lernenden zu verlassen. Durch seine Dynamik kann ein solches System eine personalisiertere und effektivere Lernerfahrung für den Lernenden bieten, da es auf die sich im Laufe der Zeit entwickelnden Bedürfnisse und Vorlieben des Lernenden reagiert.",
       "sources": "",
-      "tags": [],
+      "tags": ["Adaptivität", "Didaktik"],
+      "fundamental": false
+    },
+    {
+      "term": "Lernstil (statisch)",
+      "definition": "Im Zusammenhang mit der Erkennung von Lernstilen bezieht sich „statisch“ auf einen festen oder unveränderlichen Ansatz. Dies bedeutet, dass der bevorzugte Lernstil eines Lernenden als konstant und unverändert im Laufe der Zeit betrachtet wird. Dieser Ansatz geht davon aus, dass eine Person eine bestimmte Reihe von Lernpräferenzen hat, die unabhängig vom Lernkontext oder der Situation gleichbleiben. Im Gegensatz dazu erkennt der dynamische Ansatz zur Erkennung von Lernstilen an, dass der bevorzugte Lernstil einer Person sich im Laufe der Zeit ändern oder von verschiedenen Lernkontexten und -situationen beeinflusst werden kann.",
+      "sources": "",
+      "tags": ["Didaktik"],
+      "fundamental": false
+    },
+    {
+      "term": "Lernstilerkennung",
+      "definition": "Die Erkennung von Lernstilen bezieht sich auf den Prozess der Identifizierung der bevorzugten Lernweise einer Person. Dabei werden die Gewohnheiten, Vorlieben und Tendenzen einer Person in Bezug auf den Umgang mit Lernaufgaben, das Behalten von Informationen und die Interaktion mit Bildungsmaterialien bewertet. Es wird davon ausgegangen, dass durch die Erkennung des Lernstils einer Person wirksamere und personalisierte Lernerfahrungen gestaltet werden können, die den einzigartigen Bedürfnissen des Lernenden gerecht werden. Dies soll zu verbesserten akademischen Ergebnissen und erhöhter Motivation führen.",
+      "sources": "",
+      "tags": ["Didaktik"],
+      "fundamental": false
+    },
+    {
+      "term": "Lernstiltheorien",
+      "definition": "Die Lernstiltheorien beziehen sich auf das Konzept, dass Individuen unterschiedliche Vorlieben, Verarbeitungsweisen von Informationen und Herangehensweisen ans Lernen haben, die bestimmen, wie sie am besten neue Informationen und Fähigkeiten erwerben. Die Idee dahinter ist, dass Lehrende durch das Verständnis des individuellen Lernstils ihre Unterrichtsmethoden anpassen können, um die Fähigkeit des Lernenden zum Verständnis und zur Speicherung von Informationen zu verbessern. Es gibt viele verschiedene Modelle und Theorien zu Lernstilen, von denen jedes seine eigenen einzigartigen Merkmale und Dimensionen aufweist. Im Allgemeinen versuchen sie jedoch, Lernende anhand von Präferenzen wie Sinnesmodalitäten, Umwelt- und emotionalen Faktoren sowie anderen individuellen Merkmalen in Kategorien einzuteilen.",
+      "sources": "",
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
       "term": "Lernstrategien",
       "definition": "Lernstrategien werden aus Sicht des HASKI-Projekts als Verhaltensweisen betrachtet, die bewusst zur Aneignung von Wissen eingesetzt werden. Sie zielen darauf ab, sich Wissen und Informationen auf eine möglichst effektive Art zu beschaffen, zu verarbeiten, zu organisieren und langfristig zu speichern. Lernstrategien stellen ein individuelles Merkmal dar und setzen sich aus unterschiedlichen Komponenten zusammen, deren Ausprägung variieren kann. Im Rahmen des HASKI-Projekts werden sie aktuell mittels des LIST-K erhoben.",
       "sources": "",
-      "tags": [],
+      "tags": ["Didaktik"],
+      "fundamental": false
+    },
+    {
+      "term": "Lernumgebung",
+      "definition": "Eine Lernumgebung bezieht sich auf den physischen, sozialen und psychologischen Kontext, in dem das Lernen stattfindet. Sie umfasst die Bedingungen, Ressourcen und Interaktionen, die den Lernprozess beeinflussen und unterstützen. Die Lernumgebung kann physische Räume wie Klassenzimmer, Bibliotheken oder Online-Plattformen umfassen, ebenso wie soziale Faktoren wie das Vorhandensein von Lehrern, Gleichaltrigen oder Mentoren. Sie umfasst auch die Werkzeuge, Materialien und Technologien, die für das Lernen verwendet werden, sowie das kulturelle und emotionale Klima, das die Beteiligung und Motivation der Lernenden beeinflusst. Eine positive Lernumgebung fördert aktive Beteiligung, Zusammenarbeit, kritisches Denken und Kreativität und schafft optimale Bedingungen für effektives Lernen und Wissenserwerb.",
+      "sources": "",
+      "tags": ["Didaktik"],
+      "fundamental": false
+    },
+    {
+      "term": "Lernverhalten",
+      "definition": "Das Lernverhalten bezieht sich auf die beobachtbaren Handlungen, Einstellungen und Interaktionen, die eine Person während des Lernprozesses zeigt. Es umfasst die Art und Weise, wie Lernende sich mit Lernaufgaben beschäftigen, mit Unterrichtsmaterialien interagieren, an Diskussionen teilnehmen, Unterstützung suchen und ihr Verständnis zeigen. Das Verhalten des Lernenden kann aktive Beteiligung, das Stellen von Fragen, die Zusammenarbeit mit Gleichaltrigen, Neugier, Ausdauer oder Motivation umfassen sowie das Befolgen von Anweisungen. Es umfasst auch Verhaltensweisen im Zusammenhang mit Zeitmanagement, Lerngewohnheiten und Selbstregulation. Durch die Untersuchung und das Verständnis des Lernverhaltens können Pädagogen und Forscher Einblicke in den Lernprozess gewinnen, Stärken und Verbesserungsbereiche identifizieren und Unterrichtsstrategien und Unterstützung maßgeschneidert an die individuellen Bedürfnisse der Lernenden anpassen.",
+      "sources": "ChatGPT",
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
       "term": "Lernweg",
-      "definition": "Ein Lernweg stellt die tatsächliche Sequenz der Aktionen durch den individuellen Lerner dar. Der Lernweg kann aber muss nicht identisch sein mit dem geplanten Lernpfad für den jeweiligen Lernraum. Der Lernweg gibt bei externer Beobachtung (z.B. durch Verhaltensdaten) Aufschluss  über das Lernverhalten des Einzelnen sowie über dessen Wissensstand und seine Präferenzen. Die Differenz zwischen dem geplanten Lernpfad und den tatsächlichen Lernwegen der individuellen Lernenden, die gute Leistungen erbringen, kann außerdem Informationen über die Passgenauigkeit und Qualität des Lernpfades geben.",
+      "definition": "Ein Lernweg stellt die tatsächliche Sequenz der Aktionen durch den individuellen Lerner dar. Der Lernweg kann, muss aber nicht identisch sein mit dem geplanten Lernpfad für den jeweiligen Lernraum. Der Lernweg gibt bei externer Beobachtung (z. B. durch Verhaltensdaten) Aufschluss über das Lernverhalten des Einzelnen sowie über dessen Wissensstand und seine Präferenzen. Die Differenz zwischen dem geplanten Lernpfad und den tatsächlichen Lernwegen der individuellen Lernenden, die gute Leistungen erbringen, kann außerdem Informationen über die Passgenauigkeit und Qualität des Lernpfades geben.",
       "sources": "",
-      "tags": [],
+      "tags": ["Learning Analytics"],
       "fundamental": false
     },
     {
       "term": "Lernziele (LZ)",
       "definition": "Lernziele beschreiben, was von den Lernenden in Bezug auf die Kursbewertung verlangt wird. In HASKI sind sie als eine Art von Lernelement kategorisiert.",
-      "sources": "Graf, Kinshuk & Ives 2010",
-      "tags": [],
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE-Klassifikation"],
       "fundamental": false
     },
     {
       "term": "LIST-K Fragebogen",
-      "definition": "Beim LIST-K-Fragebogen handelt es sich um eine gekürzte Version des ursprünglichen „Lernstrategien im Studium – LIST“ (Wild & Schiefele, 1994). Aufgrund der verringerten Itemanzahl bietet dieser im Vergleich zum Original eine bessere Testökonomie, kann aber gleichzeitig eine hohe Reliabilität erzielen. Klingsieck (2018) gelang es beim LIST-K ebenfalls eine ausgeglichene Faktorenstruktur zu erzielen. Diese unterteilt sich in Kognitive Strategien (4 Subskalen: Organisieren, Elaborieren, Kritisches Prüfen, Wiederholen), Metakognitive Strategien (3 Subskalen: Ziele und Planen, Kontrollieren, Regulieren), Strategien des Managements interner Ressourcen (3 Subskalen: Anstrengung, Aufmerksamkeit, Zeit) und Strategien des Managements externer Ressourcen (3 Subskalen: Lernen mit Studienkolleg*innen, Literaturrecherche, Lernumgebung).",
+      "definition": "Beim LIST-K-Fragebogen handelt es sich um eine gekürzte Version des ursprünglichen „Lernstrategien im Studium – LIST“ (Wild & Schiefele, 1994). Aufgrund der verringerten Itemanzahl bietet dieser im Vergleich zum Original eine bessere Testökonomie, kann aber gleichzeitig eine hohe Reliabilität erzielen. Klingsieck (2018) gelang es beim LIST-K ebenfalls, eine ausgeglichene Faktorenstruktur zu erzielen. Diese unterteilt sich in kognitive Strategien (4 Subskalen: Organisieren, Elaborieren, Kritisches Prüfen, Wiederholen), metakognitive Strategien (3 Subskalen: Ziele und Planen, Kontrollieren, Regulieren), Strategien des Managements interner Ressourcen (3 Subskalen: Anstrengung, Aufmerksamkeit, Zeit) und Strategien des Managements externer Ressourcen (3 Subskalen: Lernen mit Studienkolleg*innen, Literaturrecherche, Lernumgebung).",
       "sources": "Klingsieck, 2018; Wild & Schiefele, 1994",
-      "tags": [],
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
       "term": "Metadaten",
-      "definition": "Die Metadaten beschreiben Themenbereiche, digitale Lernräume und Lernelemente detaillierter. Bisherige Kategorien von Metadaten sind: ID, Name, Autor, Datum, Changelog, Kurszuordnung, Zielgruppe, Fachsemester, Kurzbeschreibung, Schwierigkeitslevel, Learning Analytics (Bearbeitungszeit, Klickrate, Rating), Verortung in der Lernwelt und Relationen innerhalb der Grundstruktur. Für Lernelemente speziell kommen hinzu: Klassifikationsart des Lernelements, Dateityp, unterstützende & hindernde FSLSM-Dimensionen und beeinflussende Lernstrategien. Eine Orientierung an der Schablone zur Erfassung von Lehr-Lern-Arrangements im Hochschulfach Software Engineering (Bartel, Beslmeisl, Figas & Gold-Veerkamp 2015), die im Zuge des EVELIN-Projekts entstanden ist, wird angedacht.",
+      "definition": "Die Metadaten beschreiben Themenbereiche, digitale Lernräume und Lernelemente detaillierter. Bisherige Kategorien von Metadaten sind: ID, Name, Autor, Datum, Changelog, Kurszuordnung, Zielgruppe, Fachsemester, Kurzbeschreibung, Schwierigkeitslevel, Learning Analytics (Bearbeitungszeit, Klickrate, Rating), Verortung in der Lernwelt und Relationen innerhalb der Grundstruktur. Für Lernelemente speziell kommen hinzu: Klassifikationsart des Lernelements, Dateityp, unterstützende & hindernde FSLSM-Dimensionen und beeinflussende Lernstrategien. Eine Orientierung an der Schablone zur Erfassung von Lehr-Lern-Arrangements im Hochschulfach Software Engineering (Bartel, Beslmeisl, Figas & Gold-Veerkamp, 2015), die im Zuge des EVELIN-Projekts entstanden ist, wird angedacht.",
       "sources": "Bartel, Beslmeisl, Figas & Gold-Veerkamp, 2015",
-      "tags": [],
+      "tags": ["Systemarchitektur"],
       "fundamental": false
     },
     {
       "term": "Reflektives Quiz (RQ)",
       "definition": "Reflektive Quizze enthalten eine oder mehr offene Fragen zum Inhalt eines Sub-Themas. Diese Fragen sollen die Lernenden dazu ermutigen, über das gelernte Material nachzudenken. In HASKI sind sie als eine Art von Lernelement kategorisiert.",
-      "sources": "Graf, Kinshuk & Ives 2010",
-      "tags": [],
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE-Klassifikation"],
       "fundamental": false
     },
     {
       "term": "Selbsteinschätzungstest (SE)",
-      "definition": "Selbsteinschätzungstests beinhalten mehrere geschlossene Fragen zum Inhalt eines Sub-Themas. Diese Fragen ermöglichen es den Lernenden, ihr erworbenes Wissen und ihr Verständnis des Inhalts des Sub-Themas zu überprüfen, indem sie unmittelbares Feedback zu ihren Antworten erhalten. In HASKI werden sie als Art von Lernelement kategorisiert.",
-      "sources": "Graf, Kinshuk & Ives 2010",
-      "tags": [],
+      "definition": "Selbsteinschätzungstests beinhalten mehrere geschlossene Fragen zum Inhalt eines Sub-Themas. Diese Fragen ermöglichen es den Lernenden, ihr erworbenes Wissen und ihr Verständnis des Inhalts des Sub-Themas zu überprüfen, indem sie unmittelbares Feedback zu ihren Antworten erhalten. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE-Klassifikation"],
       "fundamental": false
     },
     {
-      "term": "Selbstgesteuertes Lernen ",
-      "definition": "Selbstgesteuertes Lernen: Lernende haben einen hohen Gestaltungsspielraum und entscheiden selbst, „welche Inhalte, Lernwerkzeuge und Didaktiken ihren eigenen Lernbedarfen am ehesten entsprechen“ (Goertz 2014, S. 23). Selbstgesteuertes Lernen ist eine Lernform, bei der die Lernenden im Hinblick auf vorgegebene (fremd- wie selbstbestimmte) Ziele und in Abhängigkeit von der Art ihrer Lernmotivation sowie den Anforderungen der aktuellen Lernsituation eine oder mehrere Selbststeuerungsmaßnahmen ergreifen und dadurch den Fortgang des Lernprozesses selbst überwachen, regulieren und bewerten (Konrad & Traub, 2010).",
+      "term": "Selbstgesteuertes Lernen",
+      "definition": "Selbstgesteuertes Lernen: Lernende haben einen hohen Gestaltungsspielraum und entscheiden selbst, „welche Inhalte, Lernwerkzeuge und Didaktiken ihren eigenen Lernbedarfen am ehesten entsprechen“ (Goertz, 2014, S. 23). Selbstgesteuertes Lernen ist eine Lernform, bei der die Lernenden im Hinblick auf vorgegebene (fremd- wie selbstbestimmte) Ziele und in Abhängigkeit von der Art ihrer Lernmotivation sowie den Anforderungen der aktuellen Lernsituation eine oder mehrere Selbststeuerungsmaßnahmen ergreifen und dadurch den Fortgang des Lernprozesses selbst überwachen, regulieren und bewerten (Konrad & Traub, 2010).",
       "sources": "Goertz, 2014, S. 23; Konrad & Traub, 2010",
-      "tags": [],
+      "tags": ["Didaktik"],
       "fundamental": false
     },
     {
       "term": "Sub-Thema",
-      "definition": "Innerhalb eines Sub-Themas sind ein oder mehrere Lernelemente verortet und die Lernenden können diese dort besuchen und bearbeiten. Die Lernelemente können anhand von Lernpfaden logisch verknüpft sein. In der Hierarchie des Domänen-Modells siedeln sich Sub-Themen auf der Stufe über den Lernelementen an.",
+      "definition": "Innerhalb eines Sub-Themas sind ein oder mehrere Lernelemente verortet, und die Lernenden können diese dort besuchen und bearbeiten. Die Lernelemente können anhand von Lernpfaden logisch verknüpft sein. In der Hierarchie des Domänen-Modells siedeln sich Sub-Themen auf der Stufe über den Lernelementen an.",
       "sources": "",
-      "tags": [],
-      "fundamental": false
+      "tags": ["Systemarchitektur"],
+      "fundamental": true
     },
     {
       "term": "Thema",
-      "definition": "Als Thema wird im Kontext von HASKI ein logisch verknüpfter Bereich innerhalb eines Kurses bezeichnet, dessen Funktion es ist zusammenhängende Sub-Themen zu bündeln. In Ausnahmefällen kann ein Thema auch nur ein einziges Sub-Thema beinhalten. Das Thema gliedert sich als Ebene zwischen Kurs und Sub-Thema ein.",
+      "definition": "Als Thema wird im Kontext von HASKI ein logisch verknüpfter Bereich innerhalb eines Kurses bezeichnet, dessen Funktion es ist, zusammenhängende Sub-Themen zu bündeln. In Ausnahmefällen kann ein Thema auch nur ein einziges Sub-Thema beinhalten. Das Thema gliedert sich als Ebene zwischen Kurs und Sub-Thema ein.",
       "sources": "",
-      "tags": [],
-      "fundamental": false
+      "tags": ["Systemarchitektur"],
+      "fundamental": true
     },
     {
-      "term": "Tutorielles Modell ",
-      "definition": "Das Tutorielle Modell ist in HASKI dafür verantwortlich individualisierte Lernpfade zu generieren. Diese Lernpfade kommuniziert es mit den Lernenden über Lernempfehlungen. Das Tutorielle Modell handelt mit allen Daten des Lernenden-Modells und der Grundstruktur des Domänen-Modells aus, was der einzelnen lernenden Person empfohlen werden soll. Diese Aushandlung geschieht auf Basis von unterschiedlichen KI-Modellen oder regelbasierten Methoden. Das Tutorielle Modell beinhaltet außerdem die Informationen dazu wann welcher Lerninhalt für die Lernenden empfohlen wird (vgl. Meier 2019, S.4).",
-      "sources": "Meier, 2019, S.4",
-      "tags": [],
-      "fundamental": false
+      "term": "Tutorielles Modell",
+      "definition": "Das Tutorielle Modell ist in HASKI dafür verantwortlich, individualisierte Lernpfade zu generieren. Diese Lernpfade kommuniziert es mit den Lernenden über Lernempfehlungen. Das Tutorielle Modell handelt mit allen Daten des Lernenden-Modells und der Grundstruktur des Domänen-Modells aus, was der einzelnen lernenden Person empfohlen werden soll. Diese Aushandlung geschieht auf Basis von unterschiedlichen KI-Modellen oder regelbasierten Methoden. Das Tutorielle Modell beinhaltet außerdem Informationen dazu, wann welcher Lerninhalt für die Lernenden empfohlen wird (vgl. Meier, 2019, S. 4).",
+      "sources": "Meier, 2019, S. 4",
+      "tags": ["Adaptivität", "Systemarchitektur"],
+      "fundamental": true
     },
     {
       "term": "Übung (ÜB)",
-      "definition": "Übungen geben den Lernenden die Möglichkeit das Gelernte anzuwenden und zu erproben. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
-      "sources": "Graf, Kinshuk & Ives 2010",
-      "tags": [],
+      "definition": "Übungen geben den Lernenden die Möglichkeit, das Gelernte anzuwenden und zu erproben. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE-Klassifikation"],
       "fundamental": false
     },
     {
       "term": "Wissensstand",
-      "definition": "Der Wissensstand einer lernenden Person wird als Teilmenge des Wissens eines Experten oder der gesamten Wissensdomäne festgehalten (vgl. Brusilovsky & Millán 2005). Der Wissensstand umfasst wie vertraut Lernende mit inhaltlich zentralen Themen oder Begriff einer Wissensdomäne sind (Uhing 2004, S.102). Er ist ein Aspekt des Lernenden-Modells von HASKI und wird zunächst über einen Vorwissenstest eruiert. Der Wissensstand wird im Laufe der Lernprozesses des Individuum stetig aktualisiert, da dieser sich mit jedem erfolgreich bearbeiteten Lernelement, Lernraum und Themenbereich erweitert. HASKI wird im Rahmen des Wissensstands zunächst nur das deklarative Wissen, als verbalisierbares Faktenwissen, modellieren (vgl. von Cranach & Bangerter 2000, S.235-236).",
-      "sources": "Brusilovsky & Millán, 2005; Cranach & Bangerter, 2000, S.235-236; Uhing, 2004, S.102 ",
-      "tags": [],
-      "fundamental": false
+      "definition": "Der Wissensstand einer lernenden Person wird als Teilmenge des Wissens eines Experten oder der gesamten Wissensdomäne festgehalten (vgl. Brusilovsky & Millán, 2005). Der Wissensstand umfasst, wie vertraut Lernende mit inhaltlich zentralen Themen oder Begriffen einer Wissensdomäne sind (Uhing, 2004, S. 102). Er ist ein Aspekt des Lernenden-Modells von HASKI und wird zunächst über einen Vorwissenstest eruiert. Der Wissensstand wird im Laufe des Lernprozesses des Individuums stetig aktualisiert, da dieser sich mit jedem erfolgreich bearbeiteten Lernelement, Lernraum und Themenbereich erweitert. HASKI wird im Rahmen des Wissensstands zunächst nur das deklarative Wissen, als verbalisierbares Faktenwissen, modellieren (vgl. von Cranach & Bangerter, 2000, S. 235-236).",
+      "sources": "Brusilovsky & Millán, 2005; Cranach & Bangerter, 2000, S. 235-236; Uhing, 2004, S. 102",
+      "tags": ["Adaptivität", "Learning Analytics"],
+      "fundamental": true
     },
     {
       "term": "Zusammenfassung (ZF)",
       "definition": "Zusammenfassungen präsentieren den Lerninhalt der Erklärung gebündelt. In HASKI werden sie als eine Art von Lernelement kategorisiert.",
-      "sources": "Graf, Kinshuk & Ives 2010",
-      "tags": [],
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE-Klassifikation"],
       "fundamental": false
     },
     {
       "term": "Zusatzliteratur (ZL)",
       "definition": "Zusatzliteratur bietet Lernenden zusätzliche Quellen zum Lesen über den Inhalt des Sub-Themas, zum Beispiel detailliertere Ausführungen oder andere Sichtweisen. In HASKI wird sie als eine Art von Lernelement kategorisiert.",
-      "sources": "Graf, Kinshuk & Ives 2010",
-      "tags": [],
+      "sources": "Graf, Kinshuk & Ives, 2010",
+      "tags": ["LE-Klassifikation"],
       "fundamental": false
     }
   ],
@@ -1813,18 +1890,7 @@
   "pages.glossary.fundamentals": "Grundlagen",
   "pages.glossary.search": "Suche",
   "pages.glossary.sources": "Quellen:",
-  "pages.glossary.tags": [
-    "Typescript",
-    "Python",
-    "Erziehungswissenschaften",
-    "Künstliche Intelligenz",
-    "Webdevelopment",
-    "",
-    "TestDeutsch1",
-    "TestDeutsch2",
-    "TestDeutsch3",
-    "TestDeutsch4"
-  ],
+  "pages.glossary.tags": ["Adaptivität", "Didaktik", "LE-Klassifikation", "Learning Analytics", "Systemarchitektur"],
   "pages.home": "Startseite",
   "pages.home.courseButton": "Weiter zum Kurs",
   "pages.home.courseDisabled": "Der Kurs ist Verfügbar ab",
@@ -1909,12 +1975,10 @@
   "pages.rating.learningElementRating": "Lernelement-Rating",
   "pages.rating.studentRating": "Studierenden-Rating",
   "pages.topic": "Thema",
-  "pages.topic.grouped": "Gruppiert",
   "pages.topic.menuItemAlgorithms": "Lernpfadalgorithmus ändern",
-  "pages.topic.single": "Einzeln",
   "success": "Erfolg",
+  "tooltip.availableAt": " ist verfügbar ab ",
   "tooltip.completed": "Erledigt",
-  "tooltip.courseAvailableAt": "Kurs verfügbar ab ",
   "tooltip.courseSelection": "Wählen Sie einen Kurs",
   "tooltip.furtherInfoSelection": "Weitere Informationen über das Projekt",
   "tooltip.languageSettings": "Spracheinstellungen",

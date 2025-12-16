@@ -13,20 +13,26 @@ const showCurrentBreadcrump = (
   array: string[],
   navigate: NavigateFunction,
   t: (key: string) => string,
-  isLast: boolean
+  isLast: boolean,
+  key: string
 ) => {
   const label = onlyNumbersRegex.test(array[index])
     ? t(`pages.${array[index - 1].replace(onlyNumbersRegex, '').replaceAll('/', '')}`)
     : t(`pages.${path}`)
 
   return isLast ? (
-    <Link id={path.concat('-link').replaceAll(' ', '-')} component={'span'} underline="always" color={'textPrimary'}>
+    <Link
+      key={key}
+      id={path.concat('-link').replaceAll(' ', '-')}
+      component={'span'}
+      underline="always"
+      color={'textPrimary'}>
       {label}
     </Link>
   ) : (
     <Link
       id={path.concat('-link').replaceAll(' ', '-')}
-      key={path}
+      key={key}
       underline="hover"
       component={'button'}
       color={'textPrimary'}
@@ -68,11 +74,16 @@ const BreadcrumbsContainer = () => {
       <Breadcrumbs aria-label="breadcrumb">
         {location.pathname !== '/' ? (
           location.pathname.split('/').map((path, index, array) => {
+            const key =
+              location.pathname
+                .split('/')
+                .slice(0, index + 1)
+                .join('/') || 'home'
             if (path === '')
               return (
                 <Link
                   id="home-link"
-                  key={path}
+                  key={key}
                   underline="hover"
                   color="textPrimary"
                   onClick={() => {
@@ -85,7 +96,7 @@ const BreadcrumbsContainer = () => {
             //Do not display current path if the next is a number for example course/3
             //In this example course will be ignored, 3 will be changed to match the previous name (course)
             if (onlyNumbersRegex.test(array[index + 1])) return
-            else return showCurrentBreadcrump(path, index, array, navigate, t, index === array.length - 1)
+            else return showCurrentBreadcrump(path, index, array, navigate, t, index === array.length - 1, key)
           })
         ) : (
           <Box display="flex">
