@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Chip, Grid, Typography } from '@common/components'
+import { ExpandMore } from '@common/icons'
 
 /**
  * @prop term - The term this entry defines.
@@ -59,7 +59,7 @@ const GlossaryEntry = ({ expandedList, setExpandedList, ...props }: GlossaryAcco
       id={props.term?.concat('-glossary-entry-accordion')}
       expanded={!!expandedList?.find((entry) => entry === props.term)}
       onClick={handleClick}>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <AccordionSummary expandIcon={<ExpandMore />}>
         <Grid container columnSpacing={1}>
           <Grid item>
             <Typography component="span" key={props.term} variant="h4" data-testid={'glossaryEntryTerm'}>

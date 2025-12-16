@@ -177,7 +177,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
    */
   const renderNodeStatus = useCallback(() => {
     return props.data.isDisabled ? (
-      <Tooltip title={t('components.BasicNode.warningTooltip')}>
+      <Tooltip title={<Typography variant="body2">{t('components.BasicNode.warningTooltip')}</Typography>}>
         <Box
           sx={{
             position: 'absolute',
@@ -213,7 +213,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       </Tooltip>
     ) : (
       props.data.isDone && (
-        <Tooltip title={t('tooltip.completed')}>
+        <Tooltip title={<Typography variant="body2">{t('tooltip.completed')}</Typography>}>
           <Box
             sx={{
               position: 'absolute',
@@ -280,7 +280,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           </IconButton>
           */}
           {solutionLmsId > 1 && (
-            <Tooltip title={t('components.BasicNode.solutionTooltip')}>
+            <Tooltip title={<Typography variant="body2">{t('components.BasicNode.solutionTooltip')}</Typography>}>
               <IconButton
                 onClick={handleShowSolution}
                 data-testid={'showSolutionButton'}
@@ -300,7 +300,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           )}
           {props.children}
           {isCourseCreatorRole && (
-            <Tooltip arrow title={t('components.BasicNode.deleteTooltip')} placement="top">
+            <Tooltip arrow title={<Typography variant="body2">{t('components.BasicNode.deleteTooltip')}</Typography>} placement="top">
               <IconButton
                 data-testid={'delete-learning-element-button'}
                 onClick={handleOpenDeleteLearningElementModal}

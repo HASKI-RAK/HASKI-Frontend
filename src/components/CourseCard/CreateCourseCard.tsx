@@ -23,7 +23,7 @@ const CreateCourseCard = ({
   }, [setCreateCourseModalOpen])
 
   return (
-    <Card>
+    <Card sx={{ mt: '1rem' }}>
       <CardContent>
         <Grid container justifyContent="center">
           <Button
