@@ -1,14 +1,13 @@
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import ReactFlow, { Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
+import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
 import { Grid, Skeleton } from '@common/components'
 import {
   CreateLearningElement,
   CreateLearningElementSolution,
   handleError,
   IFrameModal,
-  LabeledSwitch,
   nodeTypes,
   ResponsiveMiniMap
 } from '@components'
@@ -203,6 +202,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               <CreateLearningElementSolution />
             </Panel>
           )}
+          <Background gap={16} />
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
         </ReactFlow>
         <IFrameModal

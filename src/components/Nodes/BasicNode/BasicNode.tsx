@@ -300,7 +300,10 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           )}
           {props.children}
           {isCourseCreatorRole && (
-            <Tooltip arrow title={<Typography variant="body2">{t('components.BasicNode.deleteTooltip')}</Typography>} placement="top">
+            <Tooltip
+              arrow
+              title={<Typography variant="body2">{t('components.BasicNode.deleteTooltip')}</Typography>}
+              placement="top">
               <IconButton
                 data-testid={'delete-learning-element-button'}
                 onClick={handleOpenDeleteLearningElementModal}
