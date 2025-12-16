@@ -1,8 +1,9 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render } from '@testing-library/react'
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import * as router from 'react-router'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import BreadcrumbsContainer from './BreadcrumbsContainer'
+import { mockServices } from 'jest.setup'
 
 describe('[HASKI-REQ-0089] BreadcrumbsContainer', () => {
   const navigate = jest.fn()
@@ -11,7 +12,7 @@ describe('[HASKI-REQ-0089] BreadcrumbsContainer', () => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
-  it('should render the default breadcrumb with default path', () => {
+  it('should render the default breadcrumb with default path', async () => {
     const { getAllByText } = render(
       <MemoryRouter initialEntries={['']}>
         <BreadcrumbsContainer />
@@ -20,7 +21,9 @@ describe('[HASKI-REQ-0089] BreadcrumbsContainer', () => {
     expect(getAllByText('pages.home').length).toEqual(1)
 
     // click first link:
-    fireEvent.click(getAllByText('pages.home')[0])
+    await act(async () => {
+      fireEvent.click(getAllByText('pages.home')[0])
+    })
     expect(navigate).toHaveBeenCalledWith('/')
   })
 
@@ -47,8 +50,6 @@ describe('[HASKI-REQ-0089] BreadcrumbsContainer', () => {
     expect(getAllByText('pages.example').length).toEqual(1)
     expect(getAllByText('/').length).toEqual(3)
 
-    // click first link:
-
     fireEvent.click(getAllByText('pages.example')[0])
     expect(navigate).toHaveBeenCalled()
   })
@@ -61,8 +62,6 @@ describe('[HASKI-REQ-0089] BreadcrumbsContainer', () => {
     )
     expect(getAllByText('pages.example').length).toEqual(1)
     expect(getAllByText('/').length).toEqual(3)
-
-    // click first link:
 
     fireEvent.click(getAllByText('pages.example')[0])
     expect(navigate).toHaveBeenCalled()
@@ -77,8 +76,6 @@ describe('[HASKI-REQ-0089] BreadcrumbsContainer', () => {
     expect(getAllByText('pages.example').length).toEqual(1)
     expect(getAllByText('/').length).toEqual(4)
 
-    // click first link:
-
     expect(queryByText('2')).not.toBeInTheDocument()
   })
 
@@ -90,9 +87,126 @@ describe('[HASKI-REQ-0089] BreadcrumbsContainer', () => {
     )
     expect(getAllByText('/').length).toEqual(3)
 
-    // click first link:
-
     expect(queryByText('2')).not.toBeInTheDocument()
     expect(queryByText('3')).not.toBeInTheDocument()
+  })
+
+  it('renders course and topic names from ids in the URL', async () => {
+    const { getAllByText } = render(
+      <MemoryRouter initialEntries={['/course/1/topic/1']}>
+        <Routes>
+          <Route path="/course/:courseId/topic/:topicId" element={<BreadcrumbsContainer />} />
+        </Routes>
+      </MemoryRouter>
+    )
+
+    await waitFor(async () =>
+      act(async () => {
+        fireEvent.click(getAllByText('pages.home')[0])
+      })
+    )
+
+    await waitFor(() => {
+      expect(screen.getByText('pages.home')).toBeInTheDocument()
+      expect(screen.getByText('test')).toBeInTheDocument()
+      expect(screen.getByText('Wirtschaftsinformatik')).toBeInTheDocument()
+    })
+  })
+
+  it('renders course name and does not fetch topics when topicId is missing', async () => {
+    const { getAllByText } = render(
+      <MemoryRouter initialEntries={['/course/1']}>
+        <Routes>
+          <Route path="/course/:courseId" element={<BreadcrumbsContainer />} />
+        </Routes>
+      </MemoryRouter>
+    )
+
+    await waitFor(async () =>
+      act(async () => {
+        fireEvent.click(getAllByText('pages.home')[0])
+      })
+    )
+
+    await waitFor(() => {
+      expect(screen.getByText('pages.home')).toBeInTheDocument()
+      expect(screen.getByText('test')).toBeInTheDocument()
+    })
+  })
+
+  it('handles errors when fetching the courses', async () => {
+    mockServices.fetchCourses.mockImplementationOnce(() => {
+      throw new Error('getCourses error')
+    })
+
+    const { getAllByText } = render(
+      <MemoryRouter initialEntries={['/course/1']}>
+        <Routes>
+          <Route path="/course/:courseId" element={<BreadcrumbsContainer />} />
+        </Routes>
+      </MemoryRouter>
+    )
+
+    await waitFor(async () =>
+      act(async () => {
+        fireEvent.click(getAllByText('pages.home')[0])
+      })
+    )
+
+    await waitFor(() => {
+      expect(screen.getByText('pages.home')).toBeInTheDocument()
+      expect(screen.getByText('pages.course')).toBeInTheDocument()
+    })
+  })
+
+  it('handles errors when fetching the topics', async () => {
+    mockServices.fetchLearningPathTopic.mockImplementationOnce(() => {
+      throw new Error('getLearningPathTopic error')
+    })
+
+    const { getAllByText } = render(
+      <MemoryRouter initialEntries={['/course/1/topic/1']}>
+        <Routes>
+          <Route path="/course/:courseId/topic/:topicId" element={<BreadcrumbsContainer />} />
+        </Routes>
+      </MemoryRouter>
+    )
+
+    await waitFor(async () =>
+      act(async () => {
+        fireEvent.click(getAllByText('pages.home')[0])
+      })
+    )
+
+    await waitFor(() => {
+      expect(screen.getByText('pages.home')).toBeInTheDocument()
+      expect(screen.getByText('test')).toBeInTheDocument()
+      expect(screen.getByText('pages.topic')).toBeInTheDocument()
+    })
+  })
+
+  it('handles errors when fetching the user', async () => {
+    mockServices.fetchUser.mockImplementationOnce(() => {
+      throw new Error('getUser error')
+    })
+
+    const { getAllByText } = render(
+      <MemoryRouter initialEntries={['/course/1']}>
+        <Routes>
+          <Route path="/course/:courseId" element={<BreadcrumbsContainer />} />
+        </Routes>
+      </MemoryRouter>
+    )
+
+    await waitFor(async () =>
+      act(async () => {
+        fireEvent.click(getAllByText('pages.home')[0])
+      })
+    )
+
+    await waitFor(() => {
+      expect(screen.getByText('pages.home')).toBeInTheDocument()
+      expect(screen.getByText('pages.course')).toBeInTheDocument()
+    })
   })
 })

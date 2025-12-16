@@ -57,7 +57,7 @@
   "components.AlgorithmSettingsModal.wrongRole": "Sie haben nicht die erforderlichen Berechtigungen, um den Algorithmus zu ändern",
   "components.BasicNode.deleteLearningElementSuccessful": "Das Lernelement wurde erfolgreich gelöscht",
   "components.BasicNode.deleteTooltip": "Lernelement löschen",
-  "components.BasicNode.recommendedExercise": "Diese Übung wird Ihnen als Nächstes empfohlen.",
+  "components.BasicNode.recommendedExercise": "Diese Übung wird Ihnen empfohlen.",
   "components.ContactForm.briefDescription": "Geben Sie eine kurze Zusammenfassung Ihres Anliegens an",
   "components.ContactForm.contactform": "Kontaktformular",
   "components.ContactForm.error": "Es fehlt eine Beschreibung.",
@@ -210,6 +210,7 @@
   "components.LearningElementRatingInfo.ratingTitle": "Rating",
   "components.LearningElementRatingInfo.spiderGraphText": "Das Netzdiagramm oben rechts zeigt das durchschnittliche Rating aller Lernelemente pro Thema und ermöglicht so einen Vergleich der Schwierigkeit von verschiedenen Bereichen.",
   "components.LearningElementRatingInfo.spiderGraphTitle": "Netzdiagramm",
+  "components.LinearProgressWithLabel.completedLearningElements": "Abgeschlossene Lernelemente",
   "components.LinearProgressWithLabel.learningProgress": "Lernfortschritt",
   "components.ListKQuestions": [
     [
@@ -1322,6 +1323,7 @@
   "components.ThemeModal.radioHeader": "Verfügbare Themes",
   "components.ThemeModal.standardTheme": "Standard",
   "components.TopicCard.aco": "Ameisenalgorithmus",
+  "components.TopicCard.changeLearningPathAlgorithm": "Lernpfadalgorithmus ändern",
   "components.TopicCard.default": "Feste Reihenfolge",
   "components.TopicCard.deleteTooltip": "Themenbereich mit all seinen Inhalten löschen",
   "components.TopicCard.deleteTopicSuccessful": "Der Themenbereich wurde erfolgreich gelöscht",
