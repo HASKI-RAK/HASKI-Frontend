@@ -3,13 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
 import { Grid, Skeleton } from '@common/components'
-import {
-  CreateLearningElement,
-  handleError,
-  IFrameModal,
-  nodeTypes,
-  ResponsiveMiniMap
-} from '@components'
+import { CreateLearningElement, handleError, IFrameModal, nodeTypes, ResponsiveMiniMap } from '@components'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
