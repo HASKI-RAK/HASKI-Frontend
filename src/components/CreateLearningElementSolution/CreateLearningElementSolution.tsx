@@ -113,14 +113,7 @@ const CreateLearningElementSolution = () => {
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 3000)
       })
-  }, [
-    activeStep,
-    createLearningElementSolutionModalOpen,
-    topicId,
-    currentTopic,
-    courseId,
-    selectedLearningElements
-  ])
+  }, [activeStep, createLearningElementSolutionModalOpen, topicId, currentTopic, courseId, selectedLearningElements])
 
   return (
     <Grid>

@@ -63,7 +63,6 @@ describe('[HASKI-REQ-0035] Test the Home page-2', () => {
     })
   })
 
-
   test('render page', () => {
     const result = render(
       <ThemeProvider>
