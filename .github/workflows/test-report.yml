@@ -2,7 +2,7 @@ name: Test Report
 
 on:
   push:
-    branches: [ main, haski-requirements-linking-tests ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:

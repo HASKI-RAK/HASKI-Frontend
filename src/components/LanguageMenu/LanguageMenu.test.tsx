@@ -5,7 +5,7 @@ import { I18nextProvider } from 'react-i18next'
 import { MemoryRouter } from 'react-router-dom'
 import { LanguageMenu } from '@components'
 
-describe('[HASKI-REQ-0038] Language menu tests', () => {
+describe('[HASKI-REQ-0035] Language menu tests', () => {
   it('renders correctly', () => {
     const languageMenu = render(
       <MemoryRouter>
