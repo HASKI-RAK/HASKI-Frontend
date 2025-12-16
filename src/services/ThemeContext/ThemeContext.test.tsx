@@ -16,7 +16,7 @@ const someThemeLiteral = {
 // Build a "real" mockTheme
 const someTheme = createTheme(someThemeLiteral as any)
 
-describe('ThemeContext', () => {
+describe('[HASKI-REQ-0090] ThemeContext', () => {
   it('should provide default values when no provider is used', () => {
     let contextValue: ThemeContextType | undefined
 

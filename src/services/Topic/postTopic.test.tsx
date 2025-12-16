@@ -22,7 +22,7 @@ const output = JSON.stringify({
   university: 'University of Science'
 })
 
-describe('postTopic has expected behaviour', () => {
+describe('[HASKI-REQ-0036] postTopic has expected behaviour', () => {
   it('should return inputData if succesfull', async () => {
     const inputData = ['topic created']
 

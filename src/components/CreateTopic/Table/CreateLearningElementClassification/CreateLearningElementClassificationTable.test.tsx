@@ -7,7 +7,7 @@ import CreateLearningElementClassificationTable, {
   LearningElementWithClassification
 } from './CreateLearningElementClassificationTable'
 
-describe('CreateLearningElementClassificationTable', () => {
+describe('[HASKI-REQ-0037] CreateLearningElementClassificationTable', () => {
   const mockOptions: CreateLearningElementClassificationTableOptionsType = [
     {
       name: 'LZ - Learning Objective',

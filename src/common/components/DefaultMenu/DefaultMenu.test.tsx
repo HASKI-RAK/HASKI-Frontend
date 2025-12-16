@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Menu from './DefaultMenu'
 
-describe('DefaultMenu tests', () => {
+describe('[HASKI-REQ-0086] DefaultMenu tests', () => {
   test('DefaultMenu renders correctly', () => {
     const menu = render(
       <MemoryRouter>

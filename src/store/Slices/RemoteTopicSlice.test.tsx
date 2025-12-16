@@ -47,7 +47,7 @@ const remoteTopic = [
   }
 ]
 
-describe('RemoteTopicSlice ', () => {
+describe('[HASKI-REQ-0035] RemoteTopicSlice ', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })

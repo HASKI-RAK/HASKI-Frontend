@@ -15,7 +15,7 @@ beforeAll(() => {
   SVGElement.prototype.getComputedTextLength = () => 100
 })
 
-describe('RatingDashboard', () => {
+describe('[HASKI-REQ-0043] RatingDashboard', () => {
   it('renders StudentRatingDashboard with default hook', () => {
     const { getByRole } = render(
       <MemoryRouter>

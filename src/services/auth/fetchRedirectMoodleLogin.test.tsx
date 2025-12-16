@@ -12,7 +12,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('fetchRedirectMoodleLogin', () => {
+describe('[HASKI-REQ-0028] fetchRedirectMoodleLogin', () => {
   it('should success', async () => {
     const loginStatus = await fetchRedirectMoodleLogin()
     expect(loginStatus).toEqual({ lti_launch_view: 'https://moodle.test' })

@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { RemoteLearningElement, RemoteTopics } from '@core'
 import CreateLearningElementTable from './CreateLearningElementTable'
 
-describe('CreateLearningElementTable', () => {
+describe('[HASKI-REQ-0037] CreateLearningElementTable', () => {
   const mockOnLearningElementChange = jest.fn(
     (_selectedLearningElements: { [key: number]: RemoteLearningElement[] }) => {}
   )

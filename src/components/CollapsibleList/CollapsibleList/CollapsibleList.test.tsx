@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import CollapsibleList from './CollapsibleList'
 
-describe('ImageCollection tests', () => {
+describe('[HASKI-REQ-0086] CollapsibleList', () => {
   it('renders without input', () => {
     const collapsibleList = render(<CollapsibleList />)
     expect(collapsibleList).toBeTruthy()

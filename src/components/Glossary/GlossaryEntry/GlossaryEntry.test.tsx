@@ -31,7 +31,7 @@ const mockGlossaryAccordionEntryProps2: GlossaryAccordionEntryProps = {
   ...mockGlossaryEntry2
 }
 
-describe('GlossaryEntry tests', () => {
+describe('[HASKI-REQ-0084] GlossaryEntry tests', () => {
   it('renders correctly with input', () => {
     const { getByTestId, getAllByTestId } = render(
       <MemoryRouter>

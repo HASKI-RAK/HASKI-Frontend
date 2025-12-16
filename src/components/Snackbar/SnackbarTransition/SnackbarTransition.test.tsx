@@ -16,7 +16,7 @@ const mockSuccessSnackbarTransitionProps: SnackbarTransitionProps = {
   timeout: 10
 }
 
-describe('Test SnackbarTransition', () => {
+describe('[HASKI-REQ-0086] SnackbarTransition tests', () => {
   test('SnackbarTransition renders without input', () => {
     const { getByTestId } = render(<SnackbarTransition />)
     const snackbarTransition = getByTestId('snackbarTransition')

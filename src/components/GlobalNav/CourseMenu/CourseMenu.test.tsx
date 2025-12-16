@@ -6,7 +6,7 @@ import { AuthContext } from '@services'
 import CourseMenu from './CourseMenu'
 import { useCourseMenu } from './CourseMenu.hooks'
 
-describe('CourseMenu tests', () => {
+describe('[HASKI-REQ-0089] CourseMenu tests', () => {
   it('renders correctly with isAuth false', () => {
     const courseMenu = render(
       <AuthContext.Provider value={{ isAuth: false, setExpire: jest.fn(), logout: jest.fn() }}>

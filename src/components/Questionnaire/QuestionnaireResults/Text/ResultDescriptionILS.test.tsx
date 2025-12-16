@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { ResultDescriptionILS } from '@components'
 import { ILSDimension } from '../Table/TableILS'
 
-describe('Test ResultDescriptionILS with all Score combinations', () => {
+describe('[HASKI-REQ-0007] Test ResultDescriptionILS with all Score combinations', () => {
   test('all positive dimensions are balanced', () => {
     const mockILS = {
       characteristic_id: 1,

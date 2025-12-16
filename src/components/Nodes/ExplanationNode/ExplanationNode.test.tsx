@@ -5,7 +5,7 @@ import ReactFlow, { Node } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
 
-describe('ExplanationNode tests', () => {
+describe('[HASKI-REQ-0010] ExplanationNode tests', () => {
   beforeEach(() => {
     mockReactFlow()
   })

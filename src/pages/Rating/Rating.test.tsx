@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
 import Rating from './Rating'
 
-describe('Rating', () => {
+describe('[HASKI-REQ-0043] Rating', () => {
   it('renders Rating page and toggles button on click', () => {
     const { getAllByRole } = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>

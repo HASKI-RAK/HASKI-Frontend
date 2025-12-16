@@ -6,7 +6,7 @@ import { act } from 'react-test-renderer'
 import { OpenQuestionnaire } from '@components'
 import { AuthContext } from '@services'
 
-describe('OpenQuestionnaire', () => {
+describe('[HASKI-REQ-0007] OpenQuestionnaire', () => {
   test('Standard OpenQuestionnaire functionality', () => {
     render(<OpenQuestionnaire />)
   })

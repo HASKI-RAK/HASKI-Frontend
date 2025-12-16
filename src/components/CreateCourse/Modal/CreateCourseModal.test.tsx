@@ -8,7 +8,7 @@ import CreateCourseModal from './CreateCourseModal'
 
 jest.useFakeTimers()
 
-describe('CreateCourseModal', () => {
+describe('[HASKI-REQ-0035] CreateCourseModal', () => {
   const mockHandleCloseCreateCourseModal = jest.fn()
   const mockSetActiveStepCreateCourseModal = jest.fn()
 

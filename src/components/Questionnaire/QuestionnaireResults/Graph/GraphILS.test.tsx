@@ -16,7 +16,7 @@ const mockILS = {
   understanding_value: 1
 }
 
-describe('Test GraphILS with all Methods', () => {
+describe('[HASKI-REQ-0007] Test GraphILS with all Methods', () => {
   test('Required data is returned in correct format', () => {
     const data = useData(mockILS)
 

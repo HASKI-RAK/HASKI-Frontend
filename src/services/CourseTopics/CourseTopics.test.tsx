@@ -3,7 +3,7 @@ import { useCourseTopics } from './CourseTopics.hooks'
 import { mockServices } from 'jest.setup'
 import { AuthContext } from '@services'
 
-describe('useCourseTopics', () => {
+describe('[HASKI-REQ-0035] useCourseTopics', () => {
   it('correctly fetches topics from all courses', async () => {
     const { result } = renderHook(() => useCourseTopics(), {
       wrapper: ({ children }) => (

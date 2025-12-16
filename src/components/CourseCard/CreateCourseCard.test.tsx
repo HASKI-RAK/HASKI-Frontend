@@ -3,7 +3,7 @@ import { fireEvent, render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import CreateCourseCard from './CreateCourseCard'
 
-describe('CreateCourseCard Component', () => {
+describe('[HASKI-REQ-0035] CreateCourseCard Component', () => {
   const mockSetCreateCourseModalOpen = jest.fn()
   const mockHandleCloseCourseModal = jest.fn()
   const mockSetActiveStepCreateCourseModal = jest.fn()

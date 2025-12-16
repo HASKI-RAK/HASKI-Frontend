@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { AuthContext } from '@services'
 import StatisticsMenu from './StatisticsMenu'
 
-describe('StatisticsMenu', () => {
+describe('[HASKI-REQ-0089] StatisticsMenu', () => {
   it('renders correctly with isAuth true', () => {
     const statisticsMenu = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>

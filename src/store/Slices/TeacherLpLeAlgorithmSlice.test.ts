@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { useStore } from '../Zustand/Store'
 
-describe('TeacherLpLeAlgSlice', () => {
+describe('[HASKI-REQ-0040] TeacherLpLeAlgSlice', () => {
   test('explicitely setting the algorithm in cache from the frontend', async () => {
     const { setTeacherLpLeAlgorithm } = useStore.getState()
     const { getTeacherLpLeAlgorithm } = useStore.getState()

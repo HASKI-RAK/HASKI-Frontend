@@ -9,7 +9,7 @@ import { AuthContext, RoleContext, RoleContextType, ThemeProvider } from '@servi
 
 const navigate = jest.fn()
 
-describe('Test the Home page-1', () => {
+describe('[HASKI-REQ-0035] Test the Home page-1', () => {
   jest.useFakeTimers()
   jest.mock('@common/hooks', () => ({
     ...jest.requireActual('@common/hooks'),
@@ -35,7 +35,7 @@ describe('Test the Home page-1', () => {
   })
 })
 
-describe('Test the Home page-2', () => {
+describe('[HASKI-REQ-0035] Test the Home page-2', () => {
   jest.useFakeTimers()
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
@@ -62,6 +62,7 @@ describe('Test the Home page-2', () => {
       expect(container.innerHTML).toContain('MuiSkeleton')
     })
   })
+
 
   test('render page', () => {
     const result = render(

@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import FurtherInfoMenu from './FurtherInfoMenu'
 
-describe('FurtherInfoMenu tests', () => {
+describe('[HASKI-REQ-0089] FurtherInfoMenu tests', () => {
   it('renders correctly', () => {
     const furtherInfoMenu = render(
       <MemoryRouter>

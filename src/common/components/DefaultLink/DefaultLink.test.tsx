@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Link from './DefaultLink'
 
-describe('DefaultLink tests', () => {
+describe('[HASKI-REQ-0086] DefaultLink tests', () => {
   test('DefaultLink renders correctly', () => {
     const link = render(
       <MemoryRouter>

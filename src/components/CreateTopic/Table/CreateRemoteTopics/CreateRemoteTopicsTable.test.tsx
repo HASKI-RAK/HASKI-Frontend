@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { CreateRemoteTopicsTable } from '@components'
 import { RemoteTopics } from '@core'
 
-describe('CreateRemoteTopicsTable', () => {
+describe('[HASKI-REQ-0036] CreateRemoteTopicsTable', () => {
   const mockHandleTopicChange = jest.fn()
 
   const mockSelectedTopics: RemoteTopics[] = [

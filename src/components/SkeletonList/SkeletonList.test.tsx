@@ -4,7 +4,7 @@ import SkeletonList from './SkeletonList'
 
 // Adjust the import path accordingly
 
-describe('SkeletonList component', () => {
+describe('[HASKI-REQ-0086] SkeletonList component', () => {
   it('renders skeleton items', () => {
     const container = render(<SkeletonList />)
 

@@ -28,7 +28,7 @@ const fakePrivacyModalHookReturn = {
   handleAccept: jest.fn()
 }
 
-describe('OpenCreateDefaultLearningPath component', () => {
+describe('[HASKI-REQ-0026] OpenCreateDefaultLearningPath component', () => {
   const setCookieMock = jest.fn()
 
   afterEach(() => {

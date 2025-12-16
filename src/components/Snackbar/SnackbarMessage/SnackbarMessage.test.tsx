@@ -23,7 +23,7 @@ const mockSuccessSnackbarMessageProps: SnackbarMessageProps = {
   severity: 'success'
 }
 
-describe('Test SnackbarMessage', () => {
+describe('[HASKI-REQ-0086] Test SnackbarMessage', () => {
   test('SnackbarMessage renders without input', () => {
     const { queryByText } = render(<SnackbarMessage />)
     const snackbarMessage = queryByText('test')

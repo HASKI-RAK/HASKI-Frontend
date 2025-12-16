@@ -11,7 +11,7 @@ import { AuthContext } from '@services'
 const navigate = jest.fn()
 jest.useFakeTimers()
 
-describe('CreateCourseTable', () => {
+describe('[HASKI-REQ-0035] CreateCourseTable', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })

@@ -20,7 +20,7 @@ jest.mock('react-cookie', () => ({
   useCookies: () => [jest.fn(), jest.fn()]
 }))
 
-describe('Test PrivacyModal', () => {
+describe('[HASKI-REQ-0001] Test PrivacyModal', () => {
   test('backdrop click', () => {
     const form = render(
       <MemoryRouter>
@@ -41,7 +41,9 @@ describe('Test PrivacyModal', () => {
     fireEvent.click(link)
     expect(navigate).toHaveBeenCalledWith('/privacypolicy')
   })
+})
 
+describe('[HASKI-REQ-0004] Test PrivacyModal-2', () => {
   test('accept the PrivacyPolicy', () => {
     const new_form = render(
       <MemoryRouter>

@@ -9,7 +9,7 @@ import Course from './Course'
 const navigate = jest.fn()
 jest.useFakeTimers()
 
-describe('Course tests', () => {
+describe('[HASKI-REQ-0035] Course tests', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })

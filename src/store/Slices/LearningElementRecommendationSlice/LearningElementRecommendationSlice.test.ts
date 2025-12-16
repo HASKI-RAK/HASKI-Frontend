@@ -3,7 +3,7 @@ import { mockServices } from 'jest.setup'
 import { useStore } from '@store'
 
 describe('LearningElementRecommendationSlice', () => {
-  it('should fetch, cache and clear recommendations', async () => {
+  it('[HASKI-REQ-0072] should fetch, cache and clear recommendations', async () => {
     const { getLearningElementRecommendation } = useStore.getState()
 
     expect(getLearningElementRecommendation).toBeDefined()

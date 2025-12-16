@@ -13,7 +13,7 @@ global.fetch = jest.fn(() =>
   })
 ) as jest.Mock
 
-describe('Test LoginForm', () => {
+describe('[HASKI-REQ-0028] Test LoginForm', () => {
   test('the moodle login button', () => {
     const navigate = jest.fn()
     const loginForm = render(

@@ -3,7 +3,7 @@ import { render, renderHook } from '@testing-library/react'
 import { useContext } from 'react'
 import { SnackbarContext, SnackbarContextType } from './SnackbarContext'
 
-describe('Test SnackbarContext', () => {
+describe('[HASKI-REQ-0090] Test SnackbarContext', () => {
   const providedContext = {
     snackbarsErrorWarning: [],
     snackbarsSuccessInfo: [],

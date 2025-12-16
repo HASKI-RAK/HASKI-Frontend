@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { TopicsLearningPath } from '@pages'
 import { AuthContext } from '@services'
 
-describe('TopicsLearningPath tests', () => {
+describe('[HASKI-REQ-0085] TopicsLearningPath tests', () => {
   it('should render TopicsLearningPath', async () => {
     const topicsLearningPath = render(
       <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>

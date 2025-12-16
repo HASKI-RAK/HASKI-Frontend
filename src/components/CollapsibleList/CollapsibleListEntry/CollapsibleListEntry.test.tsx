@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import CollapsibleListEntry from './CollapsibleListEntry'
 
-describe('CollapsibleListEntry tests', () => {
+describe('[HASKI-REQ-0087] CollapsibleListEntry tests', () => {
   it('renders without input', () => {
     const collapsibleListEntry = render(
       <MemoryRouter>

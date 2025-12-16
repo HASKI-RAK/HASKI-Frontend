@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { RemoteTopics } from '@core'
 import CreateAlgorithmsStep from './CreateAlgorithmsStep'
 
-describe('CreateAlgorithmsStep', () => {
+describe('[HASKI-REQ-0040] CreateAlgorithmsStep', () => {
   const mockOnBack = jest.fn()
   const mockOnSubmit = jest.fn()
   const mockHandleAlgorithmChange = jest.fn()
