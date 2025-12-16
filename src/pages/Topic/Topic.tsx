@@ -1,16 +1,9 @@
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
+import ReactFlow, { Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
 import { Grid, Skeleton } from '@common/components'
-import {
-  CreateLearningElement,
-  handleError,
-  IFrameModal,
-  LabeledSwitch,
-  nodeTypes,
-  ResponsiveMiniMap
-} from '@components'
+import { CreateLearningElement, handleError, IFrameModal, nodeTypes, ResponsiveMiniMap } from '@components'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -62,7 +55,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialNodes, setInitialNodes] = useState<Node[]>()
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
-  const [isGrouped, setIsGrouped] = useState(true)
 
   const getLearningElementsWithStatus = (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
     setLearningPathElementStatus(learningPathElementStatusData)
@@ -84,8 +76,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         const { nodes, edges } = mapNodes(
           learningPathElementData,
           learningPathElementStatusData,
-          disabledClassificationsList,
-          isGrouped
+          disabledClassificationsList
         )
         setInitialNodes(nodes)
         setInitialEdges(edges)
@@ -129,7 +120,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     setInitialNodes,
     setInitialEdges,
     learningPathElementStatus,
-    isGrouped,
     learningPathElementCache,
     learningPathLearningElementStatusCache
   ])
@@ -199,15 +189,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             nodes: [{ id: initialNodes[0]?.id }]
           }}>
           <ResponsiveMiniMap />
-          <Background gap={16} />
-          <Panel position="top-right">
-            <LabeledSwitch
-              labelLeft={t('pages.topic.grouped')}
-              labelRight={t('pages.topic.single')}
-              isGrouped={isGrouped}
-              setIsGrouped={setIsGrouped}
-            />
-          </Panel>
           {isCourseCreatorRole && (
             <Panel position={'top-right'} style={{ right: '2rem', top: '2.5rem' }}>
               <CreateLearningElement />

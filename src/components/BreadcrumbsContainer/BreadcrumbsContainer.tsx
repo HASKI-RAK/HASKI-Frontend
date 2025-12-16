@@ -33,7 +33,13 @@ const BreadcrumbsContainer = ({ useBreadcrumbsContainer = _useBreadcrumbsContain
   const { course, topic } = useBreadcrumbsContainer()
 
   // Check if current index is numbern, if yes return name of course/topic
-  const showCurrentBreadcrumb = (path: string, index: number, array: string[], locationPathname: string) => {
+  const showCurrentBreadcrumb = (
+    path: string,
+    index: number,
+    array: string[],
+    locationPathname: string,
+    key: string
+  ) => {
     const segment = array[index]
     const prev = array[index - 1]
     const isNumeric = onlyNumbersRegex.test(segment)
@@ -53,13 +59,13 @@ const BreadcrumbsContainer = ({ useBreadcrumbsContainer = _useBreadcrumbsContain
     const id = path.concat('-link').replaceAll(' ', '-')
 
     return index === array.length - 1 ? (
-      <Link id={id} component={'span'} underline="always" color={'textPrimary'}>
+      <Link id={id} key={key} component={'span'} underline="always" color={'textPrimary'}>
         {getLabel()}
       </Link>
     ) : (
       <Link
         id={id}
-        key={path + index}
+        key={key}
         underline="hover"
         component={'button'}
         color={'textPrimary'}
@@ -81,11 +87,16 @@ const BreadcrumbsContainer = ({ useBreadcrumbsContainer = _useBreadcrumbsContain
       <Breadcrumbs aria-label="breadcrumb">
         {location.pathname !== '/' ? (
           location.pathname.split('/').map((path, index, array) => {
-            if (path === '') {
+            const key =
+              location.pathname
+                .split('/')
+                .slice(0, index + 1)
+                .join('/') || 'home'
+            if (path === '')
               return (
                 <Link
                   id="home-link"
-                  key={'home-' + index}
+                  key={key}
                   underline="hover"
                   color="textPrimary"
                   onClick={() => {
@@ -94,11 +105,9 @@ const BreadcrumbsContainer = ({ useBreadcrumbsContainer = _useBreadcrumbsContain
                   {t('pages.home')}
                 </Link>
               )
-            }
 
             if (onlyNumbersRegex.test(array[index + 1] ?? '')) return null
-
-            return showCurrentBreadcrumb(path, index, array, location.pathname)
+            return showCurrentBreadcrumb(path, index, array, location.pathname, key)
           })
         ) : (
           <Box display="flex">
