@@ -265,7 +265,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           direction="row"
           justifyContent="flex-end"
           alignItems="center"
-          sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
+          sx={{ position: 'absolute', top: '-3.55rem', left: '0.2rem' }}>
           {solutionLmsId > 1 && (
             <Tooltip title={<Typography variant="body2">{t('components.BasicNode.solutionTooltip')}</Typography>}>
               <IconButton

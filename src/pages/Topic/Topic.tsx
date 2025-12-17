@@ -197,7 +197,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           }}>
           <ResponsiveMiniMap />
           {isCourseCreatorRole && (
-            <Panel position={'top-right'} style={{ right: '2rem', top: '2.5rem' }}>
+            <Panel position={'top-right'} style={{ right: '2.5rem' }}>
               <CreateLearningElement />
               <CreateLearningElementSolution />
             </Panel>
