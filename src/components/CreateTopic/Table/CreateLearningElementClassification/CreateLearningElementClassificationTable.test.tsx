@@ -93,6 +93,8 @@ describe('[HASKI-REQ-0037] CreateLearningElementClassificationTable', () => {
           selectedLearningElements={{}}
           LearningElementsClassification={{}}
           onLearningElementChange={mockOnLearningElementChange}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -108,6 +110,8 @@ describe('[HASKI-REQ-0037] CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
+          selectedSolutions={{ 1: [] }}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -125,6 +129,8 @@ describe('[HASKI-REQ-0037] CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
+          selectedSolutions={{ 1: [] }}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -146,6 +152,8 @@ describe('[HASKI-REQ-0037] CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
+          selectedSolutions={{ 1: [] }}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -166,6 +174,8 @@ describe('[HASKI-REQ-0037] CreateLearningElementClassificationTable', () => {
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
           onLearningElementChange={mockOnLearningElementChange}
+          selectedSolutions={{ 1: [] }}
+          onSolutionChange={jest.fn}
         />
       </MemoryRouter>
     )
@@ -189,12 +199,43 @@ describe('[HASKI-REQ-0037] CreateLearningElementClassificationTable', () => {
           selectedTopics={mockSelectedTopics}
           selectedLearningElements={mockLearningElements}
           LearningElementsClassification={mockLearningElementsClassification}
-          onLearningElementChange={mockOnLearningElementChange}>
+          onLearningElementChange={mockOnLearningElementChange}
+          selectedSolutions={{ 1: [] }}
+          onSolutionChange={jest.fn()}>
           <div data-testid="child">Child Content</div>
         </CreateLearningElementClassificationTable>
       </MemoryRouter>
     )
 
     expect(screen.getByTestId('child')).toBeInTheDocument()
+  })
+
+  it('renders the checkbox with correct checked state and calls handleSolutionchange on change', () => {
+    const mockOnSolutionChange = jest.fn()
+    const mockSelectedSolutions = {
+      1: [{ solutionLmsId: 101, solutionLmsName: 'Solution 1' }]
+    }
+
+    const { getAllByRole } = render(
+      <MemoryRouter>
+        <CreateLearningElementClassificationTable
+          selectedTopics={mockSelectedTopics}
+          selectedLearningElements={mockLearningElements}
+          LearningElementsClassification={mockLearningElementsClassification}
+          selectedSolutions={mockSelectedSolutions}
+          onLearningElementChange={jest.fn()}
+          onSolutionChange={mockOnSolutionChange}
+        />
+      </MemoryRouter>
+    )
+
+    const checkbox = getAllByRole('checkbox')[1]
+    expect(checkbox).toBeChecked()
+
+    fireEvent.click(checkbox)
+
+    expect(mockOnSolutionChange).toHaveBeenCalledWith({
+      1: []
+    })
   })
 })

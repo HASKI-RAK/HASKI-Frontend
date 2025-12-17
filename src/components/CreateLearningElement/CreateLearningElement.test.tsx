@@ -111,33 +111,36 @@ describe('[HASKI-REQ-0037] CreateLearningElement Component', () => {
     )
     jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
 
-    await act(async () => {
-      render(
-        <ReactFlowProvider>
-          <MemoryRouter initialEntries={['/course', '/1', '/topic', '/2']}>
-            <SnackbarContext.Provider value={mockAddSnackbar}>
-              <CreateLearningElement />
-            </SnackbarContext.Provider>
-          </MemoryRouter>
-        </ReactFlowProvider>
-      )
-    })
+    const { getByText, getByTestId, getAllByRole } = render(
+      <ReactFlowProvider>
+        <MemoryRouter initialEntries={['/course', '/1', '/topic', '/2']}>
+          <SnackbarContext.Provider value={mockAddSnackbar}>
+            <CreateLearningElement />
+          </SnackbarContext.Provider>
+        </MemoryRouter>
+      </ReactFlowProvider>
+    )
+
+    const createButton = getByText('components.CreateLearningElement.createLearningElement')
+    fireEvent.click(createButton)
+
+    expect(getByTestId('create-learning-elements-modal-close-button')).toBeInTheDocument()
 
     await waitFor(() => {
-      const createButton = screen.getByText('components.CreateLearningElement.createLearningElement')
-      fireEvent.click(createButton)
+      expect(getByText('components.CreateLearningElementTable.selectAllToggle')).toBeInTheDocument()
     })
 
-    fireEvent.click(screen.getAllByRole('checkbox')[1])
-    expect(screen.getByText('appGlobal.next')).toBeEnabled()
-    fireEvent.click(screen.getByText('appGlobal.next'))
+    fireEvent.click(getAllByRole('checkbox')[1])
+    const nextbutton = getByText('appGlobal.next')
+    expect(nextbutton).toBeEnabled()
+    fireEvent.click(nextbutton)
 
-    expect(screen.getByText('components.CreateLearningElementModal.createLearningElements')).toBeInTheDocument()
+    expect(getByText('components.CreateLearningElementModal.createLearningElements')).toBeInTheDocument()
 
-    expect(screen.getByText('appGlobal.back')).toBeEnabled()
-    fireEvent.click(screen.getByText('appGlobal.back'))
-    expect(screen.getByTestId('create-learning-elements-modal-close-button')).toBeInTheDocument()
-    fireEvent.click(screen.getByTestId('create-learning-elements-modal-close-button'))
+    expect(getByText('appGlobal.back')).toBeEnabled()
+    fireEvent.click(getByText('appGlobal.back'))
+    expect(getByTestId('create-learning-elements-modal-close-button')).toBeInTheDocument()
+    fireEvent.click(getByTestId('create-learning-elements-modal-close-button'))
   })
 
   test('handles fetchLearningPath errors when fetching', async () => {

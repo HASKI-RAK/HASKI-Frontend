@@ -1,11 +1,11 @@
-import { memo, MouseEvent, ReactElement, ReactNode, useCallback, useContext, useState } from 'react'
+import { memo, MouseEvent, ReactElement, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
 import { Box, Checkbox, Collapse, Grid, IconButton, NodeWrapper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
-import { DeleteForever, Warning } from '@common/icons'
+import { DeleteForever, Task, Warning } from '@common/icons'
 import { BorderedPaper, DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from '@components'
-import { deleteLearningElement, RoleContext, SnackbarContext } from '@services'
+import { deleteLearningElement, deleteLearningElementSolution, RoleContext, SnackbarContext } from '@services'
 import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
 
@@ -35,6 +35,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   // Store
   const clearLearningPathElement = useStore((state) => state.clearLearningPathElementCache)
   const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
+  const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
 
   // States
   /**
@@ -57,6 +58,9 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
    * Tracks whether the node is currently hovered over or not.
    */
   const [isHovered, setIsHovered] = useState(false)
+  //const [isFavorite, setIsFavorite] = useState(false) commented out until feature is implemented
+  const [solutionLmsId, setSolutionLmsId] = useState<number>(-1)
+  const [solutionActivityType, setSolutionActivityType] = useState<string>('resource')
 
   /**
    * Sets the hover state to true.
@@ -123,18 +127,21 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
    */
   const handleAcceptDeleteLearningElementModal = useCallback(
     (learningElementId: number, lmsLearningElementId: number) => {
-      deleteLearningElement(learningElementId, lmsLearningElementId).then(() => {
-        addSnackbar({
-          message: t('components.BasicNode.deleteLearningElementSuccessful'),
-          severity: 'success',
-          autoHideDuration: 5000
+      deleteLearningElementSolution(learningElementId).then(() => {
+        deleteLearningElement(learningElementId, lmsLearningElementId).then(() => {
+          addSnackbar({
+            message: t('components.BasicNode.deleteLearningElementSuccessful'),
+            severity: 'success',
+            autoHideDuration: 5000
+          })
+          setDeleteLearningElementModalOpen(false)
         })
-        setDeleteLearningElementModalOpen(false)
       })
       clearLearningPathElement()
       clearLearningPathElementStatusCache()
     },
     [
+      deleteLearningElementSolution,
       deleteLearningElement,
       addSnackbar,
       t,
@@ -143,6 +150,27 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       clearLearningPathElementStatusCache
     ]
   )
+
+  /* placeholder for future favorite feature
+  const addToFavorites = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    setIsFavorite(!isFavorite)
+    event.stopPropagation()
+  }
+  */
+
+  const handleShowSolution = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    props.data.handleOpen()
+    props.data.handleSetUrl(getConfig().MOODLE + `/mod/${solutionActivityType}/view.php?id=${solutionLmsId}`)
+    props.data.handleSetLmsId(solutionLmsId)
+    event.stopPropagation()
+  }
+
+  useEffect(() => {
+    getLearningElementSolution(props.data.lmsId).then((solution) => {
+      setSolutionLmsId(solution.solution_lms_id)
+      setSolutionActivityType(solution.activity_type)
+    })
+  }, [getLearningElementSolution, setSolutionLmsId, setSolutionActivityType, id, props])
 
   /**
    * Renders the status icon of the node, depending on whether it is disabled or done.
@@ -232,13 +260,33 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}>
       <Collapse in={isHovered} style={{ transitionDelay: isHovered ? '100ms' : '200ms' }}>
-        {isCourseCreatorRole && (
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="center"
-            sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
+        <Grid
+          container
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="center"
+          sx={{ position: 'absolute', top: '-3.55rem', left: '0.2rem' }}>
+          {solutionLmsId > 1 && (
+            <Tooltip title={<Typography variant="body2">{t('components.BasicNode.solutionTooltip')}</Typography>}>
+              <IconButton
+                onClick={handleShowSolution}
+                data-testid={'showSolutionButton'}
+                sx={{
+                  backgroundColor: theme.palette.success.main,
+                  marginLeft: '0.5rem',
+                  color: 'white',
+                  border: '1px solid grey',
+                  '&:hover': {
+                    backgroundColor: theme.palette.success.light
+                  },
+                  zIndex: 10
+                }}>
+                <Task />
+              </IconButton>
+            </Tooltip>
+          )}
+          {props.children}
+          {isCourseCreatorRole && (
             <Tooltip
               arrow
               title={<Typography variant="body2">{t('components.BasicNode.deleteTooltip')}</Typography>}
@@ -260,9 +308,8 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
                 <DeleteForever fontSize={'medium'} />
               </IconButton>
             </Tooltip>
-            {props.children}
-          </Grid>
-        )}
+          )}
+        </Grid>
       </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
       <BorderedPaper

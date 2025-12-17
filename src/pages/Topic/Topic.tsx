@@ -1,9 +1,16 @@
 import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
-import ReactFlow, { Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
+import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
 import { Grid, Skeleton } from '@common/components'
-import { CreateLearningElement, handleError, IFrameModal, nodeTypes, ResponsiveMiniMap } from '@components'
+import {
+  CreateLearningElement,
+  CreateLearningElementSolution,
+  handleError,
+  IFrameModal,
+  nodeTypes,
+  ResponsiveMiniMap
+} from '@components'
 import { LearningPathElementStatus, User } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -190,10 +197,12 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           }}>
           <ResponsiveMiniMap />
           {isCourseCreatorRole && (
-            <Panel position={'top-right'} style={{ right: '2rem', top: '2.5rem' }}>
+            <Panel position={'top-right'} style={{ right: '2.5rem' }}>
               <CreateLearningElement />
+              <CreateLearningElementSolution />
             </Panel>
           )}
+          <Background gap={16} />
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
         </ReactFlow>
         <IFrameModal

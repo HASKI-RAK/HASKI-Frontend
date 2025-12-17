@@ -37,6 +37,8 @@ describe('[HASKI-REQ-0037] CreateLearningElementsStep', () => {
           onBack={mockOnBack}
           setSelectAllLearningElementsChecked={mockSetSelectAllLearningElementsChecked}
           selectAllLearningElementsChecked={false}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -56,6 +58,8 @@ describe('[HASKI-REQ-0037] CreateLearningElementsStep', () => {
           onBack={mockOnBack}
           setSelectAllLearningElementsChecked={mockSetSelectAllLearningElementsChecked}
           selectAllLearningElementsChecked={false}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -80,6 +84,8 @@ describe('[HASKI-REQ-0037] CreateLearningElementsStep', () => {
           onBack={mockOnBack}
           setSelectAllLearningElementsChecked={mockSetSelectAllLearningElementsChecked}
           selectAllLearningElementsChecked={false}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -99,6 +105,8 @@ describe('[HASKI-REQ-0037] CreateLearningElementsStep', () => {
           onBack={mockOnBack}
           setSelectAllLearningElementsChecked={mockSetSelectAllLearningElementsChecked}
           selectAllLearningElementsChecked={false}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -125,6 +133,8 @@ describe('[HASKI-REQ-0037] CreateLearningElementsStep', () => {
           onBack={mockOnBack}
           setSelectAllLearningElementsChecked={mockSetSelectAllLearningElementsChecked}
           selectAllLearningElementsChecked={false}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )
@@ -148,6 +158,8 @@ describe('[HASKI-REQ-0037] CreateLearningElementsStep', () => {
           onBack={mockOnBack}
           setSelectAllLearningElementsChecked={mockSetSelectAllLearningElementsChecked}
           selectAllLearningElementsChecked={false}
+          selectedSolutions={{}}
+          onSolutionChange={jest.fn()}
         />
       </MemoryRouter>
     )

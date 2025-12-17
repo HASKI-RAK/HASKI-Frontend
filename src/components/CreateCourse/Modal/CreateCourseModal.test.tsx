@@ -244,8 +244,6 @@ describe('[HASKI-REQ-0035] CreateCourseModal', () => {
     })
     await waitFor(() => {
       act(() => {
-        /*     const snackbarMessage = queryByText('appGlobal.dataSendUnsuccessful')
-        expect(snackbarMessage).toBeInTheDocument()*/
         expect(getByText('components.CreateCourseModal.createCourse')).not.toBeDisabled()
       })
     })

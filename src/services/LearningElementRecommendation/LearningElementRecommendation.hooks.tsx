@@ -79,7 +79,7 @@ export const useLearningElementRecommendation = (): LearningElementRecommendatio
           setRecommendedLearningElement(nextLearningElement)
         })
         .catch((error) => {
-          handleError(t, addSnackbar, 'error.getLearningElementRecommendation', error, 3000)
+          handleError(t, addSnackbar, 'error.fetchLearningElementRecommendation', error, 3000)
         })
     },
     [getLearningElementRecommendation, setRecommendedLearningElement, handleError, t, addSnackbar]

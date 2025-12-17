@@ -143,18 +143,21 @@ describe('[HASKI-REQ-0036] CreateTopicModal', () => {
       fireEvent.click(getByText('appGlobal.next'))
     })
 
+    // open classification menu for the first element
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[0]
       expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
       fireEvent.mouseDown(button)
     })
 
+    // all 12 possible classifications present select the 11th one
     await waitFor(() => {
       const menuItems = getAllByRole('option', { hidden: true })
       expect(menuItems).toHaveLength(12)
       fireEvent.click(menuItems[10])
     })
 
+    // select classification for second element
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[1]
       expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
@@ -167,6 +170,7 @@ describe('[HASKI-REQ-0036] CreateTopicModal', () => {
       fireEvent.click(menuItems[7])
     })
 
+    // select classification for third element
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[2]
       expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
@@ -179,6 +183,13 @@ describe('[HASKI-REQ-0036] CreateTopicModal', () => {
       fireEvent.click(menuItems[6])
     })
 
+    // mark third element as solution
+    await waitFor(() => {
+      expect(getAllByRole('checkbox').length).toEqual(6)
+      fireEvent.click(getAllByRole('checkbox')[5])
+    })
+
+    // check if the selected classifications are shown
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[0]
       expect(button).toHaveTextContent('ZF - Summary')
@@ -190,7 +201,28 @@ describe('[HASKI-REQ-0036] CreateTopicModal', () => {
       fireEvent.click(getByText('appGlobal.next'))
     })
 
+    // select solution step
     await waitFor(() => {
+      const dropdowns = getAllByRole('combobox', { hidden: true })
+      expect(dropdowns).toHaveLength(2)
+      expect(dropdowns[0]).toHaveTextContent('components.CreateLearningElementSolutionTable.noSolution')
+      fireEvent.mouseDown(dropdowns[0])
+    })
+
+    await waitFor(() => {
+      const menuItems = getAllByRole('option', { hidden: true })
+      expect(menuItems).toHaveLength(2)
+      fireEvent.click(menuItems[1])
+      fireEvent.click(getByText('appGlobal.next'))
+    })
+
+    await waitFor(() => {
+      // try back and next buttons
+      expect(getByText('appGlobal.back')).toBeEnabled()
+      fireEvent.click(getByText('appGlobal.back'))
+      expect(getByText('appGlobal.next')).toBeEnabled()
+      fireEvent.click(getByText('appGlobal.next'))
+
       const button = getAllByRole('combobox', { hidden: true })[0]
       fireEvent.mouseDown(button)
       const menuItems = getAllByRole('option', { hidden: true })
@@ -206,6 +238,7 @@ describe('[HASKI-REQ-0036] CreateTopicModal', () => {
     await waitFor(() => {
       expect(mockServices.postLearningElement).toHaveBeenCalled()
       expect(mockServices.postLearningPathAlgorithm).toHaveBeenCalled()
+      expect(mockServices.postLearningElementSolution).toHaveBeenCalled()
       expect(mockServices.postCalculateLearningPathForAllStudents).toHaveBeenCalled()
     })
   }, 20000)
@@ -279,6 +312,18 @@ describe('[HASKI-REQ-0036] CreateTopicModal', () => {
       expect(button1).toHaveTextContent('AN - Animation')
       const button2 = getAllByRole('combobox', { hidden: true })[2]
       expect(button2).toHaveTextContent('ZL - Additional Literature')
+      expect(getByText('appGlobal.next')).toBeEnabled()
+      fireEvent.click(getByText('appGlobal.next'))
+    })
+
+    // select solution step is skipped when no solutions where selected in the learning element step.
+    await waitFor(() => {
+      //skipping back to the learning element step
+      expect(getByText('appGlobal.back')).toBeEnabled()
+      fireEvent.click(getByText('appGlobal.back'))
+
+      //skipping forth to the algorithm step
+      expect(getAllByRole('combobox', { hidden: true })).toHaveLength(3)
       expect(getByText('appGlobal.next')).toBeEnabled()
       fireEvent.click(getByText('appGlobal.next'))
     })

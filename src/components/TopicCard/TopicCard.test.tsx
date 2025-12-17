@@ -14,16 +14,6 @@ describe('[HASKI-REQ-0036] TopicCard tests', () => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
 
-  /*  it('renders without input', async () => {
-    const topicCard = render(
-      <MemoryRouter>
-        <TopicCard />
-      </MemoryRouter>
-    )
-
-    expect(topicCard).toBeTruthy()
-  })*/
-
   it('renders with empty calculatedTopicProgress and isSmOrDown true', async () => {
     const mockProps = {
       topic: {

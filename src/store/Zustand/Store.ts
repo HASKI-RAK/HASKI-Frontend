@@ -6,7 +6,14 @@ import AuthSlice, { createAuthSlice } from '../Slices/AuthSlice'
 import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import { CoursesSlice, createCoursesSlice } from '../Slices/CoursesSlice'
 import { createDefaultLearningPathSlice, DefaultLearningPathSlice } from '../Slices/DefaultLearningPathSlice'
+import LearningElementSolutionSlice, {
+  createLearningElementSolutionSlice
+} from '../Slices/LearningElementSolutionSlice'
 import { createLearningPathElementSlice, LearningPathElementSlice } from '../Slices/LearningPathElementSlice'
+import {
+  createLearningPathElementSolutionSlice,
+  LearningPathElementSolutionSlice
+} from '../Slices/LearningPathElementSolution'
 import LearningPathElementSpecificStatusSlice, {
   createLearningPathElementSpecificStatusSlice
 } from '../Slices/LearningPathElementSpecificStatusSlice'
@@ -25,8 +32,10 @@ export type StoreState = LearningPathElementSlice &
   CourseSlice &
   CoursesSlice &
   LearningPathTopicSlice &
+  LearningPathElementSolutionSlice &
   LearningPathElementSpecificStatusSlice &
   RemoteTopicsSlice &
+  LearningElementSolutionSlice &
   TeacherLpLeAlgorithmSlice &
   StudentLpLeAlgorithmSlice &
   LearningElementRecommendationSlice
@@ -37,9 +46,11 @@ export const resetters: (() => void)[] = []
 
 export const useStore = create<StoreState>()((...a) => ({
   ...createLearningPathElementSlice(...a),
+  ...createLearningPathElementSolutionSlice(...a),
   ...createLearningPathTopicSlice(...a),
   ...createCourseSlice(...a),
   ...createCoursesSlice(...a),
+  ...createLearningElementSolutionSlice(...a),
   ...createLearningPathElementSpecificStatusSlice(...a),
   ...createRemoteTopicsSlice(...a),
   ...createTeacherLpLeAlgorithmSlice(...a),
