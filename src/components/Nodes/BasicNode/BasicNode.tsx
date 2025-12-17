@@ -266,19 +266,6 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           justifyContent="flex-end"
           alignItems="center"
           sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
-          {/* commented out until feature is implemented
-            <IconButton
-            onClick={addToFavorites}
-            data-testid={'favoriteButton'}
-            sx={{
-              marginLeft: '1rem',
-              color: theme.palette.secondary.contrastText,
-              backgroundColor: theme.palette.primary.main,
-              border: '1px solid grey'
-            }}>
-            {isFavorite ? <FavoriteIcon titleAccess="isFavorite" /> : <FavoriteBorderIcon titleAccess="notFavorite" />}
-          </IconButton>
-          */}
           {solutionLmsId > 1 && (
             <Tooltip title={<Typography variant="body2">{t('components.BasicNode.solutionTooltip')}</Typography>}>
               <IconButton

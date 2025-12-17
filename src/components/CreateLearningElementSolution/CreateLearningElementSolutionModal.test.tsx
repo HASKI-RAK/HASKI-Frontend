@@ -377,13 +377,6 @@ describe('CreateLearningElementSolutionModal', () => {
     renderModal({ currentTopic: undefined, activeStep: 1 })
     const sendButton = screen.getByRole('button', { name: 'appGlobal.next' })
     expect(sendButton).toBeDisabled()
-
-    /*    await waitFor(() => {
-      expect(addSnackbar).toHaveBeenCalledWith({
-        message: 'components.AddSolutionModal.noTopic',
-        severity: 'error'
-      })
-    })*/
   })
 
   it('does not call postLearningElementSolution when solutions are empty', async () => {
