@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { mockServices } from 'jest.setup'
 import { useStore } from '../Zustand/Store'
 
-describe('CoursesSlice', () => {
+describe('[HASKI-REQ-0035] CoursesSlice', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
@@ -96,7 +96,7 @@ describe('CoursesSlice', () => {
     expect(cached).toEqual(courses)
   })
 
-  it('should trigger a reload even if cache is available', async () => {
+  it('[HASKI-REQ-0035] should trigger a reload even if cache is available', async () => {
     const { getCourses } = useStore.getState()
     const courses = [{ id: 1, name: 'Math', description: 'Learn math' }]
     mockServices.fetchCourses = jest.fn().mockResolvedValue(courses)

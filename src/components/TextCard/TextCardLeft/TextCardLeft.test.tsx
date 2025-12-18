@@ -16,7 +16,7 @@ afterEach(() => {
   jest.clearAllMocks()
 })
 
-describe('TextCardRight tests', () => {
+describe('[HASKI-REQ-0083] TextCardRight tests', () => {
   it('renders without input', () => {
     const { getByTestId } = render(<TextCardLeft />)
     expect(getByTestId('textCardLeft')).toBeInTheDocument()

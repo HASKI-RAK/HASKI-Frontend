@@ -1,10 +1,15 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import SelectLearningElementStep from './SelectLearningElementStep'
 import { Topic } from '@core'
-import React from 'react'
 import '@testing-library/jest-dom'
 import { RoleContext, RoleContextType, SnackbarContext } from '@services'
+import * as router from 'react-router'
 import { MemoryRouter } from 'react-router-dom'
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn()
+}))
 
 describe('SelectLearningElementStep', () => {
   const mockSetSelectedLearningElements = jest.fn()
@@ -78,12 +83,12 @@ describe('SelectLearningElementStep', () => {
       </SnackbarContext.Provider>
     )
 
-    const button = screen.getByRole('button', { name: 'appGlobal.next' })
-    expect(button).toBeInTheDocument()
-    expect(button).toBeDisabled()
+    expect(screen.getByText('components.SelectLearningElementTable.noLearningElements')).toBeInTheDocument()
   })
 
-  it('enables button when elements are selected', () => {
+  it('enables button when elements are selected', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
+
     render(
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
@@ -107,11 +112,15 @@ describe('SelectLearningElementStep', () => {
         </MemoryRouter>
       </SnackbarContext.Provider>
     )
-    const button = screen.getByRole('button', { name: 'appGlobal.next' })
-    expect(button).toBeEnabled()
+    await waitFor(() => {
+      const button = screen.getByRole('button', { name: 'appGlobal.next' })
+      expect(button).toBeEnabled()
+    })
   })
 
-  it('calls onNext when next button is clicked', () => {
+  it('calls onNext when next button is clicked', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
+
     render(
       <SnackbarContext.Provider value={mockAddSnackbar}>
         <MemoryRouter>
@@ -136,9 +145,11 @@ describe('SelectLearningElementStep', () => {
       </SnackbarContext.Provider>
     )
 
-    const button = screen.getByRole('button', { name: 'appGlobal.next' })
-    fireEvent.click(button)
+    await waitFor(() => {
+      const button = screen.getByRole('button', { name: 'appGlobal.next' })
+      fireEvent.click(button)
 
-    expect(mockOnNext).toHaveBeenCalled()
+      expect(mockOnNext).toHaveBeenCalled()
+    })
   })
 })

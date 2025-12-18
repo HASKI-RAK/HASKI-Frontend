@@ -6,7 +6,7 @@ import GlobalNavMenu from './GlobalNavMenu'
 
 const navigate = jest.fn()
 
-describe('GlobalNavMenu tests', () => {
+describe('[HASKI-REQ-0089] GlobalNavMenu tests', () => {
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
@@ -77,6 +77,8 @@ describe('GlobalNavMenu tests', () => {
 
     fireEvent.click(getByRole('button'))
     fireEvent.click(getAllByRole('menuitem')[0])
+    fireEvent.click(getByRole('button'))
+    fireEvent.click(getAllByRole('menuitem')[1])
 
     expect(navigate).toHaveBeenCalledTimes(1)
   })

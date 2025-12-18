@@ -103,9 +103,13 @@ describe('CreateLearningElementSolutionModal', () => {
   })
 
   it('navigates to solution step', async () => {
+    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
     renderModal()
-    const nextButton = screen.getByRole('button', { name: 'appGlobal.next' })
-    fireEvent.click(nextButton)
+
+    await waitFor(() => {
+      const nextButton = screen.getByRole('button', { name: 'appGlobal.next' })
+      fireEvent.click(nextButton)
+    })
 
     await waitFor(() => {
       expect(setActiveStep).toHaveBeenCalledWith(1)
@@ -188,7 +192,7 @@ describe('CreateLearningElementSolutionModal', () => {
     expect(setActiveStep).toHaveBeenCalledTimes(2)
   })
 
-  it('disables next button if no matching solution exists', () => {
+  it('disables next button if no matching solution exists', async () => {
     const props = {
       selectedLearningElements: {
         101: [{ lms_id: 99, lms_learning_element_name: 'Unmatched', lms_activity_type: 'video', classification: 'EK' }]
@@ -198,8 +202,11 @@ describe('CreateLearningElementSolutionModal', () => {
       }
     }
     renderModal(props)
-    const nextButton = screen.getByRole('button', { name: 'appGlobal.next' })
-    expect(nextButton).toBeDisabled()
+
+    await waitFor(() => {
+      const nextButton = screen.getByRole('button', { name: 'appGlobal.next' })
+      expect(nextButton).toBeDisabled()
+    })
   })
 
   it('calls postLearningElementSolution on handleSend', async () => {
@@ -370,12 +377,61 @@ describe('CreateLearningElementSolutionModal', () => {
     renderModal({ currentTopic: undefined, activeStep: 1 })
     const sendButton = screen.getByRole('button', { name: 'appGlobal.next' })
     expect(sendButton).toBeDisabled()
+  })
 
-    /*    await waitFor(() => {
-      expect(addSnackbar).toHaveBeenCalledWith({
-        message: 'components.AddSolutionModal.noTopic',
-        severity: 'error'
-      })
-    })*/
+  it('does not call postLearningElementSolution when solutions are empty', async () => {
+    const { postLearningElementSolution } = mockServices
+    postLearningElementSolution.mockClear()
+
+    render(
+      <SnackbarContext.Provider value={mockAddSnackbar}>
+        <MemoryRouter>
+          <RoleContext.Provider value={courseCreatorContext}>
+            <CreateLearningElementSolutionModal
+              open={true}
+              activeStep={1}
+              setActiveStep={setActiveStep}
+              currentTopic={{
+                contains_le: true,
+                created_at: 'string',
+                created_by: 'string',
+                id: 3,
+                is_topic: true,
+                last_updated: 'string',
+                lms_id: 3,
+                name: 'Test Topic',
+                parent_id: 1,
+                university: 'HS-Kempten',
+                student_topic: {
+                  done: true,
+                  done_at: 'string',
+                  id: 1,
+                  student_id: 1,
+                  topic_id: 1,
+                  visits: ['string']
+                }
+              }}
+              selectedLearningElements={{
+                3: []
+              }}
+              selectedSolutions={{
+                3: []
+              }}
+              learningElementsWithSolutions={{}}
+              setSelectedLearningElements={setSelectedLearningElements}
+              setLearningElementsWithSolutions={setLearningElementsWithSolutions}
+              handleCloseCreateLearningElementSolutionModal={handleCloseCreateLearningElementSolutionModal}
+            />
+          </RoleContext.Provider>
+        </MemoryRouter>
+      </SnackbarContext.Provider>
+    )
+
+    const sendButton = screen.getByRole('button', { name: 'appGlobal.next' })
+    fireEvent.click(sendButton)
+
+    await waitFor(() => {
+      expect(postLearningElementSolution).not.toHaveBeenCalled()
+    })
   })
 })

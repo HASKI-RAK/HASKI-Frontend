@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Modal from './DefaultModal'
 
-describe('DefaultModal tests', () => {
+describe('[HASKI-REQ-0086] DefaultModal tests', () => {
   test('DefaultModal renders correctly', () => {
     const modal = render(
       <MemoryRouter>

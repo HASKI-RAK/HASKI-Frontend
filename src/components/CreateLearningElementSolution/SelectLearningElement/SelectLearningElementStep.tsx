@@ -19,17 +19,7 @@ const SelectLearningElementStep = ({
 }: SelectLearningElementStepProps) => {
   const { t } = useTranslation()
 
-  return !selectedTopics || !selectedLearningElements[selectedTopics.lms_id] ? (
-    <Grid container item>
-      <Box sx={{ padding: '1rem', width: '95%' }}>
-        <Typography variant="body1" align={'center'}>
-          {!selectedTopics
-            ? t('components.SelectLearningElementStep.noTopicSelected')
-            : t('components.SelectLearningElementStep.noLearningElements')}
-        </Typography>
-      </Box>
-    </Grid>
-  ) : (
+  return selectedTopics ? (
     <Grid container item>
       <SelectLearningElementTable
         currentTopic={selectedTopics}
@@ -42,7 +32,6 @@ const SelectLearningElementStep = ({
               variant="contained"
               color="primary"
               disabled={
-                // At least one learning element must be selected
                 !selectedLearningElements[selectedTopics.lms_id] ||
                 selectedLearningElements[selectedTopics.lms_id]?.length === 0
               }
@@ -53,6 +42,14 @@ const SelectLearningElementStep = ({
           </Grid>
         </Box>
       </SelectLearningElementTable>
+    </Grid>
+  ) : (
+    <Grid container item>
+      <Box sx={{ padding: '1rem', width: '95%' }}>
+        <Typography variant="body1" align="center">
+          {t('components.SelectLearningElementStep.noTopicSelected')}
+        </Typography>
+      </Box>
     </Grid>
   )
 }

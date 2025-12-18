@@ -10,7 +10,7 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom')
 }))
 
-describe('CreateTopicModal', () => {
+describe('[HASKI-REQ-0036] CreateTopicModal', () => {
   const courseCreatorContext = {
     isStudentRole: false,
     isCourseCreatorRole: true
@@ -485,14 +485,6 @@ describe('CreateTopicModal', () => {
       fireEvent.click(getByText('appGlobal.next'))
     })
 
-    // select solution step is skepped when no solutions are present
-    /*    await waitFor(() => {
-      const dropdowns = getAllByRole('combobox', { hidden: true })
-      expect(dropdowns).toHaveLength(3)
-      expect(dropdowns[0]).toHaveTextContent('components.CreateLearningElementSolutionTable.noSolution')
-      fireEvent.click(getByText('appGlobal.next'))
-    })*/
-
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[0]
       fireEvent.mouseDown(button)
@@ -577,14 +569,6 @@ describe('CreateTopicModal', () => {
       expect(getByText('appGlobal.next')).toBeEnabled()
       fireEvent.click(getByText('appGlobal.next'))
     })
-
-    // select solution step is skipped with no solutions present
-    /*    await waitFor(() => {
-      const dropdowns = getAllByRole('combobox', { hidden: true })
-      expect(dropdowns).toHaveLength(3)
-      expect(dropdowns[0]).toHaveTextContent('components.CreateLearningElementSolutionTable.noSolution')
-      fireEvent.click(getByText('appGlobal.next'))
-    })*/
 
     await waitFor(() => {
       const button = getAllByRole('combobox', { hidden: true })[0]

@@ -3,8 +3,11 @@ import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import { Box } from '@common/components'
 import { IFrameModal } from '@components'
+import * as router from 'react-router'
 
-describe('IFrameModal tests', () => {
+jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
+
+describe('[HASKI-REQ-0025] IFrameModal tests', () => {
   it('is displayed', () => {
     const open = true
     const { getByTestId } = render(

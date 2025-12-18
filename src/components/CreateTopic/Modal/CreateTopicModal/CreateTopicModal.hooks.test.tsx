@@ -77,7 +77,7 @@ const mockRemoteLearningElementWithClassification: { [key: number]: RemoteLearni
   ]
 }
 
-describe('useCreateTopicModal', () => {
+describe('[HASKI-REQ-0036] useCreateTopicModal', () => {
   it('should initialize correctly with default functions available', async () => {
     jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '1', topicId: '2' })
     const { result } = renderHook(() =>

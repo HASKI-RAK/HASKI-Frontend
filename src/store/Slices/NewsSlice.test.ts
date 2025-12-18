@@ -17,7 +17,7 @@ describe('NewsSlice', () => {
     jest.clearAllMocks()
   })
 
-  it('should fetch news and cache them', async () => {
+  it('[HASKI-REQ-0046] should fetch news and cache them', async () => {
     const { getNews } = useSessionStore.getState()
     const news = {
       news: [
@@ -75,7 +75,7 @@ describe('NewsSlice', () => {
     expect(getNews).not.toThrow() // counts as function call (getCourses), here it would be Called 2 times instead of 1
   })
 
-  it('should return cached news if available', async () => {
+  it('[HASKI-REQ-0046] should return cached news if available', async () => {
     const { getNews } = useSessionStore.getState()
     const news = [
       {
@@ -114,7 +114,7 @@ describe('NewsSlice', () => {
     expect(cached).toEqual(news)
   })
 
-  it('should return the cached promise if a fetch is already pending', async () => {
+  it('[HASKI-REQ-0046] should return the cached promise if a fetch is already pending', async () => {
     const deferred = createDeferred<NewsResponse>()
 
     mockServices.fetchNews = jest.fn(() => deferred.promise)

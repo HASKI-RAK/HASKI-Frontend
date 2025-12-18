@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { RemoteTopics } from '@core'
 import CreateLearningElementClassificationsStep from './CreateLearningElementClassificationsStep'
 
-describe('CreateLearningElementClassificationsStep', () => {
+describe('[HASKI-REQ-0037] CreateLearningElementClassificationsStep', () => {
   const mockOnNext = jest.fn()
   const mockOnBack = jest.fn()
   const mockHandleLearningElementClassification = jest.fn()

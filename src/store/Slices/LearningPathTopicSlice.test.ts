@@ -7,7 +7,7 @@ const learningPathTopic = { id: 1, name: 'Math', description: 'Learn math' }
 describe('LearningPathTopicSlice ', () => {
   mockServices.fetchLearningPathTopic.mockResolvedValue(learningPathTopic)
 
-  it('should fetch learning path from server and cache it', async () => {
+  it('[HASKI-REQ-0085] should fetch learning path from server and cache it', async () => {
     const { getLearningPathTopic } = useStore.getState()
     const courseId = '2'
 
@@ -22,7 +22,7 @@ describe('LearningPathTopicSlice ', () => {
     })
   })
 
-  it('should return cached learning path if available', async () => {
+  it('[HASKI-REQ-0085] should return cached learning path if available', async () => {
     const { getLearningPathTopic } = useStore.getState()
     const learningPathTopic = { id: 1, name: 'Math', description: 'Learn math' }
     const courseId = '1'
@@ -39,7 +39,7 @@ describe('LearningPathTopicSlice ', () => {
     expect(cached).toEqual(learningPathTopic)
   })
 
-  it('should trigger a reload even if cache is available', async () => {
+  it('[HASKI-REQ-0085] should trigger a reload even if cache is available', async () => {
     const { getLearningPathTopic } = useStore.getState()
     const learningPathTopic = { id: 1, name: 'Math', description: 'Learn math' }
     const courseId = '1'

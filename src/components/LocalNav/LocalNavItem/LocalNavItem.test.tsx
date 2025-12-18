@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { Topic } from '@core'
 import LocalNavItem from './LocalNavItem'
 
-describe('LocalNavItem tests', () => {
+describe('[HASKI-REQ-0089] LocalNavItem tests', () => {
   const navigate = jest.fn()
 
   beforeEach(() => {

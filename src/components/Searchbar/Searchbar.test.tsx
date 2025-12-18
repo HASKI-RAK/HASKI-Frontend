@@ -11,7 +11,7 @@ afterEach(() => {
   jest.clearAllMocks()
 })
 
-describe('Searchbar tests', () => {
+describe('[HASKI-REQ-0086] Searchbar tests', () => {
   const mockSearchbarProps = {
     label: 'testLabel',
     setSearchQuery: jest.fn(),

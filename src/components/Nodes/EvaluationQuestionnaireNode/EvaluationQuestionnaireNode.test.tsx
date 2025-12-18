@@ -5,7 +5,7 @@ import ReactFlow, { Node } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
 
-describe('EvaluationQuestionnaireNode tests', () => {
+describe('[HASKI-REQ-0085] EvaluationQuestionnaireNode tests', () => {
   beforeEach(() => {
     mockReactFlow()
   })
@@ -17,14 +17,14 @@ describe('EvaluationQuestionnaireNode tests', () => {
       name: 'testNode',
       activityType: 'testType',
       classification: 'EF',
-      isRecommended: true,
       handleSetUrl: jest.fn(),
       handleSetTitle: jest.fn(),
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
       isDone: false,
-      isDisabled: false
+      isDisabled: false,
+      isRecommended: false
     }
 
     const mockNode: Node = {
@@ -59,14 +59,14 @@ describe('EvaluationQuestionnaireNode tests', () => {
       name: 'testNode',
       activityType: 'testType',
       classification: 'BE',
-      isRecommended: true,
       handleSetUrl: jest.fn(),
       handleSetTitle: jest.fn(),
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
       isDone: true,
-      isDisabled: true
+      isDisabled: true,
+      isRecommended: false
     }
 
     const mockNode: Node = {

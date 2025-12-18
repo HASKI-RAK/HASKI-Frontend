@@ -20,7 +20,7 @@ describe('DefaultLearningPathSlice', () => {
     }
   ]
 
-  it('should fetch defaultLearningPath from server and cache them', async () => {
+  it('[HASKI-REQ-0026] should fetch defaultLearningPath from server and cache them', async () => {
     mockServices.fetchDefaultLearningPath = jest.fn().mockResolvedValue(defaultLearningPath)
     const { getDefaultLearningPath } = usePersistedStore.getState()
 
@@ -55,7 +55,7 @@ describe('DefaultLearningPathSlice', () => {
     expect(getDefaultLearningPath).not.toThrow() // counts as function call (getCourses), here it would be Called 2 times instead of 1
   })
 
-  it('should return cached defaultLearningPath if available', async () => {
+  it('[HASKI-REQ-0026] should return cached defaultLearningPath if available', async () => {
     const { getDefaultLearningPath } = usePersistedStore.getState()
     mockServices.fetchDefaultLearningPath = jest.fn().mockResolvedValue(defaultLearningPath)
 
@@ -90,7 +90,7 @@ describe('DefaultLearningPathSlice', () => {
     expect(cached).toEqual(defaultLearningPath)
   })
 
-  it('should trigger a reload even if cache is available', async () => {
+  it('[HASKI-REQ-0026] should trigger a reload even if cache is available', async () => {
     const { getDefaultLearningPath } = usePersistedStore.getState()
     mockServices.fetchDefaultLearningPath = jest.fn().mockResolvedValue(defaultLearningPath)
 

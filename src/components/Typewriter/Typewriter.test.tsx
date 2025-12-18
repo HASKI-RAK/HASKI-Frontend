@@ -9,7 +9,7 @@ afterEach(() => {
   jest.clearAllTimers()
 })
 
-describe('Typewriter tests', () => {
+describe('[HASKI-REQ-0083] Typewriter tests', () => {
   it('renders without input', () => {
     expect(render(<Typewriter />)).toBeTruthy()
   })

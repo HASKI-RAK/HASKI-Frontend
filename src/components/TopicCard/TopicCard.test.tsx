@@ -7,22 +7,12 @@ import { act } from 'react-test-renderer'
 import { AuthContext, RoleContext, RoleContextType } from '@services'
 import TopicCard from './TopicCard'
 
-describe('TopicCard tests', () => {
+describe('[HASKI-REQ-0036] TopicCard tests', () => {
   const navigate = jest.fn()
 
   beforeEach(() => {
     jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
   })
-
-  /*  it('renders without input', async () => {
-    const topicCard = render(
-      <MemoryRouter>
-        <TopicCard />
-      </MemoryRouter>
-    )
-
-    expect(topicCard).toBeTruthy()
-  })*/
 
   it('renders with empty calculatedTopicProgress and isSmOrDown true', async () => {
     const mockProps = {

@@ -4,7 +4,7 @@ import { Edge, Node } from 'reactflow'
 import { useTheme } from '@common/hooks'
 import { getGroupLabels, LearningPathLearningElementNode } from '@components'
 import { LearningElement, LearningPathElement, LearningPathElementStatus, LearningPathLearningElement } from '@core'
-import { RoleContext } from '@services'
+import { RoleContext, useLearningElementRecommendation } from '@services'
 
 /**
  * @prop defaultUrl - The default url of a node
@@ -42,8 +42,7 @@ export type TopicHookReturn = {
   readonly mapNodes: (
     learningPathData: LearningPathElement,
     learningPathStatus: LearningPathElementStatus[],
-    learningPathDisabledClassifications: string[],
-    nodesGrouped?: boolean
+    learningPathDisabledClassifications: string[]
   ) => {
     nodes: Node[]
     edges: Edge[]
@@ -76,6 +75,9 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const theme = useTheme()
   const { t } = useTranslation()
 
+  // Hook
+  const { recommendedLearningElement } = useLearningElementRecommendation()
+
   // Global variables
   const nodeOffsetX = 50
   const groupHeight = 200
@@ -90,46 +92,37 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   }, [setIsOpen])
 
   // Groups learning elements by classification.
-  const groupLearningElementsByClassification = useCallback(
-    (learningPath: LearningPathLearningElement[], nodesGrouped: boolean) => {
-      // If nodes are not grouped, return an array of arrays, each containing a single learning element.
-      if (!nodesGrouped) {
-        return learningPath.map((learningElement) => [learningElement])
-      }
+  const groupLearningElementsByClassification = useCallback((learningPath: LearningPathLearningElement[]) => {
+    // Returns an array containg the values of the object.
+    return Object.values(
+      // Creates an object with the classification of learning elements as key and an array of learning elements as value.
+      learningPath.reduce(
+        (
+          groupedLearningElements: { [classification: string]: LearningPathLearningElement[] },
+          learningPathLearningElement: LearningPathLearningElement
+        ) => {
+          const classification = learningPathLearningElement.learning_element.classification
 
-      // Returns an array containing the values of the object.
-      return Object.values(
-        // Creates an object with the classification of learning elements as key and an array of learning elements as value.
-        learningPath.reduce(
-          (
-            groupedLearningElements: { [classification: string]: LearningPathLearningElement[] },
-            learningPathLearningElement: LearningPathLearningElement
-          ) => {
-            const classification = learningPathLearningElement.learning_element.classification
+          groupedLearningElements = {
+            ...groupedLearningElements,
+            [classification]: groupedLearningElements[classification]
+              ? [...groupedLearningElements[classification]]
+              : []
+          }
 
-            groupedLearningElements = {
-              ...groupedLearningElements,
-              [classification]: groupedLearningElements[classification]
-                ? [...groupedLearningElements[classification]]
-                : []
-            }
-
-            groupedLearningElements[classification].push(learningPathLearningElement)
-            return groupedLearningElements
-          },
-          {}
-        )
+          groupedLearningElements[classification].push(learningPathLearningElement)
+          return groupedLearningElements
+        },
+        {}
       )
-    },
-    []
-  )
+    )
+  }, [])
 
   // Creates a single learning element node.
   const getLearningElementNode = useCallback(
     (
       learningElement: LearningElement,
       disabledClassification: boolean,
-      recommended: boolean,
       learningPathStatus: LearningPathElementStatus[],
       id: string,
       position: { x: number; y: number }
@@ -142,21 +135,20 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         cursor: 'pointer',
         width: 500
       }
-
       const nodeData: LearningPathLearningElementNode = {
         learningElementId: learningElement.id,
         lmsId: learningElement.lms_id,
         name: learningElement.name,
         activityType: learningElement.activity_type,
         classification: learningElement.classification,
-        isRecommended: recommended,
         handleSetUrl: setUrl,
         handleSetTitle: setTitle,
         handleSetLmsId: setLmsId,
         handleOpen: handleOpen,
         handleClose: handleClose,
         isDone: learningPathStatus?.find((item) => item.cmid === learningElement.lms_id)?.state === 1,
-        isDisabled: disabledClassification
+        isDisabled: disabledClassification,
+        isRecommended: learningElement.lms_id == recommendedLearningElement?.lms_id
       }
 
       return {
@@ -170,7 +162,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         style: learningElementNodeStyle
       }
     },
-    [theme, handleOpen, handleClose, setUrl, setTitle, setLmsId]
+    [theme, handleOpen, handleClose, setUrl, setTitle, setLmsId, recommendedLearningElement]
   )
 
   // Creates aligned nodes of the passed LearningPathLearningElement array.
@@ -186,7 +178,6 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         return getLearningElementNode(
           node.learning_element,
           disabledClassifications.includes(node.learning_element.classification), //returns if the classification is disabled
-          node.recommended,
           learningPathStatus,
           node.position.toString() + '-' + node.learning_element.lms_id,
           {
@@ -238,7 +229,6 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
         return getLearningElementNode(
           learningElements[0].learning_element,
           disabledClassifications.includes(learningElements[0].learning_element.classification),
-          learningElements[0].recommended,
           learningPathStatus,
           learningElements[0].position.toString(),
           {
@@ -261,14 +251,13 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     (
       learningPath: LearningPathElement,
       learningPathStatus: LearningPathElementStatus[],
-      learningPathDisabledClassifications: string[],
-      nodesGrouped: boolean
+      learningPathDisabledClassifications: string[]
     ): Node[] => {
       // Sort learning path by position
       const sortedLearningPath = Array.from(learningPath.path).sort((a, b) => a.position - b.position)
 
       // Group learning elements by classification
-      const groupedElements = groupLearningElementsByClassification(sortedLearningPath, nodesGrouped)
+      const groupedElements = groupLearningElementsByClassification(sortedLearningPath)
 
       // Calculate the offset between nodes/groups and create grouped nodes
       const nodes = groupedElements.map((group, index) => {
@@ -282,7 +271,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
       })
 
       // Dissovles the array of arrays into a single array.
-      return nodes.flatMap((nodes) => nodes)
+      return nodes.flat()
     },
     [groupLearningElementsByClassification, groupNodes, groupHeight]
   )
@@ -292,46 +281,35 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
     (
       learningPathData: LearningPathElement,
       learningPathStatus: LearningPathElementStatus[],
-      learningPathDisabledClassifications: string[],
-      nodesGrouped = false
+      learningPathDisabledClassifications: string[]
     ) => {
-      const nodes = mapLearningPathToNodes(
-        learningPathData,
-        learningPathStatus,
-        learningPathDisabledClassifications,
-        nodesGrouped
-      )
+      const nodes = mapLearningPathToNodes(learningPathData, learningPathStatus, learningPathDisabledClassifications)
 
       // Creates an array of node ids to be used for creating edges.
-      const nodesWithEdges = nodesGrouped
-        ? Object.values(
-            // Creates an object with the classification of learning elements as key and an array of learning elements as value.
-            nodes.reduce(
-              (
-                firstLearningElementsOfClassification: { [classification: string]: Node[] },
-                learningElementNode: Node
-              ) => {
-                const classification = learningElementNode.data.classification
+      const nodesWithEdges = Object.values(
+        // Creates an object with the classification of learning elements as key and an array of learning elements as value.
+        nodes.reduce(
+          (firstLearningElementsOfClassification: { [classification: string]: Node[] }, learningElementNode: Node) => {
+            const classification = learningElementNode.data.classification
 
-                firstLearningElementsOfClassification = {
-                  ...firstLearningElementsOfClassification,
-                  [classification]: firstLearningElementsOfClassification[classification]
-                    ? [...firstLearningElementsOfClassification[classification]]
-                    : []
-                }
+            firstLearningElementsOfClassification = {
+              ...firstLearningElementsOfClassification,
+              [classification]: firstLearningElementsOfClassification[classification]
+                ? [...firstLearningElementsOfClassification[classification]]
+                : []
+            }
 
-                if (firstLearningElementsOfClassification[classification].length === 0) {
-                  firstLearningElementsOfClassification[classification].push(learningElementNode)
-                }
+            if (firstLearningElementsOfClassification[classification].length === 0) {
+              firstLearningElementsOfClassification[classification].push(learningElementNode)
+            }
 
-                return firstLearningElementsOfClassification
-              },
-              {}
-            )
-          )
-            .flatMap((nodes) => nodes)
-            .map((node) => node.id)
-        : nodes.map((node) => node.id) // If nodes are not grouped, return an array of node ids.
+            return firstLearningElementsOfClassification
+          },
+          {}
+        )
+      )
+        .flat()
+        .map((node) => node.id)
 
       // Creates an array of edges from the array of node ids.
       const edges: Edge[] = nodesWithEdges.map((item, index) => ({

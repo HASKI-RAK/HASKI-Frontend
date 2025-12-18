@@ -20,7 +20,7 @@ jest.mock('react-cookie', () => ({
   useCookies: () => [jest.fn(), jest.fn()]
 }))
 
-describe('Test PrivacyModal', () => {
+describe('[HASKI-REQ-0001] Test PrivacyModal', () => {
   test('backdrop click', () => {
     const form = render(
       <MemoryRouter>
@@ -41,7 +41,9 @@ describe('Test PrivacyModal', () => {
     fireEvent.click(link)
     expect(navigate).toHaveBeenCalledWith('/privacypolicy')
   })
+})
 
+describe('[HASKI-REQ-0004] Test PrivacyModal-2', () => {
   test('accept the PrivacyPolicy', () => {
     const new_form = render(
       <MemoryRouter>
@@ -65,7 +67,7 @@ describe('Test PrivacyModal', () => {
       </MemoryRouter>
     )
     act(() => {
-      const declineButton = form.getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+      const declineButton = form.getByRole('button', { name: /appGlobal.decline/i })
       fireEvent.click(declineButton)
     })
   })
@@ -109,7 +111,7 @@ describe('Test PrivacyModal', () => {
       </MemoryRouter>
     )
     act(() => {
-      const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+      const declineButton = getByRole('button', { name: /appGlobal.decline/i })
       expect(declineButton).toBeInTheDocument()
       fireEvent.click(declineButton)
     })
@@ -148,7 +150,7 @@ describe('Test PrivacyModal', () => {
     )
 
     act(() => {
-      const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+      const declineButton = getByRole('button', { name: /appGlobal.decline/i })
       fireEvent.click(declineButton)
     })
     expect(window.location.assign).toHaveBeenCalled()
@@ -178,7 +180,7 @@ describe('Test PrivacyModal', () => {
       </MemoryRouter>
     )
     act(() => {
-      const declineButton = getByRole('button', { name: /components.PrivacyModal.returnToMoodle/i })
+      const declineButton = getByRole('button', { name: /appGlobal.decline/i })
       fireEvent.click(declineButton)
     })
   })

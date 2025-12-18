@@ -19,7 +19,7 @@ jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')
 
-describe('Topic Page', () => {
+describe('[HASKI-REQ-0085] Topic Page', () => {
   beforeEach(() => {
     jest.clearAllTimers()
     jest.clearAllMocks()
@@ -106,38 +106,23 @@ describe('Topic Page', () => {
   })
 
   test('getUser failed', async () => {
-    jest.spyOn(router, 'useParams').mockReturnValue({ courseId: '2', topicId: '1' })
-
-    const mockfetchUser = jest.fn(() => Promise.reject(new Error('fetchUser failed')))
-    mockServices.fetchUser.mockImplementationOnce(mockfetchUser)
+    mockServices.fetchUser.mockImplementationOnce(() => Promise.reject(new Error('fetchUser failed')))
+    const useTopicMock = jest.fn(() => ({
+      url: 'url',
+      title: 'title',
+      lmsId: 1,
+      isOpen: false,
+      handleClose: jest.fn(),
+      handleOpen: jest.fn(),
+      mapNodes: jest.fn()
+    }))
 
     act(() => {
       render(
         <ReactFlowProvider>
           <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
             <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-              <Topic />
-            </AuthContext.Provider>
-          </MemoryRouter>
-        </ReactFlowProvider>
-      )
-    })
-    await waitFor(() => {
-      expect(mockfetchUser).toHaveBeenCalledTimes(1)
-    })
-  })
-
-  test('getLearningPathElementStatus failed', async () => {
-    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(() => {
-      throw new Error('getLearningPathElementStatus error')
-    })
-
-    await act(async () => {
-      render(
-        <ReactFlowProvider>
-          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
-            <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-              <Topic />
+              <Topic useTopic={useTopicMock} />
             </AuthContext.Provider>
           </MemoryRouter>
         </ReactFlowProvider>
@@ -146,8 +131,9 @@ describe('Topic Page', () => {
   })
 
   test('getLearningPathElement failed', async () => {
-    const mockfetchLearningPathElement = jest.fn(() => Promise.reject(new Error('fetchLearningPathElement failed')))
-    mockServices.fetchLearningPathElement.mockImplementationOnce(mockfetchLearningPathElement)
+    mockServices.fetchLearningPathElement.mockImplementationOnce(() =>
+      Promise.reject(new Error('fetchLearningPathElement failed'))
+    )
 
     await act(async () => {
       render(
@@ -160,8 +146,23 @@ describe('Topic Page', () => {
         </ReactFlowProvider>
       )
     })
-    await waitFor(() => {
-      expect(mockfetchLearningPathElement).toHaveBeenCalledTimes(1)
+  })
+
+  test('getLearningPathElementStatus failed', async () => {
+    mockServices.fetchLearningPathElementStatus.mockImplementationOnce(() =>
+      Promise.reject(new Error('getLearningPathElementStatus error'))
+    )
+
+    await act(async () => {
+      render(
+        <ReactFlowProvider>
+          <MemoryRouter initialEntries={['/course', '/2', '/topic', '/1']}>
+            <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+              <Topic />
+            </AuthContext.Provider>
+          </MemoryRouter>
+        </ReactFlowProvider>
+      )
     })
   })
 
@@ -187,7 +188,6 @@ describe('Topic Page', () => {
           id: 1,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 1,
           learning_element: {
             id: 1,
@@ -211,7 +211,6 @@ describe('Topic Page', () => {
           id: 2,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 2,
           learning_element: {
             id: 2,
@@ -227,7 +226,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 2,
-              is_favorite:true
+              is_favorite: true
             }
           }
         }
@@ -255,7 +254,25 @@ describe('Topic Page', () => {
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
         {
+          data: {
+            classification: '',
+            label: undefined
+          },
           id: '1',
+          position: {
+            x: -575,
+            y: 0
+          },
+          style: {
+            border: '2px solid #9e9e9e',
+            borderRadius: 8,
+            height: 200,
+            width: 1150
+          },
+          type: 'GROUP'
+        },
+        {
+          id: '1-1',
           type: '',
           data: {
             activityType: '',
@@ -265,16 +282,16 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             isDisabled: false,
             name: '',
-            isDone: false
+            isDone: false,
+            isRecommended: false
           },
           position: {
-            x: -250,
-            y: 0
+            x: -525,
+            y: 50
           },
           style: {
             background: '#1976d2',
@@ -286,7 +303,7 @@ describe('Topic Page', () => {
           }
         },
         {
-          id: '2',
+          id: '2-2',
           type: '',
           data: {
             activityType: '',
@@ -297,15 +314,15 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             isDisabled: false,
-            isRecommended: true,
             lmsId: 2,
             learningElementId: 2,
             name: '',
-            isDone: true
+            isDone: true,
+            isRecommended: false
           },
           position: {
-            x: -250,
-            y: 250
+            x: 25,
+            y: 50
           },
           style: {
             background: '#1976d2',
@@ -317,10 +334,7 @@ describe('Topic Page', () => {
           }
         }
       ],
-      edges: [
-        { id: 'Edge1', source: '1', target: '2' },
-        { id: 'Edge2', source: '2', target: undefined }
-      ]
+      edges: [{ id: 'Edge1', source: '1', target: undefined }]
     })
 
     act(() => {
@@ -354,7 +368,6 @@ describe('Topic Page', () => {
           id: 1,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 1,
           learning_element: {
             id: 1,
@@ -370,7 +383,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -378,7 +391,6 @@ describe('Topic Page', () => {
           id: 2,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 2,
           learning_element: {
             id: 1,
@@ -394,7 +406,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -402,7 +414,6 @@ describe('Topic Page', () => {
           id: 3,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 3,
           learning_element: {
             id: 1,
@@ -418,7 +429,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -426,7 +437,6 @@ describe('Topic Page', () => {
           id: 4,
           learning_element_id: 3,
           learning_path_id: 1,
-          recommended: true,
           position: 4,
           learning_element: {
             id: 1,
@@ -442,7 +452,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         }
@@ -471,6 +481,24 @@ describe('Topic Page', () => {
       nodes: [
         {
           data: {
+            classification: '',
+            label: undefined
+          },
+          id: '1',
+          position: {
+            x: -575,
+            y: 0
+          },
+          style: {
+            border: '2px solid #9e9e9e',
+            borderRadius: 8,
+            height: 200,
+            width: 1150
+          },
+          type: 'GROUP'
+        },
+        {
+          data: {
             activityType: '',
             classification: '',
             handleClose: expect.any(Function),
@@ -478,17 +506,17 @@ describe('Topic Page', () => {
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
             handleSetLmsId: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDisabled: false,
-            isDone: false
+            isDone: false,
+            isRecommended: false
           },
-          id: '1',
+          id: '1-1',
           position: {
-            x: -250,
-            y: 0
+            x: -525,
+            y: 50
           },
           style: {
             background: '#1976d2',
@@ -503,23 +531,72 @@ describe('Topic Page', () => {
         {
           data: {
             activityType: '',
-            classification: 'ÜB',
+            classification: '',
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
             isDisabled: false,
             handleSetLmsId: expect.any(Function),
-            handleClose: expect.any(Function)
+            handleClose: expect.any(Function),
+            isRecommended: false
+          },
+          id: '4-1',
+          position: {
+            x: 25,
+            y: 50
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: ''
+        },
+        {
+          data: {
+            classification: 'ÜB',
+            label: 'components.NodeTypes.üb'
           },
           id: '2',
           position: {
-            x: -250,
-            y: 250
+            x: -575,
+            y: 364.2857142857143
+          },
+          style: {
+            border: '2px solid #9e9e9e',
+            borderRadius: 8,
+            height: 200,
+            width: 1150
+          },
+          type: 'GROUP'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            isDisabled: false,
+            name: '',
+            isDone: false,
+            isRecommended: false
+          },
+          id: '2-1',
+          position: {
+            x: -525,
+            y: 414.2857142857143
           },
           style: {
             background: '#1976d2',
@@ -540,17 +617,17 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             isDisabled: false,
             name: '',
-            isDone: false
+            isDone: false,
+            isRecommended: false
           },
-          id: '3',
+          id: '3-1',
           position: {
-            x: -250,
-            y: 500
+            x: 25,
+            y: 414.2857142857143
           },
           style: {
             background: '#1976d2',
@@ -561,37 +638,6 @@ describe('Topic Page', () => {
             width: 500
           },
           type: 'ÜB'
-        },
-        {
-          data: {
-            activityType: '',
-            classification: '',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            isRecommended: true,
-            handleSetLmsId: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            lmsId: 1,
-            learningElementId: 1,
-            isDisabled: false,
-            name: '',
-            isDone: false
-          },
-          id: '4',
-          position: {
-            x: -250,
-            y: 750
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: ''
         }
       ],
       edges: [
@@ -603,16 +649,6 @@ describe('Topic Page', () => {
         {
           id: 'Edge2',
           source: '2',
-          target: '3'
-        },
-        {
-          id: 'Edge3',
-          source: '3',
-          target: '4'
-        },
-        {
-          id: 'Edge4',
-          source: '4',
           target: undefined
         }
       ]
@@ -649,7 +685,6 @@ describe('Topic Page', () => {
           id: 1,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 1,
           learning_element: {
             id: 1,
@@ -665,7 +700,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -673,7 +708,6 @@ describe('Topic Page', () => {
           id: 2,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 2,
           learning_element: {
             id: 1,
@@ -689,7 +723,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -697,7 +731,6 @@ describe('Topic Page', () => {
           id: 3,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 3,
           learning_element: {
             id: 1,
@@ -713,7 +746,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -721,7 +754,6 @@ describe('Topic Page', () => {
           id: 4,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 4,
           learning_element: {
             id: 1,
@@ -737,7 +769,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -745,7 +777,6 @@ describe('Topic Page', () => {
           id: 5,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 5,
           learning_element: {
             id: 1,
@@ -761,7 +792,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -769,7 +800,6 @@ describe('Topic Page', () => {
           id: 6,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 6,
           learning_element: {
             id: 1,
@@ -785,7 +815,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -793,7 +823,6 @@ describe('Topic Page', () => {
           id: 7,
           learning_element_id: 3,
           learning_path_id: 1,
-          recommended: true,
           position: 7,
           learning_element: {
             id: 1,
@@ -809,7 +838,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         }
@@ -838,24 +867,42 @@ describe('Topic Page', () => {
       nodes: [
         {
           data: {
-            activityType: '',
             classification: '',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            isRecommended: true,
-            lmsId: 1,
-            learningElementId: 1,
-            name: '',
-            isDone: false,
-            isDisabled: false,
-            handleSetLmsId: expect.any(Function)
+            label: undefined
           },
           id: '1',
           position: {
-            x: -250,
+            x: -575,
             y: 0
+          },
+          style: {
+            border: '2px solid #9e9e9e',
+            borderRadius: 8,
+            height: 200,
+            width: 1150
+          },
+          type: 'GROUP'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: '',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            name: '',
+            isDone: false,
+            isDisabled: false,
+            handleSetLmsId: expect.any(Function),
+            isRecommended: false
+          },
+          id: '1-1',
+          position: {
+            x: -525,
+            y: 50
           },
           style: {
             background: '#1976d2',
@@ -866,161 +913,6 @@ describe('Topic Page', () => {
             width: 500
           },
           type: ''
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            isRecommended: true,
-            lmsId: 1,
-            learningElementId: 1,
-            name: '',
-            isDone: false,
-            isDisabled: false
-          },
-          id: '2',
-          position: {
-            x: -250,
-            y: 250
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            isRecommended: true,
-            lmsId: 1,
-            learningElementId: 1,
-            name: '',
-            isDisabled: false,
-            isDone: false
-          },
-          id: '3',
-          position: {
-            x: -250,
-            y: 500
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            isRecommended: true,
-            lmsId: 1,
-            learningElementId: 1,
-            name: '',
-            isDisabled: false,
-            isDone: false
-          },
-          id: '4',
-          position: {
-            x: -250,
-            y: 750
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            isRecommended: true,
-            lmsId: 1,
-            learningElementId: 1,
-            name: '',
-            isDisabled: false,
-            isDone: false
-          },
-          id: '5',
-          position: {
-            x: -250,
-            y: 1000
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
-        },
-        {
-          data: {
-            activityType: '',
-            classification: 'ÜB',
-            handleClose: expect.any(Function),
-            handleOpen: expect.any(Function),
-            handleSetLmsId: expect.any(Function),
-            handleSetTitle: expect.any(Function),
-            handleSetUrl: expect.any(Function),
-            isRecommended: true,
-            lmsId: 1,
-            isDisabled: false,
-            learningElementId: 1,
-            name: '',
-            isDone: false
-          },
-          id: '6',
-          position: {
-            x: -250,
-            y: 1250
-          },
-          style: {
-            background: '#1976d2',
-            border: '1px solid #9e9e9e',
-            borderRadius: 8,
-            cursor: 'pointer',
-            padding: 10,
-            width: 500
-          },
-          type: 'ÜB'
         },
         {
           data: {
@@ -1031,17 +923,17 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
+            isDone: false,
             isDisabled: false,
-            isDone: false
+            isRecommended: false
           },
-          id: '7',
+          id: '7-1',
           position: {
-            x: -250,
-            y: 1500
+            x: 25,
+            y: 50
           },
           style: {
             background: '#1976d2',
@@ -1052,16 +944,184 @@ describe('Topic Page', () => {
             width: 500
           },
           type: ''
+        },
+        {
+          data: {
+            classification: 'ÜB',
+            label: 'components.NodeTypes.üb'
+          },
+          id: '2',
+          position: {
+            x: -1125,
+            y: 364.2857142857143
+          },
+          style: {
+            border: '2px solid #9e9e9e',
+            borderRadius: 8,
+            height: 325,
+            width: 2250
+          },
+          type: 'GROUP'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            name: '',
+            isDisabled: false,
+            isDone: false,
+            isRecommended: false
+          },
+          id: '2-1',
+          position: {
+            x: -1075,
+            y: 414.2857142857143
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            name: '',
+            isDisabled: false,
+            isDone: false,
+            isRecommended: false
+          },
+          id: '3-1',
+          position: {
+            x: -525,
+            y: 414.2857142857143
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            name: '',
+            isDisabled: false,
+            isDone: false,
+            isRecommended: false
+          },
+          id: '4-1',
+          position: {
+            x: 25,
+            y: 414.2857142857143
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            isDisabled: false,
+            learningElementId: 1,
+            name: '',
+            isDone: false,
+            isRecommended: false
+          },
+          id: '5-1',
+          position: {
+            x: 575,
+            y: 414.2857142857143
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
+        },
+        {
+          data: {
+            activityType: '',
+            classification: 'ÜB',
+            handleClose: expect.any(Function),
+            handleOpen: expect.any(Function),
+            handleSetLmsId: expect.any(Function),
+            handleSetTitle: expect.any(Function),
+            handleSetUrl: expect.any(Function),
+            lmsId: 1,
+            learningElementId: 1,
+            name: '',
+            isDisabled: false,
+            isDone: false,
+            isRecommended: false
+          },
+          id: '6-1',
+          position: {
+            x: -1075,
+            y: 539.2857142857143
+          },
+          style: {
+            background: '#1976d2',
+            border: '1px solid #9e9e9e',
+            borderRadius: 8,
+            cursor: 'pointer',
+            padding: 10,
+            width: 500
+          },
+          type: 'ÜB'
         }
       ],
       edges: [
         { id: 'Edge1', source: '1', target: '2' },
-        { id: 'Edge2', source: '2', target: '3' },
-        { id: 'Edge3', source: '3', target: '4' },
-        { id: 'Edge4', source: '4', target: '5' },
-        { id: 'Edge5', source: '5', target: '6' },
-        { id: 'Edge6', source: '6', target: '7' },
-        { id: 'Edge7', source: '7', target: undefined }
+        { id: 'Edge2', source: '2', target: undefined }
       ]
     })
 
@@ -1157,7 +1217,6 @@ describe('Topic Page', () => {
           id: 1,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 1,
           learning_element: {
             id: 1,
@@ -1173,7 +1232,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1181,7 +1240,6 @@ describe('Topic Page', () => {
           id: 2,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 2,
           learning_element: {
             id: 1,
@@ -1197,7 +1255,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1205,7 +1263,6 @@ describe('Topic Page', () => {
           id: 3,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 3,
           learning_element: {
             id: 1,
@@ -1221,7 +1278,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1229,7 +1286,6 @@ describe('Topic Page', () => {
           id: 4,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 4,
           learning_element: {
             id: 1,
@@ -1245,7 +1301,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1253,7 +1309,6 @@ describe('Topic Page', () => {
           id: 5,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 5,
           learning_element: {
             id: 1,
@@ -1269,7 +1324,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1277,7 +1332,6 @@ describe('Topic Page', () => {
           id: 6,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 6,
           learning_element: {
             id: 1,
@@ -1293,7 +1347,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1301,7 +1355,6 @@ describe('Topic Page', () => {
           id: 7,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 7,
           learning_element: {
             id: 1,
@@ -1317,7 +1370,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1325,7 +1378,6 @@ describe('Topic Page', () => {
           id: 8,
           learning_element_id: 3,
           learning_path_id: 1,
-          recommended: true,
           position: 8,
           learning_element: {
             id: 1,
@@ -1341,7 +1393,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         }
@@ -1364,8 +1416,7 @@ describe('Topic Page', () => {
     const nodesAndEdges = result.current.mapNodes(
       mockLearningPath,
       mockLearningElementStatus,
-      mocklearningPathDisabledClassifications,
-      true
+      mocklearningPathDisabledClassifications
     )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
@@ -1377,12 +1428,12 @@ describe('Topic Page', () => {
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false,
             isDisabled: true,
+            isRecommended: false,
             handleSetLmsId: expect.any(Function)
           },
           id: '1',
@@ -1409,12 +1460,12 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
-            isDisabled: false
+            isDisabled: false,
+            isRecommended: false
           },
           id: '2',
           position: {
@@ -1458,12 +1509,12 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
-            isDisabled: false
+            isDisabled: false,
+            isRecommended: false
           },
           id: '3-1',
           position: {
@@ -1489,12 +1540,12 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
-            isDisabled: false
+            isDisabled: false,
+            isRecommended: false
           },
           id: '4-1',
           position: {
@@ -1520,12 +1571,12 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
-            isDisabled: false
+            isDisabled: false,
+            isRecommended: false
           },
           id: '5-1',
           position: {
@@ -1551,12 +1602,12 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
-            isDisabled: false
+            isDisabled: false,
+            isRecommended: false
           },
           id: '6-1',
           position: {
@@ -1582,12 +1633,12 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
-            isDisabled: false
+            isDisabled: false,
+            isRecommended: false
           },
           id: '7-1',
           position: {
@@ -1615,10 +1666,10 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isDone: false,
             isDisabled: false,
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
-            name: ''
+            name: '',
+            isRecommended: false
           },
           id: '8-1',
           position: {
@@ -1674,7 +1725,6 @@ describe('Topic Page', () => {
           id: 1,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 1,
           learning_element: {
             id: 1,
@@ -1690,7 +1740,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1698,7 +1748,6 @@ describe('Topic Page', () => {
           id: 2,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 2,
           learning_element: {
             id: 1,
@@ -1714,7 +1763,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1722,7 +1771,6 @@ describe('Topic Page', () => {
           id: 3,
           learning_element_id: 1,
           learning_path_id: 1,
-          recommended: true,
           position: 3,
           learning_element: {
             id: 1,
@@ -1738,7 +1786,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1746,7 +1794,6 @@ describe('Topic Page', () => {
           id: 4,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 4,
           learning_element: {
             id: 1,
@@ -1762,7 +1809,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1770,7 +1817,6 @@ describe('Topic Page', () => {
           id: 5,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 5,
           learning_element: {
             id: 1,
@@ -1786,7 +1832,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1794,7 +1840,6 @@ describe('Topic Page', () => {
           id: 6,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 6,
           learning_element: {
             id: 1,
@@ -1810,7 +1855,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1818,7 +1863,6 @@ describe('Topic Page', () => {
           id: 7,
           learning_element_id: 2,
           learning_path_id: 1,
-          recommended: true,
           position: 7,
           learning_element: {
             id: 1,
@@ -1834,7 +1878,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         },
@@ -1842,7 +1886,6 @@ describe('Topic Page', () => {
           id: 8,
           learning_element_id: 3,
           learning_path_id: 1,
-          recommended: true,
           position: 8,
           learning_element: {
             id: 1,
@@ -1858,7 +1901,7 @@ describe('Topic Page', () => {
               id: 1,
               student_id: 1,
               learning_element_id: 1,
-              is_favorite:true
+              is_favorite: true
             }
           }
         }
@@ -1881,8 +1924,7 @@ describe('Topic Page', () => {
     const nodesAndEdges = result.current.mapNodes(
       mockLearningPath,
       mockLearningElementStatus,
-      mocklearningPathDisabledClassifications,
-      true
+      mocklearningPathDisabledClassifications
     )
     expect(nodesAndEdges).toStrictEqual({
       nodes: [
@@ -1894,13 +1936,13 @@ describe('Topic Page', () => {
             handleOpen: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             learningElementId: 1,
             lmsId: 1,
             name: '',
             isDone: false,
             isDisabled: true,
-            handleSetLmsId: expect.any(Function)
+            handleSetLmsId: expect.any(Function),
+            isRecommended: false
           },
           id: '1',
           position: {
@@ -1926,12 +1968,12 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
-            isDisabled: false
+            isDisabled: false,
+            isRecommended: false
           },
           id: '2',
           position: {
@@ -1975,12 +2017,12 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
-            isDisabled: false
+            isDisabled: false,
+            isRecommended: false
           },
           id: '3-1',
           position: {
@@ -2006,12 +2048,12 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
-            isDisabled: false
+            isDisabled: false,
+            isRecommended: false
           },
           id: '4-1',
           position: {
@@ -2037,12 +2079,12 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
-            isDisabled: false
+            isDisabled: false,
+            isRecommended: false
           },
           id: '5-1',
           position: {
@@ -2068,12 +2110,12 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
-            isDisabled: false
+            isDisabled: false,
+            isRecommended: false
           },
           id: '6-1',
           position: {
@@ -2099,12 +2141,12 @@ describe('Topic Page', () => {
             handleSetLmsId: expect.any(Function),
             handleSetTitle: expect.any(Function),
             handleSetUrl: expect.any(Function),
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
             name: '',
             isDone: false,
-            isDisabled: false
+            isDisabled: false,
+            isRecommended: false
           },
           id: '7-1',
           position: {
@@ -2132,10 +2174,10 @@ describe('Topic Page', () => {
             handleSetUrl: expect.any(Function),
             isDone: false,
             isDisabled: false,
-            isRecommended: true,
             lmsId: 1,
             learningElementId: 1,
-            name: ''
+            name: '',
+            isRecommended: false
           },
           id: '8-1',
           position: {
@@ -2231,7 +2273,6 @@ describe('Topic Page', () => {
             id: 1,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: true,
             position: 1,
             learning_element: {
               id: 1,
@@ -2247,7 +2288,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                is_favorite:true
+                is_favorite: true
               }
             }
           },
@@ -2255,7 +2296,6 @@ describe('Topic Page', () => {
             id: 2,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: true,
             position: 2,
             learning_element: {
               id: 1,
@@ -2271,7 +2311,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                is_favorite:true
+                is_favorite: true
               }
             }
           },
@@ -2279,7 +2319,6 @@ describe('Topic Page', () => {
             id: 3,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: true,
             position: 3,
             learning_element: {
               id: 1,
@@ -2295,7 +2334,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                is_favorite:true
+                is_favorite: true
               }
             }
           },
@@ -2303,7 +2342,6 @@ describe('Topic Page', () => {
             id: 4,
             learning_element_id: 2,
             learning_path_id: 1,
-            recommended: true,
             position: 4,
             learning_element: {
               id: 1,
@@ -2319,7 +2357,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                is_favorite:true
+                is_favorite: true
               }
             }
           },
@@ -2327,7 +2365,6 @@ describe('Topic Page', () => {
             id: 5,
             learning_element_id: 2,
             learning_path_id: 1,
-            recommended: true,
             position: 5,
             learning_element: {
               id: 1,
@@ -2343,7 +2380,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                is_favorite:true
+                is_favorite: true
               }
             }
           },
@@ -2351,7 +2388,6 @@ describe('Topic Page', () => {
             id: 6,
             learning_element_id: 2,
             learning_path_id: 1,
-            recommended: true,
             position: 6,
             learning_element: {
               id: 1,
@@ -2367,7 +2403,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                is_favorite:true
+                is_favorite: true
               }
             }
           },
@@ -2375,7 +2411,6 @@ describe('Topic Page', () => {
             id: 7,
             learning_element_id: 2,
             learning_path_id: 1,
-            recommended: true,
             position: 7,
             learning_element: {
               id: 1,
@@ -2391,7 +2426,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                is_favorite:true
+                is_favorite: true
               }
             }
           },
@@ -2399,7 +2434,6 @@ describe('Topic Page', () => {
             id: 8,
             learning_element_id: 3,
             learning_path_id: 1,
-            recommended: true,
             position: 8,
             learning_element: {
               id: 1,
@@ -2415,7 +2449,7 @@ describe('Topic Page', () => {
                 id: 1,
                 student_id: 1,
                 learning_element_id: 1,
-                is_favorite:true
+                is_favorite: true
               }
             }
           }

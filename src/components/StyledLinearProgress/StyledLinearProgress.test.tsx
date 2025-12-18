@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react'
+import { getByTestId, render, waitFor } from '@testing-library/react'
 import { mockServices } from 'jest.setup'
 import { MemoryRouter } from 'react-router-dom'
 import { StyledLinearProgress } from '@components'
@@ -10,8 +10,8 @@ jest.mock('@common/hooks', () => ({
   useMediaQuery: jest.fn().mockReturnValue(true)
 }))
 
-describe('StyledLinearProgress-1', () => {
-  it('renders course page with topics, some learning elements are done (33%)', async () => {
+describe('[HASKI-REQ-0071] StyledLinearProgress-1', () => {
+  it('renders course page with topics, some learning elements are done (33%)', () => {
     mockServices.fetchLearningPathElementStatus.mockImplementation(() =>
       Promise.resolve([
         {
@@ -43,7 +43,6 @@ describe('StyledLinearProgress-1', () => {
             id: 1,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: false,
             position: 1,
             learning_element: {
               id: 1,
@@ -68,7 +67,6 @@ describe('StyledLinearProgress-1', () => {
             id: 2,
             learning_element_id: 2,
             learning_path_id: 2,
-            recommended: false,
             position: 2,
             learning_element: {
               id: 2,
@@ -93,7 +91,6 @@ describe('StyledLinearProgress-1', () => {
             id: 3,
             learning_element_id: 3,
             learning_path_id: 3,
-            recommended: false,
             position: 3,
             learning_element: {
               id: 3,
@@ -126,7 +123,7 @@ describe('StyledLinearProgress-1', () => {
       </MemoryRouter>
     )
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe(
         'components.LinearProgressWithLabel.learningProgress: 1/3'
       )
@@ -160,7 +157,6 @@ describe('StyledLinearProgress-1', () => {
             id: 1,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: false,
             position: 1,
             learning_element: {
               id: 1,
@@ -185,7 +181,6 @@ describe('StyledLinearProgress-1', () => {
             id: 2,
             learning_element_id: 2,
             learning_path_id: 2,
-            recommended: false,
             position: 2,
             learning_element: {
               id: 2,
@@ -238,7 +233,6 @@ describe('StyledLinearProgress-1', () => {
             id: 1,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: false,
             position: 1,
             learning_element: {
               id: 1,
@@ -263,7 +257,6 @@ describe('StyledLinearProgress-1', () => {
             id: 2,
             learning_element_id: 2,
             learning_path_id: 2,
-            recommended: false,
             position: 2,
             learning_element: {
               id: 2,
@@ -332,7 +325,6 @@ describe('StyledLinearProgress-1', () => {
             id: 1,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: false,
             position: 1,
             learning_element: {
               id: 1,
@@ -357,7 +349,6 @@ describe('StyledLinearProgress-1', () => {
             id: 2,
             learning_element_id: 2,
             learning_path_id: 2,
-            recommended: false,
             position: 2,
             learning_element: {
               id: 2,
@@ -382,18 +373,16 @@ describe('StyledLinearProgress-1', () => {
       })
     )
 
-    await waitFor(() => {
-      const { getAllByTestId } = render(
-        <MemoryRouter>
-          <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
-            <Course />
-          </AuthContext.Provider>
-        </MemoryRouter>
-      )
+    const { getAllByTestId } = render(
+      <MemoryRouter>
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          <Course />
+        </AuthContext.Provider>
+      </MemoryRouter>
+    )
 
-      waitFor(() => {
-        expect(getAllByTestId('Course-Card-Topic-Progress')[1].parentNode?.textContent).toBe('1/2')
-      })
+    waitFor(() => {
+      expect(getAllByTestId('Course-Card-Topic-Progress')[1].parentNode?.textContent).toBe('1/2')
     })
   })
 
@@ -402,8 +391,8 @@ describe('StyledLinearProgress-1', () => {
     expect(styledLinearProgress).toBeTruthy()
   })
 })
-describe('Course3', () => {
-  it('renders course page with topics, none learning elements are done (0%)', async () => {
+describe('[HASKI-REQ-0071] StyledLinearProgress-2', () => {
+  it('renders course page with topics, none learning elements are done (0%)', () => {
     mockServices.fetchLearningPathElementStatus.mockImplementation(() =>
       Promise.resolve([
         {
@@ -430,7 +419,6 @@ describe('Course3', () => {
             id: 1,
             learning_element_id: 1,
             learning_path_id: 1,
-            recommended: false,
             position: 1,
             learning_element: {
               id: 1,
@@ -455,7 +443,6 @@ describe('Course3', () => {
             id: 2,
             learning_element_id: 2,
             learning_path_id: 2,
-            recommended: false,
             position: 2,
             learning_element: {
               id: 2,
@@ -488,10 +475,22 @@ describe('Course3', () => {
       </MemoryRouter>
     )
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent).toBe(
         'components.LinearProgressWithLabel.learningProgress: 0/2'
       )
     })
+  })
+
+  it('renders StyledLinearProgress with 33% progress', () => {
+    const { getAllByTestId } = render(<StyledLinearProgress learningElementProgressTopics={[1, 3]} />)
+    const styledLinearProgress = getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent
+    expect(styledLinearProgress).toBe('components.LinearProgressWithLabel.learningProgress: 1/3')
+  })
+
+  it('renders StyledLinearProgress with no progress', () => {
+    const { getAllByTestId } = render(<StyledLinearProgress learningElementProgressTopics={[0, 3]} />)
+    const styledLinearProgress = getAllByTestId('Course-Card-Topic-Progress')[0].parentNode?.textContent
+    expect(styledLinearProgress).toBe('components.LinearProgressWithLabel.learningProgress: 0/3')
   })
 })

@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { Radio } from '@common/components'
 import RadioGroup from './DefaultRadioGroup'
 
-describe('DefaultRadioGroup tests', () => {
+describe('[HASKI-REQ-0086] DefaultRadioGroup tests', () => {
   test('DefaultRadioGroup renders correctly', () => {
     const radioGroup = render(
       <MemoryRouter>

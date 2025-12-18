@@ -17,7 +17,7 @@ const CreateLearningElementSolution = () => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
 
-  const [addSolutionModalOpen, setCreateLearningElementSolutionModalOpen] = useState(false)
+  const [createLearningElementSolutionModalOpen, setCreateLearningElementSolutionModalOpen] = useState(false)
   const [activeStep, setActiveStep] = useState<number>(0)
 
   const { courseId } = useParams()
@@ -56,7 +56,7 @@ const CreateLearningElementSolution = () => {
       .then((user) => {
         getLearningPathTopic(user.settings.user_id, user.lms_user_id, user.id, courseId)
           .then((learningPathTopic) => {
-            setCurrentTopic(learningPathTopic.topics.filter((topic) => topic.id === parseInt(topicId))[0])
+            setCurrentTopic(learningPathTopic.topics.find((topic) => topic.id === Number.parseInt(topicId)))
           })
           .catch((error) => {
             handleError(t, addSnackbar, 'error.fetchLearningPathTopic', error, 5000)
@@ -65,49 +65,46 @@ const CreateLearningElementSolution = () => {
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
       })
-  }, [topicId, getUser, addSolutionModalOpen, getLearningPathTopic, courseId, t, addSnackbar])
+  }, [topicId, getUser, createLearningElementSolutionModalOpen, getLearningPathTopic, courseId, t, addSnackbar])
 
   // fetch remote learning elements to use as solutions
   // filter out the learning elements that are already in the learning path
   useEffect(() => {
     if (!courseId || !topicId || !currentTopic) return
+
     getUser()
       .then((user) =>
         getRemoteTopics(courseId)
           .then((topics: RemoteTopics[]) => {
-            // Filter remote topics by matching the current topic LMS ID
+            // Find the remote topic matching the current topic LMS ID
             const remoteTopic = topics.find((topic) => topic.topic_lms_id === currentTopic.lms_id)
             return { user, remoteTopic }
           })
           .catch((error) => {
             handleError(t, addSnackbar, 'error.fetchRemoteTopics', error, 3000)
-            // Throw error to stop the chain
-            throw error
+            throw error // stop the promise chain
           })
       )
       .then(({ user, remoteTopic }) =>
         getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId).then(
           (learningPathElementData: LearningPathElement) => {
-            // Extract LMS IDs of learning elements already in the learning path
-            const existingLearningElementIds = learningPathElementData.path.map(
-              (element) => element.learning_element.lms_id
+            // Use a Set for efficient membership checks
+            const existingLearningElementIds = new Set(
+              learningPathElementData.path.map((element) => element.learning_element.lms_id)
             )
 
-            // Update remote topics by filtering out elements that already exist in the learning path
+            // Filter out elements already in the learning path
             const filteredLearningElements = remoteTopic?.lms_learning_elements.filter(
-              (learningElement) => !existingLearningElementIds.includes(learningElement.lms_id)
+              (learningElement) => !existingLearningElementIds.has(learningElement.lms_id)
             )
 
-            // filtered learning elements are possible solutions for the current topic
+            // Map to solution objects
             const solutions: Solution[] =
-              filteredLearningElements?.map(
-                (learningElement) =>
-                  ({
-                    solutionLmsId: learningElement.lms_id,
-                    solutionLmsName: learningElement.lms_learning_element_name,
-                    solutionLmsType: learningElement.lms_activity_type
-                  } as Solution)
-              ) || []
+              filteredLearningElements?.map((learningElement) => ({
+                solutionLmsId: learningElement.lms_id,
+                solutionLmsName: learningElement.lms_learning_element_name,
+                solutionLmsType: learningElement.lms_activity_type
+              })) || []
 
             setSelectedSolutions({ [currentTopic.lms_id]: solutions })
           }
@@ -116,16 +113,7 @@ const CreateLearningElementSolution = () => {
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 3000)
       })
-  }, [
-    activeStep,
-    setActiveStep,
-    addSolutionModalOpen,
-    topicId,
-    currentTopic,
-    courseId,
-    selectedLearningElements,
-    setSelectedLearningElements
-  ])
+  }, [activeStep, createLearningElementSolutionModalOpen, topicId, currentTopic, courseId, selectedLearningElements])
 
   return (
     <Grid>
@@ -138,7 +126,7 @@ const CreateLearningElementSolution = () => {
         {t('components.CreateLearningElementSolution.addSolution')}
       </Button>
       <CreateLearningElementSolutionModal
-        open={addSolutionModalOpen}
+        open={createLearningElementSolutionModalOpen}
         activeStep={activeStep}
         setActiveStep={setActiveStep}
         handleCloseCreateLearningElementSolutionModal={handleClose}

@@ -54,7 +54,11 @@ const CreateLearningElementSolutionModal = ({
     setIsLoading(true)
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore currentTopic can not be undefined here because the next button is disabled in that case
-    learningElementsWithSolutions[currentTopic.lms_id]?.forEach((solution) => {
+    const solutions = learningElementsWithSolutions[currentTopic.lms_id]
+
+    if (!solutions) return
+
+    for (const solution of solutions) {
       const outputJson = JSON.stringify({
         solution_lms_id: solution.solutionLmsId,
         activity_type: solution.solutionLmsType
@@ -79,8 +83,16 @@ const CreateLearningElementSolutionModal = ({
           setIsLoading(false)
           handleCloseCreateLearningElementSolutionModal()
         })
-    })
-  }, [setIsLoading, currentTopic, learningElementsWithSolutions, addSnackbar, t])
+    }
+  }, [
+    setIsLoading,
+    currentTopic,
+    learningElementsWithSolutions,
+    addSnackbar,
+    t,
+    handleCloseCreateLearningElementSolutionModal,
+    setLearningElementSolution
+  ])
 
   // Disable the send/next button when not all selected learning elements have a solution
   const disableSend = useCallback(() => {

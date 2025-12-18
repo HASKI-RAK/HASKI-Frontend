@@ -22,16 +22,18 @@ export const createLearningElementSolutionSlice: StateCreator<StoreState, [], []
     getLearningElementSolution: async (learningElementLmsId: number) => {
       const cached = get()._learningElementSolution[`${learningElementLmsId}`]
 
-      if (!cached) {
-        const learningElementSolution = await fetchLearningElementSolution(learningElementLmsId)
-        set({
-          _learningElementSolution: {
-            ...get()._learningElementSolution,
-            [`${learningElementLmsId}`]: learningElementSolution
-          }
-        })
-        return learningElementSolution
-      } else return cached
+      if (cached) {
+        return cached
+      }
+
+      const learningElementSolution = await fetchLearningElementSolution(learningElementLmsId)
+      set({
+        _learningElementSolution: {
+          ...get()._learningElementSolution,
+          [`${learningElementLmsId}`]: learningElementSolution
+        }
+      })
+      return learningElementSolution
     },
     setLearningElementSolution: (learningElementLmsId, solutionLmsId, activity_type) => {
       const learningElementSolution = {

@@ -1,6 +1,6 @@
 import { RingBuffer } from './RingBuffer'
 
-describe('Test the RingBuffer class', () => {
+describe('[HASKI-REQ-0090] Test the RingBuffer class', () => {
   test('RingBuffer can be created and has correct size', () => {
     const ringBuffer = new RingBuffer(10)
     expect(ringBuffer.getSize()).toBe(10)

@@ -7,7 +7,7 @@ import UnassignedItem, { ClassificationItem, DragPreview, SourceDraggable } from
 
 const originalModule = jest.requireActual('@dnd-kit/core')
 
-describe('UnassignedItem Component', () => {
+describe('[HASKI-REQ-0026] UnassignedItem Component', () => {
   const classificationItem: ClassificationItem = {
     key: 'KÜ',
     name: 'KÜ - Overview',

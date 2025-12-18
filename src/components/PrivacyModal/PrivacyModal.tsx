@@ -128,7 +128,8 @@ const PrivacyModal = ({ usePrivacyModal = _usePrivacyModal }: PrivacyModalProps)
                     display: 'flex',
                     justifyContent: 'space-between'
                   }}>
-                  <Tooltip title={t('components.PrivacyModal.returnToMoodle')}>
+                  <Tooltip
+                    title={<Typography variant="body2">{t('components.PrivacyModal.returnToMoodle')}</Typography>}>
                     <Button
                       id="decline-privacy-policy-button"
                       variant={'contained'}

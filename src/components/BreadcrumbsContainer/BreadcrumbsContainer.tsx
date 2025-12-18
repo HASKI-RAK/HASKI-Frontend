@@ -1,47 +1,18 @@
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Box, Breadcrumbs, Link } from '@common/components'
+import {
+  BreadcrumbsContainerHookReturn,
+  useBreadcrumbsContainer as _useBreadcrumbsContainer
+} from './BreadcrumbsContainer.hooks'
 
-// Regex to check if a string contains numbers
-const onlyNumbersRegex = /\d/
-
-// Check if current index is number, if yes return the previous name
-const showCurrentBreadcrump = (
-  path: string,
-  index: number,
-  array: string[],
-  navigate: NavigateFunction,
-  t: (key: string) => string,
-  isLast: boolean
-) => {
-  const label = onlyNumbersRegex.test(array[index])
-    ? t(`pages.${array[index - 1].replace(onlyNumbersRegex, '').replaceAll('/', '')}`)
-    : t(`pages.${path}`)
-
-  return isLast ? (
-    <Link id={path.concat('-link').replaceAll(' ', '-')} component={'span'} underline="always" color={'textPrimary'}>
-      {label}
-    </Link>
-  ) : (
-    <Link
-      id={path.concat('-link').replaceAll(' ', '-')}
-      key={path}
-      underline="hover"
-      component={'button'}
-      color={'textPrimary'}
-      onClick={() => {
-        navigate(
-          location.pathname
-            .split('/')
-            .slice(0, index + 1)
-            .join('/')
-        )
-      }}>
-      {label}
-    </Link>
-  )
+type BreadcrumbsContainerProps = {
+  useBreadcrumbsContainer?: () => BreadcrumbsContainerHookReturn
 }
+
+// Regex to check if a string contains only numbers
+const onlyNumbersRegex = /^\d+$/
 
 /**
  * BreadcrumbsContainer component.
@@ -55,24 +26,77 @@ const showCurrentBreadcrump = (
  *
  * @category Components
  */
-
-const BreadcrumbsContainer = () => {
-  // UX Logic
+const BreadcrumbsContainer = ({ useBreadcrumbsContainer = _useBreadcrumbsContainer }: BreadcrumbsContainerProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
+  const { course, topic } = useBreadcrumbsContainer()
+
+  // Check if current index is numbern, if yes return name of course/topic
+  const showCurrentBreadcrumb = (
+    path: string,
+    index: number,
+    array: string[],
+    locationPathname: string,
+    key: string
+  ) => {
+    const segment = array[index]
+    const prev = array[index - 1]
+    const isNumeric = onlyNumbersRegex.test(segment)
+
+    const isCourseId = isNumeric && !!course && String(course.id) === segment && prev === 'course'
+
+    const isTopicId = isNumeric && !!topic && String(topic.id) === segment && prev === 'topic'
+
+    const baseKey = (value: string) => value.replace(onlyNumbersRegex, '').replaceAll('/', '')
+
+    const getLabel = () => {
+      if (isCourseId) return course.name
+      if (isTopicId) return topic.name
+      return t(`pages.${baseKey(isNumeric ? prev : path)}`)
+    }
+
+    const id = path.concat('-link').replaceAll(' ', '-')
+
+    return index === array.length - 1 ? (
+      <Link id={id} key={key} component={'span'} underline="always" color={'textPrimary'}>
+        {getLabel()}
+      </Link>
+    ) : (
+      <Link
+        id={id}
+        key={key}
+        underline="hover"
+        component={'button'}
+        color={'textPrimary'}
+        onClick={() => {
+          navigate(
+            locationPathname
+              .split('/')
+              .slice(0, index + 1)
+              .join('/')
+          )
+        }}>
+        {getLabel()}
+      </Link>
+    )
+  }
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      {/** Center */}
       <Breadcrumbs aria-label="breadcrumb">
         {location.pathname !== '/' ? (
           location.pathname.split('/').map((path, index, array) => {
+            const key =
+              location.pathname
+                .split('/')
+                .slice(0, index + 1)
+                .join('/') || 'home'
             if (path === '')
               return (
                 <Link
                   id="home-link"
-                  key={path}
+                  key={key}
                   underline="hover"
                   color="textPrimary"
                   onClick={() => {
@@ -82,10 +106,8 @@ const BreadcrumbsContainer = () => {
                 </Link>
               )
 
-            //Do not display current path if the next is a number for example course/3
-            //In this example course will be ignored, 3 will be changed to match the previous name (course)
-            if (onlyNumbersRegex.test(array[index + 1])) return
-            else return showCurrentBreadcrump(path, index, array, navigate, t, index === array.length - 1)
+            if (onlyNumbersRegex.test(array[index + 1] ?? '')) return null
+            return showCurrentBreadcrumb(path, index, array, location.pathname, key)
           })
         ) : (
           <Box display="flex">

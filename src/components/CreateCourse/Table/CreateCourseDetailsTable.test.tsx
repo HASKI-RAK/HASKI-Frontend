@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { CreateCourseDetailsTable } from '@components'
 import { AuthContext } from '@services'
 
-describe('CreateCourseDetailsTable', () => {
+describe('[HASKI-REQ-0035] CreateCourseDetailsTable', () => {
   const selectedCourse = {
     enddate: 1702166400,
     fullname: 'Kurs-1',

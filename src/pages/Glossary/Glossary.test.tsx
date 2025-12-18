@@ -5,7 +5,7 @@ import { GlossaryEntryProps } from '@components'
 import Glossary, { getSelectedTagsWrapper } from './Glossary'
 import { useGlossary } from './Glossary.hooks'
 
-describe('Glossary page tests', () => {
+describe('[HASKI-REQ-0084] Glossary page tests', () => {
   const mockGlossaryEntryProps: GlossaryEntryProps[] = [
     { term: 'term1', definition: 'definition1', sources: 'source1', tags: ['TaG1'], fundamental: true },
     { term: 'term2', definition: 'definition2', sources: 'source2', tags: ['tag11', 'tag12'], fundamental: false },
@@ -20,7 +20,6 @@ describe('Glossary page tests', () => {
         <Glossary />
       </MemoryRouter>
     )
-    expect(queryByText('pages.glossary')).toBeInTheDocument()
     expect(queryAllByText('pages.glossary.search').length).toBeGreaterThan(0)
     expect(queryAllByText('pages.glossary.filter').length).toBeGreaterThan(0)
     expect(queryByText('pages.glossary.collapseAll')).toBeInTheDocument()

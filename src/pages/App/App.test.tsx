@@ -4,8 +4,9 @@ import { mockServices } from 'jest.setup'
 import log from 'loglevel'
 import { App } from './App'
 import { useApp } from './App.hooks'
+import { AuthContext } from '@services'
 
-describe('App tests', () => {
+describe('[HASKI-REQ-0090] App tests', () => {
   test('renders correctly', () => {
     const app = render(<App />)
     expect(app).toBeTruthy()
@@ -30,7 +31,14 @@ describe('App tests', () => {
       })
     )
 
-    const { result } = renderHook(() => useApp())
+    const { result } = renderHook(() => useApp(), {
+      wrapper: ({ children }) => (
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          {children}
+        </AuthContext.Provider>
+      )
+    })
+
     await waitFor(() => {
       expect(result.current.xAPI).toStrictEqual({
         currentLanguage: '',
@@ -55,23 +63,16 @@ describe('App tests', () => {
       .fn()
       .mockImplementationOnce(() => Promise.reject(new Error('error'))))
 
-    const { result } = renderHook(() => useApp())
+    const { result } = renderHook(() => useApp(), {
+      wrapper: ({ children }) => (
+        <AuthContext.Provider value={{ isAuth: true, setExpire: jest.fn(), logout: jest.fn() }}>
+          {children}
+        </AuthContext.Provider>
+      )
+    })
 
     await waitFor(() => {
-      expect(result.current.xAPI).toStrictEqual({
-        currentLanguage: '',
-        onError: expect.any(Function),
-        projectURL: '',
-        projectVersion: '',
-        repositories: {
-          component: '/functions/common.',
-          page: '/functions/pages.',
-          verb: '/variables/services.'
-        },
-        userID: undefined,
-        xAPI: expect.any(Object)
-      })
-
+      expect(result.current.xAPI).toStrictEqual(null)
       expect(mockfetchUser).toHaveBeenCalled()
     })
   })

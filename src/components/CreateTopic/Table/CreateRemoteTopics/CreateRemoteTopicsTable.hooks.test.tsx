@@ -3,7 +3,7 @@ import { act, renderHook } from '@testing-library/react-hooks'
 import { RemoteTopics } from '@core'
 import { useCreateRemoteTopicsTable } from './CreateRemoteTopicsTable.hooks'
 
-describe('useCreateRemoteTopicsTable', () => {
+describe('[HASKI-REQ-0036] useCreateRemoteTopicsTable', () => {
   const mockOnTopicChange = jest.fn()
 
   const mockSelectedTopics: RemoteTopics[] = [

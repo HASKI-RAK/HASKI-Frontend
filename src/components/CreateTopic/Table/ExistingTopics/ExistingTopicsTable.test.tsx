@@ -50,7 +50,7 @@ const mockExistingTopics: LearningPathTopic = {
   ]
 }
 
-describe('ExistingTopicsTable', () => {
+describe('[HASKI-REQ-0036] ExistingTopicsTable', () => {
   it('renders title', () => {
     const { getByText } = render(
       <MemoryRouter>

@@ -17,7 +17,7 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn()
 }))
 
-describe('CreateLearningElementModal Component', () => {
+describe('[HASKI-REQ-0037] CreateLearningElementModal Component', () => {
   beforeEach(() => {
     jest.clearAllTimers()
   })

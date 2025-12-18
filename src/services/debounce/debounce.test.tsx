@@ -10,7 +10,7 @@ afterEach(() => {
   jest.clearAllMocks()
 })
 
-describe('Debounce tests', () => {
+describe('[HASKI-REQ-0086] Debounce tests', () => {
   test('General functionality', () => {
     const mockFunction = jest.fn()
     const debounceReturn = debounce(mockFunction)

@@ -12,7 +12,7 @@ const learningPathElementSpecificStatus = [
 describe('LearningPathElementSlice', () => {
   mockServices.fetchLearningPathElement.mockReturnValue(learningPathElementSpecificStatus)
 
-  it('should fetch learning path from server and cache it', async () => {
+  it('[HASKI-REQ-0071] should fetch learning path from server and cache it', async () => {
     const { getLearningPathElementSpecificStatus } = useStore.getState()
 
     const courseId = '1'

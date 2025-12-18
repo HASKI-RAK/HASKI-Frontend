@@ -11,7 +11,7 @@ jest.mock('@services', () => ({
   deleteCourse: jest.fn().mockResolvedValue(undefined)
 }))
 
-describe('CourseCard Component', () => {
+describe('[HASKI-REQ-0035] CourseCard Component', () => {
   const addSnackbarMock = jest.fn()
   const mockAddSnackbar = {
     snackbarsErrorWarning: [],

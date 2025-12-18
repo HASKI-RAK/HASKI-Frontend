@@ -17,7 +17,7 @@ import {
  * # MainFrame Page
  * Wraps the application in a frame with a menu bar, breadcrumbs, local navigation and footer.
  * @remarks
- * Used in {@link pages.App | App} component.
+ * Used in {@link App} component.
  * Here the other pages get rendered. This is done by the {@link Outlet} component.
  *
  * The footer is also included.
@@ -29,9 +29,9 @@ import {
  */
 
 export const MainFrame = () => {
-  const { courseId } = useParams()
+  const { topicId } = useParams()
   const theme = useTheme()
-  const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && !!courseId
+  const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && !!topicId
 
   return (
     <>

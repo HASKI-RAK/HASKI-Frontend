@@ -8,7 +8,6 @@ import {
   CreateLearningElementSolution,
   handleError,
   IFrameModal,
-  LabeledSwitch,
   nodeTypes,
   ResponsiveMiniMap
 } from '@components'
@@ -63,7 +62,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialNodes, setInitialNodes] = useState<Node[]>()
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
-  const [isGrouped, setIsGrouped] = useState(true)
 
   const getLearningElementsWithStatus = (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
     setLearningPathElementStatus(learningPathElementStatusData)
@@ -85,8 +83,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         const { nodes, edges } = mapNodes(
           learningPathElementData,
           learningPathElementStatusData,
-          disabledClassificationsList,
-          isGrouped
+          disabledClassificationsList
         )
         setInitialNodes(nodes)
         setInitialEdges(edges)
@@ -130,7 +127,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     setInitialNodes,
     setInitialEdges,
     learningPathElementStatus,
-    isGrouped,
     learningPathElementCache,
     learningPathLearningElementStatusCache
   ])
@@ -149,7 +145,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           padding: 5,
           minZoom: 0.75,
           duration: 100,
-          nodes: [{ id: initialNodes[0].id }]
+          nodes: [{ id: initialNodes[0]?.id }]
         })
         setHasCentered(true)
       }, 100)
@@ -161,15 +157,16 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
    * @param user
    */
   const updateLearningPathElementStatus = (user: User) => {
-    getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
-      .then((data) => {
-        setLearningPathElementSpecificStatus(courseId?.toString(), user.lms_user_id, data[0]).then((data) => {
-          setLearningPathElementStatus(data)
+    courseId &&
+      getLearningPathElementSpecificStatus(courseId, user.lms_user_id, lmsId)
+        .then((data) => {
+          setLearningPathElementSpecificStatus(courseId.toString(), user.lms_user_id, data[0]).then((data) => {
+            setLearningPathElementStatus(data)
+          })
         })
-      })
-      .catch((error) => {
-        handleError(t, addSnackbar, 'error.setLearningPathElementSpecificStatus', error, 3000)
-      })
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.setLearningPathElementSpecificStatus', error, 3000)
+        })
   }
 
   // On Close of IFrameModal, fetch new LearningPathElementStatus, update it in
@@ -199,21 +196,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
             nodes: [{ id: initialNodes[0]?.id }]
           }}>
           <ResponsiveMiniMap />
-          <Background gap={16} />
-          <Panel position="top-right">
-            <LabeledSwitch
-              labelLeft={t('pages.topic.grouped')}
-              labelRight={t('pages.topic.single')}
-              isGrouped={isGrouped}
-              setIsGrouped={setIsGrouped}
-            />
-          </Panel>
           {isCourseCreatorRole && (
-            <Panel position={'top-right'} style={{ right: '2rem', top: '2.5rem' }}>
+            <Panel position={'top-right'} style={{ right: '2.5rem' }}>
               <CreateLearningElement />
               <CreateLearningElementSolution />
             </Panel>
           )}
+          <Background gap={16} />
           <Controls showInteractive={false} position="top-right" style={{ marginTop: 25 }} />
         </ReactFlow>
         <IFrameModal

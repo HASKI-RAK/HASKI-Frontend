@@ -19,6 +19,7 @@ export { fetchDefaultLearningPath, fetchDisabledClassifications, postDefaultLear
 export { fetchFavorite, putFavorite } from './Favorite'
 export { postLearningElement } from './LearningElement'
 export { deleteLearningElement } from './LearningElement'
+export * from './LearningElementRecommendation'
 export { fetchLearningElementSolution } from './LearningElementSolution'
 export { postLearningElementSolution } from './LearningElementSolution'
 export { deleteLearningElementSolution } from './LearningElementSolution'

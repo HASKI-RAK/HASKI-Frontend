@@ -21,7 +21,7 @@ jest.spyOn(React, 'useContext').mockImplementation((context) => {
   return {}
 })
 
-describe('useCreateDefaultLearningPathTable hook', () => {
+describe('[HASKI-REQ-0026] useCreateDefaultLearningPathTable hook', () => {
   it('handleToggleDisable adds and removes an item correctly', () => {
     const { result } = renderHook(() =>
       useCreateDefaultLearningPathTable({

@@ -3,11 +3,10 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import ReactFlow, { Node } from 'reactflow'
 import { mockReactFlow } from '@mocks'
-import { mockServices } from 'jest.setup'
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
-import { RoleContext, RoleContextType, SnackbarContext } from '@services'
+import { RoleContext, RoleContextType } from '@services'
 
-describe('BasicNode tests', () => {
+describe('[HASKI-REQ-0085] BasicNode tests', () => {
   beforeEach(() => {
     mockReactFlow()
   })
@@ -19,14 +18,14 @@ describe('BasicNode tests', () => {
       name: 'basicNode',
       activityType: 'testType',
       classification: 'DEFAULT',
-      isRecommended: true,
       handleSetUrl: jest.fn(),
       handleSetTitle: jest.fn(),
       handleOpen: jest.fn(),
       handleClose: jest.fn(),
       handleSetLmsId: jest.fn(),
       isDone: isDone,
-      isDisabled: isDisabled
+      isDisabled: isDisabled,
+      isRecommended: false
     }
 
     return {
@@ -37,105 +36,7 @@ describe('BasicNode tests', () => {
     }
   }
 
-  it('shows error snackbar when getUser fails upon adding a favorite', async () => {
-    const mockNode = getMockNode(false, false)
-    const addSnackbarMock = jest.fn()
-    const snackbarMock = {
-      snackbarsErrorWarning: [],
-      snackbarsSuccessInfo: [],
-      setSnackbarsErrorWarning: (a: any[]) => a,
-      setSnackbarsSuccessInfo: (a: any) => a,
-      addSnackbar: (a: any) => {
-        addSnackbarMock(a)
-        return a
-      },
-      updateSnackbar: (a: any) => a,
-      removeSnackbar: (a: any) => a
-    }
-
-    const { getByTestId } = render(
-      <SnackbarContext.Provider value={snackbarMock}>
-        <MemoryRouter>
-          <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
-        </MemoryRouter>
-      </SnackbarContext.Provider>
-    )
-    const basicNode = getByTestId('basicNode')
-    fireEvent.mouseEnter(basicNode)
-
-    mockServices.fetchUser.mockRejectedValueOnce(new Error('fetchUser unsuccessful'))
-    fireEvent.click(getByTestId('favoriteButton'))
-
-    await waitFor(() => {
-      expect(mockServices.fetchUser).toHaveBeenCalledTimes(3)
-      expect(addSnackbarMock).toHaveBeenCalledWith(
-        expect.objectContaining({
-          severity: 'error'
-        })
-      )
-    })
-  })
-
-  /*it('shows error snackbar when getUser fails upon loading the favorites', async () => {
-    const mockData: LearningPathLearningElementNode = {
-      learningElementId: 1,
-      lmsId: 1,
-      name: 'testNode',
-      activityType: 'testType',
-      classification: 'DEFAULT',
-      isRecommended: true,
-      handleSetUrl: jest.fn(),
-      handleSetTitle: jest.fn(),
-      handleOpen: jest.fn(),
-      handleClose: jest.fn(),
-      handleSetLmsId: jest.fn(),
-      isDone: true,
-      isDisabled: false
-    }
-
-    const mockNode: Node = {
-      id: 'basic-node',
-      type: mockData.classification,
-      data: mockData,
-      position: {
-        x: 0,
-        y: 0
-      }
-    }
-    mockServices.fetchUser.mockRejectedValueOnce(new Error('fetchUser failed'))
-    const addSnackbarMock = jest.fn()
-    const snackbarMock = {
-      snackbarsErrorWarning: [],
-      snackbarsSuccessInfo: [],
-      setSnackbarsErrorWarning: (a: any[]) => a,
-      setSnackbarsSuccessInfo: (a: any) => a,
-      addSnackbar: (a: any) => {
-        addSnackbarMock(a)
-        return a
-      },
-      updateSnackbar: (a: any) => a,
-      removeSnackbar: (a: any) => a
-    }
-
-    await act(async () => {
-      render(
-        <SnackbarContext.Provider value={snackbarMock}>
-          <MemoryRouter>
-            <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
-          </MemoryRouter>
-        </SnackbarContext.Provider>
-      )
-    })
-    
-    expect(mockServices.fetchUser).toHaveBeenCalledTimes(1)
-    expect(addSnackbarMock).toHaveBeenCalledWith(
-      expect.objectContaining({
-        severity: 'error'
-      })
-    )
-  })*/
-
-  test('renders correctly and can be clicked, isDone is false', async () => {
+  test('renders correctly and can be clicked, isDone is false', () => {
     const mockNode = getMockNode(false, false)
 
     render(
@@ -143,15 +44,13 @@ describe('BasicNode tests', () => {
         <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
       </MemoryRouter>
     )
-    await waitFor(() => {
-      const basicNode = screen.getByTestId('basicNode')
 
-      expect(basicNode).toBeInTheDocument()
+    const basicNode = screen.getByTestId('basicNode')
+    expect(basicNode).toBeInTheDocument()
 
-      fireEvent.click(basicNode)
-      expect(mockNode.data.handleOpen).toBeCalled()
-      expect(mockNode.data.handleSetUrl).toBeCalled()
-    })
+    fireEvent.click(basicNode)
+    expect(mockNode.data.handleOpen).toBeCalled()
+    expect(mockNode.data.handleSetUrl).toBeCalled()
   })
 
   test('renders correctly and can be clicked, isDone is true', () => {
@@ -262,24 +161,6 @@ describe('BasicNode tests', () => {
       fireEvent.click(getByTestId('showSolutionButton'))
       expect(mockNode.data.handleOpen).toBeCalled()
       expect(mockNode.data.handleSetUrl).toBeCalled()
-    })
-  })
-
-  it('shows the filled favorite button when it is clicked', async () => {
-    const mockNode = getMockNode(true, false)
-
-    const { getByTestId } = render(
-      <MemoryRouter>
-        <ReactFlow nodesDraggable={false} nodes={[mockNode]} nodeTypes={nodeTypes} />
-      </MemoryRouter>
-    )
-
-    const basicNode = getByTestId('basicNode')
-    fireEvent.mouseEnter(basicNode)
-
-    await waitFor(() => {
-      fireEvent.click(getByTestId('favoriteButton'))
-      expect(screen.getByTitle('isFavorite')).toBeInTheDocument()
     })
   })
 

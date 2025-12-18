@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { ToggleButton } from '@common/components'
 import ToggleButtonGroup from './DefaultToggleButtonGroup'
 
-describe('DefaultToggleButtonGroup tests', () => {
+describe('[HASKI-REQ-0086] DefaultToggleButtonGroup tests', () => {
   test('DefaultToggleButtonGroup renders correctly', () => {
     const toggleButtonGroup = render(
       <MemoryRouter>

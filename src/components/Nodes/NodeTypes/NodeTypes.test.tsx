@@ -15,7 +15,7 @@ import {
 } from '@common/icons'
 import { getNodeIcon } from './NodeTypes'
 
-describe('getNodeIcon', () => {
+describe('[HASKI-REQ-0085] getNodeIcon', () => {
   const fontSize = 20
 
   it('should return the correct icon component for each known key', () => {

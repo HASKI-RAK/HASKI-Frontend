@@ -4,7 +4,7 @@ import ReactFlow, { Node } from 'reactflow'
 import { mockReactFlow } from '@mocks'
 import { LearningPathLearningElementNode, nodeTypes } from '@components'
 
-describe('DefaultGroup tests', () => {
+describe('[HASKI-REQ-0085] DefaultGroup tests', () => {
   beforeEach(() => {
     mockReactFlow()
   })
@@ -15,14 +15,14 @@ describe('DefaultGroup tests', () => {
     name: 'testNode',
     activityType: 'testType',
     classification: 'GROUP',
-    isRecommended: true,
     handleSetUrl: jest.fn(),
     handleSetTitle: jest.fn(),
     handleOpen: jest.fn(),
     handleClose: jest.fn(),
     handleSetLmsId: jest.fn(),
     isDone: false,
-    isDisabled: false
+    isDisabled: false,
+    isRecommended: false
   }
 
   const mockNode: Node = {

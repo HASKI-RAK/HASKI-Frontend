@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import LinearProgressWithLabel from './LinearProgressWithLabel'
 
-describe('LinearProgressWithLabel', () => {
+describe('[HASKI-REQ-0071] LinearProgressWithLabel', () => {
   it('renders LinearProgressWithLabel', async () => {
     const { container } = render(
       <LinearProgressWithLabel

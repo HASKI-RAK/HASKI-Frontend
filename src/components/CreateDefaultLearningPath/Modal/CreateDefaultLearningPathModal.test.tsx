@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { AuthContext, RoleContext, RoleContextType, SnackbarContext } from '@services'
 import CreateDefaultLearningPathModal from './CreateDefaultLearningPathModal'
 
-describe('DefaultLearningPathModal component', () => {
+describe('[HASKI-REQ-0026] DefaultLearningPathModal component', () => {
   const handleClose = jest.fn()
 
   const courseCreatorContext = {

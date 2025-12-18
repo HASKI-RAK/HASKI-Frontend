@@ -9,7 +9,7 @@ const user = { id: 1, name: 'John Doe' }
 describe('UserSlice', () => {
   mockServices.fetchUser = jest.fn().mockResolvedValueOnce(user)
 
-  it('should fetch user from server and cache it', async () => {
+  it('[HASKI-REQ-0028] should fetch user from server and cache it', async () => {
     const { getUser } = usePersistedStore.getState()
     mockServices.fetchUser = jest.fn().mockResolvedValueOnce(user)
 
@@ -23,7 +23,7 @@ describe('UserSlice', () => {
     expect(usePersistedStore.getState()._user).toEqual(user)
   })
 
-  it('should return cached user if available', async () => {
+  it('[HASKI-REQ-0028] should return cached user if available', async () => {
     const { getUser } = usePersistedStore.getState()
 
     mockServices.fetchUser = jest.fn().mockResolvedValueOnce(user)
@@ -39,7 +39,7 @@ describe('UserSlice', () => {
     expect(cached).toEqual(user)
   })
 
-  it('should set and return the provided user without fetching', async () => {
+  it('[HASKI-REQ-0028] should set and return the provided user without fetching', async () => {
     // Define a sample user object
     const sampleUser: User = {
       id: 1,

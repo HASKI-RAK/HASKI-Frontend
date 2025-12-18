@@ -83,7 +83,7 @@ const CreateLearningElementClassificationTable = ({
 
   useEffect(() => {
     const updatedClassifications = Object.keys(selectedLearningElements).reduce((accumulator, topicId) => {
-      const topicIdInt = parseInt(topicId)
+      const topicIdInt = Number.parseInt(topicId)
       const existingClassifications = LearningElementsClassification[topicIdInt] || []
 
       // Keep only the elements that are still present in LearningElements

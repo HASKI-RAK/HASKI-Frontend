@@ -1,11 +1,11 @@
-import { memo, MouseEvent, ReactElement, ReactNode, useContext, useEffect, useState } from 'react'
+import { memo, MouseEvent, ReactElement, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Handle, NodeProps, Position } from 'reactflow'
-import { Favorite as FavoriteIcon, FavoriteBorder as FavoriteBorderIcon, Task } from '@mui/icons-material'
-import { Box, Checkbox, Collapse, Grid, IconButton, NodeWrapper, Paper, Tooltip, Typography } from '@common/components'
+import { Favorite as FavoriteIcon, FavoriteBorder as FavoriteBorderIcon } from '@mui/icons-material'
+import { Box, Checkbox, Collapse, Grid, IconButton, NodeWrapper, Tooltip, Typography } from '@common/components'
 import { useTheme } from '@common/hooks'
-import { DeleteForever, Warning } from '@common/icons'
-import { DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from '@components'
+import { DeleteForever, Task, Warning } from '@common/icons'
+import { BorderedPaper, DeleteEntityModal, getNodeIcon, LearningPathLearningElementNode } from '@components'
 import {
   deleteLearningElement,
   deleteLearningElementSolution,
@@ -17,30 +17,30 @@ import { getConfig } from '@shared'
 import { usePersistedStore, useStore } from '@store'
 
 /**
- * @prop children - The icon of the node.
- * @prop {@link NodeProps} - The props of the node.
- * @interface
+ * Props for the {@link BasicNode} component.
  */
 type BasicNodeProps = NodeProps<LearningPathLearningElementNode> & {
+  /**
+   * The icon of the node.
+   */
   icon?: ReactElement
+  /**
+   * The children of the node.
+   */
   children?: ReactNode
 }
 
 const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProps) => {
+  // Hooks
   const { t } = useTranslation()
   const theme = useTheme()
+
+  // Contexts
   const { addSnackbar } = useContext(SnackbarContext)
   const getUser = usePersistedStore((state) => state.getUser)
   const { isCourseCreatorRole, isStudentRole } = useContext(RoleContext)
 
-  const [deleteLearningElementModalOpen, setdeleteLearningElementModalOpen] = useState(false)
-  const [learningElementName, setLearningElementName] = useState<string>('')
-  const [learningElementId, setLearningElementId] = useState<number>(0)
-  const [lmsLearningElementId, setLmsLearningElementId] = useState<number>(0)
-  const [isHovered, setIsHovered] = useState(false)
-  const [solutionLmsId, setSolutionLmsId] = useState<number>(-1)
-  const [solutionActivityType, setSolutionActivityType] = useState<string>('resource')
-
+  // Store
   const clearLearningPathElement = useStore((state) => state.clearLearningPathElementCache)
   const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
   const getLearningElementSolution = useStore((state) => state.getLearningElementSolution)
@@ -49,55 +49,124 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   const favorited = usePersistedStore((state) => state.favorited)
   const isFavorite = favorited?.includes(props.data.learningElementId)
 
+  // States
+  /**
+   * Tracks whether the modal to delete a learning element is open or not.
+   */
+  const [deleteLearningElementModalOpen, setDeleteLearningElementModalOpen] = useState(false)
+  /**
+   * Stores the name of the learning element to be deleted.
+   */
+  const [learningElementName, setLearningElementName] = useState<string>('')
+  /**
+   * Stores the ID of the learning element to be deleted.
+   */
+  const [learningElementId, setLearningElementId] = useState<number>(0)
+  /**
+   * Stores the LMS ID of the learning element to be deleted.
+   */
+  const [lmsLearningElementId, setLmsLearningElementId] = useState<number>(0)
+  /**
+   * Tracks whether the node is currently hovered over or not.
+   */
+  const [isHovered, setIsHovered] = useState(false)
+  const [solutionLmsId, setSolutionLmsId] = useState<number>(-1)
+  const [solutionActivityType, setSolutionActivityType] = useState<string>('resource')
+
   // Fetch favorite status
   useEffect(() => {
-    getUser()
-      .then((user) => {
-        getFavoriteElement(user.id)
-      })
+    getUser().then((user) => {
+      getFavoriteElement(user.id)
+    })
   }, [getUser, getFavoriteElement, props.data.learningElementId, addSnackbar, t])
 
   // Handlers for hovering the node
 
-  const onMouseEnter = () => {
+  const onMouseEnter = useCallback(() => {
     setIsHovered(true)
-  }
-  const onMouseLeave = () => {
+  }, [setIsHovered])
+
+  /**
+   * Sets the hover state to false.
+   */
+  const onMouseLeave = useCallback(() => {
     setIsHovered(false)
-  }
+  }, [setIsHovered])
 
-  // Handle node click but ignore clicks that originated from the delete icon.
-  const handleNodeClick = (event: MouseEvent) => {
-    if ((event.target as HTMLElement).closest('.learning-element-delete-icon')) {
-      return // Skip the iframe action if it came from the delete button.
-    }
-    props.data.handleOpen()
-    props.data.handleSetUrl(getConfig().MOODLE + `/mod/${props.data.activityType}/view.php?id=${props.data.lmsId}`)
-    props.data.handleSetLmsId(props.data.lmsId)
-  }
+  /**
+   * Opens the iframe and sets the URL and LMS ID for the learning element.
+   *
+   * @param event - The mouse event triggered by the click.
+   */
+  const handleNodeClick = useCallback(
+    (event: MouseEvent) => {
+      // Skip the iframe action if it came from the delete button.
+      if ((event.target as HTMLElement).closest('.learning-element-delete-icon')) return
 
-  const handleOpenDeleteLearningElementModal = () => {
-    setdeleteLearningElementModalOpen(true)
+      props.data.handleOpen()
+      props.data.handleSetUrl(getConfig().MOODLE + `/mod/${props.data.activityType}/view.php?id=${props.data.lmsId}`)
+      props.data.handleSetLmsId(props.data.lmsId)
+    },
+    [
+      props.data.handleOpen,
+      props.data.handleSetUrl,
+      props.data.handleSetLmsId,
+      props.data.lmsId,
+      props.data.activityType
+    ]
+  )
+
+  /**
+   * Opens the modal to delete a learning element and sets the necessary data.
+   */
+  const handleOpenDeleteLearningElementModal = useCallback(() => {
+    setDeleteLearningElementModalOpen(true)
     setLearningElementName(props.data.name)
     setLearningElementId(props.data.learningElementId)
     setLmsLearningElementId(props.data.lmsId)
     setIsHovered(false)
-  }
+  }, [
+    setDeleteLearningElementModalOpen,
+    setLearningElementName,
+    props.data.name,
+    setLearningElementId,
+    props.data.learningElementId,
+    setLmsLearningElementId,
+    props.data.lmsId,
+    setIsHovered
+  ])
 
-  const handleAcceptDeleteLearningElementModal = (learningElementId: number, lmsLearningElementId: number) => {
-    deleteLearningElementSolution(learningElementId).then(() => {
-      deleteLearningElement(learningElementId, lmsLearningElementId).then(() => {
-        addSnackbar({
-          message: t('components.BasicNode.deleteLearningElementSuccessful'),
-          severity: 'success',
-          autoHideDuration: 5000
+  /**
+   * Deletes the learning element, closes the modal, and shows a snackbar notification.
+   *
+   * @param learningElementId - The ID of the learning element to be deleted.
+   * @param lmsLearningElementId - The LMS ID of the learning element to be deleted.
+   */
+  const handleAcceptDeleteLearningElementModal = useCallback(
+    (learningElementId: number, lmsLearningElementId: number) => {
+      deleteLearningElementSolution(learningElementId).then(() => {
+        deleteLearningElement(learningElementId, lmsLearningElementId).then(() => {
+          addSnackbar({
+            message: t('components.BasicNode.deleteLearningElementSuccessful'),
+            severity: 'success',
+            autoHideDuration: 5000
+          })
+          setDeleteLearningElementModalOpen(false)
         })
-        setdeleteLearningElementModalOpen(false)
       })
-    })
-    clearLearningPathElement()
-    clearLearningPathElementStatusCache()
-  }
+      clearLearningPathElement()
+      clearLearningPathElementStatusCache()
+    },
+    [
+      deleteLearningElementSolution,
+      deleteLearningElement,
+      addSnackbar,
+      t,
+      setDeleteLearningElementModalOpen,
+      clearLearningPathElement,
+      clearLearningPathElementStatusCache
+    ]
+  )
 
   // upon click save the favorite status in the backend and update the persted store
   const addToFavorites = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
@@ -116,6 +185,13 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
     event.stopPropagation()
   }
 
+  /* placeholder for future favorite feature
+  const addToFavorites = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    setIsFavorite(!isFavorite)
+    event.stopPropagation()
+  }
+  */
+
   const handleShowSolution = (event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     props.data.handleOpen()
     props.data.handleSetUrl(getConfig().MOODLE + `/mod/${solutionActivityType}/view.php?id=${solutionLmsId}`)
@@ -130,9 +206,12 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
     })
   }, [getLearningElementSolution, setSolutionLmsId, setSolutionActivityType, id, props])
 
-  const renderNodeStatus = () => {
+  /**
+   * Renders the status icon of the node, depending on whether it is disabled or done.
+   */
+  const renderNodeStatus = useCallback(() => {
     return props.data.isDisabled ? (
-      <Tooltip title={t('components.BasicNode.warningTooltip')}>
+      <Tooltip title={<Typography variant="body2">{t('components.BasicNode.warningTooltip')}</Typography>}>
         <Box
           sx={{
             position: 'absolute',
@@ -168,7 +247,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       </Tooltip>
     ) : (
       props.data.isDone && (
-        <Tooltip title={t('tooltip.completed')}>
+        <Tooltip title={<Typography variant="body2">{t('tooltip.completed')}</Typography>}>
           <Box
             sx={{
               position: 'absolute',
@@ -200,7 +279,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
         </Tooltip>
       )
     )
-  }
+  }, [props.data.isDisabled, props.data.isDone, t, theme])
 
   if (props.data.isDisabled && isStudentRole) {
     return null
@@ -220,7 +299,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           direction="row"
           justifyContent="flex-end"
           alignItems="center"
-          sx={{ position: 'absolute', top: '-3.25rem', left: '0.2rem' }}>
+          sx={{ position: 'absolute', top: '-3.55rem', left: '0.2rem' }}>
           {
             <IconButton
               onClick={addToFavorites}
@@ -239,7 +318,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
             </IconButton>
           }
           {solutionLmsId > 1 && (
-            <Tooltip title={t('components.BasicNode.solutionTooltip')}>
+            <Tooltip title={<Typography variant="body2">{t('components.BasicNode.solutionTooltip')}</Typography>}>
               <IconButton
                 onClick={handleShowSolution}
                 data-testid={'showSolutionButton'}
@@ -259,7 +338,10 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
           )}
           {props.children}
           {isCourseCreatorRole && (
-            <Tooltip arrow title={t('components.BasicNode.deleteTooltip')} placement="top">
+            <Tooltip
+              arrow
+              title={<Typography variant="body2">{t('components.BasicNode.deleteTooltip')}</Typography>}
+              placement="top">
               <IconButton
                 data-testid={'delete-learning-element-button'}
                 onClick={handleOpenDeleteLearningElementModal}
@@ -281,16 +363,12 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
         </Grid>
       </Collapse>
       <Handle type="target" position={Position.Top} style={{ visibility: 'hidden' }} />
-      <Paper
-        sx={{
-          width: '65px',
-          height: '65px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
+      <BorderedPaper
+        color={theme.palette.success.main}
+        isAnimated={props.data.isRecommended}
+        tooltip={t('components.BasicNode.recommendedExercise')}>
         {icon}
-      </Paper>
+      </BorderedPaper>
       <Typography variant="h6" style={{ marginLeft: '8px', color: theme.palette.secondary.contrastText }}>
         {props.data.name}
       </Typography>
@@ -298,7 +376,7 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
       {renderNodeStatus()}
       <DeleteEntityModal
         openDeleteEntityModal={deleteLearningElementModalOpen}
-        setDeleteEntityModalOpen={setdeleteLearningElementModalOpen}
+        setDeleteEntityModalOpen={setDeleteLearningElementModalOpen}
         entityName={learningElementName}
         entityId={learningElementId}
         entityLmsId={lmsLearningElementId}
@@ -309,4 +387,38 @@ const BasicNode = ({ id, icon = getNodeIcon('RQ', 50), ...props }: BasicNodeProp
   )
 }
 
+/**
+ * Basic node component for displaying learning elements in a learning path.
+ *
+ * Renders a node with an icon, name, and status indicators.
+ * Includes functionality for opening and deleting learning elements.
+ *
+ * @param props - See {@link BasicNodeProps}.
+ * @returns A basic node representing a learning element.
+ *
+ * @example
+ * ```tsx
+ * <BasicNode
+ *   id="basic-node"
+ *   icon={<Icon />}
+ *   data={
+ *     learningElementId={1}
+ *     lmsId={1}
+ *     name="Basic Node"
+ *     activityType="quiz"
+ *     classification="EK"
+ *     handleSetUrl={handleSetUrl}
+ *     handleSetTitle={handleSetTitle}
+ *     handleSetLmsId={handleSetLmsId}
+ *     handleOpen={handleOpen}
+ *     handleClose={handleClose}
+ *     isDone={false}
+ *     isDisabled={false}
+ *     isRecommended={true}
+ *   }
+ * >
+ * {children}
+ * </BasicNode>
+ * ```
+ */
 export default memo(BasicNode)

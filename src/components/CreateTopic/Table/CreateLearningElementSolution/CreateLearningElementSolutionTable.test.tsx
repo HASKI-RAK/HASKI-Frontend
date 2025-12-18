@@ -53,7 +53,6 @@ describe('CreateLearningElementSolutionTable', () => {
   const mockOnLearningElementSolutionChange = jest.fn(
     (selectedSolutions: { [key: number]: RemoteLearningElementWithSolution[] }) => {
       mockLearningElementsWithSolutions = { ...selectedSolutions } // Update the mock state
-      console.log('Updated mockLearningElementsWithSolutions:', mockLearningElementsWithSolutions) // Debugging
     }
   )
 
@@ -61,7 +60,7 @@ describe('CreateLearningElementSolutionTable', () => {
     mockLearningElementsWithSolutions = {}
   })
 
-  test('renders skeleton wehn no topics are selected', () => {
+  test('renders skeleton when no topics are selected', () => {
     render(
       <MemoryRouter>
         <CreateLearningElementSolutionTable

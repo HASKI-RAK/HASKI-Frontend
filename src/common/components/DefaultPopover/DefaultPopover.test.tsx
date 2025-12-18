@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import Popover from './DefaultPopover'
 
-describe('DefaultPopover tests', () => {
+describe('[HASKI-REQ-0086] DefaultPopover tests', () => {
   test('DefaultPopover renders correctly', () => {
     const popover = render(
       <MemoryRouter>

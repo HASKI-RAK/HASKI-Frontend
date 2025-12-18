@@ -8,7 +8,7 @@ import CreateCourseModal from './CreateCourseModal'
 
 jest.useFakeTimers()
 
-describe('CreateCourseModal', () => {
+describe('[HASKI-REQ-0035] CreateCourseModal', () => {
   const mockHandleCloseCreateCourseModal = jest.fn()
   const mockSetActiveStepCreateCourseModal = jest.fn()
 
@@ -244,8 +244,6 @@ describe('CreateCourseModal', () => {
     })
     await waitFor(() => {
       act(() => {
-        /*     const snackbarMessage = queryByText('appGlobal.dataSendUnsuccessful')
-        expect(snackbarMessage).toBeInTheDocument()*/
         expect(getByText('components.CreateCourseModal.createCourse')).not.toBeDisabled()
       })
     })
