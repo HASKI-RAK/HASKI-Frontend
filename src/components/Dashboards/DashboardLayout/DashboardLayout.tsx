@@ -1,6 +1,6 @@
-import { Box, Button, Grid } from '@mui/material' // todo: common/components
 import { useCallback } from 'react'
 import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom'
+import { Box, Button, Grid } from '@mui/material' // todo: common/components
 // todo rename to some more direct
 
 // content:
@@ -11,7 +11,7 @@ import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom'
 
 type DashboardLayoutType = {
   datePicker?: string
-  left?: string
+  left?: any
   topRight?: string
   bottomRight?: string
 }
@@ -31,12 +31,12 @@ const DashboardLayout = ({
 
   const handleClick = useCallback(() => navigate(-1), [navigate])
 
-
+  // 1 : 2 Layout?
 
   return (
     <Box sx={{ p: 2 }}>
       <Box sx={{ width: '80vw', mx: 'auto', mb: 2, display: 'flex', justifyContent: 'space-between', gap: 2 }}>
-        <Button variant="contained" disabled={location.pathname.split("/").length <= 2} onClick={handleClick}>
+        <Button variant="contained" disabled={location.pathname.split('/').length <= 2} onClick={handleClick}>
           Zurück {/* >//todo translation string */}
         </Button>
         <Box
@@ -58,12 +58,10 @@ const DashboardLayout = ({
         <Grid item xs={6} sx={{ height: '100%' }}>
           <Box
             sx={{
-              backgroundColor: 'lightgrey',
               borderRadius: 1,
               height: '100%',
               justifyContent: 'center',
               display: 'flex',
-              alignItems: 'center',
               borderColor: 'grey',
               borderWidth: 1,
               borderStyle: 'solid'
