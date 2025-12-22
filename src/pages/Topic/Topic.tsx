@@ -51,6 +51,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
 
   const learningPathElementCache = useStore((state) => state._cache_learningPathElement_record)
+  const clearLearningPathElementCache = useStore((state) => state.clearLearningPathElementCache)
   const learningPathLearningElementStatusCache = usePersistedStore((state) => state._learningPathElementStatus)
 
   const { url, title, lmsId, isOpen, handleClose, mapNodes } = useTopic()
@@ -92,10 +93,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
         handleError(t, addSnackbar, 'error.mapNodes', error, 3000)
       })
   }
-
-  // Effect to handle the fitting of the view when the topic changes with the LocalNav
-  // [handleCustomFitView] as dependency because inside of it the fitViewButton changes,
-  // that way the reactFlow background is changed before rendering it in a old position from the prev. topic
 
   // Get status of every learning element for user by request to backend
   // then get every learning element for topic by request to backend
@@ -151,6 +148,11 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
       }, 100)
     }
   }, [initialNodes, navigate, hasCentered])
+
+  //trigger refetch of learning path when user navigates away from topic page
+  useEffect(() => {
+    clearLearningPathElementCache()
+  }, [navigate])
 
   /**
    * Update the learning path element status for the user after he closes a learning Element (iframe)
