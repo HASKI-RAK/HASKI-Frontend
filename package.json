@@ -32,6 +32,7 @@
     "@nivo/network": "^0.80.0",
     "@nivo/pie": "^0.80.0",
     "@nivo/tooltip": "^0.80.0",
+    "@nivo/boxplot": "^0.99.0",
     "@xapi/xapi": "^3.0.1",
     "dayjs": "^1.11.11",
     "dayjs-timezone-iana-plugin": "^0.1.0",
