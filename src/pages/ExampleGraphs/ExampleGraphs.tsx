@@ -3,6 +3,7 @@ import { Box } from '@common/components'
 import PieChart from './PieChart'
 import DatePickerForChart from './DatePickerForChart'
 import AnzahlVersucheBarChart from './AnzahlVersucheBarChart'
+import VerbrachteZeitAlleStudentenBarChart from './VerbrachteZeitAlleStudentenBarChart'
 import { DateRange } from '../../components/DateRangePicker'
 import dayjs from 'dayjs'
 
@@ -96,6 +97,16 @@ const ExampleGraphs = () => {
           indexBy={'calendarWeek'}
           color={['#6EC6FF']}
           axisLeftText={'Anzahl Versuche'}
+          axisBottomText={'Kalenderwoche'}
+          data={dataBarChart}
+        />
+        <VerbrachteZeitAlleStudentenBarChart
+          width={750}
+          height={300}
+          keys={['Versuche']}
+          indexBy={'calendarWeek'}
+          color={['#FFAA46']}
+          axisLeftText={'Verbrachte Zeit (Stunden)'}
           axisBottomText={'Kalenderwoche'}
           data={dataBarChart}
         />
