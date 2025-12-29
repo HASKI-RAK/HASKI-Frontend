@@ -7,6 +7,7 @@ import VerbrachteZeitAlleStudentenBarChart from './VerbrachteZeitAlleStudentenBa
 import { DateRange } from '../../components/DateRangePicker'
 import dayjs from 'dayjs'
 import DurchschnittlicheBearbeitung, { PrecomputedMinMaxBoxPlotDatum } from './DurchschnittlicheBearbeitung'
+import NächsteEmpfehlungGraph from './NächsteEmpfehlung'
 
 const dataBarChart = [
   {
@@ -73,6 +74,20 @@ const precomputed: PrecomputedMinMaxBoxPlotDatum[] = [
   { group: 'Delta', subgroup: 'D', min: 2.1, q1: 3.1, median: 6.0, q3: 4.9, max: 7.8 }
 ]
 
+const treeData = {
+  name: 'nivo',
+  children: [
+    {
+      name: 'viz',
+      children: [
+        {
+          name: 'colors'
+        }
+      ]
+    }
+  ]
+}
+
 const totalHours = dataPieChart.reduce((sum, d) => sum + d.value, 0)
 
 const ExampleGraphs = () => {
@@ -125,6 +140,7 @@ const ExampleGraphs = () => {
           axisLeftText="Bearbeitungszeit (Tage)"
           axisBottomText="Studentengruppen"
         />
+        <NächsteEmpfehlungGraph width={500} height={400} data={treeData} />
       </Box>
     </Box>
   )
