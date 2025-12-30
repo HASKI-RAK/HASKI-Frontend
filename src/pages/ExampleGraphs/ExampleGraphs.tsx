@@ -75,13 +75,19 @@ const precomputed: PrecomputedMinMaxBoxPlotDatum[] = [
 ]
 
 const treeData = {
-  name: 'nivo',
+  name: 'Lernelement',
+  course: 'Kurs-1',
+  topic: 'Topic-1',
+  classification: 'AB',
   children: [
     {
-      name: 'viz',
+      name: 'Abschluss',
+      classification: 'ZF',
       children: [
         {
-          name: 'colors'
+          name: 'schule',
+          classification: 'AN',
+          children: [{ name: 'done', classification: 'EK' }]
         }
       ]
     }
