@@ -78,18 +78,21 @@ const treeData = {
   name: 'Lines of Code Übung - 1',
   course: 'Kurs-1',
   topic: 'Topic-1',
+  date: '2024-05-15',
   classification: 'ÜB',
   children: [
     {
       name: 'Lines of Code Übung - 2',
       course: 'Kurs-1',
       topic: 'Topic-1',
+      date: '2024-05-15',
       classification: 'ÜB',
       children: [
         {
           name: 'Lines of Code Selbsteinschätzungstest - 1',
           course: 'Kurs-1',
           topic: 'Topic-1',
+          date: '2024-05-20',
           classification: 'SE',
           children: [{ name: 'Markov - Erklärung', course: 'Kurs-1', topic: 'Topic-2', classification: 'EK' }]
         }
@@ -150,7 +153,7 @@ const ExampleGraphs = () => {
           axisLeftText="Bearbeitungszeit (Tage)"
           axisBottomText="Studentengruppen"
         />
-        <NächsteEmpfehlungGraph width={500} height={400} data={treeData} />
+        <NächsteEmpfehlungGraph width={700} height={400} data={treeData} />
       </Box>
     </Box>
   )
