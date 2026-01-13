@@ -4,9 +4,9 @@ import { Bar } from '@common/components'
 type BarChartProps = {
   width: number
   height: number
-  keys: string[]
+  keys: string[] // multiple keys supported
   indexBy: string
-  color: string[]
+  color: string[] // array of colors matching keys
   axisLeftText: string
   axisBottomText: string
   data: Array<Record<string, string | number>>
@@ -34,7 +34,7 @@ const AnzahlVersucheBarChart = ({
       colors={color}
       legends={[
         {
-          dataFrom: 'keys',
+          dataFrom: 'keys', // generate legend from keys
           anchor: 'bottom-right',
           direction: 'column',
           translateX: 120,
@@ -46,6 +46,8 @@ const AnzahlVersucheBarChart = ({
       axisBottom={{ legend: axisBottomText, legendOffset: 40, legendPosition: 'middle' }}
       axisLeft={{ legend: axisLeftText, legendOffset: -40, legendPosition: 'middle' }}
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+      // Enable grouped bars if multiple keys
+      groupMode="stacked"
     />
   )
 }

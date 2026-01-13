@@ -1,7 +1,6 @@
 import { memo, useState } from 'react'
 import { Box } from '@common/components'
 import { DateRangePicker } from '@components'
-
 import dayjs, { Dayjs } from 'dayjs'
 import { DateRange } from '../../components/DateRangePicker'
 
@@ -10,6 +9,8 @@ type DatePickerForChartProps = {
   initialStartDate?: Dayjs
   initialEndDate?: Dayjs
   showPresets?: boolean
+  width?: number | string
+  height?: number | string
   position?: {
     top?: string | number
     right?: string | number
@@ -23,6 +24,8 @@ const DatePickerForChart = ({
   initialStartDate = dayjs().subtract(30, 'day'),
   initialEndDate = dayjs(),
   showPresets = true,
+  width = 'auto',
+  height = 'auto',
   position = { top: 10, right: 10 }
 }: DatePickerForChartProps) => {
   const [startDate, setStartDate] = useState<Dayjs>(initialStartDate)
@@ -42,6 +45,8 @@ const DatePickerForChart = ({
     <Box
       sx={{
         position: 'absolute',
+        width,
+        height,
         ...position,
         zIndex: 10,
         bgcolor: 'background.paper',
@@ -55,7 +60,7 @@ const DatePickerForChart = ({
         endDate={endDate}
         onStartDateChange={handleStartDateChange}
         onEndDateChange={handleEndDateChange}
-        showPresets={showPresets}
+        showButtons={showPresets}
       />
     </Box>
   )

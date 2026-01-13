@@ -15,7 +15,18 @@ type DateRangePickerProps = {
   endDate: Dayjs
   onStartDateChange: (value: Dayjs) => void
   onEndDateChange: (value: Dayjs) => void
-  showPresets?: boolean
+  showButtons?: boolean
+}
+
+/* ---------- Semester helper ---------- */
+const getLastSemesterStart = (today = dayjs()): Dayjs => {
+  const year = today.year()
+  const march = dayjs(`${year}-03-01`)
+  const october = dayjs(`${year}-10-01`)
+
+  if (today.isBefore(march)) return dayjs(`${year - 1}-10-01`)
+  if (today.isBefore(october)) return march
+  return october
 }
 
 const DateRangePicker = ({
@@ -23,19 +34,29 @@ const DateRangePicker = ({
   endDate,
   onStartDateChange,
   onEndDateChange,
-  showPresets = true
+  showButtons = true
 }: DateRangePickerProps) => {
   const { t } = useTranslation()
 
-  const handlePresetClick = (days: number) => {
-    const newEndDate = dayjs()
-    const newStartDate = dayjs().subtract(days, 'day')
-    onStartDateChange(newStartDate)
-    onEndDateChange(newEndDate)
+  const handleDaysPreset = (days: number) => {
+    onStartDateChange(dayjs().subtract(days, 'day'))
+    onEndDateChange(dayjs())
   }
 
+  const handleSemesterPreset = () => {
+    onStartDateChange(getLastSemesterStart())
+    onEndDateChange(dayjs())
+  }
+
+  const presets = [
+    { days: 7, label: '7d' },
+    { days: 14, label: '14d' },
+    { days: 30, label: '30d' },
+    { days: 365, label: 'Semester' }
+  ]
+
   const datePickerSx = {
-    width: 145,
+    width: '100%', // take full width of flex item
     '& .MuiOutlinedInput-root': {
       borderRadius: 2.5,
       border: '1.5px solid',
@@ -43,9 +64,7 @@ const DateRangePicker = ({
       bgcolor: 'background.paper',
       boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
       transition: 'all 0.2s ease-in-out',
-      '& fieldset': {
-        border: 'none'
-      },
+      '& fieldset': { border: 'none' },
       '&:hover': {
         borderColor: 'primary.main',
         boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
@@ -72,97 +91,94 @@ const DateRangePicker = ({
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Grid container direction="column" wrap="nowrap" sx={{ display: 'inline-flex', gap: 0.75 }}>
-        <Grid item>
-          <Grid container wrap="nowrap" alignItems="center" sx={{ gap: 0.5 }}>
-            <Grid item>
-              <DatePicker
-                label={t('Von')}
-                value={startDate}
-                onChange={(newValue) => onStartDateChange(newValue || dayjs())}
-                slotProps={{ textField: { size: 'small', margin: 'none' } }}
-                sx={datePickerSx}
-                format="DD/MM/YYYY"
-              />
-            </Grid>
-            <Grid item>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  mt: 0.75
-                }}>
-                <ArrowForwardIcon
-                  sx={{
-                    fontSize: '1rem',
-                    color: 'text.secondary',
-                    opacity: 0.6
-                  }}
-                />
-              </Box>
-            </Grid>
-            <Grid item>
-              <DatePicker
-                label={t('Bis')}
-                value={endDate}
-                onChange={(newValue) => onEndDateChange(newValue || dayjs())}
-                minDate={startDate}
-                slotProps={{ textField: { size: 'small', margin: 'none' } }}
-                sx={datePickerSx}
-                format="DD/MM/YYYY"
-              />
-            </Grid>
-          </Grid>
+      {/* Always horizontal row */}
+      <Grid container alignItems="center" wrap="nowrap" sx={{ display: 'inline-flex', gap: 0.75 }}>
+        {/* -------- Date Pickers (flex grow evenly) -------- */}
+        <Grid item sx={{ display: 'flex', gap: 0.5, flex: 1, minWidth: 0 }}>
+          {/* Start Date */}
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <DatePicker
+              label={t('Von')}
+              value={startDate}
+              onChange={(newValue) => onStartDateChange(newValue || dayjs())}
+              slotProps={{ textField: { size: 'small', margin: 'none' } }}
+              sx={datePickerSx}
+              format="DD/MM/YYYY"
+            />
+          </Box>
+
+          {/* Arrow */}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              mt: 0.75,
+              flexShrink: 0 // arrow does not shrink
+            }}>
+            <ArrowForwardIcon sx={{ fontSize: '1rem', color: 'text.secondary', opacity: 0.6 }} />
+          </Box>
+
+          {/* End Date */}
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <DatePicker
+              label={t('Bis')}
+              value={endDate}
+              onChange={(newValue) => onEndDateChange(newValue || dayjs())}
+              minDate={startDate}
+              slotProps={{ textField: { size: 'small', margin: 'none' } }}
+              sx={datePickerSx}
+              format="DD/MM/YYYY"
+            />
+          </Box>
         </Grid>
 
-        {showPresets && (
-          <Grid item>
-            <Grid container justifyContent="center" sx={{ gap: 0.4 }}>
-              {[
-                { days: 7, label: '7d' },
-                { days: 30, label: '30d' },
-                { days: 90, label: '90d' },
-                { days: 365, label: '1y' }
-              ].map(({ days, label }) => (
-                <Grid item key={days}>
-                  <Button
-                    onClick={() => handlePresetClick(days)}
-                    variant="outlined"
-                    disableRipple
-                    sx={{
-                      px: 1,
-                      py: 0.3,
-                      minWidth: '45px',
-                      height: '24px',
-                      borderRadius: 2.5,
-                      textTransform: 'none',
-                      fontSize: '0.65rem',
-                      fontWeight: 500,
-                      lineHeight: 1,
-                      border: '1.5px solid',
-                      borderColor: 'divider',
-                      color: 'text.secondary',
-                      bgcolor: 'background.paper',
-                      boxShadow: 'none',
-                      transition: 'all 0.2s ease-in-out',
-                      textDecoration: 'none',
-                      '&:hover': {
-                        borderColor: 'primary.main',
-                        bgcolor: 'primary.main',
-                        color: 'primary.contrastText',
-                        boxShadow: 'none',
-                        textDecoration: 'none'
-                      },
-                      '&:active': {
-                        boxShadow: 'none'
-                      }
-                    }}>
-                    {label}
-                  </Button>
-                </Grid>
-              ))}
-            </Grid>
+        {/* -------- Prefix Buttons -------- */}
+        {showButtons && (
+          <Grid
+            item
+            sx={{
+              ml: 'auto',
+              pt: 0.5,
+              display: 'flex',
+              gap: 0.4
+            }}>
+            {presets.map(({ days, label }) => (
+              <Button
+                key={label}
+                onClick={() => (label === 'Semester' ? handleSemesterPreset() : handleDaysPreset(days))}
+                variant="outlined"
+                disableRipple
+                sx={{
+                  px: 1,
+                  minWidth: label === 'Semester' ? 70 : 45,
+                  height: '24px',
+                  borderRadius: 2.5,
+                  textTransform: 'none',
+                  fontSize: '0.65rem',
+                  fontWeight: 500,
+                  lineHeight: 1,
+                  border: '1.5px solid',
+                  borderColor: 'divider',
+                  color: 'text.secondary',
+                  bgcolor: 'background.paper',
+                  boxShadow: 'none',
+                  transition: 'all 0.2s ease-in-out',
+                  textDecoration: 'none',
+                  '&:hover': {
+                    borderColor: 'primary.main',
+                    bgcolor: 'primary.main',
+                    color: 'primary.contrastText',
+                    boxShadow: 'none',
+                    textDecoration: 'none'
+                  },
+                  '&:active': {
+                    boxShadow: 'none'
+                  }
+                }}>
+                {label}
+              </Button>
+            ))}
           </Grid>
         )}
       </Grid>

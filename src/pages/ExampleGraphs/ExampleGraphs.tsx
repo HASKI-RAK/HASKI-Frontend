@@ -8,6 +8,14 @@ import { DateRange } from '../../components/DateRangePicker'
 import dayjs from 'dayjs'
 import DurchschnittlicheBearbeitung, { PrecomputedMinMaxBoxPlotDatum } from './DurchschnittlicheBearbeitung'
 import NächsteEmpfehlungGraph from './NächsteEmpfehlung'
+import AbfolgeDerAbgeschlossenenKlassifikationen from './AbfolgeDerAbgeschlossenenKlassifikationen'
+
+const exampleData: Record<string, string | number>[] = [
+  { student: 'Student A', Week1: 5, Week2: 7, Week3: 3, Week4: 8 },
+  { student: 'Student B', Week1: 2, Week2: 6, Week3: 4, Week4: 5 },
+  { student: 'Student C', Week1: 8, Week2: 3, Week3: 7, Week4: 6 },
+  { student: 'Student D', Week1: 1, Week2: 4, Week3: 5, Week4: 2 }
+]
 
 const dataBarChart = [
   {
@@ -38,6 +46,16 @@ const dataBarChart = [
     calendarWeek: '38',
     Versuche: 24
   }
+]
+
+const dataBarChart_1 = [
+  { calendarWeek: '32', Versuche: 141, Versuche_1: 80 },
+  { calendarWeek: '33', Versuche: 140, Versuche_1: 50 },
+  { calendarWeek: '34', Versuche: 84, Versuche_1: 90 },
+  { calendarWeek: '35', Versuche: 109, Versuche_1: 70 },
+  { calendarWeek: '36', Versuche: 141, Versuche_1: 60 },
+  { calendarWeek: '37', Versuche: 12, Versuche_1: 20 },
+  { calendarWeek: '38', Versuche: 24, Versuche_1: 10 }
 ]
 
 const dataPieChart: { id: string; label: string; value: number; color: string }[] = [
@@ -120,6 +138,7 @@ const ExampleGraphs = () => {
       <Box sx={{ height: '500px', width: '50%', position: 'relative' }}>
         <PieChart width={500} height={500} data={dataPieChart} totalHours={totalHours} />
         <DatePickerForChart
+          width={800}
           onDateRangeChange={handleDateRangeChange}
           initialStartDate={dateRange.startDate}
           initialEndDate={dateRange.endDate}
@@ -135,6 +154,16 @@ const ExampleGraphs = () => {
           axisLeftText={'Anzahl Versuche'}
           axisBottomText={'Kalenderwoche'}
           data={dataBarChart}
+        />
+        <AnzahlVersucheBarChart
+          width={750}
+          height={300}
+          keys={['Versuche', 'Versuche_1']}
+          indexBy={'calendarWeek'}
+          color={['#6EC6FF', '#fd6ed4']}
+          axisLeftText={'Anzahl Versuche'}
+          axisBottomText={'Kalenderwoche'}
+          data={dataBarChart_1}
         />
         <VerbrachteZeitAlleStudentenBarChart
           width={750}
@@ -154,6 +183,15 @@ const ExampleGraphs = () => {
           axisBottomText="Studentengruppen"
         />
         <NächsteEmpfehlungGraph width={700} height={400} data={treeData} />
+        <AbfolgeDerAbgeschlossenenKlassifikationen
+          width={700}
+          height={400}
+          data={exampleData} // flat array
+          keys={['Week1', 'Week2', 'Week3', 'Week4']} // columns
+          indexBy="student" // row identifier
+          axisLeftText="Students"
+          axisTopText="Weeks"
+        />
       </Box>
     </Box>
   )
