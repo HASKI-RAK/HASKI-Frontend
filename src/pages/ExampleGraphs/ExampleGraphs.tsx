@@ -11,10 +11,10 @@ import NächsteEmpfehlungGraph from './NächsteEmpfehlung'
 import AbfolgeDerAbgeschlossenenKlassifikationen from './AbfolgeDerAbgeschlossenenKlassifikationen'
 
 const exampleData: Record<string, string | number>[] = [
-  { student: 'Student A', Week1: 5, Week2: 7, Week3: 3, Week4: 8 },
-  { student: 'Student B', Week1: 2, Week2: 6, Week3: 4, Week4: 5 },
-  { student: 'Student C', Week1: 8, Week2: 3, Week3: 7, Week4: 6 },
-  { student: 'Student D', Week1: 1, Week2: 4, Week3: 5, Week4: 2 }
+  { student: '1', KÜ: 5, EK: 7, SE: 3, LZ: 8 },
+  { student: '2', KÜ: 2, EK: 6, SE: 4, LZ: 5 },
+  { student: '3', KÜ: 8, EK: 3, SE: 7, LZ: 6 },
+  { student: '4', KÜ: 1, EK: 4, SE: 5, LZ: 2 }
 ]
 
 const dataBarChart = [
@@ -187,10 +187,10 @@ const ExampleGraphs = () => {
           width={700}
           height={400}
           data={exampleData} // flat array
-          keys={['Week1', 'Week2', 'Week3', 'Week4']} // columns
+          keys={['KÜ', 'EK', 'SE', 'LZ']} // columns
           indexBy="student" // row identifier
-          axisLeftText="Students"
-          axisTopText="Weeks"
+          axisLeftText="Position"
+          axisTopText="Position"
         />
       </Box>
     </Box>
