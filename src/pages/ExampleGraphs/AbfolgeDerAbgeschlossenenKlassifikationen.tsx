@@ -1,4 +1,4 @@
-import { memo, useMemo, ComponentType, ReactNode } from 'react'
+import { memo, useMemo } from 'react'
 import { HeatMap, DefaultHeatMapDatum, HeatMapSvgProps } from '@nivo/heatmap'
 
 type HeatMapInputRow = Record<string, string | number>
@@ -74,9 +74,16 @@ const AbfolgeDerAbgeschlossenenKlassifikationen = ({
         tickSize: 5,
         tickPadding: 5
       }}
-      labelTextColor={{
-        from: 'color',
-        modifiers: [['darker', 1.4]]
+      // dark text for low values, white text for values > 4
+      labelTextColor={(cell) => {
+        const v =
+          typeof cell.value === 'number'
+            ? cell.value
+            : typeof (cell as any)?.data?.y === 'number'
+            ? (cell as any).data.y
+            : Number((cell as any)?.value ?? (cell as any)?.data?.y ?? 0)
+
+        return v > 5 ? '#ffffff' : '#111111'
       }}
       valueFormat=">-.1f"
     />

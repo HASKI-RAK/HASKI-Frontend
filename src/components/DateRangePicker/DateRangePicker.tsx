@@ -55,8 +55,14 @@ const DateRangePicker = ({
     { days: 365, label: 'Semester' }
   ]
 
+  // ⬆️ bump these if you want even larger text
+  const FONT_INPUT = '0.9rem'
+  const FONT_LABEL = '0.85rem'
+  const FONT_BUTTON = '0.85rem'
+  const FONT_ARROW = '1.25rem'
+
   const datePickerSx = {
-    width: '100%', // take full width of flex item
+    width: '100%',
     '& .MuiOutlinedInput-root': {
       borderRadius: 2.5,
       border: '1.5px solid',
@@ -76,12 +82,12 @@ const DateRangePicker = ({
     },
     '& .MuiInputLabel-root': {
       color: (theme: Theme) => theme.palette.text.secondary,
-      fontSize: '0.7rem',
+      fontSize: FONT_LABEL,
       fontWeight: 500
     },
     '& .MuiOutlinedInput-input, & .MuiInputBase-input': {
-      fontSize: '0.7rem',
-      py: 0.4,
+      fontSize: FONT_INPUT,
+      py: 0.6,
       px: 1.2
     },
     '& .MuiInputLabel-root.Mui-focused': {
@@ -91,11 +97,8 @@ const DateRangePicker = ({
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      {/* Always horizontal row */}
       <Grid container alignItems="center" wrap="nowrap" sx={{ display: 'inline-flex', gap: 0.75 }}>
-        {/* -------- Date Pickers (flex grow evenly) -------- */}
         <Grid item sx={{ display: 'flex', gap: 0.5, flex: 1, minWidth: 0 }}>
-          {/* Start Date */}
           <Box sx={{ flex: 1, minWidth: 0 }}>
             <DatePicker
               label={t('Von')}
@@ -107,19 +110,17 @@ const DateRangePicker = ({
             />
           </Box>
 
-          {/* Arrow */}
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               mt: 0.75,
-              flexShrink: 0 // arrow does not shrink
+              flexShrink: 0
             }}>
-            <ArrowForwardIcon sx={{ fontSize: '1rem', color: 'text.secondary', opacity: 0.6 }} />
+            <ArrowForwardIcon sx={{ fontSize: FONT_ARROW, color: 'text.secondary', opacity: 0.6 }} />
           </Box>
 
-          {/* End Date */}
           <Box sx={{ flex: 1, minWidth: 0 }}>
             <DatePicker
               label={t('Bis')}
@@ -133,7 +134,6 @@ const DateRangePicker = ({
           </Box>
         </Grid>
 
-        {/* -------- Prefix Buttons -------- */}
         {showButtons && (
           <Grid
             item
@@ -152,10 +152,10 @@ const DateRangePicker = ({
                 sx={{
                   px: 1,
                   minWidth: label === 'Semester' ? 70 : 45,
-                  height: '24px',
+                  height: '28px', // a bit taller so bigger text fits nicely
                   borderRadius: 2.5,
                   textTransform: 'none',
-                  fontSize: '0.65rem',
+                  fontSize: FONT_BUTTON,
                   fontWeight: 500,
                   lineHeight: 1,
                   border: '1.5px solid',
