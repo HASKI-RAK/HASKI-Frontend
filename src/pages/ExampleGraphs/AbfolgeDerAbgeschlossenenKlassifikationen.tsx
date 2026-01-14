@@ -86,6 +86,24 @@ const AbfolgeDerAbgeschlossenenKlassifikationen = ({
         return v > 5 ? '#ffffff' : '#111111'
       }}
       valueFormat=">-.1f"
+      legends={[
+        {
+          anchor: 'bottom',
+          translateX: 0,
+          translateY: 30,
+          length: 400,
+          thickness: 8,
+          direction: 'row',
+          tickPosition: 'after',
+          tickSize: 3,
+          tickSpacing: 4,
+          tickOverlap: false,
+          tickFormat: '>-.2s',
+          title: 'Value →',
+          titleAlign: 'start',
+          titleOffset: 4
+        }
+      ]}
     />
   )
 }
