@@ -50,6 +50,7 @@ export { default as GlossaryIndex } from './Glossary/GlossaryIndex/GlossaryIndex
 export { default as GlossaryList } from './Glossary/GlossaryList/GlossaryList'
 export { default as IFrameModal } from './IFrameModal/IFrameModal'
 export { default as ImageCollection } from './ImageCollection/ImageCollection'
+export { default as LabeledProgressBar } from './LabeledProgressBar/LabeledProgressBar'
 export { default as LabeledSwitch } from './LabeledSwitch/LabeledSwitch'
 export { default as LanguageMenu } from './LanguageMenu/LanguageMenu'
 export { default as LocalNavBar } from './LocalNav/LocalNavBar/LocalNavBar'
