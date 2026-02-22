@@ -2,13 +2,13 @@ import { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { Node } from 'reactflow'
 import { Button, Divider, Grid, IconButton, MobileStepper, Paper } from '@common/components'
 import { Close, ExpandMore, KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
-import { ChallengeTracker, LevelBar, TopicBadgeList, VerbalProgress, XpLeaderboard } from '@components'
-import { BadgeVariant, ExperiencePointsPostResponse, LearningPathElementStatus } from '@core'
+import { LevelBar, TopicBadgeList, VerbalProgress, XpLeaderboard } from '@components'
+import { BadgeVariant, ExperiencePointsPostResponse } from '@core'
 import { ILSContext } from '@services'
 import { usePersistedStore } from '@store'
 
 type GameSidePanelProps = {
-  experiencePointDetails: ExperiencePointsPostResponse
+  experiencePointDetails?: ExperiencePointsPostResponse
   learningPathElements?: Node[]
   numberOfLearningPathElements: number
   topicId?: string

@@ -53,6 +53,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const getLearningPathElementSpecificStatus = useStore((state) => state.getLearningPathElementSpecificStatus)
   const setLearningPathElementSpecificStatus = usePersistedStore((state) => state.setLearningPathElementStatus)
   const setExperiencePoints = useStore((state) => state.setExperiencePoints)
+  const getExperiencePoints = useStore((state) => state.getExperiencePoints)
   const getTopicBadges = useStore((state) => state.getTopicBadges)
   const setStudentBadge = useStore((state) => state.setStudentBadge)
 
@@ -70,9 +71,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
   const [isGrouped, setIsGrouped] = useState(true)
-  const [experiencePointDetails, setExperiencePointDetails] = useState<ExperiencePointsPostResponse>(
-    {} as ExperiencePointsPostResponse
-  )
+  const [experiencePointDetails, setExperiencePointDetails] = useState<ExperiencePointsPostResponse | undefined>(undefined)
   const [studentBadgeKeys, setStudentBadgeKeys] = useState<BadgeVariant[]>([])
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false)
   const [learningElementEndTime, setLearningElementEndTime] = useState<Date | undefined>(undefined)
@@ -147,6 +146,28 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     learningPathElementCache,
     learningPathLearningElementStatusCache
   ])
+
+  //fetch experience points
+  useEffect(() => {
+    if(isAuth){
+      getUser().then((user) => {
+        getExperiencePoints(user.id).then((experiencePoints) => {
+          const xpDetails: ExperiencePointsPostResponse = {
+            total_xp: experiencePoints.experience_points,
+            gained_xp: 0,
+            base_xp: 0,
+            rating_points: 0,
+            score_modifier: 0,
+            attempt_xp: 0,
+            success_modifier: 0,
+            wait_bonus: 0,
+            successful_attempts: 0,
+            new_attempt: false
+          }
+          setExperiencePointDetails(xpDetails)
+        })
+    })
+  }}, [])
 
   useEffect(() => {
     setHasCentered(false)
@@ -293,13 +314,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           studentBadgeKeys={studentBadgeKeys}
         />
         <BadgeNotification badgeQueue={studentBadgeKeys} />
-        <GameFeedback
-          open={openFeedbackModal && experiencePointDetails.new_attempt}
-          onClose={handleCloseFeedbackModal}
-          experiencePointDetails={experiencePointDetails}
-          startTime={learningElementStartTime}
-          endTime={Number(learningElementEndTime)}
-        />
       </Grid>
     </Grid>
   ) : (
