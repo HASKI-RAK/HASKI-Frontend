@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
 import { Card, CardContent, Grid, Skeleton, Typography } from '@common/components'
-import { CourseCard, courseCardStyle, CreateCourseCard } from '@components'
+import { BarChart, CourseCard, courseCardStyle, CreateCourseCard } from '@components'
 import { Course } from '@core'
 import { AuthContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
@@ -38,6 +38,10 @@ export const Home = () => {
     setCreateCourseModalOpen(false)
     setActiveStepCreateCourseModal(0)
   }
+
+  const barValues = [60, 40, 30, 40, 50, 60, 70, 80, 80, 60]
+  const barLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+  const barColor = '#3f51b5'
 
   useEffect(() => {
     if (isAuth) {
@@ -80,31 +84,58 @@ export const Home = () => {
     )
   }
 
+  const coursesGrid = () => {
+    return (
+      <Grid item direction="column" spacing={2} justifyContent="center" alignItems="center" mt="1rem">
+        <Grid item>
+          {coursesLoading ? (
+            <Card sx={courseCardStyle}>
+              <Skeleton variant="rectangular" width="100%" height={118} />
+            </Card>
+          ) : courses.length === 0 ? (
+            noCourses()
+          ) : (
+            courses.map((course) => (
+              <CourseCard key={course.id} course={course} isCourseCreatorRole={isCourseCreatorRole} />
+            ))
+          )}
+          {isCourseCreatorRole && (
+            <CreateCourseCard
+              createCourseModalOpen={createCourseModalOpen}
+              handleCloseCourseModal={handleCloseCourseModal}
+              activeStepCreateCourseModal={activeStepCreateCourseModal}
+              setActiveStepCreateCourseModal={setActiveStepCreateCourseModal}
+              setCreateCourseModalOpen={setCreateCourseModalOpen}
+            />
+          )}
+        </Grid>
+      </Grid>
+    )
+  }
+
+  /*
+  -- Layout
+  <Grid container bgcolor={"green"} direction="row" height={"100%"} spacing={2}>
+      <Grid container direction={"column"} bgcolor={"red"} width={"50%"}>
+          <Grid item bgcolor={"lightGreen"} flexGrow={1}/>
+          <Grid item bgcolor={"lightBlue"} flexGrow={1}/>
+          <Grid item bgcolor={"lightPink"} flexGrow={1}/>
+      </Grid>
+      <Grid container direction={"column"} bgcolor={"blue"} width={"50%"} height={"100%"}/>
+    </Grid>
+    */
+
   // Card containing the courses with a button to the specific course
   return (
-    <Grid container direction="row" spacing={2} justifyContent="center">
-      <Grid item>
-        {coursesLoading ? (
-          <Card sx={courseCardStyle}>
-            <Skeleton variant="rectangular" width="100%" height={118} />
-          </Card>
-        ) : courses.length === 0 ? (
-          noCourses()
-        ) : (
-          courses.map((course) => (
-            <CourseCard key={course.id} course={course} isCourseCreatorRole={isCourseCreatorRole} />
-          ))
-        )}
-        {isCourseCreatorRole && (
-          <CreateCourseCard
-            createCourseModalOpen={createCourseModalOpen}
-            handleCloseCourseModal={handleCloseCourseModal}
-            activeStepCreateCourseModal={activeStepCreateCourseModal}
-            setActiveStepCreateCourseModal={setActiveStepCreateCourseModal}
-            setCreateCourseModalOpen={setCreateCourseModalOpen}
-          />
-        )}
+    <Grid container bgcolor={'green'} direction="row" height={'100%'} spacing={2}>
+      <Grid container direction={'column'} bgcolor={'red'} width={'50%'}>
+        <Grid item bgcolor={'lightGreen'} flexGrow={1}>
+          <BarChart barValues={barValues} yAxisLabels={barLabels} barColor={barColor} />
+        </Grid>
+        <Grid item bgcolor={'lightBlue'} flexGrow={1} />
+        <Grid item bgcolor={'lightPink'} flexGrow={1} />
       </Grid>
+      {coursesGrid()}
     </Grid>
   )
 }

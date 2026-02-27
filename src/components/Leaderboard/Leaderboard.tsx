@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Grid, Table, TableBody, TableCell, TableHead, TableRow } from '@common/components'
 
 export type LeaderboardEntry = {
+  rank: number
   studentId: number
   scoredValue: number
 }

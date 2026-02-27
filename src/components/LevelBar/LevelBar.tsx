@@ -2,8 +2,6 @@ import { memo, useEffect, useState } from 'react'
 import { Grid, LinearProgress, Typography } from '@common/components'
 import { ExperiencePointsPostResponse } from '@core'
 
-
-
 type LevelAnimationState = {
   currentLevel: number
   remainingExperiencePoints: number
@@ -16,8 +14,7 @@ type LevelBarProps = {
   studentId: number
 }
 
-const LevelBar = ({ studentId, experiencePointDetails}: LevelBarProps) => {
-
+const LevelBar = ({ studentId, experiencePointDetails }: LevelBarProps) => {
   const [animationState, setAnimationState] = useState<LevelAnimationState>({
     currentLevel: 0,
     remainingExperiencePoints: 0,
@@ -25,7 +22,6 @@ const LevelBar = ({ studentId, experiencePointDetails}: LevelBarProps) => {
     progressBuffer: 0
   })
   const [firstRender, setFirstRender] = useState(true)
-
 
   const xpToNextLevel = 1000
   const displayFactor = (1 / xpToNextLevel) * 100
@@ -37,15 +33,14 @@ const LevelBar = ({ studentId, experiencePointDetails}: LevelBarProps) => {
         const initialAnimationState: LevelAnimationState = {
           currentLevel: Math.floor(experiencePointDetails.total_xp / xpToNextLevel),
           remainingExperiencePoints: 0,
-          progress: (experiencePointDetails.total_xp % xpToNextLevel),
-          progressBuffer: (experiencePointDetails.total_xp % xpToNextLevel)
+          progress: experiencePointDetails.total_xp % xpToNextLevel,
+          progressBuffer: experiencePointDetails.total_xp % xpToNextLevel
         }
         setAnimationState(initialAnimationState)
         setFirstRender(false)
       }
     }
   }, [studentId, experiencePointDetails, firstRender, xpToNextLevel])
-
 
   useEffect(() => {
     console.log('experiencePointDetails changed', experiencePointDetails)
@@ -58,7 +53,6 @@ const LevelBar = ({ studentId, experiencePointDetails}: LevelBarProps) => {
       }
     })
   }, [experiencePointDetails])
-
 
   useEffect(() => {
     // If there are no remaining XP to animate, do nothing
@@ -98,7 +92,6 @@ const LevelBar = ({ studentId, experiencePointDetails}: LevelBarProps) => {
 
     return () => clearTimeout(timer)
   }, [animationState])
-
 
   return (
     <Grid container direction="column" justifyContent={'center'} alignItems={'center'} sx={{ position: 'relative' }}>

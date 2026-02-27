@@ -71,7 +71,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   const [initialEdges, setInitialEdges] = useState<Edge[]>()
   const [learningPathElementStatus, setLearningPathElementStatus] = useState<LearningPathElementStatus[]>()
   const [isGrouped, setIsGrouped] = useState(true)
-  const [experiencePointDetails, setExperiencePointDetails] = useState<ExperiencePointsPostResponse | undefined>(undefined)
+  const [experiencePointDetails, setExperiencePointDetails] = useState<ExperiencePointsPostResponse | undefined>(
+    undefined
+  )
   const [studentBadgeKeys, setStudentBadgeKeys] = useState<BadgeVariant[]>([])
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false)
   const [learningElementEndTime, setLearningElementEndTime] = useState<Date | undefined>(undefined)
@@ -149,7 +151,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
 
   //fetch experience points
   useEffect(() => {
-    if(isAuth){
+    if (isAuth) {
       getUser().then((user) => {
         getExperiencePoints(user.id).then((experiencePoints) => {
           const xpDetails: ExperiencePointsPostResponse = {
@@ -166,8 +168,9 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           }
           setExperiencePointDetails(xpDetails)
         })
-    })
-  }}, [])
+      })
+    }
+  }, [])
 
   useEffect(() => {
     setHasCentered(false)

@@ -15,13 +15,14 @@ export const useXpLeaderboard = (setIsLoading: Dispatch<SetStateAction<boolean>>
   const { addSnackbar } = useContext(SnackbarContext)
 
   const createEntries = useCallback((data: ExPointLeaderboardResponse): LeaderboardEntry[] => {
-    return data.map((entry) => ({
+    return data.leaderboard.map((entry) => ({
+      rank: entry.rank,
       studentId: entry.student_id,
-      scoredValue: entry.experience_points
+      scoredValue: entry.xp
     }))
   }, [])
 
-  const loadLeaderboard = useCallback(() => {
+  const loadLeaderboard = useCallback(async () => {
     setIsLoading(true)
     getUser().then((user) => {
       fetchXpLeaderboard(user.id)

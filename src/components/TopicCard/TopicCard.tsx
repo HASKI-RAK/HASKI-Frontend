@@ -78,13 +78,13 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
       }}>
       <CardContent>
         <Grid container direction="row" justifyContent={'space-between'} alignItems={'center'}>
-          <Grid item >
+          <Grid item>
             <Typography variant={isSmOrDown ? 'subtitle1' : 'h5'}>{topic?.name}</Typography>
           </Grid>
           <Grid item alignItems={'right'}>
             <IconButton
               sx={{
-                color: (theme) => theme.palette.text.primary,
+                color: (theme) => theme.palette.text.primary
               }}
               onClick={openMenu}
               id="topic-menu"

@@ -4,7 +4,7 @@ import { handleError } from '@components'
 import { StudentRating } from '@core'
 import { fetchStudentRatings, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
-import { LeaderboardEntry } from './Leaderboard'
+import { LeaderboardEntry } from '../Leaderboard'
 
 export const useRatingLeaderboard = (setIsLoading: Dispatch<SetStateAction<boolean>>) => {
   const getUser = usePersistedStore((state) => state.getUser)

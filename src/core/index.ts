@@ -21,6 +21,7 @@
  * ```
  * @module core
  */
+import exp from 'constants'
 import Badge from './Badge/Badge'
 import StudentBadge from './Badge/StudentBadge'
 import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
@@ -89,9 +90,24 @@ export type {
 export type { CourseReturn } from './Course/Course'
 export type { DefaultLearningPathResponse } from './DefaultLearningPath/DefaultLearningPath'
 export type { ExperiencePointsReturn } from './ExperiencePoints/ExperiencePoints'
-export type { ExPointLeaderboardResponse, ExPointLeaderboardReturn } from './ExperiencePoints/ExperiencePoints'
 export type { ExperiencePointsPostResponse, ExperiencePointsPostReturn } from './ExperiencePoints/ExperiencePointsPost'
-export type { LeaderboardReturn } from './Leaderboard/Leaderboard'
+export type {
+  BadgeLeaderboardEntry,
+  BadgeLeaderboardResponse,
+  BadgeLeaderboardReturn
+} from './Leaderboard/BadgeLeaderboard'
+export type {
+  GroupLeaderboardEntry,
+  GroupLeaderboardResponse,
+  GroupLeaderboardReturn
+} from './Leaderboard/GroupLeaderboard'
+export type {
+  ExPointLeaderboardResponse,
+  ExPointLeaderboardReturn,
+  LeaderboardReturn,
+  League,
+  XpLeaderboardEntry
+} from './Leaderboard/Leaderboard'
 export * from './LearningElementRecommendation'
 export type { LearningPathLearningElementAlgorithmReturn } from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
 export type { StudentLpLeAlgorithmReturn } from './LearningPathAlgorithm/StudentLpLeAlgorithm'

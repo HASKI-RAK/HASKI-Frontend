@@ -82,7 +82,11 @@ const GameSidePanel = ({
       <LevelBar studentId={studentId} experiencePointDetails={experiencePointDetails}></LevelBar>
       <Divider sx={{ marginTop: '0.5rem', mB: '0.5rem' }} />
       {studentId && topicId && elementVisibility.showBadges ? (
-        <TopicBadgeList studentId={studentId} topicId={topicId ? Number(topicId) : undefined} badgesAsKeys={studentBadgeKeys} />
+        <TopicBadgeList
+          studentId={studentId}
+          topicId={topicId ? Number(topicId) : undefined}
+          badgesAsKeys={studentBadgeKeys}
+        />
       ) : (
         <VerbalProgress
           learningPathElements={learningPathElements}
@@ -106,7 +110,7 @@ const GameSidePanel = ({
         right: 0,
         top: '10rem',
         width: '25rem',
-        height:  !elementVisibility.showLeaderboard ? '15rem' : '20rem',
+        height: !elementVisibility.showLeaderboard ? '15rem' : '20rem',
         position: 'absolute',
         mr: '1rem'
       }}>
