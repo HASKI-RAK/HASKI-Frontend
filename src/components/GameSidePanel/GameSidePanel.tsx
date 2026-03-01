@@ -1,11 +1,12 @@
-import { memo, useCallback, useContext, useEffect, useState } from 'react'
+import { memo, useContext, useEffect, useState } from 'react'
 import { Node } from 'reactflow'
-import { Button, Divider, Grid, IconButton, MobileStepper, Paper } from '@common/components'
-import { Close, ExpandMore, KeyboardArrowLeft, KeyboardArrowRight } from '@common/icons'
-import { LevelBar, TopicBadgeList, VerbalProgress, XpLeaderboard } from '@components'
+import { Divider, Grid, IconButton, Paper } from '@common/components'
+import { Close, ExpandMore } from '@common/icons'
+import { LevelBar, TopicBadgeList, VerbalProgress } from '@components'
 import { BadgeVariant, ExperiencePointsPostResponse } from '@core'
 import { ILSContext } from '@services'
 import { usePersistedStore } from '@store'
+import { useGameSidePanel } from './GameSidePanelHooks'
 
 type GameSidePanelProps = {
   experiencePointDetails?: ExperiencePointsPostResponse
@@ -43,7 +44,6 @@ const GameSidePanel = ({
     verbalInput
   } = useContext(ILSContext)
 
-  const [activeStep, setActiveStep] = useState<number>(0)
   const [expanded, setExpanded] = useState<boolean>(true)
   const [studentId, setStudentId] = useState<number>(0)
   const [elementVisibility, setElementVisibility] = useState<gameElementVisibility>({
@@ -54,13 +54,7 @@ const GameSidePanel = ({
     showBadges: false
   })
 
-  const handleNext = useCallback(() => {
-    setActiveStep((prev) => prev + 1)
-  }, [])
-
-  const handleBack = useCallback(() => {
-    setActiveStep((prev) => prev - 1)
-  }, [])
+  const { collapse, expand } = useGameSidePanel({ setExpanded })
 
   useEffect(() => {
     // fetching user ID to use as student ID since they tend to be the same
@@ -77,32 +71,6 @@ const GameSidePanel = ({
     })
   }, [ILSContext, getUser])
 
-  const FirstPage = (
-    <>
-      <LevelBar studentId={studentId} experiencePointDetails={experiencePointDetails}></LevelBar>
-      <Divider sx={{ marginTop: '0.5rem', mB: '0.5rem' }} />
-      {studentId && topicId && elementVisibility.showBadges ? (
-        <TopicBadgeList
-          studentId={studentId}
-          topicId={topicId ? Number(topicId) : undefined}
-          badgesAsKeys={studentBadgeKeys}
-        />
-      ) : (
-        <VerbalProgress
-          learningPathElements={learningPathElements}
-          numberOfLearningPathElements={numberOfLearningPathElements}
-        />
-      )}
-    </>
-  )
-
-  const SecondPage = (
-    <>
-      <XpLeaderboard></XpLeaderboard>
-      <Grid sx={{ mt: '0.5rem', mb: '9.5rem' }}></Grid>
-    </>
-  )
-
   const expandedSidePanel = (
     <Paper
       elevation={2}
@@ -110,7 +78,7 @@ const GameSidePanel = ({
         right: 0,
         top: '10rem',
         width: '25rem',
-        height: !elementVisibility.showLeaderboard ? '15rem' : '20rem',
+        height: '20rem',
         position: 'absolute',
         mr: '1rem'
       }}>
@@ -132,24 +100,18 @@ const GameSidePanel = ({
             <Close />
           </IconButton>
         </Grid>
-        {activeStep === 0 && FirstPage}
-        {activeStep === 1 && SecondPage}
-        {elementVisibility.showLeaderboard && (
-          <MobileStepper
-            variant="dots"
-            steps={2}
-            activeStep={activeStep}
-            nextButton={
-              <Button onClick={handleNext} disabled={activeStep >= 1}>
-                <KeyboardArrowRight />
-              </Button>
-            }
-            backButton={
-              <Button onClick={handleBack} disabled={activeStep <= 0}>
-                <KeyboardArrowLeft />
-              </Button>
-            }
-            sx={{ position: 'absolute', bottom: '0.5rem', border: 'none', mr: '1rem', ml: '1rem' }}
+        <LevelBar studentId={studentId} experiencePointDetails={experiencePointDetails}></LevelBar>
+        <Divider sx={{ marginTop: '0.5rem', mB: '0.5rem' }} />
+        {studentId && topicId && elementVisibility.showBadges ? (
+          <TopicBadgeList
+            studentId={studentId}
+            topicId={topicId ? Number(topicId) : undefined}
+            badgesAsKeys={studentBadgeKeys}
+          />
+        ) : (
+          <VerbalProgress
+            learningPathElements={learningPathElements}
+            numberOfLearningPathElements={numberOfLearningPathElements}
           />
         )}
       </Grid>
