@@ -1,17 +1,22 @@
 import { Dispatch, memo, SetStateAction, useContext, useEffect, useState } from 'react'
 import { Divider, Grid, IconButton, Paper } from '@common/components'
 import { Close } from '@common/icons'
-import { LevelBar, TopicBadgeList } from '@components'
-import { BadgeVariant, ExperiencePointsPostResponse } from '@core'
-import { useGameSidePanel } from './GameSidePanelHooks'
+import { EarnedXpDisplay, LevelBar } from '@components'
+import { ExperiencePointsPostResponse } from '@core'
 
 type ExpandedGameSidePanelProps = {
+  attemptDuration?: number
   collapse: Dispatch<SetStateAction<boolean>>
   studentId: number
   experiencePointDetails?: ExperiencePointsPostResponse
 }
 
-const ExpandedGameSidePanel = ({ collapse, studentId, experiencePointDetails }: ExpandedGameSidePanelProps) => {
+const ExpandedGameSidePanel = ({
+  attemptDuration,
+  collapse,
+  studentId,
+  experiencePointDetails
+}: ExpandedGameSidePanelProps) => {
   return (
     <Paper
       elevation={2}
@@ -43,6 +48,7 @@ const ExpandedGameSidePanel = ({ collapse, studentId, experiencePointDetails }: 
         </Grid>
         <LevelBar studentId={studentId} experiencePointDetails={experiencePointDetails}></LevelBar>
         <Divider sx={{ marginTop: '0.5rem', mB: '0.5rem' }} />
+        <EarnedXpDisplay experiencePointDetails={experiencePointDetails} attemptDuration={attemptDuration} />
       </Grid>
     </Paper>
   )

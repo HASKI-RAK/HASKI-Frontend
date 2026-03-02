@@ -21,7 +21,6 @@
  * ```
  * @module core
  */
-import exp from 'constants'
 import Badge from './Badge/Badge'
 import StudentBadge from './Badge/StudentBadge'
 import LearningPathBasedOn from './CalculateLearningPath/LearningPathBasedOn'
@@ -29,6 +28,7 @@ import Course, { CourseResponse } from './Course/Course'
 import DefaultLearningPath from './DefaultLearningPath/DefaultLearningPath'
 import { ExperiencePoints } from './ExperiencePoints/ExperiencePoints'
 import { ExperiencePointsPostData } from './ExperiencePoints/ExperiencePointsPost'
+import GamificationSettings from './GamificationSettings.ts/GamificationSettings'
 import Leaderboard from './Leaderboard/Leaderboard'
 import LearningElement from './LearningElement/LearningElement'
 import LearningPathLearningElementAlgorithm from './LearningPathAlgorithm/LearningPathLearningElementAlgorithm'
@@ -58,6 +58,7 @@ export type {
   DefaultLearningPath,
   ExperiencePoints,
   ExperiencePointsPostData,
+  GamificationSettings,
   ILS,
   Leaderboard,
   LearningElement,
@@ -91,6 +92,11 @@ export type { CourseReturn } from './Course/Course'
 export type { DefaultLearningPathResponse } from './DefaultLearningPath/DefaultLearningPath'
 export type { ExperiencePointsReturn } from './ExperiencePoints/ExperiencePoints'
 export type { ExperiencePointsPostResponse, ExperiencePointsPostReturn } from './ExperiencePoints/ExperiencePointsPost'
+export type {
+  GamificationSettingsPostResponse,
+  GamificationSettingsPostReturn,
+  GamificationSettingsReturn
+} from './GamificationSettings.ts/GamificationSettings'
 export type {
   BadgeLeaderboardEntry,
   BadgeLeaderboardResponse,

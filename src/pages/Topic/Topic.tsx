@@ -2,11 +2,12 @@ import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
+import { time } from 'console'
+import { start } from 'repl'
 import { Grid, Skeleton } from '@common/components'
 import {
   BadgeNotification,
   CreateLearningElement,
-  GameFeedback,
   GameSidePanel,
   handleError,
   IFrameModal,
@@ -75,20 +76,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
     undefined
   )
   const [studentBadgeKeys, setStudentBadgeKeys] = useState<BadgeVariant[]>([])
-  const [openFeedbackModal, setOpenFeedbackModal] = useState(false)
-  const [learningElementEndTime, setLearningElementEndTime] = useState<Date | undefined>(undefined)
-  const [numberOfLearningPathElements, setNumberOfLearningPathElements] = useState<number>(0)
-
-  const handleCloseFeedbackModal = () => {
-    setOpenFeedbackModal(false)
-  }
+  const [timeSpentOnTask, setTimeSpentOnTask] = useState<number>(0)
 
   const getLearningElementsWithStatus = (learningPathElementStatusData: LearningPathElementStatus[], user: User) => {
     setLearningPathElementStatus(learningPathElementStatusData)
 
     getLearningPathElement(user.settings.user_id, user.lms_user_id, user.id, courseId, topicId)
       .then((learningPathElementData) => {
-        setNumberOfLearningPathElements(learningPathElementData.path.length)
         if (learningPathElementData.based_on === 'default') {
           return getDefaultLearningPath(user.settings.user_id, user.lms_user_id).then((defaultLearningPath) => {
             const disabledClassificationsList = defaultLearningPath
@@ -214,10 +208,13 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // the persisted store and return it. Then close the IFrameModal and rerender page.
   // Catch for getUser is handled in the useEffect
   const getHandleClose = () => {
-    setLearningElementEndTime(new Date())
+    const timeStamp = Date.now()
+    const timeSpent = timeStamp - learningElementStartTime
+    setTimeSpentOnTask(timeSpent)
     getUser().then((user) => {
-      // user.id used as studentId should maybe be replaced in the future
-      if (courseId && topicId) {
+      // user.id is student_id
+      // Only post experience points if user spen at least three seconds on a learning element
+      if (courseId && topicId && timeSpent > 3000) {
         postExperiencePoints(user.id, {
           course_id: Number.parseInt(courseId),
           learning_element_id: lmsId,
@@ -232,7 +229,6 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
               student_id: user.id
             } as ExperiencePoints)
             setExperiencePointDetails(experiencePoints)
-            setOpenFeedbackModal(true)
           })
           .catch((error) => {
             // TODO: translation string missing
@@ -309,13 +305,7 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
           key={url}
           learningElementId={lmsId}
         />
-        <GameSidePanel
-          experiencePointDetails={experiencePointDetails}
-          learningPathElements={initialNodes}
-          topicId={topicId}
-          numberOfLearningPathElements={numberOfLearningPathElements}
-          studentBadgeKeys={studentBadgeKeys}
-        />
+        <GameSidePanel experiencePointDetails={experiencePointDetails} attemptDuration={timeSpentOnTask} />
         <BadgeNotification badgeQueue={studentBadgeKeys} />
       </Grid>
     </Grid>

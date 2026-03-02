@@ -1,19 +1,14 @@
 import { memo, useContext, useEffect, useState } from 'react'
-import { Node } from 'reactflow'
-import { Divider, Grid, IconButton, Paper } from '@common/components'
-import { Close, ExpandMore } from '@common/icons'
-import { LevelBar, TopicBadgeList, VerbalProgress } from '@components'
-import { BadgeVariant, ExperiencePointsPostResponse } from '@core'
+import { ExperiencePointsPostResponse } from '@core'
 import { ILSContext } from '@services'
 import { usePersistedStore } from '@store'
+import CollapsedGameSidePanel from './CollapsedGameSidePanel'
+import ExpandedGameSidePanel from './ExpandedGameSidePanel'
 import { useGameSidePanel } from './GameSidePanelHooks'
 
 type GameSidePanelProps = {
+  attemptDuration?: number
   experiencePointDetails?: ExperiencePointsPostResponse
-  learningPathElements?: Node[]
-  numberOfLearningPathElements: number
-  topicId?: string
-  studentBadgeKeys: BadgeVariant[]
 }
 
 type gameElementVisibility = {
@@ -24,13 +19,7 @@ type gameElementVisibility = {
   showBadges: boolean
 }
 
-const GameSidePanel = ({
-  experiencePointDetails,
-  learningPathElements,
-  numberOfLearningPathElements,
-  topicId,
-  studentBadgeKeys
-}: GameSidePanelProps) => {
+const GameSidePanel = ({ attemptDuration, experiencePointDetails }: GameSidePanelProps) => {
   const getUser = usePersistedStore((state) => state.getUser)
 
   const {
@@ -71,75 +60,20 @@ const GameSidePanel = ({
     })
   }, [ILSContext, getUser])
 
-  const expandedSidePanel = (
-    <Paper
-      elevation={2}
-      sx={{
-        right: 0,
-        top: '10rem',
-        width: '25rem',
-        height: '20rem',
-        position: 'absolute',
-        mr: '1rem'
-      }}>
-      <Grid
-        container
-        item
-        direction="column"
-        sx={{
-          mt: '0.5rem',
-          ml: '1rem',
-          mr: '1rem',
-          width: '100%',
-          boxSizing: 'border-box',
-          overflow: 'hidden',
-          maxWidth: '22rem'
-        }}>
-        <Grid container justifyContent={'right'} sx={{ mb: '1rem' }}>
-          <IconButton onClick={() => setExpanded(false)} sx={{ position: 'absolute', right: 0, top: 0 }}>
-            <Close />
-          </IconButton>
-        </Grid>
-        <LevelBar studentId={studentId} experiencePointDetails={experiencePointDetails}></LevelBar>
-        <Divider sx={{ marginTop: '0.5rem', mB: '0.5rem' }} />
-        {studentId && topicId && elementVisibility.showBadges ? (
-          <TopicBadgeList
-            studentId={studentId}
-            topicId={topicId ? Number(topicId) : undefined}
-            badgesAsKeys={studentBadgeKeys}
-          />
-        ) : (
-          <VerbalProgress
-            learningPathElements={learningPathElements}
-            numberOfLearningPathElements={numberOfLearningPathElements}
-          />
-        )}
-      </Grid>
-    </Paper>
+  return (
+    <>
+      {expanded ? (
+        <ExpandedGameSidePanel
+          attemptDuration={attemptDuration}
+          collapse={collapse}
+          studentId={studentId}
+          experiencePointDetails={experiencePointDetails}
+        />
+      ) : (
+        <CollapsedGameSidePanel expand={expand} />
+      )}
+    </>
   )
-
-  const collapsedSidePanel = (
-    <Paper
-      elevation={2}
-      sx={{
-        right: 0,
-        top: '10rem',
-        width: '2.5rem',
-        height: '2.5rem',
-        position: 'absolute',
-        mr: '1rem'
-      }}>
-      <Grid container item direction="column" sx={{ mt: '0.5rem', ml: '1rem', mr: '1rem' }}>
-        <Grid container justifyContent={'right'} sx={{ mb: '1rem' }}>
-          <IconButton onClick={() => setExpanded(true)} sx={{ position: 'absolute', right: 0, top: 0 }}>
-            <ExpandMore />
-          </IconButton>
-        </Grid>
-      </Grid>
-    </Paper>
-  )
-
-  return <>{expanded ? expandedSidePanel : collapsedSidePanel}</>
 }
 
 export default memo(GameSidePanel)
