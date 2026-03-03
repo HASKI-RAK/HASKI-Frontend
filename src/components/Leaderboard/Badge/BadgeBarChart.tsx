@@ -8,7 +8,7 @@ import { usePersistedStore } from '@store'
 
 //Todo: translations
 
-export const BadgeGraph = () => {
+export const BadgeBarChart = () => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
 
@@ -70,4 +70,4 @@ export const BadgeGraph = () => {
   )
 }
 
-export default memo(BadgeGraph)
+export default memo(BadgeBarChart)

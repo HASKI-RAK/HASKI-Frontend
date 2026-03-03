@@ -8,6 +8,7 @@ import {
   Glossary,
   Home,
   Imprint,
+  LeaderboardDashboard,
   LearnerCharacteristics,
   Login,
   MainFrame,
@@ -61,6 +62,7 @@ export const App = () => {
                         <Route path="/glossary" element={<Glossary />} />
                         <Route path="/aboutus" element={<AboutUs />} />
                         <Route path="/imprint" element={<Imprint />} />
+                        <Route path="/leaderboard" element={<LeaderboardDashboard />} />
                         <Route path="/learnercharacteristics" element={<LearnerCharacteristics />} />
                         <Route path="/rating" element={<Rating />} />
                         <Route path="/privacypolicy" element={<PrivacyPolicy />} />

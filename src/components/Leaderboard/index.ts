@@ -1,3 +1,6 @@
+export { default as BadgeBarChart } from './Badge/BadgeBarChart'
+export { default as BadgeLeaderboard } from './Badge/BadgeLeaderboard'
 export { default as Leaderboard } from './Leaderboard'
 export { default as RatingLeaderboard } from './Rating/RatingLeaderboard'
-export { default as XpLeaderboard } from './XpLeaderboard'
+export { default as XpBarChart } from './Xp/XpBarChart'
+export { default as XpLeaderboard } from './Xp/XpLeaderboard'

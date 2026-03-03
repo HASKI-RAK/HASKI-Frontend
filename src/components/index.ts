@@ -59,7 +59,14 @@ export { default as IFrameModal } from './IFrameModal/IFrameModal'
 export { default as ImageCollection } from './ImageCollection/ImageCollection'
 export { default as LabeledSwitch } from './LabeledSwitch/LabeledSwitch'
 export { default as LanguageMenu } from './LanguageMenu/LanguageMenu'
-export { Leaderboard, RatingLeaderboard, XpLeaderboard } from './Leaderboard'
+export {
+  BadgeBarChart,
+  BadgeLeaderboard,
+  Leaderboard,
+  RatingLeaderboard,
+  XpBarChart,
+  XpLeaderboard
+} from './Leaderboard'
 export { default as LevelBar } from './LevelBar/LevelBar'
 export { default as LocalNavBar } from './LocalNav/LocalNavBar/LocalNavBar'
 export { default as LocalNavItem } from './LocalNav/LocalNavItem/LocalNavItem'
