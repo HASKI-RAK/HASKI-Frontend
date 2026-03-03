@@ -1,19 +1,18 @@
 type GamificationSettings = {
-  student_id: number
-  presentation: string
-  social: string
-  information: string
+  id?: number
+  student_id?: number
+  presentation?: string
+  social?: string
+  information?: string
+  message?: string
 }
 
-type EmptyReturn = Record<string, never>
+type GamificationSettingsReturn = (studentId: number) => Promise<GamificationSettings>
 
-type GamificationSettingsReturn = (studentId: number) => Promise<GamificationSettings | EmptyReturn>
-
-type GamificationSettingsPostResponse = {
-  message: string
-}
-
-type GamificationSettingsPostReturn = (studentId: number, gamificationSettings: GamificationSettings) => Promise<GamificationSettingsPostResponse>
+type GamificationSettingsPostReturn = (
+  studentId: number,
+  gamificationSettings: GamificationSettings
+) => Promise<GamificationSettings>
 
 export default GamificationSettings
-export type { GamificationSettingsPostResponse, GamificationSettingsPostReturn, GamificationSettingsReturn }
+export type { GamificationSettingsPostReturn, GamificationSettingsReturn }

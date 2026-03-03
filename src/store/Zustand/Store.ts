@@ -7,6 +7,7 @@ import CourseSlice, { createCourseSlice } from '../Slices/CourseSlice'
 import { CoursesSlice, createCoursesSlice } from '../Slices/CoursesSlice'
 import { createDefaultLearningPathSlice, DefaultLearningPathSlice } from '../Slices/DefaultLearningPathSlice'
 import { createExperiencePointsSlice, ExperiencePointsSlice } from '../Slices/ExperiencePointsSlice'
+import { createGamificationSettingsSlice, GamificationSettingsSlice } from '../Slices/GamificationSettingsSlice'
 import { createILSSlice, ILSSlice } from '../Slices/ILSSlice'
 import { createLearningPathElementSlice, LearningPathElementSlice } from '../Slices/LearningPathElementSlice'
 import LearningPathElementSpecificStatusSlice, {
@@ -41,7 +42,8 @@ export type PersistedStoreState = UserSlice &
   AuthSlice &
   LearningPathElementStatusSlice &
   DefaultLearningPathSlice &
-  ILSSlice
+  ILSSlice &
+  GamificationSettingsSlice
 export type SessionStoreState = NewsSlice
 
 export const resetters: (() => void)[] = []
@@ -69,12 +71,14 @@ export const usePersistedStore = create<PersistedStoreState>()(
         ...createLearningPathElementStatusSlice(...a),
         ...createAuthSlice(...a),
         ...createDefaultLearningPathSlice(...a),
-        ...createILSSlice(...a)
+        ...createILSSlice(...a),
+        ...createGamificationSettingsSlice(...a)
       }),
       {
         name: 'persisted_storage',
         // Here we can whitelist the keys we want to persist
         partialize: (state) => ({
+          _gamificationSettings: state._cache_gamificationSettings_record,
           _ils: state._ils,
           _user: state._user,
           _learningPathElementStatus: state._learningPathElementStatus,

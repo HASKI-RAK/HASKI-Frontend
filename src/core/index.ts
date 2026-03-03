@@ -93,7 +93,6 @@ export type { DefaultLearningPathResponse } from './DefaultLearningPath/DefaultL
 export type { ExperiencePointsReturn } from './ExperiencePoints/ExperiencePoints'
 export type { ExperiencePointsPostResponse, ExperiencePointsPostReturn } from './ExperiencePoints/ExperiencePointsPost'
 export type {
-  GamificationSettingsPostResponse,
   GamificationSettingsPostReturn,
   GamificationSettingsReturn
 } from './GamificationSettings.ts/GamificationSettings'
