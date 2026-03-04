@@ -15,7 +15,7 @@ const EarnedXpDisplay = ({ experiencePointDetails, attemptDuration }: EarnedXpDi
 
   return experiencePointDetails ? (
     <Grid sx={{ p: '1rem', mt: '1rem' }}>
-      <Typography variant="h6">{`${experiencePointDetails.gained_xp} XP`}</Typography>
+      <Typography variant="h6">{`${Math.ceil(experiencePointDetails.gained_xp)} XP`}</Typography>
       {experiencePointDetails.rating_points > 0 && (
         <>
           <Typography variant="body1">
@@ -25,7 +25,7 @@ const EarnedXpDisplay = ({ experiencePointDetails, attemptDuration }: EarnedXpDi
             {`${t('components.EarnedXpDisplay.scoreModifier')}: ${experiencePointDetails.score_modifier}`}
           </Typography>
           <Typography variant="body1">
-            {`${t('components.EarnedXpDisplay.attemptXp')}: ${experiencePointDetails.attempt_xp}`}
+            {`${t('components.EarnedXpDisplay.attemptXp')}: ${Math.ceil(experiencePointDetails.attempt_xp)}`}
           </Typography>
           <Typography variant="body1">
             {`${t('components.EarnedXpDisplay.successModifier')}: ${experiencePointDetails.success_modifier}`}

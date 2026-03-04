@@ -1,5 +1,5 @@
 import { memo, useContext, useEffect, useState } from 'react'
-import { ExperiencePointsPostResponse } from '@core'
+import { ExperiencePointsPostResponse, GamificationSettings } from '@core'
 import { ILSContext } from '@services'
 import { usePersistedStore } from '@store'
 import CollapsedGameSidePanel from './CollapsedGameSidePanel'
@@ -11,37 +11,19 @@ type GameSidePanelProps = {
   experiencePointDetails?: ExperiencePointsPostResponse
 }
 
-type gameElementVisibility = {
-  showLevelBar: boolean
-  showChallengeTracker: boolean
-  showLeaderboard: boolean
-  showProgress: boolean
-  showBadges: boolean
-}
-
 const GameSidePanel = ({ attemptDuration, experiencePointDetails }: GameSidePanelProps) => {
   const getUser = usePersistedStore((state) => state.getUser)
+  const getGamificationSettings = usePersistedStore((state) => state.getGamificationSettings)
 
   const {
-    activeProcessing,
     reflectiveProcessing,
     sensingPerception,
-    intuitivePerception,
-    sequentialUnderstanding,
-    globalUnderstanding,
-    visualInput,
     verbalInput
   } = useContext(ILSContext)
 
   const [expanded, setExpanded] = useState<boolean>(true)
   const [studentId, setStudentId] = useState<number>(0)
-  const [elementVisibility, setElementVisibility] = useState<gameElementVisibility>({
-    showLevelBar: false,
-    showChallengeTracker: false,
-    showLeaderboard: false,
-    showProgress: false,
-    showBadges: false
-  })
+  const [showExperiencePointDetails, setShowExperiencePointDetails] = useState<boolean>(false)
 
   const { collapse, expand } = useGameSidePanel({ setExpanded })
 
@@ -50,14 +32,12 @@ const GameSidePanel = ({ attemptDuration, experiencePointDetails }: GameSidePane
     // should be replaced in the future
     getUser().then((user) => {
       setStudentId(user.id)
+      getGamificationSettings(user.id).then((gamificationSettings: GamificationSettings) => {
+        const showDetailedInformation = gamificationSettings.information === 'detailed'
+        setShowExperiencePointDetails(showDetailedInformation || reflectiveProcessing || sensingPerception || verbalInput)
+      })
     })
-    setElementVisibility({
-      showLevelBar: sensingPerception || intuitivePerception || sequentialUnderstanding || visualInput || verbalInput,
-      showChallengeTracker: activeProcessing || sensingPerception || intuitivePerception || verbalInput,
-      showLeaderboard: activeProcessing || intuitivePerception || sequentialUnderstanding,
-      showProgress: reflectiveProcessing || globalUnderstanding || visualInput,
-      showBadges: sensingPerception || sequentialUnderstanding || visualInput
-    })
+    
   }, [ILSContext, getUser])
 
   return (
@@ -68,6 +48,7 @@ const GameSidePanel = ({ attemptDuration, experiencePointDetails }: GameSidePane
           collapse={collapse}
           studentId={studentId}
           experiencePointDetails={experiencePointDetails}
+          showExperiencePointDetails={showExperiencePointDetails}
         />
       ) : (
         <CollapsedGameSidePanel expand={expand} />
