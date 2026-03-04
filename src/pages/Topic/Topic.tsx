@@ -2,8 +2,6 @@ import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import ReactFlow, { Background, Controls, Edge, Node, Panel, useReactFlow } from 'reactflow'
-import { time } from 'console'
-import { start } from 'repl'
 import { Grid, Skeleton } from '@common/components'
 import {
   BadgeNotification,

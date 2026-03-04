@@ -4,42 +4,45 @@ import { Grid, Typography } from '@common/components'
 import { handleError } from '@components'
 import { BadgeResponse, BadgeVariant, StudentBadgeResponse } from '@core'
 import { SnackbarContext } from '@services'
-import { useStore } from '@store'
+import { usePersistedStore, useStore } from '@store'
 import BadgeSymbol from './BadgeSymbol'
 
 type TopicBadgeListProps = {
-  studentId?: number
   topicId?: number
   badgesAsKeys?: BadgeVariant[]
 }
 
-const TopicBadgeList = ({ studentId, topicId, badgesAsKeys: badgeKeys }: TopicBadgeListProps) => {
+const TopicBadgeList = ({ topicId, badgesAsKeys: badgeKeys }: TopicBadgeListProps) => {
   const getTopicBadges = useStore((state) => state.getTopicBadges)
   const getStudentBadge = useStore((state) => state.getStudentBadge)
   const [studentBadges, setStudentBadges] = useState<StudentBadgeResponse>([])
   const [topicBadges, setTopicBadges] = useState<BadgeResponse>([])
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
+  const getUser = usePersistedStore((state) => state.getUser)
 
   useEffect(() => {
-    if (!topicId || !studentId) {
+    if (!topicId) {
       return
     }
-    getTopicBadges(topicId, false)
+    getUser().then((user) => {
+      getTopicBadges(topicId, false)
       .then((badges) => {
         setTopicBadges(badges)
       })
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchTopicBadges', error, 5000)
       })
-    getStudentBadge(String(studentId))
+    getStudentBadge(String(user.id))
       .then((badges) => {
         setStudentBadges(badges)
       })
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchStudentBadges', error, 5000)
       })
-  }, [getTopicBadges, studentId, topicId, badgeKeys])
+    })
+    
+  }, [getTopicBadges, topicId, badgeKeys])
 
   return (
     <Grid
@@ -52,7 +55,7 @@ const TopicBadgeList = ({ studentId, topicId, badgesAsKeys: badgeKeys }: TopicBa
       <Typography variant="h6" sx={{ mb: '1rem' }}>
         {t('components.TopicBadgeList.topicBadges')}
       </Typography>
-      <Grid container spacing={'1rem'} justifyContent="center">
+      <Grid container spacing={'1rem'} justifyContent="center" minWidth={'20rem'}>
         {topicBadges && topicBadges.length > 0 ? (
           topicBadges.map((badge) => (
             <Grid item key={`${topicId}-${badge.variant_key}`}>

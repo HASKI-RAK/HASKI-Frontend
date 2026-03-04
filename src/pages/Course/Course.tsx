@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Button, Card, CardContent, Grid, Stack } from '@common/components'
 import { useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
@@ -22,11 +22,20 @@ const Course = () => {
   const { courseId } = useParams<{ courseId: string }>()
   const { topicProgress, isLoading, topics } = useLearningPathTopicProgress({ courseId })
   const [createTopicModalOpen, setCreateTopicModalOpen] = useState<boolean>(false)
+  const [studentId, setStudentId] = useState<number>(0)
 
   //Store
   const clearLearningPathTopicCache = useStore((state) => state.clearLearningPathTopicCache)
   const clearLearningPathElementCache = useStore((state) => state.clearLearningPathElementCache)
   const clearLearningPathElementStatusCache = usePersistedStore((state) => state.clearLearningPathElementStatusCache)
+  const getUser = usePersistedStore((state) => state.getUser)
+
+  // Effects
+  useEffect(() => {
+    getUser().then((user) => {
+      setStudentId(user.id)
+    })
+  }, [getUser])
 
   const handleCloseTopicModal = () => {
     clearLearningPathTopicCache()

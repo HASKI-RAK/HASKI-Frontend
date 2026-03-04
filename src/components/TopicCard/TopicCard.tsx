@@ -3,7 +3,12 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardContent, Grid, IconButton, Menu, MenuItem, Tooltip, Typography } from '@common/components'
 import { DeleteForever, MoreVert, Polyline } from '@common/icons'
-import { AlgorithmSettingsModal, DeleteEntityModal, StyledLinearProgress } from '@components'
+import { 
+  AlgorithmSettingsModal,
+  DeleteEntityModal,
+  StyledLinearProgress,
+  TopicBadgeList
+ } from '@components'
 import { Topic } from '@core'
 import { deleteTopic, RoleContext, SnackbarContext } from '@services'
 import { useStore } from '@store'
@@ -77,7 +82,7 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
         mt: '1rem'
       }}>
       <CardContent>
-        <Grid container direction="row" justifyContent={'space-between'} alignItems={'center'}>
+        <Grid container direction='row' justifyContent={'space-between'} alignItems={'center'}>
           <Grid item>
             <Typography variant={isSmOrDown ? 'subtitle1' : 'h5'}>{topic?.name}</Typography>
           </Grid>
@@ -93,41 +98,42 @@ const TopicCard = ({ topic, calculatedTopicProgress, isSmOrDown }: TopicCardProp
             </IconButton>
           </Grid>
         </Grid>
-        <Grid container item direction="column" justifyContent="center" alignItems="center">
-          <Button
-            id={topic?.name.concat('-button').replaceAll(' ', '-')}
-            sx={{
-              width: {
-                xs: '6.625rem',
-                sm: '9.625rem',
-                md: '12.625rem',
-                lg: '15.625rem',
-                xl: '18.625rem',
-                xxl: '21.625rem',
-                xxxl: '24.625rem'
-              },
-              mt: '1.625rem'
-            }}
-            variant="contained"
-            data-testid={'Topic-Navigate-Button'}
-            color="primary"
-            onClick={() => {
-              navigate('topic/' + topic?.id)
-            }}>
-            {t('pages.course.topicButton')}
-          </Button>
-        </Grid>
-        <Grid
-          container
-          spacing={0}
-          direction="row"
-          alignItems={'center'}
-          justifyContent={'center'}
-          sx={{ mt: '0.5rem' }}>
-          <Typography sx={{ mr: '0.5rem' }}>
-            {studentSelection &&
-              t('components.TopicCard.learningPath') + ': ' + t(`components.TopicCard.${studentSelection}`)}
-          </Typography>
+        <Grid item container direction='row' justifyContent='space-between' alignItems='end' sx={{mt:'1rem'}}>
+          <Grid item direction='column'>
+            <Grid item>
+              <Grid item>
+              <Typography sx={{ mr: '0.5rem' }}>
+                {studentSelection &&
+                  t('components.TopicCard.learningPath') + ': ' + t(`components.TopicCard.${studentSelection}`)}
+              </Typography>
+            </Grid>
+              <Button
+                id={topic?.name.concat('-button').replaceAll(' ', '-')}
+                sx={{
+                  width: {
+                    xs: '6.625rem',
+                    sm: '9.625rem',
+                    md: '12.625rem',
+                    lg: '15.625rem',
+                    xl: '18.625rem',
+                    xxl: '21.625rem',
+                    xxxl: '24.625rem'
+                  },
+                  mt: '1.625rem'
+                }}
+                variant="contained"
+                data-testid={'Topic-Navigate-Button'}
+                color="primary"
+                onClick={() => {
+                  navigate('topic/' + topic?.id)
+                }}>
+                {t('pages.course.topicButton')}
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid item sx={{ mr: '25rem' }}>
+            <TopicBadgeList topicId={topic?.id} />
+          </Grid>
         </Grid>
       </CardContent>
       {/* Display topic progress bar */}
