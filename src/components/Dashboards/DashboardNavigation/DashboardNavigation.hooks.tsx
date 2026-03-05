@@ -4,13 +4,13 @@ import { usePersistedStore, useStore } from '@store'
 
 type NavLevel = 'courses' | 'topics' | 'learningElements'
 
-type NavLevelSelection = {
+export type NavLevelSelection = {
   course: Course | null
   topic: Topic | null
-  learningElement: LearningElement | null
+  learningElement: LearningElement | null // todo: maybe remove?
 }
 
-type NavItems = Course[] | Topic[] | LearningElement[]
+export type NavItems = Course[] | Topic[] | LearningElement[]
 
 type DashboardNavigationHookReturn = {
   back: () => void

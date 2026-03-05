@@ -1,4 +1,5 @@
-export { useMediaQuery } from './DefaultMediaQuery/DefaultMediaQuery'
-export { useTheme } from './DefaultUseTheme/DefaultUseTheme'
-export { useLearningPathTopicProgress } from './LearningPathTopicProgress/LearningPathTopicProgress.hooks'
+export * from './CourseProgress/CourseProgress.hooks'
+export * from './DefaultMediaQuery/DefaultMediaQuery'
+export * from './DefaultUseTheme/DefaultUseTheme'
+export * from './LearningPathTopicProgress/LearningPathTopicProgress.hooks'
 export * from './University/University.hooks'

@@ -1,12 +1,11 @@
 import { memo, useCallback } from 'react'
-import { Theme } from '@mui/material/styles'
 import { Box, LinearProgress, Tooltip, Typography } from '@common/components'
-import { alpha } from '@common/theme'
+import { alpha, Theme } from '@common/theme'
 
 export type LabeledProgressBarProps = {
-  current?: number
+  current?: number | string // todo: necessary?
   tooltip?: string
-  total?: number
+  total?: number | string // todo: necessary?
   value?: number
 }
 

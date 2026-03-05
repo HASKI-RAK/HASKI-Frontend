@@ -32,8 +32,14 @@ const StatisticsMenu = () => {
       url: '/rating',
       isDisabled: false,
       availableAt: new Date()
+    },
+    {
+      name: t('pages.scoreboard'), // todo: add translation
+      url: '/scoreboard',
+      isDisabled: false,
+      availableAt: new Date()
     }
-  ]
+  ] // todo: add other dashboards and sort them alphabetically
 
   return isAuth ? (
     <GlobalNavMenu
