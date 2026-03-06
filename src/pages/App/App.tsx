@@ -15,6 +15,8 @@ import {
   PrivacyPolicy,
   ProjectDescription,
   Rating,
+  Scoreboard,
+  Topic
   Topic,
   ExampleGraphs
 } from '@pages'
@@ -63,6 +65,7 @@ export const App = () => {
                       <Route path="/imprint" element={<Imprint />} />
                       <Route path="/learnercharacteristics" element={<LearnerCharacteristics />} />
                       <Route path="/rating" element={<Rating />} />
+                      <Route path="/scoreboard" element={<Scoreboard />} />
                       <Route path="/privacypolicy" element={<PrivacyPolicy />} />
                       <Route path="/🥚" element={<div>Ei</div>} />
                       <Route path="/examplegraphs" element={<ExampleGraphs />} />
