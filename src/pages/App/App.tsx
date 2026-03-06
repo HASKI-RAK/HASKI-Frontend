@@ -16,7 +16,6 @@ import {
   ProjectDescription,
   Rating,
   Scoreboard,
-  Topic
   Topic,
   ExampleGraphs
 } from '@pages'
