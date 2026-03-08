@@ -1,50 +1,69 @@
-import { memo, useContext, useEffect, useRef, useState } from 'react'
+import { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  CircularProgress,
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography
-} from '@common/components'
-import { handleError } from '@components'
-import { League, XpLeaderboardEntry } from '@core'
+import { CircularProgress, Grid, Typography } from '@common/components'
+import { BarChart, handleError, LeaderboardTable } from '@components'
+import { BadgeLeaderboardEntry, GenericLeaderboard, GenericLeaderboardEntry, League } from '@core'
 import { fetchXpLeaderboard, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
+import { useTheme } from '@common/hooks'
 
-//Todo: translations
+type XpLeaderboardProps = {
+    maxRows?: number,
+    showVisually: boolean
+}
 
-export const XpLeaderboard = () => {
+export const XpLeaderboard = ({ maxRows, showVisually }: XpLeaderboardProps) => {
   const { t } = useTranslation()
+  const theme = useTheme()
   const { addSnackbar } = useContext(SnackbarContext)
-
-  const containerRef = useRef<HTMLDivElement>(null)
 
   const getUser = usePersistedStore((state) => state.getUser)
 
   const leagueColor = {
     first: '#FFD700',
-    second: '#C0C0C0',
+    second: '#a6b3ca',
     third: '#CD7F32',
-    none: '#d4d4d4'
+    none: '#d4d4d4',
+    unranked: '#d4d4d4'
   }
 
-  const [leaderboardEntries, setLeaderboardEntries] = useState<XpLeaderboardEntry[]>([])
-  const [totalParticipants, setTotalParticipants] = useState(0)
+  const [leaderboardEntries, setLeaderboardEntries] = useState<GenericLeaderboard>([])
+  const [currentStudentId, setCurrentStudentId] = useState<number | null>(null)
+  //const [totalParticipants, setTotalParticipants] = useState(0)
   const [league, setLeague] = useState('none' as League)
   const [isLoading, setIsLoading] = useState(true)
+  const [filteredEntries, setFilteredEntries] = useState<GenericLeaderboard>([])
+
+  const updateDisplayedEntries = useCallback((student_id: number) => {
+    if(leaderboardEntries.length === 0 ) return
+
+    if(leaderboardEntries.length <= 6 || !maxRows) {
+      setFilteredEntries(leaderboardEntries)
+    } else {
+      const userIndex = leaderboardEntries.findIndex((entry) => entry.student_id === student_id)
+      const limit = Math.min(maxRows, leaderboardEntries.length)
+      const lowerhalfSize = Math.floor(limit / 2)
+      const upperhalfSize = Math.min(limit - lowerhalfSize, leaderboardEntries.length - lowerhalfSize)
+      const lowerIndex = Math.max(0, userIndex - lowerhalfSize)
+      const lowerHalf = leaderboardEntries.slice(lowerIndex, userIndex)
+      const upperHalf = leaderboardEntries.slice(userIndex, userIndex + upperhalfSize)
+      setFilteredEntries([...lowerHalf, ...upperHalf])
+    }
+  }, [leaderboardEntries, maxRows])
 
   useEffect(() => {
     getUser()
       .then((user) => {
-        const userId = user.settings.user_id
-        fetchXpLeaderboard(userId)
-          .then((response) => {
-            setLeaderboardEntries(response.leaderboard)
-            setTotalParticipants(response.total_participants)
+        const student_id = user.id
+        setCurrentStudentId(student_id)
+        fetchXpLeaderboard(student_id).then((response) => {
+            const leaderboard = response.leaderboard.map((entry) => ({
+              student_id: entry.student_id,
+              metric: entry.experience_points,
+              rank: entry.rank
+            } as GenericLeaderboardEntry))
+            setLeaderboardEntries(leaderboard)
+            //setTotalParticipants(response.total_participants)
             setLeague(response.league)
             setIsLoading(false)
           })
@@ -59,42 +78,28 @@ export const XpLeaderboard = () => {
       })
   }, [])
 
-  return (
-    <Grid container direction="column" ref={containerRef}>
-      {isLoading ? (
-        <TableRow>
-          <TableCell colSpan={3} align="center">
-            <CircularProgress />
-          </TableCell>
-        </TableRow>
+  useEffect(() => {
+    if (currentStudentId !== null) {
+      updateDisplayedEntries(currentStudentId)
+    }
+  }, [currentStudentId, leaderboardEntries, maxRows])
+
+  return ( isLoading ? (
+        <Grid>
+          <CircularProgress />
+        </Grid>
       ) : (
-        <>
-          <Grid item bgcolor={leagueColor[league] || '#d4d4d4'} padding={1}>
-            <Typography variant="h6" align="center">
-              {t('components.leaderboard.' + league)}
-            </Typography>
-          </Grid>
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">{t('components.leaderboard.rankHeader')}</TableCell>
-                <TableCell align="center">{t('components.leaderboard.userHeader')}</TableCell>
-                <TableCell align="center">{t('components.leaderboard.xpHeader')}</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {leaderboardEntries.map((entry) => (
-                <TableRow key={entry.student_id}>
-                  <TableCell align="center">{entry.rank}</TableCell>
-                  <TableCell align="center">{entry.student_id}</TableCell>
-                  <TableCell align="center">{entry.xp}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </>
-      )}
-    </Grid>
+        <Grid>
+          <Typography variant="h5" component="h2">
+            {t('xpLeaderboard.title')}
+          </Typography>
+          { showVisually ? (
+            <BarChart leaderboardEntries={filteredEntries} barColor={theme.palette.primary.main}/>
+          ) : (
+            <LeaderboardTable leaderboardEntries={filteredEntries} metricHeader={t('xpLeaderboard.xp')} />
+          )}
+        </Grid>
+      )
   )
 }
 

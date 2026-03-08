@@ -2,9 +2,16 @@ import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
 import { Card, CardContent, Divider, Grid, Skeleton, Typography } from '@common/components'
-import { BarChart, CourseCard, courseCardStyle, CreateCourseCard } from '@components'
-import { Course } from '@core'
-import { AuthContext, RoleContext, SnackbarContext } from '@services'
+import { 
+  BarChart,
+  CourseCard,
+  courseCardStyle,
+  CreateCourseCard,
+  XpBarChart,
+  XpLeaderboard
+} from '@components'
+import { Course, GamificationSettings } from '@core'
+import { AuthContext, ILSContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 /**
@@ -20,15 +27,18 @@ export const Home = () => {
   const { isAuth } = useContext(AuthContext)
   const { isCourseCreatorRole } = useContext(RoleContext)
   const { addSnackbar } = useContext(SnackbarContext)
+  const { visualInput } = useContext(ILSContext)
 
   // States
   const [courses, setCourses] = useState<Course[]>([])
   const [coursesLoading, setCoursesLoading] = useState<boolean>(true)
   const [activeStepCreateCourseModal, setActiveStepCreateCourseModal] = useState<number>(0)
   const [createCourseModalOpen, setCreateCourseModalOpen] = useState<boolean>(false)
+  const [gamificationSettings, setGamificationSettings] = useState<GamificationSettings>({} as GamificationSettings)
 
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
+  const getGamificationSettings = usePersistedStore((state) => state.getGamificationSettings)
   const getCourses = useStore((state) => state.getCourses)
   const clearCoursesCache = useStore((state) => state.clearCoursesCache)
   const coursesCache = useStore((state) => state._cache_Courses_record)
@@ -39,6 +49,7 @@ export const Home = () => {
     setActiveStepCreateCourseModal(0)
   }
 
+  const maxRows = 10
   const barValues = [60, 40, 30, 40, 50, 60, 70, 80, 80, 60]
   const barLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
   const barColor = '#3f51b5'
@@ -59,6 +70,18 @@ export const Home = () => {
                 autoHideDuration: 5000
               })
               log.error(t('error.fetchCourses') + ' ' + error)
+            })
+          getGamificationSettings(user.id)
+            .then((gamificationSettings) => {
+              setGamificationSettings(gamificationSettings)
+            })
+            .catch((error) => {
+              addSnackbar({
+                message: t('error.fetchGamificationSettings'),
+                severity: 'error',
+                autoHideDuration: 5000
+              })
+              log.error(t('error.fetchGamificationSettings') + ' ' + error)
             })
         })
         .catch((error) => {
@@ -116,11 +139,18 @@ export const Home = () => {
   return (
     <Grid container mt='1rem' direction="row" height={'100%'} spacing={2} id='homeBaseGrid'>
       <Grid container item direction={'column'} width={'30%'}>
-        <Grid item flexGrow={1}>
-          <BarChart barValues={barValues} yAxisLabels={barLabels} barColor={barColor} />
-        </Grid>
         <Grid item  flexGrow={1} />
         <Grid item flexGrow={1} />
+        <Grid item flexGrow={1}>
+          <BarChart leaderboardEntries={barValues.map((entry, index)=>{
+            return {
+              rank:index,
+              metric: entry,
+              student_id: index+1
+            }
+          }
+          )} barColor={barColor} />
+        </Grid>
       </Grid>
       <Divider orientation="vertical" flexItem />
       {coursesGrid()}

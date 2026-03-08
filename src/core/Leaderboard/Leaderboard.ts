@@ -5,8 +5,16 @@ type Leaderboard = {
 type XpLeaderboardEntry = {
   rank: number
   student_id: number
-  xp: number
+  experience_points: number
 }
+
+type GenericLeaderboardEntry = {
+  student_id: number
+  metric: number
+  rank: number
+}
+
+type GenericLeaderboard = GenericLeaderboardEntry[]
 
 type League = 'first' | 'second' | 'third' | 'none'
 
@@ -21,4 +29,11 @@ type ExPointLeaderboardReturn = (studentId: number) => Promise<ExPointLeaderboar
 type LeaderboardReturn = (course_id: string, student_id: string) => Promise<Leaderboard>
 
 export default Leaderboard
-export type { ExPointLeaderboardResponse, ExPointLeaderboardReturn, LeaderboardReturn, League, XpLeaderboardEntry }
+export type { 
+  ExPointLeaderboardResponse, 
+  ExPointLeaderboardReturn, 
+  GenericLeaderboard, 
+  GenericLeaderboardEntry, 
+  LeaderboardReturn, 
+  League, 
+  XpLeaderboardEntry }

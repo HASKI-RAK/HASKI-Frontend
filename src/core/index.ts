@@ -109,6 +109,8 @@ export type {
 export type {
   ExPointLeaderboardResponse,
   ExPointLeaderboardReturn,
+  GenericLeaderboard,
+  GenericLeaderboardEntry,
   LeaderboardReturn,
   League,
   XpLeaderboardEntry

@@ -1,42 +1,42 @@
-import { memo } from 'react'
+import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Grid, Table, TableBody, TableCell, TableHead, TableRow } from '@common/components'
-
-export type LeaderboardEntry = {
-  rank: number
-  studentId: number
-  scoredValue: number
-}
+import { Grid } from '@common/components'
+import { usePersistedStore } from '@store'
+import { GamificationSettings } from '@core'
+import { ILSContext } from '@services'
 
 type LeaderboardProps = {
-  currentStudentId: number | null
-  leaderboardContent: LeaderboardEntry[]
-  scoreHeadline: string
+  maxRanks?: number
 }
 
-const Leaderboard = ({ currentStudentId, leaderboardContent, scoreHeadline }: LeaderboardProps) => {
+const Leaderboard = ({ maxRanks }: LeaderboardProps) => {
   const { t } = useTranslation()
+  const getUser = usePersistedStore((state) => state.getUser)
+  const getGamificationSettings = usePersistedStore((state) => state.getGamificationSettings)
+
+  const [ gamificationSettings, setGamificationSettings ] = useState<GamificationSettings>({} as GamificationSettings)
+
+  const { visualInput } = useContext(ILSContext)
+
+  useEffect(() => {
+    getUser()
+      .then((user) => {
+        getGamificationSettings(user.id)
+          .then((gamificationSettings) => {
+            setGamificationSettings(gamificationSettings)
+          })
+          .catch((error) => {
+            // Handle error fetching gamification settings
+          })
+      })
+      .catch((error) => {
+        // Handle error fetching user
+      })
+  }, [])
 
   return (
-    <Grid container direction={'column'}>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">{t('components.leaderboard.userHeader')}</TableCell>
-            <TableCell align="center">{scoreHeadline}</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {leaderboardContent.map((row) => (
-            <TableRow key={row.studentId} sx={{ height: '0.5rem' }}>
-              <TableCell align="center">{`${
-                currentStudentId === row.studentId ? t('components.leaderboard.you') : row.studentId
-              }`}</TableCell>
-              <TableCell align="center">{row.scoredValue}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+    <Grid>
+      
     </Grid>
   )
 }

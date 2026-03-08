@@ -1,58 +1,59 @@
 import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Grid, Typography } from '@common/components'
+import { Box, Divider, Grid, Typography } from '@common/components'
+import { GenericLeaderboard, GenericLeaderboardEntry } from '@core'
 import { handleError } from '@components'
 import { SnackbarContext } from '@services'
 
 type BarChartProps = {
-  axisLabels?: string[]
-  barValues: number[]
-  yAxisLabels: string[]
+  leaderboardEntries: GenericLeaderboard
   barColor: string
 }
 
-export const BarChart = ({ axisLabels, barValues, yAxisLabels, barColor }: BarChartProps) => {
+export const BarChart = ({ leaderboardEntries, barColor }: BarChartProps) => {
   const { t } = useTranslation()
   const [maxValue, setMaxValue] = useState(0)
   const [dataErrorOccurred, setDataErrorOccurred] = useState(false)
 
   useEffect(() => {
-    if (barValues.length !== yAxisLabels.length) {
-      setDataErrorOccurred(true)
-    } else {
-      setDataErrorOccurred(false)
+    if (leaderboardEntries?.length > 0) {
+      setMaxValue(Math.max(...leaderboardEntries.map(entry => entry.metric)))
     }
-  }, [barValues, yAxisLabels])
-
-  useEffect(() => {
-    if (barValues.length > 0) {
-      setMaxValue(Math.max(...barValues))
-    }
-  }, [barValues])
+  }, [leaderboardEntries])
 
   return (
-    <Grid container direction="column" alignItems="right" justifyContent="center" mt="2rem" ml="2rem">
+    <Grid container direction="column" justifyContent="center" mt="2rem" ml="2rem">
       {dataErrorOccurred ? (
         <Typography color="error">{t('components.barChart.dataError')}</Typography>
       ) : (
-        <svg width="20rem" height="25rem">
-          {barValues.map((value, index) => {
-            const maxBarWidth = 20
-            const barWidth = (value / maxValue) * maxBarWidth
-            const barHeight = 2
-            const gap = 0.5
+        <Box width="35rem" height="60rem">
+          {leaderboardEntries?.map((entry: GenericLeaderboardEntry) => {
+            const barWidth = maxValue > 0 ? `${(entry.metric / maxValue) * 100}%` : '0%'
             return (
-              <rect
-                key={index}
-                x={0}
-                y={`${index * (barHeight + gap)}rem`}
-                width={`${barWidth}rem`}
-                height={`${barHeight}rem`}
-                fill={barColor}
-              />
+              <Box
+                key={entry.student_id}
+                width="35rem"
+                height="4rem"
+                display="flex"
+                alignItems="center"
+              >
+                <Box width="10rem" height="4rem" display="flex" alignItems="center" gap="0.5rem">
+                  <Typography variant="body2">{entry.rank}</Typography>
+                  <Divider orientation="vertical" flexItem />
+                  <Typography variant="body2">{`${entry.student_id}`}</Typography>
+                </Box>
+
+                <Box width="20rem" height="4rem" display="flex" alignItems="center">
+                  <Box width={barWidth} height="2rem" bgcolor={barColor} borderRadius="1rem" mr="0.5rem" />
+                </Box>
+
+                <Box width="10rem" height="4rem" display="flex" alignItems="center" justifyContent="flex-end">
+                  <Typography variant="body2">{entry.metric}</Typography>
+                </Box>
+              </Box>
             )
           })}
-        </svg>
+        </Box>
       )}
     </Grid>
   )

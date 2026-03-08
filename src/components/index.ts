@@ -63,6 +63,7 @@ export {
   BadgeBarChart,
   BadgeLeaderboard,
   Leaderboard,
+  LeaderboardTable,
   RatingLeaderboard,
   XpBarChart,
   XpLeaderboard

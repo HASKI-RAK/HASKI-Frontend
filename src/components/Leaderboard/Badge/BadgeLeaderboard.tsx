@@ -1,46 +1,70 @@
-import { memo, useContext, useEffect, useRef, useState } from 'react'
+import { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  CircularProgress,
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography
-} from '@common/components'
-import { handleError } from '@components'
-import { BadgeLeaderboardEntry, League } from '@core'
+import { CircularProgress, Grid, Typography } from '@common/components'
+import { BarChart, handleError, LeaderboardTable } from '@components'
+import { BadgeLeaderboardEntry, GenericLeaderboard, GenericLeaderboardEntry, League } from '@core'
 import { fetchBadgeLeaderboard, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
+import { useTheme } from '@common/hooks'
 
-export const BadgeLeaderboard = () => {
+type BadgeLeaderboardProps = {
+    maxRows?: number,
+    showVisually: boolean
+}
+
+export const BadgeLeaderboard = ({ maxRows, showVisually }: BadgeLeaderboardProps) => {
   const { t } = useTranslation()
+  const theme = useTheme()
   const { addSnackbar } = useContext(SnackbarContext)
-  //  const containerRef = useRef<HTMLDivElement>(null)
+
   const getUser = usePersistedStore((state) => state.getUser)
 
   const leagueColor = {
     first: '#FFD700',
-    second: '#C0C0C0',
+    second: '#a6b3ca',
     third: '#CD7F32',
-    none: '#d4d4d4'
+    none: '#d4d4d4',
+    unranked: '#d4d4d4'
   }
 
-  const [leaderboardEntries, setLeaderboardEntries] = useState<BadgeLeaderboardEntry[]>([])
-  const [totalParticipants, setTotalParticipants] = useState(0)
+  const [leaderboardEntries, setLeaderboardEntries] = useState<GenericLeaderboard>([])
+  const [currentStudentId, setCurrentStudentId] = useState<number | null>(null)
+  //const [totalParticipants, setTotalParticipants] = useState(0)
   const [league, setLeague] = useState('none' as League)
   const [isLoading, setIsLoading] = useState(true)
+  const [filteredEntries, setFilteredEntries] = useState<GenericLeaderboard>([])
+
+  const updateDisplayedEntries = useCallback((student_id: number) => {
+    if(leaderboardEntries.length === 0 ) return
+
+    if(leaderboardEntries.length <= 6 || !maxRows) {
+      setFilteredEntries(leaderboardEntries)
+    } else {
+      const userIndex = leaderboardEntries.findIndex((entry) => entry.student_id === student_id)
+      const limit = Math.min(maxRows, leaderboardEntries.length)
+      const lowerhalfSize = Math.floor(limit / 2)
+      const upperhalfSize = Math.min(limit - lowerhalfSize, leaderboardEntries.length - lowerhalfSize)
+      const lowerIndex = Math.max(0, userIndex - lowerhalfSize)
+      const lowerHalf = leaderboardEntries.slice(lowerIndex, userIndex)
+      const upperHalf = leaderboardEntries.slice(userIndex, userIndex + upperhalfSize)
+      setFilteredEntries([...lowerHalf, ...upperHalf])
+    }
+  }, [leaderboardEntries, maxRows])
 
   useEffect(() => {
     getUser()
       .then((user) => {
-        const studentId = user.settings.user_id
-        fetchBadgeLeaderboard(studentId)
+        const userId = user.settings.user_id
+        setCurrentStudentId(userId)
+        fetchBadgeLeaderboard(userId)
           .then((response) => {
-            setLeaderboardEntries(response.leaderboard)
-            setTotalParticipants(response.total_participants)
+            const leaderboard = response.leaderboard.map((entry: BadgeLeaderboardEntry) => ({
+              student_id: entry.student_id,
+              metric: entry.badge_count,
+              rank: entry.rank
+            } as GenericLeaderboardEntry))
+            setLeaderboardEntries(leaderboard)
+            //setTotalParticipants(response.total_participants)
             setLeague(response.league)
             setIsLoading(false)
           })
@@ -55,40 +79,29 @@ export const BadgeLeaderboard = () => {
       })
   }, [])
 
-  return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <Typography variant="h5" component="h2">
-          {t('badgeLeaderboard.title')}
-        </Typography>
-      </Grid>
-      {isLoading ? (
-        <Grid item xs={12}>
+  useEffect(() => {
+    if (currentStudentId !== null) {
+      updateDisplayedEntries(currentStudentId)
+    }
+  }, [currentStudentId, leaderboardEntries, maxRows])
+
+  return ( isLoading ? (
+        <Grid>
           <CircularProgress />
         </Grid>
       ) : (
-        <Grid item xs={12}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>{t('badgeLeaderboard.rank')}</TableCell>
-                <TableCell>{t('badgeLeaderboard.student')}</TableCell>
-                <TableCell>{t('badgeLeaderboard.badgeCount')}</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {leaderboardEntries.map((entry) => (
-                <TableRow key={entry.student_id}>
-                  <TableCell>{entry.rank}</TableCell>
-                  <TableCell>{entry.student_id}</TableCell>
-                  <TableCell>{entry.badge_count}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+        <Grid>
+          <Typography variant="h5" component="h2">
+            {t('badgeLeaderboard.title')}
+          </Typography>
+          { showVisually ? (
+            <BarChart leaderboardEntries={filteredEntries} barColor={theme.palette.primary.main}/>
+          ) : (
+            <LeaderboardTable leaderboardEntries={filteredEntries} metricHeader={t('badgeLeaderboard.badgeCount')} />
+          )}
         </Grid>
-      )}
-    </Grid>
+      )
   )
 }
+
 export default memo(BadgeLeaderboard)
