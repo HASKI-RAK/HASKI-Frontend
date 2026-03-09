@@ -136,7 +136,7 @@ const ExampleGraphs = () => {
   return (
     <Box sx={{ ml: 10, mr: 10, mt: 5 }}>
       <Box sx={{ height: '500px', width: '50%', position: 'relative' }}>
-        <PieChart width={500} height={500} data={dataPieChart} totalHours={totalHours} />
+        <PieChart height={500} data={dataPieChart} totalHours={totalHours} />
         <DatePickerForChart
           width={800}
           onDateRangeChange={handleDateRangeChange}
@@ -146,7 +146,6 @@ const ExampleGraphs = () => {
           showPresets={true}
         />
         <AnzahlVersucheBarChart
-          width={750}
           height={300}
           keys={['Versuche']}
           indexBy={'calendarWeek'}
@@ -156,8 +155,6 @@ const ExampleGraphs = () => {
           data={dataBarChart}
         />
         <AnzahlVersucheBarChart
-          width={750}
-          height={300}
           keys={['Versuche', 'Versuche_1']}
           indexBy={'calendarWeek'}
           color={['#6EC6FF', '#fd6ed4']}
@@ -182,7 +179,7 @@ const ExampleGraphs = () => {
           axisLeftText="Bearbeitungszeit (Tage)"
           axisBottomText="Studentengruppen"
         />
-        <NächsteEmpfehlungGraph width={700} height={400} data={treeData} />
+        <NächsteEmpfehlungGraph data={treeData} />
         <AbfolgeDerAbgeschlossenenKlassifikationen
           width={700}
           height={400}

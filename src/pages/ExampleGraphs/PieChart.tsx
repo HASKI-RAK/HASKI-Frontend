@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import { ResponsivePie } from '@nivo/pie'
 import { useTheme } from '@mui/material/styles'
 import type { Theme } from '@common/theme'
@@ -6,7 +6,6 @@ import type { Theme } from '@common/theme'
 type PieChartRequiredProps = {
   label: string
   value: number
-  color: string
 }
 
 type PieChartProps<T extends PieChartRequiredProps = PieChartRequiredProps> = {
@@ -19,10 +18,20 @@ const PieChart = ({ data, maxHeight = 500 }: PieChartProps) => {
   const theme = useTheme<Theme>()
 
   const totalHours = data.reduce((sum, d) => sum + d.value, 0)
-  const enhancedData = data.map((d) => ({
-    ...d,
-    label: `${d.label} (${d.value}h)`
-  }))
+
+  // ✅ if total is 0, show one placeholder segment
+  const safeData: PieChartRequiredProps[] = totalHours > 0 ? data : [{ label: 'No data', value: 1 }]
+
+  const enhancedData = useMemo(
+    () =>
+      safeData.map((d) => ({
+        // ✅ provide a stable id for nivo
+        id: d.label,
+        label: totalHours > 0 ? `${d.label} (${d.value}h)` : d.label,
+        value: d.value
+      })),
+    [safeData, totalHours]
+  )
 
   return (
     <div
@@ -33,10 +42,13 @@ const PieChart = ({ data, maxHeight = 500 }: PieChartProps) => {
       }}>
       <ResponsivePie
         data={enhancedData}
+        // ✅ gray slice for "no data", otherwise use normal scheme
+        colors={totalHours > 0 ? { scheme: 'nivo' } : ['#e0e0e0']}
         theme={{
           labels: {
             text: {
-              fontSize: 16
+              fontSize: 16,
+              fill: theme.palette.text.primary
             }
           },
           legends: {
@@ -51,13 +63,15 @@ const PieChart = ({ data, maxHeight = 500 }: PieChartProps) => {
         cornerRadius={2}
         activeOuterRadiusOffset={8}
         enableArcLinkLabels={false}
-        arcLinkLabelsSkipAngle={10}
         animate={false}
         arcLinkLabelsTextColor={theme.palette.text.primary}
         arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: 'color' }}
         arcLabelsSkipAngle={10}
-        arcLabel={(d) => `${((d.value / totalHours) * 100).toFixed(1)}%`}
+        arcLabel={(d) => {
+          if (totalHours <= 0) return ''
+          return `${((Number(d.value) / totalHours) * 100).toFixed(1)}%`
+        }}
         arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
         legends={[
           {

@@ -16,35 +16,26 @@ import { useScoreboard } from './Scoreboard.hooks'
 import PieChart from '../ExampleGraphs/PieChart'
 import AnzahlVersucheBarChart from '../ExampleGraphs/AnzahlVersucheBarChart'
 import NächsteEmpfehlungGraph from '../ExampleGraphs/NächsteEmpfehlung'
-import { Box } from '@mui/material'
 import DatePickerForChart from '../ExampleGraphs/DatePickerForChart'
 import { DateRange } from '../../components/DateRangePicker'
 import dayjs from 'dayjs'
 
-const dataPieChart: { id: string; label: string; value: number; color: string }[] = [
+const dataPieChart: { label: string; value: number }[] = [
   {
-    id: 'Course-1',
     label: 'Course-1',
-    value: 429,
-    color: 'hsl(49, 70%, 50%)'
+    value: 429
   },
   {
-    id: 'Course-2',
     label: 'Course-2',
-    value: 104,
-    color: 'hsl(307, 70%, 50%)'
+    value: 104
   },
   {
-    id: 'Course-3',
     label: 'Course-3',
-    value: 364,
-    color: 'hsl(223, 70%, 50%)'
+    value: 364
   },
   {
-    id: 'Course-4',
     label: 'Course-4',
-    value: 482,
-    color: 'hsl(9, 70%, 50%)'
+    value: 482
   }
 ]
 
@@ -115,6 +106,15 @@ const Scoreboard = () => {
     courseId: selection.course?.id,
     topicId: selection.topic?.id
   })
+
+  const pieData = useMemo(() => {
+    return Object.entries(timesSpent)
+      .filter(([, v]) => Number.isFinite(v) && v > 0)
+      .map(([key, value]) => ({
+        label: key, // replace with a nicer label if you have one
+        value
+      }))
+  }, [timesSpent])
 
   const isLearningElementLevel = level === 'learningElements'
   const isLearningElement = (item: LearningElement | Course | Topic): item is LearningElement =>
@@ -229,10 +229,11 @@ const Scoreboard = () => {
       topRight={
         level == 'courses' ? (
           //course hours
-          <PieChart data={dataPieChart} maxHeight={500} totalHours={totalHours} />
+
+          <PieChart data={pieData} maxHeight={500} totalHours={totalHours} />
         ) : level == 'topics' ? (
           //topic hours
-          <PieChart data={dataPieChart} maxHeight={500} totalHours={totalHours} />
+          <PieChart data={pieData} maxHeight={500} totalHours={totalHours} />
         ) : level == 'learningElements' ? (
           //attempts per learning element
           <AnzahlVersucheBarChart
