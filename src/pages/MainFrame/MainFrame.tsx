@@ -1,6 +1,5 @@
-import { Outlet, useParams } from 'react-router-dom'
-import { useCourseNavBar } from 'src/components/LocalNav/CourseNavBar/CourseNavBar.hooks'
-import { useDashboardNavBar } from 'src/components/LocalNav/DashboardNavBar/DashboardNavBar.hooks'
+import { memo } from 'react'
+import { Outlet, useLocation, useParams } from 'react-router-dom'
 import { Box, Divider, Grid } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
 import {
@@ -11,7 +10,9 @@ import {
   Newsbanner,
   OpenCreateDefaultLearningPath,
   OpenQuestionnaire,
-  PrivacyModal
+  PrivacyModal,
+  useCourseNavBar,
+  useDashboardNavBar
 } from '@components'
 
 /**
@@ -29,14 +30,17 @@ import {
  * @category Pages
  */
 
-export const MainFrame = () => {
-  const { courseId } = useParams()
+const MainFrame = () => {
   const theme = useTheme()
-  const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && !!courseId // todo move into component
-  // todo !!course, media query, dashboards in url?
-  // todo determine the hook for the local nav based on the url and pass it to the local nav
+  const { courseId } = useParams()
+  const { pathname } = useLocation()
 
-  //
+  const isDashboardOpen =
+    pathname.startsWith('/scoreboard') ||
+    pathname.startsWith('/rating') ||
+    pathname.startsWith('/learnercharacteristics')
+  const isCourseOpen = !!courseId
+  const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && (isDashboardOpen || isCourseOpen)
 
   return (
     <>
@@ -54,7 +58,10 @@ export const MainFrame = () => {
           {isLocalNavOpen && (
             <>
               <Grid item container sx={{ width: '26.5rem' }}>
-                <LocalNavBar useLocalNavBar={useCourseNavBar} />
+                <LocalNavBar
+                  key={isDashboardOpen ? 'dashboard-nav-bar' : 'course-nav-bar'}
+                  useLocalNavBar={isDashboardOpen ? useDashboardNavBar : useCourseNavBar}
+                />
               </Grid>
               <Divider flexItem orientation="vertical" />
             </>
@@ -72,4 +79,4 @@ export const MainFrame = () => {
   )
 }
 
-export default MainFrame // todo memo
+export default memo(MainFrame)

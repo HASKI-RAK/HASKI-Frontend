@@ -1,26 +1,31 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { handleError } from '@components'
 import { Course, LearningElement, Topic, User } from '@core'
+import { SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 type NavLevel = 'courses' | 'topics' | 'learningElements'
 
-export type NavLevelSelection = {
+type NavLevelSelection = {
   course: Course | null
   topic: Topic | null
-  learningElement: LearningElement | null // todo: maybe remove?
 }
 
-export type NavItems = Course[] | Topic[] | LearningElement[]
+type NavItems = Course[] | Topic[] | LearningElement[]
 
 type DashboardNavigationHookReturn = {
   back: () => void
   currentItems: NavItems
   level: NavLevel
   select: (item: Course | Topic | LearningElement) => void
-  selection: NavLevelSelection // todo: remove from export
+  selection: NavLevelSelection
 }
 
 export const useDashboardNavigation = (): DashboardNavigationHookReturn => {
+  const { t } = useTranslation()
+  const { addSnackbar } = useContext(SnackbarContext)
+
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
   const getLearningPathTopic = useStore((state) => state.getLearningPathTopic)
@@ -28,8 +33,7 @@ export const useDashboardNavigation = (): DashboardNavigationHookReturn => {
 
   const [selection, setSelection] = useState<NavLevelSelection>({
     course: null,
-    topic: null,
-    learningElement: null
+    topic: null
   })
 
   const level: NavLevel = useMemo(
@@ -41,17 +45,16 @@ export const useDashboardNavigation = (): DashboardNavigationHookReturn => {
 
   const select = useCallback((item: Course | Topic | LearningElement) => {
     setSelection((prevSelection) => {
-      if (!prevSelection.course) return { course: item as Course, topic: null, learningElement: null }
-      if (!prevSelection.topic) return { ...prevSelection, topic: item as Topic, learningElement: null }
+      if (!prevSelection.course) return { course: item as Course, topic: null }
+      if (!prevSelection.topic) return { ...prevSelection, topic: item as Topic }
       return { ...prevSelection, learningElement: item as LearningElement }
     })
   }, [])
 
   const back = useCallback(() => {
     setSelection((prevSelection) => {
-      if (prevSelection.learningElement) return { ...prevSelection, learningElement: null }
       if (prevSelection.topic) return { ...prevSelection, topic: null }
-      if (prevSelection.course) return { course: null, topic: null, learningElement: null }
+      if (prevSelection.course) return { course: null, topic: null }
       return prevSelection
     })
   }, [])
@@ -64,7 +67,7 @@ export const useDashboardNavigation = (): DashboardNavigationHookReturn => {
             return courses.courses
           })
           .catch((error) => {
-            // todo error handling
+            handleError(t, addSnackbar, 'error.fetchCourses', error, 5000)
             return []
           }),
       topics: (user, selection) =>
@@ -75,7 +78,7 @@ export const useDashboardNavigation = (): DashboardNavigationHookReturn => {
                 return topics.topics
               })
               .catch((error) => {
-                // todo error handling
+                handleError(t, addSnackbar, 'error.getTopics', error, 5000)
                 return []
               }),
       learningElements: (user, selection) =>
@@ -92,7 +95,7 @@ export const useDashboardNavigation = (): DashboardNavigationHookReturn => {
                 return learningElements.path.map((learningPathElement) => learningPathElement.learning_element)
               })
               .catch((error) => {
-                // todo error handling
+                handleError(t, addSnackbar, 'error.fetchLearningPathElement', error, 5000)
                 return []
               })
     }),
@@ -102,16 +105,12 @@ export const useDashboardNavigation = (): DashboardNavigationHookReturn => {
   useEffect(() => {
     getUser()
       .then((user) => {
-        fetchMap[level](user, selection)
-          .then((items) => {
-            setCurrentItems(items)
-          })
-          .catch((error) => {
-            // todo error handling
-          })
+        fetchMap[level](user, selection).then((items) => {
+          setCurrentItems(items)
+        })
       })
       .catch((error) => {
-        // todo error handling
+        handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
       })
   }, [fetchMap, getUser, level, selection])
 

@@ -1,6 +1,6 @@
 import { memo, useCallback, useMemo } from 'react'
-import { CalendarMonthRounded, CancelRounded, CheckCircleRounded, StarRounded } from '@mui/icons-material'
 import { useCourseProgress } from '@common/hooks'
+import { CalendarMonthRounded, CancelRounded, CheckCircleRounded, StarRounded } from '@common/icons'
 import {
   DashboardLayout,
   DashboardList,
@@ -122,22 +122,3 @@ const Scoreboard = () => {
 }
 
 export default memo(Scoreboard)
-
-/*
-type DashboardTableItemProps2 = {
-  name: string
-  score: number
-  maxScore: number
-  progress: number
-  avgTime: number
-  avgScore: number
-  doneDate: number
-  attempts: number
-  maxAttempts: number
-  watchDate: number
-  finishedStudents: number
-  studentCount: number
-  done: boolean
-}
-  */
-// todo: laaz <AccessTime /> für andere Dashboard wichtig!

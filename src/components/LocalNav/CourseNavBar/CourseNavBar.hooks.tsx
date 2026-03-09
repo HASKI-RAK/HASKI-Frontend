@@ -1,20 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useLearningPathTopicProgress } from '@common/hooks'
-import { LocalNavBarHookReturn } from '../LocalNavBar/LocalNavBar.hooks' // todo @components
-import { LocalNavItemProps } from '../LocalNavItem/LocalNavItem' // todo @components
+import { LocalNavItemProps } from '@components'
 
-// todo docu + test
-export const useCourseNavBar = (): LocalNavBarHookReturn => {
+type CourseNavBarHookReturn = {
+  readonly isLoading: boolean
+  readonly localNavItems: LocalNavItemProps[]
+}
+
+export const useCourseNavBar = (): CourseNavBarHookReturn => {
   // State
-  const [localNavItemProps, setLocalNavItemProps] = useState<LocalNavItemProps[]>([])
+  const [localNavItems, setLocalNavItems] = useState<LocalNavItemProps[]>([])
 
   // Hooks
   const { courseId, topicId } = useParams<string>()
   const { isLoading, topics, topicProgress } = useLearningPathTopicProgress({ courseId })
 
   useEffect(() => {
-    setLocalNavItemProps(
+    setLocalNavItems(
       topics.map((topic, index) => ({
         key: topic.id,
         isLoading,
@@ -27,8 +30,5 @@ export const useCourseNavBar = (): LocalNavBarHookReturn => {
     )
   }, [isLoading, topics, topicProgress, topicId, courseId])
 
-  return {
-    isLoading,
-    localNavItemProps
-  }
+  return useMemo(() => ({ isLoading, localNavItems }), [isLoading, localNavItems])
 }

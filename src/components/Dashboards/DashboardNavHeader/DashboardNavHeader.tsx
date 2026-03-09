@@ -1,6 +1,6 @@
 import { memo } from 'react'
-import { ChevronRightRounded, KeyboardBackspaceRounded } from '@mui/icons-material' // todo: add to common icons
 import { Box, Button, Tooltip, Typography } from '@common/components'
+import { ChevronRightRounded, KeyboardBackspaceRounded } from '@common/icons'
 
 type DashboardNavHeaderProps = {
   backLabel?: string

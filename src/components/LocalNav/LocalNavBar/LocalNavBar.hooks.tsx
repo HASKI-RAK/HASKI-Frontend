@@ -1,14 +1,13 @@
-import { LocalNavItemProps } from '../LocalNavItem/LocalNavItem'
+import { LocalNavItemProps } from '@components'
 
 export type LocalNavBarHookReturn = {
   isLoading: boolean
-  localNavItemProps: LocalNavItemProps[]
-  // Todo: Title?????
+  localNavItems: LocalNavItemProps[]
 }
 
-export const useLocalNavbar = (): LocalNavBarHookReturn => {
+export const useLocalNavBar = (): LocalNavBarHookReturn => {
   return {
     isLoading: false,
-    localNavItemProps: []
+    localNavItems: []
   }
 }

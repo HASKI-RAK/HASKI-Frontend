@@ -1,8 +1,6 @@
 import { memo, ReactNode } from 'react'
 import { Box, Grid } from '@common/components'
 
-// global time filter -> own component // only when student scoreboard ->  ausblenden sonst
-
 type DashboardLayoutType = {
   bottomRight?: ReactNode
   datePicker?: ReactNode
@@ -13,6 +11,7 @@ type DashboardLayoutType = {
 }
 
 const DashboardLayout = ({
+  // todo: remove default values
   datePicker = 'DATE PICKER',
   left,
   topRight = 'TOP RIGHT',
