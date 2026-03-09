@@ -56,10 +56,10 @@ const DateRangePicker = ({
   ]
 
   // ⬆️ bump these if you want even larger text
-  const FONT_INPUT = '0.9rem'
-  const FONT_LABEL = '0.85rem'
-  const FONT_BUTTON = '0.85rem'
-  const FONT_ARROW = '1.25rem'
+  const FONT_INPUT = '1.05rem'
+  const FONT_LABEL = '1.20rem'
+  const FONT_BUTTON = '1.05rem'
+  const FONT_ARROW = '2rem'
 
   const datePickerSx = {
     width: '100%',
@@ -83,7 +83,15 @@ const DateRangePicker = ({
     '& .MuiInputLabel-root': {
       color: (theme: Theme) => theme.palette.text.secondary,
       fontSize: FONT_LABEL,
-      fontWeight: 500
+      fontWeight: 500,
+
+      // ✅ move the label up (non-shrunk state)
+      transform: 'translate(14px, -8px) scale(1)',
+
+      // ✅ move the label up when shrunk (focused / has value)
+      '&.MuiInputLabel-shrink': {
+        transform: 'translate(14px, -15px) scale(0.85)'
+      }
     },
     '& .MuiOutlinedInput-input, & .MuiInputBase-input': {
       fontSize: FONT_INPUT,
@@ -115,7 +123,6 @@ const DateRangePicker = ({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              mt: 0.75,
               flexShrink: 0
             }}>
             <ArrowForwardIcon sx={{ fontSize: FONT_ARROW, color: 'text.secondary', opacity: 0.6 }} />
