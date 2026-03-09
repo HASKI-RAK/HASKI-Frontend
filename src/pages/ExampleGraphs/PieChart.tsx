@@ -1,5 +1,7 @@
 import { memo } from 'react'
 import { ResponsivePie } from '@nivo/pie'
+import { useTheme } from '@mui/material/styles'
+import type { Theme } from '@common/theme'
 
 type PieChartRequiredProps = {
   label: string
@@ -10,10 +12,12 @@ type PieChartRequiredProps = {
 type PieChartProps<T extends PieChartRequiredProps = PieChartRequiredProps> = {
   totalHours?: number
   data: T[]
-  maxHeight?: number // ✅ added
+  maxHeight?: number
 }
 
 const PieChart = ({ data, maxHeight = 500 }: PieChartProps) => {
+  const theme = useTheme<Theme>()
+
   const totalHours = data.reduce((sum, d) => sum + d.value, 0)
   const enhancedData = data.map((d) => ({
     ...d,
@@ -29,6 +33,18 @@ const PieChart = ({ data, maxHeight = 500 }: PieChartProps) => {
       }}>
       <ResponsivePie
         data={enhancedData}
+        theme={{
+          labels: {
+            text: {
+              fontSize: 16
+            }
+          },
+          legends: {
+            text: {
+              fill: theme.palette.text.primary
+            }
+          }
+        }}
         margin={{ top: 40, right: 70, bottom: 50, left: 70 }}
         innerRadius={0.5}
         padAngle={0.6}
@@ -37,7 +53,7 @@ const PieChart = ({ data, maxHeight = 500 }: PieChartProps) => {
         enableArcLinkLabels={false}
         arcLinkLabelsSkipAngle={10}
         animate={false}
-        arcLinkLabelsTextColor="#333333"
+        arcLinkLabelsTextColor={theme.palette.text.primary}
         arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: 'color' }}
         arcLabelsSkipAngle={10}
@@ -65,7 +81,8 @@ const PieChart = ({ data, maxHeight = 500 }: PieChartProps) => {
                 y={centerY - 8}
                 textAnchor="middle"
                 dominantBaseline="central"
-                style={{ fontSize: 24, fontWeight: 700, fill: '#333' }}>
+                style={{ fontSize: 24, fontWeight: 700 }}
+                fill={theme.palette.text.primary}>
                 {totalHours}
               </text>
               <text
@@ -73,7 +90,8 @@ const PieChart = ({ data, maxHeight = 500 }: PieChartProps) => {
                 y={centerY + 16}
                 textAnchor="middle"
                 dominantBaseline="central"
-                style={{ fontSize: 14, fill: '#666' }}>
+                style={{ fontSize: 14 }}
+                fill={theme.palette.text.primary}>
                 Total Hours
               </text>
             </g>

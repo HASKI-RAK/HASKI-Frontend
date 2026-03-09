@@ -3,6 +3,7 @@ import { Tree } from '@nivo/tree'
 import { Box, Stack, Typography } from '@common/components'
 import { getNodeIcon } from '@components'
 import type { LearningPathLearningElementNode } from '@components'
+import { useTheme } from '@common/hooks'
 
 export type TreeDatum = {
   name: string
@@ -114,6 +115,8 @@ const NächsteEmpfehlungGraph = ({
   const firstNodeName = prunedData.name
   const isSingleNode = useMemo(() => countNodes(prunedData) === 1, [prunedData])
 
+  const theme = useTheme()
+
   // Measure the aspect-ratio wrapper
   const { ref, size } = useElementSize()
   const w = size.width
@@ -124,11 +127,11 @@ const NächsteEmpfehlungGraph = ({
   const s = useMemo(() => {
     const minDim = Math.max(1, Math.min(w, h))
 
-    const nodeR = clamp(minDim * 0.07, 22, 44)
+    const nodeR = clamp(minDim * 0.07, 24, 44)
     const iconSize = Math.round(nodeR * 1.05)
 
-    const dateFontSize = clamp(minDim * 0.024, 10, 14)
-    const noteFontSize = clamp(minDim * 0.03, 12, 18)
+    const dateFontSize = clamp(minDim * 0.024, 14, 16)
+    const noteFontSize = clamp(minDim * 0.03, 14, 18)
     const lineHeight = Math.round(noteFontSize * 1.3)
 
     const notePaddingX = clamp(minDim * 0.03, 10, 18)
@@ -298,6 +301,7 @@ const NächsteEmpfehlungGraph = ({
                       y={dateY}
                       textAnchor="middle"
                       style={{ fontSize: s.dateFontSize, opacity: 0.85 }}
+                      fill={theme.palette.text.primary}
                       xmlSpace="preserve">
                       {nd.date}
                     </text>

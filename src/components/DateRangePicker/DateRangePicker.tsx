@@ -81,7 +81,7 @@ const DateRangePicker = ({
       }
     },
     '& .MuiInputLabel-root': {
-      color: (theme: Theme) => theme.palette.text.secondary,
+      color: (theme: Theme) => theme.palette.text.primary,
       fontSize: FONT_LABEL,
       fontWeight: 500,
 
@@ -125,7 +125,7 @@ const DateRangePicker = ({
               justifyContent: 'center',
               flexShrink: 0
             }}>
-            <ArrowForwardIcon sx={{ fontSize: FONT_ARROW, color: 'text.secondary', opacity: 0.6 }} />
+            <ArrowForwardIcon sx={{ fontSize: FONT_ARROW, color: 'text.primary', opacity: 0.6 }} />
           </Box>
 
           <Box sx={{ flex: 1, minWidth: 0 }}>
@@ -167,7 +167,7 @@ const DateRangePicker = ({
                   lineHeight: 1,
                   border: '1.5px solid',
                   borderColor: 'divider',
-                  color: 'text.secondary',
+                  color: 'text.primary',
                   bgcolor: 'background.paper',
                   boxShadow: 'none',
                   transition: 'all 0.2s ease-in-out',

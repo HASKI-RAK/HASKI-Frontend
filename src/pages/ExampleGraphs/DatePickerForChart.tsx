@@ -49,7 +49,6 @@ const DatePickerForChart = ({
         height,
         ...position,
         zIndex: 10,
-        bgcolor: 'background.paper',
         p: 1.25,
         overflow: 'hidden'
       }}>
