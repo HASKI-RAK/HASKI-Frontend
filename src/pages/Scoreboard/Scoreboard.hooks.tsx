@@ -26,7 +26,7 @@ export const useScoreboard = (params: ScoreboardHookParams): ScoreboardHookRetur
   useEffect(() => {
     // todo getUser
     // todo only fetch if state are null?? prevents refetch on every render, but...
-    fetchScoreboardData(1, 9, 5, params.since, params.until).then((data) => {
+    fetchScoreboardData(52, 9, 1, params.since, params.until).then((data) => {
       setScores(data['score'] ?? {})
       setMaxScores(data['max_score'])
       setTimesSpent(data['time_spent'])

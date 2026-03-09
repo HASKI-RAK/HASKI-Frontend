@@ -23,7 +23,6 @@ const DashboardLayout = ({
       <Box sx={{ width: '80vw', mx: 'auto', mb: 2, display: 'flex', justifyContent: 'space-between', gap: 2 }}>
         <Box
           sx={{
-            backgroundColor: 'lightgrey',
             borderRadius: 1,
             p: 1,
             textAlign: 'center',
@@ -59,7 +58,6 @@ const DashboardLayout = ({
             <Grid item xs>
               <Box
                 sx={{
-                  backgroundColor: 'lightgrey',
                   borderRadius: 1,
                   height: '100%',
                   justifyContent: 'center',
@@ -75,7 +73,6 @@ const DashboardLayout = ({
             <Grid item xs>
               <Box
                 sx={{
-                  backgroundColor: 'lightgrey',
                   borderRadius: 1,
                   height: '100%',
                   justifyContent: 'center',

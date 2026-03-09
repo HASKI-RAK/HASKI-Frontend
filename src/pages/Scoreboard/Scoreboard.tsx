@@ -13,6 +13,97 @@ import {
 } from '@components'
 import { Course, LearningElement, Topic } from '@core'
 import { useScoreboard } from './Scoreboard.hooks'
+import PieChart from '../ExampleGraphs/PieChart'
+import AnzahlVersucheBarChart from '../ExampleGraphs/AnzahlVersucheBarChart'
+import NächsteEmpfehlungGraph from '../ExampleGraphs/NächsteEmpfehlung'
+import { Box } from '@mui/material'
+
+const dataPieChart: { id: string; label: string; value: number; color: string }[] = [
+  {
+    id: 'Course-1',
+    label: 'Course-1',
+    value: 429,
+    color: 'hsl(49, 70%, 50%)'
+  },
+  {
+    id: 'Course-2',
+    label: 'Course-2',
+    value: 104,
+    color: 'hsl(307, 70%, 50%)'
+  },
+  {
+    id: 'Course-3',
+    label: 'Course-3',
+    value: 364,
+    color: 'hsl(223, 70%, 50%)'
+  },
+  {
+    id: 'Course-4',
+    label: 'Course-4',
+    value: 482,
+    color: 'hsl(9, 70%, 50%)'
+  }
+]
+
+const totalHours = dataPieChart.reduce((sum, d) => sum + d.value, 0)
+
+const dataBarChart = [
+  {
+    Klassifikationen: 'RQ',
+    VerbrachteZeit: 141
+  },
+  {
+    Klassifikationen: 'ÜB',
+    VerbrachteZeit: 140
+  },
+  {
+    Klassifikationen: 'SE',
+    VerbrachteZeit: 84
+  },
+  {
+    Klassifikationen: 'BE',
+    VerbrachteZeit: 109
+  },
+  {
+    Klassifikationen: 'AB',
+    VerbrachteZeit: 141
+  },
+  {
+    Klassifikationen: 'KÜ',
+    VerbrachteZeit: 12
+  },
+  {
+    Klassifikationen: 'ZL',
+    VerbrachteZeit: 24
+  }
+]
+
+const treeData = {
+  name: 'Lines of Code Übung - 1',
+  course: 'Kurs-1',
+  topic: 'Topic-1',
+  date: '2024-05-15',
+  classification: 'ÜB',
+  children: [
+    {
+      name: 'Lines of Code Übung - 2',
+      course: 'Kurs-1',
+      topic: 'Topic-1',
+      date: '2024-05-15',
+      classification: 'ÜB',
+      children: [
+        {
+          name: 'Lines of Code Selbsteinschätzungstest - 1',
+          course: 'Kurs-1',
+          topic: 'Topic-1',
+          date: '2024-05-20',
+          classification: 'SE',
+          children: [{ name: 'Markov - Erklärung', course: 'Kurs-1', topic: 'Topic-2', classification: 'EK' }]
+        }
+      ]
+    }
+  ]
+}
 
 const Scoreboard = () => {
   const { currentItems, select, level, back, selection } = useDashboardNavigation()
@@ -113,8 +204,35 @@ const Scoreboard = () => {
           rows={tableRows}
         />
       }
-      topRight={undefined} // todo: laaz + dimi branch
-      bottomRight={undefined} // todo: laaz + dimi branch
+      topRight={
+        level == 'courses' ? (
+          //course hours
+          <PieChart data={dataPieChart} maxHeight={500} totalHours={totalHours} />
+        ) : level == 'topics' ? (
+          //topic hours
+          <PieChart data={dataPieChart} maxHeight={500} totalHours={totalHours} />
+        ) : level == 'learningElements' ? (
+          //attempts per learning element
+          <AnzahlVersucheBarChart
+            maxHeight={500}
+            keys={['VerbrachteZeit']}
+            indexBy={'Klassifikationen'}
+            color={['#6EC6FF']}
+            axisLeftText={'Verbrachte Zeit'}
+            axisBottomText={'Klassifikationen'}
+            data={dataBarChart}
+          />
+        ) : undefined
+      } // todo: laaz + dimi branch
+      bottomRight={
+        level == 'courses' ? (
+          //course hours
+          <NächsteEmpfehlungGraph maxHeight={200} aspectRatio="21 / 9" data={treeData} />
+        ) : level == 'topics' || level == 'learningElements' ? (
+          //topic hours
+          <NächsteEmpfehlungGraph maxHeight={200} data={treeData} />
+        ) : undefined
+      } // todo: laaz + dimi branch
       handleBack={back}
       disabledBack={level === 'courses'}
     />
