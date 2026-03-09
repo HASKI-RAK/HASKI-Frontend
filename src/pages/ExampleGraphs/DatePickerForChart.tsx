@@ -26,7 +26,7 @@ const DatePickerForChart = ({
   showPresets = true,
   width = 'auto',
   height = 'auto',
-  position = { top: 10, right: 10 }
+  position
 }: DatePickerForChartProps) => {
   const [startDate, setStartDate] = useState<Dayjs>(initialStartDate)
   const [endDate, setEndDate] = useState<Dayjs>(initialEndDate)
@@ -44,14 +44,12 @@ const DatePickerForChart = ({
   return (
     <Box
       sx={{
-        position: 'absolute',
+        position: 'relative',
         width,
         height,
         ...position,
         zIndex: 10,
         bgcolor: 'background.paper',
-        borderRadius: 2,
-        boxShadow: 3,
         p: 1.25,
         overflow: 'hidden'
       }}>

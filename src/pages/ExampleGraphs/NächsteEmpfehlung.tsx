@@ -229,8 +229,8 @@ const NächsteEmpfehlungGraph = ({
         <Box
           sx={{
             position: 'absolute',
-            top: 8,
-            right: 8,
+            top: -24,
+            right: 30,
             bgcolor: 'background.paper',
             border: '1px solid',
             borderColor: 'divider',

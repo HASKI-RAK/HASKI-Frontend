@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 import { CalendarMonthRounded, CancelRounded, CheckCircleRounded, StarRounded } from '@mui/icons-material'
 import { useCourseProgress } from '@common/hooks'
 import {
@@ -17,6 +17,9 @@ import PieChart from '../ExampleGraphs/PieChart'
 import AnzahlVersucheBarChart from '../ExampleGraphs/AnzahlVersucheBarChart'
 import NächsteEmpfehlungGraph from '../ExampleGraphs/NächsteEmpfehlung'
 import { Box } from '@mui/material'
+import DatePickerForChart from '../ExampleGraphs/DatePickerForChart'
+import { DateRange } from '../../components/DateRangePicker'
+import dayjs from 'dayjs'
 
 const dataPieChart: { id: string; label: string; value: number; color: string }[] = [
   {
@@ -119,6 +122,17 @@ const Scoreboard = () => {
 
   const selectedCourseId = selection.course?.id
 
+  const [dateRange, setDateRange] = useState<DateRange>({
+    startDate: dayjs().subtract(30, 'day'),
+    endDate: dayjs()
+  })
+
+  const handleDateRangeChange = (newDateRange: DateRange) => {
+    setDateRange(newDateRange)
+    // Filter your chart data based on the new date range here
+    console.log('Date range changed:', newDateRange)
+  }
+
   const getProgressBar = useCallback(
     // todo rename
     (itemId: number) => {
@@ -204,6 +218,14 @@ const Scoreboard = () => {
           rows={tableRows}
         />
       }
+      datePicker={
+        <DatePickerForChart
+          onDateRangeChange={handleDateRangeChange}
+          initialStartDate={dateRange.startDate}
+          initialEndDate={dateRange.endDate}
+          showPresets={true}
+        />
+      }
       topRight={
         level == 'courses' ? (
           //course hours
@@ -227,10 +249,10 @@ const Scoreboard = () => {
       bottomRight={
         level == 'courses' ? (
           //course hours
-          <NächsteEmpfehlungGraph maxHeight={200} aspectRatio="21 / 9" data={treeData} />
+          <NächsteEmpfehlungGraph maxHeight={250} aspectRatio="21 / 9" data={treeData} />
         ) : level == 'topics' || level == 'learningElements' ? (
           //topic hours
-          <NächsteEmpfehlungGraph maxHeight={200} data={treeData} />
+          <NächsteEmpfehlungGraph maxHeight={250} data={treeData} />
         ) : undefined
       } // todo: laaz + dimi branch
       handleBack={back}
