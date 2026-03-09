@@ -3,16 +3,15 @@ import { useTranslation } from 'react-i18next'
 import log from 'loglevel'
 import { Card, CardContent, Divider, Grid, Skeleton, Typography } from '@common/components'
 import { 
-  BarChart,
   CourseCard,
   courseCardStyle,
   CreateCourseCard,
-  XpBarChart,
   XpLeaderboard
 } from '@components'
 import { Course, GamificationSettings } from '@core'
 import { AuthContext, ILSContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
+import { get } from 'http'
 
 /**
  * # Home Page
@@ -35,6 +34,7 @@ export const Home = () => {
   const [activeStepCreateCourseModal, setActiveStepCreateCourseModal] = useState<number>(0)
   const [createCourseModalOpen, setCreateCourseModalOpen] = useState<boolean>(false)
   const [gamificationSettings, setGamificationSettings] = useState<GamificationSettings>({} as GamificationSettings)
+  const [level, setLevel] = useState<number>(1)
 
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
@@ -42,6 +42,7 @@ export const Home = () => {
   const getCourses = useStore((state) => state.getCourses)
   const clearCoursesCache = useStore((state) => state.clearCoursesCache)
   const coursesCache = useStore((state) => state._cache_Courses_record)
+  const getExperiencePoints = useStore((state) => state.getExperiencePoints)
 
   const handleCloseCourseModal = () => {
     clearCoursesCache()
@@ -50,9 +51,6 @@ export const Home = () => {
   }
 
   const maxRows = 10
-  const barValues = [60, 40, 30, 40, 50, 60, 70, 80, 80, 60]
-  const barLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
-  const barColor = '#3f51b5'
 
   useEffect(() => {
     if (isAuth) {
@@ -83,6 +81,17 @@ export const Home = () => {
               })
               log.error(t('error.fetchGamificationSettings') + ' ' + error)
             })
+          getExperiencePoints(user.id).then((response) => {
+            const calculatedLevel = Math.floor(response.experience_points / 100) + 1
+            setLevel(calculatedLevel)
+          }).catch((error) => {
+            addSnackbar({
+              message: t('error.fetchExperiencePoints'),
+              severity: 'error',
+              autoHideDuration: 5000
+            })
+            log.error(t('error.fetchExperiencePoints') + ' ' + error)
+          })
         })
         .catch((error) => {
           addSnackbar({
@@ -139,17 +148,14 @@ export const Home = () => {
   return (
     <Grid container mt='1rem' direction="row" height={'100%'} spacing={2} id='homeBaseGrid'>
       <Grid container item direction={'column'} width={'30%'}>
-        <Grid item  flexGrow={1} />
+        <Grid item  flexGrow={1}>
+          <Typography variant="h5" align="center">
+            {t('pages.home.level', { level })}
+          </Typography>
+        </Grid>
         <Grid item flexGrow={1} />
         <Grid item flexGrow={1}>
-          <BarChart leaderboardEntries={barValues.map((entry, index)=>{
-            return {
-              rank:index,
-              metric: entry,
-              student_id: index+1
-            }
-          }
-          )} barColor={barColor} />
+          <XpLeaderboard showVisually={visualInput} maxRows={maxRows} />
         </Grid>
       </Grid>
       <Divider orientation="vertical" flexItem />

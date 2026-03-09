@@ -2,9 +2,10 @@ import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Button, CircularProgress, Grid, Typography } from '@common/components'
-import Leaderboard from '../Leaderboard'
 import { useRatingLeaderboard } from './RatingLeaderboard.hook'
 
+
+// TODO: omponent must be rewwored to be standardized with other leaderboards and fit new design
 const RatingLeaderboard = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -20,11 +21,6 @@ const RatingLeaderboard = () => {
   return (
     <Grid container direction={'column'}>
       <Typography variant="h6">{t('components.leaderboard.title')}</Typography>
-      <Leaderboard
-        currentStudentId={currentStudentId}
-        leaderboardContent={leaderboardRatings}
-        scoreHeadline={t('components.leaderboard.ratingHeader')}
-      />
       <Button
         variant="text"
         size="small"

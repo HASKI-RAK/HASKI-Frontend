@@ -635,6 +635,8 @@ describe('Topic Page', () => {
     expect(result.current).toStrictEqual({
       url: '',
       title: '',
+      learningElementStartTime: 0,
+      currentActivityClassification: 'other',
       isOpen: false,
       handleClose: expect.any(Function),
       handleOpen: expect.any(Function),

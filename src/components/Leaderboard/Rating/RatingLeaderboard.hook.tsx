@@ -1,19 +1,22 @@
 import { Dispatch, SetStateAction, useCallback, useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { handleError } from '@components'
-import { StudentRating } from '@core'
+import { StudentRating, GenericLeaderboard } from '@core'
 import { fetchStudentRatings, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
-import { LeaderboardEntry } from '../Leaderboard'
+
+
+// Component must be rewwored to fit new design
 
 export const useRatingLeaderboard = (setIsLoading: Dispatch<SetStateAction<boolean>>) => {
   const getUser = usePersistedStore((state) => state.getUser)
   //const [ tableContent, setTableContent ] = useState<Leaderboard>()
-  const [leaderboardRatings, setLeaderboardRatings] = useState<LeaderboardEntry[]>([])
+  const [leaderboardRatings, setLeaderboardRatings] = useState<GenericLeaderboard>([])
   const [currentStudentId, setCurrentStudentId] = useState<number | null>(null)
 
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
+
 
   const findNewestRatings = useCallback((ratings: StudentRating[]): StudentRating[] => {
     const ratingsByUser = ratings.reduce<Record<number, StudentRating>>((acc, rating) => {
@@ -71,9 +74,10 @@ export const useRatingLeaderboard = (setIsLoading: Dispatch<SetStateAction<boole
             const topicRatings = ratingsInTopic(data, topic_id)
             const newestRatings = findNewestRatings(topicRatings)
             const userAndNeighboringRatings = findUserAndNeighbors(newestRatings, user.id)
-            const leaderboardEntries: LeaderboardEntry[] = userAndNeighboringRatings.map((rating) => ({
-              studentId: rating.student_id,
-              scoredValue: rating.rating_value
+            const leaderboardEntries: GenericLeaderboard = userAndNeighboringRatings.map((rating) => ({
+              student_id: rating.student_id,
+              metric: rating.rating_value,
+              rank: 0 
             }))
             setLeaderboardRatings(leaderboardEntries)
           })

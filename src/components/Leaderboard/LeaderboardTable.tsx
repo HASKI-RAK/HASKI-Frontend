@@ -1,15 +1,18 @@
-import { Fragment, useCallback } from 'react'
+import { memo, Fragment, useCallback } from 'react'
 import { Grid, Table, TableBody, TableCell, TableHead, TableRow } from '@common/components'
 import { GenericLeaderboard, GenericLeaderboardEntry } from '@core'
 import { useTranslation } from 'react-i18next'
+import { useTheme } from '@common/hooks'
 
 type LeaderboardTableProps = {
   leaderboardEntries: GenericLeaderboard
   metricHeader: string
+  currentStudentId?: number
 }
 
-const LeaderboardTable = ({ leaderboardEntries, metricHeader }: LeaderboardTableProps) => {
+const LeaderboardTable = ({ leaderboardEntries, metricHeader, currentStudentId }: LeaderboardTableProps) => {
   const { t } = useTranslation()
+  const theme = useTheme()
   const createTableRows = useCallback(() => {
     return leaderboardEntries.map((entry: GenericLeaderboardEntry, index: number, arr: GenericLeaderboard) => {
       const isLastEntry = index === arr.length - 1
@@ -17,7 +20,7 @@ const LeaderboardTable = ({ leaderboardEntries, metricHeader }: LeaderboardTable
 
       if (!hasRankGapToNext) {
         return (
-          <TableRow key={entry.student_id}>
+          <TableRow key={entry.student_id} sx={{ backgroundColor: currentStudentId === entry.student_id ? theme.palette.primary.light : 'inherit' }}>
             <TableCell>{entry.rank}</TableCell>
             <TableCell>{entry.student_id}</TableCell>
             <TableCell>{entry.metric}</TableCell>
@@ -27,7 +30,7 @@ const LeaderboardTable = ({ leaderboardEntries, metricHeader }: LeaderboardTable
 
       return (
         <Fragment key={`entry-${entry.student_id}`}>
-          <TableRow>
+          <TableRow sx={{ backgroundColor: currentStudentId === entry.student_id ? theme.palette.primary.light : 'inherit' }}>
             <TableCell>{entry.rank}</TableCell>
             <TableCell>{entry.student_id}</TableCell>
             <TableCell>{entry.metric}</TableCell>
@@ -60,4 +63,4 @@ const LeaderboardTable = ({ leaderboardEntries, metricHeader }: LeaderboardTable
   )
 }
 
-export default LeaderboardTable
+export default memo(LeaderboardTable)

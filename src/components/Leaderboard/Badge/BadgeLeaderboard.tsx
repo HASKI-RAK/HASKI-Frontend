@@ -5,8 +5,6 @@ import { BarChart, handleError, LeaderboardTable } from '@components'
 import { BadgeLeaderboardEntry, GenericLeaderboard, GenericLeaderboardEntry, League } from '@core'
 import { fetchBadgeLeaderboard, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
-import { useTheme } from '@common/hooks'
-
 type BadgeLeaderboardProps = {
     maxRows?: number,
     showVisually: boolean
@@ -14,7 +12,6 @@ type BadgeLeaderboardProps = {
 
 export const BadgeLeaderboard = ({ maxRows, showVisually }: BadgeLeaderboardProps) => {
   const { t } = useTranslation()
-  const theme = useTheme()
   const { addSnackbar } = useContext(SnackbarContext)
 
   const getUser = usePersistedStore((state) => state.getUser)
@@ -28,7 +25,7 @@ export const BadgeLeaderboard = ({ maxRows, showVisually }: BadgeLeaderboardProp
   }
 
   const [leaderboardEntries, setLeaderboardEntries] = useState<GenericLeaderboard>([])
-  const [currentStudentId, setCurrentStudentId] = useState<number | null>(null)
+  const [currentStudentId, setCurrentStudentId] = useState<number | undefined>(undefined)
   //const [totalParticipants, setTotalParticipants] = useState(0)
   const [league, setLeague] = useState('none' as League)
   const [isLoading, setIsLoading] = useState(true)
@@ -80,7 +77,7 @@ export const BadgeLeaderboard = ({ maxRows, showVisually }: BadgeLeaderboardProp
   }, [])
 
   useEffect(() => {
-    if (currentStudentId !== null) {
+    if (currentStudentId !== undefined) {
       updateDisplayedEntries(currentStudentId)
     }
   }, [currentStudentId, leaderboardEntries, maxRows])
@@ -95,9 +92,9 @@ export const BadgeLeaderboard = ({ maxRows, showVisually }: BadgeLeaderboardProp
             {t('badgeLeaderboard.title')}
           </Typography>
           { showVisually ? (
-            <BarChart leaderboardEntries={filteredEntries} barColor={theme.palette.primary.main}/>
+            <BarChart leaderboardEntries={filteredEntries} currentStudentId={currentStudentId} />
           ) : (
-            <LeaderboardTable leaderboardEntries={filteredEntries} metricHeader={t('badgeLeaderboard.badgeCount')} />
+            <LeaderboardTable leaderboardEntries={filteredEntries} metricHeader={t('badgeLeaderboard.badgeCount')} currentStudentId={currentStudentId}/>
           )}
         </Grid>
       )

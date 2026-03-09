@@ -75,7 +75,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   const [title, setTitle] = useState(defaultTitle)
   const [isOpen, setIsOpen] = useState(defaultIsOpen)
   const [lmsId, setLmsId] = useState<number>(defaultLmsId)
-  const [learningElementStartTime, setLearningElementStartTime] = useState<number>(Date.now())
+  const [learningElementStartTime, setLearningElementStartTime] = useState<number>(0)
   const [currentActivityClassification, setCurrentActivityClassification] = useState<string>('other')
   const theme = useTheme()
   const { t } = useTranslation()

@@ -32,8 +32,8 @@ import {
   CourseMenu,
   CreateDefaultLearningPathModal,
   FurtherInfoMenu,
+  GamificationSettingsModal,
   LanguageMenu,
-  LevelBar,
   QuestionnaireQuestionsModal,
   StatisticsMenu,
   TableILSQuestions,
@@ -60,11 +60,11 @@ const MenuBar = () => {
   const activeTheme = useTheme()
   const [modalOpenTheme, setModalOpenTheme] = useState(false)
   const { isCourseCreatorRole } = useContext(RoleContext)
-  const { isStudentRole } = useContext(RoleContext)
   const [modalOpenILSShort, setModalOpenILSShort] = useState(false)
   const [modalOpenILSLong, setModalOpenILSLong] = useState(false)
   const [modalOpenListK, setModalOpenListK] = useState(false)
   const [modalOpenDefaultLearningPath, setModalOpenDefaultLearningPath] = useState(false)
+  const [modalOpenGamificationSettings, setModalOpenGamificationSettings] = useState(false)
   const [successSendILSLong, setSuccessSendILSLong] = useState(false)
   const [successSendILSShort, setSuccessSendILSShort] = useState(false)
   const [successSendListK, setSuccessSendListK] = useState(false)
@@ -357,6 +357,24 @@ const MenuBar = () => {
               <CreateDefaultLearningPathModal
                 open={modalOpenDefaultLearningPath}
                 handleClose={handleCloseDefaultLearningPath}
+              />
+
+              {isAuth && (
+                <MenuItem
+                  id="gamification-settings-menu-item"
+                  data-testid="gamificationSettingsMenuItem"
+                  key="gamificationSettingsMenuItem"
+                  onClick={() => {
+                    setModalOpenGamificationSettings(true)}}>
+                  <ListItemIcon>
+                    <Polyline fontSize="small" />
+                  </ListItemIcon>
+                  <Typography textAlign="center">{t('components.Menubar.gamificationSettings')}</Typography>
+                </MenuItem>
+              )}
+              <GamificationSettingsModal
+                open={modalOpenGamificationSettings}
+                onClose={() => setModalOpenGamificationSettings(false)}
               />
 
               <MenuItem

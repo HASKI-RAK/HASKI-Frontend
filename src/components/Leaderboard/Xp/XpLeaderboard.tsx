@@ -2,10 +2,9 @@ import { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CircularProgress, Grid, Typography } from '@common/components'
 import { BarChart, handleError, LeaderboardTable } from '@components'
-import { BadgeLeaderboardEntry, GenericLeaderboard, GenericLeaderboardEntry, League } from '@core'
+import { GenericLeaderboard, GenericLeaderboardEntry, League } from '@core'
 import { fetchXpLeaderboard, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
-import { useTheme } from '@common/hooks'
 
 type XpLeaderboardProps = {
     maxRows?: number,
@@ -14,7 +13,6 @@ type XpLeaderboardProps = {
 
 export const XpLeaderboard = ({ maxRows, showVisually }: XpLeaderboardProps) => {
   const { t } = useTranslation()
-  const theme = useTheme()
   const { addSnackbar } = useContext(SnackbarContext)
 
   const getUser = usePersistedStore((state) => state.getUser)
@@ -28,7 +26,7 @@ export const XpLeaderboard = ({ maxRows, showVisually }: XpLeaderboardProps) => 
   }
 
   const [leaderboardEntries, setLeaderboardEntries] = useState<GenericLeaderboard>([])
-  const [currentStudentId, setCurrentStudentId] = useState<number | null>(null)
+  const [currentStudentId, setCurrentStudentId] = useState<number | undefined>(undefined)
   //const [totalParticipants, setTotalParticipants] = useState(0)
   const [league, setLeague] = useState('none' as League)
   const [isLoading, setIsLoading] = useState(true)
@@ -79,7 +77,7 @@ export const XpLeaderboard = ({ maxRows, showVisually }: XpLeaderboardProps) => 
   }, [])
 
   useEffect(() => {
-    if (currentStudentId !== null) {
+    if (currentStudentId !== undefined) {
       updateDisplayedEntries(currentStudentId)
     }
   }, [currentStudentId, leaderboardEntries, maxRows])
@@ -94,9 +92,9 @@ export const XpLeaderboard = ({ maxRows, showVisually }: XpLeaderboardProps) => 
             {t('xpLeaderboard.title')}
           </Typography>
           { showVisually ? (
-            <BarChart leaderboardEntries={filteredEntries} barColor={theme.palette.primary.main}/>
+            <BarChart leaderboardEntries={filteredEntries} currentStudentId={currentStudentId}/>
           ) : (
-            <LeaderboardTable leaderboardEntries={filteredEntries} metricHeader={t('xpLeaderboard.xp')} />
+            <LeaderboardTable leaderboardEntries={filteredEntries} metricHeader={t('xpLeaderboard.xp')} currentStudentId={currentStudentId} />
           )}
         </Grid>
       )

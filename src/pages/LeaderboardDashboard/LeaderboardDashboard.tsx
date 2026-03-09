@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Grid, Typography } from '@common/components'
-import { BadgeBarChart, BadgeLeaderboard, XpBarChart, XpLeaderboard } from '@components'
+import { BadgeLeaderboard, XpLeaderboard } from '@components'
 import { GamificationSettings } from '@core'
 import { ILSContext } from '@services'
 import { usePersistedStore } from '@store'
@@ -32,17 +32,10 @@ const LeaderboardDashboard = () => {
         </Typography>
       </Grid>
       <Grid container item xs={12}>
-        {gamificationSettings.presentation === 'visual' || visualInput ? (
           <Grid container item xs={12} spacing={4}>
-            <XpBarChart />
-            <BadgeBarChart />
+            <XpLeaderboard showVisually={gamificationSettings.presentation === 'visual' || visualInput} />
+            <BadgeLeaderboard showVisually={gamificationSettings.presentation === 'visual' || visualInput} />
           </Grid>
-        ) : (
-          <Grid container item xs={12} spacing={4}>
-            <XpLeaderboard />
-            <BadgeLeaderboard />
-          </Grid>
-        )}
       </Grid>
     </Grid>
   )

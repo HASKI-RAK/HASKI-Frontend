@@ -60,12 +60,9 @@ export { default as ImageCollection } from './ImageCollection/ImageCollection'
 export { default as LabeledSwitch } from './LabeledSwitch/LabeledSwitch'
 export { default as LanguageMenu } from './LanguageMenu/LanguageMenu'
 export {
-  BadgeBarChart,
   BadgeLeaderboard,
-  Leaderboard,
   LeaderboardTable,
   RatingLeaderboard,
-  XpBarChart,
   XpLeaderboard
 } from './Leaderboard'
 export { default as LevelBar } from './LevelBar/LevelBar'

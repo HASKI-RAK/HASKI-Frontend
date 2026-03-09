@@ -1,17 +1,17 @@
 import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Divider, Grid, Typography } from '@common/components'
+import { useTheme } from '@common/hooks'
 import { GenericLeaderboard, GenericLeaderboardEntry } from '@core'
-import { handleError } from '@components'
-import { SnackbarContext } from '@services'
 
 type BarChartProps = {
   leaderboardEntries: GenericLeaderboard
-  barColor: string
+  currentStudentId?: number
 }
 
-export const BarChart = ({ leaderboardEntries, barColor }: BarChartProps) => {
+export const BarChart = ({ leaderboardEntries, currentStudentId }: BarChartProps) => {
   const { t } = useTranslation()
+  const theme = useTheme()
   const [maxValue, setMaxValue] = useState(0)
   const [dataErrorOccurred, setDataErrorOccurred] = useState(false)
 
@@ -42,11 +42,9 @@ export const BarChart = ({ leaderboardEntries, barColor }: BarChartProps) => {
                   <Divider orientation="vertical" flexItem />
                   <Typography variant="body2">{`${entry.student_id}`}</Typography>
                 </Box>
-
                 <Box width="20rem" height="4rem" display="flex" alignItems="center">
-                  <Box width={barWidth} height="2rem" bgcolor={barColor} borderRadius="1rem" mr="0.5rem" />
+                  <Box width={barWidth} height="2rem" bgcolor={currentStudentId === entry.student_id ? theme.palette.primary.light : theme.palette.primary.main} borderRadius="1rem" mr="0.5rem" />
                 </Box>
-
                 <Box width="10rem" height="4rem" display="flex" alignItems="center" justifyContent="flex-end">
                   <Typography variant="body2">{entry.metric}</Typography>
                 </Box>
