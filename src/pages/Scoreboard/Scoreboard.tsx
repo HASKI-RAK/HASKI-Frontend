@@ -20,7 +20,7 @@ import DatePickerForChart from '../ExampleGraphs/DatePickerForChart'
 import { DateRange } from '../../components/DateRangePicker'
 import dayjs from 'dayjs'
 
-const dataPieChart: { label: string; value: number }[] = [
+/*const dataPieChart: { label: string; value: number }[] = [
   {
     label: 'Course-1',
     value: 429
@@ -39,57 +39,51 @@ const dataPieChart: { label: string; value: number }[] = [
   }
 ]
 
-const totalHours = dataPieChart.reduce((sum, d) => sum + d.value, 0)
+
 
 const dataBarChart = [
   {
-    Klassifikationen: 'RQ',
-    VerbrachteZeit: 141
+    label: 'RQ',
+    value: 141
   },
   {
-    Klassifikationen: 'ÜB',
-    VerbrachteZeit: 140
+    label: 'ÜB',
+    value: 140
   },
   {
-    Klassifikationen: 'SE',
-    VerbrachteZeit: 84
+    label: 'SE',
+    value: 84
   },
   {
-    Klassifikationen: 'BE',
-    VerbrachteZeit: 109
+    label: 'BE',
+    value: 109
   },
   {
-    Klassifikationen: 'AB',
-    VerbrachteZeit: 141
+    label: 'AB',
+    value: 141
   },
   {
-    Klassifikationen: 'KÜ',
-    VerbrachteZeit: 12
+    label: 'KÜ',
+    value: 12
   },
   {
-    Klassifikationen: 'ZL',
-    VerbrachteZeit: 24
+    label: 'ZL',
+    value: 24
   }
-]
+]*/
 
-const treeData = {
+/*const treeData = {
   name: 'Lines of Code Übung - 1',
-  course: 'Kurs-1',
-  topic: 'Topic-1',
   date: '2024-05-15',
   classification: 'ÜB',
   children: [
     {
       name: 'Lines of Code Übung - 2',
-      course: 'Kurs-1',
-      topic: 'Topic-1',
       date: '2024-05-15',
       classification: 'ÜB',
       children: [
         {
           name: 'Lines of Code Selbsteinschätzungstest - 1',
-          course: 'Kurs-1',
-          topic: 'Topic-1',
           date: '2024-05-20',
           classification: 'SE',
           children: [{ name: 'Markov - Erklärung', course: 'Kurs-1', topic: 'Topic-2', classification: 'EK' }]
@@ -97,6 +91,49 @@ const treeData = {
       ]
     }
   ]
+}*/
+
+const toIsoDate = (s?: string): string | undefined => {
+  if (!s) return undefined
+  const d = new Date(s)
+  return Number.isNaN(d.getTime()) ? undefined : d.toISOString().slice(0, 10)
+}
+
+type TreeDatum = {
+  name: string
+  date?: string
+  classification?: string
+  children?: TreeDatum[]
+}
+
+type LastElement = {
+  completed_at: string
+  learning_element: Partial<LearningElement>
+}
+
+export const treeDataFromLast = (lastElements: Record<string, LastElement>): TreeDatum | null => {
+  const ordered = Object.values(lastElements)
+    .filter((x) => Boolean(x?.learning_element?.name))
+    .sort((a, b) => new Date(a.completed_at).getTime() - new Date(b.completed_at).getTime())
+    .slice(-3) // ✅ always take last 3 (newest 3, still ordered oldest->newest)
+    .map((x) => ({
+      name: x.learning_element.name ?? 'Unknown',
+      date: toIsoDate(x.completed_at),
+      classification: x.learning_element.classification
+    }))
+
+  if (ordered.length === 0) return null
+
+  const root: TreeDatum = { ...ordered[0] }
+  let cursor = root
+
+  for (let i = 1; i < ordered.length; i += 1) {
+    const next: TreeDatum = { ...ordered[i] }
+    cursor.children = [next]
+    cursor = next
+  }
+
+  return root
 }
 
 const Scoreboard = () => {
@@ -107,14 +144,26 @@ const Scoreboard = () => {
     topicId: selection.topic?.id
   })
 
-  const pieData = useMemo(() => {
+  const labelById = useMemo(() => {
+    const map: Record<string, string> = {}
+    for (const item of currentItems) {
+      map[String(item.id)] = item.name
+    }
+    return map
+  }, [currentItems])
+
+  const pieAndChartData = useMemo(() => {
     return Object.entries(timesSpent)
       .filter(([, v]) => Number.isFinite(v) && v > 0)
       .map(([key, value]) => ({
-        label: key, // replace with a nicer label if you have one
+        label: labelById[key] ?? key, // fallback to key if not found
         value
       }))
-  }, [timesSpent])
+  }, [timesSpent, labelById])
+
+  const totalHours = pieAndChartData.reduce((sum, d) => sum + d.value, 0)
+
+  const treeData = useMemo(() => treeDataFromLast(lastElements), [lastElements])
 
   const isLearningElementLevel = level === 'learningElements'
   const isLearningElement = (item: LearningElement | Course | Topic): item is LearningElement =>
@@ -230,30 +279,30 @@ const Scoreboard = () => {
         level == 'courses' ? (
           //course hours
 
-          <PieChart data={pieData} maxHeight={500} totalHours={totalHours} />
+          <PieChart data={pieAndChartData} maxHeight={500} totalHours={totalHours} />
         ) : level == 'topics' ? (
           //topic hours
-          <PieChart data={pieData} maxHeight={500} totalHours={totalHours} />
+          <PieChart data={pieAndChartData} maxHeight={500} totalHours={totalHours} />
         ) : level == 'learningElements' ? (
           //attempts per learning element
           <AnzahlVersucheBarChart
             maxHeight={500}
-            keys={['VerbrachteZeit']}
-            indexBy={'Klassifikationen'}
-            color={['#6EC6FF']}
+            color={'#6EC6FF'}
             axisLeftText={'Verbrachte Zeit'}
-            axisBottomText={'Klassifikationen'}
-            data={dataBarChart}
+            axisBottomText={'Lernelement Name'}
+            data={pieAndChartData}
           />
         ) : undefined
       } // todo: laaz + dimi branch
       bottomRight={
-        level == 'courses' ? (
-          //course hours
-          <NächsteEmpfehlungGraph maxHeight={250} aspectRatio="21 / 9" data={treeData} />
-        ) : level == 'topics' || level == 'learningElements' ? (
-          //topic hours
-          <NächsteEmpfehlungGraph maxHeight={250} data={treeData} />
+        level === 'courses' ? (
+          treeData ? (
+            <NächsteEmpfehlungGraph maxHeight={250} aspectRatio="21 / 9" data={treeData} />
+          ) : undefined
+        ) : level === 'topics' || level === 'learningElements' ? (
+          treeData ? (
+            <NächsteEmpfehlungGraph maxHeight={250} data={treeData} />
+          ) : undefined
         ) : undefined
       } // todo: laaz + dimi branch
       handleBack={back}

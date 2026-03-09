@@ -4,23 +4,24 @@ import type { Theme as NivoTheme } from '@nivo/core'
 import { useTheme } from '@mui/material/styles'
 import type { Theme } from '@common/theme'
 
+export type BarDatum = {
+  label: string
+  value: number
+}
+
 type BarChartProps = {
-  keys: string[]
-  indexBy: string
-  color: string[]
+  data: BarDatum[]
+  color?: string
   axisLeftText: string
   axisBottomText: string
-  data: Array<Record<string, string | number>>
   maxHeight?: number
 }
 
 const AnzahlVersucheBarChart = ({
-  keys,
-  indexBy,
-  color,
+  data,
+  color = '#6EC6FF',
   axisLeftText,
   axisBottomText,
-  data,
   maxHeight = 500
 }: BarChartProps) => {
   const theme = useTheme<Theme>()
@@ -47,7 +48,7 @@ const AnzahlVersucheBarChart = ({
       },
       grid: {
         line: {
-          stroke: theme.palette.text.primary,
+          stroke: theme.palette.divider,
           strokeWidth: 1
         }
       },
@@ -67,9 +68,9 @@ const AnzahlVersucheBarChart = ({
     <div style={{ width: '100%', aspectRatio: '16 / 9', maxHeight }}>
       <ResponsiveBar
         data={data}
-        keys={keys}
-        indexBy={indexBy}
-        colors={color}
+        keys={['value']}
+        indexBy="label"
+        colors={[color]}
         theme={nivoTheme}
         labelSkipWidth={12}
         labelSkipHeight={12}

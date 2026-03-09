@@ -187,7 +187,7 @@ const ExampleGraphs = () => {
           keys={['KÜ', 'EK', 'SE', 'LZ']} // columns
           indexBy="student" // row identifier
           axisLeftText="Position"
-          axisTopText="Klassifikationen"
+          axisTopText="name"
         />
       </Box>
     </Box>
