@@ -17,7 +17,7 @@ export const BarChart = ({ leaderboardEntries, currentStudentId }: BarChartProps
 
   useEffect(() => {
     if (leaderboardEntries?.length > 0) {
-      setMaxValue(Math.max(...leaderboardEntries.map(entry => entry.metric)))
+      setMaxValue(Math.max(...leaderboardEntries.map((entry) => entry.metric)))
     }
   }, [leaderboardEntries])
 
@@ -30,20 +30,22 @@ export const BarChart = ({ leaderboardEntries, currentStudentId }: BarChartProps
           {leaderboardEntries?.map((entry: GenericLeaderboardEntry) => {
             const barWidth = maxValue > 0 ? `${(entry.metric / maxValue) * 100}%` : '0%'
             return (
-              <Box
-                key={entry.student_id}
-                width="35rem"
-                height="4rem"
-                display="flex"
-                alignItems="center"
-              >
+              <Box key={entry.student_id} width="35rem" height="4rem" display="flex" alignItems="center">
                 <Box width="10rem" height="4rem" display="flex" alignItems="center" gap="0.5rem">
                   <Typography variant="body2">{entry.rank}</Typography>
                   <Divider orientation="vertical" flexItem />
                   <Typography variant="body2">{`${entry.student_id}`}</Typography>
                 </Box>
                 <Box width="20rem" height="4rem" display="flex" alignItems="center">
-                  <Box width={barWidth} height="2rem" bgcolor={currentStudentId === entry.student_id ? theme.palette.primary.light : theme.palette.primary.main} borderRadius="1rem" mr="0.5rem" />
+                  <Box
+                    width={barWidth}
+                    height="2rem"
+                    bgcolor={
+                      currentStudentId === entry.student_id ? theme.palette.primary.light : theme.palette.primary.main
+                    }
+                    borderRadius="1rem"
+                    mr="0.5rem"
+                  />
                 </Box>
                 <Box width="10rem" height="4rem" display="flex" alignItems="center" justifyContent="flex-end">
                   <Typography variant="body2">{entry.metric}</Typography>

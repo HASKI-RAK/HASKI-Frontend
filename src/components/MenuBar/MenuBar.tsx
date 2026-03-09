@@ -365,7 +365,8 @@ const MenuBar = () => {
                   data-testid="gamificationSettingsMenuItem"
                   key="gamificationSettingsMenuItem"
                   onClick={() => {
-                    setModalOpenGamificationSettings(true)}}>
+                    setModalOpenGamificationSettings(true)
+                  }}>
                   <ListItemIcon>
                     <Polyline fontSize="small" />
                   </ListItemIcon>

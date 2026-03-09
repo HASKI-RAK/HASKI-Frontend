@@ -28,7 +28,7 @@ const ExpandedGameSidePanel = ({
         right: 0,
         top: '10rem',
         width: '25rem',
-        height: {height},
+        height: { height },
         position: 'absolute',
         mr: '1rem'
       }}>

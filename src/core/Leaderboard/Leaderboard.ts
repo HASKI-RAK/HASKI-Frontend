@@ -29,11 +29,12 @@ type ExPointLeaderboardReturn = (studentId: number) => Promise<ExPointLeaderboar
 type LeaderboardReturn = (course_id: string, student_id: string) => Promise<Leaderboard>
 
 export default Leaderboard
-export type { 
-  ExPointLeaderboardResponse, 
-  ExPointLeaderboardReturn, 
-  GenericLeaderboard, 
-  GenericLeaderboardEntry, 
-  LeaderboardReturn, 
-  League, 
-  XpLeaderboardEntry }
+export type {
+  ExPointLeaderboardResponse,
+  ExPointLeaderboardReturn,
+  GenericLeaderboard,
+  GenericLeaderboardEntry,
+  LeaderboardReturn,
+  League,
+  XpLeaderboardEntry
+}

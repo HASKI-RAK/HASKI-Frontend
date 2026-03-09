@@ -15,11 +15,7 @@ const GameSidePanel = ({ attemptDuration, experiencePointDetails }: GameSidePane
   const getUser = usePersistedStore((state) => state.getUser)
   const getGamificationSettings = usePersistedStore((state) => state.getGamificationSettings)
 
-  const {
-    reflectiveProcessing,
-    sensingPerception,
-    verbalInput
-  } = useContext(ILSContext)
+  const { reflectiveProcessing, sensingPerception, verbalInput } = useContext(ILSContext)
 
   const [expanded, setExpanded] = useState<boolean>(true)
   const [studentId, setStudentId] = useState<number>(0)
@@ -34,10 +30,11 @@ const GameSidePanel = ({ attemptDuration, experiencePointDetails }: GameSidePane
       setStudentId(user.id)
       getGamificationSettings(user.id).then((gamificationSettings: GamificationSettings) => {
         const showDetailedInformation = gamificationSettings.information === 'detailed'
-        setShowExperiencePointDetails(showDetailedInformation || reflectiveProcessing || sensingPerception || verbalInput)
+        setShowExperiencePointDetails(
+          showDetailedInformation || reflectiveProcessing || sensingPerception || verbalInput
+        )
       })
     })
-    
   }, [ILSContext, getUser])
 
   return (

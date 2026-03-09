@@ -1,35 +1,36 @@
-import { memo, SetStateAction, useState } from 'react'
+import { memo, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CircularProgress, Fab, FormControlLabel, Grid, Modal, Radio, RadioGroup, Typography } from '@common/components'
 import { Close, Save } from '@common/icons'
+import { handleError } from '@components'
 import { GamificationSettings } from '@core'
+import { AuthContext, SnackbarContext } from '@services'
+import { usePersistedStore } from '@store'
 import { useGamificationSettingsModal } from './GamificationSettingsModalHooks'
 
 type GamificationSettingsModalProps = {
   open: boolean
   onClose: () => void
-  gamificationSettings: GamificationSettings
-  setGamificationSettings: (value: SetStateAction<GamificationSettings>) => void
 }
 
-const GamificationSettingsModal = ({
-  open,
-  onClose,
-  gamificationSettings,
-  setGamificationSettings
-}: GamificationSettingsModalProps) => {
+const GamificationSettingsModal = ({ open, onClose }: GamificationSettingsModalProps) => {
   const { t } = useTranslation()
 
-  const [selectedGamificationSettings, setSelectedGamificationSettings] =
-    useState<GamificationSettings>(gamificationSettings)
+  const { isAuth } = useContext(AuthContext)
+  const getGamificationSettings = usePersistedStore((state) => state.getGamificationSettings)
+  const getUser = usePersistedStore((state) => state.getUser)
+  const { addSnackbar } = useContext(SnackbarContext)
+
+  const [selectedGamificationSettings, setSelectedGamificationSettings] = useState<GamificationSettings>(
+    {} as GamificationSettings
+  )
   const [waitForBackend, setWaitForBackend] = useState(false)
 
   const { handleSave, handleSelectPresentation, handleSelectSocial, handleSelectInformation } =
     useGamificationSettingsModal({
-      selectedGamificationSettings: selectedGamificationSettings as GamificationSettings,
+      selectedGamificationSettings: selectedGamificationSettings,
       setWaitForBackend,
       setSelectedGamificationSettings,
-      setGamificationSettings,
       onClose
     })
 
@@ -48,14 +49,33 @@ const GamificationSettingsModal = ({
     { value: 'brief', label: t('components.GamificationSettingsModal.brief') }
   ]
 
+  useEffect(() => {
+    if (isAuth) {
+      getUser()
+        .then((user) => {
+          getGamificationSettings(user.id)
+            .then((settings) => {
+              setSelectedGamificationSettings(settings)
+            })
+            .catch((error) => {
+              handleError(t, addSnackbar, 'error.fetchGamificationSettings', error, 3000)
+            })
+        })
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.fetchUser', error, 3000)
+        })
+    }
+  }, [getGamificationSettings])
+
   //TODO: Translations
   return (
     <Modal open={open} onClose={onClose} data-testid="algorithm-settings-modal">
       <Grid
         container
         direction={'column'}
+        spacing={'1.5rem'}
         sx={{
-          width: { xl: '50rem', lg: '40rem', md: '40rem', xs: '18rem' },
+          width: { xl: '30rem', lg: '30rem', md: '30rem', xs: '18rem' },
           height: '30rem',
           right: 50,
           bgcolor: 'background.paper',
@@ -71,7 +91,7 @@ const GamificationSettingsModal = ({
         <Typography id="gamification-settings-modal-title" variant="h6" component="h6" align="center">
           {t('components.GamificationSettingsModal.title')}
         </Typography>
-        <Grid item container direction="row" spacing={2}>
+        <Grid item direction="row" spacing={2}>
           <Typography variant="body1">{t('components.GamificationSettingsModal.presentation')}</Typography>
           <RadioGroup onChange={handleSelectPresentation} id="gamification-settings-presentation-radio-group">
             {PresentationOptions.map((option) => (
@@ -84,7 +104,7 @@ const GamificationSettingsModal = ({
             ))}
           </RadioGroup>
         </Grid>
-        <Grid item container direction="row" spacing={2}>
+        <Grid item direction="row" spacing={2}>
           <Typography variant="body1">{t('components.GamificationSettingsModal.social')}</Typography>
           <RadioGroup onChange={handleSelectSocial} id="gamification-settings-social-radio-group">
             {SocialOptions.map((option) => (
@@ -97,7 +117,7 @@ const GamificationSettingsModal = ({
             ))}
           </RadioGroup>
         </Grid>
-        <Grid item container direction="row" spacing={2}>
+        <Grid item direction="row" spacing={2}>
           <Typography variant="body1">{t('components.GamificationSettingsModal.information')}</Typography>
           <RadioGroup onChange={handleSelectInformation} id="gamification-settings-information-radio-group">
             {InformationOptions.map((option) => (

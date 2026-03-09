@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import { Button, CircularProgress, Grid, Typography } from '@common/components'
 import { useRatingLeaderboard } from './RatingLeaderboard.hook'
 
-
 // TODO: omponent must be rewwored to be standardized with other leaderboards and fit new design
 const RatingLeaderboard = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)

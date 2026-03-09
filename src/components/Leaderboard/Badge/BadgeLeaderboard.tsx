@@ -6,8 +6,8 @@ import { BadgeLeaderboardEntry, GenericLeaderboard, GenericLeaderboardEntry, Lea
 import { fetchBadgeLeaderboard, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
 type BadgeLeaderboardProps = {
-    maxRows?: number,
-    showVisually: boolean
+  maxRows?: number
+  showVisually: boolean
 }
 
 export const BadgeLeaderboard = ({ maxRows, showVisually }: BadgeLeaderboardProps) => {
@@ -31,22 +31,25 @@ export const BadgeLeaderboard = ({ maxRows, showVisually }: BadgeLeaderboardProp
   const [isLoading, setIsLoading] = useState(true)
   const [filteredEntries, setFilteredEntries] = useState<GenericLeaderboard>([])
 
-  const updateDisplayedEntries = useCallback((student_id: number) => {
-    if(leaderboardEntries.length === 0 ) return
+  const updateDisplayedEntries = useCallback(
+    (student_id: number) => {
+      if (leaderboardEntries.length === 0) return
 
-    if(leaderboardEntries.length <= 6 || !maxRows) {
-      setFilteredEntries(leaderboardEntries)
-    } else {
-      const userIndex = leaderboardEntries.findIndex((entry) => entry.student_id === student_id)
-      const limit = Math.min(maxRows, leaderboardEntries.length)
-      const lowerhalfSize = Math.floor(limit / 2)
-      const upperhalfSize = Math.min(limit - lowerhalfSize, leaderboardEntries.length - lowerhalfSize)
-      const lowerIndex = Math.max(0, userIndex - lowerhalfSize)
-      const lowerHalf = leaderboardEntries.slice(lowerIndex, userIndex)
-      const upperHalf = leaderboardEntries.slice(userIndex, userIndex + upperhalfSize)
-      setFilteredEntries([...lowerHalf, ...upperHalf])
-    }
-  }, [leaderboardEntries, maxRows])
+      if (leaderboardEntries.length <= 6 || !maxRows) {
+        setFilteredEntries(leaderboardEntries)
+      } else {
+        const userIndex = leaderboardEntries.findIndex((entry) => entry.student_id === student_id)
+        const limit = Math.min(maxRows, leaderboardEntries.length)
+        const lowerhalfSize = Math.floor(limit / 2)
+        const upperhalfSize = Math.min(limit - lowerhalfSize, leaderboardEntries.length - lowerhalfSize)
+        const lowerIndex = Math.max(0, userIndex - lowerhalfSize)
+        const lowerHalf = leaderboardEntries.slice(lowerIndex, userIndex)
+        const upperHalf = leaderboardEntries.slice(userIndex, userIndex + upperhalfSize)
+        setFilteredEntries([...lowerHalf, ...upperHalf])
+      }
+    },
+    [leaderboardEntries, maxRows]
+  )
 
   useEffect(() => {
     getUser()
@@ -55,11 +58,14 @@ export const BadgeLeaderboard = ({ maxRows, showVisually }: BadgeLeaderboardProp
         setCurrentStudentId(userId)
         fetchBadgeLeaderboard(userId)
           .then((response) => {
-            const leaderboard = response.leaderboard.map((entry: BadgeLeaderboardEntry) => ({
-              student_id: entry.student_id,
-              metric: entry.badge_count,
-              rank: entry.rank
-            } as GenericLeaderboardEntry))
+            const leaderboard = response.leaderboard.map(
+              (entry: BadgeLeaderboardEntry) =>
+                ({
+                  student_id: entry.student_id,
+                  metric: entry.badge_count,
+                  rank: entry.rank
+                } as GenericLeaderboardEntry)
+            )
             setLeaderboardEntries(leaderboard)
             //setTotalParticipants(response.total_participants)
             setLeague(response.league)
@@ -82,22 +88,25 @@ export const BadgeLeaderboard = ({ maxRows, showVisually }: BadgeLeaderboardProp
     }
   }, [currentStudentId, leaderboardEntries, maxRows])
 
-  return ( isLoading ? (
-        <Grid>
-          <CircularProgress />
-        </Grid>
+  return isLoading ? (
+    <Grid>
+      <CircularProgress />
+    </Grid>
+  ) : (
+    <Grid>
+      <Typography variant="h5" component="h2">
+        {t('components.badgeLeaderboard.title')}
+      </Typography>
+      {showVisually ? (
+        <BarChart leaderboardEntries={filteredEntries} currentStudentId={currentStudentId} />
       ) : (
-        <Grid>
-          <Typography variant="h5" component="h2">
-            {t('badgeLeaderboard.title')}
-          </Typography>
-          { showVisually ? (
-            <BarChart leaderboardEntries={filteredEntries} currentStudentId={currentStudentId} />
-          ) : (
-            <LeaderboardTable leaderboardEntries={filteredEntries} metricHeader={t('badgeLeaderboard.badgeCount')} currentStudentId={currentStudentId}/>
-          )}
-        </Grid>
-      )
+        <LeaderboardTable
+          leaderboardEntries={filteredEntries}
+          metricHeader={t('components.badgeLeaderboard.metric')}
+          currentStudentId={currentStudentId}
+        />
+      )}
+    </Grid>
   )
 }
 

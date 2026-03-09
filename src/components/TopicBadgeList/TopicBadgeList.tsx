@@ -27,21 +27,20 @@ const TopicBadgeList = ({ topicId, badgesAsKeys: badgeKeys }: TopicBadgeListProp
     }
     getUser().then((user) => {
       getTopicBadges(topicId, false)
-      .then((badges) => {
-        setTopicBadges(badges)
-      })
-      .catch((error) => {
-        handleError(t, addSnackbar, 'error.fetchTopicBadges', error, 5000)
-      })
-    getStudentBadge(String(user.id))
-      .then((badges) => {
-        setStudentBadges(badges)
-      })
-      .catch((error) => {
-        handleError(t, addSnackbar, 'error.fetchStudentBadges', error, 5000)
-      })
+        .then((badges) => {
+          setTopicBadges(badges)
+        })
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.fetchTopicBadges', error, 5000)
+        })
+      getStudentBadge(String(user.id))
+        .then((badges) => {
+          setStudentBadges(badges)
+        })
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.fetchStudentBadges', error, 5000)
+        })
     })
-    
   }, [getTopicBadges, topicId, badgeKeys])
 
   return (

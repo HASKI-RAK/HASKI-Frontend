@@ -10,7 +10,6 @@ type UseGamificationSettingsModalHookParams = {
   selectedGamificationSettings: GamificationSettings
   setWaitForBackend: Dispatch<SetStateAction<boolean>>
   setSelectedGamificationSettings: Dispatch<SetStateAction<GamificationSettings>>
-  setGamificationSettings: Dispatch<SetStateAction<GamificationSettings>>
   onClose: () => void
 }
 
@@ -22,7 +21,6 @@ type UseGamificationSettingsModalHookReturn = {
 }
 
 export const useGamificationSettingsModal = ({
-  setGamificationSettings,
   onClose,
   selectedGamificationSettings,
   setSelectedGamificationSettings,
@@ -39,11 +37,10 @@ export const useGamificationSettingsModal = ({
       postGamificationSettings(user.id, selectedGamificationSettings)
         .then((response) => {
           setStoreGamificationSettings(user.id, response)
-          setGamificationSettings(response)
           addSnackbar({ message: t('components.GamificationSettingsModal.saveSuccess') })
         })
         .catch((error) => {
-          handleError(t, addSnackbar, 'components.GamificationSettingsModal.saveError', error, 3000)
+          handleError(t, addSnackbar, 'error.postGamificationSettings', error, 3000)
         })
         .finally(() => {
           setWaitForBackend(false)

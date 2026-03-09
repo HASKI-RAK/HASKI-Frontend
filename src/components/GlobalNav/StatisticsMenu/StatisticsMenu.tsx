@@ -32,6 +32,12 @@ const StatisticsMenu = () => {
       url: '/rating',
       isDisabled: false,
       availableAt: new Date()
+    },
+    {
+      name: t('pages.leaderboarddashboard'),
+      url: '/leaderboard',
+      isDisabled: false,
+      availableAt: new Date()
     }
   ]
 

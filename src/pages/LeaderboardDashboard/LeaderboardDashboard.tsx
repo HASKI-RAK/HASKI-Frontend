@@ -25,17 +25,19 @@ const LeaderboardDashboard = () => {
   }, [])
 
   return (
-    <Grid container spacing={4}>
-      <Grid item xs={12}>
+    <Grid container spacing={4} alignItems="center" justifyContent="center" direction="column">
+      <Grid item>
         <Typography variant="h4" align="center">
           {t('pages.leaderboardDashboard.title')}
         </Typography>
       </Grid>
-      <Grid container item xs={12}>
-          <Grid container item xs={12} spacing={4}>
-            <XpLeaderboard showVisually={gamificationSettings.presentation === 'visual' || visualInput} />
-            <BadgeLeaderboard showVisually={gamificationSettings.presentation === 'visual' || visualInput} />
-          </Grid>
+      <Grid container item spacing={10} justifyContent="center">
+        <Grid item>
+          <XpLeaderboard showVisually={gamificationSettings.presentation === 'visual' || visualInput} />
+        </Grid>
+        <Grid item>
+          <BadgeLeaderboard showVisually={gamificationSettings.presentation === 'visual' || visualInput} />
+        </Grid>
       </Grid>
     </Grid>
   )

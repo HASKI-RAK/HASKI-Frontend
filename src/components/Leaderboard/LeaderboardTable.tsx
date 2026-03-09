@@ -1,8 +1,8 @@
-import { memo, Fragment, useCallback } from 'react'
-import { Grid, Table, TableBody, TableCell, TableHead, TableRow } from '@common/components'
-import { GenericLeaderboard, GenericLeaderboardEntry } from '@core'
+import { Fragment, memo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Grid, Table, TableBody, TableCell, TableHead, TableRow } from '@common/components'
 import { useTheme } from '@common/hooks'
+import { GenericLeaderboard, GenericLeaderboardEntry } from '@core'
 
 type LeaderboardTableProps = {
   leaderboardEntries: GenericLeaderboard
@@ -16,11 +16,13 @@ const LeaderboardTable = ({ leaderboardEntries, metricHeader, currentStudentId }
   const createTableRows = useCallback(() => {
     return leaderboardEntries.map((entry: GenericLeaderboardEntry, index: number, arr: GenericLeaderboard) => {
       const isLastEntry = index === arr.length - 1
-      const hasRankGapToNext = !isLastEntry && entry.rank + 1 !== arr[index + 1].rank
+      const hasRankGapToNext = !isLastEntry && arr[index + 1].rank - entry.rank > 1
 
       if (!hasRankGapToNext) {
         return (
-          <TableRow key={entry.student_id} sx={{ backgroundColor: currentStudentId === entry.student_id ? theme.palette.primary.light : 'inherit' }}>
+          <TableRow
+            key={entry.student_id}
+            sx={{ backgroundColor: currentStudentId === entry.student_id ? theme.palette.primary.light : 'inherit' }}>
             <TableCell>{entry.rank}</TableCell>
             <TableCell>{entry.student_id}</TableCell>
             <TableCell>{entry.metric}</TableCell>
@@ -30,7 +32,8 @@ const LeaderboardTable = ({ leaderboardEntries, metricHeader, currentStudentId }
 
       return (
         <Fragment key={`entry-${entry.student_id}`}>
-          <TableRow sx={{ backgroundColor: currentStudentId === entry.student_id ? theme.palette.primary.light : 'inherit' }}>
+          <TableRow
+            sx={{ backgroundColor: currentStudentId === entry.student_id ? theme.palette.primary.light : 'inherit' }}>
             <TableCell>{entry.rank}</TableCell>
             <TableCell>{entry.student_id}</TableCell>
             <TableCell>{entry.metric}</TableCell>
@@ -51,8 +54,8 @@ const LeaderboardTable = ({ leaderboardEntries, metricHeader, currentStudentId }
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>{t('leaderboard.rank')}</TableCell>
-              <TableCell>{t('leaderboard.studentId')}</TableCell>
+              <TableCell>{t('components.leaderboard.rank')}</TableCell>
+              <TableCell>{t('components.leaderboard.studentId')}</TableCell>
               <TableCell>{metricHeader}</TableCell>
             </TableRow>
           </TableHead>
