@@ -1,18 +1,16 @@
 import { memo, ReactNode } from 'react'
 import { Box, Grid } from '@common/components'
 
-// global time filter -> own component // only when student scoreboard ->  ausblenden sonst
-
 type DashboardLayoutType = {
   bottomRight?: ReactNode
   datePicker?: ReactNode
   disabledBack?: boolean
-  handleBack?: () => void
   left?: ReactNode
   topRight?: ReactNode
 }
 
 const DashboardLayout = ({
+  // todo: remove default values
   datePicker = 'DATE PICKER',
   left,
   topRight = 'TOP RIGHT',
@@ -20,7 +18,7 @@ const DashboardLayout = ({
 }: DashboardLayoutType) => {
   return (
     <Box sx={{ p: 2 }}>
-      <Box sx={{ width: '80vw', mx: 'auto', mb: 2, display: 'flex', justifyContent: 'space-between', gap: 2 }}>
+      <Box sx={{ width: '100%', mx: 'auto', mb: 2, display: 'flex', justifyContent: 'space-between', gap: 2 }}>
         <Box
           sx={{
             borderRadius: 1,
@@ -34,7 +32,7 @@ const DashboardLayout = ({
           {datePicker}
         </Box>
       </Box>
-      <Grid container wrap="nowrap" sx={{ width: '80vw', height: '80vh', mx: 'auto', gap: 2 }}>
+      <Grid container wrap="nowrap" sx={{ width: '100%', height: '70vh', mx: 'auto', gap: 2 }}>
         {/* LEFT BOX */}
         <Grid item xs={5} sx={{ height: '100%', minHeight: 0 }}>
           <Box

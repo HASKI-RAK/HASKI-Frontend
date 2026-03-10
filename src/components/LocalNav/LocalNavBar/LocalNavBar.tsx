@@ -3,9 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { Divider, Drawer, Grid, List, Typography } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
 import { LocalNavItem, SkeletonList } from '@components'
-import { LocalNavBarHookReturn, useLocalNavbar as _useLocalNavBar } from './LocalNavBar.hooks'
+import { LocalNavBarHookReturn, useLocalNavBar as _useLocalNavBar } from './LocalNavBar.hooks'
 
-// todo create abstract nav bar hook and overwrite it twice for course and dashboards
 type LocalNavBarProps = {
   useLocalNavBar?: () => LocalNavBarHookReturn
 }
@@ -25,9 +24,7 @@ const LocalNavBar = ({ useLocalNavBar = _useLocalNavBar }: LocalNavBarProps) => 
   const theme = useTheme()
   const { t } = useTranslation()
   const open = useMediaQuery(theme.breakpoints.up('lg'))
-  const { isLoading, localNavItemProps } = useLocalNavBar() // todo isLoaded?
-
-  // todo translation appGlobal.topics -> translation variable
+  const { isLoading, localNavItems, localNavTitle } = useLocalNavBar()
 
   // Function to resize the drawer height
   const handleResize = () => setDrawerHeight(window.innerHeight - 200)
@@ -57,7 +54,7 @@ const LocalNavBar = ({ useLocalNavBar = _useLocalNavBar }: LocalNavBarProps) => 
           }
         }}>
         <Grid item sx={{ ml: '0.9rem' }}>
-          <Typography variant="h5">{t('appGlobal.topics') /* todo */}</Typography>
+          <Typography variant="h5">{localNavTitle}</Typography>
         </Grid>
         <Divider />
         {isLoading ? (
@@ -68,7 +65,7 @@ const LocalNavBar = ({ useLocalNavBar = _useLocalNavBar }: LocalNavBarProps) => 
           </Grid>
         ) : (
           <List sx={{ width: '100%', bgcolor: 'transparent', p: 0 }}>
-            {localNavItemProps.map((localNavItemProp) => (
+            {localNavItems.map((localNavItemProp) => (
               <LocalNavItem key={localNavItemProp.name} {...localNavItemProp} />
             ))}
           </List>
@@ -79,7 +76,3 @@ const LocalNavBar = ({ useLocalNavBar = _useLocalNavBar }: LocalNavBarProps) => 
 }
 
 export default memo(LocalNavBar)
-
-// todo padding all sides of the items
-// todo items bisschen schmaler machen?
-// todo punkt vor dem namen entfernen?

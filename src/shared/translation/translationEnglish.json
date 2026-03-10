@@ -1930,5 +1930,15 @@
 	"tooltip.statisticsMenuSelection": "Open the statistics menu",
 	"warning": "Warning",
 	"warning.offline": "You are currently offline. Please check your internet connection.",
-	"warning.online": "You are online again."
+	"warning.online": "You are online again.",
+  "components.LocalNavBar.dashboards": "Dashboards",
+  "error.fetchScoreboard": "An error occurred while fetching the scoreboard data.",
+  "pages.scoreboard": "Scoreboard",
+  "pages.scoreboard.backToCourseSelection": "Back to course selection",
+  "pages.scoreboard.backToTopicSelection": "Back to topic selection",
+  "pages.scoreboard.completedAt": "Completed at {{date}}",
+  "pages.scoreboard.learningElementsCompleted": "{{current}} of {{total}} learning elements completed",
+  "pages.scoreboard.points": "{{current}} of {{total}} points",
+  "pages.scoreboard.topicsCompleted": "{{current}} of {{total}} topics completed",
+  "tooltip.notCompleted": "Not completed"
 }
