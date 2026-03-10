@@ -1,7 +1,7 @@
 import { memo, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import { GlobalNavMenu } from '@components'
 import { AuthContext } from '@services'
-import GlobalNavMenu from '../GlobalNavMenu/GlobalNavMenu'
 
 /**
  * # StatisticsMenu component
@@ -34,12 +34,18 @@ const StatisticsMenu = () => {
       availableAt: new Date()
     },
     {
+      name: t('pages.scoreboard'),
+      url: '/scoreboard',
+      isDisabled: false,
+      availableAt: new Date()
+    },
+    {
       name: t('pages.leaderboarddashboard'),
       url: '/leaderboard',
       isDisabled: false,
       availableAt: new Date()
     }
-  ]
+  ].sort((a, b) => a.name.localeCompare(b.name))
 
   return isAuth ? (
     <GlobalNavMenu

@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { useTranslation } from 'react-i18next'
-import GlobalNavMenu from '../GlobalNavMenu/GlobalNavMenu'
+import { GlobalNavMenu } from '@components'
 
 const FurtherInfoMenu = () => {
   const { t } = useTranslation()

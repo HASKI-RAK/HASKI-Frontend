@@ -1,6 +1,7 @@
 /**
  * Reusable components such as buttons and forms go in here.
  */
+export { DatePicker } from './DatePicker/DatePicker'
 export { AdapterDayjs } from './DateTimePicker/AdapterDayjs'
 export { DateTimePicker } from './DateTimePicker/DateTimePicker'
 export { LocalizationProvider } from './DateTimePicker/LocalizationProvider'
@@ -37,6 +38,7 @@ export { List } from './DefaultList/DefaultList'
 export { ListItem } from './DefaultListItem/DefaultListItem'
 export { ListItemIcon } from './DefaultListItemIcon/DefaultListItemIcon'
 export { ListItemText } from './DefaultListItemText/DefaultListItemText'
+export { MenuList } from './DefaultMenuList/DefaultMenuList'
 export { MobileStepper } from './DefaultMobileStepper/DefaultMobileStepper'
 export { OutlinedInput } from './DefaultOutlinedInput/DefaultOutlinedInput'
 export { Paper } from './DefaultPaper/DefaultPaper'
@@ -60,6 +62,7 @@ export { Typography } from './DefaultTypography/DefaultTypography'
 export { Zoom } from './DefaultZoom/DefaultZoom'
 export { Bar } from './Graphs/Bar'
 export { Network } from './Graphs/Network'
+export { Pie } from './Graphs/Pie'
 
 /**
  * Reusable types

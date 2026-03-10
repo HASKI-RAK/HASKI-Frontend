@@ -13,7 +13,6 @@ global.fetch = jest.fn(() =>
 
 describe('fetchLearningElementRecommendation', () => {
   it('fetches learning element recommendation data correctly', async () => {
-    // todo maybe rename
     const mockData = [
       {
         id: 1,

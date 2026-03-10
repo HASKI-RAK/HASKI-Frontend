@@ -1,9 +1,13 @@
 import { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
 import { Divider, Drawer, Grid, List, Typography } from '@common/components'
-import { useLearningPathTopicProgress, useMediaQuery, useTheme } from '@common/hooks'
+import { useMediaQuery, useTheme } from '@common/hooks'
 import { LocalNavItem, SkeletonList } from '@components'
+import { LocalNavBarHookReturn, useLocalNavBar as _useLocalNavBar } from './LocalNavBar.hooks'
+
+type LocalNavBarProps = {
+  useLocalNavBar?: () => LocalNavBarHookReturn
+}
 
 /**
  * Local navigation component.
@@ -12,26 +16,22 @@ import { LocalNavItem, SkeletonList } from '@components'
  * @returns
  * A JSX Element with the rendered local navigation.
  */
-const LocalNavBar = () => {
-  //States
+const LocalNavBar = ({ useLocalNavBar = _useLocalNavBar }: LocalNavBarProps) => {
+  //State
   const [drawerHeight, setDrawerHeight] = useState(0)
 
   //Hooks
-  const { t } = useTranslation()
-  const { courseId } = useParams<string>()
-  const { topicId } = useParams<string>()
   const theme = useTheme()
+  const { t } = useTranslation()
   const open = useMediaQuery(theme.breakpoints.up('lg'))
-  const { isLoading, topics, topicProgress } = useLearningPathTopicProgress({ courseId })
+  const { isLoading, localNavItems, localNavTitle } = useLocalNavBar()
+
+  // Function to resize the drawer height
+  const handleResize = () => setDrawerHeight(window.innerHeight - 200)
 
   //Resizing the window resizes drawer height
   useEffect(() => {
-    const handleResize = () => {
-      setDrawerHeight(window.innerHeight - 200)
-    }
-
     handleResize() // Set initial drawer height
-
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
@@ -54,7 +54,7 @@ const LocalNavBar = () => {
           }
         }}>
         <Grid item sx={{ ml: '0.9rem' }}>
-          <Typography variant="h5">{t('appGlobal.topics')}</Typography>
+          <Typography variant="h5">{localNavTitle}</Typography>
         </Grid>
         <Divider />
         {isLoading ? (
@@ -65,15 +65,8 @@ const LocalNavBar = () => {
           </Grid>
         ) : (
           <List sx={{ width: '100%', bgcolor: 'transparent', p: 0 }}>
-            {topics.map((topic, index) => (
-              <LocalNavItem
-                key={topic.id}
-                topic={topic}
-                topicProgress={topicProgress[index]}
-                isProgressLoading={isLoading}
-                courseId={courseId}
-                topicId={topicId}
-              />
+            {localNavItems.map((localNavItemProp) => (
+              <LocalNavItem key={localNavItemProp.name} {...localNavItemProp} />
             ))}
           </List>
         )}

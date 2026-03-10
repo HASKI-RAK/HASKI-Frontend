@@ -5,6 +5,7 @@ import {
   AboutUs,
   Contact,
   Course,
+  ExampleGraphs,
   Glossary,
   Home,
   Imprint,
@@ -16,8 +17,8 @@ import {
   PrivacyPolicy,
   ProjectDescription,
   Rating,
-  Topic
-} from '@pages'
+  Scoreboard,
+  Topic} from '@pages'
 import { AuthProvider, ILSProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
 import { useApp } from './App.hooks'
 
@@ -65,9 +66,11 @@ export const App = () => {
                         <Route path="/leaderboard" element={<LeaderboardDashboard />} />
                         <Route path="/learnercharacteristics" element={<LearnerCharacteristics />} />
                         <Route path="/rating" element={<Rating />} />
-                        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+                        <Route path="/scoreboard" element={<Scoreboard />} />
+                      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
                         <Route path="/🥚" element={<div>Ei</div>} />
-                        <Route path="*" element={<PageNotFound />} />
+                        <Route path="/examplegraphs" element={<ExampleGraphs />} />
+                      <Route path="*" element={<PageNotFound />} />
                       </Route>
                       <Route path="*" element={<PageNotFound />} />
                     </Routes>
