@@ -1,5 +1,7 @@
 import { memo, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import dayjs from 'dayjs'
+import { use } from 'i18next'
 import { Tooltip, Typography } from '@common/components'
 import { useCourseProgress } from '@common/hooks'
 import { CalendarMonthRounded, CancelRounded, CheckCircleRounded, StarRounded } from '@common/icons'
@@ -149,16 +151,23 @@ const Scoreboard = () => {
     [classifications]
   )
 
+  const [dateRange, setDateRange] = useState<DateRange>({
+    startDate: useMemo(() => dayjs().subtract(30, 'day'), []),
+    endDate: useMemo(() => dayjs(), [])
+  })
+
+  const since = useMemo(() => dateRange.startDate.toDate(), [dateRange])
+  const until = useMemo(() => dateRange.endDate.toDate(), [dateRange])
+
   // Hooks
   const { currentItems, select, level, back, selection } = useDashboardNavigation()
   const { topicProgress, getCourseProgress, isLoading } = useCourseProgress()
   const { scores, maxScores, timesSpent, lastElements, bestAttempts } = useScoreboard({
     courseId: selection.course?.id,
     topicId: selection.topic?.id,
-    since: undefined, // todo fill
-    until: undefined // todo fill
+    since: since,
+    until: until
   })
-  const { t } = useTranslation()
 
   const labelById = useMemo(() => {
     const map: Record<string, string> = {}
@@ -187,15 +196,10 @@ const Scoreboard = () => {
 
   const selectedCourseId = selection.course?.id
 
-  const [dateRange, setDateRange] = useState<DateRange>({
-    startDate: dayjs().subtract(30, 'day'),
-    endDate: dayjs()
-  })
-
   const handleDateRangeChange = (newDateRange: DateRange) => {
     setDateRange(newDateRange)
     // Filter your chart data based on the new date range here
-    console.log('Date range changed:', newDateRange)
+    // console.log('Date range changed:', newDateRange)
   }
 
   const getProgressBarData = useCallback(
@@ -370,7 +374,7 @@ const Scoreboard = () => {
             t('pages.exampleGraphs.TimeSpentOnLearningElementsNoData')
           )
         ) : undefined
-      } // todo: laaz + dimi branch
+      }
       bottomRight={
         level === 'courses' ? (
           treeData ? (
@@ -385,8 +389,7 @@ const Scoreboard = () => {
             t('pages.exampleGraphs.LastElementNoData')
           )
         ) : undefined
-      } // todo: laaz + dimi branch
-      handleBack={back}
+      }
       disabledBack={level === 'courses'}
     />
   )

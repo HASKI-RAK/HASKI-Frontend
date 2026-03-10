@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { handleError } from '@components'
 import { BestAttempt, LastElement } from '@core'
@@ -41,16 +41,7 @@ export const useScoreboard = (params: ScoreboardHookParams): ScoreboardHookRetur
   const [bestAttempts, setBestAttempts] = useState<Record<string, BestAttempt>>({})
 
   useEffect(() => {
-    // todo getUser
-    // todo only fetch if state are null?? prevents refetch on every render, but...
-    fetchScoreboardData(52, 9, 1, params.since, params.until).then((data) => {
-      setScores(data['score'] ?? {})
-      setMaxScores(data['max_score'])
-      setTimesSpent(data['time_spent'])
-      setLastElements(data['last_elements'])
-      setBestAttempts(data['best_attempts'] ?? {})
-    })
-  }, [fetchScoreboardData])
+    setIsLoading(true)
 
     if (!isAuth) return
 
@@ -74,5 +65,12 @@ export const useScoreboard = (params: ScoreboardHookParams): ScoreboardHookRetur
       })
   }, [getUser, params.courseId, params.topicId, params.since, params.until])
 
-  return { scores, maxScores, timesSpent, lastElements, bestAttempts, isLoading }
+  return useMemo(() => ({ scores, maxScores, timesSpent, lastElements, bestAttempts, isLoading }), [
+    scores,
+    maxScores,
+    timesSpent,
+    lastElements,
+    bestAttempts,
+    isLoading
+  ])
 }

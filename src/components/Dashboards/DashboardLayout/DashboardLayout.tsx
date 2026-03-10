@@ -10,11 +10,10 @@ type DashboardLayoutType = {
 }
 
 const DashboardLayout = ({
-  // todo: remove default values
-  datePicker = 'DATE PICKER',
+  datePicker,
   left,
-  topRight = 'TOP RIGHT',
-  bottomRight = 'BOTTOM RIGHT'
+  topRight,
+  bottomRight
 }: DashboardLayoutType) => {
   return (
     <Box sx={{ p: 2 }}>
