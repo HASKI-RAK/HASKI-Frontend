@@ -1,6 +1,7 @@
 import { memo, useMemo } from 'react'
-import { ResponsivePie } from '@nivo/pie'
+import { useTranslation } from 'react-i18next'
 import { useTheme } from '@mui/material/styles'
+import { ResponsivePie } from '@nivo/pie'
 import type { Theme } from '@common/theme'
 
 type PieChartRequiredProps = {
@@ -16,11 +17,13 @@ type PieChartProps<T extends PieChartRequiredProps = PieChartRequiredProps> = {
 
 const PieChart = ({ data, maxHeight = 500 }: PieChartProps) => {
   const theme = useTheme<Theme>()
+  const { t } = useTranslation()
 
   const totalHours = data.reduce((sum, d) => sum + d.value, 0)
 
   // ✅ if total is 0, show one placeholder segment
-  const safeData: PieChartRequiredProps[] = totalHours > 0 ? data : [{ label: 'No data', value: 1 }]
+  const safeData: PieChartRequiredProps[] =
+    totalHours > 0 ? data : [{ label: t('pages.exampleGraphs.PieChartNoData'), value: 1 }]
 
   const enhancedData = useMemo(
     () =>
@@ -106,7 +109,7 @@ const PieChart = ({ data, maxHeight = 500 }: PieChartProps) => {
                 dominantBaseline="central"
                 style={{ fontSize: 14 }}
                 fill={theme.palette.text.primary}>
-                Total Hours
+                {t('pages.exampleGraphs.PieChartTotalHours')}
               </text>
             </g>
           )

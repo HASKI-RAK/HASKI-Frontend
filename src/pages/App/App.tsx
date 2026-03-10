@@ -5,6 +5,7 @@ import {
   AboutUs,
   Contact,
   Course,
+  ExampleGraphs,
   Glossary,
   Home,
   Imprint,
@@ -16,9 +17,7 @@ import {
   ProjectDescription,
   Rating,
   Scoreboard,
-  Topic,
-  ExampleGraphs
-} from '@pages'
+  Topic} from '@pages'
 import { AuthProvider, RoleProvider, SnackbarProvider, ThemeProvider } from '@services'
 import { useApp } from './App.hooks'
 

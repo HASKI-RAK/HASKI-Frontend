@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
+import dayjs, { Dayjs } from 'dayjs'
 import { Box } from '@common/components'
 import { DateRangePicker } from '@components'
-import dayjs, { Dayjs } from 'dayjs'
 import { DateRange } from '../../components/DateRangePicker'
 
 type DatePickerForChartProps = {

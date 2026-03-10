@@ -1,9 +1,10 @@
 import { memo, useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import type { LearningPathLearningElementNode } from '@components'
 import { Tree } from '@nivo/tree'
 import { Box, Stack, Typography } from '@common/components'
-import { getNodeIcon } from '@components'
-import type { LearningPathLearningElementNode } from '@components'
 import { useTheme } from '@common/hooks'
+import { getNodeIcon } from '@components'
 
 export type TreeDatum = {
   name: string
@@ -111,6 +112,7 @@ const NächsteEmpfehlungGraph = ({
 }: MyTreeProps) => {
   // ✅ only 3 nodes
   const prunedData = useMemo(() => pruneToFirstNNodes(data, 3), [data])
+  const { t } = useTranslation()
 
   const firstNodeName = prunedData.name
   const isSingleNode = useMemo(() => countNodes(prunedData) === 1, [prunedData])
@@ -192,7 +194,7 @@ const NächsteEmpfehlungGraph = ({
   const linkComponent = useMemo(() => {
     const pad = 2
 
-    function LinkAtCircleBorder({ link, style }: LinkComponentProps) {
+    const LinkAtCircleBorder = ({ link, style }: LinkComponentProps) => {
       const start = shiftPoint(
         { x: link.source.x, y: link.source.y },
         { x: link.target.x, y: link.target.y },
@@ -220,7 +222,7 @@ const NächsteEmpfehlungGraph = ({
           strokeOpacity={strokeOpacity}
         />
       )
-    }
+    };
 
     return LinkAtCircleBorder
   }, [firstNodeName, isSingleNode, s.nodeR])
@@ -246,7 +248,7 @@ const NächsteEmpfehlungGraph = ({
           <Stack spacing={0.75}>
             <Stack direction="row" spacing={1} alignItems="center">
               <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: DONE_COLOR }} />
-              <Typography variant="caption">Done element</Typography>
+              <Typography variant="caption">{t('pages.exampleGraphs.LastElementLegend')}</Typography>
             </Stack>
           </Stack>
         </Box>

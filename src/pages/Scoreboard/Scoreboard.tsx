@@ -1,5 +1,7 @@
 import { memo, useCallback, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { CalendarMonthRounded, CancelRounded, CheckCircleRounded, StarRounded } from '@mui/icons-material'
+import dayjs from 'dayjs'
 import { useCourseProgress } from '@common/hooks'
 import {
   DashboardLayout,
@@ -12,13 +14,12 @@ import {
   useDashboardNavigation
 } from '@components'
 import { Course, LearningElement, Topic } from '@core'
-import { useScoreboard } from './Scoreboard.hooks'
-import PieChart from '../ExampleGraphs/PieChart'
-import AnzahlVersucheBarChart from '../ExampleGraphs/AnzahlVersucheBarChart'
-import NächsteEmpfehlungGraph from '../ExampleGraphs/NächsteEmpfehlung'
-import DatePickerForChart from '../ExampleGraphs/DatePickerForChart'
 import { DateRange } from '../../components/DateRangePicker'
-import dayjs from 'dayjs'
+import AnzahlVersucheBarChart from '../ExampleGraphs/AnzahlVersucheBarChart'
+import DatePickerForChart from '../ExampleGraphs/DatePickerForChart'
+import NächsteEmpfehlungGraph from '../ExampleGraphs/NächsteEmpfehlung'
+import PieChart from '../ExampleGraphs/PieChart'
+import { useScoreboard } from './Scoreboard.hooks'
 
 /*const dataPieChart: { label: string; value: number }[] = [
   {
@@ -143,6 +144,7 @@ const Scoreboard = () => {
     courseId: selection.course?.id,
     topicId: selection.topic?.id
   })
+  const { t } = useTranslation()
 
   const labelById = useMemo(() => {
     const map: Record<string, string> = {}
@@ -278,31 +280,38 @@ const Scoreboard = () => {
       topRight={
         level == 'courses' ? (
           //course hours
-
           <PieChart data={pieAndChartData} maxHeight={500} totalHours={totalHours} />
         ) : level == 'topics' ? (
           //topic hours
           <PieChart data={pieAndChartData} maxHeight={500} totalHours={totalHours} />
         ) : level == 'learningElements' ? (
-          //attempts per learning element
-          <AnzahlVersucheBarChart
-            maxHeight={500}
-            color={'#6EC6FF'}
-            axisLeftText={'Verbrachte Zeit'}
-            axisBottomText={'Lernelement Name'}
-            data={pieAndChartData}
-          />
+          pieAndChartData.length > 0 ? (
+            //attempts per learning element
+            <AnzahlVersucheBarChart
+              maxHeight={500}
+              color={'#6EC6FF'}
+              axisLeftText={t('pages.exampleGraphs.TimeSpentOnLearningElements')}
+              axisBottomText={t('pages.exampleGraphs.TimeSpentOnLearningElementsName')}
+              data={pieAndChartData}
+            />
+          ) : (
+            t('pages.exampleGraphs.TimeSpentOnLearningElementsNoData')
+          )
         ) : undefined
       } // todo: laaz + dimi branch
       bottomRight={
         level === 'courses' ? (
           treeData ? (
             <NächsteEmpfehlungGraph maxHeight={250} aspectRatio="21 / 9" data={treeData} />
-          ) : undefined
+          ) : (
+            t('pages.exampleGraphs.LastElementNoData')
+          ) // todo: translate
         ) : level === 'topics' || level === 'learningElements' ? (
           treeData ? (
             <NächsteEmpfehlungGraph maxHeight={250} data={treeData} />
-          ) : undefined
+          ) : (
+            t('pages.exampleGraphs.LastElementNoData')
+          )
         ) : undefined
       } // todo: laaz + dimi branch
       handleBack={back}

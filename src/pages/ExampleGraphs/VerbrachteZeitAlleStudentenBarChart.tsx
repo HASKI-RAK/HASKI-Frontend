@@ -1,7 +1,7 @@
 import { memo } from 'react'
-import { Bar } from '@common/components'
 import { BarCustomLayerProps } from '@nivo/bar'
-import { line, curveMonotoneX } from 'd3-shape'
+import { curveMonotoneX,line } from 'd3-shape'
+import { Bar } from '@common/components'
 
 type BarChartProps = {
   width: number

@@ -1,9 +1,9 @@
 /**
  * Reusable components such as buttons and forms go in here.
  */
+export { DatePicker } from './DatePicker/DatePicker'
 export { AdapterDayjs } from './DateTimePicker/AdapterDayjs'
 export { DateTimePicker } from './DateTimePicker/DateTimePicker'
-export { DatePicker } from './DatePicker/DatePicker'
 export { LocalizationProvider } from './DateTimePicker/LocalizationProvider'
 export { AccordionDetails } from './DefaultAccordionDetails/DefaultAccordionDetails'
 export { AccordionSummary } from './DefaultAccordionSummary/DefaultAccordionSummary'

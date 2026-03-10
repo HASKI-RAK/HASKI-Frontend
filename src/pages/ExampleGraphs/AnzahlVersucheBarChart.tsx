@@ -1,7 +1,7 @@
 import { memo, useMemo } from 'react'
+import { useTheme } from '@mui/material/styles'
 import { ResponsiveBar } from '@nivo/bar'
 import type { Theme as NivoTheme } from '@nivo/core'
-import { useTheme } from '@mui/material/styles'
 import type { Theme } from '@common/theme'
 
 export type BarDatum = {

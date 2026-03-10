@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react'
-import { HeatMap, DefaultHeatMapDatum, HeatMapSvgProps } from '@nivo/heatmap'
+import { DefaultHeatMapDatum, HeatMap, HeatMapSvgProps } from '@nivo/heatmap'
 
 type HeatMapInputRow = Record<string, string | number>
 

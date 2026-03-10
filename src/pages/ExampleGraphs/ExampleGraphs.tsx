@@ -1,14 +1,14 @@
 import { memo, useState } from 'react'
-import { Box } from '@common/components'
-import PieChart from './PieChart'
-import DatePickerForChart from './DatePickerForChart'
-import AnzahlVersucheBarChart from './AnzahlVersucheBarChart'
-import VerbrachteZeitAlleStudentenBarChart from './VerbrachteZeitAlleStudentenBarChart'
-import { DateRange } from '../../components/DateRangePicker'
 import dayjs from 'dayjs'
+import { Box } from '@common/components'
+import { DateRange } from '../../components/DateRangePicker'
+import AbfolgeDerAbgeschlossenenKlassifikationen from './AbfolgeDerAbgeschlossenenKlassifikationen'
+import AnzahlVersucheBarChart from './AnzahlVersucheBarChart'
+import DatePickerForChart from './DatePickerForChart'
 import DurchschnittlicheBearbeitung, { PrecomputedMinMaxBoxPlotDatum } from './DurchschnittlicheBearbeitung'
 import NächsteEmpfehlungGraph from './NächsteEmpfehlung'
-import AbfolgeDerAbgeschlossenenKlassifikationen from './AbfolgeDerAbgeschlossenenKlassifikationen'
+import PieChart from './PieChart'
+import VerbrachteZeitAlleStudentenBarChart from './VerbrachteZeitAlleStudentenBarChart'
 
 const exampleData: Record<string, string | number>[] = [
   { student: '1', KÜ: 5, EK: 7, SE: 3, LZ: 8 },
