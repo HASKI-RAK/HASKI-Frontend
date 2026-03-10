@@ -130,12 +130,12 @@ const ExampleGraphs = () => {
   const handleDateRangeChange = (newDateRange: DateRange) => {
     setDateRange(newDateRange)
     // Filter your chart data based on the new date range here
-    console.log('Date range changed:', newDateRange)
+    // console.log('Date range changed:', newDateRange)
   }
 
   return (
     <Box sx={{ ml: 10, mr: 10, mt: 5 }}>
-      <Box sx={{ height: '500px', width: '50%', position: 'relative' }}>
+      {/*<Box sx={{ height: '500px', width: '50%', position: 'relative' }}>
         <PieChart height={500} data={dataPieChart} totalHours={totalHours} />
         <DatePickerForChart
           width={800}
@@ -189,7 +189,7 @@ const ExampleGraphs = () => {
           axisLeftText="Position"
           axisTopText="name"
         />
-      </Box>
+      </Box>*/}
     </Box>
   )
 }
