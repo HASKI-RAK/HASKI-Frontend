@@ -24,18 +24,19 @@ const GameSidePanel = ({ attemptDuration, experiencePointDetails }: GameSidePane
   const { collapse, expand } = useGameSidePanel({ setExpanded })
 
   useEffect(() => {
-    // fetching user ID to use as student ID since they tend to be the same
-    // should be replaced in the future
     getUser().then((user) => {
       setStudentId(user.id)
       getGamificationSettings(user.id).then((gamificationSettings: GamificationSettings) => {
-        const showDetailedInformation = gamificationSettings.information === 'detailed'
-        setShowExperiencePointDetails(
-          showDetailedInformation || reflectiveProcessing || sensingPerception || verbalInput
-        )
+        if (gamificationSettings.information === undefined) {
+          setShowExperiencePointDetails(
+            reflectiveProcessing || sensingPerception || verbalInput
+          )
+        } else {
+          setShowExperiencePointDetails(gamificationSettings.information === 'detailed')
+        }
       })
     })
-  }, [ILSContext, getUser])
+  }, [ILSContext, getUser, getGamificationSettings])
 
   return (
     <>

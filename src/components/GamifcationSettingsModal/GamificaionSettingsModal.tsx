@@ -65,7 +65,7 @@ const GamificationSettingsModal = ({ open, onClose }: GamificationSettingsModalP
           handleError(t, addSnackbar, 'error.fetchUser', error, 3000)
         })
     }
-  }, [getGamificationSettings])
+  }, [])
 
   //TODO: Translations
   return (
