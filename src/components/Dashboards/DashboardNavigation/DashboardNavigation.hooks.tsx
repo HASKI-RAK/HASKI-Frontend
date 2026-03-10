@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { handleError } from '@components'
 import { Course, LearningElement, Topic, User } from '@core'
-import { SnackbarContext } from '@services'
+import { AuthContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
 type NavLevel = 'courses' | 'topics' | 'learningElements'
@@ -25,6 +25,7 @@ type DashboardNavigationHookReturn = {
 export const useDashboardNavigation = (): DashboardNavigationHookReturn => {
   const { t } = useTranslation()
   const { addSnackbar } = useContext(SnackbarContext)
+  const { isAuth } = useContext(AuthContext)
 
   const getUser = usePersistedStore((state) => state.getUser)
   const getCourses = useStore((state) => state.getCourses)
@@ -103,15 +104,16 @@ export const useDashboardNavigation = (): DashboardNavigationHookReturn => {
   )
 
   useEffect(() => {
-    getUser()
-      .then((user) => {
-        fetchMap[level](user, selection).then((items) => {
-          setCurrentItems(items)
+    isAuth &&
+      getUser()
+        .then((user) => {
+          fetchMap[level](user, selection).then((items) => {
+            setCurrentItems(items)
+          })
         })
-      })
-      .catch((error) => {
-        handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
-      })
+        .catch((error) => {
+          handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
+        })
   }, [fetchMap, getUser, level, selection])
 
   return useMemo(

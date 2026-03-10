@@ -24,9 +24,7 @@ const LocalNavBar = ({ useLocalNavBar = _useLocalNavBar }: LocalNavBarProps) => 
   const theme = useTheme()
   const { t } = useTranslation()
   const open = useMediaQuery(theme.breakpoints.up('lg'))
-  const { isLoading, localNavItems } = useLocalNavBar()
-
-  // todo translation appGlobal.topics -> translation variable
+  const { isLoading, localNavItems, localNavTitle } = useLocalNavBar()
 
   // Function to resize the drawer height
   const handleResize = () => setDrawerHeight(window.innerHeight - 200)
@@ -56,7 +54,7 @@ const LocalNavBar = ({ useLocalNavBar = _useLocalNavBar }: LocalNavBarProps) => 
           }
         }}>
         <Grid item sx={{ ml: '0.9rem' }}>
-          <Typography variant="h5">{t('appGlobal.topics') /* todo: Muss auch aus dem Hook kommen */}</Typography>
+          <Typography variant="h5">{localNavTitle}</Typography>
         </Grid>
         <Divider />
         {isLoading ? (
@@ -78,7 +76,3 @@ const LocalNavBar = ({ useLocalNavBar = _useLocalNavBar }: LocalNavBarProps) => 
 }
 
 export default memo(LocalNavBar)
-
-// todo padding all sides of the items
-// todo items bisschen schmaler machen?
-// todo punkt vor dem namen entfernen?

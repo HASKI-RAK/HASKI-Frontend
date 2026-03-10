@@ -8,6 +8,7 @@ const dashboards = ['learnercharacteristics', 'rating', 'scoreboard'] as const
 export const useDashboardNavBar = (): LocalNavBarHookReturn => {
   const { pathname } = useLocation()
   const { t, i18n } = useTranslation()
+  const localNavTitle = t('components.LocalNavBar.dashboards')
 
   return useMemo(
     () => ({
@@ -20,7 +21,8 @@ export const useDashboardNavBar = (): LocalNavBarHookReturn => {
           url: `/${dashboard}`
         }))
         .sort((a, b) => a.name.localeCompare(b.name, i18n.language)),
-      isLoading: false
+      isLoading: false,
+      localNavTitle
     }),
     [pathname, t, i18n.language]
   )

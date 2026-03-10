@@ -627,6 +627,7 @@
       }
     ]
   ],
+  "components.LocalNavBar.dashboards": "Dashboards",
   "components.LoginForm.loginButton": "Login",
   "components.LoginForm.orLoginWithMoodle": "or login with Moodle",
   "components.LoginForm.password": "Password",
@@ -1910,6 +1911,12 @@
   "pages.rating.learningElementRating": "Learning Element Rating",
   "pages.rating.studentRating": "Student Rating",
   "pages.scoreboard": "Scoreboard",
+  "pages.scoreboard.backToCourseSelection": "Back to course selection",
+  "pages.scoreboard.backToTopicSelection": "Back to topic selection",
+  "pages.scoreboard.completedAt": "Completed at {{date}}",
+  "pages.scoreboard.learningElementsCompleted": "{{current}} of {{total}} learning elements completed",
+  "pages.scoreboard.points": "{{current}} of {{total}} points",
+  "pages.scoreboard.topicsCompleted": "{{current}} of {{total}} topics completed",
   "pages.topic": "Topic",
   "pages.topic.grouped": "Grouped",
   "pages.topic.menuItemAlgorithms": "Change learning path algorithm",
@@ -1920,6 +1927,7 @@
   "tooltip.courseSelection": "Select a course",
   "tooltip.furtherInfoSelection": "Further information about the project",
   "tooltip.languageSettings": "Language settings",
+  "tooltip.notCompleted": "Not completed",
   "tooltip.openGlobalSettings": "Open global settings",
   "tooltip.openSettings": "Open settings",
   "tooltip.statisticsMenuSelection": "Open the statistics menu",

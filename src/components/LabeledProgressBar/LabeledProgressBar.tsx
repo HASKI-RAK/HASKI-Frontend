@@ -3,9 +3,9 @@ import { Box, LinearProgress, Tooltip, Typography } from '@common/components'
 import { alpha, Theme } from '@common/theme'
 
 export type LabeledProgressBarProps = {
-  current?: number | string // todo: necessary?
+  current?: number | string
   tooltip?: string
-  total?: number | string // todo: necessary?
+  total?: number | string
   value?: number
 }
 

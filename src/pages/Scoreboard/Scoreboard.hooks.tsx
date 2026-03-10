@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { handleError } from '@components'
 import { BestAttempt, LastElement } from '@core'
-import { fetchScoreboardData, SnackbarContext } from '@services'
+import { AuthContext, fetchScoreboardData, SnackbarContext } from '@services'
 import { usePersistedStore } from '@store'
 
 export type ScoreboardHookReturn = {
@@ -27,6 +27,7 @@ export const useScoreboard = (params: ScoreboardHookParams): ScoreboardHookRetur
 
   // Context
   const { addSnackbar } = useContext(SnackbarContext)
+  const { isAuth } = useContext(AuthContext)
 
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
@@ -39,17 +40,20 @@ export const useScoreboard = (params: ScoreboardHookParams): ScoreboardHookRetur
   const [lastElements, setLastElements] = useState<Record<string, LastElement>>({})
   const [bestAttempts, setBestAttempts] = useState<Record<string, BestAttempt>>({})
 
-  // todo only fetch if state are null?? prevents refetch on every render, but...
   useEffect(() => {
+    setIsLoading(true)
+
+    if (!isAuth) return
+
     getUser()
       .then((user) => {
         fetchScoreboardData(user.id, params.courseId, params.topicId, params.since, params.until)
           .then((data) => {
-            setScores(data['score'] ?? {})
-            setMaxScores(data['max_score'])
-            setTimesSpent(data['time_spent'])
-            setLastElements(data['last_elements'])
-            setBestAttempts(data['best_attempts'] ?? {})
+            setScores(data.score ?? {})
+            setMaxScores(data.max_score ?? {})
+            setTimesSpent(data.time_spent ?? {})
+            setLastElements(data.last_elements ?? {})
+            setBestAttempts(data.best_attempts ?? {})
             setIsLoading(false)
           })
           .catch((error) => {
@@ -59,7 +63,7 @@ export const useScoreboard = (params: ScoreboardHookParams): ScoreboardHookRetur
       .catch((error) => {
         handleError(t, addSnackbar, 'error.fetchUser', error, 5000)
       })
-  }, [getUser, fetchScoreboardData])
+  }, [getUser, params.courseId, params.topicId, params.since, params.until])
 
   return { scores, maxScores, timesSpent, lastElements, bestAttempts, isLoading }
 }

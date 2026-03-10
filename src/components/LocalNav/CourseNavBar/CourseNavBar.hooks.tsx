@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useLearningPathTopicProgress } from '@common/hooks'
-import { LocalNavItemProps } from '@components'
+import { LocalNavBarHookReturn, LocalNavItemProps } from '@components'
 
-type CourseNavBarHookReturn = {
-  readonly isLoading: boolean
-  readonly localNavItems: LocalNavItemProps[]
-}
+export const useCourseNavBar = (): LocalNavBarHookReturn => {
+  // Translation
+  const { t } = useTranslation()
+  const localNavTitle = t('appGlobal.topics')
 
-export const useCourseNavBar = (): CourseNavBarHookReturn => {
   // State
   const [localNavItems, setLocalNavItems] = useState<LocalNavItemProps[]>([])
 
@@ -30,5 +30,5 @@ export const useCourseNavBar = (): CourseNavBarHookReturn => {
     )
   }, [isLoading, topics, topicProgress, topicId, courseId])
 
-  return useMemo(() => ({ isLoading, localNavItems }), [isLoading, localNavItems])
+  return useMemo(() => ({ isLoading, localNavItems, localNavTitle }), [isLoading, localNavItems, localNavTitle])
 }

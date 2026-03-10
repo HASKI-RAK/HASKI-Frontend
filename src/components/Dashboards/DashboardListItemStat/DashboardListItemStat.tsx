@@ -10,9 +10,10 @@ type DashboardListItemStatProps = {
 const DashboardListItemStat = ({ icon, text, tooltip }: DashboardListItemStatProps) => {
   return (
     <Box>
-      <Tooltip title={tooltip ? <Typography variant="body2">{tooltip}</Typography> : undefined}>
+      <Tooltip arrow title={tooltip ? <Typography variant="body2">{tooltip}</Typography> : undefined}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          {icon} <Typography>{text}</Typography>
+          {icon}
+          <Typography sx={{ lineHeight: 1, position: 'relative', top: '0.5px' }}>{text}</Typography>
         </Box>
       </Tooltip>
     </Box>
