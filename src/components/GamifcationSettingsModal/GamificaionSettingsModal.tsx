@@ -91,7 +91,7 @@ const GamificationSettingsModal = ({ open, onClose }: GamificationSettingsModalP
         <Typography id="gamification-settings-modal-title" variant="h6" component="h6" align="center">
           {t('components.GamificationSettingsModal.title')}
         </Typography>
-        <Grid item spacing={2}>
+        <Grid item>
           <Typography variant="body1">{t('components.GamificationSettingsModal.presentation')}</Typography>
           <RadioGroup onChange={handleSelectPresentation} id="gamification-settings-presentation-radio-group">
             {PresentationOptions.map((option) => (
@@ -104,7 +104,7 @@ const GamificationSettingsModal = ({ open, onClose }: GamificationSettingsModalP
             ))}
           </RadioGroup>
         </Grid>
-        <Grid item spacing={2}>
+        <Grid item>
           <Typography variant="body1">{t('components.GamificationSettingsModal.social')}</Typography>
           <RadioGroup onChange={handleSelectSocial} id="gamification-settings-social-radio-group">
             {SocialOptions.map((option) => (
@@ -117,7 +117,7 @@ const GamificationSettingsModal = ({ open, onClose }: GamificationSettingsModalP
             ))}
           </RadioGroup>
         </Grid>
-        <Grid item spacing={2}>
+        <Grid item>
           <Typography variant="body1">{t('components.GamificationSettingsModal.information')}</Typography>
           <RadioGroup onChange={handleSelectInformation} id="gamification-settings-information-radio-group">
             {InformationOptions.map((option) => (
@@ -136,8 +136,12 @@ const GamificationSettingsModal = ({ open, onClose }: GamificationSettingsModalP
           id="gamification-settings-modal-save-button"
           data-testid={'gamification-settings-modal-save-button'}
           sx={{ position: 'absolute', right: '0.5rem', bottom: '0.5rem' }}
-          disabled={waitForBackend} // Disable while loading
-        >
+          disabled={
+            waitForBackend ||
+            !selectedGamificationSettings?.presentation ||
+            !selectedGamificationSettings?.information ||
+            !selectedGamificationSettings?.social
+          }>
           {waitForBackend ? <CircularProgress size={24} /> : <Save />}
         </Fab>
         <Fab

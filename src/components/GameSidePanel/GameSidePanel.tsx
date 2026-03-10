@@ -28,9 +28,7 @@ const GameSidePanel = ({ attemptDuration, experiencePointDetails }: GameSidePane
       setStudentId(user.id)
       getGamificationSettings(user.id).then((gamificationSettings: GamificationSettings) => {
         if (gamificationSettings.information === undefined) {
-          setShowExperiencePointDetails(
-            reflectiveProcessing || sensingPerception || verbalInput
-          )
+          setShowExperiencePointDetails(reflectiveProcessing || sensingPerception || verbalInput)
         } else {
           setShowExperiencePointDetails(gamificationSettings.information === 'detailed')
         }
