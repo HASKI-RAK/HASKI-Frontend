@@ -67,7 +67,7 @@ export const BarChart = ({ leaderboardEntries, currentStudentId, metricHeader: m
                     bgcolor={
                       currentStudentId === entry.student_id ? theme.palette.primary.light : theme.palette.primary.main
                     }
-                    borderRadius="1rem"
+                    borderRadius="0.5rem"
                     mr="0.5rem"
                   />
                 </Box>
