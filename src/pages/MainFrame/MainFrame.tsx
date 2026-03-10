@@ -38,7 +38,8 @@ const MainFrame = () => {
   const isDashboardOpen =
     pathname.startsWith('/scoreboard') ||
     pathname.startsWith('/rating') ||
-    pathname.startsWith('/learnercharacteristics')
+    pathname.startsWith('/learnercharacteristics') ||
+    pathname.startsWith('/leaderboard')
   const isCourseOpen = !!courseId
   const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && (isDashboardOpen || isCourseOpen)
 
