@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import { LocalNavBarHookReturn } from '@components'
 
-const dashboards = ['learnercharacteristics', 'rating', 'scoreboard'] as const
+const dashboards = ['learnercharacteristics', 'rating', 'scoreboard', 'leaderboard'] as const
 
 export const useDashboardNavBar = (): LocalNavBarHookReturn => {
   const { pathname } = useLocation()
