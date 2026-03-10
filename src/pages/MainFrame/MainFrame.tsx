@@ -1,5 +1,6 @@
-import React from 'react'
 import { Outlet, useParams } from 'react-router-dom'
+import { useCourseNavBar } from 'src/components/LocalNav/CourseNavBar/CourseNavBar.hooks'
+import { useDashboardNavBar } from 'src/components/LocalNav/DashboardNavBar/DashboardNavBar.hooks'
 import { Box, Divider, Grid } from '@common/components'
 import { useMediaQuery, useTheme } from '@common/hooks'
 import {
@@ -31,7 +32,11 @@ import {
 export const MainFrame = () => {
   const { courseId } = useParams()
   const theme = useTheme()
-  const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && !!courseId
+  const isLocalNavOpen = useMediaQuery(theme.breakpoints.up('lg')) && !!courseId // todo move into component
+  // todo !!course, media query, dashboards in url?
+  // todo determine the hook for the local nav based on the url and pass it to the local nav
+
+  //
 
   return (
     <>
@@ -49,7 +54,7 @@ export const MainFrame = () => {
           {isLocalNavOpen && (
             <>
               <Grid item container sx={{ width: '26.5rem' }}>
-                <LocalNavBar />
+                <LocalNavBar useLocalNavBar={useCourseNavBar} />
               </Grid>
               <Divider flexItem orientation="vertical" />
             </>
@@ -67,4 +72,4 @@ export const MainFrame = () => {
   )
 }
 
-export default MainFrame
+export default MainFrame // todo memo
