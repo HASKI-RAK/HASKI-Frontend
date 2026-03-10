@@ -4,7 +4,7 @@ import { fetchData } from '../RequestResponse'
 
 export const postGamificationSettings: GamificationSettingsPostReturn = async (
   studentId: number,
-  outputData: GamificationSettings
+  data: GamificationSettings
 ): Promise<GamificationSettings> => {
   return fetchData<GamificationSettings>(`${getConfig().BACKEND}/student/${studentId}/gamificationSettings`, {
     method: 'POST',
@@ -12,6 +12,6 @@ export const postGamificationSettings: GamificationSettingsPostReturn = async (
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(outputData)
+    body: JSON.stringify(data)
   })
 }

@@ -70,6 +70,7 @@
   "components.BadgeSymbol.perfect_one_exercise": "Finish one exercise in the topic with a perfect score",
   "components.BadgeSymbol.perfect_self_evaluation": "Achieve a perfect score in the self-assessment test",
   "components.BadgeSymbol.revisit_topic": "Revisit a learning element in the topic after two weeks",
+  "components.barChart.dataError": "No data available",
   "components.BasicNode.deleteLearningElementSuccessful": "Learning Element deleted successfully",
   "components.BasicNode.deleteTooltip": "Delete Learning Element",
   "components.BasicNode.recommendedExercise": "This exercise is recommended next for you.",

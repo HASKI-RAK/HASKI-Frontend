@@ -12,6 +12,7 @@ const LeaderboardDashboard = () => {
   const { visualInput } = useContext(ILSContext)
 
   const [gamificationSettings, setGamificationSettings] = useState<GamificationSettings>({} as GamificationSettings)
+  const [visualPresentation, setVisualPresentation] = useState<boolean>(true)
 
   const getUser = usePersistedStore((state) => state.getUser)
   const getGamificationSettings = usePersistedStore((state) => state.getGamificationSettings)
@@ -24,6 +25,14 @@ const LeaderboardDashboard = () => {
     })
   }, [])
 
+  useEffect(() => {
+    if (gamificationSettings.presentation === undefined) {
+      setVisualPresentation(visualInput)
+    } else {
+      setVisualPresentation(gamificationSettings.presentation === 'visual')
+    }
+  }, [gamificationSettings, visualInput])
+
   return (
     <Grid container spacing={4} alignItems="center" justifyContent="center" direction="column">
       <Grid item>
@@ -33,10 +42,10 @@ const LeaderboardDashboard = () => {
       </Grid>
       <Grid container item spacing={10} justifyContent="center">
         <Grid item>
-          <XpLeaderboard showVisually={gamificationSettings.presentation === 'visual' || visualInput} />
+          <XpLeaderboard showVisually={visualPresentation} />
         </Grid>
         <Grid item>
-          <BadgeLeaderboard showVisually={gamificationSettings.presentation === 'visual' || visualInput} />
+          <BadgeLeaderboard showVisually={visualPresentation} />
         </Grid>
       </Grid>
     </Grid>

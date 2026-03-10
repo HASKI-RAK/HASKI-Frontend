@@ -7,9 +7,10 @@ import { GenericLeaderboard, GenericLeaderboardEntry } from '@core'
 type BarChartProps = {
   leaderboardEntries: GenericLeaderboard
   currentStudentId?: number
+  metricHeader?: string
 }
 
-export const BarChart = ({ leaderboardEntries, currentStudentId }: BarChartProps) => {
+export const BarChart = ({ leaderboardEntries, currentStudentId, metricHeader: metric = 'Metric' }: BarChartProps) => {
   const { t } = useTranslation()
   const theme = useTheme()
   const [maxValue, setMaxValue] = useState(0)
@@ -18,6 +19,9 @@ export const BarChart = ({ leaderboardEntries, currentStudentId }: BarChartProps
   useEffect(() => {
     if (leaderboardEntries?.length > 0) {
       setMaxValue(Math.max(...leaderboardEntries.map((entry) => entry.metric)))
+      setDataErrorOccurred(false)
+    } else {
+      setDataErrorOccurred(true)
     }
   }, [leaderboardEntries])
 
@@ -26,16 +30,36 @@ export const BarChart = ({ leaderboardEntries, currentStudentId }: BarChartProps
       {dataErrorOccurred ? (
         <Typography color="error">{t('components.barChart.dataError')}</Typography>
       ) : (
-        <Box width="35rem" height="60rem">
+        <Grid width="35rem" height="60rem">
+          <Box width="35rem" height="4rem" display="flex" alignItems="center">
+            <Box width="10rem" height="4rem" display="flex" alignItems="center" gap="0.5rem">
+              <Box width="3rem">
+                <Typography variant="body2">{t('components.leaderboard.rank')}</Typography>
+              </Box>
+              <Divider orientation="vertical" flexItem />
+              <Box width="9rem">
+                <Typography variant="body2">{t('components.leaderboard.studentId')}</Typography>
+              </Box>
+            </Box>
+            <Divider orientation="vertical" flexItem />
+            <Box width="20rem" height="4rem" display="flex" alignItems="center" justifyContent="center">
+              <Typography variant="body2">{metric}</Typography>
+            </Box>
+          </Box>
           {leaderboardEntries?.map((entry: GenericLeaderboardEntry) => {
             const barWidth = maxValue > 0 ? `${(entry.metric / maxValue) * 100}%` : '0%'
             return (
               <Box key={entry.student_id} width="35rem" height="4rem" display="flex" alignItems="center">
                 <Box width="10rem" height="4rem" display="flex" alignItems="center" gap="0.5rem">
-                  <Typography variant="body2">{entry.rank}</Typography>
+                  <Box width="3rem" justifyContent="center" alignItems="center" display="flex">
+                    <Typography variant="body2">{entry.rank}</Typography>
+                  </Box>
                   <Divider orientation="vertical" flexItem />
-                  <Typography variant="body2">{`${entry.student_id}`}</Typography>
+                  <Box width="9rem" justifyContent="center" alignItems="center" display="flex">
+                    <Typography variant="body2">{`${entry.student_id}`}</Typography>
+                  </Box>
                 </Box>
+                <Divider orientation="vertical" flexItem />
                 <Box width="20rem" height="4rem" display="flex" alignItems="center">
                   <Box
                     width={barWidth}
@@ -53,7 +77,7 @@ export const BarChart = ({ leaderboardEntries, currentStudentId }: BarChartProps
               </Box>
             )
           })}
-        </Box>
+        </Grid>
       )}
     </Grid>
   )

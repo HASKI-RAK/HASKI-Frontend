@@ -98,7 +98,11 @@ export const BadgeLeaderboard = ({ maxRows, showVisually }: BadgeLeaderboardProp
         {t('components.badgeLeaderboard.title')}
       </Typography>
       {showVisually ? (
-        <BarChart leaderboardEntries={filteredEntries} currentStudentId={currentStudentId} />
+        <BarChart
+          leaderboardEntries={filteredEntries}
+          currentStudentId={currentStudentId}
+          metricHeader={t('components.badgeLeaderboard.metric')}
+        />
       ) : (
         <LeaderboardTable
           leaderboardEntries={filteredEntries}

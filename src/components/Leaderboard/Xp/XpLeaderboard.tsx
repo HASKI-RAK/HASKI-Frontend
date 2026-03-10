@@ -99,7 +99,11 @@ export const XpLeaderboard = ({ maxRows, showVisually }: XpLeaderboardProps) => 
         {t('components.xpLeaderboard.title')}
       </Typography>
       {showVisually ? (
-        <BarChart leaderboardEntries={filteredEntries} currentStudentId={currentStudentId} />
+        <BarChart
+          leaderboardEntries={filteredEntries}
+          currentStudentId={currentStudentId}
+          metricHeader={t('components.xpLeaderboard.metric')}
+        />
       ) : (
         <LeaderboardTable
           leaderboardEntries={filteredEntries}

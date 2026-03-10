@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { get } from 'http'
 import log from 'loglevel'
 import { Card, CardContent, Divider, Grid, Skeleton, Typography } from '@common/components'
 import { CourseCard, courseCardStyle, CreateCourseCard, XpLeaderboard } from '@components'
-import { Course } from '@core'
+import { Course, GamificationSettings } from '@core'
 import { AuthContext, ILSContext, RoleContext, SnackbarContext } from '@services'
 import { usePersistedStore, useStore } from '@store'
 
@@ -28,9 +29,12 @@ export const Home = () => {
   const [activeStepCreateCourseModal, setActiveStepCreateCourseModal] = useState<number>(0)
   const [createCourseModalOpen, setCreateCourseModalOpen] = useState<boolean>(false)
   const [level, setLevel] = useState<number>(1)
+  const [gamificationSettings, setGamificationSettings] = useState({} as GamificationSettings)
+  const [visualPresentation, setVisualPresentation] = useState<boolean>(true)
 
   // Store
   const getUser = usePersistedStore((state) => state.getUser)
+  const getGamificationSettings = usePersistedStore((state) => state.getGamificationSettings)
   const getCourses = useStore((state) => state.getCourses)
   const clearCoursesCache = useStore((state) => state.clearCoursesCache)
   const coursesCache = useStore((state) => state._cache_Courses_record)
@@ -61,6 +65,18 @@ export const Home = () => {
               })
               log.error(t('error.fetchCourses') + ' ' + error)
             })
+          getGamificationSettings(user.id)
+            .then((settings) => {
+              setGamificationSettings(settings)
+            })
+            .catch((error) => {
+              addSnackbar({
+                message: t('error.fetchGamificationSettings'),
+                severity: 'error',
+                autoHideDuration: 5000
+              })
+              log.error(t('error.fetchGamificationSettings') + ' ' + error)
+            })
           getExperiencePoints(user.id)
             .then((response) => {
               const calculatedLevel = Math.floor(response.experience_points / 1000) + 1
@@ -85,6 +101,14 @@ export const Home = () => {
         })
     }
   }, [getUser, getCourses, isAuth, coursesCache, coursesLoading])
+
+  useEffect(() => {
+    if (gamificationSettings.presentation === undefined) {
+      setVisualPresentation(visualInput)
+    } else {
+      setVisualPresentation(gamificationSettings.presentation === 'visual')
+    }
+  }, [gamificationSettings, visualInput])
 
   const noCourses = () => {
     return (
@@ -145,7 +169,7 @@ export const Home = () => {
           </Typography>
         </Grid>
         <Grid item flexGrow={2}>
-          <XpLeaderboard showVisually={visualInput} maxRows={maxRows} />
+          <XpLeaderboard showVisually={visualPresentation} maxRows={maxRows} />
         </Grid>
       </Grid>
       <Divider orientation="vertical" flexItem />
