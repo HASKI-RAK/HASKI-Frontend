@@ -163,7 +163,7 @@ const Scoreboard = () => {
   const { currentItems, select, level, back, selection } = useDashboardNavigation()
   const { topicProgress, getCourseProgress, isLoading } = useCourseProgress()
   const { scores, maxScores, timesSpent, lastElements, bestAttempts } = useScoreboard({
-    courseId: selection.course?.id,
+    courseId: selection.course?.lms_id,
     topicId: selection.topic?.id,
     since: since,
     until: until
