@@ -47,7 +47,7 @@ export const useScoreboard = (params: ScoreboardHookParams): ScoreboardHookRetur
 
     getUser()
       .then((user) => {
-        fetchScoreboardData(user.id, params.courseId, params.topicId, params.since, params.until)
+        fetchScoreboardData(user.settings.id, params.courseId, params.topicId, params.since, params.until)
           .then((data) => {
             setScores(data.score ?? {})
             setMaxScores(data.max_score ?? {})
@@ -65,12 +65,8 @@ export const useScoreboard = (params: ScoreboardHookParams): ScoreboardHookRetur
       })
   }, [getUser, params.courseId, params.topicId, params.since, params.until])
 
-  return useMemo(() => ({ scores, maxScores, timesSpent, lastElements, bestAttempts, isLoading }), [
-    scores,
-    maxScores,
-    timesSpent,
-    lastElements,
-    bestAttempts,
-    isLoading
-  ])
+  return useMemo(
+    () => ({ scores, maxScores, timesSpent, lastElements, bestAttempts, isLoading }),
+    [scores, maxScores, timesSpent, lastElements, bestAttempts, isLoading]
+  )
 }
