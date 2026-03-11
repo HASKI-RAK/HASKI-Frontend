@@ -21,7 +21,7 @@ type DatePickerForChartProps = {
 
 const DatePickerForChart = ({
   onDateRangeChange,
-  initialStartDate = dayjs().subtract(30, 'day'),
+  initialStartDate = dayjs().subtract(3, 'year'),
   initialEndDate = dayjs(),
   showPresets = true,
   width = 'auto',
