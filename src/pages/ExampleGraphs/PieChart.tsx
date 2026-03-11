@@ -30,7 +30,7 @@ const PieChart = ({ data, maxHeight = 500 }: PieChartProps) => {
       safeData.map((d) => ({
         // ✅ provide a stable id for nivo
         id: d.label,
-        label: totalHours > 0 ? `${d.label} (${d.value}h)` : d.label,
+        label: totalHours > 0 ? `${d.label} (${d.value}m)` : d.label,
         value: d.value
       })),
     [safeData, totalHours]
