@@ -250,7 +250,8 @@ const Scoreboard = () => {
     () =>
       currentItems.map((item) => {
         const bestAttempt = bestAttempts[level === 'topics' ? item.id : item.lms_id]
-        const completedAt = bestAttempt.completed_at
+        console.log("bestAttempt for item", item, bestAttempt)
+        const completedAt = bestAttempt?.completed_at
         const formattedDate = completedAt ? dateFormatter.format(new Date(completedAt)) : undefined
 
         return {
@@ -267,7 +268,7 @@ const Scoreboard = () => {
                     {getNodeIcon(item.classification, 40)}
                   </Tooltip>
                 ) : undefined,
-                headerRight: bestAttempt.completion_status ? (
+                headerRight: bestAttempt?.completion_status ? (
                   <DashboardListItemStat
                     icon={<CheckCircleRounded color="success" />}
                     tooltip={t('tooltip.completed')}
@@ -283,7 +284,7 @@ const Scoreboard = () => {
                   />
                 ),
                 footerRight:
-                  bestAttempt.score == null && maxScores[item.lms_id] == null ? null : (
+                  bestAttempt?.score == null && maxScores[item.lms_id] == null ? null : (
                     <DashboardListItemStat
                       icon={<StarRounded color="warning" />}
                       text={`${bestAttempt.score ?? 0} / ${maxScores[item.lms_id] ?? 0}`}
