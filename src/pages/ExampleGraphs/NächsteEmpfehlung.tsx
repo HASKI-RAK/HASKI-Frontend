@@ -193,36 +193,65 @@ const NächsteEmpfehlungGraph = ({
 
   const linkComponent = useMemo(() => {
     const pad = 2
+    const arrowLength = Math.max(10, s.nodeR * 0.45)
+    const arrowWidth = Math.max(8, s.nodeR * 0.3)
 
     const LinkAtCircleBorder = ({ link, style }: LinkComponentProps) => {
-      const start = shiftPoint(
-        { x: link.source.x, y: link.source.y },
-        { x: link.target.x, y: link.target.y },
-        s.nodeR + pad
-      )
-      const end = shiftPoint(
-        { x: link.target.x, y: link.target.y },
-        { x: link.source.x, y: link.source.y },
-        s.nodeR + pad
-      )
+      const source = { x: link.source.x, y: link.source.y }
+      const target = { x: link.target.x, y: link.target.y }
 
-      const midX = (start.x + end.x) / 2
-      const d = `M${start.x},${start.y} C${midX},${start.y} ${midX},${end.y} ${end.x},${end.y}`
+      // Start just outside the source circle
+      const start = shiftPoint(source, target, s.nodeR + pad)
+
+      // Arrow tip sits just outside the target circle
+      const tip = shiftPoint(target, source, s.nodeR + pad)
+
+      // End the curved line a bit before the tip so the arrowhead can be drawn there
+      const lineEnd = shiftPoint(target, source, s.nodeR + pad + arrowLength)
+
+      const midX = (start.x + lineEnd.x) / 2
+      const d = `M${start.x},${start.y} C${midX},${start.y} ${midX},${lineEnd.y} ${lineEnd.x},${lineEnd.y}`
 
       const isFromFirst = !isSingleNode && link.source.id === firstNodeName
       const strokeOpacity = BASE_LINK_OPACITY * (isFromFirst ? FIRST_NODE_OPACITY : 1)
       const strokeWidth = style?.strokeWidth ?? 2
+      const color = link.target.color ?? DONE_COLOR
+
+      // Direction from lineEnd -> tip
+      const dx = tip.x - lineEnd.x
+      const dy = tip.y - lineEnd.y
+      const len = Math.hypot(dx, dy) || 1
+
+      // Unit direction vector
+      const ux = dx / len
+      const uy = dy / len
+
+      // Perpendicular vector
+      const px = -uy
+      const py = ux
+
+      // Arrowhead base corners
+      const leftX = lineEnd.x + px * (arrowWidth / 2)
+      const leftY = lineEnd.y + py * (arrowWidth / 2)
+      const rightX = lineEnd.x - px * (arrowWidth / 2)
+      const rightY = lineEnd.y - py * (arrowWidth / 2)
+
+      const arrowPoints = `${tip.x},${tip.y} ${leftX},${leftY} ${rightX},${rightY}`
 
       return (
-        <path
-          d={d}
-          fill="none"
-          stroke={link.target.color ?? DONE_COLOR}
-          strokeWidth={strokeWidth}
-          strokeOpacity={strokeOpacity}
-        />
+        <g>
+          <path
+            d={d}
+            fill="none"
+            stroke={color}
+            strokeWidth={strokeWidth}
+            strokeOpacity={strokeOpacity}
+            strokeLinecap="round"
+          />
+          <polygon points={arrowPoints} fill={color} fillOpacity={strokeOpacity} />
+        </g>
       )
-    };
+    }
 
     return LinkAtCircleBorder
   }, [firstNodeName, isSingleNode, s.nodeR])
