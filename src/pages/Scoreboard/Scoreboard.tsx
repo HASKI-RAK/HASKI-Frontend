@@ -1,7 +1,6 @@
 import { memo, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
-import { use } from 'i18next'
 import { Tooltip, Typography } from '@common/components'
 import { useCourseProgress } from '@common/hooks'
 import { CalendarMonthRounded, CancelRounded, CheckCircleRounded, StarRounded } from '@common/icons'
@@ -250,7 +249,7 @@ const Scoreboard = () => {
   const tableRows: DashboardListItemProps[] = useMemo(
     () =>
       currentItems.map((item) => {
-        const bestAttempt = bestAttempts[item.id]
+        const bestAttempt = bestAttempts[item.lms_id]
         const completedAt = bestAttempt?.completed_at
         const formattedDate = completedAt ? dateFormatter.format(new Date(completedAt)) : undefined
 
@@ -284,13 +283,13 @@ const Scoreboard = () => {
                   />
                 ),
                 footerRight:
-                  bestAttempt?.score == null && maxScores[item.id] == null ? null : (
+                  bestAttempt?.score == null && maxScores[item.lms_id] == null ? null : (
                     <DashboardListItemStat
                       icon={<StarRounded color="warning" />}
-                      text={`${bestAttempt?.score ?? 0} / ${maxScores[item.id] ?? 0}`}
+                      text={`${bestAttempt?.score ?? 0} / ${maxScores[item.lms_id] ?? 0}`}
                       tooltip={t('pages.scoreboard.points', {
                         current: bestAttempt?.score ?? 0,
-                        total: maxScores[item.id] ?? 0
+                        total: maxScores[item.lms_id] ?? 0
                       })}
                     />
                   )
@@ -299,14 +298,14 @@ const Scoreboard = () => {
                 headerRight: (
                   <DashboardListItemStat
                     icon={<StarRounded color="warning" />}
-                    text={`${scores[item.id] ?? 0} / ${maxScores[item.id] ?? 0}`}
+                    text={`${scores[item.lms_id] ?? 0} / ${maxScores[item.lms_id] ?? 0}`}
                     tooltip={t('pages.scoreboard.points', {
-                      current: scores[item.id] ?? 0,
-                      total: maxScores[item.id] ?? 0
+                      current: scores[item.lms_id] ?? 0,
+                      total: maxScores[item.lms_id] ?? 0
                     })}
                   />
                 ),
-                footerLeft: <LabeledProgressBar {...getProgressBarData(item.id)} />
+                footerLeft: <LabeledProgressBar {...getProgressBarData(item.lms_id)} />
               }
         }
       }),
