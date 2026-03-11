@@ -172,19 +172,30 @@ const Scoreboard = () => {
   const labelById = useMemo(() => {
     const map: Record<string, string> = {}
     for (const item of currentItems) {
-      map[String(item.name)] = item.name
+      map[String(item.id)] = item.name
     }
     return map
   }, [currentItems])
+
+  const labelByScoreboardKey = useMemo(() => {
+    const map: Record<string, string> = {}
+
+    for (const item of currentItems) {
+      const key = String(level === 'topics' ? item.id : item.lms_id)
+      map[key] = item.name
+    }
+
+    return map
+  }, [currentItems, level])
 
   const pieAndChartData = useMemo(() => {
     return Object.entries(timesSpent)
       .filter(([, v]) => Number.isFinite(v) && v > 0)
       .map(([key, value]) => ({
-        label: labelById[key] ?? key,
+        label: labelByScoreboardKey[key] ?? key,
         value: Math.round((value / 60) * 10) / 10
       }))
-  }, [timesSpent, labelById])
+  }, [timesSpent, labelByScoreboardKey])
 
   const totalMinutes = Math.round(pieAndChartData.reduce((sum, d) => sum + d.value, 0) * 10) / 10
 
@@ -250,7 +261,7 @@ const Scoreboard = () => {
     () =>
       currentItems.map((item) => {
         const bestAttempt = bestAttempts[level === 'topics' ? item.id : item.lms_id]
-        console.log("bestAttempt for item", item, bestAttempt)
+        console.log('bestAttempt for item', item, bestAttempt)
         const completedAt = bestAttempt?.completed_at
         const formattedDate = completedAt ? dateFormatter.format(new Date(completedAt)) : undefined
 
