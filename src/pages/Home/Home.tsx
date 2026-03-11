@@ -133,7 +133,8 @@ export const Home = () => {
         alignItems="center"
         mt="0.5rem"
         id="coursesGrid"
-        width={'70%'}>
+        sx={{width:{xxL:'80rem', xL:'60rem', lg:'80rem', md:'40rem', sm:'30rem', xs:'100%'}}}
+        >
         <Grid item>
           {coursesLoading ? (
             <Card sx={courseCardStyle}>
@@ -162,7 +163,7 @@ export const Home = () => {
   // Card containing the courses with a button to the specific course
   return (
     <Grid container mt="1rem" direction="row" height={'100%'} spacing={2} id="homeBaseGrid">
-      <Grid container item direction={'column'} width={'28%'} ml="1rem">
+      <Grid container item direction={'column'} width={'40rem'} ml="1rem">
         <Grid item minHeight={'5rem'} mb="1rem">
           <Typography variant="h3" align="center">
             {`${t('pages.home.level')} ${level}`}
