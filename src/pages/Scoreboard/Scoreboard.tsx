@@ -172,7 +172,7 @@ const Scoreboard = () => {
   const labelById = useMemo(() => {
     const map: Record<string, string> = {}
     for (const item of currentItems) {
-      map[String(item.id)] = item.name
+      map[String(item.name)] = item.name
     }
     return map
   }, [currentItems])
@@ -181,12 +181,12 @@ const Scoreboard = () => {
     return Object.entries(timesSpent)
       .filter(([, v]) => Number.isFinite(v) && v > 0)
       .map(([key, value]) => ({
-        label: labelById[key] ?? key, // fallback to key if not found
-        value
+        label: labelById[key] ?? key,
+        value: Math.round((value / 60) * 10) / 10
       }))
   }, [timesSpent, labelById])
 
-  const totalHours = pieAndChartData.reduce((sum, d) => sum + d.value, 0)
+  const totalMinutes = Math.round(pieAndChartData.reduce((sum, d) => sum + d.value, 0) * 10) / 10
 
   const treeData = useMemo(() => treeDataFromLast(lastElements), [lastElements])
 
@@ -298,7 +298,9 @@ const Scoreboard = () => {
                 headerRight: (
                   <DashboardListItemStat
                     icon={<StarRounded color="warning" />}
-                    text={`${scores[level === 'topics' ? item.id : item.lms_id] ?? 0} / ${maxScores[level === 'topics' ? item.id : item.lms_id] ?? 0}`}
+                    text={`${scores[level === 'topics' ? item.id : item.lms_id] ?? 0} / ${
+                      maxScores[level === 'topics' ? item.id : item.lms_id] ?? 0
+                    }`}
                     tooltip={t('pages.scoreboard.points', {
                       current: scores[level === 'topics' ? item.id : item.lms_id] ?? 0,
                       total: maxScores[level === 'topics' ? item.id : item.lms_id] ?? 0
@@ -356,10 +358,10 @@ const Scoreboard = () => {
       topRight={
         level == 'courses' ? (
           //course hours
-          <PieChart data={pieAndChartData} maxHeight={500} totalHours={totalHours} />
+          <PieChart data={pieAndChartData} maxHeight={500} totalHours={totalMinutes} />
         ) : level == 'topics' ? (
           //topic hours
-          <PieChart data={pieAndChartData} maxHeight={500} totalHours={totalHours} />
+          <PieChart data={pieAndChartData} maxHeight={500} totalHours={totalMinutes} />
         ) : level == 'learningElements' ? (
           pieAndChartData.length > 0 ? (
             //attempts per learning element
