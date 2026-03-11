@@ -24,7 +24,7 @@ const EarnedXpDisplay = ({ experiencePointDetails, attemptDuration }: EarnedXpDi
             {`${t('components.EarnedXpDisplay.baseXp')}: ${experiencePointDetails.base_xp}`}
           </Typography>
           <Typography variant="body1">
-            {`${t('components.EarnedXpDisplay.scoreModifier')}: ${experiencePointDetails.score_modifier}`}
+            {`${t('components.EarnedXpDisplay.scoreModifier')}: ${experiencePointDetails.score_modifier * 200}`}
           </Typography>
           <Typography variant="body1">
             {`${t('components.EarnedXpDisplay.attemptXp')}: ${Math.ceil(experiencePointDetails.attempt_xp)} XP`}
@@ -38,11 +38,11 @@ const EarnedXpDisplay = ({ experiencePointDetails, attemptDuration }: EarnedXpDi
           <Typography variant="body1">
             {`${t('components.EarnedXpDisplay.waitBonus')}: ${experiencePointDetails.wait_bonus}`}
           </Typography>
-          {attemptDuration !== undefined && (
+          {/*attemptDuration !== undefined && (
             <Typography variant="body1">
               {`${t('components.EarnedXpDisplay.attemptDuration')}: ${attemptDuration}s`}
             </Typography>
-          )}
+          )*/}
         </>
       )}
     </Grid>
