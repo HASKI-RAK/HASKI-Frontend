@@ -17,6 +17,8 @@ type BarChartProps = {
   maxHeight?: number
 }
 
+const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v))
+
 const AnzahlVersucheBarChart = ({
   data,
   color = '#6EC6FF',
@@ -64,6 +66,16 @@ const AnzahlVersucheBarChart = ({
     [theme]
   )
 
+  const longestLabelLength = useMemo(() => data.reduce((max, item) => Math.max(max, item.label.length), 0), [data])
+
+  const bottomMargin = useMemo(() => {
+    // For -90° labels, label length mostly translates into needed vertical space.
+    const estimated = 90 + longestLabelLength * 7
+    return clamp(estimated, 120, 260)
+  }, [longestLabelLength])
+
+  const bottomLegendOffset = useMemo(() => clamp(bottomMargin - 45, 60, 220), [bottomMargin])
+
   return (
     <div style={{ width: '100%', aspectRatio: '16 / 9', maxHeight }}>
       <ResponsiveBar
@@ -93,14 +105,18 @@ const AnzahlVersucheBarChart = ({
         ]}
         axisBottom={{
           legend: axisBottomText,
-          legendOffset: 60,
+          legendOffset: bottomLegendOffset,
           legendPosition: 'middle',
           tickRotation: -90,
-          tickPadding: 8,
+          tickPadding: 10,
           tickSize: 5
         }}
-        margin={{ top: 50, right: 130, bottom: 110, left: 60 }}
-        axisLeft={{ legend: axisLeftText, legendOffset: -40, legendPosition: 'middle' }}
+        axisLeft={{
+          legend: axisLeftText,
+          legendOffset: -40,
+          legendPosition: 'middle'
+        }}
+        margin={{ top: 50, right: 130, bottom: bottomMargin, left: 60 }}
         groupMode="stacked"
       />
     </div>
