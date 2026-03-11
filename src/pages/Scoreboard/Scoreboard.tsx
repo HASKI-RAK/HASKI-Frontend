@@ -151,7 +151,7 @@ const Scoreboard = () => {
   )
 
   const [dateRange, setDateRange] = useState<DateRange>({
-    startDate: useMemo(() => dayjs().subtract(30, 'day'), []),
+    startDate: useMemo(() => dayjs().subtract(3, 'year'), []),
     endDate: useMemo(() => dayjs(), [])
   })
 
