@@ -12,7 +12,7 @@ export const fetchScoreboardData: ScoreboardDataReturn = async (
 ) => {
   const base = getConfig().BACKEND + `/user/${userId}/`
   const path =
-    (topicId && `course/${courseId}/topic/${topicId}/scoreboard`) ||
+    (topicId && `course/${courseId}/${courseLmsId}/topic/${topicId}/scoreboard`) ||
     (courseId && `course/${courseId}/${courseLmsId}/scoreboard`) ||
     'scoreboard'
   const url = new URL(base + path)
