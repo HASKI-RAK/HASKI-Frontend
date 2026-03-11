@@ -23,6 +23,7 @@ type ScoreboardResponse = {
 type ScoreboardDataReturn = (
   userId: number,
   courseId?: number,
+  courseLmsId?: number,
   topicId?: number,
   since?: Date,
   until?: Date

@@ -16,6 +16,7 @@ export type ScoreboardHookReturn = {
 
 export type ScoreboardHookParams = {
   courseId?: number
+  courseLmsId?: number
   topicId?: number
   since?: Date
   until?: Date
@@ -47,7 +48,14 @@ export const useScoreboard = (params: ScoreboardHookParams): ScoreboardHookRetur
 
     getUser()
       .then((user) => {
-        fetchScoreboardData(user.settings.id, params.courseId, params.topicId, params.since, params.until)
+        fetchScoreboardData(
+          user.settings.id,
+          params.courseId,
+          params.courseLmsId,
+          params.topicId,
+          params.since,
+          params.until
+        )
           .then((data) => {
             setScores(data.score ?? {})
             setMaxScores(data.max_score ?? {})
