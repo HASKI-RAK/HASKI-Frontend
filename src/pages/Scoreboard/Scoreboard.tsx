@@ -1,7 +1,7 @@
 import { memo, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
-import { Tooltip, Typography } from '@common/components'
+import { Box, CircularProgress, Tooltip, Typography } from '@common/components'
 import { useCourseProgress } from '@common/hooks'
 import { CalendarMonthRounded, CancelRounded, CheckCircleRounded, StarRounded } from '@common/icons'
 import {
@@ -161,7 +161,7 @@ const Scoreboard = () => {
   // Hooks
   const { currentItems, select, level, back, selection } = useDashboardNavigation()
   const { topicProgress, getCourseProgress, isLoading } = useCourseProgress()
-  const { scores, maxScores, timesSpent, lastElements, bestAttempts } = useScoreboard({
+  const { scores, maxScores, timesSpent, lastElements, bestAttempts, isLoading: isScoreboardLoading } = useScoreboard({
     courseId: selection.course?.id,
     courseLmsId: selection.course?.lms_id,
     topicId: selection.topic?.id,
@@ -336,6 +336,18 @@ const Scoreboard = () => {
       t
     ]
   )
+  
+  if (isScoreboardLoading)
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100%"
+      >
+        <CircularProgress />
+      </Box>
+    )
 
   return (
     <DashboardLayout
