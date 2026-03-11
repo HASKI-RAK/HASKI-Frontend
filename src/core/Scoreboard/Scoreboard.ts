@@ -1,23 +1,23 @@
 import LearningElement from '../LearningElement/LearningElement'
 
 type LastElement = {
-  completed_at: string
-  learning_element: Partial<LearningElement>
+  completedAt: string
+  learningElement: Partial<LearningElement>
 }
 
 type BestAttempt = {
   score: number
-  time_spent: number
-  completed_at: string
-  completion_status: boolean
+  timeSpent: number
+  completedAt: string
+  completionStatus: boolean
 }
 
 type ScoreboardResponse = {
   score?: Record<string, number>
-  max_score: Record<string, number>
-  time_spent: Record<string, number>
-  last_elements: Record<string, LastElement>
-  best_attempts?: Record<string, BestAttempt>
+  maxScore: Record<string, number>
+  timeSpent: Record<string, number>
+  lastElements: Record<string, LastElement>
+  bestAttempts?: Record<string, BestAttempt>
 }
 
 type ScoreboardDataReturn = (

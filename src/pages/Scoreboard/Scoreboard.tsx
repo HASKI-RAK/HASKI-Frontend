@@ -109,19 +109,19 @@ type TreeDatum = {
 }
 
 type LastElement = {
-  completed_at: string
-  learning_element: Partial<LearningElement>
+  completedAt: string
+  learningElement: Partial<LearningElement>
 }
 
 export const treeDataFromLast = (lastElements: Record<string, LastElement>): TreeDatum | null => {
   const ordered = Object.values(lastElements)
-    .filter((x) => Boolean(x?.learning_element?.name))
-    .sort((a, b) => new Date(a.completed_at).getTime() - new Date(b.completed_at).getTime())
+    .filter((x) => Boolean(x?.learningElement?.name))
+    .sort((a, b) => new Date(a.completedAt).getTime() - new Date(b.completedAt).getTime())
     .slice(-3) // ✅ always take last 3 (newest 3, still ordered oldest->newest)
     .map((x) => ({
-      name: x.learning_element.name ?? 'Unknown',
-      date: toIsoDate(x.completed_at),
-      classification: x.learning_element.classification
+      name: x.learningElement.name ?? 'Unknown',
+      date: toIsoDate(x.completedAt),
+      classification: x.learningElement.classification
     }))
 
   if (ordered.length === 0) return null
@@ -262,7 +262,7 @@ const Scoreboard = () => {
       currentItems.map((item) => {
         const bestAttempt = bestAttempts[level === 'topics' ? item.id : item.lms_id]
         console.log('bestAttempt for item', item, bestAttempt)
-        const completedAt = bestAttempt?.completed_at
+        const completedAt = bestAttempt?.completedAt
         const formattedDate = completedAt ? dateFormatter.format(new Date(completedAt)) : undefined
 
         return {
@@ -279,7 +279,7 @@ const Scoreboard = () => {
                     {getNodeIcon(item.classification, 40)}
                   </Tooltip>
                 ) : undefined,
-                headerRight: bestAttempt?.completion_status ? (
+                headerRight: bestAttempt?.completionStatus ? (
                   <DashboardListItemStat
                     icon={<CheckCircleRounded color="success" />}
                     tooltip={t('tooltip.completed')}

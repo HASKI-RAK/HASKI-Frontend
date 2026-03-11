@@ -58,10 +58,10 @@ export const useScoreboard = (params: ScoreboardHookParams): ScoreboardHookRetur
         )
           .then((data) => {
             setScores(data.score ?? {})
-            setMaxScores(data.max_score ?? {})
-            setTimesSpent(data.time_spent ?? {})
-            setLastElements(data.last_elements ?? {})
-            setBestAttempts(data.best_attempts ?? {})
+            setMaxScores(data.maxScore ?? {})
+            setTimesSpent(data.timeSpent ?? {})
+            setLastElements(data.lastElements ?? {})
+            setBestAttempts(data.bestAttempts ?? {})
             setIsLoading(false)
           })
           .catch((error) => {
