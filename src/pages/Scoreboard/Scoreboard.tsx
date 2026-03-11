@@ -365,14 +365,7 @@ const Scoreboard = () => {
           rows={tableRows}
         />
       }
-      datePicker={
-        <DatePickerForChart
-          onDateRangeChange={handleDateRangeChange}
-          initialStartDate={dateRange.startDate}
-          initialEndDate={dateRange.endDate}
-          showPresets={true}
-        />
-      }
+      datePicker={<DatePickerForChart disabled={true} />}
       topRight={
         level == 'courses' ? (
           //course hours

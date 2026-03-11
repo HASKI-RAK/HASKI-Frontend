@@ -11,6 +11,7 @@ type DatePickerForChartProps = {
   showPresets?: boolean
   width?: number | string
   height?: number | string
+  disabled?: boolean
   position?: {
     top?: string | number
     right?: string | number
@@ -26,17 +27,20 @@ const DatePickerForChart = ({
   showPresets = true,
   width = 'auto',
   height = 'auto',
+  disabled = false,
   position
 }: DatePickerForChartProps) => {
   const [startDate, setStartDate] = useState<Dayjs>(initialStartDate)
   const [endDate, setEndDate] = useState<Dayjs>(initialEndDate)
 
   const handleStartDateChange = (newStartDate: Dayjs) => {
+    if (disabled) return
     setStartDate(newStartDate)
     onDateRangeChange?.({ startDate: newStartDate, endDate })
   }
 
   const handleEndDateChange = (newEndDate: Dayjs) => {
+    if (disabled) return
     setEndDate(newEndDate)
     onDateRangeChange?.({ startDate, endDate: newEndDate })
   }
@@ -50,7 +54,10 @@ const DatePickerForChart = ({
         ...position,
         zIndex: 10,
         p: 1.25,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        opacity: disabled ? 0.45 : 1,
+        filter: disabled ? 'grayscale(0.4)' : 'none',
+        pointerEvents: disabled ? 'none' : 'auto'
       }}>
       <DateRangePicker
         startDate={startDate}
