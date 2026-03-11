@@ -161,21 +161,20 @@ const Scoreboard = () => {
   // Hooks
   const { currentItems, select, level, back, selection } = useDashboardNavigation()
   const { topicProgress, getCourseProgress, isLoading } = useCourseProgress()
-  const { scores, maxScores, timesSpent, lastElements, bestAttempts, isLoading: isScoreboardLoading } = useScoreboard({
+  const {
+    scores,
+    maxScores,
+    timesSpent,
+    lastElements,
+    bestAttempts,
+    isLoading: isScoreboardLoading
+  } = useScoreboard({
     courseId: selection.course?.id,
     courseLmsId: selection.course?.lms_id,
     topicId: selection.topic?.id,
     since: since,
     until: until
   })
-
-  const labelById = useMemo(() => {
-    const map: Record<string, string> = {}
-    for (const item of currentItems) {
-      map[String(item.id)] = item.name
-    }
-    return map
-  }, [currentItems])
 
   const labelByScoreboardKey = useMemo(() => {
     const map: Record<string, string> = {}
@@ -336,15 +335,10 @@ const Scoreboard = () => {
       t
     ]
   )
-  
+
   if (isScoreboardLoading)
     return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        height="100%"
-      >
+      <Box display="flex" justifyContent="center" alignItems="center" height="100%">
         <CircularProgress />
       </Box>
     )

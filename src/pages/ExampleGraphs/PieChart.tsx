@@ -80,6 +80,7 @@ const PieChart = ({ data, maxHeight = 500 }: PieChartProps) => {
           {
             anchor: 'bottom-right',
             direction: 'column',
+            translateX: -80,
             translateY: 35,
             itemWidth: 50,
             itemHeight: 18,

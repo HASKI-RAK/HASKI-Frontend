@@ -19,6 +19,71 @@ type BarChartProps = {
 
 const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v))
 
+const wrapLabel = (text: string, maxLineLength = 12, maxLines = 3): string[] => {
+  if (!text) return ['']
+
+  const words = text.split(' ')
+  const lines: string[] = []
+  let current = ''
+
+  for (const word of words) {
+    if (!current) {
+      current = word
+      continue
+    }
+
+    if (`${current} ${word}`.length <= maxLineLength) {
+      current = `${current} ${word}`
+    } else {
+      lines.push(current)
+      current = word
+
+      if (lines.length >= maxLines - 1) break
+    }
+  }
+
+  if (lines.length < maxLines && current) {
+    lines.push(current)
+  }
+
+  const consumedWords = lines.join(' ').split(' ').filter(Boolean).length
+  if (consumedWords < words.length && lines.length > 0) {
+    const last = lines[lines.length - 1]
+    lines[lines.length - 1] = last.length > maxLineLength - 1 ? `${last.slice(0, maxLineLength - 1)}…` : `${last}…`
+  }
+
+  return lines
+}
+
+type CustomTickProps = {
+  x: number
+  y: number
+  value: string | number
+}
+
+const BottomTick = ({ x, y, value }: CustomTickProps) => {
+  const theme = useTheme<Theme>()
+  const lines = wrapLabel(String(value), 12, 3)
+
+  return (
+    <g transform={`translate(${x},${y + 10})`}>
+      <text
+        textAnchor="middle"
+        dominantBaseline="hanging"
+        style={{
+          fill: theme.palette.text.primary,
+          fontSize: 11
+        }}>
+        {lines.map((line, i) => (
+          <tspan key={`${value}-${i}`} x={0} dy={i === 0 ? 0 : 13}>
+            {line}
+          </tspan>
+        ))}
+      </text>
+    </g>
+  )
+}
+
 const AnzahlVersucheBarChart = ({
   data,
   color = '#6EC6FF',
@@ -68,13 +133,21 @@ const AnzahlVersucheBarChart = ({
 
   const longestLabelLength = useMemo(() => data.reduce((max, item) => Math.max(max, item.label.length), 0), [data])
 
-  const bottomMargin = useMemo(() => {
-    // For -90° labels, label length mostly translates into needed vertical space.
-    const estimated = 90 + longestLabelLength * 7
-    return clamp(estimated, 120, 260)
-  }, [longestLabelLength])
+  const estimatedLineCount = useMemo(() => {
+    const wrappedLongest = wrapLabel(
+      data.reduce((longest, item) => (item.label.length > longest.length ? item.label : longest), ''),
+      12,
+      3
+    )
+    return wrappedLongest.length
+  }, [data])
 
-  const bottomLegendOffset = useMemo(() => clamp(bottomMargin - 45, 60, 220), [bottomMargin])
+  const bottomMargin = useMemo(() => {
+    const estimated = 70 + estimatedLineCount * 18 + Math.min(longestLabelLength, 20)
+    return clamp(estimated, 110, 180)
+  }, [estimatedLineCount, longestLabelLength])
+
+  const bottomLegendOffset = useMemo(() => clamp(bottomMargin - 20, 70, 160), [bottomMargin])
 
   return (
     <div style={{ width: '100%', aspectRatio: '16 / 9', maxHeight }}>
@@ -107,9 +180,9 @@ const AnzahlVersucheBarChart = ({
           legend: axisBottomText,
           legendOffset: bottomLegendOffset,
           legendPosition: 'middle',
-          tickRotation: -90,
-          tickPadding: 10,
-          tickSize: 5
+          tickSize: 5,
+          tickPadding: 8,
+          renderTick: BottomTick
         }}
         axisLeft={{
           legend: axisLeftText,
