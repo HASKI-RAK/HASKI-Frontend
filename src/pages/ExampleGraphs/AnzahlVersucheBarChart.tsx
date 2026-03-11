@@ -91,9 +91,16 @@ const AnzahlVersucheBarChart = ({
             ]
           }
         ]}
-        axisBottom={{ legend: axisBottomText, legendOffset: 40, legendPosition: 'middle' }}
+        axisBottom={{
+          legend: axisBottomText,
+          legendOffset: 60,
+          legendPosition: 'middle',
+          tickRotation: -90,
+          tickPadding: 8,
+          tickSize: 5
+        }}
+        margin={{ top: 50, right: 130, bottom: 110, left: 60 }}
         axisLeft={{ legend: axisLeftText, legendOffset: -40, legendPosition: 'middle' }}
-        margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         groupMode="stacked"
       />
     </div>
