@@ -90,6 +90,7 @@ export const useTopic = (params?: useTopicHookParams): TopicHookReturn => {
   // Logic
   const handleOpen = useCallback(() => {
     setIsOpen(true)
+    // Time in seconds because Moodle saves time in seconds
     setLearningElementStartTime(Math.round(Date.now() / 1000))
   }, [setIsOpen])
 

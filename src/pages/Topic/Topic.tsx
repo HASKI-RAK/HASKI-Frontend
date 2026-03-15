@@ -206,13 +206,14 @@ export const Topic = ({ useTopic = _useTopic }: TopicProps): JSX.Element => {
   // the persisted store and return it. Then close the IFrameModal and rerender page.
   // Catch for getUser is handled in the useEffect
   const getHandleClose = () => {
-    const timeStamp = Date.now()
+    // get the time in seconds that the user spent on the learning element
+    const timeStamp = Math.round(Date.now() / 1000)
     const timeSpent = timeStamp - learningElementStartTime
     setTimeSpentOnTask(timeSpent)
     getUser().then((user) => {
       // user.id is student_id
       // Only post experience points if user spen at least three seconds on a learning element
-      if (courseId && topicId && timeSpent > 3000) {
+      if (courseId && topicId && timeSpent > 3) {
         postExperiencePoints(user.id, {
           course_id: Number.parseInt(courseId),
           learning_element_id: lmsId,
