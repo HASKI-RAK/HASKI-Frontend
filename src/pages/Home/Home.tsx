@@ -46,7 +46,7 @@ export const Home = () => {
     setActiveStepCreateCourseModal(0)
   }
 
-  const maxRows = 10
+  const maxRows = 14
 
   useEffect(() => {
     if (isAuth) {
