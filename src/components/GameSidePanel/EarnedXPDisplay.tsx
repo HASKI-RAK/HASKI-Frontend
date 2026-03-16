@@ -30,7 +30,7 @@ const EarnedXpDisplay = ({ experiencePointDetails, attemptDuration }: EarnedXpDi
             {`${t('components.EarnedXpDisplay.attemptXp')}: ${Math.ceil(experiencePointDetails.attempt_xp)} XP`}
           </Typography>
           <Typography variant="body1">
-            {`${t('components.EarnedXpDisplay.successModifier')}: ${experiencePointDetails.success_modifier * 200}}`}
+            {`${t('components.EarnedXpDisplay.successModifier')}: ${experiencePointDetails.success_modifier * 200}`}
           </Typography>
           <Typography variant="body1">
             {`${t('components.EarnedXpDisplay.ratingPoints')}: ${experiencePointDetails.rating_points}`}
