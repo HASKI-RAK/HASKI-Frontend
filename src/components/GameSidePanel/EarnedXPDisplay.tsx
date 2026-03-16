@@ -35,9 +35,11 @@ const EarnedXpDisplay = ({ experiencePointDetails, attemptDuration }: EarnedXpDi
           <Typography variant="body1">
             {`${t('components.EarnedXpDisplay.ratingPoints')}: ${experiencePointDetails.rating_points}`}
           </Typography>
-          <Typography variant="body1">
-            {`${t('components.EarnedXpDisplay.waitBonus')}: ${experiencePointDetails.wait_bonus}`}
-          </Typography>
+          {experiencePointDetails.wait_bonus !== 1 && (
+            <Typography variant="body1">
+              {`${t('components.EarnedXpDisplay.waitBonus')}: ${experiencePointDetails.wait_bonus}`}
+            </Typography>
+          )}
           {attemptDuration !== undefined && (
             <Typography variant="body1">
               {`${t('components.EarnedXpDisplay.attemptDuration')}: ${attemptDuration}s`}
